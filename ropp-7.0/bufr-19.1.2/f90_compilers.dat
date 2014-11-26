@@ -1,0 +1,457 @@
+# $Id: f90_compilers.dat 101 2012-10-10 08:08:17Z frdo $
+#
+#****l* BUFR/f90_compilers.dat
+#
+#-----------------------------------------------------------------------
+# NAME
+#   f90_compilers.dat
+#
+# SYNOPSIS
+#   Defines known compilers & their flag options supporting this
+#   package for various platforms.
+#
+# USED BY
+#   f90_select   (shell script)
+#
+# DESCRIPTION
+#   This file defines known Fortran-90 and C compilers and their command
+#   line switches. Add new ones or replace the 'default' entry.
+#   The ID in square brackets [OS-FID] represents
+#    - OS: the platform O/S, as returned by uname (but truncated to
+#      6 characters and in uppercase)
+#    - FID: an arbitrary ID for the Fortran compiler, to be used as an
+#      argument to the -f switch in the master build script.
+#   The DEF compiler is a copy of your favourite compiler
+#   to be used as a default if no specific one is given to the
+#   build script for each OS.
+#   This compiler definitions file must have the following structure:
+#
+#   [<OS>-<FID>]
+#   f90name=<compiler name>
+#   f90version=<version>          (for info only, not used here)
+#   FF=<f90 command>
+#   FFLAGS=<f90 flags>
+#   VFFLAG=<f90 version ID flag>  (to print Fortran compiler details)
+#   CC=<C command>
+#   CFLAGS=<C flags>
+#   VCFLAG=<C version ID flag>    (to print C compiler details)
+#
+#   Path variable to find include and module files in FFLAGS (argument
+#   to -I or equivalent) must given as "$INCDIR" or the paths will not
+#   be translated correctly.
+#
+# AUTHOR
+#   Dave Offiler
+#
+# MODIFICATION HISTORY
+# Version Date         Notes                                  By
+# ---------------------------------------------------------------------
+#  1.0    20-Aug-2004  First Release                          D.Offiler
+#  1.1    14-Dec-2004  Add Linux g95                          D.Offiler
+#  1.2    23-Mar-2005  Add Cygwin g95 and Linux+Cygwin GFortran (gfc)
+#                      NB Under Cygwin, g95 works with gcc-3.3.x
+#                      or gcc-3.4.x; gcc-4.1.0 does NOT work, even
+#                      though recent releases of g95 are built on the
+#                      gcc-4.1.0 back-end. So far, I haven't managed
+#                      to get gfc to work with any version of
+#                      gcc under Cygwin :-(                   D.Offiler
+#  1.3  25-May-2005    Add Linux efc (NEC SX6/SX8 front-end)  D.Offiler
+#  1.4  12-Aug-2005    Rename Linux  PG    --> PGF90
+#                      Rename Linux  INTEL --> IFC   (Intel v7)
+#                      Rename Linux  LF    --> LF95
+#                      Rename Cygwin INTEL --> IFORT (Intel v8)
+#                      Add    Linux  PGF95
+#                      Add    Linux  IFORT (Intel v8)
+#                      Add -kind to FFLAGS for HP-UX NAG
+#                      Add VFLAG keyword to all blocks.       D.Offiler
+#                      Modify details for Linux EFC for ia64:
+#                      - add -i8 & -size_lp64 to FFLAGS
+#                      - use ecc instead of gcc
+#                      - add -size_lp64 to CFLAGS             A. von Engeln
+#                      - add -m                               D.Offiler
+#                      Add +U77 & -lnsl to HP-UX HP           D.Offiler
+#  1.5  09-Sep-2005    Use gcc-4 with Linux/Cygwin gfc
+#                      (latest releases of this combo work ok).
+#                      Change 'VFLAG' keyword to 'VFFLAG' and
+#                      add keyword 'VCFLAG'                   D.Offiler
+#  1.6  22-Sep-2005    Add SunOS Fujitsu                      D.Offiler
+#  1.7  13-Oct-2005    Add Linux ifort9 (Intel v9)            D.Offiler
+#  1.8  11-Apr-2006    Add HP-UX G95                          D.Offiler
+#  1.9  16-Oct-2006    Modify Linux details:
+#                      - set DEF (default) to ifort (Intel v9)
+#                      - change IFORT9 to IFORT     (Intel v9)
+#                      - change IFORT  to IFORT8    (Intel v8)
+#                      - change PGF90 to PGF (pgf90 now at v6.1)
+#                      - PGF95 removed (was v6.0; use 'pgf')  D.Offiler
+#  1.10 17-Jan-2007    Modify flag details for latest efc v5.4 on NEC
+#  1.11 08-Feb-2008    Add to Linux:
+#                      - IFORT9  (Intel v9 - alias for IFORT)
+#                      - IFORT10 (Intel v10)
+#                      - PGF6    (Portland Group v6 - alias for PGF)
+#                      - PGF7    (Portland Group v7)          D.Offiler
+#  1.12 27-Jun-2008    Removed all entries in FFLAG to specify
+#                      output path for module files so module
+#                      files are created in PWD. We leave it to
+#                      the build application (script or make file)
+#                      to install to $INCDIR (or wherever).   D.Offiler
+#  1.13 27-Aug-2008    Changed assumed commands for Linux Portland
+#                      compilers for better consistency:
+#                      - PGF  invokes 'pgf95' (was 'pgf90')
+#                      - PGF6 invokes 'pgf6'  (was 'pgf956')
+#                      - PGF7 invokes 'pgf7'  (was 'pgf957')  D.Offiler
+#  1.14 29-Jun-2009    Add NAGFOR  for NAGWare 'nagfor'  (v5.2) on Linux
+#                      Add SUNF95  for SUN     'sunf95'  (v8.3) on Linux
+#                      Add IFORT11 for Intel   'ifort11' (v11)  on Linux
+#                      Modify LINUX-IFORT* details:
+#                      - '-Vaxlib' deprecated after v8; removed from
+#                        v9 & later entries (including LINUX-DEF)
+#                      - added '-vec-report0' from v9 & v10 entries to
+#                        suppress remarks about vector optimisations (not
+#                        required for v11.1, but was for v11.0)
+#                      Copy 'gfc' to 'gfortran' (Linux & Cygwin),
+#                      removed '-static' flag and use default 'gcc'
+#                      in place of non-standard 'gcc-4'       D.Offiler
+#  1.15 24-Jul-2009    Package no longer uses 'portability.fi' file which
+#                      contained backslash characters supporting MS-DOS
+#                      file path syntax, so F90 compiler switches '-nbs' and
+#                      -Mbackslash' etc are redundant and have been removed.
+#                      Removed 'GFC' blocks (use 'GFORTRAN)'.
+#                      Make GFortran default under Cygwin.    D.Offiler
+#  1.16 27-May-2010    Add XLF95 for IBM AIX ('xlf95'+'xlc')  D.Offiler
+#  1.17 24-Nov-2010    Add IFORT12 for Intel 'ifort12' (v12) on Linux
+#                                                             D.Offiler
+#  1.18 18-Aug-2011    Renamed default ID PGF to PGF95 for consistency.
+#                      Add PGF10 and PGF11 for Portland Group 'pgf10'
+#                      (v10) and 'pgf11' (V11) on Linux
+#                      Removed obsolete CYGWIN-IFORT (Intel v8)
+#                      Removed obsolete LINUX-IFC    (Intel v7)
+#                      Removed -qextname (add underscores) from
+#                      xlf95 (AIX) and -DUNDERSCORE from xlc (AIX) for
+#                      compatibility with other packages (e.g. netCDF)
+#                      which use default (no underscores)
+#                      Added (lowercase-but-no-underscores)
+#                      to some sections to support FSQLITE package
+#                                                             D.Offiler
+#  1.19  02-Nov-2011   Add GFORTRAN47 for gfortran v4.7.x     D.Offiler
+#  1.20  28-Nov-2011   Make ifort v12 the default Linux compiler
+#                                                             D.Offiler
+#  1.21  10-Oct-2010   Changed CYWIN-DEF/GFORTRAN FF command from gfortran-4
+#                      to just gfortran, as this now the default compiler
+#                      Removed obsolete LINUX-IFORT8 (Intel v8)
+#                      Make xlf95 v14 the default AIX compiler
+#                                                             D.Offiler
+#
+#--------------------------------------------------------------------
+#****
+
+# --- Linux ---
+
+[LINUX-DEF]
+f90name=Intel f95 (v12)
+f90version=v12.0
+FF=ifort
+FFLAGS=-DBPATH -O2 -cm -w -I$INCDIR
+VFFLAG=--version
+CC=gcc
+CFLAGS=-O2 -w -DUNDERSCORE
+VCFLAG=--version
+
+[LINUX-IFORT]
+f90name=Intel f95 (v12)
+f90version=v12.0
+FF=ifort
+FFLAGS=-DBPATH -O2 -cm -w -I$INCDIR
+VFFLAG=--version
+CC=gcc
+CFLAGS=-O2 -w -DUNDERSCORE
+VCFLAG=--version
+
+[LINUX-IFORT9]
+f90name=Intel f95 (v9)
+f90version=v9.1
+FF=ifort9
+FFLAGS=-DBPATH -O2 -cm -w -vec-report0 -I$INCDIR
+VFFLAG=--version
+CC=gcc
+CFLAGS=-O2 -w -DUNDERSCORE
+VCFLAG=--version
+
+[LINUX-IFORT10]
+f90name=Intel f95 (v10)
+f90version=v10.0
+FF=ifort10
+FFLAGS=-DBPATH -O2 -cm -w -vec-report0 -I$INCDIR
+VFFLAG=--version
+CC=gcc
+CFLAGS=-O2 -w -DUNDERSCORE
+VCFLAG=--version
+
+[LINUX-IFORT11]
+f90name=Intel f95 (v11)
+f90version=v11.1
+FF=ifort11
+FFLAGS=-DBPATH -O2 -cm -w -vec-report0 -I$INCDIR
+VFFLAG=--version
+CC=gcc
+CFLAGS=-O2 -w -DUNDERSCORE
+VCFLAG=--version
+
+[LINUX-IFORT12]
+f90name=Intel f95 (v12)
+f90version=v12.0
+FF=ifort12
+FFLAGS=-DBPATH -O2 -cm -w -I$INCDIR
+VFFLAG=--version
+CC=gcc
+CFLAGS=-O2 -w -DUNDERSCORE
+VCFLAG=--version
+
+[LINUX-NAG]
+f90name=NAGWare f95 (Linux)
+f90version=v5.1
+FF=f95
+FFLAGS=-DBPATH -O2 -w -I$INCDIR
+VFFLAG=-V
+CC=gcc
+CFLAGS=-O2 -w -DUNDERSCORE
+VCFLAG=--version
+
+[LINUX-NAGFOR]
+f90name=NAGWare f95 (Linux)
+f90version=v5.2
+FF=nagfor
+FFLAGS=-DBPATH -O2 -w -I$INCDIR
+VFFLAG=-V
+CC=gcc
+CFLAGS=-O2 -w -DUNDERSCORE
+VCFLAG=--version
+
+[LINUX-PGF95]
+f90name=Portland Group f95 (v6)
+f90version=v6.2-3
+FF=pgf95
+FFLAGS=-DBPATH -O2 -I$INCDIR
+VFFLAG=-V
+CC=gcc
+CFLAGS=-O2 -w -DUNDERSCORE
+VCFLAG=--version
+
+[LINUX-PGF6]
+f90name=Portland Group f95 (v6)
+f90version=v6.2-3
+FF=pgf6
+FFLAGS=-DBPATH -O2 -I$INCDIR
+VFFLAG=-V
+CC=gcc
+CFLAGS=-O2 -w -DUNDERSCORE
+VCFLAG=--version
+
+[LINUX-PGF7]
+f90name=Portland Group f95 (v7)
+f90version=v7.0-2
+FF=pgf7
+FFLAGS=-DBPATH -O2 -I$INCDIR
+VFFLAG=-V
+CC=gcc
+CFLAGS=-O2 -w -DUNDERSCORE
+VCFLAG=--version
+
+[LINUX-PGF10]
+f90name=Portland Group f95 (v10)
+f90version=v10.2
+FF=pgf10
+FFLAGS=-DBPATH -O2 -I$INCDIR
+VFFLAG=-V
+CC=gcc
+CFLAGS=-O2 -w -DUNDERSCORE
+VCFLAG=--version
+
+[LINUX-PGF11]
+f90name=Portland Group f95 (v11)
+f90version=v11.7
+FF=pgf11
+FFLAGS=-DBPATH -O2 -I$INCDIR
+VFFLAG=-V
+CC=gcc
+CFLAGS=-O2 -w -DUNDERSCORE
+VCFLAG=--version
+
+[LINUX-LF95]
+f90name=Lahay-Fujitsu f95
+f90version=v6.20
+FF=lf95
+FFLAGS=-DBPATH -O0 -I$INCDIR
+VFFLAG=--version
+CC=gcc
+CFLAGS=-O2 -w -DUNDERSCORE
+VCFLAG=--version
+
+[LINUX-SUNF95]
+f90name=SUN f95
+f90version=v8.3
+FF=sunf95
+FFLAGS=-DBPATH -O2 -I$INCDIR -M$INCDIR
+VFFLAG=-V
+CC=suncc
+CFLAGS=-O2 -w -DUNDERSCORE
+VCFLAG=-V
+
+[LINUX-G95]
+f90name=GNU G95
+f90version=v0.93 (GCC 4.0.3)
+FF=g95
+FFLAGS=-DBPATH -O2 -I$INCDIR
+VFFLAG=--version
+CC=gcc
+CFLAGS=-O2 -w -DDUNDERSCORE
+VCFLAG=--version
+
+[LINUX-GFORTRAN]
+f90name=GNU GFortran
+f90version=v4.4.5
+FF=gfortran
+FFLAGS=-DBPATH -O2 -I$INCDIR
+VFFLAG=--version
+CC=gcc
+CFLAGS=-O2 -w -DUNDERSCORE
+VCFLAG=--version
+
+[LINUX-GFORTRAN47]
+f90name=GNU GFortran (v4.7)
+f90version=v4.7.1
+FF=gfortran47
+FFLAGS=-DBPATH -O2 -I$INCDIR
+VFFLAG=--version
+CC=gcc47
+CFLAGS=-O2 -w -DUNDERSCORE
+VCFLAG=--version
+
+# --- NEC-Linux ---
+
+[LINUX-EFC]
+f90name=NEC Fortran for Itanium
+f90version=v5.4
+FF=efc
+FFLAGS=-DBPATH -O2 -integer_size 64 -cm -w -nowarn -Vaxlib -I$INCDIR
+VFFLAG=-V
+CC=ecc
+CFLAGS=-O2 -w -DUNDERSCORE -DL64
+VCFLAG=-V
+
+# --- Cygwin ---
+
+[CYGWIN-DEF]
+f90name=GNU GFortran
+f90version=v4.5.3
+FF=gfortran
+FFLAGS=-DBPATH -O2 -I$INCDIR
+VFFLAG=--version
+CC=gcc
+CFLAGS=-O2 -w -DUNDERSCORE
+VCFLAG=--version
+
+[CYGWIN-G95]
+f90name=GNU G95
+f90version=v0.93 (GCC 4.0.3)
+FF=g95
+FFLAGS=-DBPATH -O2 -I$INCDIR
+VFFLAG=--version
+CC=gcc
+CFLAGS=-O2 -w -DDUNDERSCORE
+VCFLAG=--version
+
+[CYGWIN-GFORTRAN]
+f90name=GNU GFortran
+f90version=v4.5.3
+FF=gfortran
+FFLAGS=-DBPATH -O2 -I$INCDIR
+VFFLAG=--version
+CC=gcc
+CFLAGS=-O2 -w -DUNDERSCORE
+VCFLAG=--version
+
+# --- IBM AIX ---
+
+[AIX-DEF]
+f90name=IBM XL Fortran 95
+f90version=V14.1
+FF=xlf95
+FFLAGS=-WF,-DBPATH -q64 -O2 -I$INCDIR
+VFFLAG=-qversion
+CC=xlc
+CFLAGS=-O2 -w -q64 
+VCFLAG=-qversion
+
+[AIX-XLF95]
+f90name=IBM XL Fortran 95
+f90version=V14.1
+FF=xlf95
+FFLAGS=-WF,-DBPATH -q64 -O2 -I$INCDIR
+VFFLAG=-qversion
+CC=xlc
+CFLAGS=-O2 -w -q64 
+VCFLAG=-qversion
+
+# --- HP-UX ---
+
+[HP-UX-DEF]
+f90name=HP f90/95
+f90version=v2.4.10
+FF=/opt/fortran90/bin/f90
+FFLAGS=-DBPATH -O2 +U77 -I$INCDIR -lnsl
+VFFLAG=+version
+CC=cc
+CFLAGS=-O2 -w
+VCFLAG=-V
+
+[HP-UX-HP]
+f90name=HP f90/95
+f90version=v2.4.10
+FF=/opt/fortran90/bin/f90
+FFLAGS=-DBPATH -O2 +U77 -I$INCDIR -lnsl
+VFFLAG=+version
+CC=cc
+CFLAGS=-O2 -w
+VCFLAG=-V
+
+[HP-UX-NAG]
+f90name=NAGWare f95 (HP-UX)
+f90version=v4.2
+FF=f95
+FFLAGS=-DBPATH -O2 -w -kind=byte -I$INCDIR -lnsl
+VFFLAG=-version
+CC=cc
+CFLAGS=-O2 -w -DUNDERSCORE
+VCFLAG=-V
+
+[HP-UX-G95]
+f90name=Gnu G95
+f90version=v4.0.1
+FF=hpg95
+FFLAGS=-DBPATH -O2 -I$INCDIR
+VFFLAG=--version
+CC=gcc
+CFLAGS=-O2 -w -DDUNDERSCORE
+VCFLAG=--version
+
+# --- Sun-OS ---
+
+[SUNOS-DEF]
+f90name=Fujitsu Fortran
+f90version=4.0.1.1
+FF=f95
+FFLAGS=-DBPATH -O2 -AEm -fs -I$INCDIR
+VFFLAG=-V
+CC=gcc
+CFLAGS=-O2 -w -DUNDERSCORE
+VCFLAG=--version
+
+[SUNOS-FUJITSU]
+f90name=Fujitsu Fortran
+f90version=4.0.1.1
+FF=f95
+FFLAGS=-DBPATH -O2 -AEm -fs -I$INCDIR
+VFFLAG=-V
+CC=gcc
+CFLAGS=-O2 -w -DUNDERSCORE
+VCFLAG=--version

@@ -1,0 +1,17 @@
+# $Id: ecbufr_configure_ifort13_linux 3696 2013-06-17 08:48:37Z idculv $
+#
+#   ECMWF BUFR configuration file
+#
+# Compiler: ifort13 / Linux
+#
+AR      = ar
+ARFLAGS = rv
+RANLIB  = /usr/bin/ranlib
+#
+CC      = gcc
+CFLAGS  = -O2 -w -Dlinux -DLITTLE_ENDIAN -DINTEGER_IS_INT
+FASTCFLAGS = $(CFLAGS)
+#
+FC      = ifort13
+FFLAGS  = -O2 -w -Dlinux -DLITTLE_ENDIAN -DINTEGER_IS_INT
+

@@ -1,0 +1,29 @@
+#!/bin/sh
+# $Id: ropp_configure_f90_hp-ux 3752 2013-07-09 18:55:03Z frdo $
+#
+# ROPP shell script for a local configure. 
+# USERS SHOULD MODIFY THIS SCRIPT AS REQUIRED FOR LOCAL INSTALL
+#
+# Compiler: HP f90 / HP-UX
+#
+PREFIX=${1-$ROPP_ROOT/f90}
+echo
+echo "Platform:"
+uname -a
+echo
+echo "Fortran compiler:"
+/opt/fortran90/bin/f90 +version
+echo
+echo "C compiler:"
+cc -V
+echo
+echo "Installation target:"
+echo "$PREFIX"
+echo
+#
+CC=cc \
+F77=/opt/fortran90/bin/f90 FFLAGS="-O2 +U77 -w -I$PREFIX/include" \
+FC=/opt/fortran90/bin/f90 FCFLAGS="-O2 +U77 -w -I$PREFIX/include" \
+          AM_FFLAGS="+U77"              \
+            LDFLAGS="-lm -L$PREFIX/lib" \
+  ./configure --prefix=$PREFIX

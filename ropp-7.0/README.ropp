@@ -1,0 +1,122 @@
+$ Id: README_v7.0.ropp $
+
+                README file for ROPP-7 directory
+               ==================================
+                       (Release v7.0)
+
+This file describes contents of the ROPP-7 directory. These files make up the 
+core Radio Occultation Processing Package (ROPP) deliverable software of the 
+ROM SAF, Release Version 7.0.
+
+Files can be downloaded individually, or the complete ROPP-7 (v7.0) package set 
+is available in the meta-tar file ropp-7.0.tar.gz in the ROPP distribution root 
+directory. The ROPP_Release_Notes_70.html file in the ROPP distribution root 
+directory contains details on unpacking and building the ropp-7.0.tar.gz 
+distribution.
+
+ README.ropp                : This file.
+
+ COPYRIGHT                  : Copyright statements. There is a copy of this
+                              file in each of the sub-packages.
+
+ romsaf_ropp_licence.pdf    : Software Licence (v1.0).
+                              Since you are reading read this, you will have 
+                              already accepted the Terms and Conditions of this
+                              licence. This file is for your reference.
+
+ ropp_utils-7.0.tar.gz      : ROPP UTILS module sub-package (v7.0)
+                              Library of low-level utility routines used
+                              by all of the other modules.
+
+ ropp_io-7.0.tar.gz         : ROPP I/O module sub-package (v7.0)
+                              Library and application tools supporting input/
+                              output of ROPP RO files in netCDF and BUFR
+                              formats, profile thinning and range-checking. 
+                              Used by the PP, FM and 1DVAR modules. Requires
+                              netCDF and optionally either of the MetDB or
+                              ECMWF BUFR libraries. Allows extraction of 
+                              background profile from GRIB file, if ECMWF
+                              GRIB_API installed.  Can read EUMETSAT-style
+                              "grouped" RO datafiles if netCDF4 (and its 
+                              supporting HDF5 and zlib libraries) is installed.
+
+ ropp_pp-7.0.tar.gz         : ROPP Pre-Processing sub-package (v7.0)
+                              Library and application tools supporting
+                              processing of RO Level 1a (Excess phase and
+                              amplitude) to Level 1b (Bending Angles) and
+                              Level 2 (Refractivity). Includes tool to calculate
+                              tropopause height from RO data.
+
+ ropp_fm-7.0.tar.gz         : ROPP Forward Models module sub-package (v7.0)
+                              Library of routines implementing 1-dimensional
+                              and 2-dimensional forward modelling of RO 
+                              profiles from ECMWF-type or Met Office type
+                              model profiles. Other NWP model types may be 
+                              implemented in later releases. Used by the 1DVAR
+                              module.
+
+ ropp_1dvar-7.0.tar.gz      : ROPP 1DVAR module sub-package (v7.0)
+                              Library and application tools for variational
+                              retrieval of geophysical parameters (temperature,
+                              humidity, etc) from RO observations.
+                              ROPP supports retrieval from bending angles
+                              or refractivity using ECMWF-type and Met Office
+                              type model background profiles. Other NWP model
+                              types may be implemented in later releases.
+
+ ropp_build-7.0.tar.gz      : Collection of build/configure scripts.
+                              Sample shell scripts to help configure and build
+                              ROPP modules and their 3rd-party dependency
+                              packages.
+
+If the complete package is not required, manually create a dedicated local 
+build directory, download the individual tarfiles and unpack them. 
+
+For example:
+
+  > mkdir $HOME/ROPP/ropp-7.0
+  > cd $HOME/ROPP/ropp-7.0
+ ... download/copy required module tarfiles here ...
+  > tar -zxvf ropp_build-7.0.tar.gz
+  > tar -zxvf ropp_utils-7.0.tar.gz
+  ...etc
+  
+or
+
+  > gunzip ropp_build-7.0.tar.gz
+  > tar -xvf ropp_build-7.0.tar
+  ...etc
+  
+if your version of tar does not support decompression (-z option).
+
+Configure and build support scripts are contained in the configure/ 
+sub-directory, which is created on unpacking ropp_build-7.0.tar.gz. 
+
+Included in the main package (and in ropp_build) is a top-level BASH shell
+script file 'buildpack'. This script may be used to automate the build of any
+ROPP  module or dependency package in a consistent way, using configure scripts
+located in the configure/ subdirectory. In general, to build and install a
+package, it is only necessary to give the command:
+
+  > ./buildpack <package> <compiler> [[NO]CLEAN]
+
+where <package> is one of the supported ROPP module or package names
+(one of: ropp_utils, ropp_io, ropp_pp, ropp_fm, ropp_1dvar, netdcf, mobufr,
+ecbur) and <compiler> is the required compiler (ifort, nag, gfortran, ...) which
+matches an appropriate configure script.
+
+See the other README.* files for further guidance on building the ROPP modules
+and dependency packages manually.
+
+For more information, please refer to the files ROPP_Release_Notes_v70.html and
+ROPP_Changes_v61-v70.html in the ROPP distribution root directory. See the
+Documents directory for documentation on the ROPP package, file formats and
+algorithm descriptions, etc.
+
+
+ROPP Development Team,
+Met Office
+
+Version 7.0
+31 July 2013
+

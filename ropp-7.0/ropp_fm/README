@@ -1,0 +1,33 @@
+		     ROPP_FM Package Release V7.0
+		    ------------------------------
+
+The ropp_fm module is a package of software and supporting files for the
+forward  modelling of profiles of bending angles and refractivity from NWP
+model profiles, whether on height- or pressure-based vertical coordinates.
+
+ropp_fm forms one module of the Radio Occultation Processing Package (ROPP)
+which is a key deliverable of the ROM SAF. The ROPP 1D-Var retrieval
+(ropp_1dvar module) is based on these forward models. The package depends on
+utility routines in the ropp_utils module. The sample test
+programs also interface with data files using the ropp_io module. Users 
+wishing to build only those parts of the ropp_fm code with no ropp_io 
+dependencies need not install the ropp_io module. Please refer to the
+installation guides of those modules for further dependencies.
+
+See the ROPP Release Notes html file provided with the main ROPP download
+tarfile for an overview and instructions for installing this module with the 
+build and configure tools provided with ROPP. 
+
+See the README.unix and README.cygwin files for more detailed installation 
+instructions and tips for experienced developers. See file MANIFEST for the 
+complete list of files in the distribution package and the COPYRIGHT file for 
+copyright information. The file INSTALL contains generic instructions for the 
+configure script.
+
+
+Any comments on this software should be given via the ROM SAF
+Helpdesk at http://www.romsaf.org
+
+
+ROM SAF ROPP Development Team
+31 July 2013

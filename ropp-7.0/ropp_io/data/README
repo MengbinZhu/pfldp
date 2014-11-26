@@ -1,0 +1,60 @@
+             ROPP_IO data files for Release Version v7.0
+             -------------------------------------------
+
+This directory contains a collection of data files for ROPP testing.
+
+ropp_thin_*.dat are thinning control files which are used by ropp2ropp,
+ropp2bufr and ucar2ropp in order to reduce the profile resolutions.
+Different methods are supported; the ropp_thin_asglog-247.dat file is
+recommended, or ropp_thin_eum-247.dat for compatibility with EUMETSAT's
+operational thinning for their Level 1b BUFR files. We suggest one of these
+files is copied to some 'standard' location for run-time use, for instance:
+
+ > cp ropp_thin_log-247.dat $HOME/data/ropp/ropp_thin_default.dat
+ > export ROPP_THIN=$HOME/data/ropp/ropp_thin_default.dat
+ > ropp2bufr .... -p $ROPP_THIN ...
+
+The remaining files are reference files used by the test scripts in the
+ropp_io/tests/ directory (or run 'make test' from that directory - see
+../tests/example_tests.log for  an example log file from such a test run).
+
+ropp_test.nc        ROPP netCDF master reference file
+ropp_test.bfr       ditto in BUFR format (encoded with MetDB library)
+ropp_test.ecbfr     ditto in BUFR format (encoded with ECMWF library)
+ropp_testb.nc       BUFR file decoded back to ROPP netCDF 
+ropp_testm.nc       ditto as a multifile (>1 identical profiles)
+ropp_test2d.nc      example ROPP netCDF format file with 2D bg data
+
+gfz_test.dat        GFZ 'native' text format data file
+                    (This is a copy of
+                    GA-AI-3-NRT+2009_240_01_0110_zdif_006.dat,
+                    available from http://isdc.gfz-potsdam.de/)
+gfz_test.dsc        GFZ 'native' text format descripton file
+                    (This is a copy of
+                    GA-AI-3-NRT+2009_240_01_0110_zdif_006.dsc,
+                    available from http://isdc.gfz-potsdam.de/)
+gfz_test.nc         GFZ ROPP netCDF format data file containing the
+                    same profile as in gfz_test1.dat/.dsc
+
+ucar_test.nc        UCAR netCDF 'atmPrf' file
+                    (This is a copy of
+                    atmPrf_C006.2009.239.20.22.G29_0001.0001_nc, 
+                    available from http://cdaac-www.cosmic.ucar.edu/cdaac/)
+ucar_testr.nc       UCAR netCDF converted to ROPP netCDF
+
+eum_test.n4         This is a 10:1 thinned out version of a 
+                    EUMETSAT netcdf4 format GRAS input file, derived from
+                    gras_l1b_m02_20070930000210Z_20070930000314Z_20121031144459Z.n4.
+                    Suitable for testing eum2ropp and eum2bufr tools.
+
+eum_test_l.nc_ref   Reference file for testing eum2ropp.
+
+eum_test_l.bfr_ref  Reference file for testing eum2bufr.
+
+Note for ROPP Developers: to (re-)generate the set of reference test files
+from samples of original GFZ & UCAR files, see script gentestfiles.sh in
+this directory.
+
+
+ROPP Development Team
+31 July 2013

@@ -1,0 +1,29 @@
+#!/bin/sh
+# $Id: ropp_configure_g95_hp-ux 3752 2013-07-09 18:55:03Z frdo $
+#
+# ROPP shell script for a local configure. 
+# USERS SHOULD MODIFY THIS SCRIPT AS REQUIRED FOR LOCAL INSTALL
+#
+# Compiler: g95 / HP-UX
+#
+PREFIX=${1-$ROPP_ROOT/g95}
+echo
+echo "Platform:"
+uname -a
+echo
+echo "Fortran compiler:"
+g95 --version
+echo
+echo "C compiler:"
+cc -V
+echo
+echo "Installation target:"
+echo "$PREFIX"
+echo
+#
+CC=gcc \
+F77=g95      FFLAGS="-O2 -fno-backslash -I$PREFIX/include" \
+FC=g95      FCFLAGS="-O2 -fno-backslash -I$PREFIX/include" \
+            LDFLAGS="-L$PREFIX/lib" \
+  ./configure --prefix=$PREFIX
+

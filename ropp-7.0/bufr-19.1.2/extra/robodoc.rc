@@ -1,0 +1,59 @@
+# $Id: robodoc.rc 20 2011-04-18 10:49:17Z frdo $
+#
+# Robodoc configuration file for GENLIB items
+#
+items:
+   NAME
+   SYNOPSIS
+   DESCRIPTION
+   ARGUMENTS
+   OPTIONS
+   KEYWORDS
+   INPUTS
+   OUTPUTS
+   USES
+   USED BY
+   NOTES
+   EXAMPLES
+   SEE ALSO
+   CALLS
+   CALLED BY
+   REFERENCES
+   BUGS
+   TODO
+   MODIFICATION HISTORY
+   COPYRIGHT
+   AUTHOR
+   ENVIRONMENT VARIABLES
+   CONTAINS
+   ALGORITHM
+   PARAMETERS
+   LIMITATIONS
+ignore items:
+   BUGS
+   TODO
+   MODIFICATION HISTORY
+   COPYRIGHT
+   AUTHOR
+headertypes:
+   a   "Makefiles"      index
+   d   "Structures"     index
+   e   "Programs"       index
+   f   "Functions"      index
+   k   "Scripts"        index
+   l   "Lookups"        index
+   m   "Modules"        index
+   p   "Parameters"     index
+   s   "Subroutines"    index
+   t   "Topics"         index
+   v   "Variables"      index
+   w   "Procedures"     index
+ignore files:
+   ./lib/lndsea.f90
+   header.*
+accept files:
+   *.f90
+   *.sh
+   *.py
+   *.pro
+   Makefile

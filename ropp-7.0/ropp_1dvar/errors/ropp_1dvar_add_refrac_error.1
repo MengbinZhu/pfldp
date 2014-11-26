@@ -1,0 +1,102 @@
+./" $Id: <tool>.1 3551 2013-02-25 09:51:28Z idculv $
+./"
+.TH ROPP_1DVAR_ADD_REFRAC_ERROR 1 31-Jul-2013 ROPP-7 ROPP-7
+./"
+.SH NAME
+ropp_1dvar_add_refrac_error
+./"
+.SH SYNOPSIS
+Read a ROPP netCDF refractivity observation file and add an error
+description (sigma values) to the data. Write resulting file.
+.PP
+./"
+.B ropp_1dvar_add_refrac_error
+   <obs_file> -Omod <Omodel> 
+   [-b <bg_file>] [-c <corr_file>] [-o <out_file>] [-h]
+./"
+.SH DESCRIPTION
+.I ropp_1dvar_add_refrac_error
+This program calculates profile-by-profile refractivity errors according to  a
+user-defined error model, possibly dependent on a background profile,  which the
+user would need to specify. Optionally, the refractivity covariance  matrix can
+calculated and written out.
+./"
+.SH FILES
+.SS Input
+The observation file must be in the ROPP netCDF format.
+.SS Output
+The output file is the same as the input file but with revised errors on the 
+refractivities. 
+./"
+.SH OPTIONS
+Option switches are not case\-sensitive and may be placed before or after the
+<keyword|argument(s)> and in any order. All arguments to switches are mandatory
+when the switch is used.
+.PP
+.B -O
+\- Omod (required)
+.IP
+Observational error model to be used. Choices:
+   '1%': 1% at 0 km, 0.1% from 12 km, min(std(N))=0.02
+   '2%': 2% at 0 km, 0.2% from 12 km, min(std(N))=0.02
+   '3%': 3% at 0 km, 0.3% from 12 km, min(std(N))=0.02
+   'TP': ROM SAF operational implementation. As '2%'
+         model with dynamic tropopause height (default)
+         calculation from bg data rather than 12 km.
+   'MO': Met Office operational implementation
+         latitudinally varying
+   'SK': according to Steiner-Kirchengast [2005]
+.PP
+For more details, see
+.BR Reference\ 2. 
+.PP
+.B -b
+\- bg file
+.IP
+The background refractivity profile to be used if Omod = 'TP'. (Will attempt to 
+use temperature profile in input file in this case if bg file not given.)
+.PP
+.B -c
+\- corr file
+.IP
+ROPP-format covariance matrix to be optionally output, containing 
+refractivity standard deviations and correlations dependent on the vertical 
+separation of the refractivities - see 
+.BR Reference\ 2. 
+.PP
+.B -o
+\- output file name
+.IP
+Specifies the amended refractivity file. Default: ropp_add_refrac.nc.
+.PP
+.B -h
+\- show help
+.IP
+Requests brief help on the command to stdout.
+./"
+.SH EXAMPLES
+.B 1.
+Add/amend errors in refractivity file according to the "3%" rule, and storing
+the output correlation matrix (and errors):
+.PP
+ > 
+.B ropp_1dvar_add_refrac_error
+refrac_in.nc -Omod '3%' -c refrac_cov.nc -o refrac_out.nc
+./"
+.SH REFERENCES
+.PP
+.B 1.
+ROPP User Guide - Part I: Input/Output module
+.br
+SAF/ROM/METO/UG/ROPP/002
+.PP
+.B 2.
+ROPP User Guide - Part II: Forward model and 1D-Var modules
+.br
+SAF/ROM/METO/UG/ROPP/003
+./"
+.SH SEE ALSO
+.BR  ropp_1dvar_add_bgr_error (1), ropp_1dvar_add_bangle_error (1)
+./"
+.SH AUTHORS
+ROPP Development Team, Met Office <romsaf@metoffice.gov.uk>

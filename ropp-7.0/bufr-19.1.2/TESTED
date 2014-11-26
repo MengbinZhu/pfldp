@@ -1,0 +1,123 @@
+$Id: TESTED 98 2012-10-09 09:26:20Z frdo $
+
+This package has been successfully installed, built & tested under the
+OS and compilers noted below:
+
+ - Linux : Red Hat Enterprise Linux 6.2 (RHEL6) (64-bit)
+   + Intel   F95 v11.0                   ('ifort11')
+   + Intel   F95 XE (v12.0)              ('ifort', 'ifort12')
+   + NAGware F95 v5.2                    ('nagfor')
+   + Portand Group F95 v11.7             ('pgf95', 'pgf11')
+   + SUN F95 v8.5                        ('sunf95') [see note 1]
+   + GNU G95 v0.93                       ('g95')    [see note 2]
+   + GNU Gfortran v4.4.6                 ('gfortran')
+   + Gnu C v4.4.6                        ('gcc')
+   + Sun C v5.11                         ('suncc')  [see note 3]
+
+ - Linux : OpenSUSE 12.2 (64-bit) on 64-bit (Desktop & Laptop)
+   + Intel F95 v11.1                     ('ifort11')
+   + Intel F95 XE (12.1)                 ('ifort' & 'ifort12')
+   + SUN   F95 v8.5                      ('sunf95') [see Note 1]
+   + GNU   G95 v0.93                     ('g95')    [see note 2]
+   + GNU   Gfortran v4.7.1               ('gfortran')
+   + Gnu   C v4.7.1                      ('gcc')
+   + Sun   C v5.11                       ('suncc')  [see note 3]
+
+ - Windows XP Pro/SP3   (32-bit) running Cygwin (1.7.15)
+ - Windows 7 Pro        (64-bit) running Cygwin (1.7.15)
+   + GNU G95 v0.93                       ('g95')
+   + GNU Gfortran v4.5.3                 ('gfortran') [see Note 4]
+   + Gnu C v4.5.3                        ('gcc')
+
+ - Unix : IBM AIX on Power7 64-bit HPC Supercomputer
+   + IBM XL Fortran for AIX, V14.1      ('xlf') [see Note 5]
+   + IBM XL C/C++   for AIX, V11.1      ('xlc')
+
+Previous releases of the package have been successfully installed, built &
+tested under:
+
+ - Linux : Red Hat Enterprise Linux 4.8 (RHEL4) (32-bit)
+   + Intel   F95 v7.1                    ('ifc')
+   + Intel   F95 v8.1                    ('ifort8')
+   + Intel   F95 v9.1                    ('ifort' & 'ifort9')
+   + Intel   F95 v10.0                   ('ifort10')
+   + NAGware F95 v5.1                    ('f95')
+   + Portand Group F95 v6.2-3            ('pgf90', 'pgf95' & 'pgf6')
+   + Portand Group F95 v7.0-2            ('pgf7')
+   + SUN   F95 v8.3                      ('sunf95') [see Note 1]
+   + GNU   G95 v0.93                     ('g95')
+   + GNU   Gfortran v4.5.1               ('gfortran')
+   + Gnu   C v3.4.6                      ('gcc')
+   + Sun   C v5.9                        ('suncc') [see note 3]
+
+ - Unix : HPUX-11 on HP J5000 Server
+   + HP      F90/95 v2.4.10              ('f90')
+   + NAGware F95  v4.2                   ('f95')
+   + GNU     G95  v0.9                   ('g95')
+   + Standard HP C                       ('cc')
+   + Gnu     C V3.0                      ('gcc')
+
+ - Linux : Red Hat on NEC TX-7 ia64/Itanium
+   + NEC F95 v5.4                        ('efc')
+   + NEC C   V5.4                        ('ecc')
+
+ - SunOS :
+   + Fujitsu Fortran v4.0.0.1            ('f95')
+   + Gnu C v2.9.5                        ('gcc')
+
+ - Windows XP Pro/SP3 running Cygwin (1.5.x) on 32-bit Desktop
+   + Intel   F95 v8.1                    ('ifort')
+   + Microsoft C++.NET                   ('cl')
+
+but since we no longer have working access to these platforms or compilers,
+we cannot be 100% sure that they continue work with this release.
+
+Notes:
+
+1] There is a bug in the SUN v8.x implementation of the F90 intrinsic
+   DATE_AND_TIME(). When called with the optional VALUES keyword to return
+   the date/time as an 8-element INTEGER array, array element 4 (zone time
+   offset from GMT/UTC in minutes) is always set to zero (implying UTC) even
+   though the correct local non-UTC time elements are returned (BST [GMT+1])
+   in the test case). As a work-around, and if an application only requires
+   system time in UTC, pre-setting the environment variable TZ to 'UTC' will
+   result in DATE_AND_TIME() returning the expected time zone. All other
+   compilers correctly gave +60 in element 4 in the test case.
+
+2] G95 version built for ia64 (32-bit default integers), downloaded from the
+   G95 website. Development of G95 seems to have been abandoned; the latest
+   build is dated Aug 17 2010.
+
+3] Sun C (suncc) compiler only tested in conjunction with Sun Fortran
+   (sunf95), both from the Oracle Solaris Studio 12.2 distribution.
+
+4] GFortran (gcc-fortran) Cygwin package version, installed via setup.exe
+
+5] xlf (v12.x, v13.x & 14.x) has a bug in the non-ISO standard EXIT() 
+   'intrinsic'; whatever numeric value is given as the argument, the value 
+   actually passed back to the shell level is 16-200 or so (the value is 
+   constant for a given executable, but the exact value depends on the 
+   compiler minor version and the user program).
+
+Note that this particular package release may not actually contain any C code,
+so C-compiler details may seem not to be of direct relevance. However, the
+package may depend on other code which does contain C routines; these should
+have been pre-compiled using the same compiler vendor and preferably with the
+same compiler version.
+
+This release package does not support EBCDIC-based platforms such as IBM
+mainframes running MVS. OpenVMS and native MS-DOS are not supported by the
+supplied build system, but the code itself should compile (not tested),
+However, system-dependent features like file path syntax will need to be
+addressed. None of the code is guaranteed to work without modification on
+any other platforms and/or compiler combination than those listed above.
+
+If users sucessfully install using some other OS and compiler combination, it
+would be appreciated if the details of the platform (as output by uname -a),
+compiler name, command, flags and associated C compiler (if appropriate) could
+be fed back to the authors to be added for a future release.
+
+
+D. Offiler, Met Office  <dave.offiler@metoffice.gov.uk>
+
+

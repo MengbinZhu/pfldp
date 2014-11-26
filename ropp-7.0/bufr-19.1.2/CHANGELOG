@@ -1,0 +1,561 @@
+$Id: CHANGELOG 98 2012-10-09 09:26:20Z frdo $
+
+                     Changes from previous releases
+                    --------------------------------
+
+19.1.2 (9 Oct 2012)
+
+ - The the 'prefix' argument to the -p option of the main build script 
+   'buildbufr' can now be a relative path; previously the path had to be
+   absolute to ensure sub-components were using the same target path.
+   
+ - The wrapper build script 'buildbufr_local' now has a similar -p option,
+   allowing bulk installs with one or several compilers to a target package's
+   own local test build tree. In this case the path on the command line is 
+   the package root, not including the compiler ID. E.g. to support the
+   GWV local test builds with source in a parallel directory:
+    > buildbufr_local -p ../gwv
+    > cd ../gwv
+    > buildgwv_local
+   It also now has a summary help (-h) option.
+    
+ - Confirm successful builds with latest Linux GFortran (v4.7.1) and AIX 
+   xlf95 (v14.1)
+   
+ - Added Sub-centre code 39 (University of Luxembourg) to Originating 
+   Centre 74 (Met Office) in table extra/ORIGCENTRE
+
+ - No changes to any library code or other tables in this release.
+   
+
+19.1.1 (19 March 2012)
+
+ - Starting from this release, the main and second level of the package
+   Version number will reflect the underlying MetDB kernel library version
+   (19.1.x). The third level will increment when only changes to non-kernel
+   files are released (i.e. files in the package root directory and/or in
+   extra/) in between releases of the main kernel library package, or for
+   minor MetDB kernel package updates.
+
+ - MetDB kernel library v19.1.02. See metdb/ver19.1.02_Release_Notes.txt
+   This release is a minor update which removes some legacy diagnostic PRINT
+   statements, improves portability and builds/runs the encode/decode
+   test as part of it's own Makefile. The main change for users is to include
+   the latest operational BUFR tables at Version 17 (2 November 2011) with
+   versioning of TABLEB (Versions 13-17). Note that these latest tables must
+   be used with the v19.1.02 code; they are not compatible with applications
+   built against previous releases of the MetDB library (and similarly, older 
+   tables are not compatible with applications using this latest library).
+   When the complete v19.1.1 package is built and installed, user-applications
+   must also be re-built to link with the new object library so so they can use
+   the new tables.
+
+ - Updated minor look-up tables in extra/ for V17 BUFR tables.
+
+
+19.1  (24 Aug 2011)
+
+ - Corrected bug in extra/decbufr.f90 skip messages/stop decoding logic when
+   using any of -f, -l, -n or -s command line options.
+
+ - Added new MODIS aerosol descriptors to extra/TABLEB and associated code
+   tables to extra/CODEFIG. Added new satellites (CALIPSO, CloudSat,
+   Megha-Tropiques), instruments (IIR, CALIOP) and radiosonde (RS92-NGP) to
+   extra/CODEFIG, as proposed for fast-track for 2011. (19.1)
+
+ - Changes to f90_compilers.dat:
+     Support for new Linux compilers
+       + Portland Group 'pgf10' (pgf95 v10.x)
+       + Portland Group 'pgf11' (pgf95 v11.x)
+     Renamed ID LINUX-PGF to LINUX-PGF95 (default 'pgf95') for compatibity.
+     Removed switches to add underscores to external names for AIX xlf95 and
+     xlc compilers. This is for compatability in linking with other packages
+     (e.g. netCDF v4.1.x) which use default settings (no underscores).
+     Removed build support for obsolete compilers Intel 'ifc' (v7) on Linux
+     and Intel 'ifort8' (v8) on Windows/Cygwin.
+
+
+19.0  (21 Jun 2011)
+
+ - MetDB kernel library v19.0. See metdb/ver19.0.00_Release_Notes.txt.
+   This release is a complete code refresh, rewritten in Fortran 95.
+   It adds support for encoding of BUFR Edition 4, corrects the interpretation
+   of some less-well used and ambiguous BUFR features, and removes size
+   limitations inherent to the previous F77 code. Otherwise there is no new
+   functionality. Version 14 (2009) BUFR tables are included with this package.
+
+ - Several files in the extra/ directory have been updated.
+   See extra/CHANGELOG for details.
+
+ - New satellite codes provisonally included in v18.5 (see below) plus
+   some others, have been ratified and consolidated in extra/CODEFIG.
+
+ - BUFR package now kept under Subversion.
+
+
+18.5  (21 Feb 2011):
+
+ - Fixed bug in metdb/enbufr.F which was not padding final even byte
+   of Section 3 with a null value.
+
+ - Added new satellites C/NOFS, TanDEM-X and PAZ to extra/CODEFIG table
+   001007. NB all are proposed codes, not yet ratified.
+
+
+18.4  (24 Nov 2010):
+
+ - Changes to f90_compilers.dat:
+   Support for new Linux compiler
+     Intel Fortran XE 'ifort12'  (ifort v12.x).
+
+
+18.3  (27 May 2010):
+
+ - Support for building under IBM AIX with XL Fortran & C/C++ compilers
+   (xlf+xlc)
+   + f90_compilers.dat: added AIX section with support for compiler ID
+    'XLF95'.
+   + buildbufr: modified options for some built-in AIX commands rather
+     than GNU versions. AIX cp, mkdir etc commands don't support -v
+     (verbose) options, so successful command completion will not be
+     explicitly logged under this OS.
+   + extra/Makefile: new INSTALL variable passed by buildbufr script for
+     flexible platform support.
+
+
+18.2  (1 Nov 2009):
+
+ - Removed direct support for building under native MS-DOS (buildbufr.bat no
+   longer included). Building under Windows with Cygwin continues to be
+   supported within the POSIX-style buildbufr shell script.
+
+ - Since almost all modern Fortran compilers support the industry-standard (if
+   non-ISO) system interface routines GETENV(), GETARG(), IARGC() and EXIT()
+   employed by the application programs in extra/, the portability.fi
+   include-file mechanism is now redundant and has been removed.
+
+ - The notable exception to the above is the NAGWare (NAG f95) compiler which
+   requires USE f90_unix_* modules which would make application code
+   non-portable. The package now includes an interface extra/nag_interfaces.f90
+   which is automatically added to the BUFR object library by the build script
+   when using the NAG compiler; this makes the USE requirement for NAG
+   transparent to applications when linked with the BUFR library. This interface
+   should not be used for non-NAG compilers.
+
+ - MetDB BUFR library renamed libmetdbbufr.a to avoid clashing with the ECMWF
+   BUFRDC library, also called libbufr.a
+
+ - Corrected a bug in metdb/enbufv2.F to correctly set a default value for
+   Local Table Version to zero if the calling routine passes a value of -99.
+   IPET-DRC meeting of September 2009 clarifies that this value should be
+   zero when only the global parts of the Master Table are used.
+
+ - Changes to look-up tables and routines for decoding BUFR Section 1
+   information. See extra/CHANGELOG for details.
+
+
+18.1  (29 June 2009):
+
+ - Updates to tables in extra/ - see extra/CHANGELOG for details.
+
+ - Changes to f90_compilers.dat:
+   Support for 'new' Linux compilers
+     GNU     'gfortran' (copy of 'gfc' entry) (also for Cygwin entry)
+     Intel   'ifort11'  (ifort v11.x).
+     NAGWare 'nagfor'   (new command name at v5.2)
+     SUN     'sunf95'   (v8.3) + 'suncc' (SUN Studio 12)
+
+   Removed '-static' flag from gfc/gfortran which is redundant if
+   LD_LIBRARY_PATH correctly includes the GFortran dynamic link library path.
+
+   Set gfc/gfortran to use default 'gcc' instead of non-standard 'gcc-4'. If
+   users wish to invoke the version of gcc installed alongside GFortran (and
+   this is different from the default gcc) then this change should be reversed
+   and a softlink created to point gcc-4 the newer gcc. Alternatively, softlink
+   'gcc' to this newer version (which would then affect all other compilers
+   twinned with 'gcc').
+
+   Removed '-Vaxlib' from Intel v9 and later (deprecated after v8). Added
+   '-vec-report0' from Intel v9 and later to suppress 'remarks' about vector
+   optimisations. Such remarks are anyway not output by the v11.1 compiler.
+
+
+18.0 (7 Nov 2008):
+
+ - MetDB Release V18.0. See file metdb/ver18.0_updates.txt
+
+ - Change to metdb/bufrread.f (see 17.4 below) re-applied to v18.0, as
+   this upgrade has not been applied to the 'official' MetDB v18.0
+   package.
+
+ - MetDB routine decbufr() no longer supports extraction of BUFR Section 2
+   data. Utility tool extra/debufr.f90 modified accordingly. This only
+   affects the interface with the decoder; Section 2 data was not actually
+   extracted. User code may need similar modifications to the DEBUFR
+   argument list.
+
+ - Utility tool extra/test_tables now outputs the range (minimum and maximum
+   data values, in natural units) that the BUFR Table B element descriptor can
+   technically encode. Note that the range of values which are physically valid
+   for that parameter may be more restricted. This utility also now has a
+   summary help option (enter ?, -h or --help at the FXY prompt) and the user
+   may enter flag (bit-orented) values in decimal, hexadecimal, octal or binary
+   formats.
+
+ - The build & installation script 'buildbufr' now creates the object library
+   libbufr.a locally and only copies it to the the final location after building
+   and running the test tools. This is to support builds using the Windows Intel
+   'ifort' compiler under Cygwin. When passing the full library path to make
+   files under Cygwin, a Windows-style path such as c:\user breaks 'make' (the
+   colon is an item separator) and the alternative Unix style /cygdrive/c/user
+   breaks the Intel ifort compiler (anything beginning with '/' is assumed to be
+   an option switch). This change avoids passing directory paths to 'make'.
+
+
+17.4 (30 May 2008):
+
+ - Support for decoding longer BUFR messages (up to 500,000 bytes)
+   allowed on the GTS since November 2007.
+
+   - Increased internal capacity capacity of MetDB library routine
+     metdb/bufrread.f to read messages up to 500,000 bytes (2 x 250,000)
+     from 300,000 (2 x 150,000).
+
+   - Increased internal capacity of extra/decbufr.f90 to handle decoding
+     of messages up to 500,000 bytes (from 25,000) and containing up to
+     200,000 expanded descriptors (from 20,000).
+
+   - Note that the new upper message length might exceed the limits of
+     some compilers, particulary older F90 and most F77 ones which may only
+     allow CHARACTER strings up to 65535 bytes. There could also be run-time
+     memory issues on some systems. If problem occur,
+     and such long messages do not need to be handled, the maximum
+     message length declarations can be reduced by editing the two files
+     noted above to a smaller value, such as 65,000 bytes.
+
+17.3 (1 May 2008):
+
+ - Added GPS Analysis Centre IGE (as Originating Sub-centre code 35)
+   to extra/CT001034.
+
+17.2 (February 2008):
+
+ - Critical array size declarations in bufr/code.F and bufr/tabled.F
+   locally increased from the 'official' v17.1 MetDB package files.
+   These routines were reading in more data items from latest versions
+   of CODEFIG and TABLED respectively, than the size of the arrays to
+   hold them, resulting in memory-related problems for applications
+   using them.
+
+ - TABLEB and TABLED in metdb/ are updated to Master Table Version 13
+   (7 November 2007). As these now contain the descriptors for ASCAT,
+   the equivalent files in extra/ (which locally provided just this
+   additional capability from Version 12 tables) have been removed.
+
+ - Note that CODEFIG in metdb/ has not yet been updated to Version 13.
+   The file in extra/ remains in place to provide ASCAT code and flag
+   definitions, and has been updated to Version 13 in respect of
+   descriptor 001007 (Satellite Identifier). CODEFIG provides only
+   a textual description for interpreted decodes, and is not necessary
+   to provide correct encoding or decoding of BUFR messages.
+
+ - bufr/metdb/enbufv2.F default for table version ID changed from 12 to 13.
+
+ - f90_compilers.dat : Added Linux support for Intel Fortran V9
+   ('ifort9' as alias for default 'ifort') and V10 ('ifort10') plus
+   Portland Group V6 ('pgf956' as alias for default 'pgf') and V7
+   ('pgf957').
+
+17.1 (August 2007):
+
+ - MetDB Release V17.1. See file metdb/ver17.1_updates.txt
+
+16.6 (June 2007):
+
+ - Updated some files in bufr/extra. See CHANGELOG in that directory.
+
+ - No changes to tables or MetDB kernel code in this release.
+
+16.5 (August 2006):
+
+ - BUFR tables in metdb/ and extra/ updated to include all changes
+   ratified by WMO for use from 2 November 2005 (Table Version 12).
+
+ - Subroutine metdb/encbuf2.F modifed to set Version 12 in BUFR
+   Section 1 as the default.
+
+ - New Code Table extra/CT001033 (Originating/Generating Centre)
+
+ - Non-MetDB look-up table routines consolidated into a single
+   source code file extra/codetables.f90
+
+ - bufr/metdb/enbufv2.F default for table version ID changed from 11 to 12.
+
+ - Updated bufr/README, extra/README and bufr/PACKINGLIST
+
+16.4 (April 2006):
+
+ - BUFR tables CODEFIG, TABLB and TABLED in extra/ support the recently
+   ratified ASCAT BUFR template.
+
+ - f90_compilers.dat : Added support for Intel V9 ('ifort9') compiler
+   for Linux, and Gnu G95 ('hpg95') compiler on HP-UX. LF95 v6.20 no
+   longer supports '-O2' optimisation switch, and the standard '-O'
+   results in erroneous loop optimisation causing problems when running
+   applications, so no optimisation '-O0' is explicitly set.
+
+ - buildbufr script modified so that it can be called from other
+   than the directory in which it resides.
+
+ - Updated README.cygwin
+
+ - No library or application code changes in this release.
+
+16.3 (September 2005):
+
+ - BUFR run-time files are now, by default, installed in <prefix>/data/bufr
+   (with <prefix> itself, as before, defaulting to $HOME).
+
+ - Under Cygwin, the build script now follows Windows file naming
+   conventions when using the native Windows compilers ('ifort') in
+   which case the BUFR library is called bufr.lib instead of libbufr.a
+
+ - Added support for NEC 'efc', Portland Group 'pgf95' and Intel V8
+   'ifort' compiler for Linux, and Fujitsu Fortran 'f95' for SunOS in
+   bufr/f90_compilers.dat. Some existing compiler tag IDs gave also
+   been changed. Minor changes to Unix build script.
+   f90_select now also checks for a working C compiler.
+
+ - Renamed README.txt to README; split package change description
+   to this file (CHANGELOG) from README file; split copyright notice
+   from README to separate COPYRIGHT file; added PACKINGLIST file.
+
+ - Code Table extra/CT001034 includes entries for new ground stations
+   supporting direct reception of ERS-2 data.
+
+ - No library or application code changes in this release.
+
+16.2 (April 2005):
+
+ - corrected typo/bug in MetDB C utility function metdb_copen which
+   was preventing the use of double trailing underscores, and hence
+   a failure to link with Fortran compiled to expect this construct
+   under Windows/Cygwin (G95 & GFortran)
+
+ - Compiler settings modified for Cygwin g95 and gfortran in
+   bufr/f90_compilers_for_BUFR.dat
+
+16.1 (March 2005):
+
+ - MetDB Release V16.1. See file metdb/ver16.1_updates.txt
+
+ - BUFR tables TABLEB and CODEFIG in extra/ incorporate the changes
+   to these tables in the MetDB v16.1 release, and in addition
+   continue to include support for the recently ratified radio
+   occultation elements & code/flag table entries.
+
+ - decbufr.f90 modified to support new Section 2 arguments in
+   call to DEBUFR (but unused).
+
+ - Apart from the original make files in the metdb/ directory,  make
+   files are now supplied in the extra/ directory and copied to metdb/
+   by the build script. Previous releases copied these files during
+   the package zipfile build process. The packaged metdb/ directory is
+   now exactly as contained in the standalone kernel MetDB library
+   release package.
+
+ - Support for GNU Fortran compilers G95 and GFortran added to
+   f90_compilers_for_BUFR.dat. Note that both compilers are in beta
+   release (with frequent bug fix updates), and therefore are not
+   recommended for operational builds. However, for release versions
+   as of March 2005, both G95 and GFortran compile and run the BUFR
+   code correctly under Linux, as far as can be ascertained. There
+   remain issues with G95 & GFortran under Windows, as noted in the
+   Compilers section in README.
+
+ - Support for GNU Fortran compilers G95 and GFortran added to the
+   buildbufr script when running under Windows/Cygwin; these compilers
+   output object files .o whereas the Intel outputs .obj.
+
+
+15.2 (December 2004):
+
+ - Corrected error in local version of BUFR Table B (extra/TABLEB)
+   relating to scale and bit width for refractivity (015036) added
+   in v15.1 to support radio occultation.
+
+ - extra/CT001034 modified to include analysis centre ROB as a sub-
+   centre (code 32) to METO in place of IESG.
+
+15.1 (September 2004):
+
+ - Unix/Linux build script "buildbufr.s" renamed "buildbufr".
+
+ - Both Unix/Linux and Windows/DOS build scripts re-written to do
+   their things more flexibly. Notably:
+
+   + The Unix/Linux script supports building under bash in a Cygwin
+   environment under Microsoft Windows in addition to building under
+   ksh on HP-UX and bash on Linux. This now the recommended method;
+   a future release may drop native DOS batch file build support.
+   Makefiles for Cygwin are generated on-the-fly from the
+   supplied Unix/Linux versions to use Windows naming conventions
+   (e.g. name.lib, name.obj & name.exe instead of libname.a, name.o
+   & name). These make file names will have _CYGWIN appended.
+
+   + The Unix/Linux script supports an option to build with a
+   specific compiler (e.g. if more than one is installed or the
+   default one isn't). Knowledge of some common compilers are
+   provided in the file f90_compilers_for_BUFR.dat. The script will
+   abort if the specified (or default) compiler cannot compile a
+   trivial test program. To specify a compiler, use the -f option;
+   see the compiler file header for supported compiler IDs and the
+   default for each platform. This is a new feature, which  is not
+   supported by the PC-DOS buildbufr.bat version.
+
+   + Target directories will be <prefix>/lib, <prefix>/bin etc.
+   Separate external environment variables LIB, BIN, etc no longer
+   assumed or used. The default prefix is HOME. The prefix root and
+   it's sub-directories are created if they don't already exist
+   (though obviously the user must have the necessary access rights,
+   and the directory in which the root itself is to be created
+   already exists). The script will abort if any (sub-)directory does
+   not exist and cannot be created (but checking is limited in the
+   DOS version). Use the -p option to specify a prefix root.
+
+   + Add option to buildbufr to 'make clean' any existing MetDB build
+   (default now is not to wipe any existing build before a normal
+   'make' and just to make anything that might have changed). Use the
+   -c option to wipe an existing system and rebuild from scratch.
+   The previous release version always built from scratch.
+
+   + Add option to also build and run the sample encoder and decoder
+   in the bufr/metdb distribution. Default: test programs skipped.
+   Use the -t option to include the test programs in the build.
+   The previous version always built & ran these programs
+
+   + Add option to use a (temporary) definition for BUFR_LIBRARY in
+   order to install the BUFR run-time tables to an alternate location.
+   Default: existing environment variable BUFR_LIBRARY, or if that is
+   not set, then PWD is used. Use the -b option to specify a
+   temporary location for BUFR tables. This is a new feature.
+
+   + Add support to install 'man pages' (*.1) files to <prefix>/man/man1).
+   The user's MANPATH should include this root path so that the 'man'
+   utility can find these files. This is a new feature.
+
+   + Added command line options to give basic usage info (and then exit).
+   Use the -h option to print help info. Previous versions had no
+   command line control.
+
+ - extra/TABLEB & TABLED files support the sequence for Radio
+   Occultation provisionally agreed by WMO/CBS Expert Team meeting in
+   June 2004.  (NB this sequence is still subject to technical
+   discussion, so is not yet official.)
+
+ - No library or application code changes in this release.
+
+15.0 (May 2004):
+
+ - Release v15 (April 2004) of the MetDB kernel package is a general
+   maintenance release & general code tidy from v14 with no
+   functional changes. Subroutine TABLEB now returns FORMAT as 'F'
+   for flag table and 'C' for code table (used to be 'F' for
+   both). It includes some updates to CODEFIG and TABLEB BUFR tables;
+   local versions with latest RO support have been built on these
+   files - see README.txt in extra/ for details.
+
+ - Makefile_BUFRrelease (as supplied) is the original MetDB package
+   version with default compiler and options. Specific O/S & compiler
+   settings (for HP-UX and Linux) are instead defined in the
+   buildbufr.s script which are passed to the makefile to override
+   the defaults. Therefore, the makefile should not be edited; make
+   any changes to the main script (or use as a template command line
+   for stand-alone MetDB library build).
+
+ - Added support to encode & decode (display/dump) local code table
+   001034 (Originator Sub-Centre). See README.txt in extra/ for details.
+
+14.2:
+ - buildbufr.bat (in bufr/), Makefile_BUFRrelease_PC (in bufr/metdb/)
+   and portability.fi_PC (in bufr/extra/), as released, have been
+   tailored for the Intel Visual f95 v8 ('ifort') and Microsoft C++
+   .NET 2003 ('cl') compiler combination for MS Windows. The
+   equivalent files for Unix (HP-UX) are set up for the HP f90
+   ('f90') and and HP C ('cc') compilers. For Linux the set up is for
+   Intel F95 v7 ('ifc') and GNU C ('cc' or 'gcc').
+
+ - The MetDB C utility code in MetDB_c_utils_PC.c in previous
+   releases was tailored for PC using the Compaq Visual Fortran V6
+   and Microsoft C++ compilers. With the Intel f95 and C++ .NET
+   combination, no PC-specific C code is required. The Intel f95 also
+   supports Fortran compiler directives via a pre-processor (fpp), so
+   separately pre-processed source code is no longer required. The
+   bufr/metdb/f directory and files therein included in previous
+   releases are therefore not included in this release. A set of
+   pre-processed Fortran and PC-specific C source code can be
+   provided separately on request.
+
+ - The BUFR object library libbufr.a is placed in the directory
+   specified by the LIB environment variable by the build script. If
+   this is not pre-defined, then BIN is used. On PC-DOS platforms,
+   bufr.lib is copied to MYLIBS (as LIB is used by the Intel VF95
+   system), which defaults to %HOME%\lib. Similarly, include files
+   (in this package, portability.fi) are copied to INC by the build
+   script. If INC is not predefined, it defaults to the PWD, or on
+   DOS, to %HOME%\include.
+
+ - This release has no changes to the core MetDB BUFR code.
+
+14.1:
+ - Include local versions (in extra/) of BUFR tables CODEFIG, TABLEB
+   and TABLED which support encoding of Radio Occultation data
+   (BUFR proposal Version 2). CODEFIG includes a dummy (unofficial)
+   ICAO code of 'KNCR' for NCAR/UCAR in code table 001031 (originator
+   centre code 60).
+
+ - Modified gtshdrs.f90 (in extra/) to terminate a bulletin with one
+   set of CR/CR/LF, not two, before the final ETX. (The standard has
+   apparently changed some time in the recent past, though two sets
+   are common and do not break the routing.)
+
+ - This release has no changes to the core MetDB BUFR code.
+
+14.0:
+ - Release v14 (June 2003) of the MetDB kernel package is a general
+   maintenance release & general code tidy from v13 with no functional
+   or user interface changes. The internal names of routines in the C
+   code can be controlled by compiler flags to include none, one or two
+   underscore suffixes. The Makefile_BUFRrelease make file template
+   includes this flag for a single underscore on Linux platforms. This
+   flag is not needed for HP-UX or PC use. See MetDB_c_utils.c for details.
+
+ - Includes the latest versions of BUFR tables (August 2003) which
+   incorporate all WMO-approved updates for use as from 5 November
+   2003. Max. array size in MetDB routine tableb.F modified to handle
+   increased number of descriptors in new TABLEB.
+
+13.0:
+ - Release v13 (March 2003) of the MetDB kernel package incorporates
+   many changes, the most notable for users being that local BUFR
+   binary table files are no longer required to be built, as the
+   'editable' plain text files are now read directly. This simplifies
+   the package in that the source programs and scripts which built
+   the binary tables are no longer required and so are not supplied
+   or supported in this complete package.
+
+ - The main BUFR build script buildbufr.s (and .bat) now build and
+   run the MetDB sample encoder & decoder, and also test run the
+   additional utility programs test_tables and decbufr. The user
+   should review the output of these scripts for correct operation.
+
+10.1:
+ - added explicit PC-DOS support in the form of build batch files,
+   (n)make files and a PC-specific version of MetDB C utilities
+   source code.
+
+ - build and execution tested with additional compilers; compiler
+   templates added to make files.
+
+ - added script/batch file to automate basic testing of the kernel
+   package.

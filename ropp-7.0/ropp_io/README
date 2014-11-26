@@ -1,0 +1,67 @@
+		     ROPP_IO Package Release V7.0
+		    ------------------------------
+
+The ropp_io module is a package of software and supporting files for
+manipulating Radio Occulation (RO) data to/from the ROPP format files.
+
+ropp_io forms one module of the Radio Occultation Processing Package (ROPP)
+which is a key deliverable of the ROM SAF. The IO (input/output) of all
+its sample programs is based on this 'ROPP' data format. The format itself
+is based on the platform-independent netCDF data transport file mechanism.
+
+The ROPP format is essentially mission independant, so can store RO data
+processed to Level 1 and/or Level 2 from GPS/Met, CHAMP, GRACE, COSMIC 
+or whatever as well as from GRAS. The format was designed as an interface
+between mission-dependent files and mission-independent application tools
+(e.g. BUFR encoding), but could equally well be used for data exchange
+NRT and offline) and for archiving.
+
+The software provides a high-level, user-callable interface for reading and
+writing RO data from/to netCDF files. The netCDF file type can contain
+multiple RO profiles (a 'multifile'). Supporting routines are included to
+define various composite RO data types, provide units conversions and
+some string handling. The ropp_io module requires that the ropp_utils
+module has been installed and it's library built.
+
+An example application program 'ropp2ropp' is provided which will read any
+supported ROPP file, generate a file name from the contents and write the
+data to back to the latest ROPP specification. This tool can also combine
+several single profiles into one multifile (in one session, or a later
+append), split a multifile to single profiles or thin profile data.
+
+There are also tools to encode the data in a ROPP file to BUFR ('ropp2bufr')
+and to decode a BUFR file back to ROPP standard ('bufr2ropp') and to
+convert GFZ text or UCAR netCDF files to ROPP netCDF ('gfz2ropp' and
+'ucar2ropp', respectively). 
+
+Tools are provided to extract background profiles in ascii format from 
+gridded fields in GRIB file format ('grib2bgrasc') and to convert that ascii 
+datafile to ROPP standard ('bgrasc2ropp'). 
+
+There are also tools to read 'EUMETSAT'-style RO data in netCDF-4 format, and
+output in ROPP standard ('eum2ropp') or BUFR standard ('eum2bufr').
+
+Profile thinning is implemented as a user-callable subroutine and is
+used by the ropp2ropp(1) and ropp2bufr(1) tools. Various thinning algoithms
+are supported, and for those that use a fixed set of output levels, these
+levels are user-definable via a simple plain-text control file. Several
+sample control files are included in the ropp_io/ropp directory. These may
+be manually copied to a suitable location and the file and path referenced
+at run-time on the command line.
+
+See the ROPP Release Notes html file provided with the main ROPP download
+tarfile for an overview and instructions for installing this module with the
+build and configure tools provided with ROPP.
+
+See the README.unix and README.cygwin files for more detailed installation
+instructions and tips for experienced developers. See file MANIFEST for the
+complete list of files in the distribution package and the COPYRIGHT file for
+copyright information. The file INSTALL contains generic instructions for the
+configure script.
+   
+Any comments on this software should be given via the ROM SAF
+Helpdesk at http://www.romsaf.org
+
+
+ROM SAF ROPP Development Team
+31 July 2013

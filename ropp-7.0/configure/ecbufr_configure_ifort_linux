@@ -1,0 +1,17 @@
+# $Id: ecbufr_configure_ifort_linux 3740 2013-07-08 20:43:35Z frdo $
+#
+#   ECMWF BUFR configuration file
+#
+# Compiler: ifort / Linux
+#
+AR      = ar
+ARFLAGS = rv
+RANLIB  = /usr/bin/ranlib
+#
+CC      = gcc
+CFLAGS  = -O2 -w -Dlinux -DLITTLE_ENDIAN -DINTEGER_IS_INT
+FASTCFLAGS = $(CFLAGS)
+#
+FC      = ifort
+FFLAGS  = -O2 -w -Dlinux -DLITTLE_ENDIAN -DINTEGER_IS_INT
+

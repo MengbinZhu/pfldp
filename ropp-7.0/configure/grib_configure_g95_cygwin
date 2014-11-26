@@ -1,0 +1,29 @@
+#!/bin/sh
+# $Id: grib_configure_g95_cygwin 3741 2013-07-08 20:47:20Z frdo $
+#
+# GRIB shell script for a local configure for ROPP
+# USERS SHOULD MODIFY THIS SCRIPT AS REQUIRED FOR LOCAL INSTALL
+#
+# Compiler: g95 / Cygwin
+#
+PREFIX=${1-$ROPP_ROOT/g95}
+echo
+echo "Platform:"
+uname -a
+echo
+echo "Fortran compiler:"
+g95 -V
+echo
+echo "C compiler:"
+gcc --version
+echo
+echo "Installation target:"
+echo "$PREFIX"
+echo
+#
+CXX="" \
+CC=gcc       CFLAGS="-O2 -w" \
+F77=g95      FFLAGS="-O2 -w" \
+FC=g95      FCFLAGS="-O2 -w" \
+              FLIBS="" LDFLAGS="" \
+  ./configure --prefix=$PREFIX --disable-jpeg

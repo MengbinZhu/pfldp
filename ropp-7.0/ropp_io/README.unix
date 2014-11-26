@@ -1,0 +1,113 @@
+$Id: README.unix 3696 2013-06-17 08:48:37Z idculv $
+
+                Building ROPP under Unix/Linux
+               --------------------------------
+
+This README is intended to give some 'quick-start' tips for building
+the ROPP code on Unix or Linux platforms or similar POSIX-compliant
+systems. The information in this file is for experienced developers and those
+used to compiling packages from source code. Less experienced users should
+instead refer to the overall ROPP Release Notes or README.build, both provided
+with the main ROPP download tarfile, and such users are strongly recommended to
+use the build and configure tools described therein. 
+
+It is assumed that in addition to having an ANSI-standard Fortran 95 compiler
+installed, the usual Unix/Linux tools such as tar(1) and make(1) are present.
+
+The ROPP package is simply built from a terminal session. Source files should
+first of all be extracted from the module tarfile(s):
+
+ > tar -zxvf ropp_<module>-<version>.tar.gz
+  
+Change directory to the ropp_<module>-<version> directory, and type:
+
+ > FC=ifort ./configure --prefix=$HOME
+ > make
+ > make install
+
+This example specifies the use the Intel f95 compiler, 'ifort', (with
+suitable default compiler flags) and will put .mod files in
+$HOME/include, object libraries in $HOME/lib and the example application
+executable programs in $HOME/bin and (depending on the package) man(1)
+pages in $HOME/man/man1. If the --prefix option is not given, files will
+be installed beneath /usr/local by default, which will normally require
+root priviledges.
+
+Other compilers are supported by the package as long as they are
+correctly set up for the local environment. The configure command in
+general is:
+
+ > FC=<compiler_name> FCFLAGS=<compiler_options> \
+   ./configure --prefix=<install_dir>
+
+If FC is not used, configure will search for a Fortran compiler by
+trying several known names. In the Intel case above, configure would
+find 'ifort' as long as there are no other F95 compilers which might be
+tried first. Suitable default compiler options are used if FCFLAGS is
+not given; defaults will be disabled if a blank argument is given.
+The default prefix is /usr/local but individual directories can also be
+specified - see
+
+ > ./configure --help
+
+for details of the fine tuning which is possible.
+
+Note that, depending on the version of the tools used to build the
+configure script, it may be necessary to repeat the FC and FCFLAGS
+with F77 and FFLAGS:
+
+ > FC=<compiler_name> FCFLAGS=<compiler_options> \
+   F77=<compiler_name> FFLAGS=<compiler_options> \
+    ./configure --prefix=<top_dir>
+
+Also, some shells may require the './configure' part to be first on the command
+line. Use this form if the above gives an error message e.g. "FC=ifort command
+not found".
+
+Configure does not need to be re-run unless you want to change the configuration
+details. Once configure has completed, the resulting Makefiles will build the
+application with these settings.
+
+ > make
+ > make install
+
+Once an application program has been built and installed, it can be run assuming
+that $HOME/bin (or whatever final location was chosen) is in your normal PATH or
+an alias is set for it, softlink in PATH is set to point to it or the path is
+explicitly given with the 'command'.
+
+The build support package - ropp_build - contains a number of mini-scripts -
+ropp_configure_<compiler>_<os> - for running the configure command on various
+Unix-like operating systems with a number of compilers. For instance, to
+configure ROPP to build using the Intel ifort compiler under Linux:
+
+ > <path-to-build-files>/ropp_configure_ifort_linux
+
+The flags set in these scripts are compatible with similar settings for
+the 3rd-party dependency packages, but are not necesssarily optimal; the user
+should review these settings and change to suit local needs, or create a new one
+from one of the provided example templates.
+
+ 
+See also
+--------
+
+See companion file README.cygwin for support on Microsoft Windows
+systems under the 'Cygwin' Linux emulator.
+
+See README.build for more guidance on building ROPP and its dependency packages,
+including a list of compilers which have been used to verify the ROPP code.
+
+The package Release Notes (ROPP_Release_Notes_<version>.html) provides the
+principle version-specific guidance for building this release of ROPP.
+
+
+Contacts
+--------
+
+Any comments on this software should be given via the ROM SAF
+Helpdesk at http://www.romsaf.org
+
+
+ROM SAF ROPP Development Team
+31 July 2013

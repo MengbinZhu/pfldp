@@ -1,0 +1,1147 @@
+<!doctype html public "-//w3c//dtd html 4.0 transitional//en">
+<html>
+<head>
+   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <meta name="GENERATOR" content="Mozilla/4.76 [en] (WinNT; U) [Netscape]">
+   <title>Decoding and Encoding of BUFR Messages At The UK Met Office</title>
+</head>
+<body>
+&nbsp;
+<table BORDER WIDTH="100%" >
+<tr>
+<th ROWSPAN="3"><img SRC="logo.gif" height=107 width=140></th>
+
+<th>
+<h3>
+Technote 1: Decoding and Encoding BUFR messages</h3>
+</th>
+
+<td>
+<center><font size=-1>Review frequency&nbsp;</font>
+<br><font size=-1>Minimum once per year</font></center>
+</td>
+</tr>
+
+<tr>
+<td ALIGN=CENTER>$Revision: 4$&nbsp;</td>
+
+<td ALIGN=CENTER>$Date: 15/02/2011 21:35:52$&nbsp;</td>
+</tr>
+
+<tr>
+<td ALIGN=CENTER>$Source: /usr/lpp/internet/MetoRoot/WWW01/metdb/documentation/technotes/RCS/dmtn1.html,v
+$&nbsp;</td>
+
+    <td ALIGN=CENTER>&nbsp;</td>
+</tr>
+</table>
+
+<pre>&nbsp;&nbsp;&nbsp;&nbsp; <a href="#INTRO">INTRODUCTION
+
+</a>1&nbsp;&nbsp;&nbsp; <a href="#TOC1">TABLES
+
+</a>1.1&nbsp; <a href="#TOC1.1">Table B
+</a>1.2&nbsp; <a href="#TOC1.2">Table D
+</a>1.3&nbsp; <a href="#TOC1.3">Local tables B &amp; D
+</a>1.4&nbsp; <a href="#TOC1.4">Code figures and flags
+</a>1.5&nbsp; <a href="#TOC1.5">Descriptor representation
+
+</a>2&nbsp;&nbsp;&nbsp; <a href="#TOC2">DECODING
+
+</a>2.1&nbsp; <a href="#TOC2.1">BUFR message structure and decoding strategy
+</a>2.2&nbsp; <a href="#TOC2.2">Replication
+</a>2.3&nbsp; <a href="#TOC2.3">Basic BUFR operations and structure of decode
+</a>2.4&nbsp; <a href="#TOC2.4">Bit manipulation to construct values
+</a>2.5&nbsp; <a href="#TOC2.5">Output and display&nbsp;
+</a>2.6&nbsp; <a href="#TOC2.6">Coordinates and instrumentation elements
+</a>2.7&nbsp; <a href="#TOC2.7">Increments
+
+</a>3&nbsp;&nbsp;&nbsp; <a href="#TOC3">ENCODING
+
+</a>3.1&nbsp; <a href="#TOC3.1">Compression
+</a>3.2&nbsp; <a href="#TOC3.2">Setting up descriptor sequences
+</a>3.3&nbsp; <a href="#TOC3.3">Preparation of values to be encoded
+</a>3.4&nbsp; <a href="#TOC3.4">Run-length encoding
+
+</a>4&nbsp;&nbsp;&nbsp; <a href="#TOC4">QUALITY OPERATIONS
+
+</a>4.1&nbsp; <a href="#TOC4.1">Bit maps
+</a>4.2&nbsp; <a href="#TOC4.2">Bit maps and operators
+</a>4.3&nbsp; <a href="#TOC4.4">Programming strategy
+</a>4.4&nbsp; <a href="#TOC4.5">Use of decode output in application programs
+
+</a>5&nbsp;&nbsp;&nbsp; <a href="#TOC5">TO SET UP A BUFR SYSTEM
+
+</a>5.1&nbsp; <a href="#TOC5.1">Table access
+</a>5.2&nbsp; <a href="#TOC5.2">Bit-handling programs
+</a>5.3&nbsp; <a href="#TOC5.3">Calls to encode &amp; decode
+
+</a>Crown Copyright 1990, 1993, 1995, 2004, 2011
+
+Meteorological Office,
+Fitzroy Road, Exeter, EX1 3PB
+
+Note:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; This paper has not been published.&nbsp; Permission to quote&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; from it should be obtained from the Met Office.</pre>
+
+<h2>
+<a NAME="INTRO"></a>Introduction</h2>
+BUFR is a Binary Universal Form for Representing data.
+<p>BUFR is universal in that it contains a description of the data as well
+as the values. The description gives a list of the elements whose values
+follow. It does this in a coded form that requires a set of tables to interpret
+it. BUFR was developed for meteorological data, but can transmit whatever
+elements have table entries.
+<p>BUFR is binary in that values are not confined to some number of decimal
+digits, as with a character-based code , or to a machine-dependent word-length,
+but coded in a number of bits given by one of the above tables, which can
+be changed if necessary by appropriate operations.
+<p>The simplest BUFR message consists of a number of descriptors followed
+by the values of the corresponding elements. Not all BUFR descriptors
+correspond to elements: some descriptors represent operations to change
+the way a value is coded; others make the description more concise,
+by repeating descriptors (replication) or getting sequences of descriptors
+from a table, rather than including them in the message.
+<p>The most essential component of a BUFR system is the table of elements,
+Table B. Less essential, in that messages can be made without them, are
+the table of sequences (Table D) and the set of possible operations.
+<p>For each element, the entry in Table B gives a name, the SI units, the
+number of bits in which to code a value, a scale representing precision
+(see 1.1), and a reference value to be subtracted from the scaled value
+to leave a positive number to be encoded.
+<p>The operations enable the number of bits, the scale and the reference
+value to be changed. They also make it possible to add quality control
+flags, values and differences, to skip fields and so on.
+<p>Space taken up by the description can be saved by replication and the 
+use of Table D sequences. Space in the data section can be saved by
+compression if several similar sets of values are coded together: the set
+of values for each is expressed as a minimum, an increment width and a set
+of increments (in a reduced number of bits) to be added to that minimum.
+<p>The sequence of descriptors can arrange data in ways not covered by
+existing code forms. Space and time (coordinate) elements locate the values
+that follow them. Space and time increments can be defined, so time sequences
+of regularly occurring values can be encoded. Run-length encoding is provided
+for images.
+<p>The sections which follow describe how the tables have been set up and
+the various operations encoded at the UK Met Office. These notes are to
+be read in conjunction with the section on FM 94 BUFR in the WMO Manual
+on Codes, and concentrate on points which could cause confusion.
+(See Vol 1.2 Part B Binary Codes) 
+<h2>
+<a NAME="TOC1"></a>1 TABLES</h2>
+
+<h3>
+<a NAME="TOC1.1"></a>1.1 Table B</h3>
+The table of elements, Table B, is the one table essential to both encoding
+and decoding in BUFR; the other tables are not always required.
+<p>It has 64 element classes, each with room for 256 entries for elements
+in the class. A class contains e.g. temperatures, or various humidity elements,
+or year, month, day... second. No information is conveyed by the choice
+of class for an element (but see 2.6: the distinction between coordinate
+classes and others is important): it just groups related or similar elements
+together to show at a glance what entries already exist in that field.</p>
+<p>An entry consists of:  descriptor, name, units, scale, reference value
+and number of bits used to encode a value.  The value actually encoded is<br> 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp value*(10**scale)-refval.<br>
+A positive scale is the number of figures after the decimal point;
+a negative scale the number of zeros before the point.
+The reference value ensures that a positive value is always encoded.</p>
+<p>Names are limited to 64 characters - though, confusingly, some names in the 
+  Manual on Codes are longer. Units of 'code table', 'flag table' and 'CCITT IA5' 
+  (simply 'character' in CREX) call for action from a decoder; the rest are only 
+  for display. 
+<p>WMO release new versions of Table B at intervals; from version 14 changes to 
+  existing descriptors are allowed so it is important that the same table version 
+  is used for decoding as encoding.
+<h3>
+<a NAME="TOC1.2"></a><b>1.2 Table D</b></h3>
+Table D contains two main kinds of descriptor sequence. There are short
+sequences, especially for time and place, useful in many contexts
+and sequences which describe whole BUFR messages. There are other sequences,
+some of which have never been used.  Table D is, like Table B,
+divided into categories for convenience only: no information is conveyed by
+the categories.
+<p>There is no limit to the number of descriptors in a sequence, although
+a limit of 16 was assumed for a long time and hence longer sequences were
+split into components which are unlikely to be useful in other contexts.</p>
+<p>Formally Table D is just a way of cutting down the length of the description
+in a BUFR message, so the only information about a sequence in Table D
+is a list of descriptors. But for whole-message sequences the annotations
+on the right in the Manual on Codes may provide essential information for
+interpreting the data, despite the aim to make BUFR messages self-explanatory.</p>
+<p>(And despite the Backus-Naur definition and "Format for international
+exchange" of Table D in the Manual on Codes, which do list only descriptors.
+Note that the exchange format only works if the form of the sequence descriptor
+is kept different from the descriptors defining the sequence - which can
+be sequence descriptors (F=3) themselves - by e.g. leaving spaces between
+F, X &amp; Y. Otherwise counts are needed.)</p>
+<h3>
+<a NAME="TOC1.3"></a><b>1.3 Local Tables B and D</b></h3>
+Certain sections of Table B are reserved for local use (classes XX=54 to
+63 and YYY=192 to 255 in any class). To decode messages from another centre,
+whose local entries may be inconsistent with ours or messages with local descriptors
+for test purposes, use a different Table B rather than adding or changing
+entries in ours.<p></p>
+<p>Class 0 descriptors can transmit another centre's Table B entries in
+BUFR messages. In principle these could override existing entries for the
+message in which they occur - but this has never yet been done, so there
+is no code to implement it. (Entries have been transmitted in separate
+messages for test purposes; but this can't be automated, as there's no
+way of telling which following messages the overriding entries should be
+used for! The local table version in section 1 would have to be used together
+with the originating centre...)
+<h4>
+Local Table D sequences</h4>
+The UK Met Office uses local descriptor sequences outside Table D. The
+reasons for this were that (a) a limit of 16 descriptors in a Table D sequence
+was assumed, (b) it was inconvenient to fill up local sections with subsequences
+(16 descriptors or less) of whole-message sequences, and (c) a more readable
+form with room for annotation was preferred to the mere lists of component
+descriptors which Table D contained.
+<p>Input is as in the example below, from a file to be read by a call to
+LOCALD, which keeps the sequence for later calls.
+<p>On the IBM mainframe, the Local D file should be given the DDNAME LOCALSEQ
+e.g.
+<pre>//GO.LOCALSEQ DD DSN=SDB.BUFR.LOCALSEQ(AIREPS),DISP=SHR</pre>
+On a HP, T3E or IBMSP unix machine, the Local D file should be given the
+name or symbolic link LOCALSEQ in the run directory (the directory the
+BUFR executable will run in), or if using the environment variable BUFR_LIBRARY,
+put LOCALSEQ in the library pointed to by $BUFR_LIBRARY.
+<p>Example of LOCALSEQ file:
+<pre>309255&nbsp;&nbsp; UPPER AIR SIGNIFICANT TEMPERATURES AND WINDS
+
+001001, 001002, 001011&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; STATION NUMBER OR CALL SIGN&nbsp;
+005002, 006002, 007001&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; LATITUDE &amp; LONGITUDE, STATION HEIGHT
+004001, 004002, 004003&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; DATE (YEAR, MONTH, DAY)
+004004, 004005&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; HOUR &amp; MINUTE (IF KNOWN) OF LAUNCH
+002011, 002014,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; SONDE TYPE, TRACKING SYSTEM
+002013&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; RADIATION CORRECTION
+022042&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; WATER TEMPERATURE
+104000, 031001, 008002&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; CLOUD DATA (LOW, MIDDLE, HIGH)
+020012, 020011, 020013&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; CLOUD TYPE, AMOUNT &amp; BASE FOR EACH LEV
+008001, 106000, 031001&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; SEMI-STANDARD LEVELS (775MB ETC)
+010004, 010003&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; PRESSURE &amp; HEIGHT
+012001, 012003&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; TEMPERATURE &amp; DEW POINT
+011001, 011002&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; WIND SPEED &amp; DIRECTION
+008001, 103000, 031001&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; SIGNIFICANT TEMPERATURES
+010004, 012001, 012003&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; PRESSURE, TEMPERATURE &amp; DEW POINT
+008001, 103000, 031001&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; SIGNIFICANT WINDS
+010004, 011001, 011002&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; PRESSURE, WIND SPEED &amp; DIRECTION</pre>
+
+<h3>
+<a NAME="TOC1.4"></a>1.4 Code figures and flags</h3>
+BUFR Table A is not an essential part of the encoding/decoding system,
+but more for data base or telecommunications use. Table C is essential,
+but is not a table in any formal sense, consisting of plain-language descriptions
+of operations which have to be programmed in different ways.
+<p>But one further table can usefully be made, for decoding purposes only,
+or rather for displaying data coded in BUFR: it consists of brief descriptions
+corresponding to the code figures and flags. It seems best to avoid (as
+far as possible) displaying the code figures themselves: even where these
+correspond to existing WMO codes, not all users can be expected to know
+the codes, and many code and flag tables have been made specially for BUFR,
+either from scratch or by combining existing tables.
+<p>As there is no stated limit for their length, descriptions of code figures
+can be very long, especially where effectively several code figures and flags
+have been combined, as for present weather. This means that a concise form,
+say 12 characters, displayable in a table column, is not always easy to achieve.
+Despite this, most descriptions of code figures have been abbreviated into
+a reasonably meaningful 12-character form: the remainder will appear as
+figures in a display, leaving the user to look them up in the Manual on Codes.
+<h3>
+<a NAME="TOC1.5"></a><b>1.5 Descriptor representation</b></h3>
+Table B as described in 1.1, is for use by decoding and encoding programs.
+If the output from a decode consists of parallel arrays of descriptors
+and values then a calling program needs to be able to recognize descriptors.
+(But see 2.3: this is not always possible in the sense that the n-th row
+or column in the values array will consist of values of the n-th element
+ in the descriptor array - some descriptors may have to be skipped).
+<p>Descriptors appear as 6-figure numbers in the BUFR documentation. But
+if F, XX &amp; YYY in FXXYYY are fields of 2, 6 &amp; 8 bits respectively,
+then the numerical value of a descriptor is not F*100000+X*1000+Y, but
+F*16384+X*256+Y.
+<p>We therefore need several functions for converting from one form to
+another:<br>
+from a 16-bit field in section 3 of a BUFR message to separate
+values of F, X &amp; Y and hence the 6-figure displayable form as above
+(for, say, error messages); <br>
+from a readable 6-figure form as in the documentation, to the 16-bit form
+used in encoding and decoding.<br>
+The function DESFXY (DESCR,F,X,Y) converts a 16-bit descriptor to values of F, X &amp;
+Y (all integer)<br>
+the function IDES (FXXYYY) converts from 6-figure form F*100000+X*1000+Y to
+the 16-bit form.
+<p>But note that to find a given meteorological element in a message it
+is generally not enough to find a single descriptor: to find an element
+like tropopause temperature means finding two descriptors, not necessarily
+consecutive: 008002 with a value of 3 for the tropopause and only then
+a temperature descriptor. So in practice a data base interface is needed
+between a BUFR decode as described here and a meteorological user.
+<h2>
+<a NAME="TOC2"></a>2 DECODING</h2>
+
+<h3>
+<a NAME="TOC2.1"></a>2.1 BUFR message structure and decoding strategy</h3>
+A BUFR message consists of a start and end: ASCII characters 'BUFR' and
+'7777' respectively, which delimit 4 inner sections. 'BUFR' is followed by the
+total length of the message in edition 2 onwards.  Each inner section 
+itself starts with a length, which is always an even number of octets.
+The first 2 sections (the second is optional) are for handling the
+BUFR message as a whole during transmission or in a data base and give a
+rough classification of the data and a single "representative" time.
+This does not mean that the time can be omitted from the data, or that the
+data can't have more complex time structures.<br>
+Decoding is concerned with sections 3 and 4, the description and values
+respectively. Section 3 starts with the number of "sets of values" or
+"reports" in traditional terms, followed by a compression flag.  The flag
+is set if the reports are encoded together and compressed; not set if
+they follow one another, reusing the same description.
+<pre>
+The most important fields are:<br>
+(applies to Edition (Ed) 4 with differences listed for earlier editions)
+<br>
+<tr><td>BUFR</td><td>  +  (Ed 2 onwards) total length of message</td></tr>
+<tr><td>Section 1</td></tr>
+<tr><td>octets</td><td>   item</td></tr>
+<tr><td> 1-3 </td><td>    length of section (in octets)</td></tr>
+<tr><td>   4 </td><td>    BUFR master Table</td></tr>
+<tr><td> 5-6 </td><td>    originating centre</td></tr>
+<tr><td> 7-8 </td><td>    originating sub-centre</td></tr>
+<tr><td>   9 </td><td>    update sequence number</td></tr>
+<tr><td>  10 </td><td>    flag for inclusion of section 2</td></tr>
+<tr><td>  11 </td><td>    data type</td></tr>
+<tr><td>  12 </td><td>    international data subtype</td></tr>
+<tr><td>  13 </td><td>    local data subtype</td></tr>
+<tr><td>  14 </td><td>    Version number of Table B</td></tr>
+<tr><td>  15 </td><td>    Version number of local table B</td></tr>
+<tr><td>16-17</td><td>    four digit year</td></tr>
+<tr><td>18-22</td><td>    Date/time to the second</td></tr>
+<br>
+<tr><td>Section 3</td></tr>
+<tr><td>octets</td><td>   item</td></tr>
+<tr><td> 1-3 </td><td>    length of section</td></tr>
+<tr><td> 5-6 </td><td>    number of reports</td></tr>
+<tr><td>  7  </td><td>    compression flag and observed data flag</td></tr>  
+<tr><td> 8-9 </td><td>    descriptors</td></tr>
+<tr><td>10-11</td><td>    descriptors</td></tr>
+<tr><td>etc</td></tr>
+<br>
+<tr><td>Section 4</td></tr>
+<tr><td>octets</td><td>   item</td></tr>
+<tr><td> 1-3 </td><td>    length of section</td></tr>
+<tr><td> 5-> </td><td>    data bit string</td></tr>
+<br>
+<tr><td>Section 1 (Ed 2-3)</td></tr>
+<tr><td>octets</td><td>   item</td></tr>
+<tr><td> 1-3  </td><td>   length of section</td></tr>
+<tr><td>  5   </td><td>   originating centre</td></tr>
+<tr><td>  6   </td><td>   (Ed 3) originating sub-centre</td></tr>
+<tr><td>  8   </td><td>   flag for inclusion of section 2</td></tr>
+<tr><td>  9   </td><td>   data type</td></tr>
+<tr><td> 10   </td><td>   data subtype </td></tr>
+<tr><td>13-17 </td><td>   date/time (down to minutes)</td></tr>
+</pre>
+<p>The task of decoding as defined here is to achieve a correspondence between
+descriptors and bits in the data section, so that we know how many bits
+make up a value, what element it is a value of, any scale changes etc,
+and then return arrays of descriptors and values in such a way that it
+remains clear to a calling program which value corresponds to which descriptor.
+<p>Conceptually this is a matter of taking Table B entries, perhaps with
+modified scale figure etc, and adding a further column to give the corresponding
+value. But in fact there is no need to set up the whole of such an array.
+If the aim is to display the contents of the message, then lines can be
+output as they are set up rather than held in core; if not, then what is
+wanted as output is an array of values with all operations performed and
+a corresponding array of <i>descriptors</i> to identify the elements (the
+other columns are only used while an element is being handled and can be
+discarded when the next element is reached - except when
+<a href="#TOC4.2">quality operations</a> are possible.
+<p>So, although at first it might seem convenient to separate expansion
+of the description, that is the process of looking up sequences, performing
+replications, adding quality control fields etc, from the bit manipulation
+involved in finding the corresponding values, this may be better avoided
+for reasons of space.
+<p>But there are more fundamental reasons for combining expansion of descriptor
+sequences and bit manipulation. To see why, we need further consideration
+of the replication operation.
+<h3>
+<a NAME="TOC2.2"></a>2.2 Replication</h3>
+The operation called replication has grown more complicated as BUFR has
+developed. There are now three complications, which will be treated in
+turn.
+<p>First we must distinguish between explicit and delayed replication.
+A replication descriptor says how many descriptors to repeat. It may also
+say how many times to repeat them, but this count (in the descriptor) may
+be set to zero, in which case it has to be found in the data. This makes
+sense where, say, the number of levels in a profile is not known beforehand
+and may vary from profile to profile: delayed replication enables the same
+sequence of descriptors to be used for all profiles (though obviously not
+with compression if the count varies).
+<p>So a descriptor sequence which includes delayed replication cannot be
+expanded in isolation from the data. It would be possible to find the replication
+counts before the values of the elements (by adding up the number of bits
+to skip) and so keep the two processes more or less separate - but there
+are further complications.
+<p>(The rest of this section is concerned with run-length encoding of images,
+a rarely-used feature, and its aim is to justify the decoding strategy
+adopted; it can be skipped by readers interested in neither of these things.)
+<p>Replication originally applied only to descriptors: the descriptor sequence
+was abbreviated to save space and has to be expanded to match the data.
+But when a replication operator is followed by a data repetition count,
+rather than an ordinary delayed replication, the data value itself must
+be repeated the same number of times. This is for run-length encoding of
+images consisting of a fixed number of values of a given element, the precision
+being such that many successive values (pixels) may be the same.
+<p>For instance, any line of a radar image can be broken up into segments
+consisting of identical pixel values and segments where the values vary.
+The first kind of segment calls for data repetition, a descriptor and a
+value both encoded once to be repeated N times in the output; the second
+requires replication, N values to be coded in the message and one descriptor
+repeated N times in the output to correspond. Clearly such a descriptor
+sequence cannot be expanded in isolation from the data.
+<p>The third complication is the replication of coordinate increments.
+An element in one of the time or place classes immediately before a replication
+operator is taken to be included in the N-fold replication as an increment
+to be added N times, but without any further value in the data. There can
+be increments for more than one coordinate element.
+<p>Now consider nested replications, say for coding an image line by line:
+an outer replication for the number of lines in the image and inner replications
+to describe each line. The outer replication is preceded by, say, a latitude
+increment, the inner by a longitude increment; no pixel values occur except
+inside the inner replication.
+<p>Clearly the increment before the outer replication must be distinguished
+during the decoding process from that before the inner replication, or
+else it will be replicated again: it must be flagged as already replicated,
+and only unflagged when the expansion is complete.
+<p>In other words, there are descriptor sequences which cannot be reduced
+to sequences of element descriptors without destroying vital features of
+their relationship to the data. Hence sections 3 and 4 must be handled
+together.
+<h3>
+<a NAME="TOC2.3"></a>2.3 Basic BUFR operations and structure of decode</h3>
+The basic structure of the decoding program follows the descriptor structure.
+The different kinds of descriptor are as follows
+(omitting <a href="#TOC4.2">quality operations</a>). 
+<pre>F=0: element&nbsp;&nbsp; (class X, element Y in Table B)
+&nbsp;&nbsp;&nbsp;&nbsp; an element can be character or numeric,
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; a numeric element can be a number, code figure or flag(s),
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; and any element not in Class 31 can have associated fields
+
+F=1: replication&nbsp;&nbsp; (of the following X descriptors Y times)
+&nbsp;&nbsp;&nbsp;&nbsp; Y>0: explicit (count in descriptor)
+&nbsp;&nbsp;&nbsp;&nbsp; Y=0: delayed&nbsp; (count in data, either ordinary replication or data repetition)
+
+F=2: operations
+&nbsp;&nbsp;&nbsp;&nbsp; X=1: change field width&nbsp;&nbsp; (by Y-128 bits)
+&nbsp;&nbsp;&nbsp;&nbsp; X=2: change the scale, i.e. multiply by a power of ten (by 10**(Y-128))
+&nbsp;&nbsp;&nbsp;&nbsp; X=3: change reference values
+&nbsp;&nbsp;&nbsp;&nbsp; X=4: add Y-bit quality control field
+&nbsp;&nbsp;&nbsp;&nbsp; X=5: insert string of Y characters
+&nbsp;&nbsp;&nbsp;&nbsp; X=6: hide local descriptor
+&nbsp;&nbsp;&nbsp;&nbsp; X=7: change scale, width and reference value together
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [for quality operations see 4.2]&nbsp;
+
+F=3: sequence&nbsp;&nbsp; (category X, sequence Y in Table D)
+
+F=1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; If replication is delayed, the count is found in the&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; data. Increments immediately before the replication&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; operator are counted and the increment descriptors&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; added to the end of the sequence of descriptors to be&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; replicated. Space is made (as for a sequence) and the&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; replication carried out. The values of any replicated&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; increments will be copied in the output value array.
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; If a count in the data is zero, delete all the&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; descriptors that would have been replicated, including&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; the increments, as well as the replication operator and&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; count.
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; If the count in the data indicates run-length&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; encoding, flag the element descriptor (asssuming that
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; only one element at a time can be run-length encoded)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; and repeat it, leaving the operation to be completed by&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; repeating the values in the value array. We also need&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; a flag to be set when the descriptors are repeated and&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; then unset when the value has been got from the bit&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; string, to avoid looking in the bit string for further
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; values.
+
+F=2,X=1,2,4&nbsp;&nbsp; Width increment, scale increment and stacks of Q/C&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; field width and field meanings are set accordingly and&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; used whenever values of an element are found. Each&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; value is then preceded in the output by the meaning of&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; each field and the field itself, for as many pairs of&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; meaning and value as are currently nested.
+
+F=2,X=3&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Changed reference values are listed (in parallel arrays&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; of descriptor and reference value) and the list&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; consulted whenever values of an element are found.
+
+F=2,X=5&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Inserted characters are put in the same string as&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; character values.
+
+F=2,X=6&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; The descriptor and value are skipped.&nbsp;
+
+F=2,X=7&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Y gives the required scale change as in 202YYY and must 
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;be a positive integer. The reference value is given that scale change,
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;and a new width is calculated from the range implied by 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the old width (maybe wasting the odd bit).
+
+F=3&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Insertion of a sequence is simple. Space is made by&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; moving the remaining descriptors down; the inserted&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; descriptors overwrite the sequence descriptor itself,&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; and scanning of the descriptors continues with no&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; adjustment to the pointer, i.e. with the first&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; descriptor in the inserted sequence.</pre>
+
+<h3>
+<a NAME="TOC2.4"></a>2.4 Bit manipulation to construct values</h3>
+Descriptor manipulation can only be handled by a complicated program. It
+can be given a clear structure, that of the descriptors, but not easily
+broken up. Only a few tasks are sufficiently self-contained to be done
+in subroutines: these are looking up tables (B, D and codes), already discussed,
+and finding a value in the bit string, where the task is to get (or put,
+if output) a value V in WIDTH bits after I bits in the bit string.
+<p>There are several ways of doing this. It can be done a bit at a time,
+testing whether a bit is set in the bit string and building up the value
+by doubling and either adding one or not adding accordingly.
+<p>Our Fortran program takes a slightly more complicated (but faster?)
+approach, working an octet at a time. We start in octet N=I/8. In this
+octet NINIT=I-N*8, i.e. MOD(I,8), bits have already been used. The value
+will extend over NOCTET=(WIDTH+NINIT+7)/8 octets, and in the last of these
+octets NLAST=WIDTH+NINIT-(NOCTET-1)*8 bits will be used.
+<p>The value is segmented in this way, bits being shifted in an octet by
+multiplying or dividing by powers of 2. A value that fits into one octet
+is treated as a special case.
+<p>A character value is encoded one octet at a time.
+<p>A value which is all ones, i.e. equal to 2**(WIDTH-1), is missing except
+in the case of a one-bit element or associated field, which is simply a
+flag set on or off.
+<p>(An IBM Assembler program is faster, working one 32-bit integer at a
+time: skip I/32 words, load two words, shift left MOD(I,32) bits to get
+rid of unwanted bits in previous values and right 32-W bits to align, losing
+any bits from following values.)
+<p>No numerical value has more than 31 bits, so integer values are precise.
+But real output loses precision if elements have more than 24 bits (IBM
+single precision). This is a serious problem with flag tables, a few of
+which have more than 24 flags: an imprecise value can imply a completely
+misleading flag combination. So until a double-precision version is implemented
+only the first 24 flags are output: if more are wanted, a full representation
+(e.g. in octal, as for CREX) of the flag table could be put in the character
+output. (This means the value corresponding to the n-th flag in a w-flag
+table is not 2**(w-n) but 2**(min(w,24)-n)).
+<p>Example: a 13-bit value split between octets as follows (3+8+2 bits
+marked +, so NINIT=8-3=5, NLAST=2)):
+<pre>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; =====+++&nbsp;&nbsp; ++++++++&nbsp;&nbsp; ++======&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; octet 1&nbsp;&nbsp;&nbsp; octet 2&nbsp;&nbsp; octet 3
+
+Build up the value V as follows:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; in this case:
+
+V1=MOD(OCTET(1),TWOTO(8-NINIT))&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; V1=MOD(OCTET(1),8)
+V2=V1*256+OCTET(2)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; V2=V1*256+OCTET(2)
+V =V2*TWOTO(NLAST)+OCTET(3)/TWOTO(8-NLAST)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; V=V2*4+OCTET(3)/64
+
+where TWOTO is an array of powers of 2.</pre>
+
+<h3>
+<a NAME="TOC2.5"></a>2.5 Output and display</h3>
+The array of values output from a BUFR decode must in general be a real
+array. If integers were used, the scale would have to be as in Table B
+(or else the user wouldn't know if the value is in m or mm for example).
+If there has been a scale change, this may be all right when converting
+to that scale involves multiplying by a positive power of ten; but when
+it means dividing, and therefore losing precision, the extra precision
+may be just what is wanted by the user!
+<p>For character elements the corresponding value (from our decoder) points
+to a character string: the value is length*2**16 plus pointer.
+<p>Ideally the N-th descriptor in the output would correspond to the N-th
+value or N-th row of values, i.e. all operators would have been used and
+then deleted, leaving only element descriptors. But unfortunately this
+is not generally so.
+<p>In the expansion of the BUFR descriptor sequence the following aims
+at first sight seem reasonable: (1) to leave a valid sequence of descriptors
+after any operation, (2) to end up with a sequence in one-to-one correspondence
+with the values, i.e. with no operators left in it, (3) to end up with
+a sequence that can be used to re-encode selected subsets of values (reports)
+from a compressed message, (4) to end up with a sequence which can be used
+to decode another subset (if there are several subsets in the message with
+no compression).
+<p>Of these aims (3) is questionable, because what is wanted in section
+3 of a BUFR message is more likely to be the original than the expanded
+sequence, (2) requires decisions about whether delayed replication counts
+are to be put in the output value array and what descriptors should correspond
+to quality control fields, (1) is unattainable for reasons like those described
+in 2.2, and (4) is internal to the decoding process, so better abandoned
+- it's simpler to keep the original sequence and repeat the expansion.
+<p>In fact aim (2) is inconsistent with (1) and (3): if our aim is correspondence
+with the values, and therefore operators are deleted after use, then we
+may be left with replication counts with no replication operators; if the
+operators were left, then the descriptor count (X) would have to be adjusted
+during subsequent operations, which would be difficult.
+<p>So the best we can aim for is some correspondence between descriptors
+and values (essential - though some descriptors may have to be skipped)
+and the possibility of reencoding starting with the original descriptor
+sequence (though this would depend on the operations used).
+<p>So our output descriptor and value arrays depart from one-to-one correspondence
+and immediate re-encodability in the following ways:
+<ul>
+<li>
+replication operators are left in the descriptor array (with no corresponding
+counts in the values) in the form 100YYY (or rather 1YYYYY: Y can overflow
+into the X field!) to indicate e.g. the number of levels that follow</li>
+
+<li>
+scale change operators are left to indicate precision, which could be important
+to some users (whereas field width and reference changes are irrelevant
+outside the BUFR encoding/decoding process)</li>
+
+<li>
+various quality operators are left (see 4.5)</li>
+
+<li>
+replicated increments (both descriptors and values) are inserted when the
+original descriptor sequence had them implicit in a replication operation</li>
+
+<li>
+each field added by 204YYY is preceded by the meaning defined with that
+operator</li>
+
+<li>
+descriptors for character elements are flagged to indicate that the corresponding
+values consist of a length and a pointer combined.</li>
+</ul>
+(There is a further complication with several subsets which are not compressed,
+in which case replication counts can vary from subset to subset. The descriptor
+array then contains expansions of the descriptor sequence for each subset,
+separated by the final descriptor counts for subsets other than the first
+and each containing any replication count(s) as above)
+<p>These decisions, designed to avoid any repetition of descriptor manipulation
+in the calling program, may seem arbitrary, especially the first one: they
+meet our current needs (Jan 2004) but clearly the handling of replication
+may seem unsatisfactory - a better general solution might be 1XX000 in
+the descriptor array (with XX adjusted to describe the number of output
+descriptors now replicated - not an easy task!) and Y, the corresponding
+count, in the values array.
+<p>Our BUFR decode provides an optional display of the values (one line
+each: element name, units, value - if the value is a code figure, then
+if possible it is replaced by a brief description).
+<p>Example of display:
+<pre>WMO BLOCK NUMBER&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; NUMERIC&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 33
+WMO STATION NUMBER&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; NUMERIC&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 946
+LATITUDE (COARSE ACCURACY)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; DEGREES&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 45.00
+LONGITUDE (COARSE ACCURACY)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; DEGREES&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 34.00
+HEIGHT OF STATION&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; M&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 205
+TYPE OF STATION&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; CODE TABLE&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; MANNED
+YEAR&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; YEAR&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 1996
+MONTH&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; MONTH&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 4
+DAY&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; DAY&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 21
+HOUR&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; HOUR
+&nbsp;&nbsp;&nbsp;&nbsp; 0&nbsp;&nbsp;&nbsp;&nbsp; 3&nbsp;&nbsp;&nbsp; 6&nbsp;&nbsp;&nbsp; 9&nbsp;&nbsp; 12&nbsp;&nbsp; 15
+WIND DIRECTION AT 10M&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; DEGREES TRUE
+&nbsp;&nbsp;&nbsp; 170&nbsp;&nbsp;&nbsp; 0&nbsp;&nbsp; 30&nbsp;&nbsp; 60&nbsp;&nbsp; 50&nbsp;&nbsp; 230
+WIND SPEED AT 10M&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; NUMERIC&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; M/S
+&nbsp;&nbsp;&nbsp; 3.1 *********&nbsp;&nbsp; 2.1&nbsp; 4.1&nbsp; 3.1&nbsp; 5.1
+CLOUD TYPE
+NO CL CLOUD&nbsp; NO CL CLOUD&nbsp; NO CL CLOUD&nbsp; CU CAL&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; NO CL CLOUD&nbsp; CU CAL
+CLOUD TYPE
+AC TR LEVEL&nbsp; AC TR LEVEL&nbsp; AC TR LEVEL&nbsp; AC TR LEVEL&nbsp; AC TR LEVEL&nbsp; AC TR LEVEL
+CLOUD TYPE
+NO CH CLOUD&nbsp; CI FIB (UNC) CI SPI SHEAF CI SPI SHEAF NO CH CLOUD&nbsp; NO CH CLOUD</pre>
+
+<h3>
+<a NAME="TOC2.6"></a>2.6 Coordinates and instrumentation elements</h3>
+The handling of "coordinate" elements in BUFR is problematic. Because encoding
+and decoding can be done without reference to the concept, vague statements
+have crept in, like the note to 94.5.3.3, about coordinate elements "contradicting"
+one another. Fortunately decisions about what contradiction means can be
+left to the user.
+<p>But it may be useful to say that a coordinate no longer applies. This
+can be done by coding a missing value of the coordinate. This may be useful
+for instrumentation (class 2) as well as time &amp; place: there are no
+instrumentation elements (though there could be) for traditional observations
+like SYNOPs, so the instrumentation specified for a non-traditional instrument
+may have to be cancelled, rather than superseded by an appropriate value
+for the next element.
+<p>(Note also that the proliferation of instrumentation data in BUFR has
+made some early element names inappropriate: 002003, "type of measuring
+equipment used", is clearly meant only for PILOTs when the code figures
+are examined.).
+<h3>
+<a NAME="TOC2.7"></a>2.7 Increments</h3>
+Increments for time and place elements were a late addition to the BUFR
+system, perhaps not explained in sufficient detail.
+<p>Clearly the current position is obtained by adding the increment, if
+there is one, to the original position. But what if there is more than
+one increment for the same element? The general BUFR rules would say the
+second overrides the first, so add the second increment to the original
+value; but increments before replications are clearly meant to take effect
+cumulatively, i.e. the value before the replication count is added repeatedly
+to the original value.
+<p>We must then assume that if a new original position is given, any increment
+is cancelled. If, for instance, we reach the end of a row in scanning an
+image, restating the original longitude will take us back to the start
+of the next row. Until the longitude is restated the increments remain
+in force, even outside the replication which added them, so that a run-length-encoded
+row, consisting of several segments, each with its own replication, will
+accumulate increments along the whole row, rather than go back to the original
+value at the start of each segment.
+<p>So we must assume that increments involved in replications always (not
+just within the replication) take effect cumulatively: that an increment
+can be cancelled by resetting the original coordinate at the start of a
+row, but then each step is always added to the current value of the increment,
+however many segments there are in the row.
+<p>Our decode program returns replicated increments explicitly (without
+incrementing the coordinate concerned) if an increment descriptor appears
+before a replication operator: the increments can then be converted to
+incremented values of the coordinate in a further pass through the output
+array.
+<p>Increments before replication operators are recognised by the presence
+of the word 'increment' in the name. The matching up of increments and
+elements incremented is (fortunately) an operation that can be left to
+be handled outside the basic decode. We suggest incrementing an element
+only if an element in the same class (in classes 4-7) and with the same
+units is found with the same name as far as 'increment', or at least with
+the word 'increment' in its name, so as not to tie the increment recognition
+process to the word order of English (other centres may use translated
+element names, and the equivalent of 'increment' could come at the start
+rather than the end of a name!) - but one day there may be an element with
+'increment' in its name which despite that is not an increment in the sense
+of this section), so this is still not a satisfactory proposal.
+<p>One BUFR rule about increments is clearly stated: 94.5.4.3 says that
+a replicated increment is added the first time to give the coordinate of
+the first set of replicated data, so the original coordinate in the BUFR
+message must be the first position or time <i>minus</i> the increment.
+<h2>
+<a NAME="TOC3"></a>3 ENCODING</h2>
+
+<h3>
+<a NAME="TOC3.1"></a>3.1 Compression</h3>
+Compression of numerical values consists in taking N values of an element,
+finding the minimum and coding that in the current number of bits for the
+element, followed by an increment field width and N increments which, when
+added to the minimum, reconstruct the values.
+<p>Compression is done by scanning the values to find the maximum and minimum,
+allowing for missing data. Find the number of bits needed to code maximum
+minus minimum plus one (from the next highest power of 2, the smallest
+M such that max-min+1&lt;2**M). This defines the increment width. One is added
+because all ones (ie. all bits set) would imply missing data; so if max-min=(2**M)-1
+for some M, the number of bits needed is not M, but M+1. Missing values
+are ignored in finding the minimum, but a flag is set if missing values
+exist: max=min with no values missing means no increments to be coded,
+but max=min with missing values means one-bit increments, set to 1 if the
+value is missing.
+<p>If a value cannot be encoded in the field width, it is set to missing
+before it can affect the range of values.
+<p>Character values are not compressed. If they are all the same, the increment
+width is zero, otherwise it is the original width and the values are the
+original character strings.<br><br>
+Examples<br>
+(1) values to be coded: &nbsp; 45, 37, 19, 22, 17 &nbsp; min=17, max=45, max-min=28
+  &nbsp;&nbsp; requires 5 bits <br> 
+(2) values to be coded: &nbsp; 21, 3, 13, 34, 5, 8 &nbsp min=3, &nbsp; max=34,
+ max-min=31  &nbsp;&nbsp; requires 6 bits,<br>
+because an increment of 31 in 5 bits would have all 5 bits set and therefore
+mean missing data.
+<h3>
+<a NAME="TOC3.2"></a>3.2 Setting up descriptor sequences</h3>
+One of the features of BUFR easily overlooked when setting up descriptor
+sequences is the distinction between coordinate elements and others
+<a href="#TOC2.6">(Sect 2.6)</a>.<br>
+Time and Place should precede values at that time and place; similarly,
+elements from certain other classes, such as instrumentation, apply (until changed)<br>
+to the values that follow.
+<p>This effect is not overridden by replication: if the coordinates in
+a group of replicated descriptors don't come first, they apply to the first
+values of the elements which follow in the replicated group and then the
+second values of the elements before them - then comes a further coordinate
+change, and so on.
+<p>Of course a user who wants all the data in a message knows how to interpret
+it and won't connect the values and coordinates wrongly. But a general
+retrieval program (a very ambitious project: we have tried twice &amp;
+failed!) going through data of different kinds might well look for values
+of a certain element at given places and times, ignoring other elements,
+and return wrong data if the coordinates are out of place.
+<p>The BUFR package contains a program SCRIPT which will show (without
+a message to give values) how a sequence will expand: it puts a blank line
+in front of any coordinate element (or sequence of successive coordinates),
+hoping that an unexpected break will warn a user that coordinates are misplaced.
+<h3>
+<a NAME="TOC3.3"></a>3.3 Preparation of values to be encoded</h3>
+To provide an array of values for encoding, first expand the intended descriptor
+sequence using SCRIPT: this will give a list of elements with units and
+scale factor specified and also lines like "replication factor" (for a
+delayed replication count) and "n-bit Q/C field".
+<p>Real (decimal) input requires values in the units specified. The scale can be
+taken as a warning about what rounding will be done in the course of encoding,
+but the precision of the data should already have been reflected in the description
+chosen by the user at an earlier stage (eg. code temperatures in tenths, 
+or in hundredths, or in whole degrees, with a change of scale if necessary).
+At this stage the user needs only to ensure that temperatures are in Kelvin,
+rather than Celsius.
+<p>The reference value in Table B is also of no concern to the user. For
+temperature it was possible to choose units (degrees Kelvin) which always
+give positive values, so no non-zero reference value was needed; for latitude
+and longitude, however, this is not possible; so the encoding process must
+subtract a sufficiently large negative number to ensure the number to be encoded
+is always positive. However, this requires no action by the user.
+<p>An example may help. A temperature is normally stored in degrees Kelvin with
+a scale factor of 2, i.e. in hundredths. (Temperatures in tenths are now
+avoided because conversions between C &amp; K may make it difficult to
+get back to the original value.) So real input requires a value such as
+287.61 (14.46C); this number will be multiplied by 100 during encoding to give
+28761 and this value goes into the bit string (unless there is compression).
+<p>Beware that if the scale is changed and the reference value is not zero,
+it may be necessary for the user to change the reference value to go with
+the new scale. However a change is not essential if the scale change leads
+to less precision;  and the expected range of values may be such that even 
+for greater precision no change is needed - the reference value only needs
+to be a large enough negative number. Later editions of BUFR should have
+an operation which changes width &amp; reference value together with scale,
+making scale changes much easier.
+<p>Beware also of scale changes for precipitation, where negative values
+are actually code figures and so the reference value should remain constant,
+irrespective of scale changes. So a trace is always -1 or -2.  The encode
+and decode both assume that a negative value of any class 13 element with a
+reference value of -1 or -2 is a trace and therefore never scaled.
+<p>For character values we make the corresponding number in the value array
+a pointer to a character string (<a href="#TOC4.3">details</a>). There
+is no need for a length, which is given by Table B. Widths of character
+values are adjustable in Edition 4. "Inserted characters" (operation 5,
+which gives the length) simply follow on in the input character string
+with no pointer in the value array.
+<h3>
+<a NAME="TOC3.4"></a>3.4 Run-length encoding</h3>
+Class 31 in Table B defines two kinds of counts for use in repetition operations:
+one repeats descriptors only, the other repeats data too.
+<p>The first is for straightforward delayed replication, which is explained
+clearly enough in the documentation. The second is for "run-length encoding"
+of images: if the range of pixel values is small, so that, when an image
+is scanned, many successive values will be the same, it is convenient to
+give the number of identical values rather than encoding the value that
+many times.
+<p>A descriptor pattern which makes this possible without requiring a different
+sequence of descriptors for each image is as follows. Any row can be broken
+up into a set of "parcels" each consisting of a number of strings of identical
+values followed by a string of different ones. In this way an image can
+be described by a general sequence of 15 descriptors (see below), to be
+expanded using the counts in the data.
+<p>The basic BUFR software can encode an image in this way if passed the
+counts and told to use this descriptor pattern. But this is not the only
+possible approach to image encoding, so the sequence of descriptors is
+not embedded in the basic programs, and the above outline can be implemented
+in various ways: for instance, greater compression could be achieved (at
+the expense of more elaborate programming) by treating values repeated
+only 2 or 3 times as if they were different (the values themselves take
+up less space than the extra counts required).
+<p>Our preferred method of encoding is to provide a preliminary call which 
+takes a 2-dimensional array representing an image and returns a sequence of
+values with counts inserted, ready to be encoded with the descriptors
+which are likewise returned by the program (with the element concerned,
+e.g. pixel value, and increments inserted). This is only one way of 
+run-length encoding an image: the user can, of course, replace the call to
+RUNLEN by any program which produces valid sequences of values and
+descriptors to be passed to the encoding program.
+<pre>1&nbsp;&nbsp; 005001&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; initial latitude (minus increment)
+2&nbsp;&nbsp; 005011&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; latitude increment from row to row
+3&nbsp;&nbsp; 113000&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; replicate the rows of the image
+4&nbsp;&nbsp; 031002&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; number of rows
+
+5&nbsp;&nbsp;&nbsp; 006001&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; initial longitude (minus increment)
+6&nbsp;&nbsp;&nbsp; 110000&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; replicate "parcels" of different and same in row
+7&nbsp;&nbsp;&nbsp; 031002&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; number of parcels in row
+
+8&nbsp;&nbsp;&nbsp;&nbsp; 006011&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; longitude increment along row
+9&nbsp;&nbsp;&nbsp;&nbsp; 101000&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; repeat a string of different values
+10&nbsp;&nbsp;&nbsp; 031002&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; number of different values
+11&nbsp;&nbsp;&nbsp; 030001&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; descriptor for pixel element itself
+12&nbsp;&nbsp;&nbsp; 104000&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; replicate runs of identical values
+13&nbsp;&nbsp;&nbsp; 031002&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; number of runs
+
+14&nbsp;&nbsp;&nbsp;&nbsp; 006011&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; longitude increment along row
+15&nbsp;&nbsp;&nbsp;&nbsp; 101000&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; replicate a string of identical values
+16&nbsp;&nbsp;&nbsp;&nbsp; 031012&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; number of identical values
+17&nbsp;&nbsp;&nbsp;&nbsp; 030001&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; descriptor for pixel element itself</pre>
+
+<h2>
+<a NAME="TOC4"></a>4 Quality Operations</h2>
+The quality operations finally accepted in 1994 were the first major extension
+of BUFR and called for extensive reprogramming. The definitions of the
+operations are not clearly expressed and some points remain ambiguous,
+so the ideas involved, the assumptions made and the programming involved
+will be discussed here in some detail.
+<h3>
+<a NAME="TOC4.1"></a><b>4.1 Bit maps</b></h3>
+All the operations to add flags or values depend on the relation between
+operators and<i> bit maps</i>, so we start with a definition of a bit map.
+<p>A bit map is a set of values of the one-bit flag element 031031 (0 -
+data present, 1 - data not present). An N-bit map defines a subset of the
+N elements (elements rather than descriptors!) preceding an operator of
+the form 2XX000, where XX=22, 23, 24, 25 or 32. Elements here means effectively
+values in the data section, i.e. any delayed replication counts are included.
+<p>If M bits in a bit map are zero, then values of the corresponding M
+elements will follow in the data section as the result of any operation
+which uses this bit map. These values will be corrections, original values,
+differences, statistics etc as indicated by XX (together with 008023 or
+008024 if XX is 24 or 25) or Class 33 elements in the case of 222000. But
+the values may not follow immediately and may not be consecutive; their
+positions in the data that follows will be shown by M<i> place-holders</i>
+of the form 2XX255 or M Class 33 descriptors. The I-th place-holder corresponds
+to a value of the I-th of the M elements with zeros in the bit map, encoded
+with its scale, data width &amp; reference value as modified by any operations
+in force for the original value.
+<h3>
+<a NAME="TOC4.2"></a>4.2 Bit maps and operators</h3>
+That much is clear. But we need to relate bit maps to operators. Each quality
+operator needs a bit map, in the same way as a delayed replication operator
+is completed by a following count; but the bit map is much less closely
+tied to a particular operator. And the elements a bit map refers back to
+may be those before a<i> previous</i> operator.
+<p>The set of operators finally accepted has redundancies resulting from
+the different versions the proposal went through. Of the four operators
+added later, 236000, 237000, 237255 &amp; 235000, only 235000 is essential
+as the proposal now stands, and its definition is too restrictive.
+<p>236000 defines a bit map for use later, but a bit map can be recognised
+without it. 237000 reuses a bit map, but only one bit map can be currently
+defined, so again the descriptor is unnecessary. 237255 cancels a bit map,
+but a new bit map, taken to supersede the old one, would have the same
+effect. Only 235000 is essential: it unsets the end of the set of values
+referred back to by a bit map, leaving the next 2XX000 (where XX is 22
+to 25 or 32) to reset it. Without this all quality operations would refer
+back to the same point.
+<h3>
+<a NAME="TOC4.3"></a>4.3 Assumptions made where specification is ambiguous</h3>
+We want our decode to be successful with messages from as many different
+encoders as possible, so we adopt the least restrictive interpretation:
+we assume that any replication of the single element 031031 is a bit map
+and overrides any previously defined bit map. By replication we mean that
+a replication operator is used rather than the descriptor 031031 just being
+repeated so many times; the replication can be delayed or not. The point
+from which to count back is defined by the first 2XX000 operator with XX
+= 22 to 25 or 32 or by the first such operator after 235000. So different
+bit maps can be used to refer back to (different subsets of) the same set
+of elements.
+<p>Our decode also allows the same bit map to be used for different sets
+of elements. This possibility is, strictly speaking, ruled out by the operations
+as currently defined, but taking the least restrictive approach we see
+no reason why 235000 should cancel the bit map at the same time as changing
+the set of elements referred back to. If a new bit map follows, it will
+override the previous one; if not, the previous bit map can be left in
+force.
+<p>The only alternative is to stop the decode because a rule has been broken,
+whereas it may well be possible to continue successfully. But remember
+that, while this may be a useful feature, messages should still be encoded
+to follow the rules as closely as possible, or more restrictive decodes
+may fail!
+<h3>
+<a NAME="TOC4.4"></a>4.4 Outline of program changes</h3>
+These new operations call for a different programming approach. Without
+them there was no need to preserve details of how a value was encoded:
+field width, scale etc could be used and then discarded. But now we must
+be able to refer back to these details, which may be different from those
+in Table B. We must therefore keep a <i>log</i> of values encoded or decoded,
+keeping field width, scale &amp; reference value, as well as the subscript
+of the descriptor in the expanded descriptor array (N.B there is not always
+a one-to-one correspondence between descriptors and values!). For efficiency
+this log is only kept if a preliminary scan shows that the sequence contains
+such operations.
+<p>Given this log, we need action to carry out quality operations at the
+following points:
+<ul>
+<li>
+when a bit map is found, set pointers to the start and end;</li>
+
+<li>
+when a quality operation is started (by 222000 etc), set the point to count
+back from in the log if this is not set already;</li>
+
+<li>
+when 235000 is found, unset the point to count back from;</li>
+
+<li>
+when a place-holder is found, look for the next zero bit in the bit map,
+get the corresponding entry from the log, replace the place-holder by the
+descriptor and set a flag to show that scale etc come from the log rather
+than Table B.</li>
+</ul>
+
+<h3>
+<a NAME="TOC4.5"></a>4.5 Interface between decode and calling programs</h3>
+The above is enough if the aim of a BUFR decode is to print out the values
+in a message. But the interface is not so clear-cut. There is information
+in the sequence of values that may be better made explicit. For instance,
+our decode currently precedes each associated field with a meaning (in
+case there is more than one such field) rather than leave the meaning set
+just once with the operator, but does nothing to show which coordinates
+apply to a particular value.
+<p>In the case of quality operations, if the message contains several temperatures
+and a correction to one of them, the decode as described above would print
+out a temperature but not make it clear which original value was being
+corrected. Rather than leave higher-level programs with the same manipulation
+of bit maps to repeat, we need pointers to link original value and correction
+in the output descriptor array. This array already needs to include scale
+change and (modified) replication operators as well as element descriptors,
+because (as explained in 2.3) information which may be needed would otherwise
+be lost.
+<p>As pointers we use the place-holders (because XX gives information about
+the value added by the quality operation) with numbers set in the top bits.
+Each place-holder was replaced above by a descriptor; to set these pointers
+we keep a list of descriptors to be inserted in the sequence before completing
+the decode. The <b>n</b>-th insertion in this list puts a place-holder
+with<b> n</b> in the top bits after the original value and an identical
+place-holder with <b>n</b> set after the correction or whatever value is
+added. More than one such pointer can follow the original value. We can
+then get from original value to correction or vice versa by searching for
+a uniquely identified descriptor.
+<h3>
+<a NAME="TOC5"></a>5 TO SET UP A BUFR SYSTEM</h3>
+
+<h3>
+<a NAME="TOC5.1"></a>5.1 Table access</h3>
+The input tables (browseable) can be edited to add new entries. These should be 
+inserted so as to leave the descriptor numbers in sequence (rather than putting 
+new entries at the end) because no sort is done when the tables are read. Where 
+there are changes to existing descriptors, new versions should be added at the 
+end with the corresponding version number at the end of the line. Code figures 
+or flags should also be in sequence within a table, but gaps in a sequence of 
+code figures are possible with our own software, if the title line indicates that 
+by having more than one space before the descriptor. 
+<p>The three main tables can be accessed using the following calls:
+<pre>CALL TABLEB(X,Y,VER,SCALE,REFVAL,WIDTH,FORMAT,NAME,UNITS)</pre>
+returns the fields of the Table B entry, version VER (integer) for 0XXYYY, where 
+X &amp; Y (integers) are input arguments and the rest (3 integers and 3 character 
+strings) are returned.<br>
+WIDTH=0 if there is no entry 0XXYYY in Table B.
+<pre>CALL TABLED (X,Y,SEQ,NSEQ)</pre>
+returns the sequence 3XXYYY in Table D, where X &amp; Y are input arguments
+and NSEQ is the number of descriptors returned in SEQ.
+All arguments are integer.<br>  NSEQ=0 if no sequence 3XXYYY in Table D.  
+<pre>CALL CODE(DESCR,VALUE,WORDS)</pre>
+returns in WORDS a description of upto 12 characters length corresponding
+to the code figure VALUE of the descriptor DESCR (both integers).<br>
+WORDS='' &nbsp; (empty string) if no such code figure or value exists.
+<h3>
+<a NAME="TOC5.2"></a>5.2 Bit-handling programs</h3>
+Note: for a system with EBCDIC characters, there are calls to EB2ASC and ASC2EB
+to translate between EBCDIC and ASCII; these are replaced by dummies
+in a system with ASCII characters.
+<p>The following bit-handling programs are unlikely to be needed by users:
+<pre>VALUE(STRING,IBEFOR,WIDTH)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; gets a value in WIDTH bits after IBEFOR bits of STRING, where STRING&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; is section 4 of a BUFR message (starting with the length).
+
+VALOUT(STRING,IBEFOR,WIDTH,VALUE)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; puts VALUE in WIDTH bits after IBEFOR bits of STRING.</pre>
+
+<h3>
+<a NAME="TOC5.3"></a>5.3 Calls for encoding and decoding</h3>
+Once the programs have been compiled and the tables made, the following
+calls encode or decode messages:
+<pre>ENCODE A VERSION 2, 3 or 4 BUFR MESSAGE
+====================================</pre>
+
+<pre>CALL ENBUFV4(DESCR,VALUES,NDESCR,NELEM,NOBS,NAMES,DATIME,MESAGE,CMP,L,
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; EDITION,MASTERTABLE,VERMASTER,ORIGCENTRE,ORIGSUB,DATATYPE,
+             LOCALSUBTYPE,INTERSUBTYPE,VERLOCTAB,EXTRASECT1,CHARSECT1,
+             EXTRASECT2,CHARSECT2,SECT3TYPE)
+where
+
+DESCR&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Integer in/out : An array of BUFR descriptors, 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; whose length is of sufficient size to accomodate any expansion 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; needed.  Length is defined by NDESCR below. The array is changed 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; following a BUFR encode, so it needs to be reset if another encode
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; is to be attempted with the original descriptors.
+
+VALUES&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Real input : An array length NOBS*NELEM of values to be encoded
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; They should be supplied in the units given by Table B.
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Missing values should be set to -9999999.0
+
+NDESCR&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Integer in/out : Number of descriptors. If this is zero, 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; the descriptor sequence in MESAGE will be used; if the
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; string needs expansion, NDESCR will be found changed on return.
+
+NELEM&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Integer in/out : Number of values implied by
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; the descriptor sequence (not always the final value of NDESCR,
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; because the output descriptors include some <a href="#TOC2.3">operators</a>
+
+NOBS&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Integer input : Number of sets of values (reports) to be encoded together
+
+NAMES&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Character input : A string that contains any character values for which 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; there is a corresponding subscript in array VALUES that points to
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; the start of a field in this string (the length comes from Table B)
+
+DATIME&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Integer input : Date/time array, length 6 (year, month, day, hour, minute, sec)
+            seconds not used for editions 2 or 3.
+
+MESAGE&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Character output : A string that holds the BUFR message as binary data
+
+CMP&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Logical input : Is TRUE if compression is required, FALSE if not
+
+L&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Integer output : Length of the BUFR message in octets
+
+EDITION&nbsp;&nbsp;&nbsp;&nbsp; Integer input : The BUFR edition number (section 1).
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Code -99 for the default (=4)
+
+MASTERTABLE Integer input : The BUFR master table (section 1). Code -99 for the default (=0)
+
+VERMASTAB&nbsp;&nbsp; Integer input : Version number of master tables (section 1).
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Code -99 for the default taken from the Table B file (=14 in Mar 2011, but will change from year to year)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+ORIGCENTRE&nbsp; Integer input : Originating centre (section 1). Code -99 for the default (=74)
+
+ORIGSUB   &nbsp; Integer input : Originating sub-centre (section 1). Code -99 for the default (=0)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+DATATYPE&nbsp;&nbsp;&nbsp; Integer input : Data category type (section 1). Code -99 for the default (=255)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+LOCALSUBTYPE Integer input : Local Data category subtype (section 1). Code -99 for the default (=0)
+
+INTERSUBTYPE Integer input : International Data category subtype (section 1). Code -99 for the default (=0)
+             (Edition 4 only)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+VERLOCTAB&nbsp;&nbsp; Integer input : Version number of local tables (section 1).
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Code -99 for the default (=0)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+EXTRASECT1&nbsp; Logical input : Code TRUE if there is extra data to be added
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; to the end of section 1. If so, the data in CHARSECT1 will be added.
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+CHARSECT1&nbsp;&nbsp; Character input : Extra data to add to the end of section 1.
+
+EXTRASECT2&nbsp; Logical input : Code TRUE if there is data to be to put in
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; section 2. If so, the data in CHARSECT2 will be added.
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+CHARSECT2&nbsp;&nbsp; Character input : Extra data to put in section 2.
+
+SECT3TYPE&nbsp;&nbsp; Integer input : section 3, byte 7 (type of data). Code 1 for
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; observed, 0 otherwise. Code -99 for default (=1)</pre>
+Note: The length of MESAGE cannot be much more than the total length of the three 
+inputs DESCR, VALUES &amp; NAMES. The dimension of DESCR may have to be greater 
+than NELEM, because some manipulations expand before deleting. 
+<pre>DECODE ANY BUFR MESSAGE
+=======================
+
+CALL DEBUFR(DESCR,VALUES,NAMES,NDESCR,NOBS,MESAGE,DSPLAY)
+
+where
+
+DESCR&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; integer output : contains a list of descriptors in 16-bit form 
+
+VALUES&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; real output : Array size NOBS*NDESCR of values in the units given by Table B.
+
+NAMES&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; character output : A string containing any character values returned,
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; for each of which the VALUES array will contain length*(2^16)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; plus a subscript pointing to the start of a field in this 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; string, the corresponding descriptor being flagged by adding 2^17.
+
+NDESCR&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; integer in/out : must be the length of DESCR and will be returned as
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; the output descriptor count. This must be at least twice the
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; number of descriptors actually returned, as some workspace is
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; needed by the DECODE routine,
+
+NOBS&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; integer input : must be set to the length of VALUES and will be
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; returned as the number of sets of values (reports, profiles)
+
+MESAGE&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; character input : this string is the BUFR message to be decoded.
+
+DSPLAY&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; logical input : is set to TRUE for a display of element names and values.</pre>
+Unfortunately there is no way of telling how big DESCR, VALUES and NAMES
+must be without first decoding the message, hence dimensions are passed
+in NDESCR and NOBS to avoid overwriting.
+</body>
+</html>

@@ -1,0 +1,83 @@
+ROPP 1dVar Error Correlations for release Version v7.0
+------------------------------------------------------
+
+This directory contains a collection of error correlation files and scripts 
+which users may find helpful for setting up input to ROPP_1DVAR tools. 
+Further details are provided in the ROPP User Guide (Part II).
+
+N.B. The ROPP FM and 1DVAR routines assume input data are in ascending height
+     order (i.e. array index 1 nearest surface). The required error correlation
+     and covariance structures must therefore be also defined in this way.
+
+Notes on the Fortran program files in this directory:
+
+ropp_1dvar_add_bgr_error.f90    - Tool to add background pressure, temperature 
+                                  and humidity error values to a ROPP format 
+                                  netCDF file. Errors are read from the 'sigma'
+                                  variable in an input background covariance
+                                  matrix file.
+
+ropp_1dvar_add_refrac_error.f90 - Tool to add refractivity observation error
+                                  values to a ROPP netCDF file. A number of 
+                                  different error models may be chosen. 
+                                  Type 'ropp_1dvar_add_refrac_error -h' for
+                                  further details.
+
+ropp_1dvar_add_bangle_error.f90 - Tool to add bending angle observation error
+                                  values to a ROPP netCDF file. A number of 
+                                  different error models may be chosen. 
+                                  Type 'ropp_1dvar_add_bangle_error -h' for
+                                  further details.
+
+Notes on the data files in this directory:
+
+ropp_bg_ecmwf_error_corr_L91.nc - Background error correlation matrix in packed
+				  form for the latest ECMWF model structure 
+				  (91 levels). This file is suitable for input 
+				  to the ROPP_1DVAR tools using '--bg-corr'
+				  command line option with ECMWF backgrounds.
+				  It is recommended that 1dVar tools are run 
+				  with bg_covar_method = 'VSFC' config option.
+
+ropp_bg_meto_error_corr_L70.nc	- Background error correlation matrix in packed
+				  form for the latest Met Office model 
+				  structure (70 levels). This file is suitable 
+				  for input to the ROPP_1DVAR tools using 
+				  '--bg-corr' command line option with Met 
+				  Office backgrounds.
+				  It is recommended that 1dVar tools are run 
+				  with bg_covar_method = 'VSFC' config option.
+
+ropp_bg_ecmwf_error_corr_L60.nc	- Background error correlation matrix in packed
+				  form for the previous ECMWF model structure 
+				  (60 levels). 
+				  It is recommended that 1dVar tools are run 
+				  with bg_covar_method = 'VSFC' config option.
+
+ropp_bg_meto_error_corr_L50.nc	- Background error correlation matrix in packed
+				  form for the previous Met Office model 
+				  structure (50 levels). This file is suitable 
+				  for input to the ROPP_1DVAR tools using 
+				  '--bg-corr' command line option with Met 
+				  Office backgrounds.
+				  It is recommended that 1dVar tools are run 
+				  with bg_covar_method = 'VSFC' config option.
+
+ropp_ob_refrac_error_corr.nc	- Refractivity observation correlation matrix
+				  in packed form. This file is suitable for 
+				  input to the ropp_1dvar_refrac tool using 
+				  '--obs-corr' command line option. 
+				  It is recommended that 1dVar tools are run 
+				  with either obs_covar_method = 'VSDC' or
+				  obs_covar_method = 'VSFC' config options.
+
+[N.B. It is generally assumed that bending angle observations are uncorrelated,
+so it is recommended that the ropp_1dvar_bangle tool is run with errors 
+specified with the VSDC configuration option.]
+
+
+ROPP Development Team
+31 July 2013
+
+
+

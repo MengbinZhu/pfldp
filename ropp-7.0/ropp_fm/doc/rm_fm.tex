@@ -1,0 +1,2817 @@
+% Document: ./rm_fm
+% Source: ./mywork/
+% Generated with ROBODoc Version 4.99.36 (Jul 28 2009)
+\section{common/ropp\_fm\_version}
+\textsl{[ Functions ]}
+
+\label{ch:robo16}
+\label{ch:common_ropp_fm_version}
+\index{unsorted!ropp\_fm\_version}\index{Functions!ropp\_fm\_version}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+   ropp_fm_version
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+   Return ROPP_FM version ID string
+
+   USE ropp_fm
+   version = ropp_fm_version()
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+   This function returns the (common) version string for the ROPP_FM
+   module. By default, this function should be called by all ROPP_FM
+   tools to display a version ID when the '-v' command-line switch is
+   used.
+\end{Verbatim}
+\section{Constants/Earth}
+\textsl{[ Topics ]}
+
+\label{ch:robo23}
+\label{ch:Constants_Earth}
+\index{unsorted!Earth}\index{Topics!Earth}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    Physical constants related to the Earth as used in the ROPP Forward Model
+    library. 
+\end{Verbatim}
+\textbf{SEE ALSO:}\hspace{0.08in}\begin{Verbatim}
+    g_wmo
+\end{Verbatim}
+\subsection{Earth/g\_wmo}
+\textsl{[ Earth ]}
+\textsl{[ Parameters ]}
+
+\label{ch:robo40}
+\label{ch:Earth_g_wmo}
+\index{unsorted!g\_wmo}\index{Parameters!g\_wmo}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    g_wmo - Gravitational acceleration (WMO standard value)
+\end{Verbatim}
+\textbf{SOURCE:}\hspace{0.08in}\begin{Verbatim}
+  REAL(wp), PARAMETER :: g_wmo = 9.80665_wp         !   m s^{-2}
+\end{Verbatim}
+\section{Constants/Maths}
+\textsl{[ Topics ]}
+
+\label{ch:robo24}
+\label{ch:Constants_Maths}
+\index{unsorted!Maths}\index{Topics!Maths}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    Mathematical constants as used in the ROPP Forward Model library. 
+\end{Verbatim}
+\textbf{SEE ALSO:}\hspace{0.08in}\begin{Verbatim}
+    pi
+\end{Verbatim}
+\subsection{Maths/pi}
+\textsl{[ Maths ]}
+\textsl{[ Parameters ]}
+
+\label{ch:robo55}
+\label{ch:Maths_pi}
+\index{unsorted!pi}\index{Parameters!pi}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    pi  
+\end{Verbatim}
+\textbf{SOURCE:}\hspace{0.08in}\begin{Verbatim}
+  REAL(wp), PARAMETER :: pi = 3.141592653589793238_wp   
+\end{Verbatim}
+\section{Constants/RadioOccultation}
+\textsl{[ Topics ]}
+
+\label{ch:robo25}
+\label{ch:Constants_RadioOccultation}
+\index{unsorted!RadioOccultation}\index{Topics!RadioOccultation}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    Physical constants specific for radio occultation measurement as used in
+    the ROPP Forward Model library.
+\end{Verbatim}
+\textbf{SEE ALSO:}\hspace{0.08in}\begin{Verbatim}
+    kappa1
+    kappa2
+    kappa3
+\end{Verbatim}
+\subsection{RadioOccultation/kappa1}
+\textsl{[ RadioOccultation ]}
+\textsl{[ Parameters ]}
+
+\label{ch:robo73}
+\label{ch:RadioOccultation_kappa1}
+\index{unsorted!kappa1}\index{Parameters!kappa1}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    kappa1 - Coefficient to calculate dry refractivity contribution.
+             N.B. Rueger (2002) value, 77.6890e-2_wp 
+             kappa_comp = (77.689/Compressibilty) at 1013.25 hPa and T=273.15K  
+\end{Verbatim}
+\textbf{SOURCE:}\hspace{0.08in}\begin{Verbatim}
+  REAL(wp), PARAMETER :: kappa1      = 77.60e-2_wp      !   K Pa^{-1}
+  REAL(wp), PARAMETER :: kappa1_comp = 77.643e-2_wp     !   K Pa^{-1}
+\end{Verbatim}
+\subsection{RadioOccultation/kappa2}
+\textsl{[ RadioOccultation ]}
+\textsl{[ Parameters ]}
+
+\label{ch:robo74}
+\label{ch:RadioOccultation_kappa2}
+\index{unsorted!kappa2}\index{Parameters!kappa2}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    kappa2 - Coefficient to calculate moist refractivity contribution.
+             N.B. Rueger (2002) value, 3.75463e3_wp
+\end{Verbatim}
+\textbf{SOURCE:}\hspace{0.08in}\begin{Verbatim}
+  REAL(wp), PARAMETER :: kappa2      = 3.73e3_wp        !   K^2 Pa^{-1}
+  REAL(wp), PARAMETER :: kappa2_comp = 3.75463e3_wp     !   K^2 Pa^{-1}
+\end{Verbatim}
+\subsection{RadioOccultation/kappa3}
+\textsl{[ RadioOccultation ]}
+\textsl{[ Parameters ]}
+
+\label{ch:robo75}
+\label{ch:RadioOccultation_kappa3}
+\index{unsorted!kappa3}\index{Parameters!kappa3}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    kappa3 - Coefficient to calculate 2nd moist refractivity contribution.
+             N.B. Rueger (2002) value, -6.3938e-2_wp
+\end{Verbatim}
+\textbf{SOURCE:}\hspace{0.08in}\begin{Verbatim}
+  REAL(wp), PARAMETER :: kappa3      = 77.60e-2_wp        !   K Pa^{-1}
+  REAL(wp), PARAMETER :: kappa3_comp = 71.2952e-2_wp        !   K Pa^{-1}
+\end{Verbatim}
+\section{Constants/Thermodynamics}
+\textsl{[ Topics ]}
+
+\label{ch:robo26}
+\label{ch:Constants_Thermodynamics}
+\index{unsorted!Thermodynamics}\index{Topics!Thermodynamics}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    Thermodynamical constants used in the ROPP Forward Model library.
+\end{Verbatim}
+\textbf{SEE ALSO:}\hspace{0.08in}\begin{Verbatim}
+    R_dry
+    R_vap
+    C_p
+    mw_dry_air
+    mw_water
+    epsilon_water
+\end{Verbatim}
+\subsection{Thermodynamics/C\_p}
+\textsl{[ Thermodynamics ]}
+\textsl{[ Parameters ]}
+
+\label{ch:robo81}
+\label{ch:Thermodynamics_C_p}
+\index{unsorted!C\_p}\index{Parameters!C\_p}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    C_p - Specific heat capacity of dry air at constant pressure
+\end{Verbatim}
+\textbf{SOURCE:}\hspace{0.08in}\begin{Verbatim}
+  REAL(wp), PARAMETER :: C_p = 1005.7_wp       !   J K^{-1} kg^{-1}
+\end{Verbatim}
+\subsection{Thermodynamics/epsilon\_water}
+\textsl{[ Thermodynamics ]}
+\textsl{[ Parameters ]}
+
+\label{ch:robo82}
+\label{ch:Thermodynamics_epsilon_water}
+\index{unsorted!epsilon\_water}\index{Parameters!epsilon\_water}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    epsilon_water - Ratio of molecular weight of water to that of dry air.
+\end{Verbatim}
+\textbf{SOURCE:}\hspace{0.08in}\begin{Verbatim}
+  REAL(wp), PARAMETER :: epsilon_water = mw_water / mw_dry_air
+\end{Verbatim}
+\subsection{Thermodynamics/mw\_dry\_air}
+\textsl{[ Thermodynamics ]}
+\textsl{[ Parameters ]}
+
+\label{ch:robo83}
+\label{ch:Thermodynamics_mw_dry_air}
+\index{unsorted!mw\_dry\_air}\index{Parameters!mw\_dry\_air}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    mw_dry_air - Molecular weight of dry air
+\end{Verbatim}
+\textbf{SOURCE:}\hspace{0.08in}\begin{Verbatim}
+  REAL(wp), PARAMETER :: mw_dry_air = 28.9648e-3_wp !   kg mol^{-1}
+\end{Verbatim}
+\subsection{Thermodynamics/mw\_water}
+\textsl{[ Thermodynamics ]}
+\textsl{[ Parameters ]}
+
+\label{ch:robo84}
+\label{ch:Thermodynamics_mw_water}
+\index{unsorted!mw\_water}\index{Parameters!mw\_water}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    mw_water - Molecular weight of water
+\end{Verbatim}
+\textbf{SOURCE:}\hspace{0.08in}\begin{Verbatim}
+  REAL(wp), PARAMETER :: mw_water = 18.01528e-3_wp  !   kg mol^{-1}
+\end{Verbatim}
+\subsection{Thermodynamics/R\_dry}
+\textsl{[ Thermodynamics ]}
+\textsl{[ Parameters ]}
+
+\label{ch:robo85}
+\label{ch:Thermodynamics_R_dry}
+\index{unsorted!R\_dry}\index{Parameters!R\_dry}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    R_dry - Gas constant of dry air
+\end{Verbatim}
+\textbf{SOURCE:}\hspace{0.08in}\begin{Verbatim}
+  REAL(wp), PARAMETER :: R_dry = 287.0597_wp        !   J K^{-1} kg^{-1}
+\end{Verbatim}
+\subsection{Thermodynamics/R\_vap}
+\textsl{[ Thermodynamics ]}
+\textsl{[ Parameters ]}
+
+\label{ch:robo86}
+\label{ch:Thermodynamics_R_vap}
+\index{unsorted!R\_vap}\index{Parameters!R\_vap}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    R_vap - Gas constant of water vapor
+\end{Verbatim}
+\textbf{SOURCE:}\hspace{0.08in}\begin{Verbatim}
+  REAL(wp), PARAMETER :: R_vap = 461.5250_wp        !   J K^{-1} kg^{-1}
+\end{Verbatim}
+\section{ForwardModels/BendingAngle}
+\textsl{[ Topics ]}
+
+\label{ch:robo41}
+\label{ch:ForwardModels_BendingAngle}
+\index{unsorted!BendingAngle}\index{Topics!BendingAngle}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    Forward model calculating bending angles
+    (as function of impact parameters).
+\end{Verbatim}
+\textbf{SEE ALSO:}\hspace{0.08in}\begin{Verbatim}
+    ropp_fm_bangle_1d
+    ropp_fm_bangle_1d_ad
+    ropp_fm_bangle_1d_tl
+
+    ropp_fm_abel
+    ropp_fm_abel_ad
+    ropp_fm_abel_tl
+\end{Verbatim}
+\subsection{BendingAngle/ropp\_fm\_abel}
+\textsl{[ BendingAngle ]}
+\textsl{[ Subroutines ]}
+
+\label{ch:robo0}
+\label{ch:BendingAngle_ropp_fm_abel}
+\index{unsorted!ropp\_fm\_abel}\index{Subroutines!ropp\_fm\_abel}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    ropp_fm_abel - Forward model calculating a one dimensional bending angle
+                   profile from refractivity / impact parameter profile at
+                   state vector levels using a Fast Abel Transform
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    call ropp_fm_abel(nr, refrac, impact, bangle)
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    This routine calculates bending angles at a given set of impact parameters
+    from a vertical profile of rafractivity given at the state vector's set of
+    x = nr levels. 
+\end{Verbatim}
+\textbf{INPUTS:}\hspace{0.08in}\begin{Verbatim}
+    real(wp), dimension(:) :: nr          ! x = nr product
+    real(wp), dimension(:) :: refrac      ! Refractivity values
+    real(wp), dimension(:) :: impact      ! Impact parameters
+\end{Verbatim}
+\textbf{OUTPUT:}\hspace{0.08in}\begin{Verbatim}
+    real(wp), dimension(:) :: bangle      ! Forward modelled bending angles
+\end{Verbatim}
+\textbf{NOTES:}\hspace{0.08in}\begin{Verbatim}
+    The interpolation of bending angles calculated at the state vector's
+    geopotential levels to the observation vector's impact parameters is
+    carried out assuming that bending angle varies exponentially with
+    impact parameter.
+\end{Verbatim}
+\textbf{SEE ALSO:}\hspace{0.08in}\begin{Verbatim}
+    ropp_fm_types
+    ropp_fm_bangle_1d
+    ropp_fm_abel_ad
+    ropp_fm_abel_tl
+\end{Verbatim}
+\subsection{BendingAngle/ropp\_fm\_abel\_ad}
+\textsl{[ BendingAngle ]}
+\textsl{[ Subroutines ]}
+
+\label{ch:robo1}
+\label{ch:BendingAngle_ropp_fm_abel_ad}
+\index{unsorted!ropp\_fm\_abel\_ad}\index{Subroutines!ropp\_fm\_abel\_ad}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    ropp_fm_abel_ad - Adjoint of ropp_fm_abel().
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    call ropp_fm_abel_ad(nr, refrac, impact, nr_ad, refrac_ad, bangle_ad)
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    This routine is the adjoint of ropp_fm_abel.
+\end{Verbatim}
+\textbf{INPUTS:}\hspace{0.08in}\begin{Verbatim}
+    real(wp), dimension(:) :: nr          ! x=nr product of state vector
+    real(wp), dimension(:) :: refrac      ! Refractivity values
+    real(wp), dimension(:) :: impact      ! Observation's impact parameters
+    real(wp), dimension(:) :: nr_ad       ! x=nr adjoint
+    real(wp), dimension(:) :: bangle_ad   ! Adjoint forcing
+\end{Verbatim}
+\textbf{OUTPUT:}\hspace{0.08in}\begin{Verbatim}
+    real(wp), dimension(:) :: nr_ad       ! Updated x=nr adjoint
+    real(wp), dimension(:) :: refrac_ad   ! Refractivity adjoint
+    real(wp), dimension(:) :: bangle_ad   ! Bending angle adjoint
+\end{Verbatim}
+\textbf{NOTES:}\hspace{0.08in}\begin{Verbatim}
+    The lengths of the arrays nr, nr_ad, refrac and refrac_ad must be
+    equal.
+\end{Verbatim}
+\textbf{SEE ALSO:}\hspace{0.08in}\begin{Verbatim}
+    ropp_fm_types
+    rpp_fm_bangle_1d
+    ropp_fm_abel
+    ropp_fm_abel_tl
+\end{Verbatim}
+\subsection{BendingAngle/ropp\_fm\_abel\_tl}
+\textsl{[ BendingAngle ]}
+\textsl{[ Subroutines ]}
+
+\label{ch:robo2}
+\label{ch:BendingAngle_ropp_fm_abel_tl}
+\index{unsorted!ropp\_fm\_abel\_tl}\index{Subroutines!ropp\_fm\_abel\_tl}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    ropp_fm_abel_tl - Tangent linear of ropp_fm_abel().
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    call ropp_fm_abel_tl(nr, refrac, impact, nr_tl, refrac_tl, bangle_tl)
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    This routine is the tangent linear of ropp_fm_abel.
+\end{Verbatim}
+\textbf{INPUTS:}\hspace{0.08in}\begin{Verbatim}
+    real(wp), dimension(:) :: nr          ! x=nr product of state levels
+    real(wp), dimension(:) :: refrac      ! Refractivity values
+    real(wp), dimension(:) :: impact      ! Observation's impact parameters
+    real(wp), dimension(:) :: nr_tl       ! x=nr perturbations
+    real(wp), dimension(:) :: refrac_tl   ! Refractivity perturbations
+\end{Verbatim}
+\textbf{OUTPUT:}\hspace{0.08in}\begin{Verbatim}
+    real(wp), dimension(:) :: bangle_tl   ! Bending angle perturbations
+\end{Verbatim}
+\textbf{NOTES:}\hspace{0.08in}\begin{Verbatim}
+    The lengths of the arrays nr, nr_tl, refrac and refrac_tl must be
+    equal, as must the lengths of impact and bangle_tl.
+\end{Verbatim}
+\textbf{SEE ALSO:}\hspace{0.08in}\begin{Verbatim}
+    ropp_fm_types
+    rpp_fm_bangle_1d
+    ropp_fm_abel
+    ropp_fm_abel_ad
+\end{Verbatim}
+\textbf{REFERENCES:}\hspace{0.08in}\begin{Verbatim}
+    This routine was created with the help of the 
+
+      Tangent linear and Adjoint Model Compiler,  TAMC 5.3.2.
+\end{Verbatim}
+\subsection{BendingAngle/ropp\_fm\_bangle\_1d}
+\textsl{[ BendingAngle ]}
+\textsl{[ Subroutines ]}
+
+\label{ch:robo3}
+\label{ch:BendingAngle_ropp_fm_bangle_1d}
+\index{unsorted!ropp\_fm\_bangle\_1d}\index{Subroutines!ropp\_fm\_bangle\_1d}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    ropp_fm_bangle_1d - Forward model calculating a one dimensional bending
+                        angle profile from the state vector.
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    call ropp_fm_bangle_1d(x, y)
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    This routine is a forward model calculating a vertical profile of 
+    bending angles from profiles of temperature, humidity and pressure. 
+    Bending angle values are calculated for the impact parameters given in the
+    observation vector.
+\end{Verbatim}
+\textbf{INPUTS:}\hspace{0.08in}\begin{Verbatim}
+    type(State1dFM)     :: x     ! State vector structure
+    type(Obs1dBangle)   :: y     ! Observation vector (levels required)
+\end{Verbatim}
+\textbf{OUTPUT:}\hspace{0.08in}\begin{Verbatim}
+    type(Obs1dBangle)   :: y     ! Obs vector with forward modelled bangle
+\end{Verbatim}
+\textbf{NOTES:}\hspace{0.08in}\begin{Verbatim}
+    The forward model assumes that the state vector structure contains 
+    temperature, humidity and pressure values on common geopotential height 
+    levels, independent of the source of those data. Model-dependent 
+    conversion routines can be used to accomplish this with the 
+    ropp_fm_roprof2state() subroutine.
+
+    The forward model assumes that the observation vector contains impact
+    parameters onto which the forward simulated observations are interpolated.
+
+    The interpolation of bending angles calculated at the state vector's
+    geopotential height levels to the observation vector's impact parameters 
+    is carried out assuming that bending angle varies exponentially with
+    impact parameter.
+\end{Verbatim}
+\textbf{SEE ALSO:}\hspace{0.08in}\begin{Verbatim}
+    ropp_fm_types
+    ropp_fm_bangle_1d_ad
+    ropp_fm_bangle_1d_tl
+\end{Verbatim}
+\subsection{BendingAngle/ropp\_fm\_bangle\_1d\_ad}
+\textsl{[ BendingAngle ]}
+\textsl{[ Subroutines ]}
+
+\label{ch:robo4}
+\label{ch:BendingAngle_ropp_fm_bangle_1d_ad}
+\index{unsorted!ropp\_fm\_bangle\_1d\_ad}\index{Subroutines!ropp\_fm\_bangle\_1d\_ad}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    ropp_fm_bangle_1d_ad - Adjoint of ropp_fm_bangle_1d().
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    call ropp_fm_bangle_1d_ad(x, x_ad, y, y_ad)
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    This routine is the adjoint of ropp_fm_bangle_1d.
+\end{Verbatim}
+\textbf{INPUTS:}\hspace{0.08in}\begin{Verbatim}
+    type(State1dFM)        :: x        ! State vector
+    type(Obs1dBangle)      :: y        ! Observation vector
+    real(wp), dimension(:) :: y_ad     ! Adjoint forcing
+\end{Verbatim}
+\textbf{OUTPUT:}\hspace{0.08in}\begin{Verbatim}
+    type(State1dFM)        :: x_ad     ! State vector adjoint
+\end{Verbatim}
+\textbf{NOTES:}\hspace{0.08in}\begin{Verbatim}
+    The obs vector is required only for the observation's geopotential levels;
+    no forward simulated refractivity profile is returned.
+
+    The lengths of the arrays state_ad%state and obs_ad must agree with the 
+    lengths of the state%state and obs%obs arrays, respectively.
+\end{Verbatim}
+\textbf{SEE ALSO:}\hspace{0.08in}\begin{Verbatim}
+    ropp_fm_types
+    ropp_fm_bangle_1d
+    ropp_fm_bangle_1d_tl
+\end{Verbatim}
+\subsection{BendingAngle/ropp\_fm\_bangle\_1d\_grad}
+\textsl{[ BendingAngle ]}
+\textsl{[ Subroutines ]}
+
+\label{ch:robo5}
+\label{ch:BendingAngle_ropp_fm_bangle_1d_grad}
+\index{unsorted!ropp\_fm\_bangle\_1d\_grad}\index{Subroutines!ropp\_fm\_bangle\_1d\_grad}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+     ropp_fm_bangle_1d_grad - Full gradient of the bending angle 
+                              forward model.
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    call ropp_fm_bangle_1d_grad(x, y, K)
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    This routine calculates the gradient of the bending angle forward model
+    The tangent linear and adjoint of the bending angle forward model can be 
+    computed to check their consistency.
+\end{Verbatim}
+\textbf{INPUTS:}\hspace{0.08in}\begin{Verbatim}
+    type(State1dFM)          :: x            ! State vector structure
+    type(Obs1dBangle)        :: y            ! Bending angle observation 
+\end{Verbatim}
+\textbf{OUTPUT:}\hspace{0.08in}\begin{Verbatim}
+    real(wp), dimension(:,:) :: gradient     ! Gradient K_ij = dH[x_i]/dy_j
+\end{Verbatim}
+\textbf{NOTES:}\hspace{0.08in}\begin{Verbatim}
+    The obs vector is required only for the observation's geopotential levels;
+    no forward simulated bending angle profile is returned.
+
+    The shape of gradient must be consistent with the length of the
+    state and observation vector, respectively. Thus, if the state has
+    N elements, and there are M observations, the dimension of gradient
+    must be M x N.
+\end{Verbatim}
+\textbf{SEE ALSO:}\hspace{0.08in}\begin{Verbatim}
+   ropp_fm_bangle_1d
+   ropp_fm_bangle_1d_tl
+\end{Verbatim}
+\subsection{BendingAngle/ropp\_fm\_bangle\_1d\_tl}
+\textsl{[ BendingAngle ]}
+\textsl{[ Subroutines ]}
+
+\label{ch:robo6}
+\label{ch:BendingAngle_ropp_fm_bangle_1d_tl}
+\index{unsorted!ropp\_fm\_bangle\_1d\_tl}\index{Subroutines!ropp\_fm\_bangle\_1d\_tl}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    ropp_fm_bangle_1d_tl - Tangent linear of ropp_fm_bangle_1d().
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    call ropp_fm_bangle_1d_tl(x, x_tl, y, y_tl)
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    This routine is the tangent linear of ropp_fm_bangle_1d.
+\end{Verbatim}
+\textbf{INPUTS:}\hspace{0.08in}\begin{Verbatim}
+    type(State1dFM)   :: x      ! State vector structure
+    type(State1dFM)   :: x_tl   ! Perturbation vector structure
+    type(Obs1dBangle) :: y      ! Bending angle observation vector
+\end{Verbatim}
+\textbf{OUTPUT:}\hspace{0.08in}\begin{Verbatim}
+    real(wp), dimension(:) :: y_tl  ! Bending angle perturbation
+\end{Verbatim}
+\textbf{NOTES:}\hspace{0.08in}\begin{Verbatim}
+    The obs vector is required only for the observation's impact parameter
+    levels; no forward simulated bending angle profile is returned.
+
+    The lengths of the arrays x_tl%state and y_tl must agree with the 
+    lengths of the x%state and y%bangle arrays, respectively.
+\end{Verbatim}
+\textbf{SEE ALSO:}\hspace{0.08in}\begin{Verbatim}
+    ropp_fm_types
+    ropp_fm_bangle_1d
+    ropp_fm_bangle_1d_ad
+\end{Verbatim}
+\section{ForwardModels/BendingAngle2d}
+\textsl{[ Topics ]}
+
+\label{ch:robo42}
+\label{ch:ForwardModels_BendingAngle2d}
+\index{unsorted!BendingAngle2d}\index{Topics!BendingAngle2d}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    Routines for 2d Bending Angle Operator
+\end{Verbatim}
+\textbf{SEE ALSO:}\hspace{0.08in}\subsection{BendingAngle2d/ropp\_fm\_alpha2drk}
+\textsl{[ BendingAngle2d ]}
+\textsl{[ Subroutines ]}
+
+\label{ch:robo7}
+\label{ch:BendingAngle2d_ropp_fm_alpha2drk}
+\index{unsorted!ropp\_fm\_alpha2drk}\index{Subroutines!ropp\_fm\_alpha2drk}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    ropp_fm_alpha2drk - Forward model calculating a bending
+                        angle profile from planar information.
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    call ropp_fm_alpha2drk(kobs, klev, ...)
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    This routine is a forward model calculating the bending angle profile
+    from planar refractivity information.  
+\end{Verbatim}
+\textbf{INPUTS:}\hspace{0.08in}\begin{Verbatim}
+           kobs   =  number of observed bending angles 
+           klev   =  number of vertical levels
+           khoriz =  number of horizontal locations
+           ksplit =  splitting of model levels
+           pdsep  =  angular spacing
+           pa     =  impact parameters
+           proc   =  radius of curvature 
+           pz_2d  =  2D impact height (do a 1D calculation above pz_2d)
+           prefrac=  refractivity values
+           pradius=  radius values
+           pnr    =  nr product 
+\end{Verbatim}
+\textbf{OUTPUT:}\hspace{0.08in}\begin{Verbatim}
+           pa_path = impact parameter at end points of ray path
+           palpha  = bending angle values
+           prtan   = radius of tangent point 
+\end{Verbatim}
+\textbf{NOTES:}\hspace{0.08in}\begin{Verbatim}
+    The forward model calculate the bending angle as a function of
+    impact parameter. Below "pz_2d" a Runge-Kutta solver is used
+    calculate the ray-path and bending angle. Above "pz_2d" we use
+    the 1D method, based on the error function solution of the 
+    bending angle integral.  
+\end{Verbatim}
+\textbf{SEE ALSO:}\hspace{0.08in}\begin{Verbatim}
+    ropp_fm_types
+\end{Verbatim}
+\subsection{BendingAngle2d/ropp\_fm\_alpha2drk\_ad}
+\textsl{[ BendingAngle2d ]}
+\textsl{[ Subroutines ]}
+
+\label{ch:robo8}
+\label{ch:BendingAngle2d_ropp_fm_alpha2drk_ad}
+\index{unsorted!ropp\_fm\_alpha2drk\_ad}\index{Subroutines!ropp\_fm\_alpha2drk\_ad}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    ropp_fm_alpha2drk_ad - Forward model calculating a bending
+                        angle profile from planar information.
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    call ropp_fm_alpha2drk_ad(kobs, klev, ...)
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    This routine is a forward model calculating the bending angle profile
+    from planar refractivity information.  
+\end{Verbatim}
+\textbf{INPUTS:}\hspace{0.08in}\begin{Verbatim}
+           kobs   =  number of observed bending angles 
+           klev   =  number of vertical levels
+           khoriz =  number of horizontal locations
+           ksplit = splitting of model levels
+           pdsep  =  angular spacing
+           pa     =  impact parameters
+           proc   =  radius of curvature 
+           pz_2d  =  2D impact height (do a 1D calculation above pz_2d)
+           prefrac=  refractivity values
+           pradius=  radius values
+           pnr    =  nr product 
+\end{Verbatim}
+\textbf{OUTPUT:}\hspace{0.08in}\begin{Verbatim}
+           pa_path = impact parameter at end points of ray path
+           palpha  = bending angle values 
+\end{Verbatim}
+\textbf{NOTES:}\hspace{0.08in}\begin{Verbatim}
+    The forward model calculate the bending angle as a function of
+    impact parameter. Below "pz_2d" a Runge-Kutta solver is used
+    calculate the ray-path and bending angle. Above "pz_2d" we use
+    the 1D method, based on the error function solution of the 
+    bending angle integral.  
+\end{Verbatim}
+\textbf{SEE ALSO:}\hspace{0.08in}\begin{Verbatim}
+    ropp_fm_types
+\end{Verbatim}
+\subsection{BendingAngle2d/ropp\_fm\_alpha2drk\_tl}
+\textsl{[ BendingAngle2d ]}
+\textsl{[ Subroutines ]}
+
+\label{ch:robo9}
+\label{ch:BendingAngle2d_ropp_fm_alpha2drk_tl}
+\index{unsorted!ropp\_fm\_alpha2drk\_tl}\index{Subroutines!ropp\_fm\_alpha2drk\_tl}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    ropp_fm_alpha2drk - Forward model calculating a bending
+                        angle profile from planar information.
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    call ropp_fm_alpha2drk_tl(kobs, klev, ...)
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    This routine is a forward model calculating the bending angle profile
+    from planar refractivity information.  
+\end{Verbatim}
+\textbf{INPUTS:}\hspace{0.08in}\begin{Verbatim}
+           kobs   =  number of observed bending angles 
+           klev   =  number of vertical levels
+           khoriz =  number of horizontal locations
+           ksplit =  splitting of model levels
+           pdsep  =  angular spacing
+           pa     =  impact parameters
+           proc   =  radius of curvature 
+           pz_2d  =  2D impact height (do a 1D calculation above pz_2d)
+           prefrac=  refractivity values
+           pradius=  radius values
+           pnr    =  nr product 
+\end{Verbatim}
+\textbf{OUTPUT:}\hspace{0.08in}\begin{Verbatim}
+           pa_path = impact parameter at end points of ray path
+           palpha  = bending angle values 
+           pa_path_prime = TL of impact parameter at end points of ray path
+           palpha_prime  = TL of bending angle values 
+\end{Verbatim}
+\textbf{NOTES:}\hspace{0.08in}\begin{Verbatim}
+    The forward model calculate the bending angle as a function of
+    impact parameter. Below "pz_2d" a Runge-Kutta solver is used
+    calculate the ray-path and bending angle. Above "pz_2d" we use
+    the 1D method, based on the error function solution of the 
+    bending angle integral.  
+\end{Verbatim}
+\textbf{SEE ALSO:}\hspace{0.08in}\begin{Verbatim}
+    ropp_fm_types
+\end{Verbatim}
+\subsection{BendingAngle2d/ropp\_fm\_bangle\_2d}
+\textsl{[ BendingAngle2d ]}
+\textsl{[ Subroutines ]}
+
+\label{ch:robo10}
+\label{ch:BendingAngle2d_ropp_fm_bangle_2d}
+\index{unsorted!ropp\_fm\_bangle\_2d}\index{Subroutines!ropp\_fm\_bangle\_2d}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    ropp_fm_bangle_2d - Forward model calculating a bending
+                        angle profile from planar information.
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    call ropp_fm_bangle_2d(2D_state, obs)
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    This routine is a forward model calculating a vertical profile of 
+    bending angles from temperature, humidity and surface pressure. Bending
+    angle values are calculated for the impact parameters given in the
+    observation vector.
+\end{Verbatim}
+\textbf{INPUTS:}\hspace{0.08in}\begin{Verbatim}
+    type(State2dFM)       :: x     ! State vector
+    type(Obs1dBangle)     :: y     ! Observation vector (levels required)
+\end{Verbatim}
+\textbf{OUTPUT:}\hspace{0.08in}\begin{Verbatim}
+    type(Obs1dBangle)     :: y     ! Observation vector
+\end{Verbatim}
+\textbf{NOTES:}\hspace{0.08in}\begin{Verbatim}
+    The 2D forward model evaluates bending angles on the observed impact
+    parameter values using a ray tracer to solve the ray equations. The
+    operator neglects tangent point drift and uses the observed impact
+    parameter to determine the ray tangent height. 
+\end{Verbatim}
+\textbf{SEE ALSO:}\hspace{0.08in}\begin{Verbatim}
+    ropp_fm_types
+    ropp_fm_bangle_2d_ad
+    ropp_fm_bangle_2d_tl
+\end{Verbatim}
+\subsection{BendingAngle2d/ropp\_fm\_bangle\_2d\_ad}
+\textsl{[ BendingAngle2d ]}
+\textsl{[ Subroutines ]}
+
+\label{ch:robo11}
+\label{ch:BendingAngle2d_ropp_fm_bangle_2d_ad}
+\index{unsorted!ropp\_fm\_bangle\_2d\_ad}\index{Subroutines!ropp\_fm\_bangle\_2d\_ad}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    ropp_fm_bangle_2d_ad - Forward model calculating a bending
+                        angle profile from planar information.
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    call ropp_fm_bangle_2d_ad(2D_state, 2D_state_ad, obs, obs_ad)
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    This routine is a forward model calculating a vertical profile of
+    bending angles from temperature, humidity and surface pressure. Bending
+    angle values are calculated for the impact parameters given in the
+    observation vector.
+\end{Verbatim}
+\textbf{INPUTS:}\hspace{0.08in}\begin{Verbatim}
+    type(State2dFM)       :: x,x_ad     ! State vector
+    type(Obs1dBangle)     :: y,y_ad     ! Observation vector (levels required)
+\end{Verbatim}
+\textbf{OUTPUT:}\hspace{0.08in}\begin{Verbatim}
+    type(Obs1dBangle)     :: y_ad     ! Observation vector
+\end{Verbatim}
+\textbf{NOTES:}\hspace{0.08in}\begin{Verbatim}
+    The 2D forward model evaluates bending angles on the observed impact
+    parameter values using a ray tracer to solve the ray equations. The
+    operator neglects tangent point drift and uses the observed impact
+    parameter to determine the ray tangent height.
+\end{Verbatim}
+\textbf{SEE ALSO:}\hspace{0.08in}\begin{Verbatim}
+    ropp_fm_types
+    ropp_fm_bangle_2d_ad
+    ropp_fm_bangle_2d_tl
+\end{Verbatim}
+\subsection{BendingAngle2d/ropp\_fm\_bangle\_2d\_tl}
+\textsl{[ BendingAngle2d ]}
+\textsl{[ Subroutines ]}
+
+\label{ch:robo12}
+\label{ch:BendingAngle2d_ropp_fm_bangle_2d_tl}
+\index{unsorted!ropp\_fm\_bangle\_2d\_tl}\index{Subroutines!ropp\_fm\_bangle\_2d\_tl}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    ropp_fm_bangle_2d_tl - Forward model calculating a bending
+                        angle profile from planar information.
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    call ropp_fm_bangle_2d(2D state, obs)
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    This routine is a forward model calculating a vertical profile of
+    bending angles from temperature, humidity and surface pressure. Bending
+    angle values are calculated for the impact parameters given in the
+    observation vector.
+\end{Verbatim}
+\textbf{INPUTS:}\hspace{0.08in}\begin{Verbatim}
+    type(State2dFM)    :: x,x_tl     ! State vector
+\end{Verbatim}
+\textbf{OUTPUT:}\hspace{0.08in}\begin{Verbatim}
+    type(Obs1dBangle)     :: y,y_tl     ! Observation vector
+\end{Verbatim}
+\textbf{NOTES:}\hspace{0.08in}\begin{Verbatim}
+    The 2D forward model evaluates bending angles on the observed impact
+    parameter values using a ray tracer to solve the ray equations. The
+    operator neglects tangent point drift and uses the observed impact
+    parameter to determine the ray tangent height.
+\end{Verbatim}
+\textbf{SEE ALSO:}\hspace{0.08in}\begin{Verbatim}
+    ropp_fm_types
+    ropp_fm_bangle_2d_ad
+    ropp_fm_bangle_2d_tl
+\end{Verbatim}
+\subsection{BendingAngle2d/ropp\_fm\_gpspderivs}
+\textsl{[ BendingAngle2d ]}
+\textsl{[ Subroutines ]}
+
+\label{ch:robo13}
+\label{ch:BendingAngle2d_ropp_fm_gpspderivs}
+\index{unsorted!ropp\_fm\_gpspderivs}\index{Subroutines!ropp\_fm\_gpspderivs}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    ropp_fm_gpspderivs - calculates the refractivity derivatives used in
+                 the ray-tracer 
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    call ropp_fm_gpspderivs(klev,khoriz, ...)
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    This routine calculates the refractivity gradients used in the
+    raytracer.  
+\end{Verbatim}
+\textbf{INPUTS:}\hspace{0.08in}\begin{Verbatim}
+           klev   =  number of vertical levels
+           khoriz =  number of horizontal locations
+           kk      = in the kkth box in the horizontal
+           pdsep  =  angular spacing
+           ptheta_min = minium theta 
+           ptheta_max = maximum theta 
+           ptheta_tan = theta at tangent point & 
+           prtan = radius of tangent point
+           pamult = 1 or -1 depending on direction
+           prefrac = refractivity
+           pradius = radius value
+           py = current location
+\end{Verbatim}
+\textbf{OUTPUT:}\hspace{0.08in}\begin{Verbatim}
+           pdydh = derivs used in the RK calculation
+\end{Verbatim}
+\textbf{NOTES:}\hspace{0.08in}\begin{Verbatim}
+     We limit the magnitude of the radial refractivity gradient to 1.5e-7, to stop the ray
+     getting stuck 
+
+     More information on method in Healy et al, (2007), Q.J.R. Meteorol.Soc., vol 133, 1213-1217, 
+     section 3.2  
+\end{Verbatim}
+\textbf{SEE ALSO:}\hspace{0.08in}\begin{Verbatim}
+    ropp_fm_types
+\end{Verbatim}
+\subsection{BendingAngle2d/ropp\_fm\_gpspderivs\_ad}
+\textsl{[ BendingAngle2d ]}
+\textsl{[ Subroutines ]}
+
+\label{ch:robo14}
+\label{ch:BendingAngle2d_ropp_fm_gpspderivs_ad}
+\index{unsorted!ropp\_fm\_gpspderivs\_ad}\index{Subroutines!ropp\_fm\_gpspderivs\_ad}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    ropp_fm_gpspderivs_ad - calculates the refractivity derivatives used in
+                 the ray-tracer 
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    call ropp_fm_gpspderivs_ad(klev,khoriz, ...)
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    This routine calculates the refractivity gradients used in the
+    raytracer. (ADJOINT CODE) 
+\end{Verbatim}
+\textbf{INPUTS:}\hspace{0.08in}\begin{Verbatim}
+           klev   =  number of vertical levels
+           khoriz =  number of horizontal locations
+           kk      = in the kkth box in the horizontal
+           pdsep  =  angular spacing
+           ptheta_min = minium theta 
+           ptheta_max = maximum theta 
+           ptheta_tan = theta at tangent point & 
+           prtan = radius of tangent point
+           pamult = 1 or -1 depending on direction
+           prefrac = refractivity
+           pradius = radius value
+           py = current location
+\end{Verbatim}
+\textbf{OUTPUT:}\hspace{0.08in}\begin{Verbatim}
+           pdydh = derivs used in the RK calculation
+\end{Verbatim}
+\textbf{NOTES:}\hspace{0.08in}\begin{Verbatim}
+     We limit the magnitude of the radial refractivity gradient to 1.5e-7, to stop the ray
+     getting stuck 
+
+     More information on method in Healy et al, (2007), Q.J.R. Meteorol.Soc., vol 133, 1213-1217, 
+     section 3.2  
+\end{Verbatim}
+\textbf{SEE ALSO:}\hspace{0.08in}\begin{Verbatim}
+    ropp_fm_types
+\end{Verbatim}
+\subsection{BendingAngle2d/ropp\_fm\_gpspderivs\_tl}
+\textsl{[ BendingAngle2d ]}
+\textsl{[ Subroutines ]}
+
+\label{ch:robo15}
+\label{ch:BendingAngle2d_ropp_fm_gpspderivs_tl}
+\index{unsorted!ropp\_fm\_gpspderivs\_tl}\index{Subroutines!ropp\_fm\_gpspderivs\_tl}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    ropp_fm_gpspderivs_tl - calculates the refractivity derivatives used in
+                 the ray-tracer 
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    call ropp_fm_gpspderivs_tl(klev,khoriz, ...)
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    This routine calculates the refractivity gradients used in the
+    raytracer.  (TANGENT LINEAR CODE)
+\end{Verbatim}
+\textbf{INPUTS:}\hspace{0.08in}\begin{Verbatim}
+           klev   =  number of vertical levels
+           khoriz =  number of horizontal locations
+           kk      = in the kkth box in the horizontal
+           pdsep  =  angular spacing
+           ptheta_min = minium theta 
+           ptheta_max = maximum theta 
+           ptheta_tan = theta at tangent point & 
+           prtan = radius of tangent point
+           pamult = 1 or -1 depending on direction
+           prefrac = refractivity
+           pradius = radius value
+           py = current location
+\end{Verbatim}
+\textbf{OUTPUT:}\hspace{0.08in}\begin{Verbatim}
+           pdydh = derivs used in the RK calculation
+\end{Verbatim}
+\textbf{NOTES:}\hspace{0.08in}\begin{Verbatim}
+     We limit the magnitude of the radial refractivity gradient to 1.5e-7, to stop the ray
+     getting stuck 
+
+     More information on method in Healy et al, (2007), Q.J.R. Meteorol.Soc., vol 133, 1213-1217, 
+     section 3.2  
+\end{Verbatim}
+\textbf{SEE ALSO:}\hspace{0.08in}\begin{Verbatim}
+    ropp_fm_types
+\end{Verbatim}
+\section{ForwardModels/Compressibility}
+\textsl{[ Topics ]}
+
+\label{ch:robo43}
+\label{ch:ForwardModels_Compressibility}
+\index{unsorted!Compressibility}\index{Topics!Compressibility}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    Routines for calculating geopotential height and wet and compressibilities
+    in 1D and 2D Forward Models, accounting for non-ideal gas effects.
+\end{Verbatim}
+\textbf{SEE ALSO:}\hspace{0.08in}\begin{Verbatim}
+   ropp_fm_refrac_1d
+   ropp_fm_refrac_1d_ad
+   ropp_fm_refrac_1d_tl
+   ropp_fm_bangle_1d
+   ropp_fm_bangle_1d_ad
+   ropp_fm_bangle_1d_tl
+   ropp_fm_bangle_2d
+   ropp_fm_bangle_2d_ad
+   ropp_fm_bangle_2d_tl
+\end{Verbatim}
+\subsection{Compressibility/ropp\_fm\_compress}
+\textsl{[ Compressibility ]}
+\textsl{[ Subroutines ]}
+
+\label{ch:robo17}
+\label{ch:Compressibility_ropp_fm_compress}
+\index{unsorted!ropp\_fm\_compress}\index{Subroutines!ropp\_fm\_compress}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    ropp_fm_compress - Calculate geopotential height and 
+                       wet and dry compressibilities.
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    call ropp_fm_compresss(x, z_geop, zcomp_dry_inv, zcomp_wet_inv)
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    This routine calculates the inverses of the wet and dry compressibilities
+    and adjusts the model geopotential height value to account for non-ideal
+    effects.
+\end{Verbatim}
+\textbf{INPUTS:}\hspace{0.08in}\begin{Verbatim}
+    TYPE(State1dFM)       :: x               ! Model state vector.
+\end{Verbatim}
+\textbf{OUTPUT:}\hspace{0.08in}\begin{Verbatim}
+    REAL(wp)               :: z_geop          ! Geopotential heights.
+    REAL(wp)               :: zcomp_dry_inv   ! Inverse of dry compressibility.
+    REAL(wp)               :: zcomp_wet_inv   ! Inverse of wet compressibility.
+\end{Verbatim}
+\textbf{NOTES:}\hspace{0.08in}\begin{Verbatim}
+    Wet and dry compressibilities on model levels calculated using 
+    known constants. The geopotential heights are adjusted accordingly. 
+    Modified GPH and reciprocal wet and dry compressibilities are returned. 
+\end{Verbatim}
+\textbf{SEE ALSO:}\hspace{0.08in}\begin{Verbatim}
+    ropp_fm_compress_ad
+    ropp_fm_compress_tl
+\end{Verbatim}
+\subsection{Compressibility/ropp\_fm\_compress\_2d}
+\textsl{[ Compressibility ]}
+\textsl{[ Subroutines ]}
+
+\label{ch:robo18}
+\label{ch:Compressibility_ropp_fm_compress_2d}
+\index{unsorted!ropp\_fm\_compress\_2d}\index{Subroutines!ropp\_fm\_compress\_2d}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    ropp_fm_compress_2d - Calculate 2D geopotential height and 
+                          wet and dry compressibilities.
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    call ropp_fm_compress_2d(x, z_geop, zcomp_dry_inv, zcomp_wet_inv)
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    This routine calculates the inverses of the wet and dry compressibilities
+    and adjusts the model geopotential height value to account for non-ideal
+    effects.
+\end{Verbatim}
+\textbf{INPUTS:}\hspace{0.08in}\begin{Verbatim}
+    TYPE(State1dFM)       :: x               ! Model state vector.
+\end{Verbatim}
+\textbf{OUTPUT:}\hspace{0.08in}\begin{Verbatim}
+    REAL(wp)               :: z_geop          ! Geopotential heights.
+    REAL(wp)               :: zcomp_dry_inv   ! Inverse of dry compressibility.
+    REAL(wp)               :: zcomp_wet_inv   ! Inverse of wet compressibility.
+\end{Verbatim}
+\textbf{NOTES:}\hspace{0.08in}\begin{Verbatim}
+    Wet and dry compressibilities on model levels calculated using 
+    known constants. The geopotential heights are adjusted accordingly. 
+    Modified GPH and reciprocal wet and dry compressibilities are returned. 
+\end{Verbatim}
+\textbf{SEE ALSO:}\hspace{0.08in}\begin{Verbatim}
+    ropp_fm_compress_2d_tl
+    ropp_fm_compress_2d_ad
+\end{Verbatim}
+\subsection{Compressibility/ropp\_fm\_compress\_2d\_ad}
+\textsl{[ Compressibility ]}
+\textsl{[ Subroutines ]}
+
+\label{ch:robo19}
+\label{ch:Compressibility_ropp_fm_compress_2d_ad}
+\index{unsorted!ropp\_fm\_compress\_2d\_ad}\index{Subroutines!ropp\_fm\_compress\_2d\_ad}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    ropp_fm_compress - .
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    call ropp_fm_compresss_2d_ad(x, x_ad, z_geop_ad, zcomp_dry_inv_ad, zcomp_wet_inv_ad)
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    This routine is the adjoint of ropp_fm_compress_2d.
+\end{Verbatim}
+\textbf{INPUTS:}\hspace{0.08in}\begin{Verbatim}
+    TYPE(State1dFM)   :: x                   ! State vector
+    TYPE(State1dFM)   :: x_ad                ! Adjoint of x
+    REAL(wp)          :: z_geop_ad           ! Adjoint of geopotential
+    REAL(wp)          :: zcomp_dry_inv_ad    ! Adjoint of inverse dry compressibility
+    REAL(wp)          :: zcomp_wet_inv_ad    ! Adjoint of inverse wet compressibility
+\end{Verbatim}
+\textbf{OUTPUT:}\hspace{0.08in}\begin{Verbatim}
+    TYPE(State1dFM)   :: x_ad                ! Adjoint of x
+    REAL(wp)          :: z_geop_ad           ! Adjoint of geopotential
+    REAL(wp)          :: zcomp_dry_inv_ad    ! Adjoint of inverse dry compressibility
+    REAL(wp)          :: zcomp_wet_inv_ad    ! Adjoint of inverse wet compressibility
+\end{Verbatim}
+\textbf{NOTES:}\hspace{0.08in}\begin{Verbatim}
+    Line-by-line differentiation of ropp_fm_compress_2d.
+\end{Verbatim}
+\textbf{SEE ALSO:}\hspace{0.08in}\begin{Verbatim}
+    ropp_fm_compress_2d
+    ropp_fm_compress_2d_tl
+\end{Verbatim}
+\subsection{Compressibility/ropp\_fm\_compress\_2d\_tl}
+\textsl{[ Compressibility ]}
+\textsl{[ Subroutines ]}
+
+\label{ch:robo20}
+\label{ch:Compressibility_ropp_fm_compress_2d_tl}
+\index{unsorted!ropp\_fm\_compress\_2d\_tl}\index{Subroutines!ropp\_fm\_compress\_2d\_tl}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    ropp_fm_compress_2d_tl - Tangent linear of ropp_fm_compress_2d.
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    call ropp_fm_compress_2d_tl(x, x_tl, z_geop, z_geop_tl, zcomp_dry_inv, zcomp_dry_inv_tl, zcomp_wet_inv, zcomp_wet_inv_tl)
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    This routine is the tangent linear of ropp_fm_compress_2d.
+\end{Verbatim}
+\textbf{INPUTS:}\hspace{0.08in}\begin{Verbatim}
+    TYPE(State1dFM)   :: x                 ! State vector
+    TYPE(State1dFM)   :: x_tl              ! Perturbation in x
+\end{Verbatim}
+\textbf{OUTPUT:}\hspace{0.08in}\begin{Verbatim}
+    REAL              :: z_geop            ! Adjusted geop height
+    REAL(wp)          :: z_geop_tl         ! Perturbation in adjusted geop height
+    REAL(wp)          :: zcomp_dry_inv     ! Inverse of dry comp
+    REAL(wp)          :: zcomp_dry_inv_tl  ! Perturbation in inverse of dry comp
+    REAL(wp)          :: zcomp_wet_inv     ! Inverse of wet comp
+    REAL(wp)          :: zcomp_wet_inv_tl  ! Perturbation in inverse of wet comp
+\end{Verbatim}
+\textbf{NOTES:}\hspace{0.08in}\begin{Verbatim}
+    Line-by-line differentiation of ropp_fm_compress_2d.
+\end{Verbatim}
+\textbf{SEE ALSO:}\hspace{0.08in}\begin{Verbatim}
+    ropp_fm_compress_2d
+    ropp_fm_compress_2d_ad
+\end{Verbatim}
+\subsection{Compressibility/ropp\_fm\_compress\_ad}
+\textsl{[ Compressibility ]}
+\textsl{[ Subroutines ]}
+
+\label{ch:robo21}
+\label{ch:Compressibility_ropp_fm_compress_ad}
+\index{unsorted!ropp\_fm\_compress\_ad}\index{Subroutines!ropp\_fm\_compress\_ad}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    ropp_fm_compress_ad - Adjoint of ropp_fm_compress.
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    call ropp_fm_compress_ad(x, x_ad, z_geop_ad, zcomp_dry_inv_ad, zcomp_wet_inv_ad)
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    This routine is the adjoint of ropp_fm_compress.
+\end{Verbatim}
+\textbf{INPUTS:}\hspace{0.08in}\begin{Verbatim}
+    TYPE(State1dFM)   :: x                   ! State vector
+    TYPE(State1dFM)   :: x_ad                ! Adjoint of x
+    REAL(wp)          :: z_geop_ad           ! Adjoint of geopotential
+    REAL(wp)          :: zcomp_dry_inv_ad    ! Adjoint of inverse dry compressibility
+    REAL(wp)          :: zcomp_wet_inv_ad    ! Adjoint of inverse wet compressibility
+\end{Verbatim}
+\textbf{OUTPUT:}\hspace{0.08in}\begin{Verbatim}
+    TYPE(State1dFM)   :: x_ad                ! Adjoint of x
+    REAL(wp)          :: z_geop_ad           ! Adjoint of geopotential
+    REAL(wp)          :: zcomp_dry_inv_ad    ! Adjoint of inverse dry compressibility
+    REAL(wp)          :: zcomp_wet_inv_ad    ! Adjoint of inverse wet compressibility
+\end{Verbatim}
+\textbf{NOTES:}\hspace{0.08in}\begin{Verbatim}
+    Line-by-line differentiation of ropp_fm_compress.
+\end{Verbatim}
+\textbf{SEE ALSO:}\hspace{0.08in}\begin{Verbatim}
+    ropp_fm_compress
+    ropp_fm_compress_tl
+\end{Verbatim}
+\subsection{Compressibility/ropp\_fm\_compress\_tl}
+\textsl{[ Compressibility ]}
+\textsl{[ Subroutines ]}
+
+\label{ch:robo22}
+\label{ch:Compressibility_ropp_fm_compress_tl}
+\index{unsorted!ropp\_fm\_compress\_tl}\index{Subroutines!ropp\_fm\_compress\_tl}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    ropp_fm_compress_tl - Tangent linear of ropp_fm_compress.
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    call ropp_fm_compress_tl(x, x_tl, z_geop, z_geop_tl, zcomp_dry_inv, zcomp_dry_inv_tl, zcomp_wet_inv, zcomp_wet_inv_tl)
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    This routine is the tangent linear of ropp_fm_compress.
+\end{Verbatim}
+\textbf{INPUTS:}\hspace{0.08in}\begin{Verbatim}
+    TYPE(State1dFM)   :: x              ! State vector
+    TYPE(State1dFM)   :: x_tl           ! Perturbation in x
+\end{Verbatim}
+\textbf{OUTPUT:}\hspace{0.08in}\begin{Verbatim}
+    REAL              :: z_geop            ! Adjusted geop height
+    REAL(wp)          :: z_geop_tl         ! Perturbation in adjusted geop height
+    REAL(wp)          :: zcomp_dry_inv     ! Inverse of dry comp
+    REAL(wp)          :: zcomp_dry_inv_tl  ! Perturbation in inverse of dry comp
+    REAL(wp)          :: zcomp_wet_inv     ! Inverse of wet comp
+    REAL(wp)          :: zcomp_wet_inv_tl  ! Perturbation in inverse of wet comp
+\end{Verbatim}
+\textbf{NOTES:}\hspace{0.08in}\begin{Verbatim}
+    Line-by-line differentiation of ropp_fm_compress.
+\end{Verbatim}
+\textbf{SEE ALSO:}\hspace{0.08in}\begin{Verbatim}
+    ropp_fm_compress
+    ropp_fm_compress_ad
+\end{Verbatim}
+\section{ForwardModels/Datatypes}
+\textsl{[ Topics ]}
+
+\label{ch:robo44}
+\label{ch:ForwardModels_Datatypes}
+\index{unsorted!Datatypes}\index{Topics!Datatypes}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    Data types / structures used by the forward models of ROPP.
+\end{Verbatim}
+\textbf{SEE ALSO:}\hspace{0.08in}\begin{Verbatim}
+    ropp_fm_types
+
+    ropp_fm_state_1d_type
+    ropp_fm_obs_type
+\end{Verbatim}
+\subsection{Datatypes/matrix\_pp}
+\textsl{[ Datatypes ]}
+\textsl{[ Structures ]}
+
+\label{ch:robo35}
+\label{ch:Datatypes_matrix_pp}
+\index{unsorted!matrix\_pp}\index{Structures!matrix\_pp}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    matrix_pp - Type declaration for positive definite (packed) matrix.
+\end{Verbatim}
+\textbf{SOURCE:}\hspace{0.08in}\begin{Verbatim}
+  USE matrix_types
+\end{Verbatim}
+\subsection{Datatypes/Obs1dBangle}
+\textsl{[ Datatypes ]}
+\textsl{[ Structures ]}
+
+\label{ch:robo36}
+\label{ch:Datatypes_Obs1dBangle}
+\index{unsorted!Obs1dBangle}\index{Structures!Obs1dBangle}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    Obs1dBangle - 1d bending angle "observations" vector data type.
+\end{Verbatim}
+\textbf{SOURCE:}\hspace{0.08in}\begin{Verbatim}
+  TYPE Obs1dBangle
+     REAL(wp), DIMENSION(:), POINTER :: bangle  => null() ! Bending angle values
+     REAL(wp), DIMENSION(:), POINTER :: impact  => null() ! Impact parameter
+     REAL(wp), DIMENSION(:), POINTER :: weights => null() ! Observation weights
+     REAL(wp), DIMENSION(:), POINTER :: rtan    => null() ! radius of tangent point
+                                                          ! (2D operator only)
+     REAL(wp), DIMENSION(:,:), POINTER :: a_path => null() ! nr sin(phi) at ray endpoints (2D operator only)
+     INTEGER                         :: nobs              ! number of obs
+     REAL(wp)                        :: lon               ! Longitude
+     REAL(wp)                        :: lat               ! Latitude
+     REAL(wp)                        :: time              ! JulianTime of obs
+     REAL(wp)                        :: g_sfc             ! Surface gravity
+     REAL(wp)                        :: r_earth           ! Effect earth radius
+     REAL(wp)                        :: r_curve           ! Radius of curvature,
+     REAL(wp)                        :: undulation        ! Undulation
+     REAL(wp)                        :: azimuth           ! azimuthal angle
+                                                          ! (2D operator only)
+     TYPE(matrix_pp)                 :: cov               ! Error covariance
+     LOGICAL                         :: obs_ok            ! Observations ok?
+     LOGICAL                         :: cov_ok            ! Covariance ok?
+  END TYPE Obs1dBangle
+\end{Verbatim}
+\subsection{Datatypes/Obs1dRefrac}
+\textsl{[ Datatypes ]}
+\textsl{[ Structures ]}
+
+\label{ch:robo37}
+\label{ch:Datatypes_Obs1dRefrac}
+\index{unsorted!Obs1dRefrac}\index{Structures!Obs1dRefrac}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    Obs1dRefrac - 1d Refractivity "observations" vector data type.
+\end{Verbatim}
+\textbf{SOURCE:}\hspace{0.08in}\begin{Verbatim}
+  TYPE Obs1dRefrac
+     REAL(wp), DIMENSION(:), POINTER :: refrac  => null() ! Refractivity values
+     REAL(wp), DIMENSION(:), POINTER :: geop    => null() ! Geopotential height
+     REAL(wp), DIMENSION(:), POINTER :: weights => null() ! Observation weights
+     REAL(wp)                        :: lon               ! Longitude
+     REAL(wp)                        :: lat               ! Latitude
+     REAL(wp)                        :: time              ! JulianTime of obs
+     TYPE(matrix_pp)                 :: cov               ! Error covariance
+     LOGICAL                         :: obs_ok            ! Observations ok?
+     LOGICAL                         :: cov_ok            ! Covariance ok?
+  END TYPE Obs1dRefrac
+\end{Verbatim}
+\subsection{Datatypes/State1dFM}
+\textsl{[ Datatypes ]}
+\textsl{[ Structures ]}
+
+\label{ch:robo38}
+\label{ch:Datatypes_State1dFM}
+\index{unsorted!State1dFM}\index{Structures!State1dFM}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+     - 1d state vector data type.
+\end{Verbatim}
+\textbf{SOURCE:}\hspace{0.08in}\begin{Verbatim}
+  TYPE State1dFM
+
+     REAL(wp), DIMENSION(:), POINTER :: state  => null() ! State vector
+     REAL(wp), DIMENSION(:), POINTER :: temp   => null() ! Temperature (K)
+     REAL(wp), DIMENSION(:), POINTER :: shum   => null() ! Spec humidity (kg/kg)
+     REAL(wp), DIMENSION(:), POINTER :: pres   => null() ! Pressure (Pa)
+     REAL(wp), DIMENSION(:), POINTER :: geop   => null() ! Geopot height (gpm)
+     REAL(wp), DIMENSION(:), POINTER :: ak     => null() ! Level coefficients
+     REAL(wp), DIMENSION(:), POINTER :: bk     => null() ! Level coefficients
+     REAL(wp)                        :: geop_sfc         ! Surface geop height
+     INTEGER                         :: n_lev            ! Number of levels
+     REAL(wp)                        :: lon              ! Longitude
+     REAL(wp)                        :: lat              ! Latitude
+     REAL(wp)                        :: time             ! JulianTime of bg
+     TYPE(matrix_pp)                 :: cov              ! Error covariance
+     LOGICAL                         :: state_ok         ! State vector ok?
+     LOGICAL                         :: cov_ok           ! Covariance ok?
+     LOGICAL                         :: use_logp = .FALSE. ! Using log(pres)?
+     LOGICAL                         :: use_logq = .FALSE. ! Using log(shum)?
+     LOGICAL                         :: non_ideal= .FALSE. ! Non-ideal gas flag
+     LOGICAL                         :: check_qsat= .FALSE. ! Check against saturation
+
+  END TYPE State1dFM
+\end{Verbatim}
+\subsection{Datatypes/State2dFM}
+\textsl{[ Datatypes ]}
+\textsl{[ Structures ]}
+
+\label{ch:robo39}
+\label{ch:Datatypes_State2dFM}
+\index{unsorted!State2dFM}\index{Structures!State2dFM}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+     - 2d state vector data type.
+\end{Verbatim}
+\textbf{SOURCE:}\hspace{0.08in}\begin{Verbatim}
+  TYPE State2dFM
+
+     REAL(wp), DIMENSION(:,:), POINTER :: temp   => null()  ! temperature (K)
+     REAL(wp), DIMENSION(:,:), POINTER :: shum   => null()  ! specific humidity (kg/kg)
+     REAL(wp), DIMENSION(:,:), POINTER :: pres   => null()  ! pressure (Pa)
+     REAL(wp), DIMENSION(:,:), POINTER :: geop   => null()  ! geopotential height (gpm)
+     REAL(wp), DIMENSION(:), POINTER :: ak   => null()    ! level coefficients
+     REAL(wp), DIMENSION(:), POINTER :: bk   => null()    ! level coefficients
+     REAL(wp), DIMENSION(:), POINTER :: geop_sfc          ! sfc geop height
+     REAL(wp), DIMENSION(:), POINTER :: pres_sfc          ! sfc pressure
+     REAL(wp), DIMENSION(:,:), POINTER :: refrac => null()  ! refractivity on 2D grid
+     REAL(wp), DIMENSION(:,:), POINTER :: nr     => null()  ! nr profuct on 2D grid
+     INTEGER                         :: n_lev               ! Number of levels
+     INTEGER                         :: n_horiz             ! Number of horizontal points
+     REAL(wp)                        :: dtheta              ! angle between profiles in plane
+     REAL(wp), DIMENSION(:),POINTER  :: lon                 ! Longitude
+     REAL(wp), DIMENSION(:),POINTER  :: lat                 ! Latitude
+     REAL(wp)                        :: time                ! JulianTime of bg
+     LOGICAL                         :: state_ok            ! State vector ok?
+     LOGICAL                         :: non_ideal= .FALSE.  ! Non-ideal gas flag
+     LOGICAL                         :: check_qsat= .FALSE. ! Check against saturation
+
+  END TYPE State2dFM
+\end{Verbatim}
+\section{ForwardModels/Parameters}
+\textsl{[ Topics ]}
+
+\label{ch:robo45}
+\label{ch:ForwardModels_Parameters}
+\index{unsorted!Parameters}\index{Topics!Parameters}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    Parameters used by the forward models of ROPP.
+\end{Verbatim}
+\textbf{SEE ALSO:}\hspace{0.08in}\begin{Verbatim}
+    wp
+\end{Verbatim}
+\subsection{Parameters/wp}
+\textsl{[ Parameters ]}
+\textsl{[ Parameters ]}
+
+\label{ch:robo70}
+\label{ch:Parameters_wp}
+\index{unsorted!wp}\index{Parameters!wp}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    wp - Kind parameter for double precision floating point numbers.
+\end{Verbatim}
+\textbf{SOURCE:}\hspace{0.08in}\begin{Verbatim}
+  USE typesizes, ONLY: wp => EightByteReal
+\end{Verbatim}
+\section{ForwardModels/Refractivity}
+\textsl{[ Topics ]}
+
+\label{ch:robo46}
+\label{ch:ForwardModels_Refractivity}
+\index{unsorted!Refractivity}\index{Topics!Refractivity}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    Forward model calculating refractivity (as function of geopotential).
+\end{Verbatim}
+\textbf{SEE ALSO:}\hspace{0.08in}\begin{Verbatim}
+    ropp_fm_refrac_1d
+    ropp_fm_refrac_1d_ad
+    ropp_fm_refrac_1d_tl
+    ropp_fm_refrac_1d_grad
+\end{Verbatim}
+\subsection{Refractivity/ropp\_fm\_refrac\_1d}
+\textsl{[ Refractivity ]}
+\textsl{[ Subroutines ]}
+
+\label{ch:robo76}
+\label{ch:Refractivity_ropp_fm_refrac_1d}
+\index{unsorted!ropp\_fm\_refrac\_1d}\index{Subroutines!ropp\_fm\_refrac\_1d}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    ropp_fm_refrac_1d - Forward model calculating a one dimensional 
+                        refractivity profile from the state vector.
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    call ropp_fm_refrac_1d(x, y)
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    This routine is a forward model calculating a vertical profile of 
+    refractivity from profiles of temperature, humidity and pressure. 
+    Refractivity values are calculated for the geopotential height levels 
+    given in the observation vector.
+\end{Verbatim}
+\textbf{INPUTS:}\hspace{0.08in}\begin{Verbatim}
+    type(State1dFM)     :: x     ! State vector structure
+    type(Obs1dRefrac)   :: y     ! Observation vector (levels required)
+\end{Verbatim}
+\textbf{OUTPUT:}\hspace{0.08in}\begin{Verbatim}
+    type(Obs1dRefrac)   :: y     ! Obs vector with forward modelled refrac
+\end{Verbatim}
+\textbf{NOTES:}\hspace{0.08in}\begin{Verbatim}
+    The forward model assumes that the state vector structure contains 
+    temperature, humidity and pressure values on common geopotential height 
+    levels, independent of the source of those data. Model-dependent 
+    conversion routines can be used to accomplish this within the 
+    ropp_fm_roprof2state() subroutine.
+ 
+    The forward model assumes that the observation vector contains 
+    geopotential height levels onto which the forward simulated
+    observations are interpolated.
+
+    The interpolation of refractivity calculated at the state vector's
+    geopotential height levels to the observation vector's geopotential height
+    levels is carried out assuming that refractivity varies exponentially with
+    geopotential height.
+\end{Verbatim}
+\textbf{SEE ALSO:}\hspace{0.08in}\begin{Verbatim}
+    ropp_fm_types
+    ropp_fm_refrac_1d_ad
+    ropp_fm_refrac_1d_tl
+\end{Verbatim}
+\subsection{Refractivity/ropp\_fm\_refrac\_1d\_ad}
+\textsl{[ Refractivity ]}
+\textsl{[ Subroutines ]}
+
+\label{ch:robo77}
+\label{ch:Refractivity_ropp_fm_refrac_1d_ad}
+\index{unsorted!ropp\_fm\_refrac\_1d\_ad}\index{Subroutines!ropp\_fm\_refrac\_1d\_ad}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    ropp_fm_refrac_1d_ad - Adjoint of ropp_fm_refrac_1d().
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    call ropp_fm_refrac_1d_ad(x, x_ad, y, y_ad)
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    This routine is the adjoint of ropp_fm_refrac_1d.
+\end{Verbatim}
+\textbf{INPUTS:}\hspace{0.08in}\begin{Verbatim}
+    type(State1dFM)        :: x        ! State vector structure
+    type(Obs1dRefrac)      :: y        ! Observation vector structure
+    real(wp), dimension(:) :: y_ad     ! Adjoint forcing
+\end{Verbatim}
+\textbf{OUTPUT:}\hspace{0.08in}\begin{Verbatim}
+    type(State1dFM)        :: x_ad     ! State vector adjoint
+\end{Verbatim}
+\textbf{NOTES:}\hspace{0.08in}\begin{Verbatim}
+    The obs vector is required only for the observation's geopotential height
+    levels; no forward simulated refractivity profile is returned.
+
+    The lengths of the arrays x_ad%state and y_ad must agree with the 
+    lengths of the x%state and y%refrac arrays, respectively.
+\end{Verbatim}
+\textbf{SEE ALSO:}\hspace{0.08in}\begin{Verbatim}
+    ropp_fm_types
+    ropp_fm_refrac_1d
+    ropp_fm_refrac_1d_tl
+\end{Verbatim}
+\subsection{Refractivity/ropp\_fm\_refrac\_1d\_grad}
+\textsl{[ Refractivity ]}
+\textsl{[ Subroutines ]}
+
+\label{ch:robo78}
+\label{ch:Refractivity_ropp_fm_refrac_1d_grad}
+\index{unsorted!ropp\_fm\_refrac\_1d\_grad}\index{Subroutines!ropp\_fm\_refrac\_1d\_grad}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    ropp_fm_refrac_1d_grad - Full gradient of the refractivity forward model.
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    call ropp_fm_refrac_1d_grad(x, y, K)
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    This routine calculates the gradient of the refractivity forward model.
+    The tangent linear and adjoint of the refractivity forward model can be 
+    computed to check their consistency.
+\end{Verbatim}
+\textbf{INPUTS:}\hspace{0.08in}\begin{Verbatim}
+    type(State1dFM)          :: x       ! State vector structure   
+    type(Obs1dRefrac)        :: y       ! Observation vector structure
+\end{Verbatim}
+\textbf{OUTPUT:}\hspace{0.08in}\begin{Verbatim}
+    real(wp), dimension(:,:) :: K       ! Gradient K_ij = dH[x_i]/dy_j
+\end{Verbatim}
+\textbf{NOTES:}\hspace{0.08in}\begin{Verbatim}
+    The obs vector is required only for the observation's geopotential 
+    height levels; no forward simulated refractivity profile is returned.
+
+    The shape of gradient must be consistent with the length of the
+    state and observation vector, respectively. Thus, if the state has
+    N elements, and there are M observations, the dimension of gradient
+    must be M x N.
+\end{Verbatim}
+\textbf{SEE ALSO:}\hspace{0.08in}\begin{Verbatim}
+    ropp_fm_refrac
+    ropp_fm_refrac_tl
+\end{Verbatim}
+\textbf{REFERENCES:}\hspace{0.08in}\subsection{Refractivity/ropp\_fm\_refrac\_1d\_tl}
+\textsl{[ Refractivity ]}
+\textsl{[ Subroutines ]}
+
+\label{ch:robo79}
+\label{ch:Refractivity_ropp_fm_refrac_1d_tl}
+\index{unsorted!ropp\_fm\_refrac\_1d\_tl}\index{Subroutines!ropp\_fm\_refrac\_1d\_tl}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    ropp_fm_refrac_1d_tl - Tangent linear of ropp_fm_refrac_1d().
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    call ropp_fm_refrac_1d_tl(x, x_tl, y, y_tl)
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    This routine is the tangent linear of ropp_fm_refrac_1d.
+\end{Verbatim}
+\textbf{INPUTS:}\hspace{0.08in}\begin{Verbatim}
+    type(State1dFM)             :: x      ! State vector
+    type(State1dFM)             :: x_tl   ! Perturbation vector
+    type(Obs1dRefrac)           :: y      ! Observation vector
+\end{Verbatim}
+\textbf{OUTPUT:}\hspace{0.08in}\begin{Verbatim}
+    real(wp), dimension(:)      :: y_tl   ! Observation tangent linear
+\end{Verbatim}
+\textbf{NOTES:}\hspace{0.08in}\begin{Verbatim}
+    The obs vector is required only for the observation's geopotential height 
+    levels; no forward simulated refractivity profile is returned.
+
+    The lengths of the arrays x_tl%state and y_tl must agree with the 
+    lengths of the x%state and y%refrac arrays, respectively.
+\end{Verbatim}
+\textbf{SEE ALSO:}\hspace{0.08in}\begin{Verbatim}
+    ropp_fm_types
+    ropp_fm_refrac_1d
+    ropp_fm_refrac_1d_ad
+\end{Verbatim}
+\section{ForwardModels/ropp\_fm\_free}
+\textsl{[ Subroutines ]}
+
+\label{ch:robo47}
+\label{ch:ForwardModels_ropp_fm_free}
+\index{unsorted!ropp\_fm\_free}\index{Subroutines!ropp\_fm\_free}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    ropp_fm_free - Free arrays within State1dFM, Obs1dRefrac or Obs1dBangle
+                   derived types
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    use ropp_fm
+    type(State1dFM)   :: state
+    type(Obs1dRefrac) :: refrac
+    type(Obs1dBangle) :: bangle
+      ...
+    call ropp_fm_free(state)
+    call ropp_fm_free(refrac)
+    call ropp_fm_free(bangle)
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+   This subroutine frees memory from a previously initialised data structures
+   used within ropp_fm
+\end{Verbatim}
+\textbf{SEE ALSO:}\hspace{0.08in}\begin{Verbatim}
+    ropp_fm_types
+\end{Verbatim}
+\section{Interface/Modules}
+\textsl{[ Topics ]}
+
+\label{ch:robo48}
+\label{ch:Interface_Modules}
+\index{unsorted!Modules}\index{Topics!Modules}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    use ropp_fm
+
+    use ropp_fm_types
+    use ropp_fm_constants
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    Access to the routines in the ROPP Forward Model library ropp_fm is
+    provided by the single Fortran 90 module ropp_fm. The ropp_fm module
+    also includes the module ropp_fm_types, which contains derived type
+    (structure) declarations used by the forward models.
+
+    Meteorological and physical constants are provided in the module
+    ropp_fm_constants; this module is also loaded with the ropp_fm module.
+\end{Verbatim}
+\textbf{SEE ALSO:}\hspace{0.08in}\begin{Verbatim}
+    ropp_fm
+    ropp_fm_types
+    ropp_fm_constants
+\end{Verbatim}
+\subsection{Modules/ropp\_fm}
+\textsl{[ Modules ]}
+\textsl{[ Modules ]}
+
+\label{ch:robo66}
+\label{ch:Modules_ropp_fm}
+\index{unsorted!ropp\_fm}\index{Modules!ropp\_fm}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    ropp_fm - Interface module for the ROPP forward models.
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    use ropp_fm
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    This module provides interfaces for all forward model routines in the
+    ROPP Forward Model library.
+\end{Verbatim}
+\textbf{NOTES:}\hspace{0.08in}\begin{Verbatim}
+    At present, the ROPP Forward Model library consists of two one-dimensional
+    forward models calculating and refractivity (as function of geopotential
+    height) and bending angle (as function of impact parameter), respectively.
+\end{Verbatim}
+\textbf{SEE ALSO:}\hspace{0.08in}\begin{Verbatim}
+    ropp_fm_types
+    ropp_fm_refrac_1d
+    ropp_fm_bangle_1d
+\end{Verbatim}
+\subsection{Modules/ropp\_fm\_constants}
+\textsl{[ Modules ]}
+\textsl{[ Modules ]}
+
+\label{ch:robo67}
+\label{ch:Modules_ropp_fm_constants}
+\index{unsorted!ropp\_fm\_constants}\index{Modules!ropp\_fm\_constants}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    ropp_fm_constants - Module providing meteorological and physical constants.
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    use ropp_fm_constants
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    This module provides numerical values for meteorological and other
+    physical constants which are used throughout the ROPP package.
+\end{Verbatim}
+\textbf{SEE ALSO:}\hspace{0.08in}\begin{Verbatim}
+    Thermodynamical constants: R_dry, R_vap, C_p,
+                               mw_dry_air, mw_water, epsilon_water
+
+    Specific constants for RO: kappa1, kappa2, kappa3
+
+    Other physical constants:  g_wmo
+
+    Mathematical constants:    pi
+\end{Verbatim}
+\subsection{Modules/ropp\_fm\_copy}
+\textsl{[ Modules ]}
+\textsl{[ Modules ]}
+
+\label{ch:robo68}
+\label{ch:Modules_ropp_fm_copy}
+\index{unsorted!ropp\_fm\_copy}\index{Modules!ropp\_fm\_copy}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    ropp_fm_copy - Interface module for the ROPP forward models.
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    use ropp_fm_copy
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    Data type/structure copying functions using ROprof structures used by the
+    forward models of ROPP and converting units within the ROprof structure.
+\end{Verbatim}
+\textbf{SEE ALSO:}\hspace{0.08in}\begin{Verbatim}
+    ropp_fm_set_units
+    ropp_fm_roprof2state
+    ropp_fm_state2roprof
+    ropp_fm_roprof2obs
+    ropp_fm_obs2roprof
+\end{Verbatim}
+\subsection{Modules/ropp\_fm\_types}
+\textsl{[ Modules ]}
+\textsl{[ Modules ]}
+
+\label{ch:robo69}
+\label{ch:Modules_ropp_fm_types}
+\index{unsorted!ropp\_fm\_types}\index{Modules!ropp\_fm\_types}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    ropp_fm_types - Type declarations and structure definitions for the ROPP
+                    Forward Model library.
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    use ropp_fm
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    This module provides dervived type / structure definitions for the
+    forward model routines in ROPP.
+\end{Verbatim}
+\textbf{NOTES:}\hspace{0.08in}\begin{Verbatim}
+    The ropp_fm_types module is loaded automatically with the ropp_fm module.
+\end{Verbatim}
+\textbf{SEE ALSO:}\hspace{0.08in}\begin{Verbatim}
+    ropp_fm_state_1d_type
+    ropp_fm_obs_type
+\end{Verbatim}
+\section{Matrices/matrix\_types}
+\textsl{[ Modules ]}
+
+\label{ch:robo56}
+\label{ch:Matrices_matrix_types}
+\index{unsorted!matrix\_types}\index{Modules!matrix\_types}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    matrix_types - Type declaration for positive definite matrices.
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    use matrix_types
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    This module provides derived data types for matrices.
+\end{Verbatim}
+\textbf{NOTES:}\hspace{0.08in}\begin{Verbatim}
+    The main purpose of these matrix types is to be used with the matrix 
+    equation solving routines of this library for the respective matrix
+    types. The derived matrix types store decomposition information as
+    obtained by Lapack in addition to the actual matrix. For example, if
+    a positive definite packed matrix is used for the first time with
+    matrix_solve(), a Cholesky decomposition of the matrix is calculated
+    and used for the solving the given linear equation. The decomposition
+    is also stored in the same matrix data structure. In the next call
+    to matrix_solve, the Cholesky decomposition obtained previously is
+    reused, saving significant amounts of computations when solving
+    linear equations with many different right hand sides.
+
+    At present, only double precision matrices are supported. 
+\end{Verbatim}
+\textbf{SEE ALSO:}\hspace{0.08in}\begin{Verbatim}
+    matrix_ge
+    matrix_pp
+    matrix_pb
+    matrix_sq
+\end{Verbatim}
+\section{ModelConversions/Model\_ecmwf}
+\textsl{[ Topics ]}
+
+\label{ch:robo64}
+\label{ch:ModelConversions_Model_ecmwf}
+\index{unsorted!Model\_ecmwf}\index{Topics!Model\_ecmwf}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    Conversion routines for background data on ECWMF hybrid-sigma vertical
+    levels to p,q,T as function of geopotential height and state vector.
+\end{Verbatim}
+\textbf{SEE ALSO:}\hspace{0.08in}\begin{Verbatim}
+    ropp_fm_state2state_ecmwf
+    ropp_fm_state2state_ecmwf_ad
+    ropp_fm_state2state_ecmwf_tl
+\end{Verbatim}
+\subsection{Model\_ecmwf/ropp\_fm\_state2state\_ecmwf}
+\textsl{[ Model\_ecmwf ]}
+\textsl{[ Subroutines ]}
+
+\label{ch:robo57}
+\label{ch:Model_ecmwf_ropp_fm_state2state_ecmwf}
+\index{unsorted!ropp\_fm\_state2state\_ecmwf}\index{Subroutines!ropp\_fm\_state2state\_ecmwf}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    ropp_fm_state2state_ecmwf - Calculate pressure and geopotential height at 
+                                full levels for ECMWF hybrid-sigma vertical 
+                                level model type and update state vector
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    use ropp_fm
+      ...
+    call ropp_fm_state2state_ecmwf(x)
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    This subroutine calculates geopotential height and pressure at full levels
+    for a hybrid vertical coordinate.
+\end{Verbatim}
+\textbf{INPUTS:}\hspace{0.08in}\begin{Verbatim}
+    type(State1dFM)         :: x   State vector data structure
+\end{Verbatim}
+\textbf{OUTPUT:}\hspace{0.08in}\begin{Verbatim}
+    type(State1dFM)         :: x   State vector data structure
+\end{Verbatim}
+\textbf{NOTES:}\hspace{0.08in}\begin{Verbatim}
+    This function requires and returns SI units (i.e., Pa) for level 
+    coefficients, surface and level pressure.
+    Calculation of geopotential height assumes data arrays increasing with 
+    height (index 1 closest to surface).
+\end{Verbatim}
+\textbf{SEE ALSO:}\hspace{0.08in}\begin{Verbatim}
+   ropp_fm_state2state_ecmwf_ad
+   ropp_fm_state2state_ecmwf_tl
+\end{Verbatim}
+\subsection{Model\_ecmwf/ropp\_fm\_state2state\_ecmwf\_2d}
+\textsl{[ Model\_ecmwf ]}
+\textsl{[ Subroutines ]}
+
+\label{ch:robo58}
+\label{ch:Model_ecmwf_ropp_fm_state2state_ecmwf_2d}
+\index{unsorted!ropp\_fm\_state2state\_ecmwf\_2d}\index{Subroutines!ropp\_fm\_state2state\_ecmwf\_2d}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    ropp_fm_state2state_ecmwf_2d - Calculate pressure and geopotential height
+                                full levels for ECMWF hybrid-sigma vertical 
+                                level model type and update state vector
+                                TWO-DIMENSIONAL BACKGROUND VERSION
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    use ropp_fm
+      ...
+    call ropp_fm_state2state_ecmwf_2d(x)
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    This subroutine calculates geopotential height and pressure at full levels
+    for a hybrid vertical coordinate.
+\end{Verbatim}
+\textbf{INPUTS:}\hspace{0.08in}\begin{Verbatim}
+    type(State2dFM)         :: x   State vector data structure
+\end{Verbatim}
+\textbf{OUTPUT:}\hspace{0.08in}\begin{Verbatim}
+    type(State2dFM)         :: x   State vector data structure
+\end{Verbatim}
+\textbf{NOTES:}\hspace{0.08in}\begin{Verbatim}
+    This function requires and returns SI units (i.e., Pa) for level 
+    coefficients, surface and level pressure.
+    Calculation of geopotential height assumes data arrays increasing with 
+    height (index 1 closest to surface).
+\end{Verbatim}
+\textbf{SEE ALSO:}\hspace{0.08in}\begin{Verbatim}
+   ropp_fm_state2state_ecmwf_ad
+   ropp_fm_state2state_ecmwf_tl
+\end{Verbatim}
+\subsection{Model\_ecmwf/ropp\_fm\_state2state\_ecmwf\_ad}
+\textsl{[ Model\_ecmwf ]}
+\textsl{[ Subroutines ]}
+
+\label{ch:robo59}
+\label{ch:Model_ecmwf_ropp_fm_state2state_ecmwf_ad}
+\index{unsorted!ropp\_fm\_state2state\_ecmwf\_ad}\index{Subroutines!ropp\_fm\_state2state\_ecmwf\_ad}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    ropp_fm_state2state_ecmwf_ad - Adjoint of ropp_fm_state2state_ecmwf
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    use ropp_fm
+      ...
+    call ropp_fm_state2state_ecmwf_ad(x, x_ad)
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    This routine is the adjoint of ropp_fm_state2state_ecmwf
+\end{Verbatim}
+\textbf{INPUTS:}\hspace{0.08in}\begin{Verbatim}
+    type(State1dFM)  :: x         State vector
+    type(State1dFM)  :: x_ad      State adjoint vector
+\end{Verbatim}
+\textbf{OUTPUT:}\hspace{0.08in}\begin{Verbatim}
+    type(State1dFM)  :: x_ad      State adjoint vector
+\end{Verbatim}
+\textbf{NOTES:}\hspace{0.08in}\textbf{SEE ALSO:}\hspace{0.08in}\begin{Verbatim}
+   ropp_fm_state2state_ecmwf
+   ropp_fm_state2state_ecmwf_tl
+\end{Verbatim}
+\subsection{Model\_ecmwf/ropp\_fm\_state2state\_ecmwf\_tl}
+\textsl{[ Model\_ecmwf ]}
+\textsl{[ Subroutines ]}
+
+\label{ch:robo60}
+\label{ch:Model_ecmwf_ropp_fm_state2state_ecmwf_tl}
+\index{unsorted!ropp\_fm\_state2state\_ecmwf\_tl}\index{Subroutines!ropp\_fm\_state2state\_ecmwf\_tl}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    ropp_fm_state2state_ecmwf_tl - Tangent linear of ropp_fm_state2state_ecmwf
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    use ropp_fm
+      ...
+    call ropp_fm_state2state_ecmwf_tl(x,x_tl)
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    This routine is the tangent linear of ropp_fm_state2state_ecmwf
+\end{Verbatim}
+\textbf{INPUTS:}\hspace{0.08in}\begin{Verbatim}
+    type(State1dFM)  :: x        State vector structure
+    type(State1dFM)  :: x_tl     Perturbation vector structure
+\end{Verbatim}
+\textbf{OUTPUT:}\hspace{0.08in}\begin{Verbatim}
+    type(State1dFM)  :: x_tl     Perturbation vector structure
+\end{Verbatim}
+\textbf{NOTES:}\hspace{0.08in}\textbf{SEE ALSO:}\hspace{0.08in}\begin{Verbatim}
+   ropp_fm_state2state_ecmwf
+   ropp_fm_state2state_ecmwf_ad
+\end{Verbatim}
+\section{ModelConversions/Model\_meto}
+\textsl{[ Topics ]}
+
+\label{ch:robo65}
+\label{ch:ModelConversions_Model_meto}
+\index{unsorted!Model\_meto}\index{Topics!Model\_meto}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    Conversion routines for background data on Met Office geopotential height
+    based vertical levels to p,q,T as function of geopotential height and
+    state vector.
+\end{Verbatim}
+\textbf{SEE ALSO:}\hspace{0.08in}\begin{Verbatim}
+    ropp_fm_state2state_meto
+    ropp_fm_state2state_meto_ad
+    ropp_fm_state2state_meto_tl
+\end{Verbatim}
+\subsection{Model\_meto/ropp\_fm\_state2state\_meto}
+\textsl{[ Model\_meto ]}
+\textsl{[ Subroutines ]}
+
+\label{ch:robo61}
+\label{ch:Model_meto_ropp_fm_state2state_meto}
+\index{unsorted!ropp\_fm\_state2state\_meto}\index{Subroutines!ropp\_fm\_state2state\_meto}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    ropp_fm_state2state_meto - Calculate pressure and temperature on B-levels 
+                               for MetOffice bg data and update state vector
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    use ropp_fm
+      ...
+    call ropp_fm_state2state_meto(x)
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    This subroutine calculates pressure and temperature on B-levels for a 
+    geopotential height vertical coordinate (e.g. Met Office UM). 
+\end{Verbatim}
+\textbf{INPUTS:}\hspace{0.08in}\begin{Verbatim}
+    type(State1DFM)  :: x       State vector structure
+\end{Verbatim}
+\textbf{OUTPUT:}\hspace{0.08in}\begin{Verbatim}
+    type(State1DFM)  :: x       Updated state vector structure
+\end{Verbatim}
+\textbf{NOTES:}\hspace{0.08in}\textbf{SEE ALSO:}\hspace{0.08in}\begin{Verbatim}
+    ropp_fm_state2state_meto_tl
+    ropp_fm_state2state_meto_ad
+\end{Verbatim}
+\subsection{Model\_meto/ropp\_fm\_state2state\_meto\_ad}
+\textsl{[ Model\_meto ]}
+\textsl{[ Subroutines ]}
+
+\label{ch:robo62}
+\label{ch:Model_meto_ropp_fm_state2state_meto_ad}
+\index{unsorted!ropp\_fm\_state2state\_meto\_ad}\index{Subroutines!ropp\_fm\_state2state\_meto\_ad}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    ropp_fm_state2state_meto_ad - Adjoint of ropp_fm_state2state_meto
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    use ropp_fm
+      ...
+    call ropp_fm_state2state_meto_ad(x, x_ad)
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    This routine is the adjoint of ropp_fm_state2state_meto
+\end{Verbatim}
+\textbf{INPUTS:}\hspace{0.08in}\begin{Verbatim}
+    type(State1DFM)  :: x       State vector structure
+    type(State1DFM)  :: x_ad    State vector adjoint structure
+\end{Verbatim}
+\textbf{OUTPUT:}\hspace{0.08in}\begin{Verbatim}
+    type(State1DFM)  :: x_ad    State vector adjoint structure
+\end{Verbatim}
+\textbf{NOTES:}\hspace{0.08in}\textbf{SEE ALSO:}\hspace{0.08in}\begin{Verbatim}
+    ropp_fm_state2state_meto
+    ropp_fm_state2state_meto_tl
+\end{Verbatim}
+\subsection{Model\_meto/ropp\_fm\_state2state\_meto\_tl}
+\textsl{[ Model\_meto ]}
+\textsl{[ Subroutines ]}
+
+\label{ch:robo63}
+\label{ch:Model_meto_ropp_fm_state2state_meto_tl}
+\index{unsorted!ropp\_fm\_state2state\_meto\_tl}\index{Subroutines!ropp\_fm\_state2state\_meto\_tl}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    ropp_fm_state2state_meto_tl - Tangent linear of ropp_fm_state2state_meto
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    use ropp_fm
+      ...
+    call ropp_fm_state2state_meto_tl(x, x_tl)
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    This routine is the tangent linear of ropp_fm_state2state_meto
+\end{Verbatim}
+\textbf{INPUTS:}\hspace{0.08in}\begin{Verbatim}
+    type(State1dFM)  :: x        State vector structure
+    type(State1dFM)  :: x_tl     Perturbation vector structure
+\end{Verbatim}
+\textbf{OUTPUT:}\hspace{0.08in}\begin{Verbatim}
+    type(State1dFM)  :: x_tl     Perturbation vector structure
+\end{Verbatim}
+\textbf{NOTES:}\hspace{0.08in}\textbf{SEE ALSO:}\hspace{0.08in}\begin{Verbatim}
+    ropp_fm_state2state_meto
+    ropp_fm_state2state_meto_ad
+\end{Verbatim}
+\section{Programs/ropp\_fm\_bg2ro\_1d}
+\textsl{[ Parameters ]}
+
+\label{ch:robo71}
+\label{ch:Programs_ropp_fm_bg2ro_1d}
+\index{unsorted!ropp\_fm\_bg2ro\_1d}\index{Parameters!ropp\_fm\_bg2ro\_1d}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+   ropp_fm_bg2ro_1d
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+   Calculate radio occultation pseudo observation from background model
+   data using 1d forward models
+
+   > ropp_fm_bg2ro_1d <infile(s)> -o <outfile> [-f] [-use_logp]
+                     [-use_logq] [-comp] [-check_qsat] [-d] [-h] [-v]
+\end{Verbatim}
+\textbf{ARGUMENTS:}\hspace{0.08in}\begin{Verbatim}
+   <infile(s)>   One (or more) input file names.
+\end{Verbatim}
+\textbf{OPTIONS:}\hspace{0.08in}\begin{Verbatim}
+   -o <outfile>  Name of output file (default: bg2ro.nc)
+   -f            forward only, no gradient calculation.
+   -use_logp     use log(pressure) for forward model
+   -use_logq     use log(spec humidity) for forward model
+   -comp         include non ideal gas compressibility
+   -check_qsat   check against saturation
+   -d            output additional diagnostics
+   -h            help
+   -v            version information
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+   This program reads model data on model levels from the input data files
+   and calculates vertical profiles of bending angle and refractivity using
+   the 1d forward operators. The result is written to an ROPP formatted
+   output file.
+\end{Verbatim}
+\textbf{NOTES:}\hspace{0.08in}\begin{Verbatim}
+   If the input file is a multifile, or more than one input files are
+   specified, the output file is a multifile.
+
+   Already existing output files will be overwritten.
+\end{Verbatim}
+\textbf{EXAMPLE:}\hspace{0.08in}\begin{Verbatim}
+   To calculate bending angle and refractivity from one of the example
+   (single-) files in the data directory:
+
+     > ropp_fm_bg2ro_1d ../data/bgr20090401_000329_M02_2030337800_N0007_XXXX.nc
+
+   To calculate bending angle and refractivity profiles from all singlefiles
+   in the data directory:
+
+     > ropp_fm_bg2ro_1d ../data/bgr20090401*_N0007_XXXX.nc -o eg_02.nc
+
+   Note that the resulting eg_02.nc file contains forward modelled data from
+   all example profiles.
+
+   To calculate forward modelled bending angle and refractivity profiles from
+   all profiles contained in the multifile bgr20090401_multi.nc:
+
+     > ropp_fm_bg2ro_1d ../data/bgr20090401_multi.nc -o eg_03.nc
+
+   Since the ecmwf_multi_* file was generated by concatenating the other
+   files in the data directory, eg_02.nc and eg_03.nc should be identical
+   apart from the file names.
+\end{Verbatim}
+\textbf{SEE ALSO:}\hspace{0.08in}\begin{Verbatim}
+   ropp_fm_bangle_1d
+   ropp_fm_refrac_1d
+\end{Verbatim}
+\section{Programs/ropp\_fm\_bg2ro\_2d}
+\textsl{[ Parameters ]}
+
+\label{ch:robo72}
+\label{ch:Programs_ropp_fm_bg2ro_2d}
+\index{unsorted!ropp\_fm\_bg2ro\_2d}\index{Parameters!ropp\_fm\_bg2ro\_2d}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+   ropp_fm_bg2ro_2d
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+   Calculate radio occultation pseudo observation from background model
+   data using 2d forward models
+
+   > ropp_fm_bg2ro_2d <infile(s)> -o <outfile> [-comp] [-d] [-h] [-v]
+\end{Verbatim}
+\textbf{ARGUMENTS:}\hspace{0.08in}\begin{Verbatim}
+   <infile(s)>   One (or more) input file names.
+\end{Verbatim}
+\textbf{OPTIONS:}\hspace{0.08in}\begin{Verbatim}
+   -o <outfile>  Name of output file (default: bg2ro_2d.nc).
+   -comp         include non-ideal gas compressibility
+   -check_qsat   check against saturation
+   -d            output additional diagnostics
+   -h            help
+   -v            version information
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+   This program reads model data on model levels from the input data files
+   and calculates vertical profiles of bending angle and refractivity using
+   the 1d forward operators. The result is written to an ROPP formatted
+   output file.
+\end{Verbatim}
+\textbf{NOTES:}\hspace{0.08in}\begin{Verbatim}
+   If the input file is a multifile, or more than one input files are
+   specified, the output file is a multifile.
+
+   Already existing output files will be overwritten.
+\end{Verbatim}
+\textbf{EXAMPLE:}\hspace{0.08in}\begin{Verbatim}
+   To calculate bending angle and refractivity from one of the example
+   (single-) files in the data directory:
+
+     > ropp_fm_bg2ro_2d ../data/.nc
+
+   To calculate bending angle and refractivity profiles from all singlefiles
+   in the data directory:
+
+     > ropp_fm_bg2ro_2d ../data/bgr20090401*_N0007_XXXX.nc -o eg_02.nc
+
+   Note that the resulting eg_02.nc file contains forward modelled data from
+   all example profiles.
+
+   To calculate forward modelled bending angle and refractivity profiles from
+   all profiles contained in the multifile bgr20090401_multi.nc:
+
+     > ropp_fm_bg2ro_2d ../data/bgr20090401_multi.nc -o eg_03.nc
+
+   Since the ecmwf_bgr_* file was generated by concatenating the other
+   files in the data directory, should be identical apart from the file names.
+\end{Verbatim}
+\textbf{SEE ALSO:}\hspace{0.08in}\begin{Verbatim}
+   ropp_fm_bangle_2d
+\end{Verbatim}
+\section{State/ropp\_fm\_assign\_state}
+\textsl{[ Subroutines ]}
+
+\label{ch:robo80}
+\label{ch:State_ropp_fm_assign_state}
+\index{unsorted!ropp\_fm\_assign\_state}\index{Subroutines!ropp\_fm\_assign\_state}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    ropp_assign_state - Copy state vectors.
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    use ropp_fm
+      ...
+    new_state = old_state
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    This subroutine is used for overloading the assign operator (=)
+    for state vectors.
+\end{Verbatim}
+\section{Tools/Copying}
+\textsl{[ Topics ]}
+
+\label{ch:robo87}
+\label{ch:Tools_Copying}
+\index{unsorted!Copying}\index{Topics!Copying}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    Routines for copying (and checking) data in and out of state and
+    observation vectors.
+\end{Verbatim}
+\textbf{SEE ALSO:}\hspace{0.08in}\begin{Verbatim}
+   ropp_fm_state2state
+   ropp_fm_obs2obs
+\end{Verbatim}
+\subsection{Copying/ropp\_fm\_obs2obs}
+\textsl{[ Copying ]}
+\textsl{[ Subroutines ]}
+
+\label{ch:robo27}
+\label{ch:Copying_ropp_fm_obs2obs}
+\index{unsorted!ropp\_fm\_obs2obs}\index{Subroutines!ropp\_fm\_obs2obs}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    ropp_fm_obs2obs - Copy observation vectors.
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    use ropp_fm
+       ...
+    new_obs = old_obs
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    This subroutines are used for overloading the assign operator (=)
+    for observation vectors.
+\end{Verbatim}
+\subsection{Copying/ropp\_fm\_obs2roprof}
+\textsl{[ Copying ]}
+\textsl{[ Subroutines ]}
+
+\label{ch:robo28}
+\label{ch:Copying_ropp_fm_obs2roprof}
+\index{unsorted!ropp\_fm\_obs2roprof}\index{Subroutines!ropp\_fm\_obs2roprof}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    ropp_fm_obs2roprof - Copy elements of an observation vector to an ROprof
+                            structure
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    type(<some obs vector type>) :: obs
+    type(ROprof)                 :: ro_data
+       ...
+    call ropp_fm_obs2roprof(obs, ro_data)
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    This subroutine copies Level 1b (bending angle) or level 2a (refractivity)
+    data as contained in an observation vector to a radio occultation profile
+    data structure.
+\end{Verbatim}
+\textbf{INPUTS:}\hspace{0.08in}\begin{Verbatim}
+   obs      An observation state vector (Obs1dBangle, Obs1dRefrac)
+\end{Verbatim}
+\textbf{OUTPUT:}\hspace{0.08in}\begin{Verbatim}
+   ro_data  Radio occultation profile data.
+\end{Verbatim}
+\textbf{NOTES:}\hspace{0.08in}\begin{Verbatim}
+   Data is copied into the ROprof data structure without unit conversion;
+   thus, the units in the ro_data data structure for Level 1b and 2a must
+   be set to the units used by the observation vector variables. For the
+   units internally used within ropp_fm, this can be accomplished with
+   ropp_fm_set_units().
+
+   Currently, only 1-dimensional observation vectors for bending angle and
+   refractivity data (i.e., those of type(Obs1dbangle) or type(Obs1dRefrac))
+   are supported. In this case, the longitude and latitude coordinates of
+   the tangential points are taken from the georeferencing coordinates
+   contained in the header of the ROprof structure, assuming that they
+   reflect the profile's location properly.
+
+   The 1d bending angle observation vector contains a single vertical 
+   profile of bending angles only; it is assumed that these represent
+   neutral atmospheric bending. Thus, the data is copied into the generic
+   impact/bangle components of the ro_data structure. The earth and 
+   curvature radius information contained in the bending angle observation
+   structure is not further exploited; it is assumed that ro_data contains
+   the proper geolocation data in its header.
+
+   For refractivity, the calcultion of geopotential to altitude above the
+   reference ellipsoid is based on the latitude coordinate contained in the
+   header.
+\end{Verbatim}
+\textbf{SEE ALSO:}\hspace{0.08in}\begin{Verbatim}
+   Obs1dBangle
+   Obs1dRefrac
+   ropp_fm_roprof2obs
+   ropp_fm_set_units
+\end{Verbatim}
+\subsection{Copying/ropp\_fm\_roprof2d2state1d}
+\textsl{[ Copying ]}
+\textsl{[ Subroutines ]}
+
+\label{ch:robo29}
+\label{ch:Copying_ropp_fm_roprof2d2state1d}
+\index{unsorted!ropp\_fm\_roprof2d2state1d}\index{Subroutines!ropp\_fm\_roprof2d2state1d}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    ropp_fm_roprof2d2state1d - Copy elements of an 2D ROprof structure to a 
+                               1d state vector.  
+                               TWO-DIMENSIONAL BACKGROUND DATA
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    type(ROprof2d)                 :: ro_data
+    type(State1dFM)                :: x
+       ...
+    call ropp_fm_roprof2state(ro_data, x)
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    This subroutine copies 2D Level 2b, c and d (if applicable) data from a
+    radio occultation profile data structure into a 1D state vector. Data is
+    is also checked for consistency. TWO-DIMENSIONAL BACKGROUND DATA.
+\end{Verbatim}
+\textbf{INPUTS:}\hspace{0.08in}\begin{Verbatim}
+   ro_data  Radio occultation profile data (2d).
+\end{Verbatim}
+\textbf{OUTPUT:}\hspace{0.08in}\begin{Verbatim}
+   x        State vector structure (1d).
+\end{Verbatim}
+\textbf{NOTES:}\hspace{0.08in}\begin{Verbatim}
+   Data is copied into the state vector structure without unit conversion;
+   thus, the units in the ROprof data structure for Level 2b,c, and (if
+   applicable) d must be set to the units used by the state vector 
+   variables. This can be accomplished with the ropp_fm_set_units()
+   subroutine.
+   The definition of the state vector and associated covariance matrix is 
+   model-dependent, set by level_type specified in input data.
+\end{Verbatim}
+\textbf{SEE ALSO:}\hspace{0.08in}\begin{Verbatim}
+   State1dFM
+   ropp_fm_state2roprof
+   ropp_fm_set_units
+\end{Verbatim}
+\subsection{Copying/ropp\_fm\_roprof2obs}
+\textsl{[ Copying ]}
+\textsl{[ Subroutines ]}
+
+\label{ch:robo30}
+\label{ch:Copying_ropp_fm_roprof2obs}
+\index{unsorted!ropp\_fm\_roprof2obs}\index{Subroutines!ropp\_fm\_roprof2obs}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    ropp_fm_roprof2obs - Copy elements of an ROprof structure to an
+                            observation vector.
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    type(ROprof)                 :: ro_data
+    type(<some obs vector type>) :: obs
+       ...
+    call ropp_fm_roprof2obs(ro_data, obs)
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    This subroutine copies Level 1b (bending angle) or level 2a 
+    (refractivity) data as contained in a radio occultation profile data
+    structure to an observation vector.
+\end{Verbatim}
+\textbf{INPUTS:}\hspace{0.08in}\begin{Verbatim}
+   ro_data  Radio occultation profile data.
+\end{Verbatim}
+\textbf{OUTPUT:}\hspace{0.08in}\begin{Verbatim}
+   obs      An observation state vector (Obs1dBangle, Obs1dRefrac).
+\end{Verbatim}
+\textbf{NOTES:}\hspace{0.08in}\begin{Verbatim}
+   Data is copied from the ROprof data structure without unit conversion;
+   thus, the units in the ro_data data structure for Level 1b and 2a must
+   be set to the units used by the observation vector variables. For the
+   units internally used within ropp_fm, this can be accomplished with
+   ropp_fm_set_units().
+
+   Currently, only 1-dimensional observation vectors for bending angle and
+   refractivity data (i.e., those of type(Obs1dbangle) or type(Obs1dRefrac))
+   are supported. In this case, the longitude and latitude coordinates of
+   the tangential points are taken from the georeferencing coordinates
+   contained in the header of the ROprof structure, assuming that they
+   reflect the profile's location properly.
+
+   The 1d bending angle observation vector contains a single vertical 
+   profile of bending angles only; it is assumed that these represent
+   neutral atmospheric bending. Thus, the data is copied from the generic
+   impact/bangle components of the ro_data structure. The earth and 
+   curvature radius information contained in the bending angle observation
+   structure is not further exploited; it is assumed that ro_data contains
+   the proper geolocation data in its header.
+
+   For refractivity, the calcultion of geopotential to altitude above the
+   reference ellipsoid is based on the latitude coordinate contained in the
+   header.
+\end{Verbatim}
+\textbf{SEE ALSO:}\hspace{0.08in}\begin{Verbatim}
+   Obs1dBangle
+   Obs1dRefrac
+   ropp_fm_roprof2obs
+   ropp_fm_set_units
+\end{Verbatim}
+\subsection{Copying/ropp\_fm\_roprof2state}
+\textsl{[ Copying ]}
+\textsl{[ Subroutines ]}
+
+\label{ch:robo31}
+\label{ch:Copying_ropp_fm_roprof2state}
+\index{unsorted!ropp\_fm\_roprof2state}\index{Subroutines!ropp\_fm\_roprof2state}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    ropp_fm_roprof2state - Copy elements of an ROprof structure to a 
+                           state vector.
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    type(ROprof)                   :: ro_data
+    type(<some state vector type>) :: x
+       ...
+    call ropp_fm_roprof2state(ro_data, x)
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    This subroutine copies Level 2b, c and d (if applicable) data from a
+    radio occultation profile data structure into a state vector. Data
+    is also checked for consistency.
+\end{Verbatim}
+\textbf{INPUTS:}\hspace{0.08in}\begin{Verbatim}
+   ro_data  Radio occultation profile data.
+\end{Verbatim}
+\textbf{OUTPUT:}\hspace{0.08in}\begin{Verbatim}
+   x        State vector structure.
+\end{Verbatim}
+\textbf{NOTES:}\hspace{0.08in}\begin{Verbatim}
+   Data is copied into the state vector structure without unit conversion;
+   thus, the units in the ROprof data structure for Level 2b,c, and (if
+   applicable) d must be set to the units used by the state vector 
+   variables. This can be accomplished with the ropp_fm_set_units()
+   subroutine.
+   The definition of the state vector and associated covariance matrix is 
+   model-dependent, set by level_type specified in input data.
+\end{Verbatim}
+\textbf{SEE ALSO:}\hspace{0.08in}\begin{Verbatim}
+   State1dFM
+   ropp_fm_state2roprof
+   ropp_fm_set_units
+\end{Verbatim}
+\subsection{Copying/ropp\_fm\_roprof2state\_2d}
+\textsl{[ Copying ]}
+\textsl{[ Subroutines ]}
+
+\label{ch:robo32}
+\label{ch:Copying_ropp_fm_roprof2state_2d}
+\index{unsorted!ropp\_fm\_roprof2state\_2d}\index{Subroutines!ropp\_fm\_roprof2state\_2d}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    ropp_fm_roprof2state_2d - Copy elements of an ROprof structure to a state
+                              vector.  TWO-DIMENSIONAL BACKGROUND DATA
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    type(ROprof2d)                 :: ro_data
+    type(<some state vector type>) :: x
+       ...
+    call ropp_fm_roprof2state(ro_data, x)
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    This subroutine copies Level 2b, c and d (if applicable) data from a
+    radio occultation profile data structure into a state vector. Data is
+    is also checked for consistency. TWO-DIMENSIONAL BACKGROUND DATA.
+\end{Verbatim}
+\textbf{INPUTS:}\hspace{0.08in}\begin{Verbatim}
+   ro_data  Radio occultation profile data.
+\end{Verbatim}
+\textbf{OUTPUT:}\hspace{0.08in}\begin{Verbatim}
+   x        State vector structure.
+\end{Verbatim}
+\textbf{NOTES:}\hspace{0.08in}\begin{Verbatim}
+   Data is copied into the state vector structure without unit conversion;
+   thus, the units in the ROprof data structure for Level 2b,c, and (if
+   applicable) d must be set to the units used by the state vector 
+   variables. This can be accomplished with the ropp_fm_set_units()
+   subroutine.
+   The definition of the state vector and associated covariance matrix is 
+   model-dependent, set by level_type specified in input data.
+\end{Verbatim}
+\textbf{SEE ALSO:}\hspace{0.08in}\begin{Verbatim}
+   State2dFM
+   ropp_fm_state2roprof
+   ropp_fm_set_units
+\end{Verbatim}
+\subsection{Copying/ropp\_fm\_state1d2roprof}
+\textsl{[ Copying ]}
+\textsl{[ Subroutines ]}
+
+\label{ch:robo33}
+\label{ch:Copying_ropp_fm_state1d2roprof}
+\index{unsorted!ropp\_fm\_state1d2roprof}\index{Subroutines!ropp\_fm\_state1d2roprof}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    ropp_fm_state2roprof - Copy elements of a state vector to an ROprof
+                              structure
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    type(<some state vector type>) :: x 
+    type(ROprof)                   :: ro_data
+       ...
+    call ropp_fm_state2roprof(x, ro_data)
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    This subroutine copies Level 2b, c and d (if applicable) data as
+    contained in a state vector to a radio occultation profile data
+    structure.
+\end{Verbatim}
+\textbf{INPUTS:}\hspace{0.08in}\begin{Verbatim}
+   x    State vector structure.
+\end{Verbatim}
+\textbf{OUTPUT:}\hspace{0.08in}\begin{Verbatim}
+   ro_data  Radio occultation profile data.
+\end{Verbatim}
+\textbf{NOTES:}\hspace{0.08in}\begin{Verbatim}
+   Data is copied into the ROprof data structure without unit conversion; 
+   thus, the units in the ROprof data structure for Level 2b,c, and (if
+   applicable) d must be set to the units used by the state vector
+   variables. This can be accomplished with the ropp_fm_set_units()
+   subroutine.
+\end{Verbatim}
+\textbf{SEE ALSO:}\hspace{0.08in}\begin{Verbatim}
+   State1dFM
+   ropp_fm_roprof2state
+   ropp_fm_set_units
+\end{Verbatim}
+\subsection{Copying/ropp\_fm\_state2d2roprof}
+\textsl{[ Copying ]}
+\textsl{[ Subroutines ]}
+
+\label{ch:robo34}
+\label{ch:Copying_ropp_fm_state2d2roprof}
+\index{unsorted!ropp\_fm\_state2d2roprof}\index{Subroutines!ropp\_fm\_state2d2roprof}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    ropp_fm_state2roprof - Copy elements of a state vector to an ROprof2d
+                              structure
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    type(<some state vector type>) :: x 
+    type(ROprof)                   :: ro_data
+       ...
+    call ropp_fm_state2roprof(x, ro_data)
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    This subroutine copies Level 2b, c and d (if applicable) data as
+    contained in a state vector to a radio occultation profile data
+    structure.
+\end{Verbatim}
+\textbf{INPUTS:}\hspace{0.08in}\begin{Verbatim}
+   x    State vector structure.
+\end{Verbatim}
+\textbf{OUTPUT:}\hspace{0.08in}\begin{Verbatim}
+   ro_data  Radio occultation profile data.
+\end{Verbatim}
+\textbf{NOTES:}\hspace{0.08in}\begin{Verbatim}
+   Data is copied into the ROprof data structure without unit conversion; 
+   thus, the units in the ROprof data structure for Level 2b,c, and (if
+   applicable) d must be set to the units used by the state vector
+   variables. This can be accomplished with the ropp_fm_set_units()
+   subroutine.
+\end{Verbatim}
+\textbf{SEE ALSO:}\hspace{0.08in}\begin{Verbatim}
+   State1dFM
+   ropp_fm_roprof2state
+   ropp_fm_set_units
+\end{Verbatim}
+\section{Tools/Copying2}
+\textsl{[ Topics ]}
+
+\label{ch:robo88}
+\label{ch:Tools_Copying2}
+\index{unsorted!Copying2}\index{Topics!Copying2}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    Routines for copying (and checking) data in and out of state and
+    observation vectors.
+\end{Verbatim}
+\textbf{SEE ALSO:}\hspace{0.08in}\begin{Verbatim}
+   ropp_fm_roprof2state
+   ropp_fm_state2roprof
+
+   ropp_fm_roprof2obs
+   ropp_fm_obs2roprof
+\end{Verbatim}
+\section{Tools/Memory}
+\textsl{[ Topics ]}
+
+\label{ch:robo89}
+\label{ch:Tools_Memory}
+\index{unsorted!Memory}\index{Topics!Memory}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    Routines for freeing memory
+\end{Verbatim}
+\textbf{SEE ALSO:}\hspace{0.08in}\begin{Verbatim}
+   ropp_fm_free
+\end{Verbatim}
+\section{Tools/Units}
+\textsl{[ Topics ]}
+
+\label{ch:robo90}
+\label{ch:Tools_Units}
+\index{unsorted!Units}\index{Topics!Units}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    Routines for dealing with units.
+\end{Verbatim}
+\textbf{SEE ALSO:}\hspace{0.08in}\begin{Verbatim}
+    ropp_fm_set_units
+\end{Verbatim}
+\subsection{Units/ropp\_fm\_set\_units}
+\textsl{[ Units ]}
+\textsl{[ Subroutines ]}
+
+\label{ch:robo91}
+\label{ch:Units_ropp_fm_set_units}
+\index{unsorted!ropp\_fm\_set\_units}\index{Subroutines!ropp\_fm\_set\_units}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    ropp_fm_set_units - Set internally used units and valid ranges for ROPP
+                        forward models.
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    use ropp_io
+    use ropp_fm
+      ...
+    type(ROprof) :: rodata
+      ...
+    call ropp_fm_set_units(rodata)
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    This subroutine sets the units and valid range attributes within an ROprof
+    data structure to the units used internally in the forward models of the
+    ropp_fm package. For each variable to be defined a call to
+      call ropp_fm_set_units_range(old_units, new_units, range)
+    is made where old_units is the current unit, new_units is the unit assumed
+    in the forward model routines and range is the valid range array for that
+    variable, converted within the routine.
+\end{Verbatim}
+\textbf{INPUTS:}\hspace{0.08in}\begin{Verbatim}
+    rodata  Radio occultation profile data structure
+\end{Verbatim}
+\textbf{OUTPUT:}\hspace{0.08in}\begin{Verbatim}
+    rodata  As above, but with units and valid range attributes modified to
+             reflect standard physical units as used within ropp_fm and
+             ropp_1dvar.
+\end{Verbatim}
+\textbf{NOTES:}\hspace{0.08in}\begin{Verbatim}
+    Only the units and valid ranges for data levels which are used within the
+    forward models provided by ropp_fm are taken care of; thus, units for
+    level 1a (raw amplitude and phase) are left untouched.
+\end{Verbatim}
+\section{VerticalLevels/Interpolation}
+\textsl{[ Topics ]}
+
+\label{ch:robo92}
+\label{ch:VerticalLevels_Interpolation}
+\index{unsorted!Interpolation}\index{Topics!Interpolation}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    Forward model routines dealing with vertical interpolation.
+\end{Verbatim}
+\textbf{SEE ALSO:}\hspace{0.08in}\begin{Verbatim}
+    ropp_fm_interpol          - Linear interpolation
+    ropp_fm_interpol_ad
+    ropp_fm_interpol_tl
+
+    ropp_fm_interpol_log      - Logarithmic interpolation
+    ropp_fm_interpol_log_ad
+    ropp_fm_interpol_log_tl
+\end{Verbatim}
+\subsection{Interpolation/ropp\_fm\_interpol}
+\textsl{[ Interpolation ]}
+\textsl{[ Subroutines ]}
+
+\label{ch:robo49}
+\label{ch:Interpolation_ropp_fm_interpol}
+\index{unsorted!ropp\_fm\_interpol}\index{Subroutines!ropp\_fm\_interpol}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    ropp_fm_interpol - Interpolate linearly.
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    call ropp_fm_interpol(x, newx, array, interp)
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    This subroutine interpolates an array assuming it varies linearly in x.
+\end{Verbatim}
+\textbf{INPUTS:}\hspace{0.08in}\begin{Verbatim}
+    real(wp), dim(:) :: x       Coordinate values.
+    real(wp), dim(:) :: newx    New coordinate values.
+    real(wp), dim(:) :: array   Data to be interpolated (lives on x).
+\end{Verbatim}
+\textbf{OUTPUT:}\hspace{0.08in}\begin{Verbatim}
+    real(wp), dim(:) :: interp  Interpolated data (lives on newx).
+\end{Verbatim}
+\textbf{NOTES:}\hspace{0.08in}\begin{Verbatim}
+    The coordinate array x must be strictly monotonically increasing. If
+    elements of newx are outside the range of x, data will be extrapolated.
+
+    None of the above conditions are checked for, but wrong or unexpected
+    results will be obtained if thone of them is not met. 
+\end{Verbatim}
+\textbf{SEE ALSO:}\hspace{0.08in}\begin{Verbatim}
+    ropp_fm_interpol_ad
+    ropp_fm_interpol_tl
+
+    ropp_fm_interpol
+\end{Verbatim}
+\subsection{Interpolation/ropp\_fm\_interpol\_ad}
+\textsl{[ Interpolation ]}
+\textsl{[ Subroutines ]}
+
+\label{ch:robo50}
+\label{ch:Interpolation_ropp_fm_interpol_ad}
+\index{unsorted!ropp\_fm\_interpol\_ad}\index{Subroutines!ropp\_fm\_interpol\_ad}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    ropp_fm_interpol_ad - Adjoint of ropp_fm_interpol().
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    call ropp_fm_interpol_ad(x, newx, array, x_ad, array_ad, interp_ad)
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    This routine is the adjoint of ropp_fm_interpol.
+\end{Verbatim}
+\textbf{INPUTS:}\hspace{0.08in}\begin{Verbatim}
+    real(wp), dim(:) :: x          Coordinate values.
+    real(wp), dim(:) :: newx       New coordinate values.
+    real(wp), dim(:) :: array      Data to be interpolated (lives on x).
+    real(wp), dim(:) :: interp_ad  Adjoint forcing
+\end{Verbatim}
+\textbf{OUTPUT:}\hspace{0.08in}\begin{Verbatim}
+    real(wp), dim(:) :: x_ad
+    real(wp), dim(:) :: array_ad
+\end{Verbatim}
+\textbf{NOTES:}\hspace{0.08in}\begin{Verbatim}
+    The coordinate array x must be strictly monotonically increasing. If
+    elements of newx are outside the range of x, data will be extrapolated.
+
+    None of the above conditions are checked for, but wrong or unexpected
+    results will be obtained if thone of them is not met. 
+\end{Verbatim}
+\textbf{SEE ALSO:}\hspace{0.08in}\begin{Verbatim}
+    The routine should be tested with the program test_interpol_ad.
+\end{Verbatim}
+\textbf{REFERENCES:}\hspace{0.08in}\begin{Verbatim}
+    This routine was created with the help of the 
+
+      Tangent linear and Adjoint Model Compiler,  TAMC 5.3.0.
+\end{Verbatim}
+\subsection{Interpolation/ropp\_fm\_interpol\_log}
+\textsl{[ Interpolation ]}
+\textsl{[ Subroutines ]}
+
+\label{ch:robo51}
+\label{ch:Interpolation_ropp_fm_interpol_log}
+\index{unsorted!ropp\_fm\_interpol\_log}\index{Subroutines!ropp\_fm\_interpol\_log}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    ropp_fm_interpol_log - Interpolate logarithmically.
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    call ropp_fm_interpol_log(x, newx, array, interp)
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    This subroutine interpolates an array assuming it varies exponentially 
+    in x, i.e. assuming its log varies linearly as function of x.
+\end{Verbatim}
+\textbf{INPUTS:}\hspace{0.08in}\begin{Verbatim}
+    real(wp), dim(:) :: x       Coordinate values.
+    real(wp), dim(:) :: newx    New coordinate values.
+    real(wp), dim(:) :: array   Data to be interpolated (lives on x).
+\end{Verbatim}
+\textbf{OUTPUT:}\hspace{0.08in}\begin{Verbatim}
+    real(wp), dim(:) :: interp  Interpolated data (lives on newx).
+\end{Verbatim}
+\textbf{NOTES:}\hspace{0.08in}\begin{Verbatim}
+    Array must be strictly positive.
+
+    The coordinate array x must be strictly monotonically increasing. If
+    elements of newx are outside the range of x, data will be extrapolated.
+
+    None of the above conditions are checked for, but wrong or unexpected
+    results will be obtained if one of them is not met. 
+\end{Verbatim}
+\textbf{SEE ALSO:}\hspace{0.08in}\begin{Verbatim}
+    ropp_fm_interpol_ad
+    ropp_fm_interpol_tl
+
+    ropp_fm_interpol
+\end{Verbatim}
+\subsection{Interpolation/ropp\_fm\_interpol\_log\_ad}
+\textsl{[ Interpolation ]}
+\textsl{[ Subroutines ]}
+
+\label{ch:robo52}
+\label{ch:Interpolation_ropp_fm_interpol_log_ad}
+\index{unsorted!ropp\_fm\_interpol\_log\_ad}\index{Subroutines!ropp\_fm\_interpol\_log\_ad}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    ropp_fm_interpol_log_ad - Adjoint of ropp_fm_interpol_log().
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    call ropp_interpol_log_ad(x, newx, array, x_ad, array_ad, interp_ad)
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    This routine is the adjoint of ropp_fm_interpol_log.
+\end{Verbatim}
+\textbf{INPUTS:}\hspace{0.08in}\begin{Verbatim}
+    real(wp), dim(:) :: x          Coordinate values.
+    real(wp), dim(:) :: newx       New coordinate values.
+    real(wp), dim(:) :: array      Data to be interpolated (lives on x).
+    real(wp), dim(:) :: interp_ad  Adjoint forcing
+\end{Verbatim}
+\textbf{OUTPUT:}\hspace{0.08in}\begin{Verbatim}
+    real(wp), dim(:) :: x_ad       (only passed)
+    real(wp), dim(:) :: array_ad
+\end{Verbatim}
+\textbf{NOTES:}\hspace{0.08in}\begin{Verbatim}
+    Array must be strictly positive.
+
+    The coordinate array x must be strictly monotonically increasing. If
+    elements of newx are outside the range of x, data will be extrapolated.
+
+    None of the above conditions are checked for, but wrong or unexpected
+    results will be obtained if thone of them is not met. 
+\end{Verbatim}
+\textbf{SEE ALSO:}\hspace{0.08in}\begin{Verbatim}
+    ropp_fm_interpol_log
+    ropp_fm_interpol_log_tl
+
+    ropp_fm_interpol
+\end{Verbatim}
+\textbf{REFERENCES:}\hspace{0.08in}\begin{Verbatim}
+    This routine was created with the help of the 
+
+      Tangent linear and Adjoint Model Compiler,  TAMC 5.3.0.
+\end{Verbatim}
+\subsection{Interpolation/ropp\_fm\_interpol\_log\_tl}
+\textsl{[ Interpolation ]}
+\textsl{[ Subroutines ]}
+
+\label{ch:robo53}
+\label{ch:Interpolation_ropp_fm_interpol_log_tl}
+\index{unsorted!ropp\_fm\_interpol\_log\_tl}\index{Subroutines!ropp\_fm\_interpol\_log\_tl}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    ropp_fm_interpol_log_tl - Tangent linear of ropp_fm_interpol_log().
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    call ropp_fm_interpol_log_tl(x, newx, array, x_tl, array_tl, interp_tl)
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    This routine is the tangent linear of ropp_fm_interpol_log.
+\end{Verbatim}
+\textbf{INPUTS:}\hspace{0.08in}\begin{Verbatim}
+    real(wp), dim(:) :: x          Coordinate values.
+    real(wp), dim(:) :: newx       New coordinate values.
+    real(wp), dim(:) :: array      Data to be interpolated (lives on x).
+    real(wp), dim(:) :: x_tl       Perturbation in x.
+    real(wp), dim(:) :: array_tl   Perturbations in array.
+\end{Verbatim}
+\textbf{OUTPUT:}\hspace{0.08in}\begin{Verbatim}
+    real(wp), dim(:) :: interp_ad
+\end{Verbatim}
+\textbf{NOTES:}\hspace{0.08in}\begin{Verbatim}
+    Array must be strictly positive.
+
+    The coordinate array x must be strictly monotonically increasing. If
+    elements of newx are outside the range of x, data will be extrapolated.
+
+    None of the above conditions are checked for, but wrong or unexpected
+    results will be obtained if thone of them is not met. 
+\end{Verbatim}
+\textbf{SEE ALSO:}\hspace{0.08in}\begin{Verbatim}
+    ropp_fm_interpol_log
+    ropp_fm_interpol_log_ad
+
+    ropp_fm_interpol
+\end{Verbatim}
+\textbf{REFERENCES:}\hspace{0.08in}\begin{Verbatim}
+    This routine was created with the help of the 
+
+      Tangent linear and Adjoint Model Compiler,  TAMC 5.3.0.
+\end{Verbatim}
+\subsection{Interpolation/ropp\_interpol\_tl}
+\textsl{[ Interpolation ]}
+\textsl{[ Functions ]}
+
+\label{ch:robo54}
+\label{ch:Interpolation_ropp_interpol_tl}
+\index{unsorted!ropp\_interpol\_tl}\index{Functions!ropp\_interpol\_tl}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    ropp_fm_interpol_tl - Tangent linear of ropp_fm_interpol().
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    call ropp_fm_interpol_tl(x, newx, array, x_tl, array_tl, interp_tl)
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    This routine is the tangent linear of ropp_fm_interpol.
+\end{Verbatim}
+\textbf{INPUTS:}\hspace{0.08in}\begin{Verbatim}
+    real(wp), dim(:) :: x          Coordinate values.
+    real(wp), dim(:) :: newx       New coordinate values.
+    real(wp), dim(:) :: array      Data to be interpolated (lives on x).
+    real(wp), dim(:) :: x_tl       Perturbation in x.
+    real(wp), dim(:) :: array_tl   Perturbations in array.
+\end{Verbatim}
+\textbf{OUTPUT:}\hspace{0.08in}\begin{Verbatim}
+    real(wp), dim(:) :: interp_ad  Interpolated data adjoint
+\end{Verbatim}
+\textbf{NOTES:}\hspace{0.08in}\begin{Verbatim}
+    The coordinate array x must be strictly monotonically increasing. If
+    elements of newx are outside the range of x, data will be extrapolated.
+
+    None of the above conditions are checked for, but wrong or unexpected
+    results will be obtained if thone of them is not met. 
+\end{Verbatim}
+\textbf{SEE ALSO:}\hspace{0.08in}\begin{Verbatim}
+    ropp_fm_interpol
+    ropp_fm_interpol_ad
+
+    ropp_fm_interpol_log
+\end{Verbatim}
+\textbf{REFERENCES:}\hspace{0.08in}\begin{Verbatim}
+    This routine was created with the help of the 
+
+      Tangent linear and Adjoint Model Compiler,  TAMC 5.3.0.
+\end{Verbatim}

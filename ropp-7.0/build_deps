@@ -1,0 +1,59 @@
+#!/bin/bash
+#
+# $Id: build_deps 3551 2013-02-25 09:51:28Z idculv $
+#
+#---------------------------------------------------------------------
+# (Re)build dependency packages for ROPP using a particular compiler
+# Usage: > build_deps <compiler> [package...]
+# where <compiler> is the (required) compiler ID (ifort, nag, g95...)
+# and package is none, one or more (optional) supported packages
+# (default: netcdf mobufr ecbufr grib)
+#---------------------------------------------------------------------
+#
+if [[ -z $1 ]] || [[ "$1" == "-h" ]] || \
+   [[ "$1" == "--help" ]]; then
+  echo
+  echo "Purpose: build ROPP dependency packages"
+  echo
+  echo "Usage:    build_deps <compiler> [package...]"
+  echo
+  echo "Required: F95 <compiler> tag, e.g. ifort or gfortran"
+  echo
+  echo "Options:  list of none, one or more supported packages"
+  echo
+  echo "Default:  netcdf mobufr ecbufr grib"
+  echo
+  echo "Installs to ROPP_ROOT/<compiler>; saves a a log file in"
+  echo "ROPP_ROOT/<compiler>/build_deps.log"
+  echo
+  exit 1
+fi
+#
+compiler=$1
+#
+packlist=""
+while [[ -n $2 ]]; do packlist="$packlist $2"; shift; done
+if [[ -z $packlist ]]; then
+  packlist="netcdf mobufr ecbufr grib";
+fi
+packlist=$(echo $packlist | tr [:upper:] [:lower:])
+#
+prefix=$ROPP_ROOT/$compiler
+mkdir -p $prefix
+log=$prefix/$(basename $0).log
+rm -f $log > /dev/null 2>&1
+#
+echo " " | tee $log
+echo "-------------------------------------------------------------" | tee -a $log
+echo "Building ROPP dependency packages with $compiler on $(date)"   | tee -a $log
+for pack in $packlist; do
+  PACK=$(echo $pack | tr [:lower:] [:upper:])
+  echo "---$PACK------------------------------------------------"    | tee -a $log
+  ./buildpack $pack $compiler 2>&1 5>&1 6>&1                         | tee -a $log
+  if [[ $? -ne 0 ]]; then break; fi
+done
+echo "-------------------------------------------------------------" | tee -a $log
+echo "See $log for build status"
+#
+exit
+

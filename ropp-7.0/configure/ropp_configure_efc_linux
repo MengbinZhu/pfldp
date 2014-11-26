@@ -1,0 +1,30 @@
+#!/bin/sh
+# $Id: ropp_configure_efc_linux 3752 2013-07-09 18:55:03Z frdo $
+#
+# ROPP shell script for a local configure.
+# USERS SHOULD MODIFY THIS SCRIPT AS REQUIRED FOR LOCAL INSTALL
+#
+# Compiler: efc / NEC TX
+#
+PREFIX=${1-$ROPP_ROOT/efc}
+echo
+echo "Platform:"
+uname -a
+echo
+echo "Fortran compiler:"
+efc -V
+echo
+echo "C compiler:"
+ecc -V
+echo
+echo "Installation target:"
+echo "$PREFIX"
+echo
+#
+CC=ecc \
+F77=efc      FFLAGS="-O2 -integer_size 64 -cm -nbs -I$PREFIX/include" \
+FC=efc      FCFLAGS="-O2 -integer_size 64 -cm -nbs -I$PREFIX/include" \
+            LDFLAGS="-L$PREFIX/lib" \
+  ./configure --prefix=$PREFIX --with-lowercase-modnames
+
+

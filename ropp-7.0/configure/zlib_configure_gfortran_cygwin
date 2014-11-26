@@ -1,0 +1,25 @@
+#!/bin/sh
+# $Id: zlib_configure_gfortran_cygwin 3007 2011-09-05 15:45:37Z frdo $
+#
+# zlib (v1.2.5) shell script for a local configure
+# USERS SHOULD MODIFY THIS SCRIPT AS REQUIRED FOR LOCAL INSTALL
+#
+# Compiler: gfortran / Cygwin
+#
+PREFIX=${1-$ROPP_ROOT/gfortran}
+echo
+echo "Platform:"
+uname -a
+echo
+echo "Fortran compiler:"
+gfortran -V
+echo
+echo "C compiler:"
+gcc --version
+echo
+echo "Installation target:"
+echo "$PREFIX"
+echo
+#
+CC=gcc       CFLAGS="-O2 -w" \
+  ./configure --static --prefix=$PREFIX

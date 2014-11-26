@@ -1,0 +1,67 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                                                                              % 
+% ROPP Forward Model Reference Manual: Introduction                            % 
+%                                                                              % 
+% C. Marquardt, Met Office, Exeter                                             % 
+%                                                                              % 
+% Version 1.2                                                                  % 
+%                                                                              % 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\chapter{Introduction}\label{chap:introduction}
+
+\section{Purpose of this document}
+
+This document provides a Reference Manual for the Forward Model
+library which is part of the Radio Occultation Processing Package
+(ROPP). ROPP's aim is
+%
+\begin{quote}
+  \emph{\ldots{}to provide users with a comprehensive software
+    package, containing all necessary functions to pre--process RO
+    data from CGS Level 1b files or ROM SAF Level 2 files, plus
+    RO--specific components to assist with the assimilation of these
+    data in NWP systems.}
+\end{quote}
+%
+ROPP is a collection of software (provided as source code), supporting
+data files and documentation, which aids users wishing to assimilate
+radio occultation data into their NWP models. As far as is practical,
+the software will be generic, in that it can handle any GPS--LEO
+configuration radio occultation mission (GRAS, COSMIC, CHAMP, GRACE-A, 
+TerraSAR-X, TanDEM-X, C/NOFS, SAC-C, ROSA, PAZ, etc). 
+
+ROPP can generate bending angles and refractivites from excess phase 
+measurements, forward model background fields to observations, 
+and perform 1DVAR retrievals. 
+
+The \texttt{ropp\_fm} library provides forward models for the
+assimilation of radio occultation data in variational data
+assimilation systems. This document describes the Application
+Programming Interface of \texttt{ropp\_fm} in detail.
+
+\input{romsaf_acronyms}
+
+\section{Structure of this document}
+
+This document is organised as follows: Chapter~2 provides an
+alphabetical reference manual to the user-visible components of the
+\texttt{ropp\_utils} library. As the software partially consists of
+software developed outside of the ROM SAF,
+Chapter~\ref{chap:copyrights} informs about the various copyrights.
+Note that a functional overview of the software is given in the ROPP
+Overview \citep{romsaf_ov}, while detailed build and install instructions 
+are contained in the Release Notes \citep{romsaf_srn}. Testing
+procedures the software has undergone are described in a separate Test
+Plan Document \citep{romsaf_testplan} and Test Folder Report 
+\citep{romsaf_testrep}.
+
+
+\bibliographystyle{romsaf}
+\bibliography{meteorology,rom_saf}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "romsaf_ropp_fm_rm"
+%%% End:
+

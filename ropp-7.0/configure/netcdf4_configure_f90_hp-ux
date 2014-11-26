@@ -1,0 +1,34 @@
+#!/bin/sh
+# $Id: netcdf4_configure_f90_hp-ux 3007 2011-09-05 15:45:37Z frdo $
+#
+# netcdf-4 (v4.1.x) shell script for a local configure
+# USERS SHOULD MODIFY THIS SCRIPT AS REQUIRED FOR LOCAL INSTALL
+#
+# Compiler: HP f95 / HP-UX
+#
+PREFIX=${1-$ROPP_ROOT/f90}
+echo
+echo "Platform:"
+uname -a
+echo
+echo "Fortran compiler:"
+/opt/fortran90/bin/f90 +version
+echo
+echo "C compiler:"
+cc -V
+echo
+echo "Installation target:"
+echo "$PREFIX"
+echo
+#
+CXX="" \
+CC=cc                      CFLAGS="-O2 iw -I$PREFIX/include" \
+                         CPPFLAGS="-DhpuxFortran"            \
+FC=/opt/fortran90/bin/f90 FCFLAGS="-O2 -w -I$PREFIX/include" \
+F77=/opt/fortran90/bin/f90 FFLAGS="-O2 -w -I$PREFIX/include" \
+                            FLIBS="" LDFLAGS="-L$PREFIX/lib" \
+  ./configure --prefix=$PREFIX   --disable-option-checking \
+              --disable-cxx                                \
+              --disable-v2       --disable-dap             \
+              --disable-shared   --disable-largefile       \
+              --enable-separate-fortran

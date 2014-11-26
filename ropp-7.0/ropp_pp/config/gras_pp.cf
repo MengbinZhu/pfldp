@@ -1,0 +1,236 @@
+# $Id: $
+
+#****c* Configuration Files/gras_pp.cf *
+#
+# NAME
+#    default_pp.cf - GRAS data configuration file for pre-processor 
+#  		     implementations in ROPP
+#
+# SYNOPSIS
+#    <pp_program> ... -c gras_pp.cf ...
+# 
+# DESCRIPTION
+#    This file reflects the configuration for the PP
+#    implementations within ROPP suitable for use with GRAS data.
+#
+# NOTES
+#
+# AUTHOR
+#   Met Office, Exeter, UK.
+#   Any comments on this software should be given via the ROM SAF
+#   Helpdesk at http://www.romsaf.org
+#
+# COPYRIGHT
+#   (c) EUMETSAT. All rights reserved.
+#   For further details please refer to the file COPYRIGHT
+#   which you should have received as part of this distribution.
+#
+#****
+
+#-------------------------------------------------------------------------------
+# 0. Output options
+#-------------------------------------------------------------------------------
+output_tdry = .true.        ! Flag to output dry temperature
+ 
+output_diag = .false.       ! Flag to output additional diagnostics
+
+#-------------------------------------------------------------------------------
+# 1. Excess phase to bending angle processing
+#-------------------------------------------------------------------------------
+
+# 1.1 Occultation processing method
+# ---------------------------------
+
+# GO - use GEOMETRIC OPTICS processing to derive bending angle as a function of 
+#      impact parameter from excess phase as a function of time.
+# WO - use WAVE OPTICS (CT2 algorithm) processing to derive bending angle as a 
+#      function of impact parameter from excess phase as a function of time.
+
+occ_method = WO
+
+# 1.2 Filtering method
+# --------------------
+
+# optest - use OPTIMAL ESTIMATION: solution of integral equation
+# slpoly - use SLIDING POLYNOMIAL
+
+filter_method = slpoly
+
+# 1.3 Smoothing bending angle profile
+# -----------------------------------
+
+
+fw_go_smooth = 3000.0   # Filter width for smoothed GO bending angles (m)
+
+fw_go_full  = 3000.0    # Filter width for full resolution GO bending angles (m)
+
+fw_wo = 2000.0           # Filter width for wave optics bending angle above 7 km(m)
+
+fw_low = -1000.0           # Filter width for wave optics bending angle below 7 km (m)
+
+# 1.4 Maximum height for wave optics processing
+# ---------------------------------------------
+
+hmax_wo = 25000.0      # Maximum height for wave optics processing (m)
+
+# 1.5 Data cut-off limits
+# -----------------------
+
+Acut     = 0.0        # Fractional cut-off limit for amplitude
+
+Pcut     = 0.0        # Cut-off limit for impact height
+
+Bcut     = 0.05        # Cut-off limit for bending angle
+
+Hcut     = -999000.0  # Cut-off limit for straight-line tangent altitude
+
+# 1.6 CT2 options
+# ---------------
+
+CFF      = 2        # Complex field filter flag (CFF = 'P')
+
+dsh      = 100.0    # Shadow border width (m)
+
+# 1.7 Degraded L2 data flag
+# -------------------------
+
+opt_DL2  = .true.
+
+# 1.8 Compute and output spectra flag
+# -----------------------------------
+
+opt_spectra = .false.
+
+# 1.9 Paths to EGM96 geoid model coefficients and corrections file
+# ----------------------------------------------------------------
+
+egm96 = ../data/egm96.dat                 # EGM96 coefficients file
+ 
+corr_egm96 = ../data/corrcoef.dat         # Correction coefficients file
+
+#-------------------------------------------------------------------------------
+# 1. Ionospheric correction processing
+#-------------------------------------------------------------------------------
+
+# 1.1 Ionospheric correction method
+# ---------------------------------
+
+# GMSIS - use MSIS climatology bending angle (searching global MSIS profiles
+#         for best fit profile to obs) in ionospheric correction, 
+#         statistical optimization and bending angle to refractivity inversion.
+#
+# MSIS - use MSIS climatology bending angle in ionospheric correction, 
+#        statistical optimization and bending angle to refractivity inversion.
+#
+# BG   - use climatology from a specified input file containing 
+#        background temperature, pressure and humidity 
+#        (e.g. from an NWP analysis). The input filename can be specified 
+#        using the '-bfile' command line argument or setting 'bfile' (see 1.5).
+#
+# NONE - linear combination of L1 and L2 bending angles in ionospheric 
+#	 correction, no additional information above observed profile top
+#        in the inverse Abel to compute refractivity.
+ 
+method  = GMSIS                # Ionospheric correction method
+
+# 1.2 Abel integral method
+# ------------------------
+
+# LIN  - assume linear variation of bending angle and ln(n) between 
+#        observation levels. This algorithm is used in ROM SAF NRT processing
+#
+# EXP  - assume exponential variation of bending angle and ln(n) between 
+#        observation levels. This algorithm is used in ropp_fm module.
+
+abel = LIN
+
+# 1.3 Statistical optimisation method
+# -----------------------------------
+
+# SO  - statistical optimisation.
+# LCSO  - linear combination plus statistical optimisation.
+
+so_method = so 
+
+# 1.4 MSIS model coefficients file
+# --------------------------------
+
+mfile    = MSIS_coeff.nc       # Model coefficients file
+
+# 1.5 Background model temperature, humidity, pressure file
+# ---------------------------------------------------------
+
+bfile    = BG_file.nc       # Background meteorology profile file (method=BG)
+
+#-------------------------------------------------------------------------------
+# 2. Impact parameter grid
+#-------------------------------------------------------------------------------
+
+# The ionospheric correction interpolates L1 and L2 bending angle profiles onto a 
+# standard grid. 
+
+dpi = 100.0 		# Step of standard impact parameter grid (m)
+
+#-------------------------------------------------------------------------------
+# 3. Smoothing bending angle profile
+#-------------------------------------------------------------------------------
+
+# A smoothed bending angle profile is derived compute the fit of observed bending 
+# angles to the model bending angle profile.
+
+np_smooth = 3		# Polynomial degree for smoothing regression
+
+fw_smooth = 1000.0      # Filter width for smoothing profile
+
+#-------------------------------------------------------------------------------
+# 4. Model bending angle profile fit to observations
+#-------------------------------------------------------------------------------
+
+# To avoid systematic deviations from the observed profile with MSIS climatology,
+# the model profile is scaled to the observed profile by a fitting coefficient, 
+# computed by regression.
+
+nparm_fit = 2           # Number of parameters for model fit regression
+
+hmin_fit  = 20000.0     # Lower limit for model fit regression
+
+hmax_fit  = 70000.0     # Upper limit for model fit regression
+
+omega_fit = 0.3         # A priori standard deviation of regression factor
+
+#-------------------------------------------------------------------------------
+# 5. Ionospheric correction and statistical optimization
+#-------------------------------------------------------------------------------
+
+# The method described by Gorbunov (2002) is implemented to perform ionospheric
+# correction with statistical optimization. 
+
+f_width = 2000.0	# Ionospheric correction filter width
+
+delta_p = 20.0		# Step of homogeneous impact parameter grid
+
+s_smooth = 2000.0	# External ionospheric smoothing scale
+
+z_ion = 50000.0		# Lower height limit of ionospheric signal
+
+z_str = 35000.0		# Lower height limit of stratospheric signal
+
+z_ltr = 12000.0		# Lower height limit of tropospheric signal
+
+n_smooth = 11		# Number of points for smoothing (must be odd)
+
+
+#-------------------------------------------------------------------------------
+# 6. Bending angle inversion to refractivity
+#-------------------------------------------------------------------------------
+
+# The Abel inversion is computed to retrieve refractivity from corrected 
+# bending angles. If method=MSIS, the corrected bending angle profile is extended 
+# using MSIS data above the observed profile top.
+
+ztop_invert = 150000.0	# Height of atmosphere top for inversion
+
+dzh_invert = 50.0	# Step of inversion grid above observation top
+
+dzr_invert = 20000.0	# Interval for regression in inversion
+

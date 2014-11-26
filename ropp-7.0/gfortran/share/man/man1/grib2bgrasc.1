@@ -1,0 +1,144 @@
+./" $Id: grib2bgrasc.1 3696 2013-06-17 08:48:37Z idculv $
+./"
+.TH grib2bgrasc 1 31-Jul-2013 ROPP-7.0 ROPP-7.0
+./"
+.SH NAME
+grib2bgrasc
+./"
+.SH SYNOPSIS
+Extract RO background data from GRIB file(s) and output in fortran namelist format.
+.PP
+>
+.B grib2bgrasc
+.I grib_file
+[grib_file]  -lat <lat>  -lon <lon>
+.br
+                        [-date <date>]  [-time <time>]
+.br
+                        [-g grib_file2]
+.br
+                        [-z grib_filez]
+.br
+                        [-r roc]
+.br
+                        [-u und]
+.br
+                        [-o textfile.nml]
+.br
+                        [-d] [-h|?] [-v]
+./"
+.SH DESCRIPTION
+.I grib2bgrasc
+converts grib file containing {phi*, ln(p*), T, Q, Ak, Bk} into fortran namelist
+suitable for conversion to ROPP format by means of the sister program ropp_io/tools/bgrasc2ropp.
+./"
+.SH FILES
+.SS Input
+There is no default.
+.I grib2bgrasc
+will stop after displaying a usage summary if no input file names are
+given on the command line.
+.PP
+At least one input grib file must be given.
+.PP
+If time interpolation is required, another grib file (grib_file2) must be given, along with 
+date (yyyymmdd) and time (HHMM or HHMMSS) information. In this case, linear interpolation 
+between the validity times of the data in the two files is performed.
+.PP
+The surface geopotential is also required to generate geopotential heights. 
+If this is not present in the first (or second) input grib file, 
+a third file (grib_filez), which contains it, must be specified.
+./"
+.SS Output
+An output file name can be specified on the command line, or a default
+($PWD/input_file.nml) will be generated.
+.PP
+The output will be an ascii file containing the fortran namelist bgr_profile. 
+./"
+.SH NOTES
+The environment variables GEOPOT_COEF and GEOPOT_CORR must be set 
+if the user wants the undulation at the tangent point to be calculated. If the ropp_pp module has been 
+downloaded, suitable files can be found at ropp_pp/data/egm96.dat (for GEOPOT_COEF)
+and ropp_pp/data/corrcoef.dat (for GEOPOT_CORR).  Alternatively, the user may 
+specify the undulation directly with the -u option. The user may also choose to 
+specify the radius of curvature of the tangent plane with the -r option. 
+
+
+.SH OPTIONS
+Option switches are not case\-sensitive and may be placed before or after
+the input file name and in any order. All arguments to switches are
+mandatory when the switch is used.
+.PP
+.B -lon <lon>
+\- (nominal) longitude of profile
+.IP
+Specifies longitude (in degrees) to which the GRIB data fields will be interpolated.
+.B Mandatory.
+.PP
+.B -lat <lat>
+\- (nominal) latitude of profile
+.IP
+Specifies latitude (in degrees) to which the GRIB data fields will be interpolated.
+.B Mandatory.
+.PP
+.B -date <date>
+\- date of occultation.
+.IP
+Specifies date of occultation in yyyymmdd format.
+.B Mandatory if time interpolation required.
+.PP
+.B -time <time>
+\- time of occultation.
+.IP
+Specifies time of occultation in HHMM or HHMMSS format.
+.B Mandatory if time interpolation required.
+.PP
+.B -r <roc>
+\- radius of curvature.
+.IP
+Specifies radius of curvature of the tangent plane in m.
+.B Advisable since the RoC is not in the GRIB file (depends on azimuth).
+.PP
+.B -r <und>
+\- undulation.
+.IP
+Specifies undulation at the tangent point in m.
+.B Overwrites undulation calculated by code 
+(if $GEOPOT_COEFF and $GEOPOT_CORR are set). 
+.PP
+.B -d
+\- output diagnostics
+.IP
+Allows additional diagnostics to be written to stdout.
+.PP
+.B -h
+or
+.B ?
+\- help
+.IP
+Requests brief help on the command to stdout.
+.PP
+.B -o
+.I textfile.nml
+\- namelist output file name
+.IP
+.I textfile.nml
+specifies the file name for the output fortran namelist. 
+A valid file name is mandatory if this switch is present.
+.PP
+.B -v
+\- version
+.IP
+Requests the program version ID to be written to stdout.
+./"
+.SH REFERENCES
+.B 1.
+ROPP User Guide - Part I.
+.br
+SAF/ROM/METO/UG/ROPP/002
+./"
+.SH SEE ALSO
+.IR bgrasc2ropp (1)
+./"
+.SH AUTHORS
+ROPP Development Team, Met Office <romsaf@metoffice.gov.uk>

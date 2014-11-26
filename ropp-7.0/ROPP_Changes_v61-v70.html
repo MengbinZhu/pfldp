@@ -1,0 +1,225 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+  <head>
+    <meta http-equiv="CONTENT-TYPE" content="text/html; charset=UTF-8">
+    <title>ROPP Summary of Changes</title>
+    <meta name="GENERATOR" content="OpenOffice.org 2.0 (Linux)">
+    <meta name="AUTHOR" content="Ian Culverwell">
+    <meta name="CREATED" content="20110310;10322000">
+    <meta name="CHANGEDBY" content="Ian Culverwell">
+    <meta name="CHANGED" content="200110310;11185400">
+  </head>
+  <body style="direction: ltr; background-color: rgb(204, 255, 255);" lang="en-GB">
+    <p style="font-family: Helvetica,Arial,sans-serif;"><small>SAF/ROM/METO/SRN/ROPP/011
+-
+        Version 1.0 - 31 July 2013</small></p>
+    <h1 style="font-family: Helvetica,Arial,sans-serif;" align="center"><small>Summary
+of
+Changes
+        for ROPP-7 (v7.0)</small></h1>
+    <h2 style="font-family: Helvetica,Arial,sans-serif;"><small><a name="Contents"></a>Contents</small></h2>
+    <ol style="font-family: Helvetica,Arial,sans-serif;">
+      <small> </small>
+      <li><small><a href="#1._Introduction">Introduction</a> </small></li>
+      <small> </small>
+      <li><small><a href="#2._Generic">Generic</a> </small></li>
+      <small> </small>
+      <li><small><a href="#3._ROPP_FM">ROPP_FM</a> </small></li>
+      <small> </small>
+      <li><small><a href="#4._ROPP_1DVAR">ROPP_1DVAR</a> </small></li>
+      <small> </small>
+      <li><small><a href="#5._ROPP_PP">ROPP_PP</a> </small></li>
+      <small> </small>
+      <li><small><a href="#6._ROPP_IO">ROPP_IO</a> </small></li>
+      <small> </small>
+      <li><small><a href="#7._ROPP_UTILS">ROPP_UTILS</a> </small></li>
+      <small> </small>
+      <li><small><a href="#8._References">References</a></small></li>
+      <small> </small>
+    </ol>
+    <hr style="font-family: Helvetica,Arial,sans-serif;">
+    <h2 style="font-family: Helvetica,Arial,sans-serif;"><small><a name="1._Introduction"></a>1.
+        Introduction</small></h2>
+    <p style="margin-bottom: 0cm; font-family: Helvetica,Arial,sans-serif;">This
+document
+      summarizes the significant changes to an update of the Radio
+      Occultation Processing Package (ROPP) Version v7.0 from the
+      previous
+      release, Version 6.1. The descriptions below are organized by
+      module.<br>
+      <a href="#Contents"><font size="2"><small>top</small></font></a></p>
+    <hr style="font-family: Helvetica,Arial,sans-serif;">
+    <h2 style="font-family: Helvetica,Arial,sans-serif;"><small><a name="2._Generic"></a>2.
+        Generic</small></h2>
+    <ul style="font-family: Helvetica,Arial,sans-serif;">
+      <li><span style="color: black;">Added tropopause
+          height diagnostic, in accordance with ROM SAF CDOP-2 plan.</span></li>
+      <li><span style="color: black;">Introduce "man"
+          pages for all ROPP tools (in addition to those in <span style="font-family: Courier New,Courier,monospace; font-weight: bold;">ropp_io</span>
+          module).</span></li>
+      <li><span style="color: black;">Use of GRAS data in tests of the <span
+            style="font-family: Courier New,Courier,monospace; font-weight: bold;">ropp_pp</span>
+          module in the Test Folder.</span></li>
+      <li><span style="color: black;">Use DMI operational sigma(N) (ie
+          min = 0.02 N-units) in tests of the <span style="font-family: Courier New,Courier,monospace; font-weight: bold;">ropp_1dvar</span>
+          module in the Test Folder.<br>
+        </span></li>
+      <li><span style="color: black;">Revision of configuration script
+          to allow building of ECMWF BUFR library with <span checked="true"
+            style="font-family: Courier New,Courier,monospace; font-weight: bold;">pgf95</span>
+          v11.</span></li>
+      <li><span style="color: black;">Revision of configuration script
+          to allow building of HDF5 and GRIB-API libraries with <span checked="true"
+            style="font-family: Courier New,Courier,monospace; font-weight: bold;">sunf95</span>.</span></li>
+      <li><span style=" color: black;">Additional configuration scripts
+          to support building dependency libraries and ROPP modules with
+          <span style="font-weight: bold;">ifort</span> XE-2013 (v13).<br>
+        </span></li>
+      <li><span style="color: black;">Minor improvements
+          and bug fixes,&nbsp;in response to user requests.</span></li>
+    </ul>
+    <p style="font-family: Helvetica,Arial,sans-serif;"><small><a href="#Contents"><font
+            size="2"><small>top</small></font></a>
+      </small></p>
+    <hr style="font-family: Helvetica,Arial,sans-serif;">
+    <h2><small><a name="3._ROPP_FM"></a><span style="font-family: Helvetica,Arial,sans-serif;">3.
+          ROPP_FM</span></small></h2>
+    <ul style="font-family: Helvetica,Arial,sans-serif;">
+      <small> </small>
+      <li><small> </small>
+        <p style="margin-bottom: 0cm;">Missing undulation handled in <span
+            checked="true" style="font-family: Courier New,Courier,monospace; font-weight: bold;">ropp_fm_bg2ro1d</span>.
+          <br>
+        </p>
+      </li>
+    </ul>
+    <p style="font-family: Helvetica,Arial,sans-serif;"><small><a href="#Contents"><font
+            size="2"><small>top</small></font></a>
+      </small></p>
+    <hr style="font-family: Helvetica,Arial,sans-serif;">
+    <h2 style="font-family: Helvetica,Arial,sans-serif;"><small><a name="4._ROPP_1DVAR"></a>4.
+        ROPP_1DVAR</small></h2>
+    <ul style="font-family: Helvetica,Arial,sans-serif;">
+      <small> </small>
+      <li style="font-family: Helvetica,Arial,sans-serif;">No
+        significant
+        changes.</li>
+    </ul>
+    <p style="font-family: Helvetica,Arial,sans-serif;"><small><a href="#Contents"><font
+            size="2"><small>top</small></font></a>
+      </small></p>
+    <hr style="font-family: Helvetica,Arial,sans-serif;">
+    <h2 style="font-family: Helvetica,Arial,sans-serif;"><small><a name="5._ROPP_PP"></a>5.
+        ROPP_PP</small></h2>
+    <ul style="font-family: Helvetica,Arial,sans-serif;">
+      <li style="font-family: Helvetica,Arial,sans-serif;">Inclusion
+        of tool to generate tropopause height (TPH) from all/any
+        {bending angle,
+        refractivity, dry temperature, background temperature} RO
+        profile. The
+        first two locate the `kink' in the profile at the tropopause by
+        looking
+        for the maximum of the covariance transform of the bending angle
+        or
+        refractivity; the last two search for a tropopause defined by
+        the WMO
+        lapse-rate criterion, or, alternatively, the minimum temperature
+        in the
+        lower part of the profile.&nbsp;</li>
+      <li style="font-family: Helvetica,Arial,sans-serif;"><span style="font-family: Helvetica,Arial,sans-serif;">Update
+
+        </span><span style="font-family: Courier New,Courier,monospace;"><span
+            style="font-family: Helvetica,Arial,sans-serif;">of </span><span
+            style="font-family: Courier New,Courier,monospace; font-weight: bold;">ropp_pp_invert_tool</span></span>
+        to cope better with operational M02 and M01 data.</li>
+      <li style="font-family: Helvetica,Arial,sans-serif;">Corrected
+        sign in&nbsp;<span><span style="font-family: Courier New,Courier,monospace; font-weight: bold;">cl_exphase_p2</span>
+          calculation in </span><span style="font-family: Courier New,Courier,monospace; font-weight: bold;">ropp_pp_grasrs2ropp</span>.</li>
+      <li style="font-family: Helvetica,Arial,sans-serif;">Update
+        of <span style="font-family: Courier New,Courier,monospace; font-weight: bold;">ropp_pp_spectra_tool</span>
+        to let it handle GRAS raw sampling data.</li>
+    </ul>
+    <p style="font-family: Helvetica,Arial,sans-serif;"><small><a href="#Contents"><font
+            size="2"><small>top</small></font></a>
+      </small></p>
+    <hr style="font-family: Helvetica,Arial,sans-serif;">
+    <h2 style="font-family: Helvetica,Arial,sans-serif;"><small><a name="6._ROPP_IO"></a>6.
+        ROPP_IO</small></h2>
+    <ul style="font-family: Helvetica,Arial,sans-serif;">
+      <li style="color: black;">Update <span style="font-family: Courier New,Courier,monospace; font-weight: bold;">grib2bgrasc</span>
+        to allow radius of curvature and undulation&nbsp;to be input.</li>
+      <li style="color: black;">Copy <span style="font-family: Courier New,Courier,monospace; font-weight: bold;">level_type</span>
+        as part of <span checked="true" style="font-family: Courier New,Courier,monospace; font-weight: bold;">lev2d</span>
+        ROPP substructure.</li>
+      <li style="color: black;">Improve <span checked="true" style="font-family: Courier New,Courier,monospace; font-weight: bold;">lon_in=lon_out</span>
+        check in <span style="font-family: Courier New,Courier,monospace; font-weight: bold;">grib2bgrasc</span>.</li>
+      <li style="color: black;">Quick fix to <span style="font-family: Courier New,Courier,monospace; font-weight: bold;">ropp_io_read_ncdf_get</span>
+        to allow ingestion of UCAR level 1a data (rescaling input in km
+        and km/s). </li>
+    </ul>
+    <p style="margin-bottom: 0cm; font-family: Helvetica,Arial,sans-serif;"><small><a
+          href="#Contents"><font size="2"><small>top</small></font></a>
+      </small></p>
+    <hr style="font-family: Helvetica,Arial,sans-serif;">
+    <h2 style="font-family: Helvetica,Arial,sans-serif;"><small><a name="7._ROPP_UTILS"></a>7.
+        ROPP_UTILS</small></h2>
+    <ul style="font-family: Helvetica,Arial,sans-serif;">
+      <small> </small>
+      <li>Rearrangement of build in order to bypass some problems caused
+        by the inclusion of <span style="font-family: Courier New,Courier,monospace; font-weight: bold;">USE
+          typesizes</span> in <span style="font-family: Courier New,Courier,monospace; font-weight: bold;">arrays/arrays.f90</span>
+        reported at ROPP6.1.</li>
+    </ul>
+    <p style="margin-bottom: 0cm; font-family: Helvetica,Arial,sans-serif;"><small><a
+          href="#Contents"><font size="2"><small>top</small></font></a>
+      </small></p>
+    <hr style="font-family: Helvetica,Arial,sans-serif;">
+    <h2 style="font-family: Helvetica,Arial,sans-serif;"><small><a name="8._References"></a>8.
+        References</small></h2>
+    <p style="margin-bottom: 0cm; font-family: Helvetica,Arial,sans-serif;">[1]
+ROPP
+      User Guide. Part II: Forward model and 1D-Var modules. Ref.
+      SAF/ROM/METO/UG/ROPP/003<br>
+    </p>
+    <p style="margin-bottom: 0cm; font-family: Helvetica,Arial,sans-serif;">[2]
+ROPP
+      User Guide. Part I: Input/Output module. Ref.
+      SAF/ROM/METO/UG/ROPP/002</p>
+    <p style="margin-bottom: 0cm; font-family: Helvetica,Arial,sans-serif;">[3]
+WMO
+      FM94 (BUFR) Specification for&nbsp; Radio Occultation Data.
+      Ref. SAF/ROM/METO/FMT/BUFR/001</p>
+    <p style="margin-bottom: 0cm; font-family: Helvetica,Arial,sans-serif;">[4]
+Manual
+      on Codes: International Codes, Part B &amp; Part C. WMO-No.
+      306, World Meteorological Organisation, Geneva.<br>
+      <a href="http://www.wmo.int/pages/prog/www/WMOCodes/VolumeI2.html">http://www.wmo.int/pages/prog/www/WMOCodes/VolumeI2.html</a><br>
+    </p>
+    <p style="margin-bottom: 0cm; font-family: Helvetica,Arial,sans-serif;">[5]
+Met
+      Office (2011). Decoding and Encoding BUFR messages. MetDB Technote
+      1, Rev.4, Feb 2011 [dmtn1.html].<br>
+    </p>
+    <p style="margin-bottom: 0cm; font-family: Helvetica,Arial,sans-serif;">[6]
+Dragosavac,
+      Milan (2009). BUFR User's Guide. ECMWF Operations
+      Department Technical Note, July 2009.<br>
+    </p>
+    <p style="margin-bottom: 0cm; font-family: Helvetica,Arial,sans-serif;"><br>
+      For guidance on downloading and installing the ROPP software, and
+      the
+      available documentation, please refer to the <a href="ROPP_Release_Notes_v70.html">ROPP
+Release
+        Notes.</a><br>
+      <br>
+      <a href="#Contents"><font size="2"><small>top</small></font></a></p>
+    <hr style="font-family: Helvetica,Arial,sans-serif;">
+    <p style="margin-bottom: 0cm; font-family: Helvetica,Arial,sans-serif;">All
+comments
+      on the ROPP software should, in the first instance, be
+      reported via the ROM SAF Helpdesk at <a href="http://www.romsaf.org/">http://www.romsaf.org</a>.</p>
+    <hr style="font-family: Helvetica,Arial,sans-serif;">
+    <p style="font-family: Helvetica,Arial,sans-serif;"><font face="Arial, sans-serif"><font
+          face="Arial, sans-serif"><font face="Arial, sans-serif"></font></font></font></p>
+  </body>
+</html>

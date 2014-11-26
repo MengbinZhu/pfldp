@@ -1,0 +1,34 @@
+#!/bin/sh
+# $Id: netcdf4_configure_sunf95_sunos 3230 2011-11-17 15:20:07Z idculv $
+#
+# netcdf-4 (v4.1.x) shell script for a local configure
+# USERS SHOULD MODIFY THIS SCRIPT AS REQUIRED FOR LOCAL INSTALL
+#
+# Compiler: sunf95 / SunOS
+#
+PREFIX=${1-$ROPP_ROOT/sunf95}
+echo
+echo "Platform:"
+uname -a
+echo
+echo "Fortran compiler:"
+sunf95 -V
+echo
+echo "C compiler:"
+suncc -V
+echo
+echo "Installation target:"
+echo "$PREFIX"
+echo
+#
+CXX="" \
+CC=suncc     CFLAGS="-O2 -w -I$PREFIX/include" \
+           CPPFLAGS="-DsunFortran"             \
+FC=sunf95   FCFLAGS="-O2 -w -I$PREFIX/include -moddir=./" \
+F77=sunf95   FFLAGS="-O2 -w -I$PREFIX/include -moddir=./" \
+              FLIBS="" LDFLAGS="-L$PREFIX/lib" \
+  ./configure --prefix=$PREFIX   --disable-option-checking \
+              --disable-cxx                                \
+              --disable-v2       --disable-dap             \
+              --disable-shared   --disable-largefile       \
+              --enable-separate-fortran

@@ -1,0 +1,22 @@
+ROPP_FM data files for release Version v7.0
+-------------------------------------------
+
+This directory contains a collection of data files used by ROPP_FM.
+
+Notes on the data files in this directory:
+
+bgr2009*.nc        - ECMWF short range forecast background profiles [91 level].
+                     Available from ROM SAF archive http://www.romsaf.org/
+ecmwf_*.nc         - ECMWF short range forecast background profiles [60 level].
+FM_Scenarios.nc    - 5x FASCOD background profiles
+ECMWF_*.nc         - Sample files containing 2D background fields for testing
+	             the 2d operator
+
+These files were created from ECMWF short range forecasts. The levels
+are the ECMWF ones, called 'hybrid ECMWF' in order to indicate that
+these are hybrid levels as used by the ECMWF model system (there might
+be other NWP centres using hybrid vertical levels, with slightly
+different definitions). 
+
+ROPP Development Team
+31 July 2013

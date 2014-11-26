@@ -1,0 +1,560 @@
+./" $Id: ropp2ropp.1 3696 2013-06-17 08:48:37Z idculv $
+./"
+.TH ropp2ropp 1 31-Jul-2013 ROPP-7.0 ROPP-7.0
+./"
+.SH NAME
+ropp2ropp
+./"
+.SH SYNOPSIS
+Copy/reformat/range-check/thin/order ROPP files
+.PP
+>
+.B ropp2ropp
+.I ropp-file 
+[ropp-file...] [-o ropp-file] [-p thin-file|maxpts]
+.br
+                                     [-u] [-i] [-m] [-a] [-d] [-l] [-h|?] [-v]
+./"
+.SH DESCRIPTION
+.I ropp2ropp
+copies ROPP netCDF files with range-checking. It can also be used to 
+combine or split multi-profile netCDF files, to thin out profiles to 
+reduce data volume and to ensure that all profiles are in ascending 
+height order.
+./"
+.SH FILES
+.SS Input
+.I ropp-file
+: input ROPP netCDF file(s)
+.IP
+These must contain data in the ROPP netCDF format as specified in
+.B Reference
+.BR 1 .
+More than one file may be explicitly specified on the command line, or
+implied by use of wild-cards. The file name(s) may include a path.
+There is no default;
+.I ropp2ropp
+will stop after displaying a usage summary if no input file names are
+given on the command line.
+.IP
+An input netCDF file may contain a single
+profile or multiple profiles. Input files may be of mixed type, but
+.I all must contain the same number of samples
+in each sub-profile type (Level 1b, Level 2a, etc).
+./"
+.SS Output
+.I ropp-file
+: output ROPP netCDF file(s)
+.IP
+An output file name can be specified on the command line, or a default
+will be generated based on the occultation ident string (as built from
+the ROPP header - see under NOTES).
+.IP
+One output file, each containg one profile, will be written for each 
+input profile, unless the
+.B -m
+switch is used to specify output to a multifile.
+Existing files will be overwritten, unless the
+.B -a
+(append) switch is used. The specification of the ROPP format for this data
+type is given in
+.B Reference 1.
+./"
+.SH NOTES
+.SS Default output file names
+Default names will have the format:
+.IP
+.B pt_yyyymmddhhmmss_rrrr_gggg_pppp.nc
+.PP
+where:
+.IP
+.B pt
+is the profile type - 'oc' for occultation or 'bg' for a  background,
+.br
+.B
+yyyymmdd
+is the date of the occultation,
+.br
+.B hhmmss
+is the start time of the occultation (UTC),
+.br
+.B
+rrrr
+is the 4-character RO receiver or mission ID (e.g 'gras' or 'co02'),
+.br
+.B tttt
+is the 4-character transmitter ID (e.g. 'g013' for GPS satellite
+#13),
+.br
+.B
+pppp
+is the 4-character processing centre ID (e.g. 'dmi_', 'ucar' or 'gfz_') and
+.br
+.B nc
+is the literal string denoting a netCDF file.
+.PP
+On systems that support it, the default file name will be in lowercase.
+.PP
+If there is more than one profile in the input file(s), and
+the
+.B -m
+multifile switch is used, the default file name will be generated from
+the header of the first profile to be read.
+.PP
+If the specified or default file already exists, it will be
+overwritten unless the
+.B -a
+switch is present, in which case the new profile(s) will be appended to
+the existing one(s).
+.PP
+By default, each output ROPP file will contain data for one occultation
+read from the input file(s). If the
+.B -m
+and/or
+.B -a
+switch is present, all RO profiles will be written to a single
+netCDF file (a 'multifile').
+./"
+.SS Profile thinning
+Thinning is applied to all parameters in Level 1b, Level 2a and Level 2b
+profiles to limit the number of output samples. This may be desirable to
+reduce storage volumes or transmission bandwidth or because of
+user-application requirements, such as having profiles on a common set
+of fixed levels.
+.PP
+If the
+.B -p
+switch is present, it must be followed by:
+.IP
+\- a valid file name which must exist. The file is assumed to be in the current
+working directory unless an explicit path is included
+.PP
+or
+.IP
+\- a non-negative integer representing the maximum number of sampled
+points to be output. Zero disables thinning (default).
+.PP
+The thinning control file is a plain-text file and should be formatted
+to the following rules:
+.IP
+Control information is by
+.B <keyword>=<data>
+syntax, one keyword
+per line. Keywords are case-insensitive and except for
+.B Hlevels
+\- which must be the last keyword - can be in any order.
+Keywords can start in any column, but the total line should not
+exceed column 80. There should be no whitespace before or after the =
+sign. Unknown keywords will be ignored, so arbitrary text can be
+included to document a file.
+.PP
+The following keywords are recognised:
+.IP
+.B Title=<title>
+is a free-text description up to 70 characters (optional)
+.IP
+.B Method=<method>
+specifies the thinning method (optional).
+.B <method>
+must be one of:
+.br
+.I SGLOG
+: for Savitzky-Golay pre-smoothing and logarithmic interpolation to a
+fixed no. of levels.
+.br
+.I SGLIN
+: for Savitzky-Golay pre-smoothing and linear interpolation to a
+fixed no. of levels.
+.br
+.I ASGLOG
+: for Adaptive Savitzky-Golay pre-smoothing and logarithmic
+interpolation to a fixed no. of levels (recommended method).
+.br
+.I ASGLIN
+: for Adaptive Savitzky-Golay pre-smoothing and linear
+interpolation to a fixed no. of levels.
+.br
+.I LOG
+: for logarithmic interpolation to a fixed no. of levels, no pre-smoothing
+.br
+.I LIN
+: for linear interpolation to a fixed no. of levels, no pre-smoothing
+.br
+.I SAMPLE
+: for simple sampling (by selecting or rejecting 1-in-N samples to a maximum
+no. of levels given by the
+.B NLevs
+keyword).
+.br
+.I NONE
+: no thinning (also the default if the file cannot be read or if the
+.B -p
+switch is not used at all).
+.IP
+.B Nlevels=<no.levels>
+is the (maximum or fixed) number of levels for output (optional; default: zero)
+If
+.B <no.levels>
+is zero, thinning is disabled.
+.IP
+.B Hlevels=
+   <level_1>
+   <level_2>
+   ...
+   <level_n>
+
+.B <level_nnn>
+are the required set of fixed levels as impact heights (impact parameter
+minus radius of curvature). The list of levels may be omitted for
+.I SAMPLE
+and
+.I NONE
+but the
+.B Hlevels=
+keyword is required for all other methods and then must be the last keyword.
+.PP
+.I Example file
+.B ropp_thin_asglog-247.dat
+ Title=Adaptive SG with LOG Thinning (247 fixed Impact Heights)
+ Method=ASGLOG
+ Nlevels=247
+ Hlevels=
+  2094.0
+  2212.0
+  2330.0
+  ....
+.PP
+Note that for the logarithmic interpolation methods
+.I SGLOG, ASGLOG, LOG
+only those profile parameters that vary logarithmically with height -
+that is
+.I bending angles, refractivity
+and
+.I humidity
+\- are interpolated in log-space. All other parameters are interpolated
+linearly. For the linear interpolation methods
+.I SGLIN, ASGLIN, LIN
+all profile parameters are interpolated linearly.
+.PP
+The Savitzky-Golay pre-smoothing - see
+.B Reference 2
+\- applies only a light smoothing operation with linear weighted cofficients
+over a window of 3 input points, introducing almost no vertical correlation
+in the output samples. The Adaptive S-G methods provide smoothing over a larger
+window (e.g. 5 or 7 points) with an order-2 weighting of points in cases
+where the original and thinned resolution ratio exceeds about 4:1; lower ratios automatically fall back the standard SG settings. Hence it is recommended to
+use one of the ASG methods; in general, the ASGLOG method should give the
+best results.
+.PP
+Level 1b (bending angle) profiles are interpolated to the set of fixed
+impact heights given in the thinning control files. Level 2a (refractivities)
+are interpolated onto equivalent geometric heights and Level 2b
+(T,q,P) are interpolated onto equivalent geopotential heights. Hence
+all profile levels will be at the same
+.I physical
+altitudes, but the height
+.I values
+for Level 2a,b profiles will vary slightly from profile to profile.
+./"
+.SS Profile ordering
+For consistency and for ease of comparison, RO profiles are often desired
+to be in ascending order of altitude (like a radiosonde), whether the
+original occultation was ascending or descending (the PCD flag bit #3 will
+indicate which).
+.I ropp2ropp
+by default re-orders profiles to be ascending if necessary. This
+re-ordering can be suppressed by using the
+.B -u
+(unordered) switch. Note, however, that for any of the "interpolation to
+a set of fixed heights" methods, the thinned output profiles will
+be in the same order as the fixed levels specified in the thinning control
+file. Only sampled or no thinning will retain the profile order of the
+original input file when using
+.B -u.
+./"
+.SS Range checking
+.I ropp2ropp
+performs comprehensive range checking on (nearly) all parameters prior to
+writing the output file. 
+.PP
+Character strings representing fixed options or IDs are converted to 
+uppercase and - where appropriate - invalid
+characters are replaced by underscore characters. Valid characters are 
+alpha-numeric, underscore, dash (minus) and blank only. Some character strings
+(such as 'POD Method') are relatively free form; for these only the first 
+three characters are checked for validity. If the significant part of the 
+resulting character string is entirely undercores, it is replaced with
+\'UNKN' or 'UNKNOWN'.
+.PP
+Numeric parameters are checked against their defined valid ranges, and if
+out-of-range, are replaced with an appropriate 'missing data flag value'.
+For most parameters, this is -9999000.0, though date/time values are replaced 
+with 9999, 999 or 99 as appropriate; time offsets are set to zero, and 
+coordinate type vectors (X,Y,Z) such as satellite position/velocity, are 
+set to all-zeros if all components are out-of-range. In rare cases, this
+may cause problems - see LIMITATIONS.
+.IP
+If any sub-profile coordinate parameters (time, impact parameter, altitude or
+geopotential height) is flagged as missing; since this sample is unusable
+without a coordinate, it is removed from the profile. (If one of the 
+interpolation thinners is employed, the output will interpolate over the 
+gap.) In extreme cases, this may result in the profile being eliminated
+entirely and that sub-profile is then not written to the netCDF file. 
+.IP
+If all observational parameters (Phase+S/N, Bending Angle, Refractivity) 
+in a sub-profile are flagged as missing, but the coordinates for
+that sub-profile are valid, the profile will be saved normally. Previous
+versions of 
+.I ropp2ropp
+would have suppressed such a sub-profile.
+./"
+.SH OPTIONS
+Option switches are not case\-sensitive and may be placed before or after
+the input file name and in any order. All arguments to switches are
+mandatory when the switch is used.
+.PP
+.B -a
+\- append
+.IP
+Causes data to be appended to an already existing file, e.g. as
+specified by the
+.B -o
+option. The default is to overwrite an existing file. If the
+.B -a
+switch is present, but the file does not already exist, the file will
+be created.
+.IP
+Since appending profiles implies that the output is a multifile, if not
+explicitly given, option
+.B -m
+is automatically set if
+.B -a
+is used.
+.PP
+.B -d
+\- output diagnostics
+.IP
+Allows additional diagnostics to be written to stdout. Switch
+.B -l
+can be used with
+.B -d
+to suppress any output file(s).
+.PP
+.B -h
+or
+.B ?
+\- help
+.IP
+Requests brief help on the command to stdout.
+.PP
+.B -i
+\- thin on impact altitudes
+.IP
+If thinning is effected, do so on impact altitude (height above geoid)
+(= impact parameter - radius of curvature - undulation) 
+rather than impact height (height above ellipsoid)
+(= impact parameter - radius of curvature), which is the default behaviour.
+.PP
+.B -l
+\ -list only
+.IP
+Outputs a basic listing of the profiles in the input files to stdout.
+The listing is the occultation ID string and the nominal location
+(latitude & longitude) of each profile read. If used with the
+.B -d
+switch, additional header data is written to stdout. The
+.B -l
+switch suppresses data being written to any output files and disables
+any thinning or profile height re-ordering.
+.PP
+.B -m
+\- multifile output
+.IP
+Specifies that if there is more than one RO profile input, all
+profiles are to be written (appended) to a single netCDF 'multifile'.
+If no file name is specified with
+.B -o
+then a default will be generated from the first successfully read
+occultation header. If only one RO profile is read, this option is
+effectively redundant. The default is to create one output file for each
+successfully input RO profile.
+By default, any existing file will be overwritten unless the
+.B -a
+switch is specified.
+.PP
+.B -o ropp-file
+\- ROPP output file name
+.IP
+.I ropp-file
+specifies the file name for the output ROPP netCDF file.
+A valid file name is mandatory if this switch is present.
+.IP
+If a name is given, and there are multiple input profiles but neither
+.B -m
+nor
+.B -a
+switches is specified (i.e. the default of one profile per output file),
+only the first output file will have this name; subsequent files will
+have default names based on their occultation headers.
+.IP
+If there could be more than one RO BUFR message in the input file(s),
+and separate output files are required,
+.I it is strongly recommended that this option is not used.
+Let the program generate a unique default name for each output file,
+based on the occultation ID string (see under NOTES).
+.PP
+.B -p thin-file|maxpts
+\- profile thinning control
+.IP
+Specifies a thinning control file (see under NOTES) or the maximum no. of points
+to be sampled. This switch, if used, must be followed by either
+a valid existing file name (with optional path) or
+a non-negative integer representing the maximum no. of points to be sampled.
+This latter option is equivalent to a thinning control file specifying a method of
+.B SAMPLE
+and
+.B Nlevels=nnn
+.IP
+If this switch is not used, no thinning will be attempted. Specifying
+.B -p0
+also disables thinning (method equivalent to
+.BR NONE ).
+.PP
+.B -u
+\- unordered
+.IP
+Suppresses the default re-ordering of profiles into ascending height
+order. Note that interpolation onto a set of fixed heights will
+still output profiles in the order of the fixed levels in the thinning
+control file, and not the order of the original input data.
+.PP
+.B -v
+\- version
+.IP
+Requests the
+.I ropp2ropp
+program version ID to be written to stdout.
+./"
+.SH Examples
+.PP
+.B 1.
+Concatenate a number of single profile files into to one multifile:
+.PP
+>
+.B ropp2ropp ropp1.nc ropp2.nc ropp3.nc -m -o ropp_multi.nc
+
+ --------------------------------------------------------
+                      ROPP-to-ROPP Tool
+                     18:49UT 18-Jan-2012
+ --------------------------------------------------------
+
+ INFO (from ropp2ropp):  Reading ropp1.nc
+ INFO (from ropp2ropp):  Profile    1 : OC_20101209140409_META_G027_DMI_
+ INFO (from ropp2ropp):  Writing ropp_multi.nc
+ INFO (from ropp2ropp):  Reading ropp2.nc
+ INFO (from ropp2ropp):  Profile    1 : OC_20101209140409_META_G027_DMI_
+ INFO (from ropp2ropp):  Writing ropp_multi.nc
+ INFO (from ropp2ropp):  Reading ropp3.nc
+ INFO (from ropp2ropp):  Profile    1 : OC_20101209140409_META_G027_DMI_
+ INFO (from ropp2ropp):  Writing ropp_multi.nc
+ INFO (from ropp2ropp):       3 profiles processed
+.PP
+.I ropp2ropp
+can also accept wild-card names for the input files:
+.PP
+>
+.B ropp2ropp ropp*.nc -m -o ropp_multi.nc
+.PP
+.B 2.
+Append a new profile to a daily archive:
+.PP
+ >
+.B ropp2ropp ropp_new.nc -a -o ropp_today.nc
+.PP
+and do a quick listing of what's in there:
+.PP
+>
+.B ropp2ropp ropp_today.nc -l
+.PP
+.B 3.
+Thin a ROPP file using a simple sampling to no more than 250 points:
+.PP
+>
+.B ropp2ropp ropp_full.nc -o ropp_samp.nc -m  -p 250
+.PP
+.B 4.
+Thin a ROPP file using Adaptive Savitzky-Golay pre-smoothing and logarithmic
+interpolation to 247 fixed impact heights (ASGLOG method) defined in
+file ropp_thin_default.dat in $HOME/data/ropp):
+.PP
+> export ROPP_THIN=$HOME/data/ropp/ropp_thin_default.dat
+.br
+>
+.B ropp2ropp ropp_fat.nc -o ropp_thin.nc -m -p $ROPP_THIN
+./"
+.SH LIMITATIONS
+The netCDF-3 file format used for ROPP assumes data is organised in
+2-dimensional arrays of 'number of profile samples' X 'number of profiles'. 
+The size of the first dimension is determined from the first profile
+to be written. The netCDF DIM_UNLIM dimension is used for the second, so there
+is no (practical) limit to the number of profile that can be appended at 
+any time.
+
+The consequence is that all subsequent profiles written to a multifile 
+must have no more samples than the first profile (the same or fewer
+is permissible; netCDF just internally pads the unused part). 
+If the first profile  has missing coordinate data, the range checking
+(see NOTES) may result in a smaller than expected number of samples;
+if any subsequent profile is longer, this will violate the array 
+dimension constraint.
+
+If this is likely to happen, one solution is to generate a dummy
+profile with at least the maximum number of expected samples. For instance,
+if there are normally up to 300 samples, but it is possible (or likely)
+that there may be invalid coordinates in some, then:
+.PP
+> 
+.B ropp2test 
+BADPROF -n 300 -o dummy.nc
+.br
+>
+.B ropp2ropp
+dummy.nc my_profiles.nc -o safe_profiles.nc
+ 
+The dummy first profile will then protect the subsequent real profiles
+when processing with other ROPP tools. 
+ 
+(Note that although BADPROF generates random invalid observation 
+parameter values, range checking on input into
+.I ropp2ropp
+will set them back to their missing data values on valid (numerically
+if not scientifically) coordinates. This dummy profile could be further
+pre-conditioned by passing it though one of the interpolation thinners
+to be on a fixed set of levels of the user's choice.)
+./"
+.SH ERRORS
+Diagnostics relating to errors in I/O are output to stdout. Additional
+diagnostics can be obtained with the
+.B -d
+option.
+./"
+.SH REFERENCES
+.B 1.
+ROPP User Guide - Part I.
+.br
+SAF/ROM/METO/UG/ROPP/002
+.PP
+.B 2.
+ROPP thinner algorthm
+.br
+SAF/GRAS/METO/REP/GSR/008
+./"
+.SH SEE ALSO
+.BR ropp2bufr (1),
+.BR bufr2ropp (1),
+.BR gfz2ropp (1),
+.BR test.2ropp (1),
+.BR ucar2ropp (1)
+./"
+.SH AUTHORS
+ROPP Development Team, Met Office <romsaf@metoffice.gov.uk>

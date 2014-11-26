@@ -1,0 +1,273 @@
+./" $Id: $
+./"
+.TH eum2ropp 1 31-Jul-2013 ROPP-7.0 ROPP-7.0
+./"
+.SH NAME
+eum2ropp
+./"
+.SH SYNOPSIS
+Convert/thin EUMETSAT netCDF files to ROPP format
+.PP
+>
+.B eum2ropp
+.I eum-file
+[eum-file...] [-o ropp-file] [-p thin-file|maxpts] [-r resn_gp]
+.br
+                      [-u] [-i] [-m] [-a] [-d] [-h|?] [-v] [-l]
+./"
+.SH DESCRIPTION
+.I eum2ropp
+converts EUMETSAT level 1B netCDF files into ROPP netCDF file format.
+Only main fields are used. Also allows thinning. Descending profiles 
+are reordered to ascending by default.
+./"
+.SH FILES
+.SS Input
+There is no default.
+.I eum2ropp
+will stop after displaying a usage summary if no input file names are
+given on the command line.
+.PP
+One or more input file names, including wildcards, can be given.
+Each input file must contain data in the same EUMETSAT format (e.g.
+.B Reference
+.BR 2 )
+and each input netCDF file must contain a single profile with all profiles having
+the same number of samples in each sub-profile type (Level 1a, Level 1b, Level 2a, etc).
+./"
+.SS Output
+An output file name can be specified on the command line, or a default
+will be generated based on the occultation ident string (as built from
+the ROPP header - see below).
+.PP
+The output will be created as a ROPP netCDF file. One output file will be
+written for each input profile, unless the
+.B -m
+switch is used to specify output to a multifile. Existing files
+will be overwritten, unless the
+.B -a
+(append) switch is used. The specification of the ROPP format for this data
+type is given in
+.B Reference 1.
+.PP
+.B NB:
+Use of the
+.B -o
+option is not recommended unless only a single profile is present
+in a single input file, or if a netCDF multifile is to be written.
+Otherwise,
+.I let the program  generate default (and unique) file names.
+See
+.BR ropp2ropp (1)
+for details.
+.PP
+If there is more than one profile in the input file(s), and
+the
+.B -m
+multifile switch is used, the default file name will be generated from
+the header of the first profile to be read.
+If the specified or default file already exists, it will be
+overwritten unless the
+.B -a
+switch is present, in which case the new profile(s) will be appended to
+the existing one(s).
+By default, each output ROPP file will contain data for one occultation
+read from the input file(s). If the
+.B -m
+and/or
+.B -a
+switch is present, all RO profiles will be written to a single
+netCDF file (a 'multifile').
+./"
+.SH NOTES
+.SS Profile thinning
+See
+.BR ropp2ropp (1)
+for details.
+./"
+.SS Profile ordering
+If a profile is detected as being in decending height order, it will
+be reversed to be in ascending order. This operation can be suppressed
+by using the
+.B -u
+switch.
+./"
+.SH OPTIONS
+Option switches are not case\-sensitive and may be placed before or after
+the input file name and in any order. All arguments to switches are
+mandatory when the switch is used.
+.PP
+.B -a
+\- append
+.IP
+Causes data to be appended to an already existing file, e.g. as
+specified by the
+.B -o
+option. The default is to overwrite an existing file. If the
+.B -a
+switch is present, but the file does not already exist, the file will
+be created.
+.IP
+Since appending profiles implies that the output is a multifile, if not
+explicitly given, option
+.B -m
+is automatically set if
+.B -a
+is used.
+.PP
+.B -d
+\- output diagnostics
+.IP
+Allows additional diagnostics to be written to stdout.
+.PP
+.B -i
+\- thin on impact altitudes
+.IP
+If thinning is effected, do so on impact altitude (height above geoid)
+(= impact parameter - radius of curvature - undulation) 
+rather than on impact height (height above ellipsoid)
+(= impact parameter - radius of curvature), which is the default behaviour.
+.PP
+.B -h
+or
+.B ?
+\- help
+.IP
+Requests brief help on the command to stdout.
+.PP
+.B -m
+\- multifile output
+.IP
+Specifies that if there is more than one RO profile input, all converted
+profiles are to be written (appended) to a single netCDF 'multifile'.
+If no file name is specified with
+.B -o
+then a default will be generated from the first successfully converted
+occultation header. If only one RO profile is converted, this option is
+effectively redundant. The default is to create one output file for each
+successfully converted input profile.
+.PP
+.B -o
+.I ropp-file
+\- ROPP output file name
+.IP
+.I ropp-file
+specifies the file name for the output ROPP netCDF file.
+A valid file name is mandatory if this switch is present.
+.IP
+If a name is given, and there are multiple input profiles but neither
+.B -m
+nor
+.B -a
+switches is specified (i.e. the default of one profile per output file),
+only the first output file will have this name; subsequent files will
+have default names based on their occultation headers.
+.IP
+If there could be more than one RO BUFR message in the input file(s),
+and separate output files are required,
+.I it is strongly recommended that this option is not used.
+Let the program generate a unique default name for each output file,
+based on the occultation ID string (see above).
+.PP
+.B -p
+\- profile thinning control
+.IP
+Specifies a profile thinning control file or a positive number as an
+upper limit to the sub-sampled output profiles. See
+.BR ropp2ropp (1)
+for more details.
+If the
+.B -u
+switch is present, this option will be ignored.
+.PP
+.B -u
+\- unordered
+.IP
+Suppresses the default re-ordering of profiles into ascending height
+order and any thinning option specifed by the
+.B -p
+switch.
+.PP
+.B -r resn_gp
+\- resolution group of EUM nc4 data
+.IP
+Specifies the name of the level_1b subgroup in which the desired lev1b data
+are to be found. The default is 'thinned', which implies that we wish to extract
+variables called (eg) level_1b/thinned/impact. Other options include 'high_res'.
+.PP
+.B -l
+.IP
+Read also level 1a data from EUMETSAT file.
+.PP
+.B -v
+\- version
+.IP
+Requests the program version ID to be written to stdout.
+./"
+.SH EXAMPLES
+.B 1.
+Convert a single EUMETSAT level 1B netCDF file to ROPP netCDF:
+.PP
+ >
+.B eum2ropp
+.I atmPrf_C006.2009.239.20.22.G29_0001.0001_nc
+.PP
+ --------------------------------------------------------
+                 EUMETSAT to ROPP netCDF Converter
+                     12:17UT 25-Aug-2011
+ --------------------------------------------------------
+
+ INFO (from eum2ropp):  Reading file atmPrf_C006.2009.239.20.22.G29_0001.0001_nc
+ INFO (from eum2ropp):  Profile    1 : OC_20090827202208_C006_G029_EUM
+ INFO (from eum2ropp):  Writing oc_20090827202208_c006_g029_eum.nc
+.PP
+The date and time in the banner is the program run time.
+./"
+.PP
+.B 2.
+Concatenate a number of single EUMETSAT profile files into to one multifile:
+.PP
+ >
+.B eum2ropp
+.I eum1.nc eum2.nc eum3.nc
+\-m -o eum_multi.nc
+.PP
+A wildcard for input files
+.I eum*.nc
+could also have been used.
+./"
+.PP
+.B 3.
+Append a new profile to a daily archive, retaining the original
+profile ordering:
+.PP
+ >
+.B eum2ropp
+.I eum_new.nc
+-u -a -o eum_today.nc
+./"
+.SH ERRORS
+Diagnostics relating to errors in I/O are output to stdout. Additional
+diagnostics can be obtained with the
+.B -d
+option.
+./"
+.SH REFERENCES
+.B 1.
+ROPP User Guide - Part I
+.br
+SAF/ROM/METO/UG/ROPP/002
+.PP
+.B 2.
+EUMETSAT File Formats
+.br
+http://www.eumetsat.int
+./"
+.SH SEE ALSO
+.IR ropp2ropp (1),
+.IR gfz2ropp (1),
+.IR bufr2ropp (1)
+.IR ucar2ropp (1)
+./"
+.SH AUTHORS
+ROPP Development Team, Met Office <romsaf@metoffice.gov.uk>

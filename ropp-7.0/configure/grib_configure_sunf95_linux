@@ -1,0 +1,28 @@
+#!/bin/sh
+# $Id: grib_configure_sunf95_linux 3769 2013-07-23 18:19:36Z frdo $
+#
+# GRIB shell script for a local configure for ROPP
+# USERS SHOULD MODIFY THIS SCRIPT AS REQUIRED FOR LOCAL INSTALL
+#
+# Compiler: sunf95 / Linux
+#
+PREFIX=${1-$ROPP_ROOT/sunf95}
+echo
+echo "Platform:"
+uname -a
+echo
+echo "Fortran compiler:"
+sunf95 -V
+echo
+echo "C compiler:"
+suncc -V
+echo
+echo "Installation target:"
+echo "$PREFIX"
+echo
+# TODO: get working with suncc
+CXX="" \
+CC=gcc       CFLAGS="-O2 -w -m64" \
+FC=sunf95   FCFLAGS="-O  -w -m64" \
+              FLIBS="" LDFLAGS="" \
+  ./configure --prefix=$PREFIX --disable-jpeg

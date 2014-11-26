@@ -1,0 +1,17 @@
+# $Id: ecbufr_configure_sunf95_linux 3769 2013-07-23 18:19:36Z frdo $
+#
+#   ECMWF BUFR configuration file
+#
+# Compiler: sunf95 / Linux
+#
+AR      = ar
+ARFLAGS = rv
+RANLIB  = /usr/bin/ranlib
+#
+CC      = gcc
+CFLAGS  = -O -w -m64 -Dlinux -DLITTLE_ENDIAN -DINTEGER_IS_INT
+FASTCFLAGS = $(CFLAGS)
+#
+FC      = sunf95
+FFLAGS  = -O -w -m64 -Dlinux -DLITTLE_ENDIAN -DINTEGER_IS_INT
+

@@ -1,0 +1,28 @@
+#!/bin/sh
+# $Id: ropp_configure_f95_sunos 3752 2013-07-09 18:55:03Z frdo $
+#
+# ROPP shell script for a local configure.
+# USERS SHOULD MODIFY THIS SCRIPT AS REQUIRED FOR LOCAL INSTALL
+#
+# Compiler: Sun f95 / SunOS
+#
+PREFIX=${1-$ROPP_ROOT/f95}
+echo
+echo "Platform:"
+uname -a
+echo
+echo "Fortran compiler:"
+f95 -V
+echo
+echo "C compiler:"
+cc -V
+echo
+echo "Installation target:"
+echo "$PREFIX"
+echo
+#
+CC=cc \
+F77=f95      FFLAGS="-fw -g -Am -M./ -M ../build -Bstatic -I$PREFIX/include" \
+FC=f95      FCFLAGS="-fw -g -Am -M./ -M ../build -Bstatic -I$PREFIX/include" \
+            LDFLAGS="-L$PREFIX/lib" \
+  ./configure --prefix=$PREFIX

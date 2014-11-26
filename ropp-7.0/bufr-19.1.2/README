@@ -1,0 +1,393 @@
+$Id: README 98 2012-10-09 09:26:20Z frdo $
+
+                     Met Office BUFR package
+                    =========================
+                        (Release V19.1.2)
+
+
+1) Introduction
+   ------------
+
+BUFR (Binary Universal Format for data Representation, aka FM-94) is a WMO
+official format for the exchange and storage of (usually) observational data. 
+See, for instance: Manual on the Global Telecommunications System (WMO-386), 
+Manual on Codes (WMO-306) and Guide to WMO Binary Code Forms (TR 17). Details 
+of past, current and future operational BUFR tables, documentation on codes 
+and guides can be found on the WMO website at:
+ http://www.wmo.int/pages/prog/www/WMOCodes/TDCFtables.html
+
+This package provides a generic BUFR library for encoding and decoding of
+arbitrary data, together with sample application programs. The library (or 
+'kernel') provides the basic codec engine, and has been developed over many 
+years by the Met Office's MetDB (Meteorological Data Base) Team, for 
+operational use on several platforms. Some additional routines and application 
+programs and supporting data files are provided in addition to the kernel 
+library, but these are not supported by the MetDB Team.
+
+The building/installation of the package is automated with a shell script
+supporting POSIX-compliant tools, such as Unix, Linux & Windows running the
+Cygwin system. See file README.cygwin for building under the latter.
+
+The build script supports a number of popular Fortran compilers - see
+Section 7 - which can be easily extended.
+
+The distribution package does not directly support automated (scripted)
+building on other platforms, like native MS-DOS, OpenVMS, though the code
+is expected compile correctly & run if manually built.
+
+
+2) Installation of files
+   ---------------------
+
+The package is released as a compressed tar file bufr-<ver>.tar.gz where
+<ver> is the current release version number.
+
+This file should be placed in a suitable location (e.g. $HOME/packages)
+and then unpacked:
+
+ > tar -zxvf bufr-<ver>.tar.gz
+
+or
+
+ > gunzip bufr-<ver>.tar.gz
+ > tar -xvf bufr-<ver>.tar
+
+if your version of tar does not support decompression (-z option).
+
+
+3) Overview of contents
+   --------------------
+
+Unpacking the archive installs the sub-directory  structure:
+
+                       PWD
+                        |
+                    bufr-<ver>/
+                        |
+               +--------+---------+
+               |                  |
+             metdb/             extra/
+
+
+where PWD is the directory from where the tar command was run.
+
+The package root directory bufr-<ver>/ contains master build scripts 
+(buildbufr) and README files. Other BUFR-related application data could also 
+be placed here by the user.
+
+The bufr-<ver>/metdb/ directory contains the MetDB kernel BUFR source code
+(.f90 & .F90) routines and make files. By default, the BUFR object library 
+will be built here, though the build script copies it to a working target 
+directory <prefix>/lib. [See Section 5.4 for the meaning of <prefix>.]
+
+This directory also contains current operational versions of the BUFR tables
+CODEFIG, TABLEB and TABLED; these are copied to BUFR_LIBRARY (by default 
+$HOME/data/bufr/) by the build script, where they may be modified for local 
+purposes. (N.B. depending on the release, local versions of one or more of 
+these tables may be contained in bufr-<ver>/extra/ and if of non-zero size, 
+these will replace the ones from bufr-<ver>/metdb/.)
+
+The bufr-<ver>/extra/ directory contains some additional support routines,
+programs and data files. The BUFR support utility programs are insalled to
+directory <prefix>/bin and Fortran module (.mod) files to <prefix>/include.
+See the separate bufr-<ver>/extra/README file.
+
+
+4) Required files NOT in this package
+   ----------------------------------
+
+No external files are required - this package is self-contained.
+
+
+5) Building the package
+   --------------------
+
+5.1) Licences & copyright
+
+See the license & copyright notice in bufr-<ver>/COPYRIGHT, copyright 
+information contained in the source code headers and in the MS Word document 
+SoftwareLicense_BUFR.doc in bufr-<ver>/metdb/. The licence conditions apply 
+to the complete package.
+
+
+5.2) Help files
+
+See the README files in bufr-<ver>/ (this file) and bufr-<ver>/extra/.
+The kernel MetDB package in bufr-<ver>/metdb contains help in files
+BUFR_README.txt, dmtn1.html and ver<ver>_Release_Notes.txt. Information
+for building under Cygwin can be found in bufr-<ver>/README.cygwin.
+
+Basic info on the build script usage can be obtained by typing:
+ > ./buildbufr -h
+
+Once built, most application tools can also be run with the -h switch
+to give basic command line usage; see also man page for decbufr(1).
+
+
+5.3) Environment variables
+
+If building with environment variable path support, rather than making 
+symbolic links to the BUFR tables (the former is recommended, and implemented
+in the build scripts), first set environment variable BUFR_LIBRARY to point 
+to the BUFR working directory - this is where the BUFR run-time tables will 
+be placed. If BUFR_LIBRARY is not defined, the build script uses 
+$HOME/data/bufr/
+
+E.g.:
+ > BUFR_LIBRARY=$HOME/data/bufr/
+ > export BUFR_LIBRARY
+Note the required trailing '/'.
+
+Tip: add this definition to your .profile (or .bash_profile or other similar 
+login setup) file and/or application batch scripts so that BUFR applications 
+can always access the run-time BUFR tables.
+
+Alternatively, use the -b option on the buildbufr command line, thus:
+
+ > ./buildbufr -b $DATADIR/testbufr/
+
+which will set BUFR_LIBRARY temporarily, just within the scope of the build
+script.
+
+It is recommended that a standard location is used for the 'operational'
+tables, and alternate tables, e.g. under development, be installed elsewhere 
+(e.g. using the -b option). Then set BUFR_LIBRARY as appropriate before 
+running BUFR applications.
+
+
+5.4) Installation model
+
+Files installed by the build script will be placed in a root <prefix> and
+sub-directory tree. Typically, <prefix> might be $HOME or /usr/local. The
+tree is:
+
+ <prefix>/bin       - executable (application) programs
+ <prefix>/lib       - object libraries (libmetdbbufr.a in this case)
+ <prefix>/include   - Fortran include and module files
+ <prefix>/man       - 'man' pages (usually in <prefix>/man/man1)
+ <prefix>/data      - root for data files (e.g. <prefix>/data/bufr)
+
+By default, the build script uses $HOME as <prefix>, but this can be over-
+ridden on the command line (see below). If necessary, the root and sub-
+directories will be created if they do not already exist. Obviously this 
+means that the user must have the necessary access permissions. Since many 
+other 3rd party packages use a similar model, this tree may already exist.
+
+
+5.5) Checking the build options & defaults
+
+Check the appropriate build script bufr-<ver>/buildbufr, Makefile_BUFRrelease
+in bufr-<ver>/metdb/ and Makefile files in bufr-<ver>/extra/ for compatibility 
+with your local F90 & C compilers and their option flags. Edit to suit. Note 
+that the compiler set up in the Unix/Linux buildbufr script overrides the 
+defaults in the make files, so the latter should not need to be edited. 
+
+The location for the BUFR object library is defined by <prefix>/lib, with
+<prefix>/include for include and module files, executable programs to
+<prefix>/bin and 'man pages' to <prefix>/man/man1. The default prefix is HOME.
+If necessary, change these as appropriate to your system or use the -p option
+to the buildbufr script to specify a prefix other than HOME. E.g.
+
+ > ./buildbufr -p /usr/local
+
+Obviously the user must have write access to this location. If they do not
+exist, the build scripts will attempt to create the prefix directory and
+it's sub-directories.
+
+Run the main build shell script:
+
+ > ./buildbufr [-c [-n]] [-b bufrdir] [-f compiler] [-p prefix] [-t]
+               [-h] [-u] [-z]
+
+where the options are:
+
+-c : clears an old build before building from scratch. Highly recommended if
+     re-building using a different compiler. Not needed for a first time
+     build. Default: build only anything that has changed since a previous
+     build.
+
+-n : with -c - clears an old build but does not perform the re-build.
+
+-b : specifies a temporary directory to place working copies of the BUFR
+     run-time tables. Default: BUFR_LIBRARY, or if that is not defined, then
+     $HOME/data/bufr. Tip: use -b . to force PWD (bufr-<ver>/)
+
+-f : use a particular compiler. Default depends on the platform.
+     The compiler and its flags associated with these tags are defined
+     in the file bufr-<ver>/f90_compilers.dat (see Section 5.6).
+     Of course, the chosen or default compiler must be installed and
+     working.
+
+-p : sets a prefix path for the installation. Default: HOME
+
+-t : also runs the example test_tables and decbufr applications. These 
+     programs are always built and installed, but are not run by default.
+
+-h : prints basic usage help and exits.
+
+-v : print package release version information and exits.
+
+-z : build the export distribution package (bufr-<ver>.tar.gz).
+     For the use of the BUFR package administrator only - uses files
+     not in the distribution.
+
+
+5.6) Compilers
+
+Check the file bufr-<ver>/f90_compilers.dat which contains F90 compiler
+information such as the name, invocation command, compile flags and associated
+C compiler and any flags. Several popular compilers for several platforms are
+supported (some in different versions or aliases via softlinks). If your
+favourite does not appear, add the details in the same format as described in
+the file's header and use the script -f option to use that compiler ID (or
+replace the details for the DEFault block for your OS). The OS part is the
+first 6 characters from the 'uname' command; the compiler part is arbitrary.
+The match is done in uppercase.
+
+The G95 and GFortran compilers are both available under the GNU free software 
+licence conditions as source code or pre-built for a variety of platforms 
+including Linux, Unix and Windows (stand-alone or under Cygwin). GFortran is 
+included in (or can be installed from) almost all recent Linux distros, though 
+this will probably not be the most recent release. Both compilers are now fully
+functional and reasonably stable but are not recommended for operational code. 
+Bugs have been known to appear and disappear as new builds are released (though
+G95 development seems to have stalled since August 2010).
+
+For the details and downloads, see:
+  http://www.g95.org/
+and
+  http://gcc.gnu.org/wiki/GFortran
+
+
+5.7) Issues for Cygwin on Windows platforms
+
+See README.cygwin for information on installing and setting up Cygwin and
+compilers on Windows platforms to support the BUFR package build.
+
+The buildpack script assumes Cygwin DLL v1.7.0 or later is installed.
+
+
+5.8) Running the build script
+
+At its simplest:
+
+ > ./buildbufr
+
+will use the default compiler on the host platform (e.g. Intel 'ifort' under
+Linux) and install to <prefix>=$HOME.
+
+The build script will:
+ - uninstall a previous installation (only if -u option used);
+ - clean any previous build (only if -c option used);
+ - check that the selected (if using the -f option) or default F90
+   and C compilers are present & working;
+ - make the BUFR kernel object library, libmetdbbufr.a
+ - make & run the sample encoder & decoder main programs which
+   are supplied in bufr-<ver>/metdb
+ - integrate the additional routines in bufr-<ver>/extra/ to the BUFR
+   kernel object library;
+ - make the BUFR application support programs from bufr-<ver>/extra
+ - install library. modules, binaries, man pages, run-time tables
+   to the target <prefix> tree,
+ - if installed, run ROBOdoc to generate HTML documentation from the
+   code header block comments to $HOME/public_html/bufr
+ - run the generic support application main programs with sample
+   test data (See the README file in bufr-<ver>/extra/)  (only if -t option 
+   used);
+
+NB if the -c option is not used, and a previous build has been done, only
+changed components will be updated. It is highly recommended to use the -c
+option if rebuilding using a different compiler, including an updated version
+from the same vendor.
+
+The package also contains a shell script buildbufr_local which (by default)
+invokes the main buildbufr script for each of a given list of compilers and
+test-builds the BUFR package with a local <prefix> of $PWD/<compiler>. As
+shipped, this list is all the compilers we have available on the Met Office
+scientific Linux desktops. The list in the script can be edited, or simply
+over-ridden on the command line, as a space-separated list. For instance:
+
+ > ./buildbufr_local ifort gfortran
+
+If any argument is 'CLEAN', then any previous local builds will be deleted
+rather than built. E.g. to wipe the above two builds:
+
+ > ./buildbufr_local ifort gfortran CLEAN
+
+
+6) User applications
+
+User application programs to encode/decode BUFR messages should be linked with
+libmetdbbufr.a. E.g. (assuming that the installation prefix was HOME and using
+the Intel V8 or later 'ifort' compiler):
+
+ > ifort -o prog prog.f90 $HOME/lib/libmetdbbufr.a <other flags...>
+
+or
+
+ > ifort -o prog prog.f90 -L$HOME/lib -lmetdbbufr <other flags...>
+
+
+7) Supported platforms
+   -------------------
+
+The package has been successfully installed, built & tested under the OS and
+compiler combinations noted in file TESTED.
+
+NB 'supported' means that the package is known to build correctly with the
+noted platform and compiler options using the supplied build system. We offer
+no formal support in the form of help desk facilities etc. We will attempt to
+fix any problems reported to us, although this cannot be guaranteed. Updates
+may be released from time to time.
+
+
+8) Testing & validation:
+   ---------------------
+
+Ensure that the environment variable BUFR_LIBRARY is set to the path
+containing the BUFR run-time files (TABLEB, TABLED etc), and that it includes
+a final '/' delimiter.
+
+Using the -t switch to the buildbufr script runs the testtables tool (which 
+tests decoding of the main TABLEB, TABLED and CODEFIG tables, plus the
+supporting DATACATEGORY, MASTERTABLE and ORIGCENTRE tables) and also runs the
+decbufr(1) generic decoding tool on the same sample BUFR file used for the
+simpler MetDB sample decoder and created by the MetDB example encoder.
+
+The simple MetDB test programs BUFRdecode & BUFRencode are built in
+bufr-<ver>/metdb; the testtables and decbufr tools are installed to
+<prefix>/bin.
+
+
+9) Portability issues
+   ------------------
+
+Almost all modern Fortran compilers support the industry-standard (if non-ISO)
+system interface routines GETENV(), GETARG(), IARGC() and EXIT() employed by
+the application programs in extra/. A notable exception is the NAGWare
+(NAG f95) compiler which requires USE f90_unix_* modules which would make
+application code non-portable. The package includes an interface
+(extra/nag_interfaces.f90) which should be compiled with user applications
+when using the NAG compiler; this makes the USE requirement for NAG transparent
+to applications when linked with the BUFR library. This interface should not 
+be used for non-NAG compilers.
+
+Most compilers require the IARGC() system interface function to be explicitly
+declared INTEGER, or don't care if it is delared or not. Some compilers (but
+none of those in our stable) may complain about this declaration; if this is
+the case, comment out these statements.
+
+
+10) Legal bits
+   ----------
+
+See accompanying file COPYRIGHT
+
+
+11) Changes from previous releases
+   -------------------------------
+
+See accompanying file CHANGELOG
+
+
+D. Offiler, Met Office <dave.offiler@metoffice.gov.uk>

@@ -1,0 +1,33 @@
+#!/bin/sh
+# $Id: netcdf4_configure_gfortran_cygwin 3215 2011-11-07 14:14:31Z frdo $
+#
+# netcdf-4 (v4.1.x)  shell script for a local configure
+# USERS SHOULD MODIFY THIS SCRIPT AS REQUIRED FOR LOCAL INSTALL
+#
+# Compiler: gfortran / Cygwin
+#
+PREFIX=${1-$ROPP_ROOT/gfortran}
+echo
+echo "Platform:"
+uname -a
+echo
+echo "Fortran compiler:"
+gfortran --version
+echo
+echo "C compiler:"
+gcc --version
+echo
+echo "Installation target:"
+echo "$PREFIX"
+echo
+#
+CXX="" \
+CC=gcc       CFLAGS="-O2 -w -I$PREFIX/include" \
+FC=gfortran FCFLAGS="-O2 -w -I$PREFIX/include" \
+F77=gfortran FFLAGS="-O2 -w -I$PREFIX/include" \
+              FLIBS="" LDFLAGS="-L$PREFIX/lib" \
+  ./configure --prefix=$PREFIX   --disable-option-checking \
+              --disable-cxx                                \
+              --disable-v2       --disable-dap             \
+              --disable-shared   --disable-largefile       \
+              --enable-separate-fortran

@@ -1,0 +1,115 @@
+./" $Id: gfz2ropp.1 3696 2013-06-17 08:48:37Z idculv $
+./"
+.TH gfz2ropp 1 31-Jul-2013 ROPP-7.0 ROPP-7.0
+./"
+.SH NAME
+gfz2ropp
+./"
+.SH SYNOPSIS
+Convert a GFZ 'PD' or 'NRT' text file pair to ROPP netCDF format
+.PP
+>
+.B gfz2ropp
+.I gfz-file
+[-o ropp-file] [-d] [-h|?] [-v]
+./"
+.SH DESCRIPTION
+.I gfz2ropp
+converts a pair of 'PD' (Phase/SNR) or 'NRT' (BA/Ref) GFZ text files
+(.dat & .dsc) to a ROPP netCDF file.
+./"
+.SH FILES
+.SS Input
+There is no default.
+.I gfz2ropp
+will stop after displaying a usage summary if no input file name is
+given on the command line.
+.PP
+The command line should specify the principal '.dat' file name in full
+(with optional path); the program will assume the companion '.dsc' file
+has the same basename and resides in the same directory as the '.dat'
+file. The input pair of files must contain a single profile
+in the '.dat' file and it's meta-data in the '.dsc' file.
+./"
+.SS Output
+The output will be created as a ROPP netCDF file, as described in
+.B Reference 1.
+The output file name can be specified with the
+.B -o
+switch, or by default will be the same as that of the input file(s) but
+with a type of '.nc' in place of '.dat' and in PWD.
+If this file already exists, it will be overwritten.
+./"
+.SH OPTIONS
+Option switches are not case\-sensitive and may be placed before or after
+the input file name and in any order. All arguments to switches are
+mandatory when the switch is used.
+.PP
+.B -d
+\- output diagnostics
+.IP
+Allows additional diagnostics to be written to stdout.
+.I gfz2ropp
+will print out, for instance, how many profile samples have been converted
+for each ROPP section.
+.PP
+.B -h
+or
+.B ?
+\- help
+.IP
+Requests brief help on the command to stdout.
+.PP
+.B -o
+\- ROPP netCDF output file name
+.IP
+.I ropp-file
+specifies the output file name. A valid file name, which may include a
+path, is mandatory if this switch is present. A default name is generated
+based on the base name/path of the input files, but with a type of '.nc'.
+.PP
+.B -v
+\- version
+.IP
+Requests the program version ID to be written to stdout.
+./"
+.SH EXAMPLES
+.B 1.
+Convert a pair of GFZ text files (gfz1.dat & gfz1.dsc) into to one ROPP
+netCDF file (here, gfz1.nc by default):
+.PP
+>
+.B gfz2ropp gfz1.dat
+
+ --------------------------------------------------------
+                    GFZ to ROPP Converter
+                     23:04UT 18-Jan-2012
+ --------------------------------------------------------
+
+ INFO (from gfz2ropp):  Reading file gfz1.dat
+ INFO (from gfz2ropp):  Reading file gfz1.dsc
+ INFO (from gfz2ropp):  Profile    1: OC_20090828011008_GRAA_G002_GFZ_
+ INFO (from gfz2ropp):  Writing gfz1.nc
+
+The date and time in the banner is the program run time.
+./"
+.SH ERRORS
+Diagnostics relating to errors in I/O are output to stdout. Additional
+diagnostics can be obtained with the
+.B -d
+option.
+./"
+.SH REFERENCES
+.PP
+.B 1.
+ROPP User Guide- Part I
+.br
+SAF/ROM/METO/UG/ROPP/002
+./"
+.SH SEE ALSO
+.IR ropp2ropp (1),
+.IR ucar2ropp (1),
+.IR bufr2ropp (1)
+./"
+.SH AUTHORS
+ROPP Development Team, Met Office <romsaf@metoffice.gov.uk>

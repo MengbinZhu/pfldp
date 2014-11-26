@@ -1,0 +1,3344 @@
+% Document: ./rm_utils
+% Source: ./mywork/
+% Generated with ROBODoc Version 4.99.36 (Jul 28 2009)
+\section{Arrays/arrays}
+\textsl{[ Modules ]}
+
+\label{ch:robo0}
+\label{ch:Arrays_arrays}
+\index{unsorted!arrays}\index{Modules!arrays}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    arrays - Tools for handling arrays in Fortran 90.
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    use arrays
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    This module provides interfaces to several arrays related
+    functions and subroutines within the tools90 library. This
+    does not only include utilities to get indices of array
+    elements fulfilling certain conditions, but also tools for
+    sorting and unifying values of arrays, reversing fields
+    along one of their coordinates, reallocation of fields,
+    and simple mathematical operations like vector products
+    or the calculation of the norm and unit vector from a given
+    one dimensional vector.
+\end{Verbatim}
+\textbf{NOTES:}\hspace{0.08in}\begin{Verbatim}
+    All of the routines are at least implemented for float and
+    double, some also for single and double complex arguments
+    as well as for integer and string arguments (if applicable).
+    Routines returning different numbers of array elements or
+    changing the size of arrays and fields implemented via
+    pointers. This may cause significant performance problems
+    with some compilers. Also make sure that functions returning
+    pointers are not used with normal arrays, as this is likely
+    to cause memory leaks.
+\end{Verbatim}
+\textbf{SEE ALSO:}\hspace{0.08in}\begin{Verbatim}
+    Allocation:             copy_allocate, callocate
+    Reallocation:           reallocate, preallocate
+    Index functions:        where, nruns, getrun, uniq, unique, locate,
+                              iminloc, imaxloc, setminus
+    Sorting et al.:         sort, sorted, quick_sort
+    Array manipulation:     reverse, blend, swap, isinrange
+    Simple maths:           cross_product, outer_product, outer_and, 
+                              l2norm, unit_vector
+\end{Verbatim}
+\section{Arrays/blend}
+\textsl{[ Functions ]}
+
+\label{ch:robo1}
+\label{ch:Arrays_blend}
+\index{unsorted!blend}\index{Functions!blend}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    blend - Sets up weighting array for blending arrays together.
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    w = blend(n, i, j)
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    This function calculates cosine weights for blending two arrays.
+\end{Verbatim}
+\textbf{INPUTS:}\hspace{0.08in}\begin{Verbatim}
+    n   size of array to make
+    i   index of first value to blend
+    j   index of last value to blend
+\end{Verbatim}
+\textbf{OUTPUT:}\hspace{0.08in}\begin{Verbatim}
+    w   weigthing array (0.0 until i, 1.0 after j, cos-weight in between)
+\end{Verbatim}
+\textbf{NOTES:}\hspace{0.08in}\begin{Verbatim}
+    To blend two arrays A and B:
+
+        blended =  A * (1 - w) + B * w
+
+    The result starts with pure A and ends with pure B.
+\end{Verbatim}
+\textbf{REFERENCES:}\hspace{0.08in}\begin{Verbatim}
+    This function is reimplemented in Fortran 90 from the original
+    IDL function blend.pro written by R. Sterner; this function is
+    is part of the John Hopkins University / Applied Physics
+    Laboratory (JHU/APL) IDL library.
+\end{Verbatim}
+\section{Arrays/callocate}
+\textsl{[ Subroutines ]}
+
+\label{ch:robo2}
+\label{ch:Arrays_callocate}
+\index{unsorted!callocate}\index{Subroutines!callocate}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    callocate - Allocate arrays and initialise them with a given value.
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    call callocate(array, newsize, [value])
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    This subroutine allocates an array or field to the given size and
+    initialises the array with a given value (or zero if no value is
+    given).
+\end{Verbatim}
+\textbf{INPUTS:}\hspace{0.08in}\begin{Verbatim}
+    ..., dim(:[,:[...]]), pointer :: array
+    integer [, dim(:[...])]       :: newsize
+\end{Verbatim}
+\textbf{OUTPUT:}\hspace{0.08in}\begin{Verbatim}
+    ..., dim(:[,:[...]]), pointer :: array
+\end{Verbatim}
+\textbf{NOTES:}\hspace{0.08in}\begin{Verbatim}
+    This subroutine supports integer, float, double, complex,
+    double complex arguments for up to seven dimensions.
+\end{Verbatim}
+\textbf{SEE ALSO:}\hspace{0.08in}\begin{Verbatim}
+    reallocate
+\end{Verbatim}
+\section{Arrays/copy\_alloc}
+\textsl{[ Subroutines ]}
+
+\label{ch:robo3}
+\label{ch:Arrays_copy_alloc}
+\index{unsorted!copy\_alloc}\index{Subroutines!copy\_alloc}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    copy_alloc - Copy data into a newly allocated array.
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    call copy_alloc(array, newarray)
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    This subroutine copies the values in array into the newly allocated
+    newarray. Previous contents of newaray are lost.
+\end{Verbatim}
+\textbf{INPUTS:}\hspace{0.08in}\begin{Verbatim}
+    ..., dim(:[,:[...]]) :: array
+\end{Verbatim}
+\textbf{OUTPUT:}\hspace{0.08in}\begin{Verbatim}
+    ..., dim(:[,:[...]]), pointer :: newarray
+\end{Verbatim}
+\textbf{NOTES:}\hspace{0.08in}\begin{Verbatim}
+    On exit, newarray will have the same shape as array.
+
+    This subroutine supports integer, float, double, complex,
+    double complex and character/string arguments for up to
+    seven dimensions.
+\end{Verbatim}
+\section{Arrays/cross\_product}
+\textsl{[ Functions ]}
+
+\label{ch:robo4}
+\label{ch:Arrays_cross_product}
+\index{unsorted!cross\_product}\index{Functions!cross\_product}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    cross_product - Calculate the cross product between two vectors.
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    z = cross_product(x, y)
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    This function returns the cross product between two 1D vectors.
+\end{Verbatim}
+\textbf{INPUTS:}\hspace{0.08in}\begin{Verbatim}
+    real(wp), dimension(3) :: x, y
+\end{Verbatim}
+\textbf{OUTPUT:}\hspace{0.08in}\begin{Verbatim}
+    real(wp), dimension(3) :: z
+\end{Verbatim}
+\textbf{NOTES:}\hspace{0.08in}\begin{Verbatim}
+    This function is obviously only useful for vectors from R^3.
+    Both float and double arguments are supported.
+\end{Verbatim}
+\textbf{EXAMPLE:}\hspace{0.08in}\begin{Verbatim}
+    To calculate the cross product between vectors representing
+    the x- and y-coordinate axis, try
+
+      use arrays
+        ...
+      real(wp), dimension (3) :: x, y, z
+        ...
+      x = (/ 1., 0., 0./)
+      y = (/ 0., 1., 0./)
+        ...
+      z = cross_product(x, y)
+\end{Verbatim}
+\textbf{SEE ALSO:}\hspace{0.08in}\begin{Verbatim}
+    outer_product
+\end{Verbatim}
+\section{Arrays/getrun}
+\textsl{[ Functions ]}
+
+\label{ch:robo5}
+\label{ch:Arrays_getrun}
+\index{unsorted!getrun}\index{Functions!getrun}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    getrun - Gives N'th run of consecutive integers from a given array.
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    run => getrun(iarray, n, m, longest)
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    This function returns the N'th run of consecutive integers in a 
+    given (integer) array. This function is meant to be used with
+    arrays obtained from the where function.
+\end{Verbatim}
+\textbf{INPUTS:}\hspace{0.08in}\begin{Verbatim}
+    int     iarray(:)    Integer array to process.
+    int     n            Run number to get (first = 1 = def).
+    int     m            Optional last run number to get.
+    logical last         If .true., n is offset from last run.
+    logical longest      Returns the longest run.
+\end{Verbatim}
+\textbf{OUTPUT:}\hspace{0.08in}\begin{Verbatim}
+    run
+\end{Verbatim}
+\textbf{NOTES:}\hspace{0.08in}\begin{Verbatim}
+    getrun is meant to be used on the output from where. If m > n,
+    run will be a set of runs from run n to run m.  If no m is given,
+    run will be a single run. If n<0, the routine returns runs starting
+    at run abs(n) to end of iarray. If n is out of range, a -1 is
+    returned.
+
+    last = .true. means that n is an offset from last run. So n = -1
+    gives the last run, n = -2 gives next to last, ... If n = -3 and
+    m = -1, the last 3 runs are returned.
+
+    longest = .true. returns the longest run. n and m are both ignored.
+\end{Verbatim}
+\textbf{SEE ALSO:}\hspace{0.08in}\begin{Verbatim}
+    nruns
+\end{Verbatim}
+\textbf{REFERENCES:}\hspace{0.08in}\begin{Verbatim}
+    This function is reimplemented in Fortran 90 from the original
+    IDL function getrun.pro written by R. Sterner; this function is
+    is part of the John Hopkins University / Applied Physics
+    Laboratory (JHU/APL) IDL library.
+\end{Verbatim}
+\section{Arrays/imaxloc}
+\textsl{[ Functions ]}
+
+\label{ch:robo6}
+\label{ch:Arrays_imaxloc}
+\index{unsorted!imaxloc}\index{Functions!imaxloc}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    imaxloc - Index of first maximum value.
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    idx = imaxloc(array)
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    This function returns the index of the first maximum value.
+\end{Verbatim}
+\textbf{INPUTS:}\hspace{0.08in}\begin{Verbatim}
+    array - 1D array of type real, double, or integer.
+\end{Verbatim}
+\textbf{OUTPUT:}\hspace{0.08in}\begin{Verbatim}
+    idx   - index position of the first maximum in array.
+\end{Verbatim}
+\textbf{NOTES:}\hspace{0.08in}\begin{Verbatim}
+    The routine is based on the Fortran 90 intrinsic function maxloc;
+    it just returns a scalar index for 1 dimensional arrays instead of
+    a rank one array.
+\end{Verbatim}
+\textbf{SEE ALSO:}\hspace{0.08in}\begin{Verbatim}
+    iminloc
+\end{Verbatim}
+\section{Arrays/iminloc}
+\textsl{[ Functions ]}
+
+\label{ch:robo7}
+\label{ch:Arrays_iminloc}
+\index{unsorted!iminloc}\index{Functions!iminloc}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    iminloc - Index of first minimum value.
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    idx = iminloc(array)
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    This function returns the index of the first minimum value.
+\end{Verbatim}
+\textbf{INPUTS:}\hspace{0.08in}\begin{Verbatim}
+    array - 1D array of type real, double, or integer.
+\end{Verbatim}
+\textbf{OUTPUT:}\hspace{0.08in}\begin{Verbatim}
+    idx   - index position of the first maximum in array.
+\end{Verbatim}
+\textbf{NOTES:}\hspace{0.08in}\begin{Verbatim}
+    The routine is based on the Fortran 90 intrinsic function minloc;
+    it just returns a scalar index for 1 dimensional arrays instead of
+    a rank one array.
+\end{Verbatim}
+\textbf{SEE ALSO:}\hspace{0.08in}\begin{Verbatim}
+    iminloc
+\end{Verbatim}
+\section{Arrays/isinrange}
+\textsl{[ Subroutines ]}
+
+\label{ch:robo8}
+\label{ch:Arrays_isinrange}
+\index{unsorted!isinrange}\index{Subroutines!isinrange}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    isinrange - Check if data values are within a given range of numbers.
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    ... = isinrange(data, range)
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    This function returns .true. if all elements of an array are within
+    a given range, .false. if at least one element is outside the given
+    range.
+\end{Verbatim}
+\textbf{INPUTS:}\hspace{0.08in}\begin{Verbatim}
+    ..., dim(:[,:[...]]) :: data
+    ..., dimension(2)    :: range
+\end{Verbatim}
+\textbf{OUTPUT:}\hspace{0.08in}\begin{Verbatim}
+    logical              :: isinrange
+\end{Verbatim}
+\textbf{NOTES:}\hspace{0.08in}\begin{Verbatim}
+    The array range is a two element vector giving the minimum and
+    maximum value for the allowed (valid) range.
+
+    This subroutine supports integer, float and double arguments for
+    up to seven dimensions. Scalar data values can also be tested.
+\end{Verbatim}
+\section{Arrays/l2norm}
+\textsl{[ Functions ]}
+
+\label{ch:robo9}
+\label{ch:Arrays_l2norm}
+\index{unsorted!l2norm}\index{Functions!l2norm}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    l2norm - Calculate the L2 (Euclidian) norm of a vector.
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    use arrays
+      ...
+    norm = l2norm(vector)
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    This function computes the L2 (i.e., the usual Euclidian) norm of
+    a 1D vector.
+\end{Verbatim}
+\textbf{INPUTS:}\hspace{0.08in}\begin{Verbatim}
+    ..., dim(:) :: vector    1D array.
+
+ RESULT
+    ...         :: norm      Scalar value of the norm of vector.
+\end{Verbatim}
+\textbf{NOTES:}\hspace{0.08in}\begin{Verbatim}
+    Vector can be a float, double, complex or double complex
+    array, while the norm will always be real (float or double).
+\end{Verbatim}
+\textbf{EXAMPLE:}\hspace{0.08in}\begin{Verbatim}
+    To calculate the norm of an arbitrary vector in physical space
+    (like a coordinate vector), try
+
+      use arrays
+        ...
+      real(wp), dimension(3) :: vec
+      real                   :: length
+        ...
+      vec    = ...
+      length = l2norm(vec)
+\end{Verbatim}
+\textbf{SEE ALSO:}\hspace{0.08in}\begin{Verbatim}
+      unit_vector
+\end{Verbatim}
+\section{Arrays/locate}
+\textsl{[ Functions ]}
+
+\label{ch:robo10}
+\label{ch:Arrays_locate}
+\index{unsorted!locate}\index{Functions!locate}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    locate - locate where a (list of) number(s) can be found in an array.
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    index = locate(array, point(s))
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    This function returns the index or indices of point(s) within an array.
+    If the point is outside the array bounds, either 0 or n + 1 will be
+    returned, n being the number of elements in array. If the point is
+    within the range spanned by the array, the returned index will give the
+    position of the sought for point such that
+
+       array(i) <= point <= array(i+1)
+\end{Verbatim}
+\textbf{INPUTS:}\hspace{0.08in}\begin{Verbatim}
+    ...,    :: array(:)
+    ...,    :: points(:)
+\end{Verbatim}
+\textbf{OUTPUT:}\hspace{0.08in}\begin{Verbatim}
+    integer :: index(:)
+\end{Verbatim}
+\textbf{NOTES:}\hspace{0.08in}\begin{Verbatim}
+    The data array must be either monotonically increasing or decreasing
+    for the algorithm to work.
+
+    The index array must have the same number of elements as the point(s)
+    array.
+\end{Verbatim}
+\textbf{REFERENCES:}\hspace{0.08in}\begin{Verbatim}
+    This routine has been copied (by hand) and slightly edited from the
+    fgauss routine found in
+
+       Press, W.H, Teukolsky, S.A. Vetterling, W.T. and Flannery, B.P.,
+          Numerical Recipes in Fortran 90, Cambridge University Press, 
+          Cambridge, 1999.
+\end{Verbatim}
+\section{Arrays/nruns}
+\textsl{[ Functions ]}
+
+\label{ch:robo11}
+\label{ch:Arrays_nruns}
+\index{unsorted!nruns}\index{Functions!nruns}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    nruns - Gives # of runs of consecutive integers in an array.
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    n_runs = nruns(iarray)
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    This function returns the number of runs of consecutive integers
+    in a given (integer) array. This routine is meant to be used with
+    arrays obtained from the where function.
+\end{Verbatim}
+\textbf{INPUTS:}\hspace{0.08in}\begin{Verbatim}
+    int :: iarray(:)
+\end{Verbatim}
+\textbf{OUTPUT:}\hspace{0.08in}\begin{Verbatim}
+    int :: n_runs
+\end{Verbatim}
+\textbf{SEE ALSO:}\hspace{0.08in}\begin{Verbatim}
+    getrun
+\end{Verbatim}
+\textbf{REFERENCES:}\hspace{0.08in}\begin{Verbatim}
+    This function is reimplemented in Fortran 90 from the original
+    IDL function nruns.pro written by R. Sterner; this function is
+    is part of the John Hopkins University / Applied Physics
+    Laboratory (JHU/APL) IDL library.
+\end{Verbatim}
+\section{Arrays/outer\_and}
+\textsl{[ Functions ]}
+
+\label{ch:robo12}
+\label{ch:Arrays_outer_and}
+\index{unsorted!outer\_and}\index{Functions!outer\_and}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    outer_product - Calculate the outer logical and of two vectors.
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    z = outer_and(x, y)
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    This function returns the outer (dyadic) and between two
+    logical 1D vectors.
+\end{Verbatim}
+\textbf{INPUTS:}\hspace{0.08in}\begin{Verbatim}
+    logical, dimension(:)   :: x, y
+\end{Verbatim}
+\textbf{OUTPUT:}\hspace{0.08in}\begin{Verbatim}
+    logical, dimension(:,:) :: z
+\end{Verbatim}
+\textbf{NOTES:}\hspace{0.08in}\begin{Verbatim}
+    The result of an outer and of two 1d vectors is matrix!
+\end{Verbatim}
+\textbf{SEE ALSO:}\hspace{0.08in}\begin{Verbatim}
+      outer_product
+\end{Verbatim}
+\section{Arrays/outer\_product}
+\textsl{[ Functions ]}
+
+\label{ch:robo13}
+\label{ch:Arrays_outer_product}
+\index{unsorted!outer\_product}\index{Functions!outer\_product}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    outer_product - Calculate the outer product of two vectors.
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    z = outer_product(x, y)
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    This function returns the outer (dyadic) product between two
+    1D vectors.
+\end{Verbatim}
+\textbf{INPUTS:}\hspace{0.08in}\begin{Verbatim}
+    real(wp), dimension(:)   :: x, y
+\end{Verbatim}
+\textbf{OUTPUT:}\hspace{0.08in}\begin{Verbatim}
+    real(wp), dimension(:,:) :: z
+\end{Verbatim}
+\textbf{NOTES:}\hspace{0.08in}\begin{Verbatim}
+    The result of an outer product of two 1d vectors is matrix!
+    Both float and double arguments are supported.
+\end{Verbatim}
+\textbf{EXAMPLE:}\hspace{0.08in}\begin{Verbatim}
+    To calculate the dyadic (outer) product of vectors representing
+    the x- and y-coordinate axis, try
+
+      use arrays
+        ...
+      real(wp), dimension(3)   :: x, y
+      real(wp), dimension(3,3) :: A
+        ...
+      x = (/ 1., 0., 0./)
+      y = (/ 0., 1., 0./)
+        ...
+      A = outer_product(x, y)
+\end{Verbatim}
+\textbf{SEE ALSO:}\hspace{0.08in}\begin{Verbatim}
+      cross_product
+\end{Verbatim}
+\section{Arrays/preallocate}
+\textsl{[ Functions ]}
+
+\label{ch:robo14}
+\label{ch:Arrays_preallocate}
+\index{unsorted!preallocate}\index{Functions!preallocate}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    preallocate - Reallocate 1d arrays (function).
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    use arrays
+      ...
+    array => preallocate(array, newsize)
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    This subroutine reallocates an array or field to a new size and
+    rescues the previous contents if possible (i.e., the array
+    is enlarged, the old values will be available in the first
+    elements of the new, enlarged array. If an array is shrinked,
+    superfluous elements will be lost. If an array is enlarged,
+    the additional elements are undetermined.
+\end{Verbatim}
+\textbf{INPUTS:}\hspace{0.08in}\begin{Verbatim}
+    ..., dim(:[,:[...]]), pointer :: array
+    integer [, dim(:[...])]       :: newsize
+\end{Verbatim}
+\textbf{OUTPUT:}\hspace{0.08in}\begin{Verbatim}
+    ..., dim(:[,:[...]]), pointer :: array
+\end{Verbatim}
+\textbf{NOTES:}\hspace{0.08in}\begin{Verbatim}
+    If an array is shrinked, superfluous elements will be lost.
+    If an array is enlarged, the compiler will fill in whatever
+    is available into the additional elements; what is filled in
+    depends solely on the state of the heap and the compiler's
+    internals and cannot be relied on.
+    If the pointer receiving the reallocated arrays is different from
+    from the argument given to the function, preallocate will allocate
+    a new pointer, copy newsize elements from the old pointer to the
+    new one and destroy the old pointer. Any previous contents of the
+    receiving pointer will be lost.
+    Make sure to use pointer notation for receiving the reallocated
+    pointer array, or a memory leak and performance reduction (due to
+    copying the old data twice) will almost certainly occure.
+    This function supports integer, float, double, complex,
+    double complex and character/string arguments for up to
+    seven dimensions.
+\end{Verbatim}
+\textbf{EXAMPLE:}\hspace{0.08in}\begin{Verbatim}
+    To enlarge a 1d vector with m elements to n elements (with n > m),
+    try
+
+      use arrays
+         ...
+      real, dimension(:), pointer :: vector
+      integer                     :: m, n
+         ...
+      allocate(vector(m))
+         ...
+      vector => preallocate(vector, n)
+\end{Verbatim}
+\textbf{SEE ALSO:}\hspace{0.08in}\begin{Verbatim}
+    reallocate
+\end{Verbatim}
+\section{Arrays/quick\_sort}
+\textsl{[ Subroutines ]}
+
+\label{ch:robo15}
+\label{ch:Arrays_quick_sort}
+\index{unsorted!quick\_sort}\index{Subroutines!quick\_sort}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    quick_sort - Sort an array. 
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    call quick_sort(array, idx)
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    This function sorts an array.
+\end{Verbatim}
+\textbf{INPUTS:}\hspace{0.08in}\begin{Verbatim}
+    ...     :: array(:)  Array to be sorted; will be overwritten.
+\end{Verbatim}
+\textbf{OUTPUT:}\hspace{0.08in}\begin{Verbatim}
+    ...     :: array(:)  Sorted array.
+    int     :: idx(:)    
+\end{Verbatim}
+\textbf{NOTES:}\hspace{0.08in}\begin{Verbatim}
+    The routine implements the quick_sort algorithm; the sort order is
+    ascending. array and idx have the same length.
+
+    This function supports and single and double precison arguments.
+\end{Verbatim}
+\textbf{SEE ALSO:}\hspace{0.08in}\begin{Verbatim}
+    sort
+    sorted
+\end{Verbatim}
+\textbf{REFERENCES:}\hspace{0.08in}\begin{Verbatim}
+    The quick sort routine originates from:
+
+       Brainerd, W.S., Goldberg, C.H. & Adams, J.C. (1990) Programmers
+          Guide to Fortran 90, McGraw-Hill  ISBN 0-07-000248-7, pages
+          149-150.
+
+    and was modified by Alan Miller to include an associated integer array
+    which gives the positions of the elements in the original order.
+\end{Verbatim}
+\section{Arrays/reallocate}
+\textsl{[ Functions ]}
+
+\label{ch:robo16}
+\label{ch:Arrays_reallocate}
+\index{unsorted!reallocate}\index{Functions!reallocate}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    reallocate - Reallocate 1d arrays (subroutine).
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    use arrays
+      ...
+    call reallocate(array, newsize)
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    This subroutine reallocates an array or field to a new size and
+    rescues the previous contents if possible (i.e., the array
+    is enlarged, the old values will be available in the first
+    elements of the new, enlarged array. If an array is shrinked,
+    superfluous elements will be lost. If an array is enlarged,
+    the additional elements are undetermined.
+\end{Verbatim}
+\textbf{INPUTS:}\hspace{0.08in}\begin{Verbatim}
+    ..., dim(:[,:[...]]), pointer :: array
+    integer [, dim(:[...])]       :: newsize
+\end{Verbatim}
+\textbf{OUTPUT:}\hspace{0.08in}\begin{Verbatim}
+    ..., dim(:[,:[...]]), pointer :: array
+\end{Verbatim}
+\textbf{NOTES:}\hspace{0.08in}\begin{Verbatim}
+    If an array is shrinked, superfluous elements will be lost.
+    If an array is enlarged, the compiler will fill in whatever
+    is available into the additional elements; what is filled in
+    depends solely on the state of the heap and the compiler's
+    internals and cannot be relied on.
+    This subroutine supports integer, float, double, complex,
+    double complex and character/string arguments for up to
+    seven dimensions.
+\end{Verbatim}
+\textbf{EXAMPLE:}\hspace{0.08in}\begin{Verbatim}
+    To enlarge a 1d vector with m elements to n elements (with n > m),
+    try
+
+      use arrays
+         ...
+      real, dimension(:), pointer :: vector
+      integer                     :: m, n
+         ...
+      allocate(vector(m))
+         ...
+      call reallocate(vector, n)
+\end{Verbatim}
+\textbf{SEE ALSO:}\hspace{0.08in}\begin{Verbatim}
+    preallocate
+\end{Verbatim}
+\section{Arrays/reverse}
+\textsl{[ Functions ]}
+
+\label{ch:robo17}
+\label{ch:Arrays_reverse}
+\index{unsorted!reverse}\index{Functions!reverse}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    reverse - Reverse an array along a given dimension.
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    use arrays
+      ...
+    array = reverse(array [, dim])
+\end{Verbatim}
+\textbf{INPUTS:}\hspace{0.08in}\begin{Verbatim}
+    array   array to be reversed.
+    dim     dimension along which the array is to be reversed.
+\end{Verbatim}
+\textbf{OUTPUT:}\hspace{0.08in}\begin{Verbatim}
+    array   reversed data.
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    This subroutine reverses an array along a given dimension (or along
+    the first dimension is dim is not given.
+\end{Verbatim}
+\textbf{EXAMPLE:}\hspace{0.08in}\begin{Verbatim}
+    To reverse the order of a 1-dimensional array, use
+
+       array = reverse(array)
+
+    which is identical to
+
+       array = array(size(array):1:-1)
+
+    To invert a 2-dimensional array along its second dimension,
+
+       array(:,:) = reverse(array, 2)
+\end{Verbatim}
+\section{Arrays/setminus}
+\textsl{[ Functions ]}
+
+\label{ch:robo18}
+\label{ch:Arrays_setminus}
+\index{unsorted!setminus}\index{Functions!setminus}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    setminus - Eliminate elements from a set that are also in
+               another set.
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    c = setminus(a, b)
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    This function removes all elements in a which are also part of b. It
+    is intended to be used with index arrays.
+\end{Verbatim}
+\textbf{INPUTS:}\hspace{0.08in}\begin{Verbatim}
+    a = set (array) to process.
+    b = set (array) of elements to eliminate.
+\end{Verbatim}
+\textbf{OUTPUT:}\hspace{0.08in}\begin{Verbatim}
+    c = resulting set (array).
+\end{Verbatim}
+\textbf{NOTES:}\hspace{0.08in}\begin{Verbatim}
+    This function should work for all data types, however: an equality
+    constraint for floating point data, regardless of single of double
+    precision, is a somewhat suspect concept.
+\end{Verbatim}
+\textbf{REFERENCES:}\hspace{0.08in}\begin{Verbatim}
+    This function is reimplemented in Fortran 90 from the original
+    IDL function setminus.pro written by R. Sterner; this function is
+    is part of the John Hopkins University / Applied Physics
+    Laboratory (JHU/APL) IDL library.
+\end{Verbatim}
+\section{Arrays/sort}
+\textsl{[ Functions ]}
+
+\label{ch:robo19}
+\label{ch:Arrays_sort}
+\index{unsorted!sort}\index{Functions!sort}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    sort - Indices for a sorted array. 
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    idx = sort(array [, reverse = .true.|.false.])
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    This function returns the indices of a sorted array.
+\end{Verbatim}
+\textbf{INPUTS:}\hspace{0.08in}\begin{Verbatim}
+    ...     :: array(:)  Array to be sorted.
+    logical :: reverse   If true, do an descending sort (default is to
+                           sort the array with ascending values).
+\end{Verbatim}
+\textbf{OUTPUT:}\hspace{0.08in}\begin{Verbatim}
+    int     :: idx(:)    Indices of array after sorting.
+\end{Verbatim}
+\textbf{NOTES:}\hspace{0.08in}\begin{Verbatim}
+    The routine is based on the quick_sort algorithm; the default sort order
+    is ascending. The returned index array has the same length as the array
+    to be sorted.
+
+    This function supports and single and double precison arguments.
+\end{Verbatim}
+\textbf{SEE ALSO:}\hspace{0.08in}\begin{Verbatim}
+    sorted
+    quick_sort
+\end{Verbatim}
+\textbf{REFERENCES:}\hspace{0.08in}\begin{Verbatim}
+    The quick sort routine originates from:
+
+       Brainerd, W.S., Goldberg, C.H. & Adams, J.C. (1990) Programmers
+          Guide to Fortran 90, McGraw-Hill  ISBN 0-07-000248-7, pages
+          149-150.
+
+    and was modified by Alan Miller to include an associated integer array
+    which gives the positions of the elements in the original order.
+\end{Verbatim}
+\section{Arrays/sorted}
+\textsl{[ Functions ]}
+
+\label{ch:robo20}
+\label{ch:Arrays_sorted}
+\index{unsorted!sorted}\index{Functions!sorted}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    sorted - Sort an array. 
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    array = sort(array [, reverse = .true.|.false.])
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    This function returns a sorted array.
+\end{Verbatim}
+\textbf{INPUTS:}\hspace{0.08in}\begin{Verbatim}
+    ...     :: array(:)  Array to be sorted.
+    logical :: reverse   If true, do an descending sort (default is to
+                           sort the array with ascending values).
+\end{Verbatim}
+\textbf{OUTPUT:}\hspace{0.08in}\begin{Verbatim}
+    ...     :: array(:)  Sorted array.
+\end{Verbatim}
+\textbf{NOTES:}\hspace{0.08in}\begin{Verbatim}
+    The routine is based on the quick_sort algorithm; the default sort order
+    is ascending. The returned array has the same length as the array to be
+    to be sorted.
+
+    This function supports and single and double precison arguments.
+\end{Verbatim}
+\textbf{SEE ALSO:}\hspace{0.08in}\begin{Verbatim}
+    sort
+    quick_sort
+\end{Verbatim}
+\textbf{REFERENCES:}\hspace{0.08in}\begin{Verbatim}
+    The quick sort routine originates from:
+
+       Brainerd, W.S., Goldberg, C.H. & Adams, J.C. (1990) Programmers
+          Guide to Fortran 90, McGraw-Hill  ISBN 0-07-000248-7, pages
+          149-150.
+
+    and was modified by Alan Miller to include an associated integer array
+    which gives the positions of the elements in the original order.
+\end{Verbatim}
+\section{Arrays/swap}
+\textsl{[ Subroutines ]}
+
+\label{ch:robo21}
+\label{ch:Arrays_swap}
+\index{unsorted!swap}\index{Subroutines!swap}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    swap - Swap the two arguments.
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    call swap(a, b)
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    This subroutine swaps the content of the two arguments. This is an
+    elemental subroutine.
+\end{Verbatim}
+\textbf{INPUTS:}\hspace{0.08in}\begin{Verbatim}
+    a   -  First argument, to be swapped with...
+    b   -  ... second argument.
+\end{Verbatim}
+\textbf{OUTPUT:}\hspace{0.08in}\begin{Verbatim}
+    a   -  is now the former b.
+    b   -  is now the former a.
+\end{Verbatim}
+\section{Arrays/uniq}
+\textsl{[ Functions ]}
+
+\label{ch:robo22}
+\label{ch:Arrays_uniq}
+\index{unsorted!uniq}\index{Functions!uniq}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    uniq - Return the subscripts of the unique elements in an array.
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    idx => uniq(array [, index])
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    This function returns the subscripts of the unique elements in an
+    array. Note that repeated elements must be adjacent in order to be
+    found.  This routine is intended to be used with the sort function;
+    see the discussion of the index argument below.
+\end{Verbatim}
+\textbf{INPUTS:}\hspace{0.08in}\begin{Verbatim}
+    ...          :: array(:)   The array to be scanned.
+    int          :: index(:)   An array of indices into array that order
+                                 the elements into monotonic order.
+\end{Verbatim}
+\textbf{OUTPUT:}\hspace{0.08in}\begin{Verbatim}
+    ..., pointer :: idx(:)     An array of indicies into array.
+\end{Verbatim}
+\textbf{SEE ALSO:}\hspace{0.08in}\begin{Verbatim}
+    unique
+\end{Verbatim}
+\textbf{REFERENCES:}\hspace{0.08in}\begin{Verbatim}
+    This is a Fortran 90 implementation of IDL's uniq() function.
+\end{Verbatim}
+\section{Arrays/unique}
+\textsl{[ Functions ]}
+
+\label{ch:robo23}
+\label{ch:Arrays_unique}
+\index{unsorted!unique}\index{Functions!unique}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    uniq - Return the unique elements in an array.
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    array => uniq(array [, index])
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    This function returns the unique elements in an array. Note that
+    repeated elements must be adjacent in order to be found.  This
+    routine is intended to be used with the sort function; see the
+    discussion of the index argument below.
+\end{Verbatim}
+\textbf{INPUTS:}\hspace{0.08in}\begin{Verbatim}
+    ...          :: array(:)   The array to be scanned.
+    int          :: index(:)   An array of indices into array that order
+                                 the elements into monotonic order.
+\end{Verbatim}
+\textbf{OUTPUT:}\hspace{0.08in}\begin{Verbatim}
+    ..., pointer :: uarray(:)  An array with the unique elements of array.
+\end{Verbatim}
+\textbf{SEE ALSO:}\hspace{0.08in}\begin{Verbatim}
+    uniq
+\end{Verbatim}
+\textbf{REFERENCES:}\hspace{0.08in}\begin{Verbatim}
+    This function was inspired by the unique() function in Ray Sterner's 
+    JHUA library.
+\end{Verbatim}
+\section{Arrays/unit\_vector}
+\textsl{[ Functions ]}
+
+\label{ch:robo24}
+\label{ch:Arrays_unit_vector}
+\index{unsorted!unit\_vector}\index{Functions!unit\_vector}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    unit_vector
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    uvector = unit_vector(vector)
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    This function calculates the unit vector of a 1D vector.
+\end{Verbatim}
+\textbf{INPUTS:}\hspace{0.08in}\begin{Verbatim}
+    real, dim(:) :: vector   1D array to be normalized.
+
+ RESULT
+    real, dim(:) :: uvector  Normalized version of vector, i.e.
+                               vector divided by its norm.
+\end{Verbatim}
+\textbf{NOTES:}\hspace{0.08in}\begin{Verbatim}
+    Vector can be a float, double, complex or double complex
+    array; the calculated unit vector will be of the same type.
+\end{Verbatim}
+\textbf{EXAMPLE:}\hspace{0.08in}\begin{Verbatim}
+    To calculate a unit vector from an arbitray vector in physical
+    space (like a coordinate vector), try
+
+      [use tools90|use arrays]
+        ...
+      real(wp), dimension(3) :: vec, uvec
+        ...
+      vec  = ...
+      uvec = unit_vector(vec)
+\end{Verbatim}
+\textbf{SEE ALSO:}\hspace{0.08in}\begin{Verbatim}
+      l2norm
+\end{Verbatim}
+\section{Arrays/where}
+\textsl{[ Functions ]}
+
+\label{ch:robo25}
+\label{ch:Arrays_where}
+\index{unsorted!where}\index{Functions!where}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    where - Return the subscripts for which a condition is fullfilled.
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    idx => where(mask [, n])
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    This function returns the subscripts of the true elements of mask.
+\end{Verbatim}
+\textbf{INPUTS:}\hspace{0.08in}\begin{Verbatim}
+    logical      :: mask(:)   The array to be scanned.
+\end{Verbatim}
+\textbf{OUTPUT:}\hspace{0.08in}\begin{Verbatim}
+    int, pointer :: idx(:)    An array of indices where mask == .true.
+\end{Verbatim}
+\textbf{REFERENCES:}\hspace{0.08in}\begin{Verbatim}
+    This is a Fortran 90 implementation of IDL's where() function.
+\end{Verbatim}
+\section{Common/file\_delete}
+\textsl{[ Subroutines ]}
+
+\label{ch:robo26}
+\label{ch:Common_file_delete}
+\index{unsorted!file\_delete}\index{Subroutines!file\_delete}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+       file_delete - delete a file if it exists
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+       use ropp_utils
+         ...
+       call file_delete(file, ierr)
+
+ INPUT
+    file - filename to be deleted
+\end{Verbatim}
+\textbf{OUTPUT:}\hspace{0.08in}\begin{Verbatim}
+    ierr - error message with status
+\end{Verbatim}
+\textbf{NOTES:}\hspace{0.08in}\begin{Verbatim}
+    Output status flag depending on outcome
+    -2 : task failed 
+    -1 : file does not exist - task failed
+     0 : task successful
+\end{Verbatim}
+\section{Common/get\_io\_unit}
+\textsl{[ Subroutines ]}
+
+\label{ch:robo27}
+\label{ch:Common_get_io_unit}
+\index{unsorted!get\_io\_unit}\index{Subroutines!get\_io\_unit}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+       get_io_unit - Obtain a free Fortran unit number
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+       use ropp_utils
+        ...
+       unit = get_io_unit()
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+       This function returns the first available unit number larger than 10.
+       BASED ON MARQUARDT COLLECTION FILES LIBRARY ROUTINE
+\end{Verbatim}
+\section{Common/ropp\_utils\_version}
+\textsl{[ Functions ]}
+
+\label{ch:robo28}
+\label{ch:Common_ropp_utils_version}
+\index{unsorted!ropp\_utils\_version}\index{Functions!ropp\_utils\_version}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+   ropp_utils_version
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+   Return ROPP_UTILS version ID string
+
+   USE ropp_utils
+   version = ropp_utils_version()
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+   This function returns the (common) version string for the ROPP_UTILS
+   module. By default, this function should be called by all ROPP_UTILS
+   tools to display a version ID when the '-v' command-line switch is
+   used.
+\end{Verbatim}
+\section{Common/To\_Lower}
+\textsl{[ Subroutines ]}
+
+\label{ch:robo29}
+\label{ch:Common_To_Lower}
+\index{unsorted!To\_Lower}\index{Subroutines!To\_Lower}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+       To_Lower - Convert alpha characters in a string from upper to
+                  lower case
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+       use ropp_utils
+        ...
+       call To_Lower( string )
+\end{Verbatim}
+\section{Common/To\_Upper}
+\textsl{[ Subroutines ]}
+
+\label{ch:robo30}
+\label{ch:Common_To_Upper}
+\index{unsorted!To\_Upper}\index{Subroutines!To\_Upper}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+       To_Upper - Convert alpha characters in a string from lower to
+                  upper case
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+       use ropp_utils
+        ...
+       call To_Upper( string )
+\end{Verbatim}
+\section{Coordinates/cart2geod}
+\textsl{[ Functions ]}
+
+\label{ch:robo32}
+\label{ch:Coordinates_cart2geod}
+\index{unsorted!cart2geod}\index{Functions!cart2geod}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    cart2geod - Transform occultation geometry in cartesian coordinates
+                to geodetic latitude, longitude and height data.
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    call cart2geod(cart, lat, lon, height)
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    This subroutine calculates occultation latitude, longitude and height 
+    relative to the WGS-84 ellipsoid from a cartesian vector relative to the
+    ECF frame. 
+\end{Verbatim}
+\textbf{INPUTS:}\hspace{0.08in}\begin{Verbatim}
+    cart        cartesian position vector (relative to ECF frame)
+\end{Verbatim}
+\textbf{OUTPUT:}\hspace{0.08in}\begin{Verbatim}
+    lat           latitude (deg)
+    lon           longitude (deg)
+    height        geometric height relative to WGS-84 ellipsoid (m)
+\end{Verbatim}
+\textbf{NOTES:}\hspace{0.08in}\begin{Verbatim}
+    Fast approximate solution
+\end{Verbatim}
+\textbf{SEE ALSO:}\hspace{0.08in}\textbf{REFERENCES:}\hspace{0.08in}\begin{Verbatim}
+    Escobal, Methods of orbit determination
+    1965, Wiley & sons, Inc. Pp. 27 - 29.
+
+    Mahoney, M.J., A discussion of various measures of altitudes,
+       URL: http://mtp.jpl.nasa.gov/notes/altitude/altitude.html,
+       cited 13/01/2009.
+\end{Verbatim}
+\section{Coordinates/coordinates}
+\textsl{[ Modules ]}
+
+\label{ch:robo33}
+\label{ch:Coordinates_coordinates}
+\index{unsorted!coordinates}\index{Modules!coordinates}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    coordinates - Module interfacing various geometric routines and functions.
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    use coordinates
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    This module provides interfaces to some geometric funtions and
+    subroutines of the ropp_utils library.
+\end{Verbatim}
+\textbf{SEE ALSO:}\hspace{0.08in}\begin{Verbatim}
+    ecf2eci
+    eci2ecf
+    impact_parameter
+    occ_point
+    plane_coordinates
+    rotate
+    earth
+\end{Verbatim}
+\section{Coordinates/curvature}
+\textsl{[ Functions ]}
+
+\label{ch:robo34}
+\label{ch:Coordinates_curvature}
+\index{unsorted!curvature}\index{Functions!curvature}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    curvature - Determine the section curvature, its centre for the Earth
+                reference ellipsoid, and the curvature radius
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    call curvature(lat, lon, theta, r_coc, roc)
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    This subroutine calculates the cartesian coordinates of the local centre
+    of curvature and the radius for the reference ellipsoid.
+\end{Verbatim}
+\textbf{INPUTS:}\hspace{0.08in}\begin{Verbatim}
+    lat           latitude of surface point
+    lon           longitude of surface point
+    theta         azimuth direction of the cross-section
+\end{Verbatim}
+\textbf{OUTPUT:}\hspace{0.08in}\begin{Verbatim}
+    r_coc         cartesian centre of curvature vector (relative to ECF frame)
+    roc           radius of curvature value           
+\end{Verbatim}
+\textbf{NOTES:}\hspace{0.08in}\begin{Verbatim}
+    Uses theorems of Meusnier and Euler
+\end{Verbatim}
+\textbf{REFERENCES:}\hspace{0.08in}\section{Coordinates/deg2rad}
+\textsl{[ Parameters ]}
+
+\label{ch:robo35}
+\label{ch:Coordinates_deg2rad}
+\index{unsorted!deg2rad}\index{Parameters!deg2rad}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    deg2rad - Degrees to radians conversion
+    rad2deg - Radians to degrees conversion
+\end{Verbatim}
+\textbf{SOURCE:}\hspace{0.08in}\begin{Verbatim}
+  real(wp), parameter  :: deg2rad = Pi / 180.0_wp
+
+  real(wp), parameter  :: rad2deg = 180.0_wp / Pi
+\end{Verbatim}
+\section{Coordinates/ecf2eci}
+\textsl{[ Functions ]}
+
+\label{ch:robo36}
+\label{ch:Coordinates_ecf2eci}
+\index{unsorted!ecf2eci}\index{Functions!ecf2eci}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    ecf2eci - Transform occultation geometry relative to ECF
+              reference frame to geometry relative to ECI frame.
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    r_eci = ecf2eci(year, month, day, hour, minute, sec, dsec, r_ecf)
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    This subroutine calculates occultation coordinates relative to the ECI 
+    frame.
+\end{Verbatim}
+\textbf{INPUTS:}\hspace{0.08in}\begin{Verbatim}
+    year          occultation start year
+    month         occultation start month
+    day           occultation start day
+    hour          occultation start hour
+    minute        occultation start minute
+    sec           occultation start second
+    dsec          time since occultation start
+    r_ecf         cartesian position vector (relative to ECF frame)
+\end{Verbatim}
+\textbf{OUTPUT:}\hspace{0.08in}\begin{Verbatim}
+    r_eci         cartesian position vector (relative to ECI frame)  
+\end{Verbatim}
+\textbf{NOTES:}\hspace{0.08in}\textbf{SEE ALSO:}\hspace{0.08in}\begin{Verbatim}
+    eci2ecf
+\end{Verbatim}
+\textbf{REFERENCES:}\hspace{0.08in}\begin{Verbatim}
+     Astronomical Alamanus, 1993
+\end{Verbatim}
+\section{Coordinates/eci2ecf}
+\textsl{[ Functions ]}
+
+\label{ch:robo37}
+\label{ch:Coordinates_eci2ecf}
+\index{unsorted!eci2ecf}\index{Functions!eci2ecf}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    eci2ecf - Transform occultation geometry relative to ECI
+              reference frame to geometry relative to ECF frame.
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    r_ecf = eci2ecf(year, month, day, hour, minute, sec, dsec, r_eci)
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    This subroutine calculates occultation coordinates relative to the ECF 
+    frame.
+\end{Verbatim}
+\textbf{INPUTS:}\hspace{0.08in}\begin{Verbatim}
+    year           occultation start year
+    month          occultation start month
+    day            occultation start day
+    hour           occultation start hour
+    minute         occultation start minute
+    sec            occultation start second
+    dsec           time since occultation start
+    r_eci          cartesian position vector (relative to ECI frame)
+\end{Verbatim}
+\textbf{OUTPUT:}\hspace{0.08in}\begin{Verbatim}
+    r_ecf          cartesian position vector (relative to ECF frame)  
+\end{Verbatim}
+\textbf{NOTES:}\hspace{0.08in}\textbf{SEE ALSO:}\hspace{0.08in}\begin{Verbatim}
+    ecf2eci
+\end{Verbatim}
+\textbf{REFERENCES:}\hspace{0.08in}\begin{Verbatim}
+     Astronomical Alamanus, 1993
+\end{Verbatim}
+\section{Coordinates/geod2cart}
+\textsl{[ Functions ]}
+
+\label{ch:robo38}
+\label{ch:Coordinates_geod2cart}
+\index{unsorted!geod2cart}\index{Functions!geod2cart}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    geod2cart - Transform occultation geodetic latitude, longitude and height 
+                data to geometry in cartesian coordinates.
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    call geod2cart(lat, lon, height, cart)
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    This subroutine calculates a cartesian vector relative to the
+    ECF frame from occultation latitude, longitude and height 
+    relative to the WGS-84 ellipsoid.
+\end{Verbatim}
+\textbf{INPUTS:}\hspace{0.08in}\begin{Verbatim}
+    lat           latitude (deg)
+    lon           longitude (deg)
+    height        geometric height relative to WGS-84 ellipsoid (m)
+\end{Verbatim}
+\textbf{OUTPUT:}\hspace{0.08in}\begin{Verbatim}
+    cart          cartesian position vector (relative to ECF frame)
+\end{Verbatim}
+\textbf{NOTES:}\hspace{0.08in}\textbf{SEE ALSO:}\hspace{0.08in}\begin{Verbatim}
+   cart2geod
+\end{Verbatim}
+\textbf{REFERENCES:}\hspace{0.08in}\begin{Verbatim}
+    Escobal, Methods of orbit determination
+    1965, Wiley & sons, Inc. Pp. 27 - 29.
+
+    Mahoney, M.J., A discussion of various measures of altitudes,
+       URL: http://mtp.jpl.nasa.gov/notes/altitude/altitude.html,
+       cited 13/01/2009.
+\end{Verbatim}
+\section{Coordinates/global}
+\textsl{[ Parameters ]}
+
+\label{ch:robo39}
+\label{ch:Coordinates_global}
+\index{unsorted!global}\index{Parameters!global}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    Re - Equatorial semiaxis (m)
+    Rp - Polar semiaxis (m)
+    f  - Flatness
+    e  - Squared eccentricity
+\end{Verbatim}
+\textbf{REFERENCES:}\hspace{0.08in}\begin{Verbatim}
+   http://earth-info.nga.mil/GandG/wgs84/gravitymod/index.html
+\end{Verbatim}
+\textbf{SOURCE:}\hspace{0.08in}\begin{Verbatim}
+  real(wp), parameter  :: Re = 6378137.0_wp
+
+  real(wp), parameter  :: f  = 1.0_wp / 298.2572235630_wp
+
+  real(wp), parameter  :: Rp = Re * (1.0_wp - f)
+
+  real(wp), parameter  :: e  = (Re**2 - Rp**2)/(Re**2)
+\end{Verbatim}
+\section{Coordinates/impact\_parameter}
+\textsl{[ Functions ]}
+
+\label{ch:robo40}
+\label{ch:Coordinates_impact_parameter}
+\index{unsorted!impact\_parameter}\index{Functions!impact\_parameter}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    impact parameter - Determine the impact parameter
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    impact =  impact_parameter(r_leo, r_gns, bangle)
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    This function calculates the impact parameter connecting two given points
+    assuming spherical symmetry using trigonometric formulae.
+    With no knowledge of the bending angle (i.e. default processing), this 
+    routine returns the straight line tangent altitude.
+\end{Verbatim}
+\textbf{INPUTS:}\hspace{0.08in}\begin{Verbatim}
+    r_leo         cartesian LEO position vector (relative to ECF frame)
+    r_gns         cartesian GPS position vector (relative to ECF frame)
+    bangle        bending angle
+\end{Verbatim}
+\textbf{OUTPUT:}\hspace{0.08in}\begin{Verbatim}
+    impact        impact parameter
+\end{Verbatim}
+\textbf{SEE ALSO:}\hspace{0.08in}\textbf{REFERENCES:}\hspace{0.08in}\section{Coordinates/occ\_point}
+\textsl{[ Functions ]}
+
+\label{ch:robo41}
+\label{ch:Coordinates_occ_point}
+\index{unsorted!occ\_point}\index{Functions!occ\_point}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    occ_point - Determine the occultation point
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    call occ_point(r_leo, r_gns, lat, lon, r_coc, roc, azimuth, undulation, 
+                   cfile, efile)
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    This subroutine calculates the lowest occultation perigree point projected
+    to the Earth's surface
+\end{Verbatim}
+\textbf{INPUTS:}\hspace{0.08in}\begin{Verbatim}
+    r_leo         cartesian LEO position vector (relative to ECF frame)
+    r_gns         cartesian GPS position vector (relative to ECF frame)
+    cfile         path to geoid potential coefficients file (optional)
+    efile         path to geoid potential corrections file (optional)
+\end{Verbatim}
+\textbf{OUTPUT:}\hspace{0.08in}\begin{Verbatim}
+    lat           Occultation point latitude
+    lon           Occultation point longitude
+    r_coc         Cartesian centre of curvature vector for occ point (ECF)
+    roc           Radius of curvature value for occultation point
+    azimuth       GPS to LEO azimuth direction wrt true North (deg)
+    undulation    Difference between ellipsoid (WGS-84) and EGM-96 geoid (m)
+\end{Verbatim}
+\textbf{SEE ALSO:}\hspace{0.08in}\textbf{REFERENCES:}\hspace{0.08in}\section{Coordinates/plane\_coordinates}
+\textsl{[ Functions ]}
+
+\label{ch:robo42}
+\label{ch:Coordinates_plane_coordinates}
+\index{unsorted!plane\_coordinates}\index{Functions!plane\_coordinates}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    plane_coordinates - Calculation of occultation plane coordinates of GSP
+                        and LEO
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    call plane_coordinates(r_leo, r_gns, r_coc, roc, xleo, yleo, xgns, ygns, ax, ay)
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    This subroutine calculates the GPS and LEO coordinates in GPS-O-LEO plane
+    transformed to unmoving GPS.
+\end{Verbatim}
+\textbf{INPUTS:}\hspace{0.08in}\begin{Verbatim}
+    r_leo         cartesian LEO position vector (m)
+    r_gns         cartesian GPS position vector (m)
+    r_coc         Cartesian centre of curvature vector (m) 
+    roc           Local radius of curvature (m)
+\end{Verbatim}
+\textbf{OUTPUT:}\hspace{0.08in}\begin{Verbatim}
+    xleo          X coordinates of LEO (m)
+    yleo          Y coordinates of LEO (m)
+    xgns          X coordinates of GPS (m)
+    ygns          Y coordinates of GPS (m)
+    ax            Occultation plane X basis vector
+    ay            Occultation plane Y basis vector
+\end{Verbatim}
+\textbf{SEE ALSO:}\hspace{0.08in}\textbf{REFERENCES:}\hspace{0.08in}\section{Coordinates/rotate}
+\textsl{[ Functions ]}
+
+\label{ch:robo43}
+\label{ch:Coordinates_rotate}
+\index{unsorted!rotate}\index{Functions!rotate}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    rotate - Rotate a vector in cartesian coordinates around
+             a given axis by a given angle  
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    Rotate = rotate(X, A, phi)
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    This function rotates a vector X around a given axis A by angle phi.
+       N*(N,X) + [N,X]*Sin(Phi) + (X-N*(N,X))*Cos(Phi),   where N=A/|A|
+\end{Verbatim}
+\textbf{INPUTS:}\hspace{0.08in}\begin{Verbatim}
+    X             Vector to rotate
+    A             Rotation axis
+    Phi           Rotation angle (rad)
+\end{Verbatim}
+\textbf{OUTPUT:}\hspace{0.08in}\begin{Verbatim}
+    Rotate        Rotated vector
+\end{Verbatim}
+\textbf{NOTES:}\hspace{0.08in}\textbf{SEE ALSO:}\hspace{0.08in}\textbf{REFERENCES:}\hspace{0.08in}\section{Coordinates/tangent\_point}
+\textsl{[ Functions ]}
+
+\label{ch:robo44}
+\label{ch:Coordinates_tangent_point}
+\index{unsorted!tangent\_point}\index{Functions!tangent\_point}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    tangent_point - Determine tangent point coordinates
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    call occ_point(r_leo, r_gns, lat_tp, lon_tp, azimuth_tp)
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    This subroutine calculates the latitude, longitude and azimuth of
+    each tangent point for an occultation
+\end{Verbatim}
+\textbf{INPUTS:}\hspace{0.08in}\begin{Verbatim}
+    r_leo         cartesian LEO position vector (relative to ECF frame)
+    r_gns         cartesian GPS position vector (relative to ECF frame)
+\end{Verbatim}
+\textbf{OUTPUT:}\hspace{0.08in}\begin{Verbatim}
+    lat_tp        tangent point latitude
+    lon_tp        tangent point longitude
+    azimuth_tp    GPS to LEO azimuth direction wrt true North at tangent (deg)
+\end{Verbatim}
+\textbf{SEE ALSO:}\hspace{0.08in}\textbf{REFERENCES:}\hspace{0.08in}\section{Coordinates/vector\_angle}
+\textsl{[ Functions ]}
+
+\label{ch:robo45}
+\label{ch:Coordinates_vector_angle}
+\index{unsorted!vector\_angle}\index{Functions!vector\_angle}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    vector_angle - Find the angle between two cartesian vectors
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    angle = vector_angle(X, Y, A)
+\end{Verbatim}
+\textbf{INPUTS:}\hspace{0.08in}\begin{Verbatim}
+    X             Vector 1
+    Y             Vector 2
+    A             Orientation axis (optional)
+\end{Verbatim}
+\textbf{OUTPUT:}\hspace{0.08in}\begin{Verbatim}
+    Angle       Angle between vectors
+\end{Verbatim}
+\section{Coordinates/vector\_product}
+\textsl{[ Functions ]}
+
+\label{ch:robo46}
+\label{ch:Coordinates_vector_product}
+\index{unsorted!vector\_product}\index{Functions!vector\_product}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    vector_product - Compute a vector product of two cartesian vectors
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    product = vector_product(X, Y)
+\end{Verbatim}
+\textbf{INPUTS:}\hspace{0.08in}\begin{Verbatim}
+    X             Vector 1
+    Y             Vector 2
+\end{Verbatim}
+\textbf{OUTPUT:}\hspace{0.08in}\begin{Verbatim}
+    Product       Vector product
+\end{Verbatim}
+\section{Datetime/CalToJul}
+\textsl{[ Subroutines ]}
+
+\label{ch:robo47}
+\label{ch:Datetime_CalToJul}
+\index{unsorted!CalToJul}\index{Subroutines!CalToJul}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+   CalToJul  (caltojul.f90)
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+   Subroutine to convert between calendar date/time &
+   Julian date & fraction
+
+   REAL(dp) :: JDF
+   INTEGER  :: CDT(8), inv
+   CALL CalToJul ( CDT, JDF, inv )
+\end{Verbatim}
+\textbf{INPUTS:}\hspace{0.08in}\begin{Verbatim}
+   CDT  int   Array(8): Calender date & clock time [if inv>0]
+   JDF  dflt  Julian date & fraction (UTC)         [if inv<=0]
+   inv  int   Indicator for direction of conversion
+               > 0 : CDT --> JDF
+              <= 0 : JDF --> CDT
+
+ OUTPUTS
+   CDT  int   Array(8): Calender date & clock time [if inv<=0]
+   JDF  dflt  Julian date & fraction (UTC)         [if inv>0]
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+   Converts between:
+     - CDT: Gregorian calendar date & clock time as an 8-element array
+       (year,month,day,zone,hour,minute,second,millisecond)
+       as returned by the F90 DATE_AND_TIME(VALUE=array) intrinsic
+   and:
+     - JDF: Julian Date (UTC, in days and fractions) [See NOTES]
+   or vice-versa.
+   inv indicates the direction of conversion: >0 for CDT-->JDF else
+   JDF-->CDT.
+   The zone parameter (CDT(4) - offset from UTC in minutes) is
+   applied to CDT-->JDF conversions so that JDF is always in UTC.
+   JDF-->CDT conversions assume JDF is in UTC and CDT(4) is
+   applied to obtain the appropriate time zone (all elements of CDT
+   except CDT(4) are overwritten). Set CDT(4)=0 to keep the
+   JDF-->CDT conversion in UTC.
+   NB JDF argument's KIND must be declared equivalent to
+   DOUBLE PRECISION (REAL*8).
+   The Date/Julian day number conversions apply the algorithms from
+   Ref.1. All dates are assumed to be in the Gregorian Calendar.
+\end{Verbatim}
+\textbf{NOTES:}\hspace{0.08in}\begin{Verbatim}
+   From Ref.2, Julian period or dates:
+   - Number of consecutive days since 1-Jan-4713 BC.
+   - Devised by Joseph Justus Scaliger in 1582. Thought to be named after
+     his father, Julius Caesar Scaliger, but some now think it named
+     after the Julian calendar (ie after Julius Caesar) - see Ref.3.
+   - Based on 'cycles of history' of period 7980 years, being the
+     product of:
+      28 = so-called solar cycle in Julian calendar
+      19 = lunar or metonic cycle
+      15 = 'cycle of indiction', an ancient Roman taxation period.
+     4713 BC was the nearest past year on which all three cycles started
+     together. See Refs.2,3.
+   - By convention, Julian dates begin at midday, the astronomical start
+     of the day (Ref.3)
+   - Epochs other than 12:00 1-Jan-4713 BC may be used, but these strictly
+     should not be called 'Julian' dates. See the TimeSince() subroutine in
+     this package.
+\end{Verbatim}
+\textbf{REFERENCES:}\hspace{0.08in}\begin{Verbatim}
+   1) Meeus, Jan (1998). Astronomical Algorithms.
+      2nd ed., Willmann-Bell Inc, ISBN 0-943396-61-1
+   2) Encyclpaedia Brittanica, Microcropaedia Vol.V,
+      15th Ed. 1975, p.632.
+   3) Wikipaedia: http://en.wikipedia.org/wiki/Julian_Date
+\end{Verbatim}
+\textbf{SEE ALSO:}\hspace{0.08in}\begin{Verbatim}
+   TimeSince()
+\end{Verbatim}
+\section{DateTime/ConvertDT}
+\textsl{[ Subroutines ]}
+
+\label{ch:robo48}
+\label{ch:DateTime_ConvertDT}
+\index{unsorted!ConvertDT}\index{Subroutines!ConvertDT}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+   ConvertDT     (convertdt.f90)
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+   Convert a Date & Time string between long1 or long2 & short formats
+
+   USE DateTime
+   CHARACTER (LEN=24) :: DTLong1
+   CHARACTER (LEN=19) :: DTLong2
+   CHARACTER (LEN=14) :: DTshort
+   INTEGER            :: inv msecs, lfmt
+   CALL ConvertDT ( DTlong, DTshort, inv[, LongFmt=lfmt][, Msec=msecs] )
+\end{Verbatim}
+\textbf{INPUTS:}\hspace{0.08in}\begin{Verbatim}
+   DTlong   chr  Date & Time as dd-MMM-yyyy hh:mm:ss.ttt
+                 or yyyy-MM-dd hh:mm:ss.ttt    [if inv>0]
+   DTshort  chr  Date & Time as yyyyMMddhhmmss [if inv<=0]
+   inv      int  Inversion flag
+                  >0 : long --> short
+                 <=0 : short --> long
+   Msec     int  (Optional) millisecs value (ttt: 0-999)
+   LongFmt  int  (optional) Output long format style. Ignored if inv>0
+                  1 = dd-MMM-yyyy hh:mm:ss.ttt (default)
+                  2 = yyyy-MM-dd hh:mm:ss.ttt
+
+ OUTPUTS
+   DTlong   chr  Date & Time as dd-MMM-yyyy hh:mm:ss.ttt [if inv<=0]
+   DTshort  chr  Date & Time as yyyyMMddhhmmss           [if inv>0]
+   Msec     int  (Optional) millisecs value (ttt: 0-999)
+\end{Verbatim}
+\textbf{CALLS:}\hspace{0.08in}\begin{Verbatim}
+   MonthOfYear
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+   When inv > 0, converts a date & time string from long1
+   (dd-MMM-yyyy hh:mm:ss.ttt) or long2 ( yyyy-MM-dd hh:mm:ss.ttt)
+   formats to short (yyyymmddhhmmss) format. For both long formats,
+   the time portion may be truncated, in which case the short format
+   will be padded with '0's. The ttt portion is anyway ignored.
+   When inv <= 0, converts a date & time string from short
+   (yyyymmddhhmmss) format to long1 (dd-MMM-yyyy hh:mm:ss.ttt) format.
+   The ttt portion will be '0's.
+   While the long formats are suitable for human reading, the
+   short format is more efficient to use for comparisons and sorting.
+
+ EXAMPLES
+   USE DateTime
+   CHARACTER (LEN=24) :: DTlong1
+   CHARACTER (LEN=19) :: DTlong2
+   CHARACTER (LEN=14) :: DTshort
+   INTEGER            :: msecs
+   DTlong2 = "2010-04-14"
+   CALL ConvertDT ( DTlong2, DTshort, 1 )
+   --> DTshort = "20100414000000"
+   DTshort = "20100414093456"
+   msecs = 789
+   CALL ConvertDT ( DTlong1, DTshort, -1, Msec=msecs )
+   --> DTlong = "14-Apr-2010 09:34:56.789"
+   DTshort = "20100414093456"
+   CALL ConvertDT ( DTlong1, DTshort, -1, LongFmt=2 )
+   --> DTlong = "2010-04-14 09:34:56.000"
+\end{Verbatim}
+\section{DateTime/Date\_and\_Time\_UTC}
+\textsl{[ Subroutines ]}
+
+\label{ch:robo49}
+\label{ch:DateTime_Date_and_Time_UTC}
+\index{unsorted!Date\_and\_Time\_UTC}\index{Subroutines!Date\_and\_Time\_UTC}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+   Date_and_Time_UTC     (date_and_time_utc.f90)
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+   Mimics the F90 intrinsic DATE_AND_TIME, but returned
+   elements are in UTC
+
+   USE DateTime
+   CHARACTER (LEN=8)  :: Date
+   CHARACTER (LEN=10) :: Time
+   CHARACTER (LEN=5)  :: Zone
+   INTEGER            :: Values(8)
+   CALL Date_and_Time_UTC ( [DATE=Date][, TIME=Time]
+                          [, ZONE=zone][, VALUES=Values] )
+\end{Verbatim}
+\textbf{INPUTS:}\hspace{0.08in}\begin{Verbatim}
+   None
+
+ OUTPUTS
+   Date    chr   (Optional) Date (CCYYMMDD)   in UTC
+   Time    chr   (Optional) Time (hhmmss.sss) in UTC
+   Zone    chr   (Optional) Zone (+/-hhmm)    always "+00:00"
+   Values  int   (Optional) Array(8): Calendar date & clock time in UTC
+\end{Verbatim}
+\textbf{CALLS:}\hspace{0.08in}\begin{Verbatim}
+   CalToJul
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+   Get current system date/time as YR,MN,DY,ZO,HR,MN,SC,MS.
+   and using the zone element (minutes relative to UTC),
+   offset local time to UTC. NB: 'local' may already in UTC!
+   All arguments are optional, and can be any or all of Date,
+   Time, Zone (not useful!) as strings and Values (integer array
+   of date/time elements), as per the DATE_AND_TIME() intrinsic.
+\end{Verbatim}
+\section{DateTime/DateTimeOffset}
+\textsl{[ Subroutines ]}
+
+\label{ch:robo50}
+\label{ch:DateTime_DateTimeOffset}
+\index{unsorted!DateTimeOffset}\index{Subroutines!DateTimeOffset}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+   DateTimeOffset     (datetimeoffset.f90)
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+   Offset a date/time by a given amount
+
+   USE DateTime
+   INTEGER :: CDT1(8), CDT2(8)
+   CALL DateTimeOffset ( CDT1 "+|-", CDT2 )
+\end{Verbatim}
+\textbf{INPUTS:}\hspace{0.08in}\begin{Verbatim}
+   CDT1  int   Array(8): Calendar date & clock time in UTC
+   oper  char  Operation ("+" or "-")
+   CDT2  int   Array(8): Calender date & clock time in UTC
+
+ OUTPUTS
+   CDT1  int   Array(8): Calendar date & clock time in UTC
+\end{Verbatim}
+\textbf{CALLS:}\hspace{0.08in}\begin{Verbatim}
+   CalToJul
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+   Appplies an offset to the given date & time array using
+   a second date/time array, which may be a small delta or
+   a full calendar value. The offset operation may be
+   to add (oper="+") or subtract (oper="-"). The result is
+   returned in the first date/time array.
+   This routine handles two types of case:
+   1) CDT1 is an absolute date/time and CDT2 is a relatively
+      small (<10 years) delta offset (oper is "+" or "-"); CDT1
+      will be the absolute date/time with the offset applied.
+   2) CDT1 and CDT2 are both absolute date/times and oper is
+      "-"; CDT1 will be the time difference in days, hours,
+      minutes, seconds & msecs (year, month & zone elements
+      will be zero). If CDT2 is later than CDT1, all of these
+      non-zero time elements will be negative.
+   Note that the case of CDT1 + CDT2 where both are absolute
+   date/times will work - but this is not a sensible operation!
+
+ EXAMPLES
+   1) Difference between two date/times:
+      USE DateTime
+      INTEGER :: CDT1(8)
+      INTEGER :: CDT2(8) = (/2010,1,1,0,0,0,0,0/)
+      CALL DATE_AND_TIME_UTC(VALUES=CDT1)
+      --> CDT1 = 2010,4,9,15,17,14,234
+      CALL DateTimeOffset ( CDT1, "-", CDT2 )
+      --> CDT1 = 0,0,98,0,15,17,14,234
+
+   2) Date/time three days, 12 hours ago from now (which just
+      happens to be 06:30 2-Jan-2011):
+      USE DateTime
+      INTEGER :: CDT1(8) = (/2011,1,2,0,06,30,0,0/)
+      INTEGER :: CDT2(8) = (/0,0,3,0,12,0,0,0/)
+      CALL DateTimeOffset ( CDT1, "+", CDT2 )
+      --> CDT1 = 2010,12,29,0,18,30,0,0
+
+   3) Next whole hour after an observaton timestamped at
+      23:14 31-Dec-2010:
+      USE DateTime
+      INTEGER :: CDT1(8) = (/2010,12,31,0,23,14,0,0/)
+      INTEGER :: CDT2(8) = (/0,0,0,0,1,0,0,0/)
+      CALL DateTimeOffset ( CDT1, "+", CDT2 )
+      CDT1(6:8) = 0
+      --> CDT1 = 2011,1,1,0,0,0,0,0
+
+   4) Day-of-year for today
+      USE DateTime
+      INTEGER :: CDT1(8), CDT2(8)
+      CALL Date_and_Time_UTC ( VALUES=CDT1 )
+      --> CDT1 = 2010,4,9,15,17,14,234
+      CDT2 = (/CDT1(1),1,0,0,0,0,0,0/) ! NB day=0 so 1-Jan returns 1
+      CALL DateTimeOffset ( CDT1,'-',CDT2)
+      --> CDT1(IdxDay) = 99
+\end{Verbatim}
+\textbf{SEE ALSO:}\hspace{0.08in}\begin{Verbatim}
+    TimeSince()
+\end{Verbatim}
+\section{DateTime/DateTimeProgs}
+\textsl{[ Modules ]}
+
+\label{ch:robo51}
+\label{ch:DateTime_DateTimeProgs}
+\index{unsorted!DateTimeProgs}\index{Modules!DateTimeProgs}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    DateTimeProgs    (datetimeprogs.f90)
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+   Interface module for date & time manipulation routines
+
+    USE DateTimeProgs
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    This module provides interfaces to some date and time manipulation 
+    routines
+\end{Verbatim}
+\textbf{SEE ALSO:}\hspace{0.08in}\begin{Verbatim}
+   DateTimeTypes
+   CalToJul
+   ConvertDT
+   Date_and_Time_UTC
+   DateTimeOffset
+   MonthOfYear
+   TimeSince
+\end{Verbatim}
+\section{DateTime/DateTimeTypes}
+\textsl{[ Modules ]}
+
+\label{ch:robo52}
+\label{ch:DateTime_DateTimeTypes}
+\index{unsorted!DateTimeTypes}\index{Modules!DateTimeTypes}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    DateTimeTypes    (datetimetypes.f90) 
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+   Module of definitions for date & time manipulation routines
+
+    USE DateTimeTypes
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    This module provides definitions for date & time manipulation 
+    routines
+\end{Verbatim}
+\textbf{SEE ALSO:}\hspace{0.08in}\begin{Verbatim}
+   DateTimeProgs
+   CalToJul
+   ConvertDT
+   Date_and_Time_UTC
+   DateTimeOffset
+   MonthOfYear
+   TimeSince
+\end{Verbatim}
+\section{DateTime/MonthOfYear}
+\textsl{[ Subroutines ]}
+
+\label{ch:robo53}
+\label{ch:DateTime_MonthOfYear}
+\index{unsorted!MonthOfYear}\index{Subroutines!MonthOfYear}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+   MonthOfYear     (monthofyear.f90)
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+   Convert a Month between string and numeric form
+
+   USE DateTime
+   CHARACTER (LEN=10) :: monthname
+   INTEGER            :: monthnumber, inv
+   CALL MonthOfYear ( monthnumber, monthname, inv )
+\end{Verbatim}
+\textbf{INPUTS:}\hspace{0.08in}\begin{Verbatim}
+   MonthNumber  int  Month as number (1-12) {if inv>=0}
+   MonthString  chr  Month as name ("JAN"-"DEC", "January"-"December")
+                     [if inv<0]
+   inv          int  Inversion flag
+                      > 0 : number --> string (full name)
+                      = 0 : number --> string (3chr uppercase)
+                      < 0 : string --> number
+
+ OUTPUTS
+   MonthNumber  int  Month as number (1-12 or 0 if string invalid)
+                     [if inv<0]
+   MonthString  chr  Month as name ("JAN"-"DEC", "January"-"December")
+                     [if inv>=0]
+
+ DECRIPTION
+   Converts a month name (e.g. "February") to it's numeric
+   equivalent (e.g 2) or vice-versa depending on the value
+   of inv.
+   inv = 0 : an input numeric value must be in the range 1-12
+             and is converted to its equivalent month name (returned
+             as a 3-chr uppercase string, e.g. "FEB"). Invalid values
+             return the month name for absolute modulo-12 value (e.g.
+             13 returns "JAN" and 0 returns "DEC").
+   inv > 0 : as above, but returns the full, capitalised, month name
+             (e.g. "February").
+   inv < 0 : For input, month names may be full or abbreviated to a
+             minimum of three characters, and may be in upper,
+             lower or mixed case (the match is done using only
+             the first three significant characters in upper case).
+             Invalid months return a numeric value of zero, else
+             the month in the range 1 to 12.
+
+ EXAMPLES
+   USE DateTime
+   CHARACTER (LEN=10) :: monthname
+   INTEGER            :: monthnumber
+   monthnumber = 12
+   CALL MonthOfYear ( monthnumber, monthname, 1 )
+   --> monthname = "December"
+   CALL MonthOfYear ( monthnumber, monthname, 0 )
+   --> monthname = "DEC"
+   monthname = "March"
+   CALL MonthOfYear ( monthnumber, monthname, -1 )
+   --> monthnumber = 3
+\end{Verbatim}
+\section{DateTime/TimeSince}
+\textsl{[ Subroutines ]}
+
+\label{ch:robo54}
+\label{ch:DateTime_TimeSince}
+\index{unsorted!TimeSince}\index{Subroutines!TimeSince}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    TimeSince   (timesince.f90)
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+   Subroutine to convert between calendar date & time since some
+   arbitrary base date time, or vice-versa
+
+   USE  DateTime
+   CHARACTER (LEN=40) :: Tbase
+   INTEGER            :: CDT(8)
+   REAL(dp)           :: Tsince
+   INTEGER            :: inv
+   CALL TimeSince ( CDT, Tsince, inv[, Base=Tbase] )
+\end{Verbatim}
+\textbf{INPUTS:}\hspace{0.08in}\begin{Verbatim}
+   CDT     int   Array(8): Calender date & clock time  [if inv>0]
+   Tsince  dflt  Value in 'units since base date/time' [if inv<=0]
+   inv     int   Indicator for direction of conversion
+                  > 0 : Calendar --> time since base
+                 <= 0 : time since base --> Calendar
+   Base    char  (Optional) Base units/date/time
+                 Default: 'JD2000'
+
+ OUTPUTS
+   CDT     int   Array(8): Calendar date & clock time  [if inv<=0]
+   Tsince  dflt  Value in 'units since base date/time' [if inv>0]
+\end{Verbatim}
+\textbf{CALLS:}\hspace{0.08in}\begin{Verbatim}
+   CalToJul
+   ConvertDT
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+   Converts between:
+     - CDT: Gregorian calendar date & clock time as an 8-element array
+       (year,month,day,zone,hour,minute,second,millisecond)
+       as returned by the F90 DATE_AND_TIME(VALUE=array) intrinsic
+   and:
+     - Tsince: time relative to an arbitary base date/time and in
+       base units (seconds, minutes, hours or days)
+   or vice-versa.
+   inv indicates the direction of conversion: >0 for CDT-->Tsince else
+   Tsince-->CDT.
+   NB Tsince argument's KIND must be declared equivalent to
+   DOUBLE PRECISION (REAL*8).
+
+   The (optional) Base string may specify an arbitrary base
+   units and date/time as one of:
+   1) '<units> SINCE <[d]d-MMM-yyyy [hh[:mm[:ss]]]>'
+      where <units> can be 'seconds', 'minutes', 'hours' or 'days'.
+      If the time portion is truncated, the missing elements are
+      assumed to be zero, so '1-Jan-2010' is the same as
+      '01-Jan-2010 00:00:00'
+   2) '<units> SINCE <yyyy-mm-dd [hh[:mm[:ss]]]>'
+      otherwise the same as (1)
+   3) '<units> SINCE <yyyymmdd[hh[mm[ss]]]'
+      otherwise the same as (1)
+   4) 'J<u>[<yyyy>]'
+      where <u> is one of 'S', 'M', 'H' or 'D' and the date is
+      implicitly 1st January of the year yyyy at midnight.
+      If yyyy is blank, 2000 is assumed.
+   5) one of the following short-hand keywords:
+      a) 'GPS[SECONDS]' eqiv 'seconds since 6-Jan-1980 00:00:00',
+          - the base date for counting GPS time in seconds
+      b) 'MJD' equiv 'days since 16-Nov-1858 00:00:00'
+         - Modified Julian Date (defined as JDF - 2,400,000.5)
+      c) 'UNIX' equiv 'seconds since 1-Jan-1970 00:00:00'
+         - the base for UNIX time counting
+      d) 'ZERO' eqiv 'days since 1-Jan-4317 12:00:00'
+         - the base JDF=0 (standard Julian Days); same as CalToJul().
+
+   If the Base units argument is not present, or the string is given
+   but is blank or incorrectly formatted, a default of JD2000
+   (days since 1-Jan-2000 00:00;00) is used.
+   The 'zone' element is ignored for input and set to zero on output
+   (implying UTC).
+
+ EXAMPLES
+   1) Current time in seconds since midnight, 1-Jan-2000
+      USE DateTime
+      INTEGER  :: CDT(8)
+      REAL(dp) :: JDF
+      CALL Date_and_Time_UTC ( Values=CDT )
+      --> CDT = 2010,4,9,15,17,14,234
+      CALL TimeSince ( CDT, JDF, Base="JS2000" )
+      --> JDF = 324141434.23402011
+
+   2) Day-of-year for today
+      USE DateTime
+      CHARACTER (LEN=20) :: Tbase
+      INTEGER  :: CDT(8), DoY
+      REAL(dp) :: JDF
+      CALL Date_and_Time_UTC ( Values=CDT )
+      --> CDT = 2010,4,9,15,17,14,234
+      WRITE ( Tbase, "(A2,I4.4)" ) "JD", CDT(1)
+      CALL TimeSince ( CDT, JDF, 1, Base=Tbase )
+      DoY = INT ( JDF1 + HalfDay ) ! allow for JDFs from midday
+      --> DoY = 99
+
+   3) Calendar date for 1 million hours from 11:32 on 8-Nov-1952
+      USE DateTime
+      INTEGER  :: CDT(8)=0
+      REAL(dp) :: OMH=1000000.0_dp
+      CALL TimeSince ( CDT, OMH, -1, Base="Hours since 1952-11-08 11:32" )
+      --> CDT = 2066,12,7,0,3,32,0,0 (03:32 7-Dec-2066)
+\end{Verbatim}
+\textbf{SEE ALSO:}\hspace{0.08in}\begin{Verbatim}
+    CalToJul(), DateTimeOffset()
+\end{Verbatim}
+\section{EARTH/Datum\_Erad}
+\textsl{[ Subroutines ]}
+
+\label{ch:robo55}
+\label{ch:EARTH_Datum_Erad}
+\index{unsorted!Datum\_Erad}\index{Subroutines!Datum\_Erad}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+   Datum_Erad     (earth.f90)
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+   Calculate the Earth's radii of curvature on ellipsoid datum
+
+   USE EarthMod
+   real(wp) :: Rm, Rp, Re
+   CALL Datum_Erad ( "WGS84", 50.0D0, Rm, Rp, Re )
+\end{Verbatim}
+\textbf{ARGUMENTS:}\hspace{0.08in}\begin{Verbatim}
+   Datum  (in)   chr   Name of datum
+   Lat    (in)   dflt  Latitude (degrees)
+   Rm     (out)  dflt  Radius of curvature along meridian
+                       i.e. N-S at given latitude (metres)
+   Rp     (out)  dflt  Radius of curvature along parallel
+                       i.e. E-W at given latitude (metres)
+   Re     (out)  dflt  Distance from earth centre to
+                       ellipsoid surface (metres)
+\end{Verbatim}
+\textbf{CALLS:}\hspace{0.08in}\begin{Verbatim}
+   Datum_Param
+\end{Verbatim}
+\textbf{CALLED BY:}\hspace{0.08in}\begin{Verbatim}
+   Datum_Trans
+   LLtoNE
+
+ ALGORITHM
+    Rm   = a (1-e^2) / (1-e^2.sin^2{lat})^(3/2)
+    Rp   = a / (1-e^2.sin^2{lat})^(1/2)
+    Re^2 = a^2.(1-e^2) / (1 - e^2 + e^2.sin^2{lat})
+   where a is the equatorial radius,
+   and e is the eccentricity:
+    e^2  = f(2-f)
+   where f is the flattening parameter, and a,f define the ellipsoid.
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+   Given the latitude of a point (in degrees), calculates the Earth's
+   radii of curvature in both the meridional (N/S) and parallel (E/W)
+   directions, and the Earth's radius (i.e. the distance from the
+   Earth's centre to surface at the given latitude) using an ellipsoid
+   model. Datum is specified as character string for any of the
+   supported types:
+    "ED50"   - European datum, 1950
+    "GEM6"   - used for ERS orbits
+    "GRS80"  - Geodetic Reference System, 1980 [5]
+    "KL86"   - Kaye & Laby, 1986 [3]
+    "NAD27"  - North American Datum, 1927 (Clark 1866)
+    "OSGB36" - Airy 1936, UK National Grid (Ordnance Survey)
+    "OSU91"  - OSU, 1991-a
+    "WGS84"  - World Geodetic System 1984 [2]
+   plus the non-elliposid cases:
+    "SPHERE" - spherical earth (latitude independent)
+    "ECF"    - earth-centred fixed (x,y,z in m)
+   Datum names are case-insensitive. If datum name is not one of the
+   above, Rm, Rp and Re are all returned as -9999999.0. For "SPHERE" and
+   "ECF", all 3 radii will be the same and equal to a mean earth radius.
+\end{Verbatim}
+\textbf{REFERENCES:}\hspace{0.08in}\begin{Verbatim}
+   [1] ACIC (1962). Geodesy for the layman. Geosciences Branch, Chart
+       Research Division, Aeronautical Chart and Information Centre,
+       St.Louis, Miss. January 1992.
+   [2] DMA (1987). Department of Defense World Geodetic System 1984 -
+       its definition and relationships with local geodetic systems.
+       DMA Technical Report 8350.2, DMA, September 1987.
+   [3] Kaye, CGW and TH Laby (1986). Tables of Physical and Chemical
+       Constants, 15th Edn. Longman, UK.
+   [4] Ruffhead, AC (1989). A 5-Parameter Transformation for OSGB36
+       to WGS84. MCE Working Paper No. 7/89, Mapping and Charting
+       Establishment, Computer and Geodesy Support Group, September 1989.
+   [5] Geodetic Reference System 1980, Bulletin Géodésique, Vol 54:3, 1980.
+\end{Verbatim}
+\section{EARTH/Datum\_HMSL}
+\textsl{[ Subroutines ]}
+
+\label{ch:robo56}
+\label{ch:EARTH_Datum_HMSL}
+\index{unsorted!Datum\_HMSL}\index{Subroutines!Datum\_HMSL}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+   Datum_HMSL     (earth.f90)
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+   Convert height on datum to geoid (msl)
+
+   USE EarthMod
+   real(wp) :: GEO(3), HMSL
+   GEO(:) = (/ <lat>, <lon>, <ht> /) ! on WGS-84 ellipsoid
+   CALL Datum_HMSL ( "WGS84", GEO, HMSL )
+\end{Verbatim}
+\textbf{ARGUMENTS:}\hspace{0.08in}\begin{Verbatim}
+   Datum  (in)   chr   Name of datum
+   GEO    (in)   dflt  Point coordinates wrt datum
+                       for ellipsoid: lat/lon (deg)/ht (m)
+                       for ECF: x/y/z (m)
+   HMSL   (out)  dflt  Height above geoid (msl)
+   FCOEFF (in, optional) chr Path to geoid potential coeffs file
+   FCORR  (in, optional) chr Path to geoid potential corrections file
+
+ ENVIRONMENT VARIABLES
+   GEOPOT_COEF - path to geoid potential coeffs file (if not specified arg)
+   GEOPOT_CORR - path to geoid corrections file (if not specified arg)
+\end{Verbatim}
+\textbf{CALLS:}\hspace{0.08in}\begin{Verbatim}
+   Datum_Param
+   Datum_Trans
+   GEOPOT_LEGDFN
+\end{Verbatim}
+\textbf{USES:}\hspace{0.08in}\begin{Verbatim}
+ ALGORITHM
+   Uses NIMA EGM96 geoid coefficients wrt WGS-84 datum. These are
+   in the form of geoid potential and correction coefficients to
+   order and degree 360. The coefficients are expanded as Legendre
+   polynomials and applied to the given location to calculate the
+   local EGM96 undulation wrt WGS-84; the location Datum is also
+   converted to the same ellipsoid if not already in that system.
+   The HMSL value (strictly orthometric height) is simply equal to
+   WGS-84 minus EGM96 heights.
+   This routine can be validated by comparing its output with the
+   online calculator linked from the NIMA/NASA website URL noted
+   in Refs.
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+   Given the location of a point wrt an ellipsoid datum (e.g. WGS-84),
+   or ECF X,Y,Z coordinates, return the location's height above mean
+   sea level. MSL here is assumed to correspond with the local
+   geoid undulation, given by a geoid model. The potential coeffs.
+   for this model are read from a file pointed to by the environment
+   variable 'GEOPOT_COEF' and the corrections file from 'GEOPOT_CORR'.
+   Alternatively, it is possible to specify the files by passing optional
+   arguments FCOEF and FCORR.
+\end{Verbatim}
+\textbf{REFERENCES:}\hspace{0.08in}\begin{Verbatim}
+   Original package from Ohio State University for OSU91.
+   EGM96 coefficients files can be obtained from the National Image
+   and Mapping Agency (NIMA/NASA) website at:
+     http://earth-info.nima.mil/GandG/wgs84/gravitymod/egm96/egm96.html
+   For more information on EGM96, see also:
+     http://cddis.gsfc.nasa.gov/926/egm96/egm96.html
+\end{Verbatim}
+\section{EARTH/Datum\_Param}
+\textsl{[ Subroutines ]}
+
+\label{ch:robo57}
+\label{ch:EARTH_Datum_Param}
+\index{unsorted!Datum\_Param}\index{Subroutines!Datum\_Param}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+   Datum_Param     (earth.f90)
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+   Return geoid parameters
+
+   USE EarthMod
+   real(wp) :: delXYZ(3), a, f
+   CALL Datum_Param ( "OSGB36", delXYZ, a, f )
+\end{Verbatim}
+\textbf{ARGUMENTS:}\hspace{0.08in}\begin{Verbatim}
+   Datum   (in)   chr   Name of datum
+   delXYZ  (out)  dflt  Array(3) delta offsets in x,y,z (m)
+   a       (out)  dflt  Semi-major axis (m)
+   f       (out)  dflt  Flattening parameter
+\end{Verbatim}
+\textbf{CALLED BY:}\hspace{0.08in}\begin{Verbatim}
+   Datum_HMSL
+   Datum_Trans
+   Datum_Erad
+   ECFtoGEO
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+   Returns ellipsoid datum parameters. Datum is specified as a character
+   string for any of the supported types:
+    "ED50"   - European datum, 1950
+    "GEM6"   - used for ERS orbits
+    "GRS80"  - Geodetic Reference System, 1980 [5]
+    "KL86"   - Kaye & Laby, 1986 [3]
+    "NAD27"  - North American Datum, 1927 (Clark 1866)
+    "OSGB36" - Airy 1936, UK National Grid (Ordnance Survey)
+    "OSU91"  - OSU, 1991-a
+    "WGS84"  - World Geodetic System 1984 [2]
+   plus the non-elliposid cases:
+    "SPHERE" - spherical earth (latitude independent)
+    "ECF"    - earth-centred fixed (x,y,z in m)
+   Datum names are case-insensitive. If datum is blank, WGS-84 is used;
+   if datum is not blank but is not one of the above names, all
+   parameters are all returned as -9999999. For "SPHERE" and "ECF",
+   'a' represents mean earth radius value and 'f' is zero. NB: 'a' is
+   returned as a -ve value for "ECF" type.
+\end{Verbatim}
+\textbf{REFERENCES:}\hspace{0.08in}\begin{Verbatim}
+   [1] ACIC (1962). Geodesy for the layman. Geosciences Branch, Chart
+       Research Division, Aeronautical Chart and Information Centre,
+       St.Louis, Miss. January 1992.
+   [2] DMA (1987). Department of Defense World Geodetic System 1984 -
+       its definition and relationships with local geodetic systems.
+       DMA Technical Report 8350.2, DMA, September 1987.
+   [3] Kaye, CGW and TH Laby (1986). Tables of Physical and Chemical
+       Constants, 15th Edn. Longman, UK.
+   [4] Ruffhead, AC (1989). A 5-Parameter Transformation for OSGB36
+       to WGS84. MCE Working Paper No. 7/89, Mapping and Charting
+       Establishment, Computer and Geodesy Support Group, September 1989.
+   [5] Geodetic Reference System 1980, Bulletin Géodésique, Vol 54:3, 1980.
+\end{Verbatim}
+\section{EARTH/Datum\_Trans}
+\textsl{[ Subroutines ]}
+
+\label{ch:robo58}
+\label{ch:EARTH_Datum_Trans}
+\index{unsorted!Datum\_Trans}\index{Subroutines!Datum\_Trans}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+   Datum_Trans     (earth.f90)
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+   Transform geographic coordinates from one ellipsoid datum to another
+
+   USE EarthMod
+   real(wp) :: GEO1(3), GEO2(3)
+   GEO1(:) = (/ <lat>, <lon>, <ht> /) ! on WGS-84 ellipsoid
+   CALL Datum_Trans ( "WGS84", GEO1, "OSGB36", GEO2 )
+   [GEO2 contains lat/lon/ht on OS-GB (Airy 1936) spheroid]
+\end{Verbatim}
+\textbf{ARGUMENTS:}\hspace{0.08in}\begin{Verbatim}
+   Datum1  (in)   chr   Name of datum to transform 'from'
+   GEO1    (in)   dflt  Array(3) cordinates in Datum1
+                        (1) latitude  (deg) [X (m) if ECF]
+                        (2) longitude (deg) [Y (m) if ECF]
+                        (3) height    (m)   [Z (m) if ECF]
+   Datum2  (in)   chr   Name of datum to transform 'to'
+   GEO2    (out)  dflt  Array(3) coordinates in Datum2
+                        (1) latitude  (deg) [X (m) if ECF]
+                        (2) longitude (deg) [Y (m) if ECF]
+                        (3) height    (m)   [Z (m) if ECF]
+\end{Verbatim}
+\textbf{CALLS:}\hspace{0.08in}\begin{Verbatim}
+   Datum_Erad
+   Datum_Param
+   ECFtoGEO
+\end{Verbatim}
+\textbf{CALLED BY:}\hspace{0.08in}\begin{Verbatim}
+   Datum_HMSL
+
+ ALGORITHM
+   Simplified Molodensky formulae [4]
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+   Transforms latitude, longitude and height relative to one (ellipsoid)
+   datum to another datum. Input and output datums are specified as
+   character strings for any of the supported types:
+    "ED50"   - European datum, 1950
+    "GEM6"   - used for ERS orbits
+    "GRS80"  - Geodetic Reference System, 1980 [5]
+    "KL86"   - Kaye & Laby, 1986 [3]
+    "NAD27"  - North American Datum, 1927 (Clark 1866)
+    "OSGB36" - Airy 1936, UK National Grid (Ordnance Survey)
+    "OSU91"  - OSU, 1991-a
+    "WGS84"  - World Geodetic System 1984 [2]
+   plus the non-ellipsoid cases:
+    "SPHERE" - spherical earth (latitude independent)
+    "ECF"    - earth-centred fixed (x,y,z in m)
+   For datum "ECF", the associated 'GEO1' or 'GEO2' array elements are
+   interpreted as X,Y,Z distances from the Earth's centre.
+   Datum names are case-insensitive. If Datum1 name is not one of the
+   above, GEO2 array is returned with all elemnts -999999.0; if Datum2
+   name is unknown, the returned values are +999999.0.
+\end{Verbatim}
+\textbf{REFERENCES:}\hspace{0.08in}\begin{Verbatim}
+   [1] ACIC (1962). Geodesy for the layman. Geosciences Branch, Chart
+       Research Division, Aeronautical Chart and Information Centre,
+       St.Louis, Miss. January 1992.
+   [2] DMA (1987). Department of Defense World Geodetic System 1984 -
+       its definition and relationships with local geodetic systems.
+       DMA Technical Report 8350.2, DMA, September 1987.
+   [3] Kaye, CGW and TH Laby (1986). Tables of Physical and Chemical
+       Constants, 15th Edn. Longman, UK.
+   [4] Ruffhead, AC (1989). A 5-Parameter Transformation for OSGB36
+       to WGS84. MCE Working Paper No. 7/89, Mapping and Charting
+       Establishment, Computer and Geodesy Support Group, September 1989.
+   [5] Geodetic Reference System 1980, Bulletin Géodésique, Vol 54:3, 1980.
+\end{Verbatim}
+\section{EARTH/EarthMod}
+\textsl{[ Modules ]}
+
+\label{ch:robo59}
+\label{ch:EARTH_EarthMod}
+\index{unsorted!EarthMod}\index{Modules!EarthMod}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+   EarthMod     (earth.f90)
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+   Module defining Earth-related constants
+   and datum conversion routines.
+
+   USE EarthMod
+   CHARACTER (LEN=6)  :: Datum1,  Datum2
+   CHARACTER (LEn=12) :: NGref
+   DOUBLE PRECISION   :: GEO1(3), GEO2(3), ECF(3), delXYZ(3)
+   DOUBLE PRECISION   :: rm, rp, re, a, f
+   DOUBLE PRECISION   :: rlat, rleg(nmax+1)
+   DOUBLE PRECISION   :: Latitude1, Longitude1
+   DOUBLE PRECISION   :: Latitude2, Longitude2
+   real(wp)   :: DistNorth, DistEast, Easting, Northing
+   REAL               :: Lat1, Lon1, Lat2, Lon2, Distance, Bearing, Ht
+   INTEGER            :: m, nmax, iflg
+
+  - Ellipsoid/geoid datum routines:
+
+   CALL Datum_Trans  ( Datum1, GEO1, Datum2, GEO2 )
+   CALL Datum_Erad   ( Datum1, Latitude1, rm, rp, re )
+   CALL Datum_Param  ( Datum1, delXYZ, A, F )
+   CALL Datum_HMSL   ( Datum1, GEO1, HMSL )
+   CALL Geopot_LegFn ( m, rlat, nmax, rleg )
+   CALL ECFtoGEO     ( ECF, Datum1, GEO, iflg )
+
+  - Earth physics:
+
+   RAD = EradL      ( Lat1 )         [See also Datum_Erad]
+   g   = EGravity    ( Lat1, Ht )
+
+ CONTAINS
+   Datum_Trans
+   Datum_Erad
+   Datum_Param
+   Datum_HMSL
+   Geopot_LegFn
+   ECFtoGEO
+   EradL
+   EGravity
+
+ PARAMETERS
+   BIGNEG   = -9999999.0D0             ! Missing data value
+   SMALL    = 1.0D-8                   ! Something close to zero
+   Pi       = 3.14159265358979323846D0 ! Pi
+   HalfPi   = Pi / 2.0D0               ! Pi / 2
+   TwoPi    = Pi * 2.0D0               ! Pi * 2
+   RadToDeg = 180.0D0 / Pi             ! Radians to degrees
+   DegToRad = Pi / 180.0D0             ! Degrees to radians
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+   Defines (a) physical constants related to angle conversion,
+           (b) various routines to transform a datum (location
+               on the Earth) between different coordinate systems
+           (c) various routines to calculate point to point parameters
+               (distance, bearing...)
+           (d) Earth's physical parameters (radius, gravity)
+\end{Verbatim}
+\section{EARTH/ECFtoGEO}
+\textsl{[ Subroutines ]}
+
+\label{ch:robo60}
+\label{ch:EARTH_ECFtoGEO}
+\index{unsorted!ECFtoGEO}\index{Subroutines!ECFtoGEO}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+   ECFtoGEO     (earth.f90)
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+   Convert between ECF coordinates & geodetic position
+
+   USE EarthMod
+   real(wp) :: EFC(3), GEO(3)
+   ECF(:) = (/ <X>, <Y>, <Z> /)   !   location wrt Earth's centre
+   CALL ECFtoGEO ( ECF, "WGS84", GEO, 1 )
+   [GEO contains lat/lon/ht on WGS-84 ellipsoid]
+\end{Verbatim}
+\textbf{ARGUMENTS:}\hspace{0.08in}\begin{Verbatim}
+   ECF    (inout)  dflt  Array(3) ECF x/y/z coordinates (m)
+   Datum  (in)     chr   Name of datum for geo coords
+   GEO    (inout)  dflt  Array(3) geodetic position
+                         Lat/lon (deg) & altitude (m)
+   iflg   (in)     int   Conversion flag:
+                          >  0 : ecf --> geo
+                          <= 0 : geo --> ecf
+\end{Verbatim}
+\textbf{CALLS:}\hspace{0.08in}\begin{Verbatim}
+   Datum_Param
+\end{Verbatim}
+\textbf{CALLED BY:}\hspace{0.08in}\begin{Verbatim}
+   Datum_Trans
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+   Converts between earth-centred fixed (ECF), X,Y,Z coordinates
+   (in m from Earth's centre) and geodetic latitude, longitude
+   (deg) and altitude above the Earth's surface (m) relative to
+   the specified (ellipsoid) datum. The direction of conversion
+   depends on iflg.
+   Datum is specified as a character string for any of the supported
+   types:
+    "ED50"   - European datum, 1950
+    "GEM6"   - used for ERS orbits
+    "GRS80"  - Geodetic Reference System, 1980 [5]
+    "KL86"   - Kaye & Laby, 1986 [3]
+    "NAD27"  - North American Datum, 1927 (Clark 1866)
+    "OSGB36" - Airy 1936, UK National Grid (Ordnance Survey)
+    "OSU91"  - OSU, 1991-a
+    "WGS84"  - World Geodetic System 1984 [2]
+   plus the non-elliposid cases:
+    "SPHERE" - spherical earth (latitude independent)
+    "ECF"    - earth-centred fixed (x,y,z in m)
+   Datum names are case-insensitive. If datum is blank, WGS-84 is used
+\end{Verbatim}
+\textbf{REFERENCES:}\hspace{0.08in}\begin{Verbatim}
+   The 1992 Astronomical Almanac, page K12.
+   See also numbered references under routine Datum_Param
+\end{Verbatim}
+\section{EARTH/EGravity}
+\textsl{[ Subroutines ]}
+
+\label{ch:robo61}
+\label{ch:EARTH_EGravity}
+\index{unsorted!EGravity}\index{Subroutines!EGravity}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+   EGravity     (earth.f90)
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+   Gravity (m.s^-2) as a function of latitude (deg) and height
+   (m amsl).
+
+   USE EarthMod
+   REAL :: g
+   g = EGravity ( 50.0, 5000.0 )
+
+ ALGORITHM
+   g = g0[1-c1.cos(lat)-c2.ht]  (see ref.)
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+   Calculates gravity, g, as a simple function of latitude and
+   height above a reference surface (nominally WGS-84).
+\end{Verbatim}
+\textbf{REFERENCES:}\hspace{0.08in}\begin{Verbatim}
+   Baker, HC (1998): GPS water vapour estimation for meteorological
+          applications. PhD Thesis, University of Nottingham.
+\end{Verbatim}
+\section{EARTH/EradL}
+\textsl{[ Subroutines ]}
+
+\label{ch:robo62}
+\label{ch:EARTH_EradL}
+\index{unsorted!EradL}\index{Subroutines!EradL}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+   EradL     (earth.f90)
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+   Calculate the Earth's radius as a simple function of latitude.
+
+   USE EarthMod
+   REAL Re
+   Re = EradL ( 45.0 )
+\end{Verbatim}
+\textbf{ARGUMENTS:}\hspace{0.08in}\begin{Verbatim}
+   Latitude  (in)  flt  Latitude (deg)
+
+ OUTPUTS
+   EradL   (func)  flt  Earth's radius at given latitude (km)
+\end{Verbatim}
+\textbf{CALLED BY:}\hspace{0.08in}\begin{Verbatim}
+   LLtoDB
+
+ ALGORITHM
+   re(lat) = r0 + r1.cos(2.lat) * r2.cos(4.lat)
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+   Returns radius of earth given the latitude (north or south).
+   Uses a simple non-ellipsoid model. For ellipsoid radius, see
+   Datum_Erad
+\end{Verbatim}
+\section{EARTH/Geopot\_LegFn}
+\textsl{[ Subroutines ]}
+
+\label{ch:robo63}
+\label{ch:EARTH_Geopot_LegFn}
+\index{unsorted!Geopot\_LegFn}\index{Subroutines!Geopot\_LegFn}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+   Geopot_LegFn     (earth.f90)
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+   Compute legendre polynomials for geopotential
+
+   USE EarthMod
+   real(wp) :: COLAT, RLEG(NMAX+1)
+   INTEGER          :: M, NMAX
+   CALL Geopot_LegFn ( M, COLAT, NMAX, RLEG )
+\end{Verbatim}
+\textbf{ARGUMENTS:}\hspace{0.08in}\begin{Verbatim}
+   M      (in)   int   Order of legendre functions
+   COLAT  (in)   dflt  Co-latitude (rad)
+   NMAX   (in)   int   Maximum degree of functions
+   RLEG   (out)  dflt  Array(nmax+1) of legendre function values
+\end{Verbatim}
+\textbf{CALLED BY:}\hspace{0.08in}\begin{Verbatim}
+   Datum_HMSL
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+   This subroutine computes all normalized Legendre functions in RLEG
+   for order M and co-latitude COLAT (radians). Maximum degree is NMAX.
+   The dimensions of array RLEG must be at least equal to NMAX+1.
+   Original algorithm & code from Ohio State University.
+\end{Verbatim}
+\section{Geodesy/geodesy}
+\textsl{[ Modules ]}
+
+\label{ch:robo64}
+\label{ch:Geodesy_geodesy}
+\index{unsorted!geodesy}\index{Modules!geodesy}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    geodesy - Module interfacing various geodetic routines and functions.
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    use geodesy
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    This module provides interfaces to some geodetic funtions and
+    subroutines of the ropp_utils library.
+\end{Verbatim}
+\textbf{SEE ALSO:}\hspace{0.08in}\begin{Verbatim}
+    R_eff
+    gravity
+    geometric2geopotential
+    geopotential2geometric
+\end{Verbatim}
+\section{Geodesy/geometric2geopotential}
+\textsl{[ Functions ]}
+
+\label{ch:robo65}
+\label{ch:Geodesy_geometric2geopotential}
+\index{unsorted!geometric2geopotential}\index{Functions!geometric2geopotential}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    geometric2geopotential - Calculate geopotential height as function of 
+                             altitude using the expressions derived from 
+                             the Somigliana equation
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    geop = geometric2geopotential(lat, h)
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    This subroutine calculates geopotential height as
+    function of altitude.
+\end{Verbatim}
+\textbf{INPUTS:}\hspace{0.08in}\begin{Verbatim}
+    lat           geographical latitude (in degree north).
+    h             altitude (in m).
+\end{Verbatim}
+\textbf{OUTPUT:}\hspace{0.08in}\begin{Verbatim}
+    geopotential  geopotential height (in geopotential metres).
+\end{Verbatim}
+\textbf{NOTES:}\hspace{0.08in}\begin{Verbatim}
+    Note Somigliana's Equation is defined for normal gravity on the surface 
+    of an ellipsoid while geopotential height is strictly defined relative to
+    an equi-potential surface for the geopotential (i.e. the geoid). 
+    These routines preserve the datum used for the input height. 
+      i.e.
+ 
+        If INPUT: h wrt ellipsoid -> OUTPUT: Z wrt ellipsoid
+        The output is not strictly a geopotential height (relative to an equi-
+        potential surface). To compute the geopotential height relative to 
+        the EGM96 geoid, it is necessary for users to subtract the undulation
+        from the output 'geopotential height'.
+
+        If INPUT: h wrt geoid -> OUTPUT: Z wrt geoid
+        In this case, the output is a geopotential height relative to the 
+        geoid. Note Somagliana's equation is strictly based on computations
+        relative to a reference ellipsoid, but the error in assuming these 
+        apply for conversions wrt geoid is small.
+\end{Verbatim}
+\textbf{SEE ALSO:}\hspace{0.08in}\begin{Verbatim}
+    R_eff
+    gravity_msl
+    geopotential2geometric
+\end{Verbatim}
+\textbf{REFERENCES:}\hspace{0.08in}\begin{Verbatim}
+    Mahoney, M.J., A discussion of various measures of altitudes,
+       URL: http://mtp.jpl.nasa.gov/notes/altitude/altitude.html,
+       cited 29/06/2004.
+\end{Verbatim}
+\section{Geodesy/geopotential2geometric}
+\textsl{[ Functions ]}
+
+\label{ch:robo66}
+\label{ch:Geodesy_geopotential2geometric}
+\index{unsorted!geopotential2geometric}\index{Functions!geopotential2geometric}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    geopotential2geometric - Calculate geometric altitude 
+                             from geopotential height using expressions 
+                             derived from the Somigliana equation
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    h = geopotential2geometric(lat, geop)
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    This subroutine calculates geometric altitude
+    from geopotential height 
+    [see http://mtp.jpl.nasa.gov/notes/altitude/altitude.html for details]
+\end{Verbatim}
+\textbf{INPUTS:}\hspace{0.08in}\begin{Verbatim}
+    lat           geographical latitude (in degrees north).
+    geopotential  geopotential height (in geopotential metres).
+\end{Verbatim}
+\textbf{OUTPUT:}\hspace{0.08in}\begin{Verbatim}
+    h             altitude above reference ellipsoid (in m).
+\end{Verbatim}
+\textbf{NOTES:}\hspace{0.08in}\begin{Verbatim}
+    Note Somigliana's Equation is defined for normal gravity on the surface 
+    of an ellipsoid while geopotential height is strictly defined relative to
+    an equi-potential surface for the geopotential (i.e. the geoid). 
+    These routines preserve the datum used for the input height. 
+      i.e.
+ 
+        If INPUT: Z wrt ellipsoid -> OUTPUT: h wrt ellipsoid
+        Typically, geometric altitude is expressed relative to a reference 
+        geoid. To compute the geometric height relative to 
+        the EGM96 geoid, it is necessary for users to subtract the undulation
+        from the output geometric height in this case.
+
+        If INPUT: Z wrt geoid -> OUTPUT: h wrt geoid
+        In this case, the output is a geometric height relative to the 
+        geoid. Note Somagliana's equation is strictly based on computations
+        relative to a reference ellipsoid, but the error in assuming these 
+        apply for conversions wrt geoid is small.
+\end{Verbatim}
+\textbf{SEE ALSO:}\hspace{0.08in}\begin{Verbatim}
+    R_eff
+    gravity
+    geopotential2geometric
+\end{Verbatim}
+\textbf{REFERENCES:}\hspace{0.08in}\begin{Verbatim}
+    Mahoney, M.J., A discussion of various measures of altitudes,
+       URL: http://mtp.jpl.nasa.gov/notes/altitude/altitude.html,
+       cited 29/06/2004.
+\end{Verbatim}
+\section{Geodesy/gravity}
+\textsl{[ Functions ]}
+
+\label{ch:robo67}
+\label{ch:Geodesy_gravity}
+\index{unsorted!gravity}\index{Functions!gravity}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    gravity - Calculate gravity following the Somigliana equation
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    g_lat = gravity( lat, [ h ] )
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    This function returns gravity as function of geographic latitude and 
+    (optionally) altitude above the WGS-84 reference ellipsoid as derived 
+    from the Somigliana equation 
+    [see http://mtp.jpl.nasa.gov/notes/altitude/altitude.html for details]
+\end{Verbatim}
+\textbf{INPUTS:}\hspace{0.08in}\begin{Verbatim}
+    lat     geographical latitude (in degree north).
+    h       altitude above reference ellipsod (in m, optional). If z is not
+               given, the function returns the gravity at the ellipsoid.
+\end{Verbatim}
+\textbf{OUTPUT:}\hspace{0.08in}\begin{Verbatim}
+    g       gravity (in m/s^2).
+\end{Verbatim}
+\textbf{NOTES:}\hspace{0.08in}\textbf{SEE ALSO:}\hspace{0.08in}\begin{Verbatim}
+    R_eff
+    geopotential2geometric
+    geometric2geopotential
+\end{Verbatim}
+\textbf{REFERENCES:}\hspace{0.08in}\begin{Verbatim}
+    Mahoney, M.J., A discussion of various measures of altitudes,
+       URL: http://mtp.jpl.nasa.gov/notes/altitude/altitude.html,
+       cited 29/06/2004.
+\end{Verbatim}
+\section{Geodesy/great\_circle\_distance}
+\textsl{[ Functions ]}
+
+\label{ch:robo68}
+\label{ch:Geodesy_great_circle_distance}
+\index{unsorted!great\_circle\_distance}\index{Functions!great\_circle\_distance}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    great_circle_distance - Calculate great circle distance between two
+                              points on Earth.
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    dist = great_circle_distance(lon1, lat1, lon2, lat2)
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    This function calculates the great circle distance between two points
+    on a sphere, given by their (geodetic) longitude and latitude coordinates,
+    respectively
+\end{Verbatim}
+\textbf{INPUTS:}\hspace{0.08in}\begin{Verbatim}
+    lon1   Longitude of first point on the sphere / Earth (in degree east).
+    lat1   Latitude of the first point (in degree north).
+    lon2   Longitude of the second point (in degree east).
+    lat2   Latitude of the second point (in degree north).
+\end{Verbatim}
+\textbf{OUTPUT:}\hspace{0.08in}\begin{Verbatim}
+    dist   Great circle distance between (lon1, lat1) and (lon2, lat2) (in meter).
+\end{Verbatim}
+\textbf{NOTES:}\hspace{0.08in}\begin{Verbatim}
+    It is assumed that Earth is a sphere with an average great-circle radius
+    of 6372.795 km. No corrections are applied for the ellipsoidal shape of
+    the Earth.
+\end{Verbatim}
+\textbf{EXAMPLE:}\hspace{0.08in}\textbf{SEE ALSO:}\hspace{0.08in}\textbf{REFERENCES:}\hspace{0.08in}\begin{Verbatim}
+    Formulation and default values were taken from
+
+       http://en.wikipedia.org/wiki/Great-circle_distance
+
+    cited in December 2006.
+\end{Verbatim}
+\section{Geodesy/R\_eff}
+\textsl{[ Functions ]}
+
+\label{ch:robo69}
+\label{ch:Geodesy_R_eff}
+\index{unsorted!R\_eff}\index{Functions!R\_eff}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    R_eff - Effective radius of Earth for geopotential height conversion
+               following Somigliana's equation
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    R_eff = R_eff(lat)
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    This function calculates the effective radius of Earth relative to 
+    WGS-84 reference ellipsoid
+\end{Verbatim}
+\textbf{INPUTS:}\hspace{0.08in}\begin{Verbatim}
+    lat    geographical latitude (in degree north).
+\end{Verbatim}
+\textbf{OUTPUT:}\hspace{0.08in}\begin{Verbatim}
+    R_lat  effective Earth radius (in m).
+\end{Verbatim}
+\textbf{NOTES:}\hspace{0.08in}\textbf{SEE ALSO:}\hspace{0.08in}\begin{Verbatim}
+    gravity_msl
+    geopotential2geometric
+    geometric2geopotential
+\end{Verbatim}
+\textbf{REFERENCES:}\hspace{0.08in}\begin{Verbatim}
+    Mahoney, M.J., A discussion of various measures of altitudes,
+       URL: http://mtp.jpl.nasa.gov/notes/altitude/altitude.html,
+       cited 29/06/2004.
+\end{Verbatim}
+\section{Initialisation/ropp\_unit\_conversion}
+\textsl{[ Functions ]}
+
+\label{ch:robo70}
+\label{ch:Initialisation_ropp_unit_conversion}
+\index{unsorted!ropp\_unit\_conversion}\index{Functions!ropp\_unit\_conversion}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+   ropp_unit_conversion - unit conversion
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+   CALL ropp_unit_conversion ( from_unit, to_unit, slope, intercept )
+\end{Verbatim}
+\textbf{INPUTS:}\hspace{0.08in}\begin{Verbatim}
+   from_unit      Original data unit
+   to_unit        Required output data unit
+
+ OUTPUTS
+   slope          Scaling factor for unit conversion
+   intercept      Offset for unit conversion
+\end{Verbatim}
+\textbf{USES:}\hspace{0.08in}\begin{Verbatim}
+   typsesizes
+   To_Lower
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\section{Mathematics/Pi}
+\textsl{[ Parameters ]}
+
+\label{ch:robo71}
+\label{ch:Mathematics_Pi}
+\index{unsorted!Pi}\index{Parameters!Pi}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    Pi - Mathematical constant
+\end{Verbatim}
+\textbf{SOURCE:}\hspace{0.08in}\begin{Verbatim}
+  real(wp), parameter :: Pi = 3.141592653589793238_wp
+\end{Verbatim}
+\section{Messages/assert}
+\textsl{[ Subroutines ]}
+
+\label{ch:robo72}
+\label{ch:Messages_assert}
+\index{unsorted!assert}\index{Subroutines!assert}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    assert - Make sure that a condition is fulfilled.
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    call assert(condition, string [, severity])
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    This subroutine provides an assertion facility, i.e. it issues a
+    (fatal by default) error message if the condition if the condition
+    is NOT fullfilled.
+\end{Verbatim}
+\textbf{INPUTS:}\hspace{0.08in}\begin{Verbatim}
+    logical condition
+    char*   string
+    int     severity
+\end{Verbatim}
+\textbf{OUTPUT:}\hspace{0.08in}\begin{Verbatim}
+    If the test fails (i.e., the condition evaluates to .false.), the
+    text string is printed as part of a fatal error message. This also
+    terminates the program.
+\end{Verbatim}
+\textbf{NOTES:}\hspace{0.08in}\begin{Verbatim}
+    If an informational or warning message is desired instead of a fatal
+    error, the severity of the failure can be specified with the optional
+    argument. It is intended to receive one of msg_info, msg_warn, or
+    msg_error (all defined in the messages module).
+\end{Verbatim}
+\textbf{SEE ALSO:}\hspace{0.08in}\begin{Verbatim}
+   message
+   message_set_program
+   message_get_program
+   message_set_routine
+   message_get_routine
+   message_set_addinfo
+   message_get_addinfo
+\end{Verbatim}
+\section{Messages/message}
+\textsl{[ Subroutines ]}
+
+\label{ch:robo73}
+\label{ch:Messages_message}
+\index{unsorted!message}\index{Subroutines!message}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    message - Issue an information / warning / error message.
+            --> BASED ON MARQUARDT COLLECTION LIBRARY ROUTINE
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+   use ropp_utils
+     ...
+   call message(type, text [, status])
+     ...
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    This subroutine prints an error message. For fatal errors, the program
+    is aborted, and an exit status is set. The output will look like this:
+
+       MESSAGE_TYPE (<prog>/<routine>/<add>):
+          Text of the message, which might have multiple lines of text.
+
+    where the MESSAGE_TYPE is determined by the value of the type argument.
+    Fatal error messages result in termination of the program.
+\end{Verbatim}
+\textbf{INPUTS:}\hspace{0.08in}\begin{Verbatim}
+   int   type    The type of the message which can be msg_cont, msg_info,
+                   msg_warn, msg_error or msg_fatal (as defined in the
+                   module messages). The following values are supported:
+
+                     msg_cont    This will continue the previous message
+                                   (and provides a way to build up multi
+                                   line informational or warning messages).
+                     msg_info    Informational message; message starts with
+                                   'INFO:'
+                     msg_warn    Warning message; message starts with
+                                   'WARNING:'
+                     msg_error   Error message; message starts with
+                                   'ERROR:'
+                     msg_fatal   Fatal error message; message starts with
+                                   'FATAL ERROR:'
+
+                   For fatal errors, the program will terminate with an
+                   an error code as given in status if the Fortran compiler
+                   supports a 'call exit(status)'.
+
+   char* text    Error (or informational) message to be printed. This is
+                   a text string which may have embedded C-style control
+                   characters. Currently supported are the following ones:
+
+                     \n   newline; use for multi-line messages
+                     \t   tabulator
+                     \'   single and...
+                     \"   ...double hyphens
+                     \a   terminal bell (i.e., a 'beep')
+                     \b   backspace
+                     \\   backslash
+
+   int   status  Unix error status in case of a fatal error. This argument is
+                   optional.
+\end{Verbatim}
+\textbf{OUTPUT:}\hspace{0.08in}\begin{Verbatim}
+   Text is printed to stdout or stderr.
+\end{Verbatim}
+\textbf{NOTES:}\hspace{0.08in}\begin{Verbatim}
+   The MESSAGE_TYPE qualifiers in the first line of the message are determined
+   by the value of the type parameter; use one of the parameters provided in
+   the module messages (as described above). The additional qualifiers after
+   the main one can be set via the additional routines message_set_program(),
+   message_set_routine() and message_set_addinfo(). If those qualifiers are
+   set to ' ', they will not be printed. Similar *_set_* routines exist to
+   enquire about the current setting of the additional qualifiers.
+
+   Multiline texts can be generated by adding '\n' for line breaks with a
+   single call to message. Note, however, that the routine prints three blanks
+   in front of the error string; for multiline error messages, these must be
+   added manually after the '\n'. An alternative way to create non-fatal 
+   multiline messages is to use the routine repeatedly with the 'msg_cont'
+   type parameter to write out individual lines.
+
+   The default exit status (if status is not specified) in case of fatal errors
+   is -1.
+\end{Verbatim}
+\textbf{SEE ALSO:}\hspace{0.08in}\begin{Verbatim}
+   message_set_program
+   message_get_program
+   message_set_routine
+   message_get_routine
+   message_set_addinfo
+   message_get_addinfo
+\end{Verbatim}
+\section{Messages/message\_bs\_escape}
+\textsl{[ Subroutines ]}
+
+\label{ch:robo74}
+\label{ch:Messages_message_bs_escape}
+\index{unsorted!message\_bs\_escape}\index{Subroutines!message\_bs\_escape}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    message - Issue an information / warning / error message.
+            --> BASED ON MARQUARDT COLLECTION LIBRARY ROUTINE
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+   use ropp_utils
+     ...
+   call message(type, text [, status])
+     ...
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    This subroutine prints an error message. For fatal errors, the program
+    is aborted, and an exit status is set. The output will look like this:
+
+       MESSAGE_TYPE (<prog>/<routine>/<add>):
+          Text of the message, which might have multiple lines of text.
+
+    where the MESSAGE_TYPE is determined by the value of the type argument.
+    Fatal error messages result in termination of the program.
+\end{Verbatim}
+\textbf{INPUTS:}\hspace{0.08in}\begin{Verbatim}
+   int   type    The type of the message which can be msg_cont, msg_info,
+                   msg_warn, msg_error or msg_fatal (as defined in the
+                   module messages). The following values are supported:
+
+                     msg_cont    This will continue the previous message
+                                   (and provides a way to build up multi
+                                   line informational or warning messages).
+                     msg_info    Informational message; message starts with
+                                   'INFO:'
+                     msg_warn    Warning message; message starts with
+                                   'WARNING:'
+                     msg_error   Error message; message starts with
+                                   'ERROR:'
+                     msg_fatal   Fatal error message; message starts with
+                                   'FATAL ERROR:'
+
+                   For fatal errors, the program will terminate with an
+                   an error code as given in status if the Fortran compiler
+                   supports a 'call exit(status)'.
+
+   char* text    Error (or informational) message to be printed. This is
+                   a text string which may have embedded C-style control
+                   characters. Currently supported are the following ones:
+
+                     \n   newline; use for multi-line messages
+                     \t   tabulator
+                     \'   single and...
+                     \"   ...double hyphens
+                     \a   terminal bell (i.e., a 'beep')
+                     \b   backspace
+                     \\   backslash
+
+   int   status  Unix error status in case of a fatal error. This argument is
+                   optional.
+\end{Verbatim}
+\textbf{OUTPUT:}\hspace{0.08in}\begin{Verbatim}
+   Text is printed to stdout or stderr.
+\end{Verbatim}
+\textbf{NOTES:}\hspace{0.08in}\begin{Verbatim}
+   The MESSAGE_TYPE qualifiers in the first line of the message are determined
+   by the value of the type parameter; use one of the parameters provided in
+   the module messages (as described above). The additional qualifiers after
+   the main one can be set via the additional routines message_set_program(),
+   message_set_routine() and message_set_addinfo(). If those qualifiers are
+   set to ' ', they will not be printed. Similar *_set_* routines exist to
+   enquire about the current setting of the additional qualifiers.
+
+   Multiline texts can be generated by adding '\n' for line breaks with a
+   single call to message. Note, however, that the routine prints three blanks
+   in front of the error string; for multiline error messages, these must be
+   added manually after the '\n'. An alternative way to create non-fatal 
+   multiline messages is to use the routine repeatedly with the 'msg_cont'
+   type parameter to write out individual lines.
+
+   The default exit status (if status is not specified) in case of fatal errors
+   is -1.
+\end{Verbatim}
+\textbf{SEE ALSO:}\hspace{0.08in}\begin{Verbatim}
+   assert
+   message_set_program
+   message_get_program
+   message_set_routine
+   message_get_routine
+   message_set_addinfo
+   message_get_addinfo
+\end{Verbatim}
+\section{Messages/message\_get\_addinfo}
+\textsl{[ Subroutines ]}
+
+\label{ch:robo75}
+\label{ch:Messages_message_get_addinfo}
+\index{unsorted!message\_get\_addinfo}\index{Subroutines!message\_get\_addinfo}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    message_get_addinfo - Get an additional information string used by the
+                          ropp_utils message anderror handling system.
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    call message_get_addinfo(progname)
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    This routine gets the additional info string that appears in error messages
+    issued by the message and error handling system of the ropp_utils library.
+\end{Verbatim}
+\textbf{INPUTS:}\hspace{0.08in}\begin{Verbatim}
+    character(len = *) :: addinfo
+\end{Verbatim}
+\textbf{SEE ALSO:}\hspace{0.08in}\begin{Verbatim}
+    assert
+    message
+    message_set_program
+    message_get_program
+    message_set_routine
+    message_get_routine
+    message_set_addinfo
+\end{Verbatim}
+\section{Messages/message\_get\_program}
+\textsl{[ Subroutines ]}
+
+\label{ch:robo76}
+\label{ch:Messages_message_get_program}
+\index{unsorted!message\_get\_program}\index{Subroutines!message\_get\_program}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    message_get_program - Get the program name for the ropp_utils message and
+                          error handling system.
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    call message_get_program(progname)
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    This routine sets the name of the program that appears in error messages
+    issued by the message and error handling system of the ropp_utils library.
+\end{Verbatim}
+\textbf{INPUTS:}\hspace{0.08in}\begin{Verbatim}
+    character(len = *) :: progname
+\end{Verbatim}
+\textbf{SEE ALSO:}\hspace{0.08in}\begin{Verbatim}
+    assert
+    message
+    message_set_program
+    message_set_routine
+    message_get_routine
+    message_set_addinfo
+    message_get_addinfo
+\end{Verbatim}
+\section{Messages/message\_get\_routine}
+\textsl{[ Subroutines ]}
+
+\label{ch:robo77}
+\label{ch:Messages_message_get_routine}
+\index{unsorted!message\_get\_routine}\index{Subroutines!message\_get\_routine}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    message_get_routine - Get the routine name for the ropp_utils message and
+                          error handling system.
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    call message_get_routine(routine)
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    This routine gets the name of the routine that appears in error messages
+    issued by the message and error handling system of the ropp_utils library.
+\end{Verbatim}
+\textbf{INPUTS:}\hspace{0.08in}\begin{Verbatim}
+    character(len = *) :: routine
+\end{Verbatim}
+\textbf{SEE ALSO:}\hspace{0.08in}\begin{Verbatim}
+    assert
+    message
+    message_set_program
+    message_get_program
+    message_set_routine
+    message_set_addinfo
+    message_get_addinfo
+\end{Verbatim}
+\section{Messages/message\_set\_addinfo}
+\textsl{[ Subroutines ]}
+
+\label{ch:robo78}
+\label{ch:Messages_message_set_addinfo}
+\index{unsorted!message\_set\_addinfo}\index{Subroutines!message\_set\_addinfo}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    message_set_addinfo - Set an additional information string for the ropp_utils
+                          message and error handling system.
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    call message_set_addinfo(addinfo)
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    This routine sets an additional information string that appears in error
+    messages issued by the message and error handling system of the ropp_utils
+    library.
+\end{Verbatim}
+\textbf{INPUTS:}\hspace{0.08in}\begin{Verbatim}
+    character(len = *) :: addinfo
+\end{Verbatim}
+\textbf{SEE ALSO:}\hspace{0.08in}\begin{Verbatim}
+    assert
+    message
+    message_set_program
+    message_get_program
+    message_set_routine
+    message_get_routine
+    message_get_addinfo
+\end{Verbatim}
+\section{Messages/message\_set\_program}
+\textsl{[ Subroutines ]}
+
+\label{ch:robo79}
+\label{ch:Messages_message_set_program}
+\index{unsorted!message\_set\_program}\index{Subroutines!message\_set\_program}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    message_set_program - Set the program name for the ropp_utils message and
+                          error handling system.
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    call message_set_program(progname)
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    This routine sets the name of the program that appears in error messages
+    issued by the message and error handling system of the ropp_utils library.
+\end{Verbatim}
+\textbf{INPUTS:}\hspace{0.08in}\begin{Verbatim}
+    character(len = *) :: progname
+\end{Verbatim}
+\textbf{SEE ALSO:}\hspace{0.08in}\begin{Verbatim}
+    assert
+    message
+    message_get_program
+    message_set_routine
+    message_get_routine
+    message_set_addinfo
+    message_get_addinfo
+\end{Verbatim}
+\section{Messages/message\_set\_routine}
+\textsl{[ Subroutines ]}
+
+\label{ch:robo80}
+\label{ch:Messages_message_set_routine}
+\index{unsorted!message\_set\_routine}\index{Subroutines!message\_set\_routine}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    message_set_routine - Set the routine name for the ropp_utils message and
+                          error handling system.
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    call message_set_routine(routine)
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    This routine sets the name of the routine that appears in error messages
+    issued by the message and error handling system of the ropp_utils library.
+\end{Verbatim}
+\textbf{INPUTS:}\hspace{0.08in}\begin{Verbatim}
+    character(len = *) :: routine
+\end{Verbatim}
+\textbf{SEE ALSO:}\hspace{0.08in}\begin{Verbatim}
+    assert
+    message
+    message_set_program
+    message_get_program
+    message_get_routine
+    message_set_addinfo
+    message_get_addinfo
+\end{Verbatim}
+\section{Messages/messages}
+\textsl{[ Modules ]}
+
+\label{ch:robo81}
+\label{ch:Messages_messages}
+\index{unsorted!messages}\index{Modules!messages}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    messages - The tools90 message- and error handling system.
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    use messages
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    This module provides constants and interfaces to the Tools90
+    message and error handling system.
+\end{Verbatim}
+\textbf{SEE ALSO:}\hspace{0.08in}\begin{Verbatim}
+   assert
+   message
+   message_set_program
+   message_get_program
+   message_set_routine
+   message_get_routine
+   message_set_addinfo
+   message_get_addinfo
+\end{Verbatim}
+\section{Modules/ropp\_utils}
+\textsl{[ Modules ]}
+
+\label{ch:robo82}
+\label{ch:Modules_ropp_utils}
+\index{unsorted!ropp\_utils}\index{Modules!ropp\_utils}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    ropp_utils - The ROPP utils library
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    use ropp_utils
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    This Fortran module provides interfaces required for the use of the
+    ROPP utils library
+\end{Verbatim}
+\textbf{SEE ALSO:}\hspace{0.08in}\begin{Verbatim}
+    arrays
+    geodesy
+    coordinates
+    datetimeprogs
+    messages
+    unitconvert
+\end{Verbatim}
+\section{Modules/unitconvert}
+\textsl{[ Modules ]}
+
+\label{ch:robo83}
+\label{ch:Modules_unitconvert}
+\index{unsorted!unitconvert}\index{Modules!unitconvert}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    unitconvert - A simple interface to the unit conversion library.
+                 --> BASED ON MARQUARDT COLLECTION LIBRARY ROUTINE
+                     FOR INTERFACE TO THIRD-PARTY UDUNITS LIBRARY
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    use unitconvert
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    This module provides a simple interface to a unit conversion library and
+    allows straightford conversion between physical units.
+\end{Verbatim}
+\textbf{SEE ALSO:}\hspace{0.08in}\begin{Verbatim}
+    ut_convert
+    ropp_unit_conversion
+\end{Verbatim}
+\section{tools90/nag\_interfaces}
+\textsl{[ Functions ]}
+
+\label{ch:robo84}
+\label{ch:tools90_nag_interfaces}
+\index{unsorted!nag\_interfaces}\index{Functions!nag\_interfaces}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    nag_interfaces - Interfaces to the NAG f90/f95 f90_unix_* routines.
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    When Fortran 90 routines call standard Unix system calls but are
+    compiled with the NAGWare Fortran 90/95 compiler, link the resulting
+    object code with a compiled version of this file.
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    The NAG f90 / f95 compiler provides access to most standard Unix
+    system routines via a set of modules named f90_unix_*. While this
+    is a clear and well defined interface to system routines, it leaves
+    source code developed for the NAG compilers incompatible with other
+    Fortran compilers (which usually provide access to the same routines
+    as part of their standard library), as the corresponding NAG modules
+    are missing in other compiler distributions. This causes a lot of
+    unnecessary recoding work.
+
+    As an alternative, this file collects (part of) the system routines
+    addressed by the various f90_unix_* modules and provides an interface
+    to them. Instead of adding the appropriate use f90_unix_* entries
+    in each affected source file, this file can be compiled with the NAG
+    compiler and linked to the other routines.
+\end{Verbatim}
+\textbf{NOTES:}\hspace{0.08in}\begin{Verbatim}
+    Not all routines are currently implemented; i will add them if they
+    will be requested (or I have a need for them).
+
+    Some of the NAG routines do have optional arguments, like ALARM.
+    Obviously, this is not implemented. Also, all parameter and type
+    definitions available from the NAG modules have been omitted.
+\end{Verbatim}
+\textbf{EXAMPLE:}\hspace{0.08in}\textbf{SEE ALSO:}\hspace{0.08in}\begin{Verbatim}
+    For the NAG compiler:
+       f90_unix
+       f90_unix_dir
+       f90_unix_dirent
+       f90_unix_env
+       f90_unix_file
+       f90_unix_proc
+\end{Verbatim}
+\textbf{REFERENCES:}\hspace{0.08in}\section{Units/Conversion}
+\textsl{[ Subroutines ]}
+
+\label{ch:robo85}
+\label{ch:Units_Conversion}
+\index{unsorted!Conversion}\index{Subroutines!Conversion}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    The interface to a ROPP-specific unit conversion routine
+    is contained in a single subroutine, ut_convert(), and has been coded
+    with simplicity in mind, not efficiency.
+\end{Verbatim}
+\textbf{SEE ALSO:}\hspace{0.08in}\begin{Verbatim}
+    ut_convert
+\end{Verbatim}
+\subsection{Conversion/ut\_convert}
+\textsl{[ Conversion ]}
+\textsl{[ Subroutines ]}
+
+\label{ch:robo31}
+\label{ch:Conversion_ut_convert}
+\index{unsorted!ut\_convert}\index{Subroutines!ut\_convert}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    ut_convert - Convert between physical units.
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    use unitconvert
+      ...
+    call ut_convert(data, from_unit, converted, to_unit)
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    This module provides a simple interface to the udunits library and
+    allows straightford conversion between physical units. If either
+    from_unit or to_unit is blank or '1' (indicating no or dimensionless
+    quantities) or are the same, output values are merely copied from
+    the inputs.
+\end{Verbatim}
+\textbf{INPUTS:}\hspace{0.08in}\begin{Verbatim}
+    data       Integer, real or double precision scalar or array.
+    from_unit  Udunits conformant unit specification of the data to be
+                  converted.
+    to_unit    Udunits conformant unit specification of the target unit.
+\end{Verbatim}
+\textbf{OUTPUT:}\hspace{0.08in}\begin{Verbatim}
+    converted  Converted data; must have same type and shape as data.
+\end{Verbatim}
+\textbf{EXAMPLE:}\hspace{0.08in}\begin{Verbatim}
+    To convert a length from mm to km:
+
+       call ut_convert(length, 'mm', length, 'km')
+\end{Verbatim}

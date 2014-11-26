@@ -1,0 +1,258 @@
+#!/bin/bash
+#
+# $Id: f90_select 24 2011-06-21 12:21:48Z frdo $
+#
+#****k* f90_select *
+#--------------------------------------------------------------------
+#
+# NAME
+#  f90_select
+#
+# SYNOPSIS
+#   BASH script to select the details for a particular F90 (and C)
+#   compiler for a given platform.
+#
+#   Usage: > export INCDIR=<INCDIR>
+#          > . f90_select [[f90opt]=<F90ID>]
+#
+#   where:
+#     <F90ID>  is the ID of the required F90 compiler (Default: DEF)
+#     <INCDIR> is a path for INCDIR in FFLAGS         (Default: $HOME/include)
+#
+#   NB: this script must be sourced in order to have the variables defined
+#   here available to the caller, which in turn must be a higher-level script
+#   running under bash. The current script should not be sourced directly
+#   from an intereactive command line or the shell session will be terminated
+#   on any error exit.
+#
+# INPUTS
+#   Compiler list file f90_compilers.dat in the same directory as this script.
+#   This list file must have the following structure:
+#   [<OS>-<F90ID>]
+#   f90name=<compiler name>
+#   f90version=<version> (for info only, not returned to caller)
+#   FF=<f90 command>
+#   FFLAGS=<f90 flags>
+#   VFFLAG=<f90 version ID flag>
+#   CC=<C command>
+#   CFLAGS=<C flags>
+#   VCFLAG=<C version ID flag>
+#
+#   The above can be repeated for alternate compilers and platforms.
+#   There must be at least one entry with F90ID of 'DEF' as a default.
+#   <OS> is the string returned by uname, truncated to 6 characters
+#   and in uppercase. Example:
+#   [LINUX-DEF]
+#   f90name=Intel f95
+#   f90version=v9.1
+#   FF=ifort
+#   FFLAGS=-DBPATH -cm -w -nbs -Vaxlib -I $INCDIR
+#   VFFLAG=-V
+#   CC=gcc
+#   CFLAGS=-DUNDERSCORE
+#   VCFLAG=--version
+#
+#   If C support is not required, the CC=, CFLAGS= and VCFLAG= keywords must
+#   still be present, but their arguments can be blank. A blank argument for
+#   CC will suppress the C compiler checking.
+#
+# OUTPUTS
+#   The individual entries are returned to the calling script
+#   by variables names identical to the keys noted above.
+#
+# ENVIRONMENT VARIABLES
+#   Path variable INCDIR for include files must be defined as shown
+#   for the translation to be made here.
+#
+# ERRORS
+#   The following completion codes can be returned to the caller (in $?):
+#     0 = OK
+#     1 = Compiler definitions file f90_compilerss.dat file not found
+#     2 = No entry for OS-F90 combo found in f90_compilers.dat
+#         - add a new entry or use a different compiler
+#     3 = F90 compiler failed to compile a trivial test program
+#         - check F90 compiler is installed correctly
+#     4 = C compiler (if tested) failed to compile a trivial test program
+#         - check C compiler is installed correctly
+#
+# CALLED BY
+#   build<pack>
+#
+# AUTHOR
+#   Dave Offiler
+#
+# MODIFICATION HISTORY
+# Version Date         Notes                                  By
+# ---------------------------------------------------------------------
+#  1.0    20-Aug-2004  First release                          D.Offiler
+#  1.1    04-Aug-2005  Pass compiler ID tag as argument
+#                      Fixed list file name f90_compilers.dat D.Offiler
+#  1.2    12-Aug-2005  Added VFLAG line                       D.Offiler
+#  1.3    08-Sep-2005  Change VFLAG to VFFLAG; add VCFLAG & also
+#                      test for C compiler if CC not blank.   D.Offiler
+#  1.4    12-Sep-2005  Add support for calling with argument
+#                      'f90opt=<F90ID>' as needed by SunOS.   D.Offiler
+#                      SunOS also uses an obsolete syntax for tail(1)
+#                      which needs accounting for here.       D.Offiler
+#  1.5    06-Dec-2006  RHEL4 grep(1) finding non-unique <OS>-<FF>
+#                      keys (reports line nos. for both LINUX-IFORT
+#                      & LINUX-IFORT8). So include "[" and "]"
+#                      delimiters in grep search string.      D.Offiler
+#  1.6    28-Aug-2008  (a) Run under 'bash' (was 'sh')
+#                          Use [[test]] built-in syntax instead of [test]
+#                          external;
+#                          Use $(command) syntax instead of `command` form;
+#                          Use bash substringing instead of external editing
+#                          commands
+#                      (b) Simplify method of translation of $INCDIR
+#                      (c) Arg $1 can be just <F90ID> as well as f90opt=<F90ID>
+#                      (d) Update & format header comments for RoboDoc.
+#                                                             D.Offiler
+#  1.7 2  9-June-2009  Return unique exit codes (see ERRORS)  D.Offiler
+#
+#--------------------------------------------------------------------
+#****
+#
+# --- Check compiler definition file exists ---
+#
+f90def="f90_compilers.dat"
+if [[ ! -f $f90def  ]]; then
+  echo "*** Compiler definition file $PWD/$f90def not found ***"
+  echo
+  exit 1
+fi
+#
+# --- Platform ID ---
+#
+OS=$(uname | cut -c 1-6 | tr [:lower:] [:upper:])
+#
+# --- Compiler ID tag ---
+#     Handle cases with $1="<F90ID>" as well as $1="f90opt=<F90ID>";
+#     default where no <F90ID> is given in either of these forms,
+#     and finally ensure the tag is uppercase.
+#
+f90opt=${f90opt:-$1}
+f90opt=${f90opt/f90opt=}
+f90opt=${f90opt:-DEF}
+f90opt=$(echo $f90opt | tr [:lower:] [:upper:])
+#
+# --- Translation for INCDIR ---
+#
+INCDIR=${INCDIR:-$HOME/include}
+#
+#  --- Generate look-up key from O/S & compiler IDs
+#
+key="${OS}-${f90opt}"
+echo ">> Looking for compiler $key details in $f90def..."
+#
+# --- Find key ID entry ---
+#
+tmpfile="${key}.tmp"
+start=$(grep -n "\[$key\]" $f90def | cut -d: -f1)
+if [[ -n "$start"  ]]; then
+  echo "   Found entry for $key at line $start"
+#
+# --- Extract all entries for this key ---
+#
+  if [[ $OS = "SUNOS"  ]]; then
+    tail +${start}l $f90def | head -n 9 > $tmpfile
+  else
+    tail -n +$start $f90def | head -n 9 > $tmpfile
+  fi
+#
+# --- Extract individual keywords ---
+#
+  line=$(grep "f90name=" $tmpfile)
+  f90name=${line:8}
+#
+  line=$(grep "FF=" $tmpfile)
+  FF=${line:3}
+#
+  line=$(grep "FFLAGS=" $tmpfile)
+  FFLAGS=$(eval echo ${line:7})
+#
+  line=$(grep "VFFLAG=" $tmpfile)
+  VFFLAG=${line:7}
+#
+  line=$(grep "CC=" $tmpfile)
+  CC=${line:3}
+#
+  line=$(grep "CFLAGS=" $tmpfile)
+  CFLAGS=${line:7}
+#
+  line=$(grep "VCFLAG=" $tmpfile)
+  VCFLAG=${line:7}
+#
+  rm -f $tmpfile
+  echo "   Name  : $f90name"
+  echo "   Cmd   : $FF"
+  echo "   FFlags: $FFLAGS"
+  echo "   VFflag: $VFFLAG"
+  echo "   CC    : $CC"
+  echo "   CFlags: $CFLAGS"
+  echo "   VCflag: $VCFLAG"
+#
+# --- Test to see if F90 compiler actually installed & working ---
+#
+  echo
+  echo ">> Testing Fortran..."
+  echo "END" > ${key}.f90
+  $FF $VFFLAG -c ${key}.f90 2>&1
+  $FF -c $FFLAGS ${key}.f90 2>&1
+  if [[ $? -eq 0  ]]; then
+    echo
+    echo " - $f90name ($FF) compiler appears to work OK"
+    echo
+    rm -f ${key}*.*
+  else
+    echo
+    echo "*** $f90name compiler ($FF) failed test ***"
+    echo
+    echo "    Plese check that this compiler is correctly installed and"
+    echo "    can compile and run sample Fortran programs."
+    echo
+    rm -f ${key}.*
+    exit 2
+  fi
+#
+# --- Test to see if C compiler actually installed & working (if required) ---
+#
+  if [[ ! "$CC" = ""  ]]; then
+    echo ">> Testing C..."
+    cat > ${key}.c <<EOF
+int
+main()
+{
+ return 0;
+}
+EOF
+    $CC $VCFLAG -c ${key}.c  2>&1
+    $CC -c $CFLAGS ${key}.c  2>&1
+    if [[ $? -eq 0  ]];  then
+      echo
+      echo " - C compiler ($CC) appears to work OK"
+      echo
+      rm -f ${key}*.*
+    else
+      echo
+      echo "*** C compiler ($CC) failed test ***"
+      echo
+      echo "    Plese check that this compiler is correctly installed and"
+      echo "    can compile and run sample C programs."
+      echo
+      rm -f ${key}.*
+      exit 3
+    fi
+  fi
+#
+else
+  echo "*** No entry for compiler $f90opt under $OS ***"
+  echo
+  echo "    Please create an an entry for this combination of compiler and operating"
+  echo "    system, following an existing entry, and re-run the build."
+  echo "    Refer to the BUFR distribution package documentation for full details."
+  echo "    Please send any new working entry to the BUFR Development Team for"
+  echo "    inclusion in future releases (see the package README file)."
+  exit 2
+fi
+#

@@ -1,0 +1,45 @@
+BUFR version 19.1.00 Release Notes
+
+Summary
+TABLEB,D and CODEFIGS updated to WMO version 17.
+
+-------------------------------------------------------------------------------
+Subroutines CODE and TABLED - increase array sizes.
+
+MetDB_c_utils - added string.h include.
+
+Subroutine BUFRREAD - removed print statements.
+
+run_test.sh - script to run the encode and decode sample programs.
+
+Makefile_BUFRrelease - tidied up and added test target.
+
+TABLEB, TABLED and CODEFIG - updated to version 17 from
+http://www.wmo.int/pages/prog/www/WMOCodes/TDCFtables.html#TDCFtables 
+
+README updated.
+
+------------------------------------------------------------------------------
+BUFR version 19.1.01 Release Notes
+
+Corrected format of TABLEB line 1.
+Updated bufhead.f90 to F90 syntax
+
+------------------------------------------------------------------------------
+BUFR version 19.1.02 Release Notes
+
+Correction to TABLED 307092 sequence (in validation) as previous version was
+incorrect on the WMO website.
+
+TABLEB, TABLED and CODEFIG minor formatting change to remove extra CRs after 
+LFs causing problems with some compilers. 
+
+
+
+
+
+
+
+
+
+

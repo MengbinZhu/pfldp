@@ -1,0 +1,2840 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+  <head>
+    <meta http-equiv="CONTENT-TYPE" content="text/html; charset=UTF-8">
+    <title>ROPP Release Notes</title>
+  </head>
+  <body style="   direction: ltr; background-color: rgb(204, 255, 255);"
+    lang="en-GB">
+    <p><font face="Arial, sans-serif">SAF/ROM/METO/SRN/ROPP/001 -
+        Version 7.0 - 31 July 2013<span checked="true" style="font-weight: bold; font-style: italic;"></span><br>
+      </font></p>
+    <h1 align="center"><font face="Arial, sans-serif">Software Release
+        Notes for ROPP-7 (v7.0)</font></h1>
+    <h3><a name="Contents"></a><font face="Arial, sans-serif">Contents</font></h3>
+    <ol>
+      <li><a href="#Introduction"><font face="Arial, sans-serif">Introduction</font></a></li>
+      <li><a href="#Release_file_set"><font face="Arial, sans-serif">Release
+
+
+
+
+
+
+            file set</font></a></li>
+      <li><a href="#Previous_versions"><font face="Arial, sans-serif">Previous
+
+
+
+
+
+
+            versions</font></a></li>
+      <li><a href="#Third-party_software_dependencies"><font face="Arial, sans-serif">Third-party
+
+
+
+
+
+
+            software dependencies</font></a></li>
+      <li><a href="#Configurebuild_assistance"><font face="Arial, sans-serif">Unpacking
+
+
+
+
+
+
+            and building ROPP</font></a></li>
+      <li><a href="#Building_ROPP"><font face="Arial, sans-serif">Building
+
+
+
+
+
+
+            ROPP manually</font></a></li>
+      <li><a href="#Testing"><font face="Arial, sans-serif">Testing</font></a></li>
+      <li><a href="#Portability"><font face="Arial, sans-serif">Portability&nbsp;</font></a></li>
+      <li><a href="#Known_problems"><font face="Arial, sans-serif">Known
+            problems</font></a></li>
+      <li><a href="#Limitations"><font face="Arial, sans-serif">Limitations</font></a></li>
+      <li><a href="#And_finally"><font face="Arial, sans-serif">And
+            finally...</font></a></li>
+    </ol>
+    <hr>
+    <h2><a name="Introduction"></a><font face="Arial, sans-serif">1.
+        Introduction</font></h2>
+    <p><font face="Arial, sans-serif">This document outlines updates
+        to&nbsp;the seventh major release of the Radio Occultation
+        Processing Package (ROPP) Version 7 - hereafter referred to as '<b>ROPP-7.0</b>'.
+
+
+
+
+
+        It describes the file set, documentation, dependency packages, a
+        summary 'Quick Start' guide to build/installation, a list of
+        supported platforms and known problems. <br>
+        <br>
+        ROPP is a collection of software modules (provided as source
+        code), supporting build scripts, data files and documentation.
+        The complete package is split into several modules. Users may
+        wish to integrate a subset of ROPP code into their own software
+        applications, individually linking modules to their own code.
+        These users may not require the complete ROPP-7.0 distribution
+        package. Alternatively, users may wish to use the executable
+        tools provided as part of each module as stand-alone
+        applications for RO data processing. These users should download
+        the complete ROPP-7.0 release. <a href="#Configurebuild_assistance">Section
+
+
+
+
+
+
+          5</a> has guidance for unpacking and building ROPP. <br>
+        <br>
+        The download website is organized as:</font></p>
+    <blockquote>&nbsp;&nbsp;<font face="Courier, monospace"><span style="font-weight: bold;">ROPP
+Download
+
+
+
+
+
+
+          (root) page</span><br style="font-weight: bold;">
+        <span style="font-weight: bold;"> &nbsp;&nbsp;|-- ROPP-7.0</span><br
+          style="font-weight: bold;">
+        <span style="font-weight: bold;">
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|-- Documents</span><br style="font-weight: bold;">
+        <span style="font-weight: bold;"> &nbsp;&nbsp;|-- Dependency
+          Packages</span><br style="font-weight: bold;">
+        <span style="font-weight: bold;">&nbsp; |-- Previous Releases</span><br>
+      </font> </blockquote>
+    <p><font face="Arial, sans-serif">The root directory contains the
+        Release Notes (this file), </font><a href="ROPP_Changes_v61-v70.html"><font
+          face="Arial, sans-serif">Change Log for this</font></a> <font
+        face="Arial, sans-serif">and a compressed tar archive file (<span
+          checked="true" style="font-family: Courier New,Courier,monospace; font-weight: bold;">ROPP-7.0.tar.gz</span>)
+        which contains the complete release for ROPP-7.0.</font></p>
+    <p><font face="Arial, sans-serif">Directory <font style="font-family: Courier New,Courier,monospace; font-weight: bold;"
+          face="Courier, monospace">ROPP-7.0</font> contains compressed
+        tar archive files for the individual components (source and
+        build modules) for this release. These are provided should users
+        wish to access individual modules rather than download the
+        complete package. Related documentation is also available
+        separately in the <font style="font-family: Courier New,Courier,monospace; font-weight: bold;"
+          face="Courier, monospace">Documents</font> sub-directory.
+        Third-party dependency packages (not part of the ROPP
+        distribution and for those whose licences permit it) can be
+        downloaded from the <font style="font-weight: bold;" face="Courier, monospace">Dependency
+
+
+
+
+
+
+          Packages</font> directory. See the <font style="font-weight: bold;"
+          checked="true" face="Courier, monospace">README</font> files
+        in these directories for more information. The <span checked="true"
+          style="font-family: Courier New,Courier,monospace; font-weight: bold;">Previous
+
+
+
+
+
+
+          Releases</span> directory contains a small number of older
+        ROPP releases, but please note that support for these is limited
+        and decreases with age.<br>
+        <br>
+        ROPP-7.0 IO, PP, FM and 1DVAR modules have been fully validated
+        using operational Level 1b and Level 2 GRAS data. As such, it is
+        guaranteed for operational use. All parts of this release have
+        been tested against CHAMP, GRACE-A, COSMIC and GRAS data.&nbsp;
+        <span style="color: black;">In addition,&nbsp; limited samples
+          of data from TerraSAR-X, C/NOFS and SAC-C have been tested
+          with the BUFR encoding and decoding tools and appropriate
+          GFZ-to-ROPP and UCAR-to-ROPP converters. </span><br>
+        <br>
+        Almost all files described here can be downloaded by registered
+        and logged-in users from this website (</font><a style="font-weight: bold;"
+        href="http://www.romsaf.org/"><font face="Courier, monospace">http://www.romsaf.org</font></a><span
+        style="font-weight: bold;"> </span><i style="font-weight: bold;"><font
+          face="Courier, monospace">&gt; User Login &gt; ROPP &gt; ROPP
+          Download</font></i><font face="Arial, sans-serif">). Any
+        exceptions are noted below.<br>
+        <br>
+        Before being able to download any ROPP-7.0 files, you will have
+        accepted the Terms and Conditions of the full ROPP Software
+        Licence, a copy of which is available in the ROPP-7.0 directory
+        for reference. Note also the contents of the <font style="font-weight: bold;"
+          face="Courier, monospace">COPYRIGHT</font> file.<br>
+        <br>
+        All comments on the ROPP software should, in the first instance,
+        be reported via the ROM SAF Helpdesk at </font><a style="font-family: Courier New,Courier,monospace; font-weight: bold;"
+        href="http://www.romsaf.org/">http://www.romsaf.org</a><font face="Arial, sans-serif">.</font><br>
+      <a href="#Contents"><font size="2">top</font></a></p>
+    <hr>
+    <h2><a name="Release_file_set"></a><font face="Arial, sans-serif">2.
+        Release file set</font></h2>
+    <p><font face="Arial:san-serif, sans-serif">The 'Status' column in
+        the following tables shows the current status of files since the
+        previous release (v6.1), by a traffic light system:</font></p>
+    <center>
+      <table style="width: 499px; height: 31px;" border="0" cellpadding="2"
+        cellspacing="0">
+        <tbody>
+          <tr>
+            <td width="100" bgcolor="#00ff00">
+              <p align="center"><font face="Arial:san-serif, sans-serif"><b>Unchanged</b></font></p>
+            </td>
+            <td width="75">
+              <p align="center">&nbsp;</p>
+            </td>
+            <td width="100" bgcolor="#ffff00">
+              <p align="center"> <font face="Arial:san-serif, sans-serif"><b>Updated</b></font></p>
+            </td>
+            <td width="75">
+              <p align="center">&nbsp;</p>
+            </td>
+            <td width="100" bgcolor="#ff0000">
+              <p align="center"><font face="Arial:san-serif, sans-serif"><b>New</b></font></p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </center>
+    <p><font face="Arial:san-serif, sans-serif">A summary of the main
+        changes to this package (v7.0) from the previous release (v6.1)
+        are documented in the </font><a href="ROPP_Changes_v61-v70.html"><font
+          face="Arial:san-serif, sans-serif">Change Log</font></a><font
+        face="Arial:san-serif, sans-serif">.</font></p>
+    <h3><font face="Arial, sans-serif">2.1 ROPP root directory</font></h3>
+    <center>
+      <table style="background-color: rgb(255, 204, 153); width: 835px;"
+        border="1" bordercolor="#ff8080" cellpadding="2" cellspacing="2">
+        <colgroup><col width="244"><col width="424"><col width="69"><col
+            width="64"></colgroup>
+        <tbody>
+          <tr>
+            <td width="244" bgcolor="#ff9966">
+              <p align="center"><font face="Arial, sans-serif"><font size="2"><i><b>File
+
+
+
+
+
+
+                        Name</b></i></font></font></p>
+            </td>
+            <td width="424" bgcolor="#ff9966">
+              <p align="center"><font face="Arial, sans-serif"><font size="2"><i><b>Description</b></i></font></font></p>
+            </td>
+            <td width="69" bgcolor="#ff9966">
+              <p align="center"><font face="Arial, sans-serif"><font size="2"><i><b>Version</b></i></font></font></p>
+            </td>
+            <td width="64" bgcolor="#ff9966">
+              <p align="center"><font face="Arial, sans-serif"><font size="2"><i><b>Status</b></i></font></font></p>
+            </td>
+          </tr>
+          <tr>
+            <td style="font-weight: bold;" width="244" bgcolor="#ffcc99">
+              <p><font face="Courier, monospace"><font size="2">ROPP_Release_Notes_v70.html</font></font></p>
+            </td>
+            <td width="424" bgcolor="#ffcc99">
+              <p><font face="Arial, sans-serif"><font size="2">This file</font></font></p>
+            </td>
+            <td width="69" bgcolor="#ffcc99">
+              <p align="center"><font face="Arial, sans-serif"><font size="2">v1.0</font></font></p>
+            </td>
+            <td width="64" bgcolor="#ff0000">
+              <p align="center"><font face="Arial, sans-serif"><font size="2">New</font></font></p>
+            </td>
+          </tr>
+          <tr>
+            <td style="font-weight: bold;"><font face="Courier, monospace"><font
+                  size="2">ROPP_Changes_v61-v70.html</font></font></td>
+            <td><font face="Arial, sans-serif"><font size="2">Change Log
+                  - summary of changes from Release Version 6.1 to 7.0</font></font></td>
+            <td style="text-align: center;"><font face="Arial, sans-serif"><font
+                  size="2">v1.0</font></font></td>
+            <td style="text-align: center; background-color: rgb(255, 0, 0);"><font
+                face="Arial, sans-serif"><font size="2">New</font></font></td>
+          </tr>
+          <tr>
+            <td style="font-weight: bold;" width="244" bgcolor="#ffcc99">
+              <p><font face="Courier, monospace"><font size="2">ropp-7.0.tar.gz</font></font></p>
+            </td>
+            <td width="424" bgcolor="#ffcc99">
+              <p><font face="Arial, sans-serif"><font size="2">Compressed
+
+
+
+
+
+
+                    tar archive of the whole ROPP-6 (v7.0) distribution
+                    set</font></font></p>
+            </td>
+            <td width="69" bgcolor="#ffcc99">
+              <p align="center"><font face="Arial, sans-serif"><font size="2">v7.0</font></font></p>
+            </td>
+            <td width="64" bgcolor="#ff0000">
+              <p align="center"><font face="Arial, sans-serif"><font size="2">New</font></font></p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </center>
+    <h3><font face="Arial, sans-serif">2.2 ROPP-7.0 directory</font></h3>
+    <p><font face="Arial, sans-serif">For users not requiring the
+        complete distribution package, this directory contains the
+        component module files:</font></p>
+    <center>
+      <table style="background-color: rgb(204, 204, 255); width: 835px;"
+        border="1" bordercolor="#00b8ff" cellpadding="2" cellspacing="2">
+        <colgroup><col width="245"><col width="423"><col width="69"><col
+            width="64"></colgroup>
+        <tbody>
+          <tr>
+            <td width="245" bgcolor="#99ccff">
+              <p align="center"><font face="Arial, sans-serif"><font size="2"><i><b>File
+
+
+
+
+
+
+                        Name</b></i></font></font></p>
+            </td>
+            <td width="423" bgcolor="#99ccff">
+              <p align="center"><font face="Arial, sans-serif"><font size="2"><i><b>Description</b></i></font></font></p>
+            </td>
+            <td width="69" bgcolor="#99ccff">
+              <p align="center"><font face="Arial, sans-serif"><font size="2"><i><b>Version</b></i></font></font></p>
+            </td>
+            <td width="64" bgcolor="#99ccff">
+              <p align="center"><font face="Arial, sans-serif"><font size="2"><i><b>Status</b></i></font></font></p>
+            </td>
+          </tr>
+          <tr>
+            <td style="font-weight: bold;" width="245" bgcolor="#ccccff">
+              <p><font face="Courier, monospace"><font size="2">README.ropp</font></font></p>
+            </td>
+            <td width="423" bgcolor="#ccccff">
+              <p><font face="Arial, sans-serif"><font size="2">Additional
+
+
+
+
+
+
+                    notes on the software</font></font></p>
+            </td>
+            <td width="69" bgcolor="#ccccff">
+              <p align="center"><font face="Arial, sans-serif"><font size="2">v7.0</font></font></p>
+            </td>
+            <td width="64" bgcolor="#ffff00">
+              <p align="center"><font face="Arial, sans-serif"><font size="2">Updated</font></font></p>
+            </td>
+          </tr>
+          <tr>
+            <td style="font-weight: bold;" width="245" bgcolor="#ccccff">
+              <p><font face="Courier, monospace"><font size="2">COPYRIGHT</font></font></p>
+            </td>
+            <td width="423" bgcolor="#ccccff">
+              <p><font face="Arial, sans-serif"><font size="2">Copyright
+                    notices</font></font></p>
+            </td>
+            <td width="69" bgcolor="#ccccff">
+              <p align="center"><font face="Arial, sans-serif"><font size="2">n/a</font></font></p>
+            </td>
+            <td style="width: 64px; background-color: rgb(51, 255, 51);">
+              <p align="center"><font face="Arial, sans-serif"><font size="2">Unchanged</font></font></p>
+            </td>
+          </tr>
+          <tr>
+            <td style="font-weight: bold;" width="245" bgcolor="#ccccff">
+              <p><font face="Courier, monospace"><font size="2">romsaf_ropp_licence.pdf</font></font></p>
+            </td>
+            <td width="423" bgcolor="#ccccff">
+              <p><font face="Arial, sans-serif"><font size="2">ROPP
+                    Software Licence<span style="font-style: italic;"></span></font></font></p>
+            </td>
+            <td width="69" bgcolor="#ccccff">
+              <p align="center"><font face="Arial, sans-serif"><font size="2">v1.0</font></font></p>
+            </td>
+            <td style="width: 64px; background-color: rgb(255, 255, 0);">
+              <p style="background-color: rgb(255, 255, 0);" align="center"><font
+                  face="Arial, sans-serif"><font size="2">Updated<br>
+                  </font></font></p>
+            </td>
+          </tr>
+          <tr>
+            <td style="font-weight: bold;" width="245" bgcolor="#ccccff">
+              <p><font face="Courier, monospace"><font size="2">ropp_utils-7.0.tar.gz</font></font></p>
+            </td>
+            <td width="423" bgcolor="#ccccff">
+              <p><font face="Arial, sans-serif"><font size="2">ROPP
+                    Utilities module. </font></font> </p>
+            </td>
+            <td width="69" bgcolor="#ccccff">
+              <p align="center"><font face="Arial, sans-serif"><font size="2">v7.0</font></font></p>
+            </td>
+            <td width="64" bgcolor="#ff0000">
+              <p align="center"><font face="Arial, sans-serif"><font size="2">New</font></font></p>
+            </td>
+          </tr>
+          <tr>
+            <td style="font-weight: bold;" width="245" bgcolor="#ccccff">
+              <p><font face="Courier, monospace"><font size="2">ropp_io-7.0.tar.gz</font></font></p>
+            </td>
+            <td width="423" bgcolor="#ccccff">
+              <p><font face="Arial, sans-serif"><font size="2">ROPP
+                    Input/Output module</font></font></p>
+            </td>
+            <td width="69" bgcolor="#ccccff">
+              <p align="center"><font face="Arial, sans-serif"><font size="2">v7.0</font></font></p>
+            </td>
+            <td width="64" bgcolor="#ff0000">
+              <p align="center"><font face="Arial, sans-serif"><font size="2">New</font></font></p>
+            </td>
+          </tr>
+          <tr>
+            <td style="font-weight: bold;" width="245" bgcolor="#ccccff">
+              <p><font face="Courier, monospace"><font size="2">ropp_pp-7.0.tar.gz</font></font></p>
+            </td>
+            <td width="423" bgcolor="#ccccff">
+              <p><font face="Arial, sans-serif"><font size="2">ROPP
+                    Pre-Processor module</font></font></p>
+            </td>
+            <td width="69" bgcolor="#ccccff">
+              <p align="center"><font face="Arial, sans-serif"><font size="2">v7.0</font></font></p>
+            </td>
+            <td width="64" bgcolor="#ff0000">
+              <p align="center"><font face="Arial, sans-serif"><font size="2">New</font></font></p>
+            </td>
+          </tr>
+          <tr>
+            <td style="font-weight: bold;" width="245" bgcolor="#ccccff">
+              <p><font face="Courier, monospace"><font size="2">ropp_fm-7.0.tar.gz</font></font></p>
+            </td>
+            <td width="423" bgcolor="#ccccff">
+              <p><font face="Arial, sans-serif"><font size="2">ROPP
+                    Forward Model module</font></font></p>
+            </td>
+            <td width="69" bgcolor="#ccccff">
+              <p align="center"><font face="Arial, sans-serif"><font size="2">v7.0</font></font></p>
+            </td>
+            <td width="64" bgcolor="#ff0000">
+              <p align="center"><font face="Arial, sans-serif"><font size="2">New</font></font></p>
+            </td>
+          </tr>
+          <tr>
+            <td style="font-weight: bold;" width="245" bgcolor="#ccccff">
+              <p><font face="Courier, monospace"><font size="2">ropp_1dvar-7.0.tar.gz</font></font></p>
+            </td>
+            <td width="423" bgcolor="#ccccff">
+              <p><font face="Arial, sans-serif"><font size="2">ROPP
+                    1D-Var module</font></font></p>
+            </td>
+            <td width="69" bgcolor="#ccccff">
+              <p align="center"><font face="Arial, sans-serif"><font size="2">v7.0</font></font></p>
+            </td>
+            <td width="64" bgcolor="#ff0000">
+              <p align="center"><font face="Arial, sans-serif"><font size="2">New</font></font></p>
+            </td>
+          </tr>
+          <tr>
+            <td style="font-weight: bold;" width="245" bgcolor="#ccccff">
+              <p><font face="Courier, monospace"><font size="2">ropp_build-7.0.tar.gz</font></font></p>
+            </td>
+            <td width="423" bgcolor="#ccccff">
+              <p><font face="Arial, sans-serif"><font size="2">A
+                    collection of configure and build scripts for a
+                    number of compilers &amp; platforms suitable for
+                    ROPP and the dependency packages. See Section 6.</font></font></p>
+            </td>
+            <td width="69" bgcolor="#ccccff">
+              <p align="center"><font face="Arial, sans-serif"><font size="2">v7.0</font></font></p>
+            </td>
+            <td width="64" bgcolor="#ff0000">
+              <p align="center"><font face="Arial, sans-serif"><font size="2">New</font></font></p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </center>
+    <p><font face="Arial, sans-serif">Note that the collective content
+        of these separate module tarfiles is contained in the main
+        tarfile in the root directory.</font></p>
+    <h3><font face="Arial, sans-serif">2.3 ROPP-7.0/Documents directory</font></h3>
+    <p><font face="Arial, sans-serif">The ROPP User Guide (in three
+        parts) and documentation on ROPP code (Reference Manuals), file
+        formats (netCDF and BUFR), Technical Notes and other related
+        items, can be found here.</font></p>
+    <center>
+      <table style="background-color: rgb(204, 204, 0); width: 835px;" border="1"
+        bordercolor="#cccc00" cellpadding="2" cellspacing="2">
+        <colgroup><col width="245"><col width="423"><col width="69"><col
+            width="64"></colgroup>
+        <tbody>
+          <tr bgcolor="#ffff66">
+            <td width="245" bgcolor="#b3b300">
+              <p align="center"><font face="Arial, sans-serif"><font size="2"><i><b>File
+
+
+
+
+
+
+                        Name</b></i></font></font></p>
+            </td>
+            <td width="423" bgcolor="#b3b300">
+              <p align="center"><font face="Arial, sans-serif"><font size="2"><i><b>Description</b></i></font></font></p>
+            </td>
+            <td width="69" bgcolor="#b3b300">
+              <p align="center"><font face="Arial, sans-serif"><font size="2"><i><b>Version</b></i></font></font></p>
+            </td>
+            <td width="64" bgcolor="#b3b300">
+              <p align="center"><font face="Arial, sans-serif"><font size="2"><i><b>Status</b></i></font></font></p>
+            </td>
+          </tr>
+          <tr>
+            <td style="font-weight: bold;" width="245" bgcolor="#e6e64c">
+              <p><font face="Courier, monospace"><font size="2">README.docs</font></font></p>
+            </td>
+            <td width="423" bgcolor="#e6e64c">
+              <p><font face="Arial, sans-serif"><font size="2">Additional
+
+
+
+
+
+
+                    notes on the documents</font></font></p>
+            </td>
+            <td width="69" bgcolor="#e6e64c">
+              <p align="center"><font face="Arial, sans-serif"><font size="2">v7.0</font></font></p>
+            </td>
+            <td width="64" bgcolor="#ffff00">
+              <p align="center"><font face="Arial, sans-serif"><font size="2">Updated</font></font></p>
+            </td>
+          </tr>
+          <tr>
+            <td style="font-weight: bold;" width="245" bgcolor="#e6e64c">
+              <p><font face="Courier, monospace"><font size="2">romsaf_ropp_overview.pdf</font></font></p>
+            </td>
+            <td width="423" bgcolor="#e6e64c">
+              <p><font face="Arial, sans-serif"><font size="2">ROPP
+                    Overview document</font></font></p>
+            </td>
+            <td width="69" bgcolor="#e6e64c">
+              <p align="center"><font face="Arial, sans-serif"><font size="2">v7.0</font></font></p>
+            </td>
+            <td width="64" bgcolor="#ffff00">
+              <p align="center"><font face="Arial, sans-serif"><font size="2">Updated</font></font></p>
+            </td>
+          </tr>
+          <tr>
+            <td style="font-weight: bold;" width="245" bgcolor="#e6e64c">
+              <p><font face="Courier, monospace"><font size="2">romsaf_ropp_ug_io.pdf</font></font></p>
+            </td>
+            <td width="423" bgcolor="#e6e64c">
+              <p><font face="Arial, sans-serif"><font size="2">ROPP User
+                    Guide. Part I</font></font></p>
+            </td>
+            <td width="69" bgcolor="#e6e64c">
+              <p align="center"><font face="Arial, sans-serif"><font size="2">v7.0</font></font></p>
+            </td>
+            <td width="64" bgcolor="#ffff00">
+              <p align="center"><font face="Arial, sans-serif"><font size="2">Updated</font></font></p>
+            </td>
+          </tr>
+          <tr>
+            <td style="font-weight: bold;" width="245" bgcolor="#e6e64c">
+              <p><font face="Courier, monospace"><font size="2">romsaf_ropp_ug_1dvar.pdf</font></font></p>
+            </td>
+            <td width="423" bgcolor="#e6e64c">
+              <p><font face="Arial, sans-serif"><font size="2">ROPP User
+                    Guide. Part II</font></font></p>
+            </td>
+            <td width="69" bgcolor="#e6e64c">
+              <p align="center"><font face="Arial, sans-serif"><font size="2">v7.0</font></font></p>
+            </td>
+            <td width="64" bgcolor="#ffff00">
+              <p align="center"><font face="Arial, sans-serif"><font size="2">Updated</font></font></p>
+            </td>
+          </tr>
+          <tr>
+            <td style="font-weight: bold;" width="245" bgcolor="#e6e64c">
+              <p><font face="Courier, monospace"><font size="2">romsaf_ropp_ug_pp.pdf</font></font></p>
+            </td>
+            <td width="423" bgcolor="#e6e64c">
+              <p><font face="Arial, sans-serif"><font size="2">ROPP User
+                    Guide. Part III</font></font></p>
+            </td>
+            <td width="69" bgcolor="#e6e64c">
+              <p align="center"><font face="Arial, sans-serif"><font size="2">v7.0</font></font></p>
+            </td>
+            <td width="64" bgcolor="#ffff00">
+              <p align="center"><font face="Arial, sans-serif"><font size="2">Updated</font></font></p>
+            </td>
+          </tr>
+          <tr>
+            <td style="font-weight: bold;" width="245" bgcolor="#e6e64c">
+              <p><font face="Courier, monospace"><font size="2">romsaf_bufr.pdf</font></font></p>
+            </td>
+            <td width="423" bgcolor="#e6e64c">
+              <p><font face="Arial, sans-serif"><font size="2">BUFR
+                    template specification for RO data</font></font></p>
+            </td>
+            <td width="69" bgcolor="#e6e64c">
+              <p align="center"><font face="Arial, sans-serif"><font size="2">v2.2</font></font></p>
+            </td>
+            <td width="64" bgcolor="#ffff00">
+              <p align="center"><font face="Arial, sans-serif"><font size="2">Updated</font></font></p>
+            </td>
+          </tr>
+          <tr>
+            <td style="font-weight: bold;" width="245" bgcolor="#e6e64c">
+              <p><font face="Courier, monospace"><font size="2">ropp_docs.tar.gz</font></font></p>
+            </td>
+            <td width="423" bgcolor="#e6e64c">
+              <p><font face="Arial, sans-serif"><font size="2">A
+                    compressed tar archive containing all of the above
+                    files plus the Reference Manuals for the individual
+                    modules:<br>
+                    <font face="Courier, monospace">romsaf_ropp_utils_rm.pdf<br>
+                      romsaf_ropp_io_rm.pdf<br>
+                      romsaf_ropp_pp_rm.pdf<br>
+                      romsaf_ropp_fm_rm.pdf<br>
+                      romsaf_ropp_1dvar_rm.pdf<br>
+                    </font><font face="Arial:sans-serif, sans-serif">The
+                      Reference Manuals are also included in the
+                      respective module distribution files.</font></font></font></p>
+            </td>
+            <td width="69" bgcolor="#e6e64c">
+              <p align="center"><font face="Arial, sans-serif"><font size="2">n/a</font></font></p>
+            </td>
+            <td width="64" bgcolor="#ffff00">
+              <p align="center"><font face="Arial, sans-serif"><font size="2">Updated</font></font></p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </center>
+    <p><font face="Arial, sans-serif">Please refer to the Overview
+        document for the general content of the individual modules, and
+        to the User Guide for details of the installation and usage of
+        the package.<br>
+        <br>
+        For users wishing to write their own interfaces to the ROPP
+        routines, or to modify the ROPP code, detailed
+        user-documentation in the form of Reference Manuals, one for
+        each module, are provided; these Reference Manuals are also
+        contained in the main ROPP tarfile. Stand-alone application
+        tools also have Unix-style 'man' pages which are installed
+        during the ROPP module building process.</font></p>
+    <h3><a name="Dependency_Packages"></a><font face="Arial, sans-serif">2.4
+
+
+
+
+
+
+        Dependency Packages directory</font></h3>
+    <p><font face="Arial, sans-serif">ROPP uses some standard
+        third-party packages. Most of these packages are open source and
+        their licences permit re-distribution. Where licences permit,
+        the latest stable versions of these packages known to be
+        compatible with ROPP are available for download here as a
+        convenience to users.</font></p>
+    <center>
+      <table style="background-color: rgb(204, 204, 204); width: 835px;"
+        border="1" bordercolor="#c0c0c0" cellpadding="2" cellspacing="3">
+        <colgroup><col width="244"><col width="425"><col width="69"><col
+            width="64"></colgroup>
+        <tbody>
+          <tr>
+            <td width="244">
+              <p align="center"><font face="Arial, sans-serif"><font size="2"><i><b>File
+
+
+
+
+
+
+                        Name</b></i></font></font></p>
+            </td>
+            <td width="425">
+              <p style="width: 401px;" align="center"><font face="Arial, sans-serif"><font
+                    size="2"><i><b>Description</b></i></font></font></p>
+            </td>
+            <td width="69">
+              <p style="margin-left: 0px; width: 63px;" align="center"><font
+                  face="Arial, sans-serif"><font size="2"><i><b>Version</b></i></font></font></p>
+            </td>
+            <td width="64">
+              <p style="margin-left: 0px; width: 72px;" align="center"><font
+                  face="Arial, sans-serif"><font size="2"><i><b>Status</b></i></font></font></p>
+            </td>
+          </tr>
+          <tr>
+            <td style="font-weight: bold;" width="244" bgcolor="#e6e6e6">
+              <p style="height: 20px;"><font face="Courier, monospace"><font
+                    size="2">README.deps</font></font></p>
+            </td>
+            <td width="425" bgcolor="#e6e6e6">
+              <p><font face="Arial, sans-serif"><font size="2">Additional
+
+
+
+
+
+
+                    notes on the dependency packages</font></font></p>
+            </td>
+            <td width="69" bgcolor="#e6e6e6">
+              <p align="center"><font face="Arial, sans-serif"><font size="2">v7.0</font></font></p>
+            </td>
+            <td width="64" bgcolor="#ffff00">
+              <p align="center"><font face="Arial, sans-serif"><font size="2">Updated</font></font></p>
+            </td>
+          </tr>
+          <tr>
+            <td style="font-weight: bold;" colspan="1" rowspan="1" width="244"
+              bgcolor="#e6e6e6">
+              <p style="margin-top: 0px; height: 30px;"><font face="Courier, monospace"><font
+                    size="2">netcdf-4.1.3.tar.gz</font></font></p>
+            </td>
+            <td colspan="1" rowspan="1" width="425" bgcolor="#e6e6e6">
+              <p><font size="2"><font face="Arial, sans-serif">NetCDF
+                    interface library</font></font><br>
+                <a href="http://www.unidata.ucar.edu/software/netcdf/"><font
+                    size="2"><font face="Arial, sans-serif">http://www.unidata.ucar.edu/software/netcdf/</font></font></a></p>
+            </td>
+            <td colspan="1" rowspan="1" width="69" bgcolor="#e6e6e6">
+              <p align="center"><font face="Arial, sans-serif"><font size="2">v4.1.3</font></font></p>
+            </td>
+            <td colspan="1" rowspan="1" style="width: 75px; background-color: rgb(51, 255, 51);">
+              <p style="background-color: rgb(51, 255, 51);" align="center"><font
+                  face="Arial, sans-serif"><font size="2">Unchanged&nbsp;
+
+
+
+
+
+
+                    (1)</font></font></p>
+            </td>
+          </tr>
+          <tr>
+            <td style="font-weight: bold;" width="244" bgcolor="#e6e6e6">
+              <p style="margin-top: 0px; height: 21px;"><font face="Courier, monospace"><font
+                    size="2">bufr-19.1.3.tar.gz<span style="color: rgb(255, 0, 0);"></span></font></font></p>
+            </td>
+            <td style="width: 425px; background-color: rgb(230, 230, 230);">
+              <p><font face="Arial, sans-serif"><font size="2">Met
+                    Office 'MetDB' BUFR kernel library and generic tools<br>
+                    <a href="http://www.romsaf.org">http://www.romsaf.org</a><br>
+                  </font></font></p>
+            </td>
+            <td style="width: 69px; background-color: rgb(230, 230, 230);">
+              <p align="center"><font face="Arial, sans-serif"><font size="2">v19.1.2</font></font></p>
+            </td>
+            <td style="width: 64px; background-color: rgb(51, 255, 51);">
+              <p style="background-color: rgb(51, 255, 51);" align="center"><font
+                  face="Arial, sans-serif"><font size="2">Unchanged
+                    (2,3)</font></font></p>
+            </td>
+          </tr>
+          <tr>
+            <td style="width: 244px; font-weight: bold; background-color: rgb(230, 230, 230);">
+              <p style="margin-top: 0px; height: 21px;"><font face="Courier, monospace"><font
+                    size="2">bufr-000387.tar.gz<span style="color: rgb(255, 0, 0);"></span></font></font></p>
+            </td>
+            <td width="425" bgcolor="#e6e6e6">
+              <p><font face="Arial, sans-serif"><font size="2">ECMWF
+                    BUFR kernel library<br>
+                    <a href="http://www.ecmwf.int/products/data/software/bufr.html">http://www.ecmwf.int/products/data/software/bufr.html</a><br>
+                  </font></font></p>
+            </td>
+            <td width="69" bgcolor="#e6e6e6">
+              <p align="center"><font face="Arial, sans-serif"><font size="2">v387</font></font></p>
+            </td>
+            <td style="width: 64px; background-color: rgb(0, 255, 0);">
+              <p style="margin-left: 0px; width: 101px;" align="center"><font
+                  face="Arial, sans-serif"><font size="2">Unchanged
+                    (3,4)</font></font></p>
+            </td>
+          </tr>
+          <tr>
+            <td style="font-weight: bold; background-color: rgb(230, 230, 230);"><font
+                face="Courier, monospace"><font size="2">grib_api-1.9.9.tar.gz</font></font></td>
+            <td style="background-color: rgb(230, 230, 230);"><font face="Arial, sans-serif"><font
+                  size="2">ECMWF GRIB API</font></font><br>
+              <font face="Arial, sans-serif"><font size="2"><a href="https://software.ecmwf.int/wiki/display/GRIB/Home">https://software.ecmwf.int/wiki/display/GRIB/Home</a></font></font></td>
+            <td style="text-align: center; background-color: rgb(230, 230, 230);"><font
+                face="Arial, sans-serif"><font size="2">v1.9.9</font></font></td>
+            <td style="text-align: center; background-color: rgb(51, 255, 51);"><font
+                face="Arial, sans-serif"><font size="2">Unchanged (5,6)</font></font></td>
+          </tr>
+          <tr>
+            <td style="font-weight: bold; background-color: rgb(230, 230, 230);"><font
+                face="Courier, monospace"><font size="2">hdf5-1.8.8.tar.gz</font></font></td>
+            <td style="background-color: rgb(230, 230, 230);"><font face="Arial, sans-serif"><font
+                  size="2">HDF5 software (for netCDF-4).</font></font> <br>
+              <font face="Arial, sans-serif"><font size="2"><a href="http://www.hdfgroup.org/HDF5/">http://www.hdfgroup.org/HDF5/</a></font></font></td>
+            <td style="text-align: center; background-color: rgb(230, 230, 230);"><font
+                face="Arial, sans-serif"><font size="2">v1.8.8</font></font></td>
+            <td style="text-align: center; background-color: rgb(51, 255, 51);"><font
+                face="Arial, sans-serif"><font size="2">Unchanged (7)</font></font></td>
+          </tr>
+          <tr>
+            <td style="background-color: rgb(230, 230, 230); font-weight: bold;"><font
+                face="Courier, monospace"><font size="2">zlib-1.2.7.tar.gz</font></font></td>
+            <td style="background-color: rgb(230, 230, 230);"><font face="Arial, sans-serif"><font
+                  size="2">ZLIB software (for HDF5).</font></font> <br>
+              <font face="Arial, sans-serif"><font size="2"><a href="http://www.zlib.net/">http://www.zlib.net/</a></font></font></td>
+            <td style="text-align: center; background-color: rgb(230, 230, 230);"><font
+                face="Arial, sans-serif"><font size="2">v1.2.7</font></font></td>
+            <td style="background-color: rgb(255, 255, 0); text-align: center;"><font
+                face="Arial, sans-serif"><font size="2">Updated (8)</font></font></td>
+          </tr>
+        </tbody>
+      </table>
+    </center>
+    <p><font face="Arial, sans-serif">Updated versions may become
+        available from the noted source websites; we do not guarantee
+        that these will work with ROPP. If later versions are proved to
+        be compatible, the new distribution files will be posted here.<br>
+      </font></p>
+    <ol>
+      <li><font face="Arial, sans-serif"><font style="font-weight: bold;"
+            face="Courier, monospace">netCDF-4</font> is the current
+          release family; ROPP generally&nbsp;uses the 'classic' netCDF
+          model, for which <font style="font-weight: bold;" face="Courier, monospace">netCDF-4</font>
+          is equivalent to <font face="Courier, monospace"><span style="font-weight: bold;">netCDF-3</span>.
+          </font></font><font face="Arial, sans-serif"><font face="Courier, monospace"><span
+              style="font-family: Helvetica,Arial,sans-serif;">(But see
+              point 6 below.)</span></font></font><font face="Arial, sans-serif"><font
+            face="Courier, monospace"> <span style="font-family: Helvetica,Arial,sans-serif;">As
+from
+
+
+
+
+
+
+              ROPP-6 v6.0, building <span style="font-family: Courier New,Courier,monospace; font-weight: bold;">netCDF-3</span><span
+                style="font-weight: bold;"> </span>(v3.x.x) from source
+              is no longer supported, but any release from v4.0.0 to
+              v4.1.3 can be built for use with ROPP, as long as the
+              option to build a separate Fortran object library is used.
+              Release v4.2.x, in which the core C library and Fortran
+              codes are provided in separate tarfiles, is not supported
+              by the ROPP-7.0 build system.</span><br>
+          </font></font></li>
+      <li><font face="Arial, sans-serif"><span style="color: black;">The
+            latest Met Office BUFR library is </span><font style="color: black; font-weight: bold;"
+            face="Courier, monospace">bufr-19.1.3</font><span style="color: black;">.
+            Any v19.x release<span style="font-family: Courier New,Courier,monospace;"></span>
+          </span></font><font face="Arial, sans-serif"><span style="color: black;">is
+
+
+
+
+
+
+            required to build the BUFR tools in ROPP-7 as earlier v18.x
+            releases are incompatible. v19.0 brings support for encoding
+            BUFR Edition 4 messages and included new RO satellite IDs to
+            the code tables; v19.1.x includes support for additional
+            compilers and updated BUFR run-time tables.<br>
+            <span style="color: red; font-weight: bold;"></span></span></font><font
+          face="Arial, sans-serif"><span style="color: black;"></span><span
+            style="font-weight: bold; color: rgb(255, 0, 0);"></span></font></li>
+      <li><font face="Arial, sans-serif">The ROPP-7 BUFR encoder and
+          decoder can be used with either the Met Office or ECMWF BUFR
+          libraries but only one need be installed. The ROPP build
+          system will detect which is present and make the executable
+          with the appropriate source code. If both libraries are
+          installed, the MetDB one will be used in preference.</font></li>
+      <li><font face="Arial, sans-serif">The ECMWF BUFR C code may fail
+          to compile or run the package tests with certain versions of <span
+            style="font-family: Courier New,Courier,monospace; font-weight: bold;">gcc</span>
+          under Cygwin. <span style="color: red; font-weight: bold;"></span>Such
+
+
+
+
+
+
+          failures should be reported to ECMWF, not the ROM SAF.</font></li>
+      <li><font face="Arial, sans-serif">The later version 1.9.16 of the
+          ECMWF <span style="font-family: Courier New,Courier,monospace; font-weight: bold;">GRIB_API</span>
+          is incompatible with ROPP. Users wishing to use the ROPP <span
+            style="font-family: Courier New,Courier,monospace; font-weight: bold;">GRIB</span>
+          reading tools will need to install v1.9.9.</font></li>
+      <li><font face="Arial, sans-serif">Users attempting to build <span
+            style="font-family: Courier New,Courier,monospace; font-weight: bold;">GRIB_API</span>
+          on the Cygwin O/S are advised that <span checked="true" style="font-family: Courier New,Courier,monospace; font-weight: bold;">buildpack</span>
+          is likely to fail, since it only runs 'make install' if 'make
+          check' is successful. The latter currently fails because of
+          some apparent INT4/INT8 and REAL4/REAL8 inconsistencies.
+          &nbsp;These appear to be harmless as far as ROPP is concerned,
+          because if the user runs <span checked="true" style="font-family: Courier New,Courier,monospace; font-weight: bold;">make
+
+
+
+
+
+
+            install </span>directly from the <span style="font-family: Courier New,Courier,monospace; font-weight: bold;">grib_api-1.9.9</span>
+          directory, no problems result. This is therefore the
+          recommended course of action for such users.&nbsp; <br>
+        </font></li>
+      <li><font face="Arial, sans-serif">This software suite is only
+          needed if full <span style="font-family: Courier New,Courier,monospace; font-weight: bold;">netCDF-4</span>
+          capability is required, which will be the case only if the
+          used wishes to read "grouped" EUMETSAT-style RO data.</font></li>
+      <li><font face="Arial, sans-serif">This compression library is
+          only needed if HDF5 is desired - see point 7. Since almost all
+          Linux/Unix systems come with <span checked="true" style="font-family: Courier New,Courier,monospace; font-weight: bold;">zlib
+
+
+
+
+
+
+          </span>as standard, most users will not have to download and
+          build the package for themselves; the HDF5 configure should
+          find the system <span checked="true" style="font-family: Courier New,Courier,monospace; font-weight: bold;">zlib</span>
+          automatically.<br>
+        </font></li>
+    </ol>
+    <p><font face="Arial, sans-serif"> Sample build and configuration
+        scripts are available to assist in building these packages
+        consistently for use with ROPP; see </font><a href="#Example_configure"><font
+          face="Arial, sans-serif">Section 5.4</font></a><font face="Arial, sans-serif">.</font><br>
+      <a href="#Contents"><font size="2">top</font></a></p>
+    <hr>
+    <h2><a name="Previous_versions"></a><font face="Arial, sans-serif">3.
+
+
+
+
+
+
+        Previous versions</font></h2>
+    <p><font face="Arial, sans-serif">If you have previously installed
+        v1.x, v2.0, v3.0, v4.x, v5.0 or v6.x we recommend that you
+        install v7.0 to a separate target path - do not just install
+        v7.0 over an existing installation. This is especially important
+        if the v6.1 (or earlier) tools or applications built on those
+        libraries are being used for operational production. Only swing
+        over to using v7.0 tools and libraries when you have validated
+        them locally and you are satisfied that they meet your
+        requirements.<br>
+        <br>
+        Support for v5.0 and v6.x will be limited to problems which can
+        be reproduced&nbsp;with v7.0. If reported problems with v5.0 or
+        v6.x have been already fixed at v7.0, we recommend upgrading to
+        v7.0. ROPP Versions v1.x, v2.0, v3.0 and </font><font face="Arial, sans-serif">v4.x
+
+
+
+
+
+
+      </font><font face="Arial, sans-serif">are no longer supported.<br>
+        <br>
+        All previous Beta release versions of ROPP, up to and including
+        v7.0-beta, are obsolete and are completely unsupported. If you
+        have previously installed any version of ROPP for Beta testing,
+        under the terms of the Beta licence (to which you agreed when
+        first requesting access to the software) the right to use this
+        software terminated after one year. Any and all ROPP Beta files
+        downloaded for testing purposes are unsupported and should be
+        deleted.</font><br>
+      <a href="#Contents"><font size="2">top</font></a></p>
+    <hr>
+    <h2><a name="Third-party_software_dependencies"></a><font face="Arial, sans-serif">4.
+Third-party
+
+
+
+
+
+
+        software dependencies</font></h2>
+    <p><font face="Arial, sans-serif">Some third-party packages used by
+        ROPP-7.0 are noted above and elsewhere on this website. How to
+        obtain this code is detailed in the <span checked="true" style="font-family: Courier New,Courier,monospace; font-weight: bold;">README.deps</span>,
+        ROPP Overview and User Guide documents. Where licences permit,
+        the latest versions known to be compatible with ROPP can be
+        downloaded from this website - see </font><a href="#Dependency_Packages"><font
+          face="Arial, sans-serif">Section 2.4</font></a><font face="Arial, sans-serif">.<br>
+        <br>
+        Object library and header, include and module files generated
+        from the third-party source code should be placed in the target
+        path being used to build ROPP. Alternatively, soft links to
+        their actual locations may be placed in this path. See </font><a
+        href="#Configurebuild_assistance"><font face="Arial, sans-serif">Section
+
+
+
+
+
+          5</font></a> <font face="Arial, sans-serif">for installation
+        tips. <i>Unless existing installations are known to have been
+          compiled with the same compiler and options as being used for
+          ROPP, we strongly recommend building these dependency packages
+          specifically for ROPP.</i></font><br>
+      <a href="#Contents"><font size="2">top</font></a></p>
+    <hr>
+    <h2><a name="Configurebuild_assistance"></a><font face="Arial, sans-serif">5.
+
+
+
+
+
+
+        Unpacking and building ROPP</font></h2>
+    <p><font face="Arial, sans-serif">This section provides guidance on
+        building the complete ROPP package as a standalone installation
+        for evaluation and testing or to build the application tools for
+        local use. ROPP is designed to be highly modular and key
+        components of the software may be extracted for embedding in
+        user applications via user-callable application program
+        interface (API). In the latter case, the 3<sup>rd</sup> party
+        dependency packages may not be required. See the User Guide for
+        guidance on use of the ROPP main APIs.</font> </p>
+    <h3><font face="Arial, sans-serif">5.1 Unpacking</font></h3>
+    <p><font face="Arial, sans-serif">For simplicity, we recommend
+        downloading the main ropp-7.0.tar.gz compressed tar archive
+        (approx. 29Mb<span style="font-weight: bold; color: rgb(255, 0, 0);"></span>)
+        which contains the complete ROPP-7 (v7.0) package set. Download
+        (or copy) this file to a suitable directory, where the content
+        can be extracted with:</font></p>
+    <blockquote><font face="Courier, monospace"><span style="font-weight: bold;">&gt;
+tar
+
+
+
+
+
+
+          -zxvf ropp-7.0.tar.gz</span> </font> </blockquote>
+    <span style="font-family: Helvetica,Arial,sans-serif;"> or</span>
+    <blockquote><font style="font-weight: bold;" face="Courier, monospace">&gt;
+gunzip
+
+
+
+
+
+
+        -c ropp-7.0.tar.gz </font><font style="font-weight: bold;" face="Courier, monospace">|
+        tar -xv</font><font face="Courier, monospace"> </font> </blockquote>
+    <span style="font-family: Helvetica,Arial,sans-serif;"> if your
+      version of <span style="font-family: Courier New,Courier,monospace;">tar</span>
+      does not support decompression (<span style="font-family: Courier New,Courier,monospace; font-weight: bold;">-z</span>
+      option).</span>
+    <p><font face="Arial, sans-serif">This will create a sub-directory
+        with the following structure:</font></p>
+    <blockquote style="font-weight: bold;"><font face="Courier, monospace">ropp-7.0<br>
+        |- configure<br>
+        |- ropp_1dvar<br>
+        |- ropp_fm<br>
+        |- ropp_io<br>
+        |- ropp_pp<span style="color: red; font-family: Helvetica,Arial,sans-serif;"></span><br>
+        |- ropp_utils</font> </blockquote>
+    <p><font face="Arial, sans-seriff, sans-serif">The ropp-7.0 top
+        directory contains additional README files and example </font><a
+        href="#BUILDPACK"><font face="Arial, sans-seriff, sans-serif">build
+
+
+
+
+
+
+          scripts</font></a> <font face="Arial, sans-seriff, sans-serif">and
+
+
+
+
+
+        the </font><a href="#Example_configure"><font face="Arial, sans-seriff, sans-serif">configure</font></a>
+      <font face="Arial, sans-seriff, sans-serif">sub-directory contains
+        a number of mini-scripts for local build configuration. The
+        other <font style="font-weight: bold;" face="Courier, monospace">ropp_*</font>
+        sub-directories contain the source code, makefiles, test data,
+        etc., for each of the main ROPP modules.</font></p>
+    <p><font face="Arial, sans-seriff, sans-serif">Alternatively, if the
+        complete package is not required, the user can manually create
+        the <font face="Courier, monospace"><span style="font-weight: bold;">ropp-7.0</span>
+        </font>directory (or one with any other suitable name), download
+        the individual module tarfiles from the website's ROPP-7
+        directory to it and unpack them here. For example:</font></p>
+    <blockquote style="font-weight: bold;"><font face="Courier, monospace">&gt;
+mkdir
+
+
+
+
+
+
+        -p $HOME/ROPP/ropp-7.0<br>
+        &gt; cd $HOME/ROPP/ropp-7.0<br>
+        ...download or copy required tarfiles here...<br>
+        &gt; tar -zxvf ropp_build-7.0.tar.gz<br>
+        &gt; tar -zxvf ropp_utils-7.0.tar.gz<br>
+        ...etc </font></blockquote>
+    <p><font face="Arial, sans-serif">Note that unpacking <font style="font-weight: bold;"
+          face="Courier, monospace">ropp_build</font> will create the </font><a
+        style="font-weight: bold;" href="#Example_configure"><font face="Courier, monospace">configure</font></a>
+      <font face="Arial, sans-serif">sub-directory and build scripts as
+        above. Since the </font><a style="font-weight: bold;" href="#BUILDPACK"><font
+          face="Courier, monospace">buildpack</font></a> <font face="Arial, sans-serif">script
+
+
+
+
+
+
+        will unpack a module's tarfile if the source tree is not found,
+        it is not necessary to manually unpack the other ROPP modules if
+        using this tool.</font></p>
+    <p><font face="Arial, sans-serif">We suggest that any required
+        dependency packages also be downloaded here; they can then be
+        unpacked and built using the </font><a style="font-weight: bold;"
+        href="#BUILDPACK"><font face="Courier, monospace">buildpack</font></a>
+      <font face="Arial, sans-serif">tool before building the ROPP
+        modules</font></p>
+    <h3><font face="Arial, sans-serif">5.2 Preparing to build the ROPP
+        code</font></h3>
+    <p><font face="Arial, sans-serif">The full package tarfile contains
+        a plain-text file called <font style="font-weight: bold;" face="Courier, monospace">MANIFEST</font>
+        which lists all of the files in the distribution. The individual
+        module tarfiles each contain a similar file for their own
+        module.</font></p>
+    <p><font face="Arial, sans-serif">Third-party dependency libraries
+        must be installed before attempting to build any ROPP code. The
+      </font><a href="#Example_configure"><font face="Courier, monospace">configure</font></a>
+      <font face="Arial, sans-serif">sub-directory contains some
+        configuration mini-scripts and there are higher-level shell
+        scripts to assist in building the <span style="font-family: Courier New,Courier,monospace; font-weight: bold;">zlib</span>,
+        <span style="font-family: Courier New,Courier,monospace; font-weight: bold;">HDF5</span>,
+        <font style="font-weight: bold;" face="Courier, monospace">netCDF</font>,
+        <font face="Courier, monospace"><span style="font-weight: bold;">BUFR</span>
+        </font></font><font face="Arial, sans-serif">(both Met Office
+        and ECMWF ) and </font><span style="font-family: Courier; font-weight: bold;">GRIB-API</span><font
+        face="Arial, sans-serif"><span style="font-family: LucidaTypewriter;">
+        </span>(ECMWF) packages.</font><span style="font-family: sans-serif;">
+      </span><font face="Arial, sans-serif">Review and edit these to
+        suit your local requirements before running them. Refer to the <font
+          style="font-weight: bold;" face="Courier, monospace">README.build</font>,
+        <font style="font-weight: bold;" face="Courier, monospace">README.compilers</font>,
+        <font style="font-weight: bold;" face="Courier, monospace">README.unix</font>
+        and <font style="font-weight: bold;" face="Courier, monospace">README.cygwin</font><span
+          style="font-weight: bold;"> </span>files included in the
+        package for&nbsp; further information. <br>
+        <br>
+        Any third-party packages already installed (e.g. for previous
+        ROPP builds or for other applications) do not normally need to
+        be re-built but should be in the expected ROPP build path for
+        libraries, as real files or as symlinks. Note that this release
+        may require a minimum version of a dependency package.
+        Third-party packages may have been updated since the previous
+        release of ROPP; those available on this website in the <font style="font-weight: bold;"
+          face="Courier, monospace">Dependency Packages</font> directory
+        are the latest versions supported by ROPP and the sample build
+        scripts. We recommend installing these latest versions, but in
+        general it is not necessary to do so. Rebuilding is also
+        recommended if your C or Fortran compiler version has changed
+        since the original build.</font></p>
+    <p><font face="Arial, sans-serif"><i>It is highly recommended that
+          third-party dependency packages are compiled using the same
+          Fortran compiler being used for the ROPP code.</i> Mixing code
+        at object level, even using different versions of compilers from
+        the same vendor, can cause linking or run-time problems. C code
+        in the dependency packages (there is none in the ROPP package)
+        must be compiled using the <font face="Courier, monospace"><span
+            style="font-weight: bold;">cfortran.h</span> </font>system
+        or equivalent to ensure calling interface compatibility with the
+        Fortran compiler's object code, which means that the package
+        must be configured for use with a particular Fortran interface,
+        even if the package itself contains no Fortran.<br>
+        <br>
+        The example configure/build scripts use the environment variable
+        <font style="font-family: Courier New,Courier,monospace; font-weight: bold;"
+          face="Courier, monospace">ROPP_ROOT</font> as the default
+        installation path, and this should be set prior to running these
+        scripts. See </font><a href="#Building_ROPP"><font face="Arial, sans-serif">Section
+
+
+
+
+
+
+          6</font></a> <font face="Arial, sans-serif">for an example.</font></p>
+    <h3><font><font><font><font face="Arial, sans-serif"><a name="environment_vars"></a>5.3
+Environment
+
+
+
+
+
+
+              variables</font> </font></font></font></h3>
+    <span style="font-family: Helvetica,Arial,sans-serif;">The build
+      system uses an environment variable<span style="font-family: Courier New,Courier,monospace;">
+        ROPP_ROOT</span> as the root path (see <a href="#Building_ROPP">Section
+
+
+
+
+
+
+        6</a>) for all file installation. By default, this will be set
+      to <span style="font-family: Courier New,Courier,monospace; font-weight: bold;">$HOME</span>
+      by the </span><a style="font-weight: bold;" href="ROPP_Release_Notes_v50.html#BUILDPACK"><font
+        face="Courier, monospace">buildpack</font></a> <span style="font-family: Helvetica,Arial,sans-serif;">script.
+Pre-define
+
+
+
+
+
+
+      this variable before installing any 3rd party packages or ROPP
+      modules; for instance:<br>
+    </span>
+    <blockquote><font face="Courier, monospace"><span style="font-weight: bold;">&gt;
+export
+
+
+
+
+
+
+          ROPP_ROOT=/usr/local</span><br>
+      </font></blockquote>
+    <span style="font-family: Helvetica,Arial,sans-serif;">noting that
+      the user must have appropriate file permissions to write to such a
+      location.</span><br>
+    <p><font face="Arial, sans-serif">The ROPP BUFR encoder and decoder
+        may be interfaced with either the Met Office 'MetDB' or ECMWF
+        BUFR kernel libraries. A BUFR library is optional, and if
+        neither is present, the encoder and decoder application programs
+        in the <font face="Courier, monospace">ROPP_IO </font>module
+        will not be built. If both libraries are detected, the MetDB one
+        will be used in preference. If a BUFR library is to be used, the
+        appropriate environment variable must be pre-set to the
+        directory path for the run-time tables. For instance, if using
+        the Met Office 'MetDB' library:</font></p>
+    <blockquote><font style="font-weight: bold;" checked="true" face="Courier, monospace">&gt;
+export
+
+
+
+
+
+
+        BUFR_LIBRARY=$ROPP_ROOT/data/bufr/</font><font face="Courier, monospace"><br>
+      </font></blockquote>
+    <span style="font-family: Helvetica,Arial,sans-serif;">or for the
+      ECMWF BUFR library:</span><br>
+    <br>
+    <span checked="true" style="font-family: Courier New,Courier,monospace;">
+      &nbsp;&nbsp;&nbsp; <span style="font-weight: bold;">&gt; export
+        BUFR_TABLES=$ROPP_ROOT/data/bufr/</span></span><br>
+    <br>
+    <font face="Arial, sans-serif">(note the required trailing forward
+      slash in both cases). Please refer to the documentation that comes
+      with with the BUFR package on how to install this library and
+      related files or simply use the </font><a style="font-weight: bold;"
+      href="ROPP_Release_Notes_v50.html#BUILDPACK"><font face="Courier, monospace">buildpack</font></a>
+    <font face="Arial, sans-serif">script with a &lt;package&gt; name of
+      'mobufr' or 'ecbufr'. The appropriate environment variable can be
+      pre-defined so that<span style="font-family: Courier New,Courier,monospace; font-weight: bold;">
+      </span></font><font style="font-weight: bold;"><a href="ROPP_Release_Notes_v50.html#BUILDPACK"><font
+          face="Courier, monospace">buildpack</font></a></font><font face="Arial, sans-serif"><span
+        style="font-family: Courier New,Courier,monospace; font-weight: bold;"></span>
+      will install the BUFR run-time files to the desired location (the
+      above examples show the default paths). These two paths may be the
+      same or different; the two sets of run-time files can co-exist.<span
+        style="color: red; font-weight: bold;"></span></font><br>
+    <h3><a name="Example_configure"></a><font face="Arial, sans-serif">
+        5.4 Example configuration scripts</font></h3>
+    <p><font face="Arial, sans-serif">The <font face="Courier, monospace">
+          <span style="font-weight: bold;">ropp_build</span></font>
+        module (content included within the main tarfile) contains
+        example build and configure shell mini-scripts for installing
+        not only the ROPP code but also the dependent third-party
+        packages in a compatible way. These files are extracted into the
+        <font face="Courier, monospace">configure</font> sub-directory
+        and follow the naming style <font face="Courier, monospace"><span
+            style="font-weight: bold;">
+            &lt;package&gt;_configure_&lt;compiler&gt;_&lt;os&gt;</span>
+        </font>where <font style="font-weight: bold;" face="Courier, monospace">&lt;package&gt;</font>
+        is the package name (<font style="font-family: Courier New,Courier,monospace;"
+          face="Courier, monospace"><span style="font-weight: bold;">ropp</span>,</font><span
+          style="font-family: Courier New,Courier,monospace;"> </span><font
+          style="font-family: Courier New,Courier,monospace;" face="Courier, monospace"><span
+            style="font-weight: bold;">netcdf</span>,</font><span style="font-family: Courier New,Courier,monospace;">
+        </span><font style="font-family: Courier New,Courier,monospace;"
+          face="Courier, monospace"> <span style="font-weight: bold;">ecbufr</span></font><span
+          style="font-family: Courier New,Courier,monospace;">...</span>),
+
+
+
+
+
+
+        <font style="font-weight: bold;" face="Courier, monospace">&lt;compiler&gt;</font>
+        is the compiler ID (<font style="font-family: Courier New,Courier,monospace; font-weight: bold;"
+          face="Courier, monospace">ifort</font><span style="font-family: Courier New,Courier,monospace;">,
+          <span style="font-weight: bold;">nagfor</span>, </span><font
+          style="font-family: Courier New,Courier,monospace;" face="Courier, monospace"><span
+            style="font-weight: bold;">pgf95</span>,</font><span style="font-family: Courier New,Courier,monospace;">
+        </span><font style="font-family: Courier New,Courier,monospace;"
+          face="Courier, monospace"><span style="font-weight: bold;">
+            g95</span>, <span style="font-weight: bold;">gfortran</span></font><span
+          style="font-family: Courier New,Courier,monospace;">, <span style="font-weight: bold;">xlf95</span>...</span>)
+        and <font style="font-weight: bold;" face="Courier, monospace">&lt;os&gt;</font><span
+          style="font-weight: bold;"> </span>is the operating system
+        ID, as output by the <font style="font-weight: bold;" face="Courier, monospace">uname(1)</font>
+        command but entirely in lower case (<font style="font-family: Courier New,Courier,monospace; font-weight: bold;"
+          face="Courier, monospace">linux</font><span style="font-family: Courier New,Courier,monospace;">,
+        </span><font style="font-family: Courier New,Courier,monospace; font-weight: bold;"
+          face="Courier, monospace">cygwin</font><span style="font-family: Courier New,Courier,monospace;">,
+        </span><font style="font-family: Courier New,Courier,monospace; font-weight: bold;"
+          face="Courier, monospace">hp-ux</font><span style="font-family: Courier New,Courier,monospace;">,
+          <span style="font-weight: bold;">sunos</span>, <span style="font-weight: bold;">aix</span>...</span>).
+
+
+
+
+
+        These configure mini-scripts are used by the utility </font><a
+        style="font-weight: bold;" href="#BUILDPACK"><font face="Courier, monospace">buildpack</font></a>
+      <font face="Arial, sans-serif">script.</font></p>
+    <p><font face="Arial, sans-serif">The example configure scripts for
+        specific platforms and compilers may need to be edited for
+        optimal local use, or users may create their own following one
+        of the examples. We would be pleased to receive back equivalent
+        scripts if you have built the packages using different compilers
+        and/or platforms and which could be included in future updates.
+        We can't formally support such scripts since their use is highly
+        dependent on the user's target system and compiler setting
+        preferences and we have no means of testing them ourselves.</font></p>
+    <h3><a name="BUILDPACK"></a><font face="Arial, sans-serif">5.5
+        BUILDPACK script</font></h3>
+    <p><font face="Arial, sans-serif">Included in the main package (and
+        in <font face="Courier, monospace">ropp_build</font>) is a Bash
+        shell script file <font style="font-weight: bold;" face="Courier, monospace">buildpack</font>.
+        The user need not be using Bash as an interactive shell, but
+        Bash needs to be installed (usually at <span style="font-family: Courier New,Courier,monospace; font-weight: bold;">/bin/bash</span>)
+        for the script to work; almost all POSIX-based systems should
+        have Bash installed by default, and for many Bash is the login
+        shell. On the rare systems that do not have Bash installed,
+        follow the main commands for the desired package installation
+        section of this script after reading&nbsp;</font><span style="font-family: Helvetica,Arial,sans-serif;"><a
+          href="ROPP_Release_Notes_v50.html#Building_ROPP">Section 6.<br>
+        </a></span><br>
+      <font face="Arial, sans-serif">This script may be used to automate
+        the build of any ROPP module or dependency package in a
+        consistent way, using the above mentioned configure scripts.
+        Summary usage can be obtained by:</font></p>
+    <blockquote style="font-weight: bold;"><font face="Courier, monospace">&gt;
+buildpack
+
+
+
+
+
+
+        -h</font></blockquote>
+    <p><font face="Arial, sans-serif">This script assumes that all
+        archive (tar &amp; zip) files are placed in the same working
+        directory and the </font><a href="#Example_configure"><font face="Arial, sans-serif">
+          configure scripts</font></a> <font face="Arial, sans-serif">are
+
+
+
+
+
+
+        in a<span style="font-weight: bold;"> </span><font style="font-weight: bold;"
+          face="Courier, monospace">configure</font> sub-directory.
+        Packages will be decompressed here and resulting files installed
+        to the <font style="font-weight: bold;" face="Courier, monospace">ROPP_ROOT/&lt;compiler&gt;</font>
+        target directory, as described in </font><a href="#Building_ROPP"><font
+          face="Arial, sans-serif">Section 6</font></a><font face="Arial, sans-serif">.
+        In general, to build and install a package, it is only necessary
+        to give the command:</font></p>
+    <blockquote style="font-weight: bold;"><font face="Courier, monospace">&gt;
+buildpack
+
+
+
+
+
+
+        &lt;package&gt;&nbsp;&lt;compiler&gt; [[NO]CLEAN]</font></blockquote>
+    <p><font face="Arial, sans-serif">where <font face="Courier, monospace">
+          &lt;package&gt;</font>is one of the supported ROPP module or
+        package names (<font style="font-weight: bold;" face="Courier, monospace">ropp_io</font>,
+        <font style="font-weight: bold;" face="Courier, monospace">netcdf</font>,
+        <font style="font-weight: bold;" face="Courier, monospace">mobufr</font>,<span
+          style="font-family: Courier New,Courier,monospace;"> <span style="font-weight: bold;">ecbufr</span>,
+          <span style="font-weight: bold;">grib</span>, ...</span>)
+        and&nbsp;<font style="font-weight: bold;" face="Courier, monospace">&lt;compiler&gt;</font>
+        is the required compiler (<font style="font-weight: bold;" face="Courier, monospace">ifort</font><font
+          style="font-family: Helvetica,Arial,sans-serif;" face="Courier, monospace">,</font><span
+          style="font-family: Helvetica,Arial,sans-serif;"> </span><font
+          style="font-weight: bold;" face="Courier, monospace">nagfor</font>,
+        <font face="Courier, monospace"><span style="font-weight: bold;">g95</span><span
+            style="font-family: Helvetica,Arial,sans-serif;">,</span> <span
+            style="font-weight: bold;">gfortran</span></font>, <span style="font-family: Courier New,Courier,monospace;"><span
+            style="font-weight: bold;">xlf95</span>, ...</span>) which
+        matches an appropriate configure script. The <font style="font-weight: bold;"
+          face="Courier, monospace">&lt;os&gt;</font> part is detected
+        automatically.&nbsp;</font></p>
+    <p><font face="Arial, sans-serif">The script's main steps are:</font></p>
+    <ol>
+      <li><span style="font-family: Helvetica,Arial,sans-serif;">check
+          that <span style="font-family: Courier New,Courier,monospace; font-weight: bold;">ROPP_ROOT</span>
+          has been set (or is given a default), and that it exists (or
+          is created) and the user has write access</span></li>
+      <li><font face="Arial, sans-serif">detect the latest (or only)
+          existing source installation directory (decompressed archive)
+          for the package</font></li>
+      <li><font face="Arial, sans-serif">optionally delete the tree to
+          force a clean build (if <font style="font-weight: bold;" face="Courier, monospace">CLEAN</font>
+          is present)</font></li>
+      <li><font face="Arial, sans-serif">if no source tree is present
+          (first install or deleted at step 2), detect the latest
+          archive file (compressed tar or zip file) and extract the
+          contents</font></li>
+      <li><font face="Arial, sans-serif">if starting from an existing
+          installation directory , clean it (or optionally skip this
+          step if <span checked="true" style="font-family: Courier New,Courier,monospace; font-weight: bold;">NOCLEAN</span>
+          is present)</font></li>
+      <li><font face="Arial, sans-serif">for those packages requiring a
+          configure step, run the appropriate mini-configure script if
+          found</font></li>
+      <li><font face="Arial, sans-serif">run the appropriate build and
+          install command(s) (usually <span style="font-family: Courier New,Courier,monospace; font-weight: bold;">make</span><span
+            style="font-weight: bold;"> </span>and <span style="font-family: Courier New,Courier,monospace;">
+            <span style="font-weight: bold;">make install</span></span>)</font></li>
+      <li><font face="Arial, sans-serif">for packages providing the
+          facility, run test procedures (usually <span style="font-family: Courier New,Courier,monospace;">
+            <span style="font-weight: bold;">make test</span></span>)</font></li>
+    </ol>
+    <p><font face="Arial, sans-serif">Since some modules are dependent
+        on other modules, the recommended build order is:</font></p>
+    <ol>
+      <li><span style="color: red; font-weight: bold; font-family: Helvetica,Arial,sans-serif;">{</span><font
+          face="Courier, monospace"><span style="font-weight: bold;">zlib</span>
+          <span style="font-family: Helvetica,Arial,sans-serif;">(if
+            needed for HDF5)</span></font></li>
+      <li> <font face="Courier, monospace"><span style="font-weight: bold;">HDF5</span>
+          <span style="font-family: Helvetica,Arial,sans-serif;">(if
+            needed for 'full' netCDF-4)</span></font></li>
+      <li> <font face="Courier, monospace"><span style="font-weight: bold;">netCDF4</span>
+          <span style="font-family: Helvetica,Arial,sans-serif;">(if
+            using 'full' netCDF-4)</span></font><span style="color: red; font-weight: bold; font-family: Helvetica,Arial,sans-serif;">}
+          OR</span></li>
+      <li><span style="color: red; font-weight: bold; font-family: Helvetica,Arial,sans-serif;">{</span><font
+          style="font-family: Helvetica,Arial,sans-serif;" face="Courier, monospace"><span
+            style="font-family: Courier New,Courier,monospace; font-weight: bold;">netCDF</span>
+          (if using the alternative standard 'classic' netCDF-4)</font><span
+          style="color: red; font-weight: bold; font-family: Helvetica,Arial,sans-serif;">}</span><br>
+      </li>
+      <li><font face="Courier, monospace"><span style="font-weight: bold;">BUFR</span>&nbsp;<span
+            style="font-family: Helvetica,Arial,sans-serif;">(optional -
+            either Met Office or ECMWF package)</span></font></li>
+      <li><font face="Courier, monospace"><span style="font-family: Helvetica,Arial,sans-serif;"><span
+              style="font-family: Courier New,Courier,monospace; font-weight: bold;">GRIB</span>&nbsp;
+(optional
+
+
+
+
+
+
+            - ECMWF package)<br>
+          </span></font></li>
+      <li style="font-weight: bold;"><font face="Courier, monospace">ROPP_UTILS
+
+
+
+
+
+
+          <br>
+        </font></li>
+      <li style="font-weight: bold;"><font face="Courier, monospace">ROPP_IO</font></li>
+      <li style="font-weight: bold;"><font face="Courier, monospace">ROPP_PP</font></li>
+      <li style="font-weight: bold;"><font face="Courier, monospace">ROPP_FM</font></li>
+      <li style="font-weight: bold;"><font face="Courier, monospace">ROPP_1DVAR</font></li>
+    </ol>
+    <p><font face="Arial:sans-serif, sans-serif"> <span style="font-family: Helvetica,Arial,sans-serif;">Note
+
+
+
+
+
+
+          that this Bash script has only been tested under Linux (RHEL4,
+          RHEL6 and OpenSUSE 11 and 12), IBM AIX and PC/Windows (Cygwin)
+          and may need minor modifications to run on other systems. <span
+            style="font-weight: bold;">Users are strongly advised to
+            build the external dependency packages with <span style="font-family: Courier New,Courier,monospace;">buildpack</span>,
+            if possible, as "DIY" installations may not mesh correctly
+            with the ROPP modules which use them.</span> See</span> <font
+          style="font-weight: bold;" checked="true" face="Courier, monospace">README.build</font>
+        for more information.</font></p>
+    <h3><font face="Arial, sans-serif">5.6 Other build scripts</font></h3>
+    <p><font face="Arial, sans-serif">Other shell wrapper scripts<span style="font-weight: bold;">
+        </span><font style="font-weight: bold;" face="Courier, monospace">build*_ropp</font>
+        are provided which can be used to further automate the build
+        process by calling <font style="font-weight: bold;" face="Courier, monospace">buildpack</font><span
+          style="font-weight: bold;"> </span>with a predetermined
+        sequence of packages or compilers and which save a copy of all
+        screen output to a disk log file. Review and edit to suit your
+        requirements.</font><br>
+      <br>
+      <a href="#Contents"><font size="2">top</font></a></p>
+    <hr>
+    <h2><a name="Building_ROPP"></a><font face="Arial, sans-serif">6.
+        Building ROPP manually</font></h2>
+    <p><font face="Arial, sans-serif">The low-level build sequence is
+        described in the User Guide (see also <font face="Courier, monospace">
+          <span style="font-weight: bold;">README.unix</span></font>),
+        but in summary, consists of the common <font style="font-weight: bold;"
+          face="Courier, monospace">configure</font><span style="font-weight: bold;">
+          / </span><font style="font-weight: bold;" face="Courier, monospace">make</font><span
+          style="font-weight: bold;"> / </span><font face="Courier, monospace"><span
+            style="font-weight: bold;"> make install</span> </font>commands.
+If
+
+
+
+
+
+
+        not using the supplied </font><a style="font-weight: bold;" href="#BUILDPACK"><font
+          face="Courier, monospace">buildpack</font></a> <font face="Arial, sans-serif">
+        script, this section gives some guidance on the manual
+        procedure.<br>
+        <br>
+        We suggest that a ROPP 'root' directory be created in a suitable
+        place, for example: </font> </p>
+    <blockquote style="font-weight: bold;"><font face="Courier, monospace">&gt;
+cd
+
+
+
+
+
+
+        &lt;directory-of-your-choice&gt;<br>
+        &gt; mkdir ropp-7.0<br>
+        &gt; cd ropp-7.0<br>
+        &gt; export ROPP_ROOT=$PWD </font> </blockquote>
+    <p><font face="Arial, sans-serif">though of course <span style="font-family: Courier New,Courier,monospace; font-weight: bold;">ROPP_ROOT</span><span
+          style="font-weight: bold;"> </span>can be set to any existing
+        directory to which the user has write access. </font></p>
+    <p><font face="Arial, sans-serif">As provided, the </font><a href="#Example_configure"><font
+          face="Arial, sans-serif">configure scripts</font></a> <font face="Arial, sans-serif">
+        will install the package files to:</font></p>
+    <font face="Courier, monospace">ROPP_ROOT/data</font>
+    <table style="width: 970px; height: 193px;" border="0" cellpadding="4"
+      cellspacing="0">
+      <colgroup><col width="82*"><col width="174*"></colgroup>
+      <tbody>
+        <tr>
+          <td style="font-weight: bold;" valign="top" width="32%">
+            <p><font face="Courier, monospace">ROPP_ROOT/&lt;compiler&gt;/bin</font></p>
+          </td>
+          <td width="68%">
+            <p><font face="Arial, sans-serif">executable programs</font></p>
+          </td>
+        </tr>
+        <tr valign="top">
+          <td style="font-weight: bold;" width="32%">
+            <p><font face="Courier, monospace">ROPP_ROOT/&lt;compiler&gt;/lib<br>
+                ROPP_ROOT/&lt;compiler&gt;/lib64</font></p>
+          </td>
+          <td width="68%">
+            <p><font face="Arial, sans-serif">compiled object libraries.
+                Most libraries will install to the<span style="font-family: Courier New,Courier,monospace; font-weight: bold;">
+                  lib</span> target directory but packages may install
+                to <span checked="true" style="font-family: Courier New,Courier,monospace; font-weight: bold;">lib64</span>
+                on some 64-bit Linux distros <br>
+              </font></p>
+          </td>
+        </tr>
+        <tr valign="top">
+          <td style="font-weight: bold;" width="32%">
+            <p><font face="Courier, monospace">ROPP_ROOT/&lt;compiler&gt;/include</font></p>
+          </td>
+          <td width="68%">
+            <p><font face="Arial, sans-serif">Fortran modules (<font style="font-weight: bold;"
+                  face="Courier, monospace">.mod</font>), C header (<font
+                  style="font-weight: bold;" face="Courier, monospace">.h</font>)
+                files etc.</font></p>
+          </td>
+        </tr>
+        <tr valign="top">
+          <td style="font-weight: bold;" width="32%">
+            <p><font face="Courier, monospace">ROPP_ROOT/&lt;compiler&gt;/man/man1</font></p>
+          </td>
+          <td width="68%">
+            <p><font face="Arial, sans-serif">'man' pages</font></p>
+          </td>
+        </tr>
+        <tr valign="top">
+          <td style="width: 32%; vertical-align: top; font-weight: bold;">
+            <p><font face="Courier, monospace">ROPP_ROOT/&lt;compiler&gt;/etc<br>
+                ROPP_ROOT/&lt;compiler&gt;/share</font></p>
+          </td>
+          <td width="68%">
+            <p><font face="Arial, sans-serif">various other files</font></p>
+          </td>
+        </tr>
+        <tr valign="top">
+          <td style="font-weight: bold;" width="32%">
+            <p><font face="Courier, monospace">ROPP_ROOT/data</font></p>
+          </td>
+          <td width="68%">
+            <p><font face="Arial, sans-serif">Compiler-independent data
+                files (e.g. BUFR run-time tables)</font></p>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <p><font face="Arial, sans-serif">where <font style="font-weight: bold;"
+          face="Courier, monospace">&lt;compiler&gt;</font> is an ID
+        (normally the command line name) for a particular Fortran
+        compiler. If only one compiler is to be used, the appropriate
+        configure script can be edited to remove this extra directory
+        layer.<br>
+        <br>
+        Then copy the required tar files here and unpack, e.g.:</font></p>
+    <blockquote><font face="Courier, monospace"><span style="font-weight: bold;">&gt;
+
+
+          tar -zxvf ropp_build-7.0.tar.gz</span><br style="font-weight: bold;">
+        <span style="font-weight: bold;"> &gt; tar -zxvf
+          ropp_utils-7.0.tar.gz</span> </font> </blockquote>
+    <p><font face="Arial, sans-serif">Select a suitable configure script
+        from the <font style="font-weight: bold;" face="Courier, monospace">configure</font>
+        sub-directory. E.g. if using the Intel <font face="Courier, monospace">
+          <span style="font-weight: bold;">ifort </span></font>command
+        (on our RHEL6 systems this defaults to v12) compiler under Linux
+        this would be <font style="font-weight: bold;" face="Courier, monospace">ropp_configure_ifort_linux</font>.
+        Review/edit this file to suit your local installation
+        directories and compiler flags. In this example, by default, the
+        ROPP libraries, include, F90 module files, etc will be installed
+        into the <font face="Courier, monospace"><span style="font-weight: bold;">ROPP_ROOT/ifort</span>
+        </font> tree and the configure will expect similar pre-built
+        third-party dependency files to be found here also.<br>
+        <br>
+        To build the <font face="Courier, monospace"><span style="font-weight: bold;">ROPP_UTILS</span>
+        </font>library:</font></p>
+    <blockquote style="font-weight: bold;"><font face="Courier, monospace">&gt;
+
+
+        cd ropp_utils-7.0<br>
+        &gt; ../configure/ropp_configure_ifort_linux<br>
+        &gt; make<br>
+        &gt; make install<br>
+        &gt; make test</font> </blockquote>
+    <p><font face="Arial, sans-serif">Repeat for any other ROPP modules
+        you wish to use. If your application only requires (say) the I/O
+        support (e.g. only the BUFR encoder/decoder tools are wanted),
+        then it is not necessary to build the PP, FM or 1DVAR modules.
+        Alternatively, if only the PP, FM or 1DVAR callable-API routines
+        are to be implemented in a user's own applications, then the IO
+        module (and netCDF support) need not be built. The configure
+        script will then only build those parts of the ROPP code with no
+        dependence on <font style="font-weight: bold;" face="Courier, monospace">ROPP_IO</font>
+        (i.e. stand-alone tools with netCDF read/write are not built). <br>
+      </font></p>
+    <p><font face="Arial, sans-serif">Note that to use the ROPP BUFR
+        encoder and decoder, the appropriate <a href="#environment_vars">
+          environment variable</a> must be pre-set to the desired
+        directory path to install and use the run-time tables.</font></p>
+    <font face="Arial, sans-serif"><span style="color: red; font-weight: bold;"></span></font><a
+      href="#Contents"><font size="2">top</font></a>
+    <hr>
+    <h2><a name="Testing"></a><font face="Arial, sans-serif">7. Testing</font></h2>
+    <p><font face="Arial, sans-serif">All ROPP modules have a basic
+        user-test option; this is not intended to be a comprehensive
+        test of the software, but just to demonstrate that the package
+        has been correctly installed and programs generate data which
+        can be validated against a reference dataset (provided). The
+        tests can be run by:</font></p>
+    <blockquote><font face="Courier, monospace"><span style="font-weight: bold;">&gt;
+
+
+          cd tests</span><br style="font-weight: bold;">
+        <span style="font-weight: bold;"> &gt; make test</span> </font>
+    </blockquote>
+    <p><font face="Arial, sans-serif">The screen output (and in some
+        cases log files or graphics) should be reviewed as to whether
+        the test(s) were successful or not. Example log files and
+        graphics are provided to show the output for a successful test.
+        Graphical output is only generated if IDL is installed. (Tip: <font
+          face="Courier, monospace"><br>
+        </font></font></p>
+    <p style="margin-left: 40px;"> <font style="font-weight: bold;" face="Arial, sans-serif"><font
+          face="Courier, monospace">&gt; make test &gt; test.log </font></font><font
+        style="font-weight: bold;" face="Arial, sans-serif"><font face="Courier, monospace">2&gt;&amp;1
+
+
+
+
+
+
+        </font></font><font face="Arial, sans-serif"><br>
+      </font></p>
+    <p><font face="Arial, sans-serif"> to save a log file which can be
+        examined at leisure.)<br>
+        <br>
+        If using the<span style="font-weight: bold;"> </span></font><a
+        style="font-weight: bold;" href="#BUILDPACK"><font face="Courier, monospace">buildpack</font></a>
+      <font face="Arial, sans-serif">script, testing will be performed
+        automatically if the build process completed successfully.<br>
+      </font></p>
+    <p style="font-family: Helvetica,Arial,sans-serif;">Some of the
+      tests (notably in <span checked="true" style="font-family: Courier New,Courier,monospace; font-weight: bold;">ROPP_PP</span>,
+      <span style="font-family: Courier New,Courier,monospace; font-weight: bold;">ROPP_FM</span>
+      and <span style="font-family: Courier New,Courier,monospace; font-weight: bold;">ROPP_1DVAR</span>)
+      generate graphics files using the IDL system. If IDL is not
+      installed, the test scripts will note the fact, and skip the
+      graphics generation and display. Obviously in this case, the user
+      will not be able to visually verify the tests. If ROPP is able to
+      generate and display graphical results, each test result and a
+      comparison reference figure (part of the distribution) will be
+      displayed simultaneously.&nbsp; By setting the environment
+      variable <span checked="true" style="font-family: Courier New,Courier,monospace; font-weight: bold;">$ROPP_PAUSE</span>
+      to <span checked="true" style="font-family: Courier New,Courier,monospace; font-weight: bold;">TRUE</span>,
+      the user can examine the two figures at leisure, before allowing
+      the test script to move on to the next figure by hitting any key.
+      We are investigating using a non-graphical, objective statistical
+      test method for a future release. </p>
+    <p><a href="#Contents"><font size="2">top</font></a></p>
+    <hr>
+    <h2><a name="Portability"></a><font face="Arial, sans-serif">8.
+        Portability</font></h2>
+    <p><font face="Arial, sans-serif">A prime requirement of ROPP is
+        that it must be portable so as to compile and run under a range
+        of compilers and platforms. Nevertheless, ROPP can only be
+        supported on platforms also supported by the required
+        third-party packages. In practice this means POSIX-compliant
+        systems (Unix, Linux, MS Windows/Cygwin, SunOS, OS/X...) and
+        ISO-compliant F95 &amp; C compilers. ROPP depends on some F95
+        features, so older F90-only compilers cannot be supported. In
+        addition, the ROPP code can only be fully validated only on
+        platforms and with compilers available to the Development Team.<br>
+        <br>
+        Target compiler/platform combinations we aim to support are
+        listed in the ROPP Overview document. However, difficulties have
+        been encountered with certain compilers, mostly due to explicit
+        or implicit bugs in the compilers themselves, or some
+        limitations in their functionality or interpretation of Fortran
+        standards. The investigation of workarounds&nbsp;continues,
+        although it is not our policy to provide different code for
+        different compilers just because certain compilers do not adhere
+        to accepted standards or have internal bugs.<br>
+        <br>
+        For this release, the following OS/compiler combinations have
+        passed all of our comprehensive internal testing ('Test Folder'
+        system) and so should work on similar systems elsewhere. Unless
+        noted, this release of ROPP works with <span style="font-family: Courier New,Courier,monospace; font-weight: bold;">netcdf-4.1.3</span>,
+        MetDB&nbsp; <span style="font-family: Courier New,Courier,monospace;"><span
+            style="font-weight: bold;"> bufr-19.1.3</span>,</span></font><font
+        face="Arial, sans-serif"><span style="font-family: Courier New,Courier,monospace;"></span>ECMWF
+
+
+
+
+
+
+        <span style="font-family: Courier New,Courier,monospace;"> <span
+            style="font-weight: bold;">bufr_000387</span></span>,&nbsp;
+      </font><font face="Arial, sans-serif"><span style="font-family: Courier New,Courier,monospace;"></span>ECMWF
+
+
+
+
+
+
+        <span style="font-family: Courier New,Courier,monospace;"><span
+            style="font-weight: bold;">grib_api-1.9.9</span>,</span></font><font
+        face="Arial, sans-serif"> <span style="font-family: Courier New,Courier,monospace; font-weight: bold;">hdf5-1.8.8</span>,
+        and</font><font face="Arial, sans-serif"> <span style="font-family: Courier New,Courier,monospace; font-weight: bold;">zlib-1.2.7</span><span
+          style="font-weight: bold;">.</span>&nbsp; </font><font face="Arial, sans-serif"><span
+          style="font-family: Courier New,Courier,monospace;"></span>The
+        RHEL6 platform is a 64-bit OS wit 64-bit compilers (unless
+        noted). The GNU <span checked="true" style="font-family: Courier New,Courier,monospace; font-weight: bold;">gcc</span>
+        compiler is used for compiling C code except where noted.<br>
+      </font></p>
+    <center>
+      <table style="background-color: rgb(35, 255, 35); width: 870px;" border="1"
+        bordercolor="#008000" cellpadding="2" cellspacing="2">
+        <colgroup><col width="125"><col width="125"><col width="96"><col
+            width="87"><col width="121"><col width="269"></colgroup>
+        <tbody>
+          <tr>
+            <td width="125" bgcolor="#3deb3d">
+              <p align="center"><font face="Arial, sans-serif"><font size="2"><i><b>Platform</b></i></font></font></p>
+            </td>
+            <td width="125" bgcolor="#3deb3d">
+              <p align="center"><font face="Arial, sans-serif"><font size="2"><i><b>
+                        Compiler Vendor</b></i></font></font></p>
+            </td>
+            <td width="96" bgcolor="#3deb3d">
+              <p align="center"><font face="Arial, sans-serif"><font size="2"><i><b>
+                        Compiler ID</b></i></font></font></p>
+            </td>
+            <td width="87" bgcolor="#3deb3d">
+              <p align="center"><font face="Arial, sans-serif"><font size="2"><i><b>Command</b></i></font></font></p>
+            </td>
+            <td width="121" bgcolor="#3deb3d">
+              <p align="center"><font face="Arial, sans-serif"><font size="2"><i><b>Version</b></i></font></font></p>
+            </td>
+            <td width="269" bgcolor="#3deb3d">
+              <p align="center"><font face="Arial, sans-serif"><font size="2"><i><b>Notes</b></i></font></font></p>
+            </td>
+          </tr>
+          <tr>
+            <td width="125" bgcolor="#23ff23">
+              <p><font face="Arial, sans-serif"><font size="2">Linux
+                    (RHEL6.3)<br>
+                  </font></font><font face="Arial, sans-serif"><font size="2">Intel
+
+
+
+
+
+
+                    Xeon</font></font></p>
+            </td>
+            <td width="125" bgcolor="#23ff23">
+              <p><font face="Arial, sans-serif"><font size="2">Intel</font></font></p>
+            </td>
+            <td width="96" bgcolor="#23ff23">
+              <p><font face="Arial, sans-serif"><font size="2">ifort11</font></font></p>
+            </td>
+            <td width="87" bgcolor="#23ff23">
+              <p><font face="Courier, monospace"><font size="2">ifort</font></font></p>
+            </td>
+            <td width="121" bgcolor="#23ff23">
+              <p><font face="Arial, sans-serif"><font size="2">v11.0</font></font></p>
+            </td>
+            <td width="269" bgcolor="#23ff23">
+              <p><font face="Arial, sans-serif"><font size="2">GCC
+                    v4.4.6</font></font></p>
+            </td>
+          </tr>
+          <tr>
+            <td width="125" bgcolor="#23ff23">
+              <p><font face="Arial, sans-serif"><font size="2">Linux
+                    (RHEL6.3)<br>
+                  </font></font><font face="Arial, sans-serif"><font size="2">
+                    Intel Xeon</font></font></p>
+            </td>
+            <td width="125" bgcolor="#23ff23">
+              <p><font face="Arial, sans-serif"><font size="2">Intel</font></font></p>
+            </td>
+            <td width="96" bgcolor="#23ff23">
+              <p><font face="Arial, sans-serif"><font size="2">ifort12</font></font></p>
+            </td>
+            <td width="87" bgcolor="#23ff23">
+              <p><font face="Courier, monospace"><font size="2">ifort</font></font></p>
+            </td>
+            <td width="121" bgcolor="#23ff23">
+              <p><font face="Arial, sans-serif"><font size="2">v12.0.</font></font></p>
+            </td>
+            <td width="269" bgcolor="#23ff23">
+              <p><fontface ="arial,&gt;&lt;fontsize=" 2=" "=""><font face="Arial, sans-serif"><font
+                      size="2">GCC v4.4.6</font></font></fontface> </p>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <p><font face="Arial, sans-serif"><font size="2">Linux
+                    (RHEL6.3)<br>
+                  </font></font><font face="Arial, sans-serif"><font size="2">
+                    Intel Xeon</font></font></p>
+            </td>
+            <td><font face="Arial, sans-serif"><font size="2">Portland
+                  Group</font></font></td>
+            <td><font face="Arial, sans-serif"><font size="2">pgf11</font></font></td>
+            <td><font face="Courier, monospace"><font size="2">pgf95</font></font></td>
+            <td><font face="Arial, sans-serif"><font size="2">v11.7</font></font></td>
+            <td><fontface ="arial,&gt;&lt;fontsize=" 2=" "=""><font face="Arial, sans-serif"><font
+                    size="2">GCC v4.4.6<br>
+                    See Note 1</font></font>&nbsp;</fontface></td>
+          </tr>
+          <tr>
+            <td><font size="2"><span style="font-family: Helvetica,Arial,sans-serif;">Linux
+
+
+                  (RHEL6.3)</span><br>
+              </font><font face="Arial, sans-serif"><font size="2">
+                  Intel Xeon</font></font></td>
+            <td><font face="Arial, sans-serif"><font size="2">NAGWare</font></font></td>
+            <td><font face="Arial, sans-serif"><font size="2">nagfor</font></font></td>
+            <td><font face="Courier, monospace"><font size="2">nagfor</font></font></td>
+            <td><font face="Arial, sans-serif"><font size="2">v5.2</font></font></td>
+            <td><font face="Arial, sans-serif"><font size="2">GCC v4.4.6</font></font></td>
+          </tr>
+          <tr>
+            <td><font size="2"><span style="font-family: Helvetica,Arial,sans-serif;">Linux
+
+
+                  (RHEL6.3)</span><br>
+              </font><font face="Arial, sans-serif"><font size="2">
+                  Intel Xeon</font></font></td>
+            <td><font face="Arial, sans-serif"><font size="2">GNU
+                  GFortran</font></font></td>
+            <td><font face="Arial, sans-serif"><font size="2">gfortran</font></font></td>
+            <td><font face="Courier, monospace"><font size="2">gfortran</font></font></td>
+            <td><font face="Arial, sans-serif"><font size="2">v4.4.6</font></font></td>
+            <td><font face="Arial, sans-serif"><font size="2">GCC v4.4.6</font></font></td>
+          </tr>
+          <tr>
+            <td>
+              <p><font face="Arial, sans-serif"><font size="2">Linux
+                    (RHEL6.3)<br>
+                  </font></font><font face="Arial, sans-serif"><font size="2">
+                    Intel Xeon</font></font></p>
+            </td>
+            <td><font face="Arial, sans-serif"><font size="2">GNU G95</font></font></td>
+            <td><font face="Arial, sans-serif"><font size="2">g95</font></font></td>
+            <td><font face="Courier, monospace"><font size="2">g95</font></font></td>
+            <td><font face="Arial, sans-serif"><font size="2">v0.94<br>
+                  (Jan 17 2013)</font></font></td>
+            <td><tdbgcolor ="#23ff23"="" width="269"> <fontface ="arial,&gt;&lt;fontsize=" 2="
+                  "=""><font face="Arial, sans-serif"><font size="2">GCC
+                      v4.4.6</font></font></fontface> </tdbgcolor></td>
+          </tr>
+          <tr>
+            <td>
+              <p><font face="Arial, sans-serif"><font size="2">Linux
+                    (RHEL6.3)<br>
+                  </font></font><font face="Arial, sans-serif"><font size="2">
+                    Intel Xeon</font></font></p>
+            </td>
+            <td><font face="Arial, sans-serif"><font size="2">SUN</font></font></td>
+            <td><font face="Arial, sans-serif"><font size="2">sunf95<br>
+                </font></font></td>
+            <td><font face="Courier, monospace"><font size="2">sunf95</font></font></td>
+            <td><font face="Arial, sans-serif"><font size="2">v8.5<br>
+                </font></font></td>
+            <td><font face="Arial, sans-serif"><font size="2">SUN suncc
+                  v5.11. 32-bit compilers<br>
+                </font></font></td>
+          </tr>
+          <tr>
+            <td><font face="Arial, sans-serif"><font size="2">Unix (IBM
+                  64-bit AIX)<br>
+                  Power-7 HPC</font></font></td>
+            <td><font face="Arial, sans-serif"><font size="2">IBM</font></font></td>
+            <td><font face="Arial, sans-serif"><font size="2">xlf95<br>
+                </font></font></td>
+            <td><font face="Courier, monospace"><font size="2">xlf95</font></font></td>
+            <td><font face="Arial, sans-serif"><font size="2">v12.1.0.2</font></font></td>
+            <td style="font-family: Helvetica,Arial,sans-serif;"><font size="2">
+                IBM xlc v10.1 netcdf-4.1.3<br>
+              </font></td>
+          </tr>
+        </tbody>
+      </table>
+    </center>
+    <p><font face="Arial, sans-serif">For this release, the following
+        OS/compiler combinations have failed some element of our
+        comprehensive internal testing ('Test Folder' system):<span style="color: rgb(255, 0, 0); font-weight: bold;"></span></font></p>
+    <center>
+      <table style="background-color: rgb(35, 255, 35); width: 870px;" border="1"
+        bordercolor="#008000" cellpadding="2" cellspacing="2">
+        <colgroup><col width="125"><col width="125"><col width="96"><col
+            width="87"><col width="121"><col width="269"></colgroup>
+        <tbody>
+          <tr>
+            <td width="125" bgcolor="#3deb3d">
+              <p align="center"><font face="Arial, sans-serif"><font size="2"><i><b>Platform</b></i></font></font></p>
+            </td>
+            <td width="125" bgcolor="#3deb3d">
+              <p align="center"><font face="Arial, sans-serif"><font size="2"><i><b>Compiler
+
+
+
+
+
+
+                        Vendor</b></i></font></font></p>
+            </td>
+            <td width="96" bgcolor="#3deb3d">
+              <p align="center"><font face="Arial, sans-serif"><font size="2"><i><b>Compiler
+
+
+
+
+
+
+                        ID</b></i></font></font></p>
+            </td>
+            <td width="87" bgcolor="#3deb3d">
+              <p align="center"><font face="Arial, sans-serif"><font size="2"><i><b>Command</b></i></font></font></p>
+            </td>
+            <td width="121" bgcolor="#3deb3d">
+              <p align="center"><font face="Arial, sans-serif"><font size="2"><i><b>Version</b></i></font></font></p>
+            </td>
+            <td width="269" bgcolor="#3deb3d">
+              <p align="center"><font face="Arial, sans-serif"><font size="2"><i><b>Notes</b></i></font></font></p>
+            </td>
+          </tr>
+          <tr>
+            <td style="background-color: rgb(51, 255, 51);" width="125"
+              bgcolor="#23bb23"> <br>
+            </td>
+            <td style="background-color: rgb(51, 255, 51);" width="125"
+              bgcolor="#23bb23"><br>
+            </td>
+            <td style="background-color: rgb(51, 255, 51);" width="96" bgcolor="#23bb23"><br>
+            </td>
+            <td style="background-color: rgb(51, 255, 51);" width="87" bgcolor="#23bb23">
+              <br>
+            </td>
+            <td style="background-color: rgb(51, 255, 51);" width="121"
+              bgcolor="#23bb23"><br>
+            </td>
+            <td style="background-color: rgb(51, 255, 51);" width="269"
+              bgcolor="#23bb23"><span style="font-family: Helvetica,Arial,sans-serif;"><small>No
+
+
+                  known issues</small></span><br>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </center>
+    <font face="Arial, sans-serif"><br>
+      The following OS/compiler combinations have failed on one or more
+      <a href="#Dependency_Packages">external dependency packages</a>: <br>
+      <br>
+    </font>
+    <table style="background-color: rgb(35, 255, 35); width: 870px; text-align: left; margin-left: auto; margin-right: auto;"
+      border="1" bordercolor="#008000" cellpadding="2" cellspacing="2">
+      <tbody>
+        <tr>
+          <td style="width: 125px; text-align: center; background-color: rgb(61, 235, 61);">
+            <p><font face="Arial, sans-serif"><font size="2"><i><b>Platform</b></i></font></font></p>
+          </td>
+          <td style="text-align: center; width: 97px;" bgcolor="#3deb3d">
+            <p><font face="Arial, sans-serif"><font size="2"><i><b>
+                      Compiler Vendor</b></i></font></font></p>
+          </td>
+          <td style="text-align: center; width: 89px;" bgcolor="#3deb3d">
+            <p><font face="Arial, sans-serif"><font size="2"><i><b>
+                      Compiler ID</b></i></font></font></p>
+          </td>
+          <td style="text-align: center; width: 76px;" bgcolor="#3deb3d">
+            <p><font face="Arial, sans-serif"><font size="2"><i><b>Command</b></i></font></font></p>
+          </td>
+          <td style="text-align: center; width: 66px;" bgcolor="#3deb3d">
+            <p><font face="Arial, sans-serif"><font size="2"><i><b>Version</b></i></font></font></p>
+          </td>
+          <td style="text-align: center; background-color: rgb(61, 235, 61); width: 113px;">
+            <p style="background-color: rgb(61, 235, 61);"><font face="Arial, sans-serif"><font
+                  size="2"><i><b>Dependency Package</b></i></font></font></p>
+          </td>
+          <td style="width: 244px;" bgcolor="#3deb3d">
+            <div style="text-align: center;"> <font face="Arial, sans-serif"><font
+                  size="2"><i><b>Notes</b></i></font></font></div>
+          </td>
+        </tr>
+        <tr>
+          <td><font size="2"><span style="font-family: Helvetica,Arial,sans-serif;">Linux
+
+
+                (RHEL6.3)</span><br>
+            </font><font face="Arial, sans-serif"><font size="2"> Intel
+                Xeon</font></font></td>
+          <td style="width: 97px;"><font face="Arial, sans-serif"><font
+                size="2">NAGWare</font></font></td>
+          <td style="width: 89px;"><font face="Arial, sans-serif"><font
+                size="2">nagfor</font></font></td>
+          <td style="width: 76px; font-weight: bold;"><font face="Courier, monospace"><font
+                size="2">nagfor</font></font></td>
+          <td style="width: 66px;"><font face="Arial, sans-serif"><font
+                size="2">v5.2</font></font></td>
+          <td style="width: 113px;"><font face="Arial, sans-serif"><font
+                size="2">netCDF-4 4.1.3</font></font></td>
+          <td style="width: 244px;"><font face="Arial, sans-serif"><font
+                size="2">Unknown KIND value (8) in
+                netcdf4_constants.f90.</font></font></td>
+        </tr>
+        <tr>
+          <td><font size="2"><span style="font-family: Helvetica,Arial,sans-serif;">Linux
+
+
+                (RHEL6.3)</span><br>
+            </font><font face="Arial, sans-serif"><font size="2"> Intel
+                Xeon</font></font></td>
+          <td style="width: 97px;"><font face="Arial, sans-serif"><font
+                size="2">NAGWare</font></font></td>
+          <td style="width: 89px;"><font face="Arial, sans-serif"><font
+                size="2">nagfor</font></font></td>
+          <td style="width: 76px; font-weight: bold;"><font face="Courier, monospace"><font
+                size="2">nagfor</font></font></td>
+          <td style="width: 66px;"><font face="Arial, sans-serif"><font
+                size="2">v5.2</font></font></td>
+          <td style="width: 113px;"><font face="Arial, sans-serif"><font
+                size="2">ECMWF BUFR 000387</font></font></td>
+          <td style="width: 244px;"><font face="Arial, sans-serif"><font
+                size="2">Builds OK, but cannot be built on because (eg)
+                ropp_io configure cannot find getenv_</font></font></td>
+        </tr>
+        <tr>
+          <td><font size="2"><span style="font-family: Helvetica,Arial,sans-serif;">Linux
+
+
+                (RHEL6.3)</span><br>
+            </font><font face="Arial, sans-serif"><font size="2"> Intel
+                Xeon</font></font></td>
+          <td style="width: 97px;"><font face="Arial, sans-serif"><font
+                size="2">NAGWare</font></font></td>
+          <td style="width: 89px;"><font face="Arial, sans-serif"><font
+                size="2">nagfor</font></font></td>
+          <td style="width: 76px; font-weight: bold;"><font face="Courier, monospace"><font
+                size="2">nagfor</font></font></td>
+          <td style="width: 66px;"><font face="Arial, sans-serif"><font
+                size="2">v5.2</font></font></td>
+          <td style="width: 113px;"><font face="Arial, sans-serif"><font
+                size="2">ECMWF GRIP_API 1.9.9</font></font></td>
+          <td style="width: 244px;"><font face="Arial, sans-serif"><font
+                size="2">Unknown KIND value (8) in same_int_long.f90.</font></font></td>
+        </tr>
+        <tr>
+          <td><font size="2"><span style="font-family: Helvetica,Arial,sans-serif;">Linux
+
+
+                (RHEL6.3)</span><br>
+            </font><font face="Arial, sans-serif"><font size="2"> Intel
+                Xeon</font></font></td>
+          <td style="width: 97px;"><font face="Arial, sans-serif"><font
+                size="2">GNU GFortran</font></font></td>
+          <td style="width: 89px;"><font face="Arial, sans-serif"><font
+                size="2">gfortran</font></font></td>
+          <td style="width: 76px; font-weight: bold;"><font face="Courier, monospace"><font
+                size="2">gfortran</font></font></td>
+          <td style="width: 66px;"><font face="Arial, sans-serif"><font
+                size="2">v4.4.6</font></font></td>
+          <td style="width: 113px;"><font face="Arial, sans-serif"><font
+                size="2">ECMWF BUFR 000387</font></font></td>
+          <td style="width: 244px;"><font face="Arial, sans-serif"><font
+                size="2">Builds lib, but test says "ERROR WRITING TO
+                TARGET FILE". And PBUFR returns 0 instead of -1 when
+                reaching end-of-file.</font></font></td>
+        </tr>
+        <tr>
+          <td>
+            <p><font face="Arial, sans-serif"><font size="2">Linux
+                  (RHEL6.3)<br>
+                </font></font><font face="Arial, sans-serif"><font size="2">
+                  Intel Xeon</font></font></p>
+          </td>
+          <td style="width: 97px;"><font face="Arial, sans-serif"><font
+                size="2">SUN</font></font></td>
+          <td style="width: 89px;"><font face="Arial, sans-serif"><font
+                size="2">sunf95</font></font></td>
+          <td style="width: 76px; font-weight: bold;"><font face="Courier, monospace"><font
+                size="2">sunf95</font></font></td>
+          <td style="width: 66px;"><font face="Arial, sans-serif"><font
+                size="2">v8.5</font></font></td>
+          <td style="width: 113px;"><font face="Arial, sans-serif"><font
+                size="2">ECMWF BUFR 000387</font></font></td>
+          <td style="width: 244px;"><font face="Arial, sans-serif"><font
+                size="2">Multiple undefined reference to 'stdio_read',
+                'stdio_seek' &amp; 'stdio_tell'. Can be successfully
+                compiled and linked with ROPP by substituting <span checked="true"
+                  style="font-family: Courier New,Courier,monospace; font-weight: bold;">gcc</span>
+                for <span checked="true" style="font-family: Courier New,Courier,monospace; font-weight: bold;">suncc</span>
+                <br>
+              </font></font></td>
+        </tr>
+      </tbody>
+    </table>
+    <p><font face="Arial, sans-serif">Naturally, if an external
+        dependency cannot be built, neither can an ROPP utility based on
+        it.</font></p>
+    <p> <font face="Arial, sans-serif">In addition, all dependency code
+        and ROPP modules have been successfully built and passed basic
+        user-tests (as provided in the distribution tarfiles) under the
+        following OS/compiler combinations, unless explicitly noted
+        otherwise:</font></p>
+    <center>
+      <table style="background-color: rgb(255, 255, 153); width: 870px;"
+        border="1" bordercolor="#e6e64c" cellpadding="2" cellspacing="2">
+        <colgroup><col width="127"><col width="124"><col width="95"><col
+            width="87"><col width="124"><col width="266"></colgroup>
+        <tbody>
+          <tr>
+            <td width="127" bgcolor="#ffff66">
+              <p align="center"><font face="Arial, sans-serif"><font size="2"><i><b>Platform</b></i></font></font></p>
+            </td>
+            <td width="124" bgcolor="#ffff66">
+              <p align="center"><font face="Arial, sans-serif"><font size="2"><i><b>Compiler
+
+
+
+
+
+
+                        Vendor</b></i></font></font></p>
+            </td>
+            <td width="95" bgcolor="#ffff66">
+              <p align="center"><font face="Arial, sans-serif"><font size="2"><i><b>Compiler
+
+
+
+
+
+
+                        ID</b></i></font></font></p>
+            </td>
+            <td width="87" bgcolor="#ffff66">
+              <p align="center"><font face="Arial, sans-serif"><font size="2"><i><b>Command</b></i></font></font></p>
+            </td>
+            <td width="124" bgcolor="#ffff66">
+              <p align="center"><font face="Arial, sans-serif"><font size="2"><i><b>Version</b></i></font></font></p>
+            </td>
+            <td width="266" bgcolor="#ffff66">
+              <p align="center"><font face="Arial, sans-serif"><font size="2"><i><b>Notes</b></i></font></font></p>
+            </td>
+          </tr>
+          <tr>
+            <td width="127">
+              <p><font face="Arial, sans-serif"><font size="2">Linux
+                    (OpenSUSE 12.3 64-bit)<br>
+                    Intel Q9650</font></font></p>
+            </td>
+            <td width="124">
+              <p><font face="Arial, sans-serif"><font size="2">Intel</font></font></p>
+            </td>
+            <td width="95">
+              <p><font face="Arial, sans-serif"><font size="2">ifort12</font></font></p>
+            </td>
+            <td style="font-weight: bold;" width="87">
+              <p><font face="Courier, monospace"><font size="2">ifort12</font></font></p>
+            </td>
+            <td width="124">
+              <p><font face="Arial, sans-serif"><font size="2">v12.1
+                    (XE-2011)<br>
+                  </font></font></p>
+            </td>
+            <td width="266">
+              <p><font face="Arial, sans-serif"><font size="2">GCC&nbsp;v4.7.2</font></font></p>
+              <p><font face="Arial, sans-serif"><font size="2">Intel64
+                    (64-bit) ifort compiler build<br>
+                  </font></font></p>
+            </td>
+          </tr>
+          <tr>
+            <td width="127">
+              <p><font face="Arial, sans-serif"><font size="2">Linux
+                    (OpenSUSE 12.3 64-bit)<br>
+                    Intel Q9650</font></font></p>
+            </td>
+            <td width="124">
+              <p><font face="Arial, sans-serif"><font size="2">Intel</font></font></p>
+            </td>
+            <td width="95">
+              <p><font face="Arial, sans-serif"><font size="2">ifort</font></font></p>
+            </td>
+            <td style="font-weight: bold;" width="87">
+              <p><font face="Courier, monospace"><font size="2">ifort</font></font></p>
+            </td>
+            <td width="124">
+              <p><font face="Arial, sans-serif"><font size="2">v13.1
+                    (XE-2013)<br>
+                  </font></font></p>
+            </td>
+            <td width="266">
+              <p><font face="Arial, sans-serif"><font size="2">GCC&nbsp;v4.7.2</font></font></p>
+              <p><font face="Arial, sans-serif"><font size="2">Intel64
+                    (64-bit) ifort compiler build<br>
+                  </font></font></p>
+            </td>
+          </tr>
+          <tr>
+            <td width="127">
+              <p><font face="Arial, sans-serif"><font size="2">Linux
+                    (OpenSUSE 12.3 64-bit)<br>
+                  </font></font><font face="Arial, sans-serif"><font size="2">Intel
+
+
+
+
+
+
+                    Q9650</font></font></p>
+            </td>
+            <td width="124">
+              <p><font face="Arial, sans-serif"><font size="2">GNU
+                    GFortran</font></font></p>
+            </td>
+            <td width="95">
+              <p><font face="Arial, sans-serif"><font size="2">gfortran</font></font></p>
+            </td>
+            <td style="font-weight: bold;" width="87">
+              <p><font face="Courier, monospace"><font size="2">gfortran</font></font></p>
+            </td>
+            <td checked="true" width="124">
+              <p><font face="Arial, sans-serif"><font size="2">v4.7.2<br>
+                  </font></font></p>
+            </td>
+            <td width="266">
+              <p><font face="Arial, sans-serif"><font size="2">GCC
+                    v4.7.2</font></font></p>
+              <p><font face="Arial, sans-serif"><font size="2">x86_64&nbsp;
+
+
+
+
+
+
+                    (AMD 64-bit) GFortran build</font></font></p>
+            </td>
+          </tr>
+          <tr>
+            <td width="127">
+              <p><font face="Arial, sans-serif"><font size="2">Linux
+                    (OpenSUSE 12.3 64-bit)<br>
+                  </font></font><font face="Arial, sans-serif"><font size="2">Intel
+
+
+
+
+
+
+                    Q9650</font></font></p>
+            </td>
+            <td width="124">
+              <p><font face="Arial, sans-serif"><font size="2">GNU G95</font></font></p>
+            </td>
+            <td width="95">
+              <p><font face="Arial, sans-serif"><font size="2">g95</font></font></p>
+            </td>
+            <td style="font-weight: bold;" width="87">
+              <p><font face="Courier, monospace"><font size="2">g95</font></font></p>
+            </td>
+            <td width="124">
+              <p><font face="Arial, sans-serif"><font size="2">v0.94<br>
+                    (Jan 17 2013)</font></font></p>
+            </td>
+            <td width="266">
+              <p><font face="Arial, sans-serif"><font size="2">GCC
+                    v4.7.2</font></font></p>
+              <p><font face="Arial, sans-serif"><font size="2">x86_64
+                    (EMT 64-bit) with 32-bit default integer G95 build</font></font></p>
+            </td>
+          </tr>
+          <tr>
+          </tr>
+          <tr>
+            <td style="background-color: rgb(255, 204, 102);" width="127">
+              <p><font face="Arial, sans-serif"><font size="2">Windows 7
+                    Pro (Cygwin 64-bit)<br>
+                    Intel </font></font><font face="Arial, sans-serif"><font
+                    size="2">Q9650</font></font></p>
+            </td>
+            <td style="background-color: rgb(255, 204, 102);" width="124">
+              <p><font face="Arial, sans-serif"><font size="2">GNU G95</font></font></p>
+            </td>
+            <td style="background-color: rgb(255, 204, 102);" width="95">
+              <p><font face="Arial, sans-serif"><font size="2">g95</font></font></p>
+            </td>
+            <td style="font-weight: bold; background-color: rgb(255, 204, 102);"
+              width="87">
+              <p><font face="Courier, monospace"><font size="2">g95</font></font></p>
+            </td>
+            <td style="background-color: rgb(255, 204, 102);" width="124">
+              <p><font face="Arial, sans-serif"><font size="2">v0.93<br>
+                    (Aug 17 2010)<br>
+                  </font></font></p>
+            </td>
+            <td style="background-color: rgb(255, 204, 102);">
+              <p><font face="Arial, sans-serif"><font size="2">GCC
+                    v4.7.3</font></font></p>
+              <p><font face="Arial, sans-serif"><font size="2"> x86_64
+                    (EMT 64-bit) with 32-bit default integer G95 build<br>
+                    See Notes 2,3<br>
+                  </font></font></p>
+            </td>
+          </tr>
+          <tr>
+            <td width="127">
+              <p><font face="Arial, sans-serif"><font size="2">Windows 7
+                    Pro (Cygwin 64-bit)<br>
+                    Intel </font></font><font face="Arial, sans-serif"><font
+                    size="2">Q9650</font></font></p>
+            </td>
+            <td width="124">
+              <p><font face="Arial, sans-serif"><font size="2">GNU
+                    GFortran</font></font></p>
+            </td>
+            <td width="95">
+              <p><font face="Arial, sans-serif"><font size="2">gfortran</font></font></p>
+            </td>
+            <td style="font-weight: bold;" width="87">
+              <p><font face="Courier, monospace"><font size="2">gfortran</font></font></p>
+            </td>
+            <td width="124">
+              <p><font face="Arial, sans-serif"><font size="2">v4.7.3<br>
+                  </font></font></p>
+            </td>
+            <td width="266">
+              <p><font face="Arial, sans-serif"><font size="2">GCC
+                    v4.7.3<br>
+                    See Note 2<br>
+                  </font></font></p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </center>
+    <br>
+    <font face="Arial, sans-serif"><b>NOTES:</b></font> <br>
+    <ol>
+      <li><span style="font-family: Helvetica,Arial,sans-serif;">The
+          ECMWF example test program fails to run to completion using
+          the Portland Group compilers, but nevertheless generates
+          correct BUFR files and ROPP tests also pass.</span><br>
+        <span style="font-family: Helvetica,Arial,sans-serif;"></span></li>
+      <li style="font-family: Helvetica,Arial,sans-serif;">A C routine
+        in the ECMWF low-level I/O interface code fails to compile on
+        this latest and previous versions of <span checked="true" style="font-family: Courier New,Courier,monospace; font-weight: bold;">gcc</span>
+        on Cygwin. The problem appears to be related to a missing <span
+          style="font-family: Courier New,Courier,monospace; font-weight: bold;">#define</span>
+        in a standard system header file, which the ECMWF code expects
+        to be set, but isn't. Hence ROPP has not been tested with the
+        ECMWF BUFR library on this platform. The simplest work-around is
+        to use the MetDB BUFR library.</li>
+      <li style="font-family: Helvetica,Arial,sans-serif;">Cygwin <span
+          checked="true" style="font-family: Courier New,Courier,monospace; font-weight: bold;">g95</span>
+        fails to build test programs for HDF5, netCDF (classic) and
+        GRIB-API with undefined references to <span checked="true" style="font-family: Courier New,Courier,monospace; font-weight: bold;">__chkstk_ms</span>.
+        NetCDF-4 fails to build due to missing HDF5. This lack of netCDF
+        support prevents ROPP_IO and dependent modules from being fully
+        built and&nbsp; tested.<br>
+      </li>
+      <li style="font-family: Helvetica,Arial,sans-serif;">Due to
+        non-POSIX-style command line syntax and file naming conventions,
+        native Windows compilers such as Intel, Salford and others -
+        though perfectly good compilers - generally do not work with
+        POSIX-style <span style="font-family: Courier New,Courier,monospace; font-weight: bold;">configure</span>
+        scripts (as used by netCDF and ROPP) under Cygwin, so are not
+        supported.</li>
+    </ol>
+    <p><font face="Arial, sans-serif"><font face="Arial, sans-serif"><a
+            href="#Contents"><font size="2">top</font></a></font></font></p>
+    <hr style="width: 100%; height: 2px;">
+    <h2><font face="Arial, sans-serif"><font face="Arial, sans-serif"><font
+            face="Arial, sans-serif"><a name="Known_problems"></a>9.
+            Known problems</font></font></font></h2>
+    <span style="font-family: Arial,sans-serif;"><font face="Arial, sans-serif"><font
+          face="Arial, sans-serif">The following issues have arisen
+          during testing and review, but are not considered blockers to
+          this release and will be addressed for a future release.</font></font></span>
+    <br>
+    <ul>
+      <font face="Arial, sans-serif"><font face="Arial, sans-serif"><font
+            face="Arial, sans-serif">
+            <li><span style="font-family: Arial,sans-serif;">Tests of
+                the <span checked="true" style="font-family: Courier New,Courier,monospace; font-weight: bold;">ropp_pp_occ</span>
+                tool, which processes level1a excess phase and SNR, have
+                shown occasional small differences when using <span checked="true"
+                  style="font-family: Courier New,Courier,monospace; font-weight: bold;">xlf95</span>
+                on a Power 7 HPC (IBM AIX) and when using (for example)
+                <span checked="true" style="font-family: Courier New,Courier,monospace; font-weight: bold;">ifort</span>
+                on an Intel Xeon linux box (RHEL6). The reasons for this
+                are still being investigated, but mean differences in
+                bending angle are usually less than 0.1% and the
+                majority of profiles are essentially identical. The
+                discrepancy is not considered critical.<br>
+              </span></li>
+            <li><span style="font-family: Arial,sans-serif;">As noted
+                above, the ECMWF BUFR library may not fully build on
+                Cygwin with <span checked="true" style="font-family: Helvetica,Arial,sans-serif; font-weight: bold;">gcc</span>.
+                Since this package is supported by ECMWF, such problems
+                should be reported there, not to the ROM SAF. The
+                suggested work-around is to use the MetDB BUFR library.
+                Upgrading to the very latest version of <span checked="true"
+                  style="font-family: Courier New,Courier,monospace; font-weight: bold;">gcc</span>
+                (e.g. v4.8.x either installing an independent binary
+                build for Cygwin or from the latest source) may cure the
+                problem, but we have not tried this ourselves.</span></li>
+            <li><span style=" font-family: Arial,sans-serif;">Cygwin <span
+                  checked="true" style="font-family: Courier New,Courier,monospace; font-weight: bold;">g95</span>
+                fails to build test programs for several dependency
+                libraries. Manually installing these libraries <span style="font-style: italic;">may</span>
+                still work with ROPP when the latter does not use the
+                failing dependency features being tested (untried). For
+                preference, use <span checked="true" style="font-family: Courier New,Courier,monospace; font-weight: bold;">gfortran</span>
+                on this platform, which builds and runs all tests
+                normally.<br>
+              </span></li>
+            <li><span style="font-family: Arial,sans-serif;">Similar
+                remarks apply to the other failures in building the
+                external dependency packages as detailed <a href="#Portability">above</a>.<br>
+              </span></li>
+            <li><span style="font-family: Arial,sans-serif;">Recent
+                validation testing has revealed occasional difficulties
+                when using the log<span style="font-style: italic;">p</span>
+                or log<span style="font-style: italic;">q</span> options
+                with the default minropp minimization scheme in
+                ropp_1dvar. Until these are resolved, we recommend using
+                minropp without the </span><font face="Arial, sans-serif"><font
+                  face="Arial, sans-serif"><font face="Arial, sans-serif"><spanstyle
+                      ="="" font-family:=" arial,sans-serif=" "="">log<spanstyle
+                        ="font-style:="" style="" "="" italic="">p</spanstyle></spanstyle></font></font></font><font
+                face="Arial, sans-serif"><font face="Arial, sans-serif"><font
+                    face="Arial, sans-serif">,<spanstyle ="font-style:=""
+                      italic;="&gt;&lt;span style=" font-style:="" italic;"="">q
+                      options, or the Levenberg-Marquardt minimiser
+                      (with or without the log<span style="font-style: italic;">p</span>,<span
+                        style="font-style: italic;">q</span> options).
+                      The two minimisers are compared and contrasted in
+                      ROM SAF Report 11, which the user should consult
+                      for further information.<br>
+                    </spanstyle></font></font></font></li>
+          </font></font></font>
+    </ul>
+    <font face="Arial, sans-serif"><font face="Arial, sans-serif"><font
+          face="Arial, sans-serif"><font face="Arial, sans-serif"><font
+              face="Arial, sans-serif"><font face="Arial, sans-serif">
+                <p><font face="Arial, sans-serif"><font face="Arial, sans-serif"><font><a
+                          href="#Contents"><font size="2">top</font></a></font></font></font>
+                </p>
+                <hr> <font face="Arial, sans-serif"><font face="Arial, sans-serif">
+                  </font></font>
+                <h2><font face="Arial, sans-serif"><font face="Arial, sans-serif"><font
+                        face="Arial, sans-serif"><font face="Arial, sans-serif"><font
+                            face="Arial, sans-serif"><a name="Limitations"></a><font
+                              face="Arial, sans-serif">10. Limitations</font></font></font></font></font></font></h2>
+                <font face="Arial, sans-serif"><font face="Arial, sans-serif">
+                  </font></font>
+                <ul>
+                  <font face="Arial, sans-serif"><font face="Arial, sans-serif">
+                      <font face="Arial, sans-serif"><font face="Arial, sans-serif">
+                          <font face="Arial, sans-serif">
+                            <li><font face="Arial, sans-serif">ROPP is
+                                being implemented in a phased approach,
+                                and while all functionality planned for
+                                ROPP-7 has been implemented,&nbsp;not
+                                all of the total planned functionality
+                                for the package is yet available. See
+                                the ROPP Overview document for more
+                                details. </font></li>
+                          </font></font></font> <font face="Arial, sans-serif"><font
+                          face="Arial, sans-serif"><font face="Arial, sans-serif"><font
+                              face="Arial, sans-serif"> </font></font></font></font>
+                      <font face="Arial, sans-serif"><font face="Arial, sans-serif"><font
+                            face="Arial, sans-serif"><font face="Arial, sans-serif">
+                              <li><font face="Arial, sans-serif">Support
+                                  for previous versions will be limited
+                                  to problems which can also be
+                                  reproduced with the latest version. We
+                                  recommend that users should upgrade to
+                                  the latest version when released. In
+                                  general, only the current (<span style="font-style: italic;">viz</span>
+                                  ROPP-7.0) release is fully supported
+                                  with the immediately preceding
+                                  releases (<span style="font-style: italic;">viz</span>
+                                  ROPP-6.1) having limited support.</font></li>
+                            </font></font></font></font> <font face="Arial, sans-serif"><font
+                          face="Arial, sans-serif"><font face="Arial, sans-serif"><font
+                              face="Arial, sans-serif"> </font></font></font></font>
+                      <font face="Arial, sans-serif"><font face="Arial, sans-serif"><font
+                            face="Arial, sans-serif"><font face="Arial, sans-serif">
+                              <li><font face="Arial, sans-serif">ROPP
+                                  supports writing of more than one RO
+                                  profile to a netCDF file. It is
+                                  assumed that the number of data points
+                                  in the first profile is sufficient to
+                                  hold all subsequent profiles to be
+                                  written to the file (this is a
+                                  fundamental limitation of saving
+                                  2D&nbsp;arrays in netCDF). As a
+                                  consequence, should the first file
+                                  written to&nbsp;a multifile have no
+                                  valid samples in the profile (say, all
+                                  refractivities are invalid and set
+                                  missing), then that 'Level 2a' section
+                                  will be written with zero data points.
+                                  Subsequent profiles having at least
+                                  one valid sample will then not be
+                                  correctly saved in the multifile. See
+                                  the ROPP User Guide Part I for more
+                                  details.</font></li>
+                            </font></font></font></font> <font face="Arial, sans-serif"><font
+                          face="Arial, sans-serif"><font face="Arial, sans-serif"><font
+                              face="Arial, sans-serif">
+                              <li><font face="Arial, sans-serif">All
+                                  ROPP stand-alone tools use the <span
+                                    style="font-family: Courier New,Courier,monospace; font-weight: bold;">ROPP_IO</span>
+                                  routines to read data from input ROPP
+                                  format netCDF files. By default, the
+                                  data are checked against their valid
+                                  range attributes, and each data level
+                                  tested for the availability of valid
+                                  height (or time) values. All input
+                                  files are therefore required to have
+                                  valid time, impact parameter or
+                                  geopotential height information to
+                                  pass the range checks on reading for
+                                  Level1a, Level1b and Level2 data
+                                  respectively. See the ROPP User Guide
+                                  Part I for more details.</font></li>
+                              <li><font face="Arial, sans-serif"><font face="Arial, sans-serif"><font
+                                      face="Arial, sans-serif"><font face="Arial, sans-serif"><font
+                                          face="Arial, sans-serif"><font
+                                            face="Arial, sans-serif"><font
+                                              face="Arial, sans-serif"><font
+                                                face="Arial, sans-serif"><font
+                                                  face="Arial, sans-serif"><font
+                                                    face="Arial, sans-serif"><span
+                                                      style="font-family: Courier New,Courier,monospace; font-weight: bold;">ROPP_PP</span>
+                                                    contains routines to
+                                                    process GRAS 'Raw
+                                                    Sampling' (RS) data
+                                                    (strictly, this is
+                                                    full-sampling closed
+                                                    loop data). While
+                                                    this code works, the
+                                                    pre-processing of
+                                                    GRAS RS data itself
+                                                    is still in
+                                                    development by
+                                                    EUMETSAT, file
+                                                    formats are liable
+                                                    to change, and the
+                                                    ROPP_PP code has not
+                                                    been extensively
+                                                    tested. <span style="font-weight: bold;">The
+GRAS
+
+
+
+
+
+
+                                                      RS functionality
+                                                      in the ROPP_PP
+                                                      code&nbsp;therefore
+                                                      has only '</span><span
+                                                      style="font-style: italic; font-weight: bold;">unvalidated
+
+
+
+
+
+
+                                                      prototype</span><span
+                                                      style="font-weight: bold;">'
+                                                      status</span></font></font></font></font></font></font></font></font></font></font><font
+                                  face="Arial, sans-serif"><font face="Arial, sans-serif"><font
+                                      face="Arial, sans-serif"><font face="Arial, sans-serif"><font
+                                          face="Arial, sans-serif"><font
+                                            face="Arial, sans-serif"><font
+                                              face="Arial, sans-serif"><font
+                                                face="Arial, sans-serif"><font
+                                                  face="Arial, sans-serif"><font
+                                                    face="Arial, sans-serif"><span
+                                                      style="font-family: Courier New,Courier,monospace;"></span></font></font></font></font></font></font></font></font></font></font></li>
+                            </font></font></font></font> </font></font>
+                </ul>
+                <font face="Arial, sans-serif"><font face="Arial, sans-serif">
+                  </font></font>
+                <p><font face="Arial, sans-serif"><font face="Arial, sans-serif"><font
+                        face="Arial, sans-serif"><font face="Arial, sans-serif"><font
+                            face="Arial, sans-serif"><font face="Arial, sans-serif"><font
+                                face="Arial, sans-serif"><a href="#Contents"><font
+                                    size="2"><font face="Arial, sans-serif">top</font></font></a></font></font></font></font></font></font></font></p>
+                <font face="Arial, sans-serif"><font face="Arial, sans-serif">
+                  </font></font>
+                <hr> <font face="Arial, sans-serif"><font face="Arial, sans-serif">
+                  </font></font>
+                <h2><font face="Arial, sans-serif"><font face="Arial, sans-serif"><font
+                        face="Arial, sans-serif"><font face="Arial, sans-serif"><font
+                            face="Arial, sans-serif"><font face="Arial, sans-serif"><font
+                                face="Arial, sans-serif"><a name="And_finally"></a><font
+                                  face="Arial, sans-serif">11. And
+                                  finally...</font></font></font></font></font></font></font></font></h2>
+                <font face="Arial, sans-serif"><font face="Arial, sans-serif">
+                  </font></font>
+                <p><font face="Arial, sans-serif"><font face="Arial, sans-serif"><font
+                        face="Arial, sans-serif"><font face="Arial, sans-serif"><font
+                            face="Arial, sans-serif"><font face="Arial, sans-serif"><font
+                                face="Arial, sans-serif"><font face="Arial, sans-serif">Data
+files,
+
+
+
+
+
+
+                                  documentation, etc, in this release
+                                  are not definitive and not all final
+                                  intended functionality may be present,
+                                  since ROPP is being developed and
+                                  released in planned stages. The
+                                  software is not guaranteed to be
+                                  bug-free, but has been tested with
+                                  operational GRAS data (Level 1b from
+                                  EUMETSAT and ROM SAF Level 2 <span style="font-style: italic;">GRM-01</span>
+                                  Refractivity products) and also with
+                                  COSMIC, CHAMP, GRACE-A <span style="color: red; font-weight: bold;"></span>(and
+to
+
+
+
+
+
+
+                                  a limited extent, TerraSAR-X, C/NOFS
+                                  and SAC-C) occultations. Nevertheless,
+                                  the code - with the portability and
+                                  other limitations noted above - have
+                                  passed a defined set of tests and the
+                                  complete package has been formally
+                                  reviewed and approved for general
+                                  release as software having <span style="font-style: italic;">operational</span>
+                                  status.<br>
+                                  <br>
+                                  Nevertheless, we encourage you to
+                                  carefully check the building and
+                                  installation and test the running of
+                                  the ROPP software and to review the
+                                  package in its entirety and to provide
+                                  feedback to the ROPP Development Team.<br>
+                                  <br>
+                                  Updates to the ROPP code to:</font></font></font></font></font></font></font></font></p>
+                <font face="Arial, sans-serif"><font face="Arial, sans-serif">
+                  </font></font>
+                <ul>
+                  <font face="Arial, sans-serif"><font face="Arial, sans-serif">
+                      <font face="Arial, sans-serif"><font face="Arial, sans-serif"><font
+                            face="Arial, sans-serif"><font face="Arial, sans-serif">
+                              <font face="Arial, sans-serif">
+                                <li><font face="Arial, sans-serif">fix
+                                    any reported bugs</font></li>
+                                <li><font face="Arial, sans-serif">extend
+
+
+
+
+
+
+                                    portability</font></li>
+                                <li><font face="Arial, sans-serif">improve
+
+
+
+
+
+
+                                    the user-build experience<br>
+                                  </font></li>
+                                <li><font face="Arial, sans-serif">enhance
+
+
+
+
+
+
+                                    functionality</font></li>
+                                <li><font face="Arial, sans-serif">improve
+
+
+
+
+
+
+                                    the science</font></li>
+                              </font> </font></font></font></font> </font></font>
+                </ul>
+                <font face="Arial, sans-serif"><font face="Arial, sans-serif">
+                  </font></font> <font face="Arial, sans-serif"><font face="Arial, sans-serif">
+                  </font></font>
+                <p><font face="Arial, sans-serif"><font face="Arial, sans-serif"><font
+                        face="Arial, sans-serif"><font face="Arial, sans-serif"><font
+                            face="Arial, sans-serif"><font face="Arial, sans-serif"><font
+                                face="Arial, sans-serif"><font face="Arial, sans-serif"><font
+                                    face="Arial, sans-serif">will be
+                                    released from time to time as minor
+                                    or major releases. Registered users
+                                    will be notified when an update is
+                                    available. This may be in the form
+                                    of a complete replacement file, a
+                                    patch file or - in the case of
+                                    trivial changes - instructions for
+                                    local file editing. Implementation
+                                    of such updates is at the discretion
+                                    of the user, but support for older
+                                    releases will become increasingly
+                                    limited.</font></font></font></font></font></font></font></font></font></p>
+                <p><font face="Arial, sans-serif"><font face="Arial, sans-serif"><font
+                        face="Arial, sans-serif"><font face="Arial, sans-serif"><font
+                            face="Arial, sans-serif"><font face="Arial, sans-serif"><font
+                                face="Arial, sans-serif"><font face="Arial, sans-serif"><font
+                                    face="Arial, sans-serif"> All
+                                    comments on the ROPP software
+                                    should, in the first instance, be
+                                    reported via the ROM SAF Helpdesk at
+                                  </font><a style="font-family: Courier New,Courier,monospace;"
+                                    href="http://www.romsaf.org/"><b>http://www.romsaf.org</b></a><b
+                                    style="font-family: Courier New,Courier,monospace;">
+                                    &gt; Helpdesk &gt; New enquiry.</b></font></font></font></font></font></font></font></font></p>
+                <p><font face="Arial, sans-serif"><font face="Arial, sans-serif"><font
+                        face="Arial, sans-serif"><font face="Arial, sans-serif"><font
+                            face="Arial, sans-serif"><font face="Arial, sans-serif"><font
+                                face="Arial, sans-serif"><font face="Arial, sans-serif"><a
+                                    href="#Contents"><font size="2">top</font></a></font></font></font></font></font></font></font></font></p>
+                <font face="Arial, sans-serif"><font face="Arial, sans-serif">
+                  </font></font>
+                <hr> <font face="Arial, sans-serif"><font face="Arial, sans-serif">
+                  </font></font>
+                <p><font face="Arial, sans-serif"><font face="Arial, sans-serif"><font
+                        face="Arial, sans-serif"><font face="Arial, sans-serif"><font
+                            face="Arial, sans-serif"><font face="Arial, sans-serif"><font
+                                face="Arial, sans-serif"><i><font face="Arial, sans-serif">ROM
+
+
+
+
+
+
+                                    SAF ROPP Development Team<br>
+                                    <a href="http://www.romsaf.org/"><b><font
+                                          face="Arial:sans-serif, sans-serif">
+                                          http://www.romsaf.org</font></b></a></font></i></font></font></font></font></font></font></font></p>
+                <font face="Arial, sans-serif"><font face="Arial, sans-serif">
+                  </font></font></font></font></font> </font></font></font>
+  </body>
+</html>

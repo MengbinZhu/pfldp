@@ -1,0 +1,196 @@
+netcdf ropp_test_1m {
+dimensions:
+	dim_unlim = UNLIMITED ; // (1 currently)
+	dim_char04 = 5 ;
+	dim_char20 = 21 ;
+	dim_char40 = 41 ;
+	dim_char64 = 65 ;
+	xyz = 3 ;
+variables:
+	char occ_id(dim_unlim, dim_char40) ;
+		occ_id:long_name = "Occultation ID" ;
+	char gns_id(dim_unlim, dim_char04) ;
+		gns_id:long_name = "GNSS satellite ID" ;
+	char leo_id(dim_unlim, dim_char04) ;
+		leo_id:long_name = "LEO satellite ID" ;
+	char stn_id(dim_unlim, dim_char04) ;
+		stn_id:long_name = "Ground station ID" ;
+	double start_time(dim_unlim) ;
+		start_time:long_name = "Starting time for the occultation" ;
+		start_time:units = "seconds since 2000-01-01 00:00:00" ;
+	int year(dim_unlim) ;
+		year:long_name = "Year" ;
+		year:units = "years" ;
+		year:valid_range = 1995, 2099 ;
+	int month(dim_unlim) ;
+		month:long_name = "Month" ;
+		month:units = "months" ;
+		month:valid_range = 1, 12 ;
+	int day(dim_unlim) ;
+		day:long_name = "Day" ;
+		day:units = "days" ;
+		day:valid_range = 1, 31 ;
+	int hour(dim_unlim) ;
+		hour:long_name = "Hour" ;
+		hour:units = "hours" ;
+		hour:valid_range = 0, 23 ;
+	int minute(dim_unlim) ;
+		minute:long_name = "Minute" ;
+		minute:units = "minutes" ;
+		minute:valid_range = 0, 59 ;
+	int second(dim_unlim) ;
+		second:long_name = "Second" ;
+		second:units = "seconds" ;
+		second:valid_range = 0, 59 ;
+	int msec(dim_unlim) ;
+		msec:long_name = "Millisecond" ;
+		msec:units = "milliseconds" ;
+		msec:valid_range = 0, 999 ;
+	int pcd(dim_unlim) ;
+		pcd:long_name = "Product Confidence Data" ;
+		pcd:units = "bits" ;
+		pcd:valid_range = 0, 32767 ;
+	float overall_qual(dim_unlim) ;
+		overall_qual:long_name = "Overall quality" ;
+		overall_qual:units = "percent" ;
+		overall_qual:valid_range = 0., 100. ;
+	double time(dim_unlim) ;
+		time:long_name = "Reference time for the occultation" ;
+		time:units = "seconds since 2000-01-01 00:00:00" ;
+	float time_offset(dim_unlim) ;
+		time_offset:long_name = "Time offset for georeferencing (since start of occ.)" ;
+		time_offset:units = "seconds" ;
+		time_offset:valid_range = 0., 240. ;
+	float lat(dim_unlim) ;
+		lat:long_name = "Reference latitude for the occultation" ;
+		lat:units = "degrees_north" ;
+		lat:valid_range = -90., 90. ;
+	float lon(dim_unlim) ;
+		lon:long_name = "Reference longitude for the occultation" ;
+		lon:units = "degrees_east" ;
+		lon:valid_range = -180., 180. ;
+	float undulation(dim_unlim) ;
+		undulation:long_name = "Geoid undulation for the reference coordinate" ;
+		undulation:units = "metres" ;
+		undulation:valid_range = -150., 150. ;
+	double roc(dim_unlim) ;
+		roc:long_name = "Radius of curvature for the reference coordinate" ;
+		roc:units = "metres" ;
+		roc:valid_range = 6.2e+06, 6.6e+06 ;
+	float r_coc(dim_unlim, xyz) ;
+		r_coc:long_name = "Centre of curvature for the reference coordinate" ;
+		r_coc:units = "metres" ;
+		r_coc:valid_range = -50000., 50000. ;
+		r_coc:reference_frame = "ECF" ;
+	float azimuth(dim_unlim) ;
+		azimuth:long_name = "GNSS->LEO line of sight angle (from True North) for the reference coordinate" ;
+		azimuth:units = "degrees_T" ;
+		azimuth:valid_range = 0., 360. ;
+	char bg_source(dim_unlim, dim_char20) ;
+		bg_source:long_name = "Background data source" ;
+	int bg_year(dim_unlim) ;
+		bg_year:long_name = "VT year" ;
+		bg_year:units = "years" ;
+		bg_year:valid_range = 1995, 2099 ;
+	int bg_month(dim_unlim) ;
+		bg_month:long_name = "VT month" ;
+		bg_month:units = "months" ;
+		bg_month:valid_range = 1, 12 ;
+	int bg_day(dim_unlim) ;
+		bg_day:long_name = "VT day" ;
+		bg_day:units = "days" ;
+		bg_day:valid_range = 1, 31 ;
+	int bg_hour(dim_unlim) ;
+		bg_hour:long_name = "VT hour" ;
+		bg_hour:units = "hours" ;
+		bg_hour:valid_range = 0, 23 ;
+	int bg_minute(dim_unlim) ;
+		bg_minute:long_name = "VT minute" ;
+		bg_minute:units = "minutes" ;
+		bg_minute:valid_range = 0, 59 ;
+	float bg_fcperiod(dim_unlim) ;
+		bg_fcperiod:long_name = "Forecast period" ;
+		bg_fcperiod:units = "hours" ;
+		bg_fcperiod:valid_range = 0., 24. ;
+
+// global attributes:
+		:title = "Atmospheric background data for ROPP Radio Occultation data" ;
+		:institution = "UNKNOWN" ;
+		:Conventions = "CF-1.0" ;
+		:format_version = "ROPP I/O V1.1" ;
+		:processing_centre = "UNKNOWN" ;
+		:processing_date = "2014-11-26 10:20:25.804" ;
+		:pod_method = "UNKNOWN" ;
+		:phase_method = "UNKNOWN" ;
+		:bangle_method = "UNKNOWN" ;
+		:refrac_method = "UNKNOWN" ;
+		:meteo_method = "UNKNOWN" ;
+		:thin_method = "NONE (Thinning disabled) [v3.1]" ;
+		:software_version = "UNKNOWN" ;
+		:_FillValue = -9.9999e+07 ;
+data:
+
+ occ_id =
+  "OC_99999999999999_UNKN_U999_UNKN" ;
+
+ gns_id =
+  "U999" ;
+
+ leo_id =
+  "UNKN" ;
+
+ stn_id =
+  "UNKN" ;
+
+ start_time = 0 ;
+
+ year = 9999 ;
+
+ month = 99 ;
+
+ day = 99 ;
+
+ hour = 99 ;
+
+ minute = 99 ;
+
+ second = 99 ;
+
+ msec = 9999 ;
+
+ pcd = 65535 ;
+
+ overall_qual = -9.9999e+07 ;
+
+ time = 0 ;
+
+ time_offset = -9.9999e+07 ;
+
+ lat = -9.9999e+07 ;
+
+ lon = -9.9999e+07 ;
+
+ undulation = -9.9999e+07 ;
+
+ roc = -9.9999e+07 ;
+
+ r_coc =
+  -9.9999e+07, -9.9999e+07, -9.9999e+07 ;
+
+ azimuth = -9.9999e+07 ;
+
+ bg_source =
+  "UNKNOWN" ;
+
+ bg_year = 9999 ;
+
+ bg_month = 99 ;
+
+ bg_day = 99 ;
+
+ bg_hour = 99 ;
+
+ bg_minute = 99 ;
+
+ bg_fcperiod = 999.9 ;
+}

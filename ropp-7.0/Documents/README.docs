@@ -1,0 +1,90 @@
+$ Id: README_v7.0.docs $
+
+                README file for Documents directory
+               =====================================
+               
+This file describes contents of the Documents directory. These files make up
+User documentation set for the Radio Occultation Processing Package (ROPP) 
+deliverable software of the ROM SAF, Release Version 7.0.
+
+
+ README.docs               : This file.
+
+ romsaf_ropp_overview.pdf  : ROPP Overview (v7.0)
+                             A summary of the ROPP deliverable, what
+                             top-level functionality can be found in each
+                             module, what will be in future releases,
+                             supported platforms and compilers and 3rd party
+                             dependencies.
+
+ romsaf_ropp_ug_io.pdf     : ROPP User Guide. Part I:   IO module (v7.0).
+
+ romsaf_ropp_ug_1dvar.pdf  : ROPP User Guide. Part II:  FM and 1DVar modules (v7.0).
+
+ romsaf_ropp_ug_pp.pdf     : ROPP User Guide. Part III: PP module (v7.0).
+                             A comprehensive set of guides describing the 
+                             science and implementation of the ROPP software 
+                             and how to build, install and use it.
+                               
+ romsaf_bufr.pdf           : BUFR Specification for RO (v2.2)
+                             Describes the WMO-standard BUFR format used for 
+                             disseminating GRAS SAF Level 2 products on the GTS
+                             and over EUMETCast. This BUFR template was also 
+                             used for CHAMP, is being used for COSMIC, 
+                             GRACE-A, TerraSAR-X, C/NOFS and SAC-C and will be 
+                             used for TanDEM-X, ROSA, PAZ and other RO missions
+                             whose data might be available in near-real time on 
+                             the GTS.
+                             
+ ropp_docs.tar.gz          : All of the above documents in one compressed tar
+                             archive, and which also contains the ROPP
+                             Reference Manuals for the individual modules: 
+               romsaf_ropp_utils_rm.pdf : ROPP UTILS Reference Manual (v7.0)
+               romsaf_ropp_io_rm.pdf    : ROPP IO    Reference Manual (v7.0)
+               romsaf_ropp_fm_rm.pdf    : ROPP FM    Reference Manual (v7.0)
+               romsaf_ropp_1dvar_rm.pdf : ROPP 1DVAR Reference Manual (v7.0)
+               romsaf_ropp_pp_rm.pdf    : ROPP PP    Reference Manual (v7.0)
+                             These Refrence Manuals are also included in the
+                             appropriate module's distribution tarfile.
+
+NB: ropp_docs.tar.gz is only available on the website, since its component 
+    files are present elsewhere in the "overall" tarball anyway.
+
+Files can be downloaded individually, or the complete set is available
+in the tarfile. The individual files can be extracted using:
+
+ > tar -zxvf ropp_docs.tar.gz
+ 
+or
+
+ > gunzip ropp_docs.tar.gz
+ > tar -xvf ropp_docs.tar
+ 
+if your version of tar does not support gzip decompression (-z option).
+ 
+The contents will be created in a local sub-directory Documents/. All 
+documents are provided in PDF format and can be read (and printed) with the
+free Adobe Acrobat Reader (www.adobe.com) or similar tools available for a 
+wide variety of platforms. 
+
+For more information, please refer to the Release Notes (html file) in the
+ROPP distribution root directory.
+
+The Reference Manuals give the details on each and every ROPP routine in that
+sub-package (excepting some 3rd party bundled code), such as the  user calling
+interfaces, dependencies and algorithm notes. The Reference  Manuals are built
+from standardised headers to each routine; the code itself being the ultimate
+documentation. These Manuals are aimed at users wishing to build their own
+applications calling the ROPP subroutines, or if they need to modify the code
+in any way. Note that if you extract this document set from the main
+full-distribution tarfile, the Reference Manuals are in the doc/ directory of
+the individual modules and are not duplicated in this Documents/ directory.
+
+Finally, the main stand-alone application tools have Unix-style 'man' pages 
+describing their command line interfaces; all also provide basic help 
+information by running the program with a '-h' switch.
+
+
+ROPP Development Team
+Met Office
+

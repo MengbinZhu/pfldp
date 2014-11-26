@@ -1,0 +1,107 @@
+./" $Id: ropp_fm_bg2ro_2d.1 3551 2013-02-25 09:51:28Z idculv $
+./"
+.TH ROPP_FM_BG2RO_2D 1 31-Jul-2013 ROPP-7 ROPP-7
+./"
+.SH NAME
+ropp_fm_bg2ro_2d
+./"
+.SH SYNOPSIS
+Two-dimensional bending angle and refractivity forward model.
+.PP
+./"
+.B ropp_fm_bg2ro_2d
+.I input_file [input_file...]
+\-o output_file
+.br
+                 [-h] [-d] [-v] [-comp] [-check_qsat]
+./"
+.SH DESCRIPTION
+.I ropp_fm_bg2ro_2d
+Calculates 2-D refractivity as a function of geometric height and
+bending angles as a function of impact parameter from a set of background
+T,q,P profiles. Each profile is assumed to be 1-dimensional (vertical)
+at the given latitude & longitude in the 'occulation plane' -  a line in
+the direction of the GNSS propogation azimuth with respect to True North.
+(See
+.BR Reference\ 2 ).
+./"
+.SH FILES
+.SS Input
+One or more ROPP netCDF files containing 2-D background profiles
+of temperature, humdity and pressure. (See
+.BR Reference\ 1 ).
+The background profiles will normally be horizontally (and perhaps temporally)
+interpolated from an NWP model short-period forecast, and values given
+on model level geopotential heights.
+.SS Output
+The output ROPP netCDF file contains the modelled refractivity and bending
+angle profiles. (See
+.BR Reference\ 1 ).
+.PP
+If the input file contains more than one profile (a 'multi-file') or more
+than one input file is specified, the single output file will contain derived
+profiles for all the input profiles.
+./"
+.SH OPTIONS
+Option switches are case\-sensitive but may be placed before or after
+the input file argument and in any order. All arguments to switches are
+mandatory when the switch is used.
+.PP
+.B -check_qsat
+\- include check for saturation
+.IP
+Includes a check against saturation in the forward model. By default,
+super-saturation is allowed.
+.PP
+.B -comp
+\- non ideal gas compressibility
+.IP
+The default is to use refractivity coefficients which assume
+ideal gas without compressibility factors. (See
+.BR Reference\ 2 ).
+.PP
+.B -d
+\- diagnostics
+.IP
+Output additional diagnostics to stdout.
+.PP
+.B -h
+\- help
+.IP
+Requests brief help on the command to stdout.
+.PP
+.B -o
+\- output file (required)
+.IP
+Specifies the name of the output ROPP netCDF file.
+.PP
+.B -v
+\- version
+.IP
+Requests the program version ID to be written to stdout.
+./"
+.SH EXAMPLES
+.B 1.
+Forward model a set of background profiles with compressibility factors:
+.PP
+ >
+.B ropp_fm_bg2ro_2d
+my2dbgr.nc -o fm2dout.nc -comp
+./"
+.SH REFERENCES
+.PP
+.B 1.
+ROPP User Guide - Part I: Input/Output module
+.br
+SAF/ROM/METO/UG/ROPP/002
+.PP
+.B 2.
+ROPP User Guide - Part II: Forward model and 1D-Var modules
+.br
+SAF/ROM/METO/UG/ROPP/003
+./"
+.SH SEE ALSO
+.BR ropp_fm_bg2ro_1d (1)
+./"
+.SH AUTHORS
+ROPP Development Team, Met Office <romsaf@metoffice.gov.uk>

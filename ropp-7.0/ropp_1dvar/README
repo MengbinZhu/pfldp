@@ -1,0 +1,34 @@
+		     ROPP_1DVAR Package Release V7.0
+		    ---------------------------------
+
+The ropp_1dvar module is a package of software and supporting files for the
+retrieval - by the variational (1D-VAR) method - of pressure, temperature
+and humidity (plus surface pressure) from profiles of bending angle or
+refractivity, using background 'first guess' profile, e.g. from an NWP
+model.
+
+ropp_1dvar forms one module of the Radio Occultation Processing Package
+(ROPP) which is a key deliverable of the ROM SAF. The ROPP 1D-Var
+retrieval is based on the forward models implemented in the ropp_fm module.
+These packages depend on utility routines in the ropp_utils module. The sample 
+test programs also interface with data files using the ropp_io
+module. Users wishing to build only those parts of the ropp_1dvar code with no 
+ropp_io dependencies need not install the ropp_io module. Please refer to the 
+installation guides of those modules for further dependencies.
+
+See the ROPP Release Notes html file provided with the main ROPP download
+tarfile for an overview and instructions for installing this module with the 
+build and configure tools provided with ROPP. 
+ 
+See the README.unix and README.cygwin files for more detailed installation 
+instructions and tips for experienced developers. See file MANIFEST for the 
+complete list of files in the distribution package and the COPYRIGHT file for 
+copyright information. The file INSTALL contains generic instructions for the 
+configure script.
+
+Any comments on this software should be given via the ROM SAF
+Helpdesk at http://www.romsaf.org
+
+
+ROM SAF ROPP Development Team
+31 July 2013

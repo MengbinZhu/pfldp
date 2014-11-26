@@ -1,0 +1,403 @@
+./" $Id: ropp2bufr.1 3696 2013-06-17 08:48:37Z idculv $
+./"
+.TH ropp2bufr 1 31-Jul-2013 ROPP-7.0 ROPP-7.0
+./"
+.SH NAME
+ropp2bufr
+./"
+.SH SYNOPSIS
+Encode one or more ROPP-format netCDF files to WMO BUFR.
+.PP
+>
+.B ropp2bufr
+.I ropp-file
+[ropp-file...] [-o bufr-file]
+.br
+                      [-g[i]] [-s seq-file] [-p thinfile|maxsamp] [-t time]
+.br
+                      [-u] [-l] [-m] [-d] [-h|?] [-v]
+./"
+.SH DESCRIPTION
+.I ropp2bufr
+encodes processed (Level 1b & Level 2) GPS Radio Occultation (RO)
+data from ROPP netCDF files to WMO (FM-94) BUFR.
+.PP
+There are options to include WMO abbreviated headings for routing
+via GTS/RMDCN and data can be filtered by age for GTS dissemination purposes.
+Some RO data elements can be prevented from being encoded, e.g.
+where the length of BUFR messages is an issue. The profile data can
+also be thinned and put into ascending height order.
+./"
+.SH FILES
+.SS Input
+.I ropp-file
+: input ROPP netCDF file(s)
+.IP
+These must contain data in the ROPP netCDF format as specified in
+.B Reference
+.BR 1 .
+More than one file may be explicitly specified on the command line, or
+implied by use of wild-cards. The file name(s) may include a path.
+If no input file names are specified, the default name
+.B ropp.nc
+will be used (a file type of '.nc' is conventionally used for netCDF).
+.PP
+.I roppbufrcodes.nl
+: look up table file
+.IP
+This is a Fortran namelist file which should be installed in the directory path
+.B BUFR_TABLES
+(if using the ECMWF BUFR library), or
+.B BUFR_LIBRARY
+(if using the MetDB BUFR library).
+This file  contains look-up tables for converting between WMO numeric code
+values and ROPP text-based identifiers (or vice-versa). If this file
+cannot be read for any reason, internal default tables will be applied.
+This namelist file can be locally edited to change the conversion values
+or extend the existing tables.
+.PP
+./"
+.SS Output
+.I bufr-file
+: output BUFR file
+.IP
+The output file name for the encoded BUFR messages can be specified
+on the command line with
+.BR -o ,
+or a default will be used based on the occultation ident string
+(as generated from the ROPP header - see
+.BR ropp2ropp (1)
+or
+.B Reference
+.BR 1 ).
+For netCDF multifiles the first occultation is used for this default.
+The specification of the BUFR format for this data type is given in
+.B Reference 2.
+.IP
+If the specified or default file already exists, it will be
+overwritten. If no valid BUFR messages can be generated - for
+instance if an occultation has been rejected as being too old
+\- then no output file will be created.
+.IP
+The output BUFR file will contain one message (or full
+WMO bulletins if the
+.B -g
+or
+.B gi
+option is used) for each input profile.
+./"
+.SH ENVIRONMENT
+.B BUFR_TABLES
+(ECMWF BUFR library) or
+.B BUFR_LIBRARY
+(MetDB BUFR library)
+should define a path to the directory containing run-time BUFR files, including
+the
+.B roppbufrcodes.nl
+namelist file read by
+.I bufr2ropp
+for BUFR to ROPP identifier code conversions. See documentation on the appropriate
+BUFR kernel library for more details.
+./"
+.SH NOTES
+.SS Default output file names
+Default names will have the format described in
+.BR ropp2ropp (1).
+SS Profile thinning
+.I ropp2bufr
+implements the same thinning function as
+.BR ropp2ropp (1)
+except that the default is equivalent to
+.B -p 375
+(sample to no more than 375 vertical levels). See
+.B Reference 3
+for the thinning algorithm details.
+./"
+.SS Profile ordering
+Like
+.BR ropp2ropp (1),
+by default,
+.I ropp2bufr
+re-orders profiles to be ascending as necessary, though this operation can be
+suppressed by using the
+.B -u
+(unordered) switch.
+.SS Range checking
+The same checking employed by
+.BR ropp2ropp (1),
+is a also used by
+.IR ropp2bufr .
+./"
+.SH OPTIONS
+Option switches are not case-sensitive and may be placed before or after
+the input file name and in any order. All arguments to switches which
+take them are mandatory.
+.PP
+.B -d
+\- output diagnostics
+.IP
+Allows additional diagnostics to be written to stdout.
+.PP
+.B -g
+\- generate GTS routing headers
+.IP
+Specifies that WMO GTS abbreviated routing headers (ARH) & trailers
+should be generated. The addition of the routing 'wrapper' to a BUFR message
+is collectively known as a GTS 'bulletin'.
+By default, no routing headers are generated.
+.IP
+Use of the
+.B -s
+option can be used to 'seed' the bulletin sequence number in the ARH.
+.B -g
+also sets the default for the
+.B -t
+option to 23:50 on the assumption that the resulting bulletins are
+destined for NRT dissemination via GTS/RMDCN.
+.PP
+.B -gi
+\- as for
+.B -g
+but adds an IP leader.
+.IP
+This option not only adds ARHs, but also inserts an 10-byte leader before each bulletin,
+containing the bulletin length and type, plus a dummy leader after the last bulletin
+to signify end-of-file. This option is usually required for file-based transmission
+over TCP/IP (usually FTP) protocols.
+.PP
+.B -h
+or
+.B ?
+\- help
+.IP
+Requests brief help on the command to stdout.
+.PP
+.B -l
+\- suppress L1 & L2 data
+.IP
+Specifies that L1 & L2 (Level 1b) data, even if present in the input
+file, are
+.I not
+encoded - only the ionospheric-corrected profile is to be encoded.
+The default is to encode all (L1+L2+Corrected) Level 1b profiles,
+if Level 1b data is present in the ROPP file.
+.PP
+.B -m
+\- suppress met. data
+.IP
+Specifies that meteorological (geophysical retrieval) data in Level 2b
+(i.e. profiles of P,T,q) and Level 2c (Ps) data are
+.I not
+encoded. The default is to encode Level 2b and 2c data, if present
+in the ROPP file.
+.PP
+.B -o bufr-file
+\- output BUFR file name
+.IP
+Specifies the output file name for the encoded BUFR messages. A default
+name is generated based on the first occultation ID string.
+A valid file name (which can include a path) is mandatory if this switch
+is present.
+.PP
+.B -p thin-file|max-samples
+\- profile thinning control
+.IP
+Specifies a thinning control file or the maximum no. of levels
+to be sampled. This switch, if used, must be followed by one of:
+.IP
+\- a valid existing file name (with optional path)
+.IP
+or
+.IP
+\- a non-negative integer representing the maximum no. of levels to be sampled.
+This option is equivalent to a thinning control file specifying a method of
+.B SAMPLE
+and
+.B Nlevels=max-samples
+.IP
+If this switch is not used, the default is to sub-sample to a maximum
+of 375 levels. Specifying
+.B -p0
+disables thinning (method equivalent to
+.BR NONE ).
+.PP
+.B -s seq-file
+\- bulletin sequence file name
+.IP
+.I seq-file
+is the name (with optional path) of a bulletin sequence save file.
+By default,
+.I ropp2bufr
+will generate a bulletin sequence number (BSN) in the ARH - see
+.B Reference 2
+\- starting at 001 and incrementing by 1 for each bulletin generated in
+a session. The use of this option will initiate the BSN at the value
+found in the specified file (incremented by one) and will save the last
+used BSN back to the file for the next session. This allows a
+rolling BSN from 001 to 999 if the same file is used over a number of
+encoding sessions. A valid file name is a mandatory argument to this switch.
+.IP
+If the specified file does not exist or a valid numeric value is not found,
+.I ropp2bufr
+will issue a warning; the BSN will start at 001 and the file
+will  then be created to save the last used sequence number. A
+warning will be issued if the BSN cannot be saved.
+.IP
+This option is ignored unless one of the
+.B -g
+options is used to generate an ARH which includes the BSN.
+.PP
+.B -t time
+\- cut-off time
+.IP
+Specifies a relative cut-off time for GTS/RMDCN dissemination purposes.
+The time argument is the maximum time difference between the occultation
+time stamp and the time when encoder is run, and must be in
+.B hh:mm
+format. A valid time must be given if this option is present.
+The default is
+.B 00:00
+(no cut-off applied) unless one of the
+.B -g
+options is present, in which case the default is
+.B 23:50.
+.IP
+The GTS is designed for the transmission of synoptic data, and
+most routing nodes will reject the passing of data more than 23h59m
+from 'now' (or more than 10 minutes into the future). The default
+cut-off here of 23h50m allows for a few minutes delay in completing
+the encoding and transfer of the BUFR file to the operational GTS
+routing node.
+.IP
+.B Hint:
+should GTS routing headers be required but with no cut-off
+applied, use, for instance:
+.IP
+ >
+.B ropp2bufr -gi -t -1:00
+.PP
+.B -u
+\- suppress re-ordering
+.IP
+Suppresses the default re-ordering of profiles into ascending height
+order. Note that interpolation onto a set of fixed heights will
+still output profiles in the order of the fixed levels in the thinning
+control file, and not the order of the original input data.
+.PP
+.B -v
+\- version
+.IP
+Requests the
+.I bufr2ropp
+program version ID to be written to stdout.
+./"
+.SH Examples
+.B 1.
+Encode a MetOp/GRAS profile processed to Level 2 by the ROM SAF:
+.PP
+>
+.B ropp2bufr atm20101209_140409_M02_1270399559_N0018_XXXX.nc
+
+ --------------------------------------------------------
+                      ROPP BUFR Encoder
+                     16:56UT 18-Jan-2012
+ --------------------------------------------------------
+
+ INFO (from ropp2bufr):  Reading  ROPP data from atm20101209_140409_M02_1270399559_N0018_XXXX.nc
+ INFO (from ropp2bufr):  Encoding profile    1 : OC_20101209140409_META_G027_DMI_
+ INFO (from ropp2bufr):  Total of  17964 bytes written to oc_20101209140409_meta_g027_dmi_.bufr
+ INFO (from ropp2bufr):  Generated 1 BUFR message to oc_20101209140409_meta_g027_dmi_.bufr
+
+The date and time after the banner is the program run time.
+.PP
+Had the
+.B -d
+diagnostics switch been used, we would have seen the default thinning by sub-sampling
+kick in.
+.PP
+.B 2.
+Limit the encoded profiles to no more than 200 samples:
+.PP
+ >
+.B ropp2bufr ropp_file.nc -p 200
+.PP
+will cause Level 1b, Level 2a and Level 2b profiles to be thinned
+if the input profiles contain more than 200 samples. The output will
+contain no more (and probably fewer) than 200 levels.
+.PP
+.B 3.
+Encode operation with Adaptive Savitzky-Golay pre-smoothing and logarithmic
+interpolation to 247 fixed impact heights (the
+.I recommended
+ASGLOG method),
+defined in file
+.I ropp_thin_asglog-247.dat
+(e.g. as provided in ropp_io/data):
+.PP
+ > export ROPP_THIN=<path>/ropp_thin_asglog-247.dat
+ >
+.B ropp2bufr ropp.nc -p $ROPP_THIN
+.PP
+.B 4.
+Generate WMO bulletins for GTS/RMDCN via TCP/IP to a temporary, but unique
+output file and with rolling bulletin sequence numbers from several input files
+ropp_gras_1.nc, ropp_gras_2.nc, etc:
+.PP
+ > bufrfile=`date -u """+ro_%H%M%S.bufr"""`
+ >
+.B ropp2bufr ropp_gras_*.nc -gi -o $bufrfile -s bulseq.dat
+ > send2gts $bufrfile
+.PP
+.B 5.
+Use of non-default GTS cut-off time:
+.PP
+ >
+.B ropp2bufr -t12:00 ropp_file.dat
+.PP
+will encode an occultation up to 12 hours old at the time of running the
+encoder; older data will be rejected and (if all profiles are rejected) no BUFR
+file will be produced.
+.PP
+.B 6.
+Encode only ionospheric-corrected bending angle and refractivity
+profiles:
+.PP
+ >
+.B ropp2bufr ropp_file.nc -l -m
+.PP
+will not encode L1+L2 bending angles or retrieved met. profiles.
+This might be done to maximise the number of refractivity levels
+encoded if the total length of the BUFR message is an issue and
+the Level 1b and Level 2b profiles can be skipped.
+This may be the case when using refractivity profiles in a 3- or
+4D-Var assimilation system, for instance.
+./"
+.SH ERRORS
+Diagnostics relating to errors in I/O are output to stdout. Additional
+diagnostics can be obtained with the
+.B -d
+option.
+./"
+.SH REFERENCES
+.B 1.
+ROPP User Guide - Part I.
+.br
+SAF/ROM/METO/UG/ROPP/002
+.PP
+.B 2.
+WMO FM-94 (BUFR) specification for ROM SAF processed Radio Occultation data.
+.br
+SAF/ROM/METO/FMT/BUFR/001
+.PP
+.B 3.
+ROPP thinner algorthm
+.br
+SAF/GRAS/METO/REP/GSR/008
+./"
+.SH SEE ALSO
+.BR bufr2ropp (1),
+.BR ropp2ropp (1),
+.BR decbufr (1)
+./"
+.SH AUTHORS
+ROPP Development Team, Met Office, <romsaf@metoffice.gov.uk>

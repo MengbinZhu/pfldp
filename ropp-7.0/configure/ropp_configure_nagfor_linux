@@ -1,0 +1,28 @@
+#!/bin/sh
+# $Id: ropp_configure_nagfor_linux 3752 2013-07-09 18:55:03Z frdo $
+#
+# ROPP shell script for a local configure.
+# USERS SHOULD MODIFY THIS SCRIPT AS REQUIRED FOR LOCAL INSTALL
+#
+# Compiler: nagfor / Linux
+#
+PREFIX=${1-$ROPP_ROOT/nagfor}
+echo
+echo "Platform:"
+uname -a
+echo
+echo "Fortran compiler:"
+nagfor -V
+echo
+echo "C compiler:"
+gcc --version
+echo
+echo "Installation target:"
+echo "$PREFIX"
+echo
+#
+CC=gcc \
+F77=nagfor   FFLAGS="-O2 -I$PREFIX/include" \
+FC=nagfor   FCFLAGS="-O2 -I$PREFIX/include" \
+            LDFLAGS="-L$PREFIX/lib -L$PREFIX/lib64" \
+  ./configure --prefix=$PREFIX

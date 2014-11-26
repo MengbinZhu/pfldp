@@ -1,0 +1,251 @@
+
+Testing basic 1D-Var functionality...
+
+Running ropp_1dvar executable...
+
+---------------------------------------------------------------------
+ ROPP Refractivity 1DVar - v3.0
+---------------------------------------------------------------------
+
+INFO (from ropp_1dvar_refrac):  Reading observation data for profile 1 from the file
+       ../data/IT-1DVAR-01_y.nc.
+
+INFO (from ropp_1dvar_refrac):  Reading background data for profile 1 from the file
+       ../data/IT-1DVAR-01_b.nc.
+
+INFO (from ropp_qc_bgqc):  Background quality control lets all refractivity values pass.
+
+INFO (from ropp_1dvar_solve):  Using background error covariance matrix for preconditioning.
+
+INFO (from ropp_1dvar_cost):  Using absolute decrease of cost function and relative change 
+ of state vector as additional convergence criterium.
+
+      n_iter =    1   J = .23040E-20   max(relative change in state) =  -
+      n_iter =    2   J = .19055E-20   max(relative change in state) = .11653E-11
+      n_iter =    3   J = .14669E-20   max(relative change in state) = .26432E-11
+   
+INFO (from ropp_1dvar_cost):  Convergence assumed to be achieved as the state vector did not change by more
+    than 0.1000 relative to the assumed background errors for the last 2 iterations.
+
+INFO (from ropp_1dvar_solve):  Minimization of cost function successfully finished (according to additional
+    convergence criteria). Number of required iterations: 3.
+
+INFO (from ropp_1dvar_refrac):  Writing 1DVar retrieval for profile 1 to the file
+       ../data/IT-1DVAR-01.1.nc.
+
+INFO (from ropp_1dvar_refrac):  Reading observation data for profile 2 from the file
+       ../data/IT-1DVAR-01_y.nc.
+
+INFO (from ropp_1dvar_refrac):  Reading background data for profile 2 from the file
+       ../data/IT-1DVAR-01_b.nc.
+
+INFO (from ropp_qc_bgqc):  Background quality control lets all refractivity values pass.
+
+INFO (from ropp_1dvar_solve):  Using background error covariance matrix for preconditioning.
+
+INFO (from ropp_1dvar_cost):  Using absolute decrease of cost function and relative change 
+ of state vector as additional convergence criterium.
+
+      n_iter =    1   J = .24217E-20   max(relative change in state) =  -
+      n_iter =    2   J = .19499E-20   max(relative change in state) = .12079E-11
+      n_iter =    3   J = .12676E-20   max(relative change in state) = .35243E-11
+   
+INFO (from ropp_1dvar_cost):  Convergence assumed to be achieved as the state vector did not change by more
+    than 0.1000 relative to the assumed background errors for the last 2 iterations.
+
+INFO (from ropp_1dvar_solve):  Minimization of cost function successfully finished (according to additional
+    convergence criteria). Number of required iterations: 3.
+
+INFO (from ropp_1dvar_refrac):  Appending 1DVar retrieval for profile 2 to the file
+       ../data/IT-1DVAR-01.1.nc.
+
+INFO (from ropp_1dvar_refrac):  Reading observation data for profile 3 from the file
+       ../data/IT-1DVAR-01_y.nc.
+
+INFO (from ropp_1dvar_refrac):  Reading background data for profile 3 from the file
+       ../data/IT-1DVAR-01_b.nc.
+
+INFO (from ropp_qc_bgqc):  Background quality control lets all refractivity values pass.
+
+INFO (from ropp_1dvar_solve):  Using background error covariance matrix for preconditioning.
+
+INFO (from ropp_1dvar_cost):  Using absolute decrease of cost function and relative change 
+ of state vector as additional convergence criterium.
+
+      n_iter =    1   J = .22873E-20   max(relative change in state) =  -
+      n_iter =    2   J = .18972E-20   max(relative change in state) = .12221E-11
+      n_iter =    3   J = .13382E-20   max(relative change in state) = .30269E-11
+   
+INFO (from ropp_1dvar_cost):  Convergence assumed to be achieved as the state vector did not change by more
+    than 0.1000 relative to the assumed background errors for the last 2 iterations.
+
+INFO (from ropp_1dvar_solve):  Minimization of cost function successfully finished (according to additional
+    convergence criteria). Number of required iterations: 3.
+
+INFO (from ropp_1dvar_refrac):  Appending 1DVar retrieval for profile 3 to the file
+       ../data/IT-1DVAR-01.1.nc.
+
+INFO (from ropp_1dvar_refrac):  Reading observation data for profile 4 from the file
+       ../data/IT-1DVAR-01_y.nc.
+
+INFO (from ropp_1dvar_refrac):  Reading background data for profile 4 from the file
+       ../data/IT-1DVAR-01_b.nc.
+
+INFO (from ropp_qc_bgqc):  Background quality control lets all refractivity values pass.
+
+INFO (from ropp_1dvar_solve):  Using background error covariance matrix for preconditioning.
+
+INFO (from ropp_1dvar_cost):  Using absolute decrease of cost function and relative change 
+ of state vector as additional convergence criterium.
+
+      n_iter =    1   J = .23900E-20   max(relative change in state) =  -
+      n_iter =    2   J = .20260E-20   max(relative change in state) = .13358E-11
+      n_iter =    3   J = .13676E-20   max(relative change in state) = .33822E-11
+   
+INFO (from ropp_1dvar_cost):  Convergence assumed to be achieved as the state vector did not change by more
+    than 0.1000 relative to the assumed background errors for the last 2 iterations.
+
+INFO (from ropp_1dvar_solve):  Minimization of cost function successfully finished (according to additional
+    convergence criteria). Number of required iterations: 3.
+
+INFO (from ropp_1dvar_refrac):  Appending 1DVar retrieval for profile 4 to the file
+       ../data/IT-1DVAR-01.1.nc.
+
+INFO (from ropp_1dvar_refrac):  Reading observation data for profile 5 from the file
+       ../data/IT-1DVAR-01_y.nc.
+
+INFO (from ropp_1dvar_refrac):  Reading background data for profile 5 from the file
+       ../data/IT-1DVAR-01_b.nc.
+
+INFO (from ropp_qc_bgqc):  Background quality control lets all refractivity values pass.
+
+INFO (from ropp_1dvar_solve):  Using background error covariance matrix for preconditioning.
+
+INFO (from ropp_1dvar_cost):  Using absolute decrease of cost function and relative change 
+ of state vector as additional convergence criterium.
+
+      n_iter =    1   J = .46205E-20   max(relative change in state) =  -
+      n_iter =    2   J = .38649E-20   max(relative change in state) = .20037E-11
+      n_iter =    3   J = .26624E-20   max(relative change in state) = .37375E-11
+   
+INFO (from ropp_1dvar_cost):  Convergence assumed to be achieved as the state vector did not change by more
+    than 0.1000 relative to the assumed background errors for the last 2 iterations.
+
+INFO (from ropp_1dvar_solve):  Minimization of cost function successfully finished (according to additional
+    convergence criteria). Number of required iterations: 3.
+
+INFO (from ropp_1dvar_refrac):  Appending 1DVar retrieval for profile 5 to the file
+       ../data/IT-1DVAR-01.1.nc.
+
+INFO (from ropp_1dvar_refrac):  Reading observation data for profile 6 from the file
+       ../data/IT-1DVAR-01_y.nc.
+
+INFO (from ropp_1dvar_refrac):  Reading background data for profile 6 from the file
+       ../data/IT-1DVAR-01_b.nc.
+
+INFO (from ropp_qc_bgqc):  Background quality control lets all refractivity values pass.
+
+INFO (from ropp_1dvar_solve):  Using background error covariance matrix for preconditioning.
+
+INFO (from ropp_1dvar_cost):  Using absolute decrease of cost function and relative change 
+ of state vector as additional convergence criterium.
+
+      n_iter =    1   J = .23841E-20   max(relative change in state) =  -
+      n_iter =    2   J = .20252E-20   max(relative change in state) = .12506E-11
+      n_iter =    3   J = .12970E-20   max(relative change in state) = .38654E-11
+   
+INFO (from ropp_1dvar_cost):  Convergence assumed to be achieved as the state vector did not change by more
+    than 0.1000 relative to the assumed background errors for the last 2 iterations.
+
+INFO (from ropp_1dvar_solve):  Minimization of cost function successfully finished (according to additional
+    convergence criteria). Number of required iterations: 3.
+
+INFO (from ropp_1dvar_refrac):  Appending 1DVar retrieval for profile 6 to the file
+       ../data/IT-1DVAR-01.1.nc.
+
+INFO (from ropp_1dvar_refrac):  Reading observation data for profile 7 from the file
+       ../data/IT-1DVAR-01_y.nc.
+
+INFO (from ropp_1dvar_refrac):  Reading background data for profile 7 from the file
+       ../data/IT-1DVAR-01_b.nc.
+
+INFO (from ropp_qc_bgqc):  Background quality control lets all refractivity values pass.
+
+INFO (from ropp_1dvar_solve):  Using background error covariance matrix for preconditioning.
+
+INFO (from ropp_1dvar_cost):  Using absolute decrease of cost function and relative change 
+ of state vector as additional convergence criterium.
+
+      n_iter =    1   J = .23079E-20   max(relative change in state) =  -
+      n_iter =    2   J = .18896E-20   max(relative change in state) = .12790E-11
+      n_iter =    3   J = .11682E-20   max(relative change in state) = .38938E-11
+   
+INFO (from ropp_1dvar_cost):  Convergence assumed to be achieved as the state vector did not change by more
+    than 0.1000 relative to the assumed background errors for the last 2 iterations.
+
+INFO (from ropp_1dvar_solve):  Minimization of cost function successfully finished (according to additional
+    convergence criteria). Number of required iterations: 3.
+
+INFO (from ropp_1dvar_refrac):  Appending 1DVar retrieval for profile 7 to the file
+       ../data/IT-1DVAR-01.1.nc.
+
+INFO (from ropp_1dvar_refrac):  Reading observation data for profile 8 from the file
+       ../data/IT-1DVAR-01_y.nc.
+
+INFO (from ropp_1dvar_refrac):  Reading background data for profile 8 from the file
+       ../data/IT-1DVAR-01_b.nc.
+
+INFO (from ropp_qc_bgqc):  Background quality control lets all refractivity values pass.
+
+INFO (from ropp_1dvar_solve):  Using background error covariance matrix for preconditioning.
+
+INFO (from ropp_1dvar_cost):  Using absolute decrease of cost function and relative change 
+ of state vector as additional convergence criterium.
+
+      n_iter =    1   J = .24000E-20   max(relative change in state) =  -
+      n_iter =    2   J = .20004E-20   max(relative change in state) = .11653E-11
+      n_iter =    3   J = .12158E-20   max(relative change in state) = .37517E-11
+   
+INFO (from ropp_1dvar_cost):  Convergence assumed to be achieved as the state vector did not change by more
+    than 0.1000 relative to the assumed background errors for the last 2 iterations.
+
+INFO (from ropp_1dvar_solve):  Minimization of cost function successfully finished (according to additional
+    convergence criteria). Number of required iterations: 3.
+
+INFO (from ropp_1dvar_refrac):  Appending 1DVar retrieval for profile 8 to the file
+       ../data/IT-1DVAR-01.1.nc.
+
+ 
+Finished 1D-var
+ 
+Output file ../data/IT-1DVAR-01.1.nc was created
+ 
+Running IDL
+IDL Version 7.0 (linux x86 m32). (c) 2007, ITT Visual Information Solutions
+Trial version expires on 31-may-2012.
+Licensed for use by: Met Office
+
+% Compiled module: IT_1DVAR_01.
+% Compiled module: NCDF_OPENFIX.
+% Loaded DLM: NCDF.
+% Compiled module: NCDF_GETVAR.
+   Processing scenario: FASCOD_TRO
+% Compiled module: INTERPOL.
+   Processing scenario: FASCOD_MLS
+   Processing scenario: FASCOD_MLW
+   Processing scenario: FASCOD_SAS
+   Processing scenario: FASCOD_SAW
+   Processing scenario: DUCTING_00
+   Processing scenario: DUCTING_01
+   Processing scenario: DUCTING_02
+% Compiled module: OPEN_JPGFILE.
+% Compiled module: KLEGEND_D.
+% Compiled module: CLOSE_JPGFILE.
+% Loaded DLM: JPEG.
+   Found max difference [%] in temperature scenarios:    4.3528591e-12
+   Found max difference [%] in specific humidity scenarios:    5.3222065e-11
+   Found max difference [%] in pressure scenarios:   -4.3281528e-13
+Finished IDL
+ 
+plot (ropp_1dvar_comp_sce_ref.jpg) was produced
+

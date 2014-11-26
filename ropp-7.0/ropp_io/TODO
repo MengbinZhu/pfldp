@@ -1,0 +1,20 @@
+			TODO list for ropp_io
+			=====================
+
+After v1.0:
+-----------
+
+ - conversion applications for EUMETSAT, UCAR and GFZ data formats 
+   (one way only, e.g. pfs2ropp, gfz2ropp, ucar2ropp)
+ - add support for 2d (occultation plane) and 3d (block around
+   occultation) background data
+ - add support (i.e., provide structures and write / read routines)
+   for other data types (covariance / correlation matrices) (?)
+ - add support (i.e., provide structures and write / read routines)
+   for other data types (2d / 3d / 4d atmospheric fields) (?)
+ - extend support for data thinning
+ - add configurable netcdf variable names and missing value indicator,
+   similar to configurable units (?)
+ - make some netcdf variables optional (candidates: snr's, phases,
+   impact parameters, bending angles which are all missing; additional
+   humidity variables) (?)

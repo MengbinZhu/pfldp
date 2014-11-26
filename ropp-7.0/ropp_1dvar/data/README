@@ -1,0 +1,35 @@
+ROPP_1DVAR data files for release Version v7.0
+----------------------------------------------
+
+This directory contains a collection of data files used by ROPP_1DVAR.
+
+Notes on the data files in this directory:
+
+IT-1DVAR-01_b.nc   - 5x FASCOD + 3x ECMWF 'ducting' background profiles
+IT-1DVAR-01_c.nc   - Background error covariance matrix for ECMWF 60 levels
+IT-1DVAR-01_y.nc   - Observation (refractivity profiles) simulated from
+                     the above background profiles.
+                   
+IT-1DVAR-04_b.nc   - 5x Met Office background profiles
+IT-1DVAR-04_c.nc   - Background error covariance matrix for Met Office levels
+IT-1DVAR-04_y.nc   - Co-located COSMIC radio occultation observations
+IT-1DVAR-04_o.nc   - Refractivity observation error covariance matrix
+  
+IT-1DVAR-05_b.nc   - 10x ECMWF background profiles
+IT-1DVAR-05_c.nc   - Background error covariance matrix for ECMWF 91 levels
+IT-1DVAR-05_y.nc   - Co-located GRAS radio occultation observations
+IT-1DVAR-05_o.nc   - Refractivity observation error covariance matrix
+
+The IT-1DVAR-01 files are input to the test_1dvar script in the
+ropp_1dvar/tests directory (ie invoked by make test). 
+See ropp_1dvar/tests/test_1dvar.sh
+
+The IT-1DVAR-04 files may be used for testing the use of observation error 
+correlations. See ropp_1dvar/tests/test_1dvar_MO.sh
+
+The IT-1DVAR-05 files contain pre-operational GRAS data, available from the 
+ROM SAF archive http://www.romsaf.org/. 
+See ropp_1dvar/tests/test_1dvar_GRAS.sh
+
+ROPP Development Team
+31 July 2013

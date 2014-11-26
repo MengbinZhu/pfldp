@@ -1,0 +1,17 @@
+# $Id: ecbufr_configure_xlf95_aix 3740 2013-07-08 20:43:35Z frdo $
+#
+#   ECMWF BUFR configuration file
+#
+# Compiler: xlf(95) / IBM AIX
+#
+AR      = ar
+ARFLAGS = rv
+RANLIB  = /usr/bin/ranlib
+#
+CC      = xlc
+CFLAGS  = -O2 -w -q64 -DINTEGER_IS_INT
+FASTCFLAGS = $(CFLAGS)
+#
+FC      = xlf
+FFLAGS  = -O2 -w -q64 -DINTEGER_IS_INT
+

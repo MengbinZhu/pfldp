@@ -1,0 +1,30 @@
+#!/bin/sh
+# $Id: hdf5_configure_ifort13_linux 3007 2011-09-05 15:45:37Z frdo $
+#
+# hdf5 (v1.8.x) shell script for a local configure
+# USERS SHOULD MODIFY THIS SCRIPT AS REQUIRED FOR LOCAL INSTALL
+#
+# Compiler: ifort13 / Linux
+#
+PREFIX=${1-$ROPP_ROOT/ifort13}
+echo
+echo "Platform:"
+uname -a
+echo
+echo "Fortran compiler:"
+ifort13 --version
+echo
+echo "C compiler:"
+gcc --version
+echo
+echo "Installation target:"
+echo "$PREFIX"
+echo
+#
+CXX="" \
+CC=gcc       CFLAGS="-O2 -w -I$PREFIX/include"          \
+FC=ifort13  FCFLAGS="-O2 -w -fp-port -I$PREFIX/include" \
+F77=ifort13  FFLAGS="-O2 -w -fp-port -I$PREFIX/include" \
+              FLIBS="" LDFLAGS="-L$PREFIX/lib -L$PREFIX/lib64" \
+  ./configure --prefix=$PREFIX   --enable-fortran \
+              --disable-shared   --disable-cxx

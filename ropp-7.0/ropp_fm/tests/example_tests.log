@@ -1,0 +1,23 @@
+
+Testing ropp_fm routine with reference dataset...
+
+ Checking FASCOD Scenario: FASCOD_TRO
+    Refractivity passed
+    Bending angle passed
+ Checking FASCOD Scenario: FASCOD_MLS
+    Refractivity passed
+    Bending angle passed
+ Checking FASCOD Scenario: FASCOD_MLW
+    Refractivity passed
+    Bending angle passed
+ Checking FASCOD Scenario: FASCOD_SAS
+    Refractivity passed
+    Bending angle passed
+ Checking FASCOD Scenario: FASCOD_SAW
+    Refractivity passed
+    Bending angle passed
+ 
+ 
+ *** ropp_fm: Success ***
+ 
+

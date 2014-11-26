@@ -1,0 +1,28 @@
+#!/bin/sh
+# $Id: ropp_configure_gfortran_cygwin 3752 2013-07-09 18:55:03Z frdo $
+#
+# ROPP shell script for a local configure. 
+# USERS SHOULD MODIFY THIS SCRIPT AS REQUIRED FOR LOCAL INSTALL
+#
+# Compiler: gfortran / Cygwin
+# 
+PREFIX=${1-$ROPP_ROOT/gfortran}
+echo
+echo "Platform:"
+uname -a
+echo
+echo "Fortran compiler:"
+gfortran --version
+echo
+echo "C compiler:"
+gcc --version
+echo
+echo "Installation target:"
+echo "$PREFIX"
+echo
+#
+CC=gcc \
+F77=gfortran FFLAGS="-O2 -I$PREFIX/include"  \
+FC=gfortran FCFLAGS="-O2 -I$PREFIX/include"  \
+            LDFLAGS="-L$PREFIX/lib"          \
+  ./configure --prefix=$PREFIX

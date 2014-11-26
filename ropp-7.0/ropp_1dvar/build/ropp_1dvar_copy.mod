@@ -1,0 +1,5654 @@
+GFORTRAN module version '10' created from ../common/ropp_1dvar_copy.f90
+MD5:4d3b794f0e09da0fbc4bb43394e1bcec -- If you edit this, you'll get what you deserve.
+
+(() () () () () () () () () () () () () () () () () () () () () () ()
+() () () ())
+
+()
+
+(('ropp_1dvar_diag2roprof' 'ropp_1dvar_copy' 2 3))
+
+()
+
+()
+
+()
+
+(4 'ropp_1dvar_copy' 'ropp_1dvar_copy' '' 1 ((MODULE UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) (UNKNOWN 0 0 0 0 UNKNOWN ()) 0 0 () ()
+0 () () () 0 0)
+5 'ropp_1dvar_diag2roprof' 'ropp_1dvar_copy' '' 1 ((PROCEDURE
+UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 SUBROUTINE GENERIC) (
+UNKNOWN 0 0 0 0 UNKNOWN ()) 0 0 () () 0 () () () 0 0)
+3 'ropp_1dvar_diag2roprof_bangle' 'ropp_1dvar_copy' '' 1 ((PROCEDURE
+UNKNOWN-INTENT MODULE-PROC BODY UNKNOWN 0 0 EXTERNAL SUBROUTINE) (
+UNKNOWN 0 0 0 0 UNKNOWN ()) 6 0 (7 8 9 10) () 0 () () () 0 0)
+2 'ropp_1dvar_diag2roprof_refrac' 'ropp_1dvar_copy' '' 1 ((PROCEDURE
+UNKNOWN-INTENT MODULE-PROC BODY UNKNOWN 0 0 EXTERNAL SUBROUTINE) (
+UNKNOWN 0 0 0 0 UNKNOWN ()) 11 0 (12 13 14 15) () 0 () () () 0 0)
+7 'obs' '' '' 6 ((VARIABLE IN UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DUMMY) (
+DERIVED 16 0 0 0 DERIVED ()) 0 0 () () 0 () () () 0 0)
+8 'diag' '' '' 6 ((VARIABLE IN UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DUMMY) (
+DERIVED 17 0 0 0 DERIVED ()) 0 0 () () 0 () () () 0 0)
+9 'ro_data' '' '' 6 ((VARIABLE INOUT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0
+DUMMY) (DERIVED 18 0 0 0 DERIVED ()) 0 0 () () 0 () () () 0 0)
+10 'config' '' '' 6 ((VARIABLE IN UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DUMMY)
+(DERIVED 19 0 0 0 DERIVED ()) 0 0 () () 0 () () () 0 0)
+12 'obs' '' '' 11 ((VARIABLE IN UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DUMMY)
+(DERIVED 20 0 0 0 DERIVED ()) 0 0 () () 0 () () () 0 0)
+13 'diag' '' '' 11 ((VARIABLE IN UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DUMMY)
+(DERIVED 21 0 0 0 DERIVED ()) 0 0 () () 0 () () () 0 0)
+14 'ro_data' '' '' 11 ((VARIABLE INOUT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0
+DUMMY) (DERIVED 22 0 0 0 DERIVED ()) 0 0 () () 0 () () () 0 0)
+15 'config' '' '' 11 ((VARIABLE IN UNKNOWN-PROC UNKNOWN UNKNOWN 0 0
+DUMMY) (DERIVED 23 0 0 0 DERIVED ()) 0 0 () () 0 () () () 0 0)
+16 'Obs1dbangle' 'ropp_fm_types' '' 6 ((DERIVED UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 POINTER_COMP) (UNKNOWN 0 0 0 0 UNKNOWN
+()) 0 0 () () 0 ((24 'bangle' (REAL 8 0 0 0 REAL ()) (1 0 DEFERRED () ())
+(UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION
+POINTER) UNKNOWN-ACCESS (NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0)) (25
+'impact' (REAL 8 0 0 0 REAL ()) (1 0 DEFERRED () ()) (UNKNOWN-FL
+UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION POINTER)
+UNKNOWN-ACCESS (NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0)) (26 'weights' (
+REAL 8 0 0 0 REAL ()) (1 0 DEFERRED () ()) (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION POINTER) UNKNOWN-ACCESS (
+NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0)) (27 'rtan' (REAL 8 0 0 0 REAL ())
+(1 0 DEFERRED () ()) (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
+UNKNOWN 0 0 DIMENSION POINTER) UNKNOWN-ACCESS (NULL (UNKNOWN 0 0 0 0
+UNKNOWN ()) 0)) (28 'a_path' (REAL 8 0 0 0 REAL ()) (2 0 DEFERRED () ()
+() ()) (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0
+DIMENSION POINTER) UNKNOWN-ACCESS (NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0))
+(29 'nobs' (INTEGER 4 0 0 0 INTEGER ()) () (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS ()) (30 'lon' (REAL 8 0
+0 0 REAL ()) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN
+0 0) UNKNOWN-ACCESS ()) (31 'lat' (REAL 8 0 0 0 REAL ()) () (UNKNOWN-FL
+UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS ()) (32
+'time' (REAL 8 0 0 0 REAL ()) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC
+UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS ()) (33 'g_sfc' (REAL 8 0 0 0 REAL ())
+() (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0)
+UNKNOWN-ACCESS ()) (34 'r_earth' (REAL 8 0 0 0 REAL ()) () (UNKNOWN-FL
+UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS ()) (35
+'r_curve' (REAL 8 0 0 0 REAL ()) () (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS ()) (36 'undulation' (
+REAL 8 0 0 0 REAL ()) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
+UNKNOWN 0 0) UNKNOWN-ACCESS ()) (37 'azimuth' (REAL 8 0 0 0 REAL ()) ()
+(UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0)
+UNKNOWN-ACCESS ()) (38 'cov' (DERIVED 39 0 0 0 DERIVED ()) () (
+UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0)
+UNKNOWN-ACCESS (STRUCTURE (DERIVED 39 0 0 0 DERIVED ()) 0 (((NULL (
+UNKNOWN 0 0 0 0 UNKNOWN ()) 0) ()) ((CONSTANT (LOGICAL 4 0 0 0 LOGICAL ())
+0 0) ()) ((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 1 'N') ()) ((
+NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0) ()) ((NULL (UNKNOWN 0 0 0 0 UNKNOWN
+()) 0) ()) ((NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0) ())) ())) (40 'obs_ok'
+(LOGICAL 4 0 0 0 LOGICAL ()) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC
+UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS ()) (41 'cov_ok' (LOGICAL 4 0 0 0
+LOGICAL ()) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0
+0) UNKNOWN-ACCESS ())) PUBLIC (() () () ()) () 0 0 92121384)
+17 'Vardiag' 'ropp_1dvar_types' '' 6 ((DERIVED UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 POINTER_COMP) (UNKNOWN 0 0 0 0 UNKNOWN
+()) 0 0 () () 0 ((42 'n_data' (INTEGER 4 0 0 0 INTEGER ()) () (
+UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0)
+UNKNOWN-ACCESS ()) (43 'n_bgqc_reject' (INTEGER 4 0 0 0 INTEGER ()) () (
+UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0)
+UNKNOWN-ACCESS ()) (44 'n_pge_reject' (INTEGER 4 0 0 0 INTEGER ()) () (
+UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0)
+UNKNOWN-ACCESS ()) (45 'bg_bangle' (DERIVED 16 0 0 0 DERIVED ()) () (
+UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0)
+UNKNOWN-ACCESS (STRUCTURE (DERIVED 16 0 0 0 DERIVED ()) 0 (((NULL (
+UNKNOWN 0 0 0 0 UNKNOWN ()) 0) ()) ((NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0)
+()) ((NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0) ()) ((NULL (UNKNOWN 0 0 0 0
+UNKNOWN ()) 0) ()) ((NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0) ()) (() ()) (
+() ()) (() ()) (() ()) (() ()) (() ()) (() ()) (() ()) (() ()) ((
+STRUCTURE (DERIVED 39 0 0 0 DERIVED ()) 0 (((NULL (UNKNOWN 0 0 0 0
+UNKNOWN ()) 0) ()) ((CONSTANT (LOGICAL 4 0 0 0 LOGICAL ()) 0 0) ()) ((
+CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 1 'N') ()) ((NULL (
+UNKNOWN 0 0 0 0 UNKNOWN ()) 0) ()) ((NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0)
+()) ((NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0) ())) ()) ()) (() ()) (() ()))
+())) (46 'bg_refrac' (DERIVED 47 0 0 0 DERIVED ()) () (UNKNOWN-FL
+UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (
+STRUCTURE (DERIVED 47 0 0 0 DERIVED ()) 0 (((NULL (UNKNOWN 0 0 0 0
+UNKNOWN ()) 0) ()) ((NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0) ()) ((NULL (
+UNKNOWN 0 0 0 0 UNKNOWN ()) 0) ()) (() ()) (() ()) (() ()) ((STRUCTURE (
+DERIVED 39 0 0 0 DERIVED ()) 0 (((NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0) ())
+((CONSTANT (LOGICAL 4 0 0 0 LOGICAL ()) 0 0) ()) ((CONSTANT (CHARACTER 1
+0 0 0 CHARACTER (())) 0 1 'N') ()) ((NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0)
+()) ((NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0) ()) ((NULL (UNKNOWN 0 0 0 0
+UNKNOWN ()) 0) ())) ()) ()) (() ()) (() ())) ())) (48 'omb' (REAL 8 0 0
+0 REAL ()) (1 0 DEFERRED () ()) (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC
+UNKNOWN UNKNOWN 0 0 DIMENSION POINTER) UNKNOWN-ACCESS (NULL (UNKNOWN 0 0
+0 0 UNKNOWN ()) 0)) (49 'omb_sigma' (REAL 8 0 0 0 REAL ()) (1 0 DEFERRED
+() ()) (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0
+DIMENSION POINTER) UNKNOWN-ACCESS (NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0))
+(50 'pge_gamma' (REAL 8 0 0 0 REAL ()) () (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS ()) (51 'pge' (REAL 8 0
+0 0 REAL ()) (1 0 DEFERRED () ()) (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION POINTER) UNKNOWN-ACCESS (
+NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0)) (52 'pge_weights' (REAL 8 0 0 0
+REAL ()) (1 0 DEFERRED () ()) (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC
+UNKNOWN UNKNOWN 0 0 DIMENSION POINTER) UNKNOWN-ACCESS (NULL (UNKNOWN 0 0
+0 0 UNKNOWN ()) 0)) (53 'ok' (LOGICAL 4 0 0 0 LOGICAL ()) () (
+UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0)
+UNKNOWN-ACCESS ()) (54 'j' (REAL 8 0 0 0 REAL ()) () (UNKNOWN-FL
+UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS ()) (55
+'j_scaled' (REAL 8 0 0 0 REAL ()) () (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS ()) (56 'j_init' (REAL
+8 0 0 0 REAL ()) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
+UNKNOWN 0 0) UNKNOWN-ACCESS ()) (57 'j_bgr' (REAL 8 0 0 0 REAL ()) (1 0
+DEFERRED () ()) (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN
+0 0 DIMENSION POINTER) UNKNOWN-ACCESS (NULL (UNKNOWN 0 0 0 0 UNKNOWN ())
+0)) (58 'j_obs' (REAL 8 0 0 0 REAL ()) (1 0 DEFERRED () ()) (UNKNOWN-FL
+UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION POINTER)
+UNKNOWN-ACCESS (NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0)) (59 'b_sigma' (
+REAL 8 0 0 0 REAL ()) (1 0 DEFERRED () ()) (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION POINTER) UNKNOWN-ACCESS (
+NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0)) (60 'n_iter' (INTEGER 4 0 0 0
+INTEGER ()) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0
+0) UNKNOWN-ACCESS ()) (61 'n_simul' (INTEGER 4 0 0 0 INTEGER ()) () (
+UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0)
+UNKNOWN-ACCESS ()) (62 'min_mode' (INTEGER 4 0 0 0 INTEGER ()) () (
+UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0)
+UNKNOWN-ACCESS ()) (63 'res_bangle' (DERIVED 16 0 0 0 DERIVED ()) () (
+UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0)
+UNKNOWN-ACCESS (STRUCTURE (DERIVED 16 0 0 0 DERIVED ()) 0 (((NULL (
+UNKNOWN 0 0 0 0 UNKNOWN ()) 0) ()) ((NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0)
+()) ((NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0) ()) ((NULL (UNKNOWN 0 0 0 0
+UNKNOWN ()) 0) ()) ((NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0) ()) (() ()) (
+() ()) (() ()) (() ()) (() ()) (() ()) (() ()) (() ()) (() ()) ((
+STRUCTURE (DERIVED 39 0 0 0 DERIVED ()) 0 (((NULL (UNKNOWN 0 0 0 0
+UNKNOWN ()) 0) ()) ((CONSTANT (LOGICAL 4 0 0 0 LOGICAL ()) 0 0) ()) ((
+CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 1 'N') ()) ((NULL (
+UNKNOWN 0 0 0 0 UNKNOWN ()) 0) ()) ((NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0)
+()) ((NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0) ())) ()) ()) (() ()) (() ()))
+())) (64 'res_refrac' (DERIVED 47 0 0 0 DERIVED ()) () (UNKNOWN-FL
+UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (
+STRUCTURE (DERIVED 47 0 0 0 DERIVED ()) 0 (((NULL (UNKNOWN 0 0 0 0
+UNKNOWN ()) 0) ()) ((NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0) ()) ((NULL (
+UNKNOWN 0 0 0 0 UNKNOWN ()) 0) ()) (() ()) (() ()) (() ()) ((STRUCTURE (
+DERIVED 39 0 0 0 DERIVED ()) 0 (((NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0) ())
+((CONSTANT (LOGICAL 4 0 0 0 LOGICAL ()) 0 0) ()) ((CONSTANT (CHARACTER 1
+0 0 0 CHARACTER (())) 0 1 'N') ()) ((NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0)
+()) ((NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0) ()) ((NULL (UNKNOWN 0 0 0 0
+UNKNOWN ()) 0) ())) ()) ()) (() ()) (() ())) ())) (65 'oma' (REAL 8 0 0
+0 REAL ()) (1 0 DEFERRED () ()) (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC
+UNKNOWN UNKNOWN 0 0 DIMENSION POINTER) UNKNOWN-ACCESS (NULL (UNKNOWN 0 0
+0 0 UNKNOWN ()) 0)) (66 'oma_sigma' (REAL 8 0 0 0 REAL ()) (1 0 DEFERRED
+() ()) (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0
+DIMENSION POINTER) UNKNOWN-ACCESS (NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0)))
+PUBLIC (() () () ()) () 0 0 13524127)
+18 'Roprof' 'ropp_io_types' '' 6 ((DERIVED UNKNOWN-INTENT UNKNOWN-PROC
+UNKNOWN UNKNOWN 0 0 POINTER_COMP) (UNKNOWN 0 0 0 0 UNKNOWN ()) 0 0 () ()
+0 ((67 'fmtversion' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0
+0 0 INTEGER ()) 0 '21'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC
+UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0
+CHARACTER (())) 0 21 'UNKNOWN              ')) (68 'occ_id' (CHARACTER 1
+0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '40'))) () (
+UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0)
+UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 40
+'UNKNOWN                                 ')) (69 'leo_id' (CHARACTER 1 0
+0 0 CHARACTER ((CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '4'))) () (
+UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0)
+UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 4 'UNKN'))
+(70 'gns_id' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0 0 0
+INTEGER ()) 0 '4'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
+UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0 CHARACTER (()))
+0 4 'U999')) (71 'stn_id' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (
+INTEGER 4 0 0 0 INTEGER ()) 0 '4'))) () (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1
+0 0 0 CHARACTER (())) 0 4 'UNKN')) (72 'processing_centre' (CHARACTER 1
+0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '40'))) () (
+UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0)
+UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 40
+'UNKNOWN                                 ')) (73 'pod_method' (
+CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '40')))
+() (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0)
+UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 40
+'UNKNOWN                                 ')) (74 'phase_method' (
+CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '40')))
+() (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0)
+UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 40
+'UNKNOWN                                 ')) (75 'bangle_method' (
+CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '40')))
+() (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0)
+UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 40
+'UNKNOWN                                 ')) (76 'refrac_method' (
+CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '40')))
+() (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0)
+UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 40
+'UNKNOWN                                 ')) (77 'meteo_method' (
+CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '40')))
+() (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0)
+UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 40
+'UNKNOWN                                 ')) (78 'thin_method' (
+CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '80')))
+() (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0)
+UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 80
+'UNKNOWN                                                                         '))
+(79 'software_version' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER
+4 0 0 0 INTEGER ()) 0 '40'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC
+UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0
+CHARACTER (())) 0 40 'UNKNOWN                                 ')) (80
+'dtocc' (DERIVED 81 0 0 0 DERIVED ()) () (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (STRUCTURE (DERIVED 81
+0 0 0 DERIVED ()) 0 (((CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '9999') ())
+((CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '99') ()) ((CONSTANT (INTEGER
+4 0 0 0 INTEGER ()) 0 '99') ()) ((CONSTANT (INTEGER 4 0 0 0 INTEGER ())
+0 '99') ()) ((CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '99') ()) ((
+CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '99') ()) ((CONSTANT (INTEGER 4
+0 0 0 INTEGER ()) 0 '9999') ()) ((STRUCTURE (DERIVED 82 0 0 0 DERIVED ())
+0 (((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'years                                                           ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'months                                                          ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'days                                                            ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'hours                                                           ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'minutes                                                         ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'seconds                                                         ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'milliseconds                                                    ') ()))
+()) ()) ((STRUCTURE (DERIVED 83 0 0 0 DERIVED ()) 0 (((ARRAY (INTEGER 4
+0 0 0 INTEGER ()) 1 (((CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '1995') ())
+((CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '2099') ())) ('2')) ()) ((
+ARRAY (INTEGER 4 0 0 0 INTEGER ()) 1 (((CONSTANT (INTEGER 4 0 0 0
+INTEGER ()) 0 '1') ()) ((CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '12') ()))
+('2')) ()) ((ARRAY (INTEGER 4 0 0 0 INTEGER ()) 1 (((CONSTANT (INTEGER 4
+0 0 0 INTEGER ()) 0 '1') ()) ((CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0
+'31') ())) ('2')) ()) ((ARRAY (INTEGER 4 0 0 0 INTEGER ()) 1 (((
+CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '0') ()) ((CONSTANT (INTEGER 4 0
+0 0 INTEGER ()) 0 '23') ())) ('2')) ()) ((ARRAY (INTEGER 4 0 0 0 INTEGER
+()) 1 (((CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '0') ()) ((CONSTANT (
+INTEGER 4 0 0 0 INTEGER ()) 0 '59') ())) ('2')) ()) ((ARRAY (INTEGER 4 0
+0 0 INTEGER ()) 1 (((CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '0') ()) (
+(CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '59') ())) ('2')) ()) ((ARRAY (
+INTEGER 4 0 0 0 INTEGER ()) 1 (((CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0
+'0') ()) ((CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '999') ())) ('2')) ()))
+()) ())) ())) (84 'dtpro' (DERIVED 81 0 0 0 DERIVED ()) () (UNKNOWN-FL
+UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (
+STRUCTURE (DERIVED 81 0 0 0 DERIVED ()) 0 (((CONSTANT (INTEGER 4 0 0 0
+INTEGER ()) 0 '9999') ()) ((CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '99')
+()) ((CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '99') ()) ((CONSTANT (
+INTEGER 4 0 0 0 INTEGER ()) 0 '99') ()) ((CONSTANT (INTEGER 4 0 0 0
+INTEGER ()) 0 '99') ()) ((CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '99')
+()) ((CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '9999') ()) ((STRUCTURE (
+DERIVED 82 0 0 0 DERIVED ()) 0 (((CONSTANT (CHARACTER 1 0 0 0 CHARACTER
+(())) 0 64
+'years                                                           ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'months                                                          ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'days                                                            ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'hours                                                           ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'minutes                                                         ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'seconds                                                         ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'milliseconds                                                    ') ()))
+()) ()) ((STRUCTURE (DERIVED 83 0 0 0 DERIVED ()) 0 (((ARRAY (INTEGER 4
+0 0 0 INTEGER ()) 1 (((CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '1995') ())
+((CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '2099') ())) ('2')) ()) ((
+ARRAY (INTEGER 4 0 0 0 INTEGER ()) 1 (((CONSTANT (INTEGER 4 0 0 0
+INTEGER ()) 0 '1') ()) ((CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '12') ()))
+('2')) ()) ((ARRAY (INTEGER 4 0 0 0 INTEGER ()) 1 (((CONSTANT (INTEGER 4
+0 0 0 INTEGER ()) 0 '1') ()) ((CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0
+'31') ())) ('2')) ()) ((ARRAY (INTEGER 4 0 0 0 INTEGER ()) 1 (((
+CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '0') ()) ((CONSTANT (INTEGER 4 0
+0 0 INTEGER ()) 0 '23') ())) ('2')) ()) ((ARRAY (INTEGER 4 0 0 0 INTEGER
+()) 1 (((CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '0') ()) ((CONSTANT (
+INTEGER 4 0 0 0 INTEGER ()) 0 '59') ())) ('2')) ()) ((ARRAY (INTEGER 4 0
+0 0 INTEGER ()) 1 (((CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '0') ()) (
+(CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '59') ())) ('2')) ()) ((ARRAY (
+INTEGER 4 0 0 0 INTEGER ()) 1 (((CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0
+'0') ()) ((CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '999') ())) ('2')) ()))
+()) ())) ())) (85 'pcd' (INTEGER 4 0 0 0 INTEGER ()) () (UNKNOWN-FL
+UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (
+CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '65535')) (86 'overall_qual' (
+REAL 8 0 0 0 REAL ()) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
+UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'-0.5f5dd180000000@7')) (87 'georef' (DERIVED 88 0 0 0 DERIVED ()) () (
+UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0)
+UNKNOWN-ACCESS (STRUCTURE (DERIVED 88 0 0 0 DERIVED ()) 0 (((CONSTANT (
+REAL 8 0 0 0 REAL ()) 0 '-0.5f5dd180000000@7') ()) ((CONSTANT (REAL 8 0
+0 0 REAL ()) 0 '-0.5f5dd180000000@7') ()) ((CONSTANT (REAL 8 0 0 0 REAL
+()) 0 '-0.5f5dd180000000@7') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'-0.5f5dd180000000@7') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'-0.5f5dd180000000@7') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'-0.5f5dd180000000@7') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'-0.5f5dd180000000@7') ()) ((STRUCTURE (DERIVED 89 0 0 0 DERIVED ()) 0 (
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'seconds                                                         ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'degrees_north                                                   ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'degrees_east                                                    ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'metres                                                          ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'metres                                                          ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'degrees_T                                                       ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'metres                                                          ') ()))
+()) ()) ((STRUCTURE (DERIVED 90 0 0 0 DERIVED ()) 0 (((ARRAY (REAL 8 0 0
+0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.00000000000000@0')
+()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.efffbe76c8b438@2') ())) ('2'))
+()) ((ARRAY (REAL 8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ())
+0 '-0.5a000000000000@2') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.5a000000000000@2') ())) ('2')) ()) ((ARRAY (REAL 8 0 0 0 REAL ()) 1 (
+((CONSTANT (REAL 8 0 0 0 REAL ()) 0 '-0.b4000000000000@2') ()) ((
+CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.b4000000000000@2') ())) ('2')) ())
+((ARRAY (REAL 8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.5e9ac000000000@6') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.64b54000000000@6') ())) ('2')) ()) ((ARRAY (REAL 8 0 0 0 REAL ()) 1 (
+((CONSTANT (REAL 8 0 0 0 REAL ()) 0 '-0.c3500000000000@4') ()) ((
+CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.c3500000000000@4') ())) ('2')) ())
+((ARRAY (REAL 8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.00000000000000@0') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.16800000000000@3') ())) ('2')) ()) ((ARRAY (REAL 8 0 0 0 REAL ()) 1 (
+((CONSTANT (REAL 8 0 0 0 REAL ()) 0 '-0.96000000000000@2') ()) ((
+CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.96000000000000@2') ())) ('2')) ()))
+()) ()) ((STRUCTURE (DERIVED 91 0 0 0 DERIVED ()) 0 (((CONSTANT (
+CHARACTER 1 0 0 0 CHARACTER (())) 0 3 'ECF') ())) ()) ())) ())) (92 'bg'
+(DERIVED 93 0 0 0 DERIVED ()) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC
+UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (STRUCTURE (DERIVED 93 0 0 0 DERIVED
+()) 0 (((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 20
+'NONE                ') ()) ((CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0
+'9999') ()) ((CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '99') ()) ((
+CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '99') ()) ((CONSTANT (INTEGER 4
+0 0 0 INTEGER ()) 0 '99') ()) ((CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0
+'99') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.3e7e6680000000@3') ())
+((STRUCTURE (DERIVED 94 0 0 0 DERIVED ()) 0 (((CONSTANT (CHARACTER 1 0 0
+0 CHARACTER (())) 0 64
+'years                                                           ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'months                                                          ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'days                                                            ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'hours                                                           ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'minutes                                                         ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'hours                                                           ') ()))
+()) ()) ((STRUCTURE (DERIVED 95 0 0 0 DERIVED ()) 0 (((ARRAY (INTEGER 4
+0 0 0 INTEGER ()) 1 (((CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '1995') ())
+((CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '2099') ())) ('2')) ()) ((
+ARRAY (INTEGER 4 0 0 0 INTEGER ()) 1 (((CONSTANT (INTEGER 4 0 0 0
+INTEGER ()) 0 '1') ()) ((CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '12') ()))
+('2')) ()) ((ARRAY (INTEGER 4 0 0 0 INTEGER ()) 1 (((CONSTANT (INTEGER 4
+0 0 0 INTEGER ()) 0 '1') ()) ((CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0
+'31') ())) ('2')) ()) ((ARRAY (INTEGER 4 0 0 0 INTEGER ()) 1 (((
+CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '0') ()) ((CONSTANT (INTEGER 4 0
+0 0 INTEGER ()) 0 '23') ())) ('2')) ()) ((ARRAY (INTEGER 4 0 0 0 INTEGER
+()) 1 (((CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '0') ()) ((CONSTANT (
+INTEGER 4 0 0 0 INTEGER ()) 0 '59') ())) ('2')) ()) ((ARRAY (REAL 8 0 0
+0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.00000000000000@0')
+()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.18000000000000@2') ())) ('2'))
+())) ()) ())) ())) (96 'lev1a' (DERIVED 97 0 0 0 DERIVED ()) () (
+UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0)
+UNKNOWN-ACCESS (STRUCTURE (DERIVED 97 0 0 0 DERIVED ()) 0 (((CONSTANT (
+INTEGER 4 0 0 0 INTEGER ()) 0 '0') ()) ((CONSTANT (LOGICAL 4 0 0 0
+LOGICAL ()) 0 1) ()) ((NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0) ()) ((NULL (
+UNKNOWN 0 0 0 0 UNKNOWN ()) 0) ()) ((NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0)
+()) ((NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0) ()) ((NULL (UNKNOWN 0 0 0 0
+UNKNOWN ()) 0) ()) ((NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0) ()) ((NULL (
+UNKNOWN 0 0 0 0 UNKNOWN ()) 0) ()) ((NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0)
+()) ((NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0) ()) ((NULL (UNKNOWN 0 0 0 0
+UNKNOWN ()) 0) ()) ((NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0) ()) ((
+STRUCTURE (DERIVED 98 0 0 0 DERIVED ()) 0 (((CONSTANT (CHARACTER 1 0 0 0
+CHARACTER (())) 0 64
+'seconds                                                         ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'volt / volt                                                     ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'metres                                                          ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'metres                                                          ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'metres / seconds                                                ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'metres                                                          ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'metres / seconds                                                ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'percent                                                         ') ()))
+()) ()) ((STRUCTURE (DERIVED 99 0 0 0 DERIVED ()) 0 (((ARRAY (REAL 8 0 0
+0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0 '-0.10000000000000@1')
+()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.efffbe76c8b438@2') ())) ('2'))
+()) ((ARRAY (REAL 8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ())
+0 '0.00000000000000@0') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.c3500000000000@4') ())) ('2')) ()) ((ARRAY (REAL 8 0 0 0 REAL ()) 1 (
+((CONSTANT (REAL 8 0 0 0 REAL ()) 0 '-0.f4240000000000@5') ()) ((
+CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.f4240000000000@5') ())) ('2')) ())
+((ARRAY (REAL 8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'-0.29020c00000000@7') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.29020c00000000@7') ())) ('2')) ()) ((ARRAY (REAL 8 0 0 0 REAL ()) 1 (
+((CONSTANT (REAL 8 0 0 0 REAL ()) 0 '-0.27100000000000@4') ()) ((
+CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.27100000000000@4') ())) ('2')) ())
+((ARRAY (REAL 8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'-0.98968000000000@6') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.98968000000000@6') ())) ('2')) ()) ((ARRAY (REAL 8 0 0 0 REAL ()) 1 (
+((CONSTANT (REAL 8 0 0 0 REAL ()) 0 '-0.27100000000000@4') ()) ((
+CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.27100000000000@4') ())) ('2')) ())
+((ARRAY (REAL 8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.00000000000000@0') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.64000000000000@2') ())) ('2')) ())) ()) ()) ((STRUCTURE (DERIVED 100
+0 0 0 DERIVED ()) 0 (((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 3
+'ECF') ()) ((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 3 'ECI') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 3 'ECF') ()) ((CONSTANT
+(CHARACTER 1 0 0 0 CHARACTER (())) 0 3 'ECI') ())) ()) ())) ())) (101
+'lev1b' (DERIVED 102 0 0 0 DERIVED ()) () (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (STRUCTURE (DERIVED 102
+0 0 0 DERIVED ()) 0 (((CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '0') ())
+((CONSTANT (LOGICAL 4 0 0 0 LOGICAL ()) 0 1) ()) ((NULL (UNKNOWN 0 0 0 0
+UNKNOWN ()) 0) ()) ((NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0) ()) ((NULL (
+UNKNOWN 0 0 0 0 UNKNOWN ()) 0) ()) ((NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0)
+()) ((NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0) ()) ((NULL (UNKNOWN 0 0 0 0
+UNKNOWN ()) 0) ()) ((NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0) ()) ((NULL (
+UNKNOWN 0 0 0 0 UNKNOWN ()) 0) ()) ((NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0)
+()) ((NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0) ()) ((NULL (UNKNOWN 0 0 0 0
+UNKNOWN ()) 0) ()) ((NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0) ()) ((NULL (
+UNKNOWN 0 0 0 0 UNKNOWN ()) 0) ()) ((NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0)
+()) ((NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0) ()) ((NULL (UNKNOWN 0 0 0 0
+UNKNOWN ()) 0) ()) ((NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0) ()) ((NULL (
+UNKNOWN 0 0 0 0 UNKNOWN ()) 0) ()) ((NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0)
+()) ((STRUCTURE (DERIVED 103 0 0 0 DERIVED ()) 0 (((CONSTANT (CHARACTER
+1 0 0 0 CHARACTER (())) 0 64
+'degrees_north                                                   ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'degrees_east                                                    ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'degrees                                                         ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'metres                                                          ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'radians                                                         ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'radians                                                         ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'percent                                                         ') ()))
+()) ()) ((STRUCTURE (DERIVED 104 0 0 0 DERIVED ()) 0 (((ARRAY (REAL 8 0
+0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0 '-0.5a000000000000@2')
+()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.5a000000000000@2') ())) ('2'))
+()) ((ARRAY (REAL 8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ())
+0 '-0.b4000000000000@2') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.b4000000000000@2') ())) ('2')) ()) ((ARRAY (REAL 8 0 0 0 REAL ()) 1 (
+((CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.00000000000000@0') ()) ((
+CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.16800000000000@3') ())) ('2')) ())
+((ARRAY (REAL 8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.5e9ac000000000@6') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.64b54000000000@6') ())) ('2')) ()) ((ARRAY (REAL 8 0 0 0 REAL ()) 1 (
+((CONSTANT (REAL 8 0 0 0 REAL ()) 0 '-0.4189374bc6a7f0@-2') ()) ((
+CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.1999999999999a@0') ())) ('2')) ())
+((ARRAY (REAL 8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.00000000000000@0') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.28f5c28f5c28f6@-1') ())) ('2')) ()) ((ARRAY (REAL 8 0 0 0 REAL ()) 1
+(((CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.00000000000000@0') ()) ((
+CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.64000000000000@2') ())) ('2')) ()))
+()) ())) ())) (105 'lev2a' (DERIVED 106 0 0 0 DERIVED ()) () (
+UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0)
+UNKNOWN-ACCESS (STRUCTURE (DERIVED 106 0 0 0 DERIVED ()) 0 (((CONSTANT (
+INTEGER 4 0 0 0 INTEGER ()) 0 '0') ()) ((CONSTANT (LOGICAL 4 0 0 0
+LOGICAL ()) 0 1) ()) ((NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0) ()) ((NULL (
+UNKNOWN 0 0 0 0 UNKNOWN ()) 0) ()) ((NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0)
+()) ((NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0) ()) ((NULL (UNKNOWN 0 0 0 0
+UNKNOWN ()) 0) ()) ((NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0) ()) ((NULL (
+UNKNOWN 0 0 0 0 UNKNOWN ()) 0) ()) ((NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0)
+()) ((STRUCTURE (DERIVED 107 0 0 0 DERIVED ()) 0 (((CONSTANT (CHARACTER
+1 0 0 0 CHARACTER (())) 0 64
+'metres                                                          ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'geopotential metres                                             ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'N-units                                                         ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'N-units                                                         ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'percent                                                         ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'kelvin                                                          ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'kelvin                                                          ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'percent                                                         ') ()))
+()) ()) ((STRUCTURE (DERIVED 108 0 0 0 DERIVED ()) 0 (((ARRAY (REAL 8 0
+0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0 '-0.3e800000000000@3')
+()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.186a0000000000@5') ())) ('2'))
+()) ((ARRAY (REAL 8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ())
+0 '-0.3e800000000000@3') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.186a0000000000@5') ())) ('2')) ()) ((ARRAY (REAL 8 0 0 0 REAL ()) 1 (
+((CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.00000000000000@0') ()) ((
+CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.1f400000000000@3') ())) ('2')) ())
+((ARRAY (REAL 8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.00000000000000@0') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.32000000000000@2') ())) ('2')) ()) ((ARRAY (REAL 8 0 0 0 REAL ()) 1 (
+((CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.00000000000000@0') ()) ((
+CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.64000000000000@2') ())) ('2')) ())
+((ARRAY (REAL 8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.96000000000000@2') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.15e00000000000@3') ())) ('2')) ()) ((ARRAY (REAL 8 0 0 0 REAL ()) 1 (
+((CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.00000000000000@0') ()) ((
+CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.32000000000000@2') ())) ('2')) ())
+((ARRAY (REAL 8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.00000000000000@0') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.64000000000000@2') ())) ('2')) ())) ()) ())) ())) (109 'lev2b' (
+DERIVED 110 0 0 0 DERIVED ()) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC
+UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (STRUCTURE (DERIVED 110 0 0 0
+DERIVED ()) 0 (((CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '0') ()) ((
+CONSTANT (LOGICAL 4 0 0 0 LOGICAL ()) 0 1) ()) ((NULL (UNKNOWN 0 0 0 0
+UNKNOWN ()) 0) ()) ((NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0) ()) ((NULL (
+UNKNOWN 0 0 0 0 UNKNOWN ()) 0) ()) ((NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0)
+()) ((NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0) ()) ((NULL (UNKNOWN 0 0 0 0
+UNKNOWN ()) 0) ()) ((NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0) ()) ((NULL (
+UNKNOWN 0 0 0 0 UNKNOWN ()) 0) ()) ((NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0)
+()) ((STRUCTURE (DERIVED 111 0 0 0 DERIVED ()) 0 (((CONSTANT (CHARACTER
+1 0 0 0 CHARACTER (())) 0 64
+'geopotential metres                                             ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'geopotential metres                                             ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'hPa                                                             ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'hPa                                                             ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'kelvin                                                          ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'kelvin                                                          ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'gram / kilogram                                                 ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'gram / kilogram                                                 ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'percent                                                         ') ()))
+()) ()) ((STRUCTURE (DERIVED 112 0 0 0 DERIVED ()) 0 (((ARRAY (REAL 8 0
+0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0 '-0.3e800000000000@3')
+()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.186a0000000000@5') ())) ('2'))
+()) ((ARRAY (REAL 8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ())
+0 '0.00000000000000@0') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.1f400000000000@3') ())) ('2')) ()) ((ARRAY (REAL 8 0 0 0 REAL ()) 1 (
+((CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.68db8bac710cb4@-3') ()) ((
+CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.44c00000000000@3') ())) ('2')) ())
+((ARRAY (REAL 8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.00000000000000@0') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.50000000000000@1') ())) ('2')) ()) ((ARRAY (REAL 8 0 0 0 REAL ()) 1 (
+((CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.96000000000000@2') ()) ((
+CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.15e00000000000@3') ())) ('2')) ())
+((ARRAY (REAL 8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.00000000000000@0') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.50000000000000@1') ())) ('2')) ()) ((ARRAY (REAL 8 0 0 0 REAL ()) 1 (
+((CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.00000000000000@0') ()) ((
+CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.32000000000000@2') ())) ('2')) ())
+((ARRAY (REAL 8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.00000000000000@0') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.50000000000000@1') ())) ('2')) ()) ((ARRAY (REAL 8 0 0 0 REAL ()) 1 (
+((CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.00000000000000@0') ()) ((
+CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.64000000000000@2') ())) ('2')) ()))
+()) ())) ())) (113 'lev2c' (DERIVED 114 0 0 0 DERIVED ()) () (
+UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0)
+UNKNOWN-ACCESS (STRUCTURE (DERIVED 114 0 0 0 DERIVED ()) 0 (((CONSTANT (
+INTEGER 4 0 0 0 INTEGER ()) 0 '0') ()) ((CONSTANT (LOGICAL 4 0 0 0
+LOGICAL ()) 0 1) ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'-0.5f5dd180000000@7') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'-0.5f5dd180000000@7') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'-0.5f5dd180000000@7') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'-0.5f5dd180000000@7') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'-0.5f5dd180000000@7') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'-0.5f5dd180000000@7') ()) ((CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0
+'-999') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0 '-0.5f5dd180000000@7') ())
+((CONSTANT (REAL 8 0 0 0 REAL ()) 0 '-0.5f5dd180000000@7') ()) ((
+CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '-999') ()) ((CONSTANT (REAL 8 0
+0 0 REAL ()) 0 '-0.5f5dd180000000@7') ()) ((CONSTANT (REAL 8 0 0 0 REAL
+()) 0 '-0.5f5dd180000000@7') ()) ((CONSTANT (INTEGER 4 0 0 0 INTEGER ())
+0 '-999') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0 '-0.5f5dd180000000@7')
+()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0 '-0.5f5dd180000000@7') ()) ((
+CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '-999') ()) ((CONSTANT (REAL 8 0
+0 0 REAL ()) 0 '-0.5f5dd180000000@7') ()) ((CONSTANT (REAL 8 0 0 0 REAL
+()) 0 '-0.5f5dd180000000@7') ()) ((CONSTANT (INTEGER 4 0 0 0 INTEGER ())
+0 '-999') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0 '-0.5f5dd180000000@7')
+()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0 '-0.5f5dd180000000@7') ()) ((
+CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '-999') ()) ((CONSTANT (REAL 8 0
+0 0 REAL ()) 0 '-0.5f5dd180000000@7') ()) ((CONSTANT (REAL 8 0 0 0 REAL
+()) 0 '-0.5f5dd180000000@7') ()) ((CONSTANT (INTEGER 4 0 0 0 INTEGER ())
+0 '-999') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0 '-0.5f5dd180000000@7')
+()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0 '-0.5f5dd180000000@7') ()) ((
+CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '-999') ()) ((STRUCTURE (
+DERIVED 115 0 0 0 DERIVED ()) 0 (((CONSTANT (CHARACTER 1 0 0 0 CHARACTER
+(())) 0 64
+'degrees_north                                                   ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'degrees_east                                                    ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'radians                                                         ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'geopotential metres                                             ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'hPa                                                             ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'hPa                                                             ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'percent                                                         ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'metres                                                          ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'radians                                                         ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'                                                                ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'metres                                                          ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'N-units                                                         ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'                                                                ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'metres                                                          ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'kelvin                                                          ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'                                                                ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'metres                                                          ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'kelvin                                                          ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'                                                                ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'metres                                                          ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'kelvin                                                          ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'                                                                ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'geopotential metres                                             ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'kelvin                                                          ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'                                                                ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'geopotential metres                                             ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'kelvin                                                          ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'                                                                ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'metres                                                          ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'kelvin                                                          ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'                                                                ') ()))
+()) ()) ((STRUCTURE (DERIVED 116 0 0 0 DERIVED ()) 0 (((ARRAY (REAL 8 0
+0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0 '-0.5a000000000000@2')
+()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.5a000000000000@2') ())) ('2'))
+()) ((ARRAY (REAL 8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ())
+0 '-0.b4000000000000@2') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.b4000000000000@2') ())) ('2')) ()) ((ARRAY (REAL 8 0 0 0 REAL ()) 1 (
+((CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.00000000000000@0') ()) ((
+CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.3243f3e0370cdc@1') ())) ('2')) ())
+((ARRAY (REAL 8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'-0.3e800000000000@3') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.27100000000000@4') ())) ('2')) ()) ((ARRAY (REAL 8 0 0 0 REAL ()) 1 (
+((CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.fa000000000000@2') ()) ((
+CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.44c00000000000@3') ())) ('2')) ())
+((ARRAY (REAL 8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.00000000000000@0') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.50000000000000@1') ())) ('2')) ()) ((ARRAY (REAL 8 0 0 0 REAL ()) 1 (
+((CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.00000000000000@0') ()) ((
+CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.64000000000000@2') ())) ('2')) ())
+((ARRAY (REAL 8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.5e9ac000000000@6') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.64b54000000000@6') ())) ('2')) ()) ((ARRAY (REAL 8 0 0 0 REAL ()) 1 (
+((CONSTANT (REAL 8 0 0 0 REAL ()) 0 '-0.4189374bc6a7f0@-2') ()) ((
+CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.1999999999999a@0') ())) ('2')) ())
+((ARRAY (INTEGER 4 0 0 0 INTEGER ()) 1 (((CONSTANT (INTEGER 4 0 0 0
+INTEGER ()) 0 '0') ()) ((CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '255')
+())) ('2')) ()) ((ARRAY (REAL 8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0
+0 REAL ()) 0 '-0.3e800000000000@3') ()) ((CONSTANT (REAL 8 0 0 0 REAL ())
+0 '0.186a0000000000@5') ())) ('2')) ()) ((ARRAY (REAL 8 0 0 0 REAL ()) 1
+(((CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.00000000000000@0') ()) ((
+CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.1f400000000000@3') ())) ('2')) ())
+((ARRAY (INTEGER 4 0 0 0 INTEGER ()) 1 (((CONSTANT (INTEGER 4 0 0 0
+INTEGER ()) 0 '0') ()) ((CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '255')
+())) ('2')) ()) ((ARRAY (REAL 8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0
+0 REAL ()) 0 '-0.3e800000000000@3') ()) ((CONSTANT (REAL 8 0 0 0 REAL ())
+0 '0.186a0000000000@5') ())) ('2')) ()) ((ARRAY (REAL 8 0 0 0 REAL ()) 1
+(((CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.96000000000000@2') ()) ((
+CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.15e00000000000@3') ())) ('2')) ())
+((ARRAY (INTEGER 4 0 0 0 INTEGER ()) 1 (((CONSTANT (INTEGER 4 0 0 0
+INTEGER ()) 0 '0') ()) ((CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '255')
+())) ('2')) ()) ((ARRAY (REAL 8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0
+0 REAL ()) 0 '-0.3e800000000000@3') ()) ((CONSTANT (REAL 8 0 0 0 REAL ())
+0 '0.186a0000000000@5') ())) ('2')) ()) ((ARRAY (REAL 8 0 0 0 REAL ()) 1
+(((CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.96000000000000@2') ()) ((
+CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.15e00000000000@3') ())) ('2')) ())
+((ARRAY (INTEGER 4 0 0 0 INTEGER ()) 1 (((CONSTANT (INTEGER 4 0 0 0
+INTEGER ()) 0 '0') ()) ((CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '255')
+())) ('2')) ()) ((ARRAY (REAL 8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0
+0 REAL ()) 0 '-0.3e800000000000@3') ()) ((CONSTANT (REAL 8 0 0 0 REAL ())
+0 '0.186a0000000000@5') ())) ('2')) ()) ((ARRAY (REAL 8 0 0 0 REAL ()) 1
+(((CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.96000000000000@2') ()) ((
+CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.15e00000000000@3') ())) ('2')) ())
+((ARRAY (INTEGER 4 0 0 0 INTEGER ()) 1 (((CONSTANT (INTEGER 4 0 0 0
+INTEGER ()) 0 '0') ()) ((CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '255')
+())) ('2')) ()) ((ARRAY (REAL 8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0
+0 REAL ()) 0 '-0.3e800000000000@3') ()) ((CONSTANT (REAL 8 0 0 0 REAL ())
+0 '0.186a0000000000@5') ())) ('2')) ()) ((ARRAY (REAL 8 0 0 0 REAL ()) 1
+(((CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.96000000000000@2') ()) ((
+CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.15e00000000000@3') ())) ('2')) ())
+((ARRAY (INTEGER 4 0 0 0 INTEGER ()) 1 (((CONSTANT (INTEGER 4 0 0 0
+INTEGER ()) 0 '0') ()) ((CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '255')
+())) ('2')) ()) ((ARRAY (REAL 8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0
+0 REAL ()) 0 '-0.3e800000000000@3') ()) ((CONSTANT (REAL 8 0 0 0 REAL ())
+0 '0.186a0000000000@5') ())) ('2')) ()) ((ARRAY (REAL 8 0 0 0 REAL ()) 1
+(((CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.96000000000000@2') ()) ((
+CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.15e00000000000@3') ())) ('2')) ())
+((ARRAY (INTEGER 4 0 0 0 INTEGER ()) 1 (((CONSTANT (INTEGER 4 0 0 0
+INTEGER ()) 0 '0') ()) ((CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '255')
+())) ('2')) ()) ((ARRAY (REAL 8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0
+0 REAL ()) 0 '-0.3e800000000000@3') ()) ((CONSTANT (REAL 8 0 0 0 REAL ())
+0 '0.186a0000000000@5') ())) ('2')) ()) ((ARRAY (REAL 8 0 0 0 REAL ()) 1
+(((CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.96000000000000@2') ()) ((
+CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.15e00000000000@3') ())) ('2')) ())
+((ARRAY (INTEGER 4 0 0 0 INTEGER ()) 1 (((CONSTANT (INTEGER 4 0 0 0
+INTEGER ()) 0 '0') ()) ((CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '255')
+())) ('2')) ())) ()) ())) ())) (117 'lev2d' (DERIVED 118 0 0 0 DERIVED ())
+() (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0)
+UNKNOWN-ACCESS (STRUCTURE (DERIVED 118 0 0 0 DERIVED ()) 0 (((CONSTANT (
+INTEGER 4 0 0 0 INTEGER ()) 0 '0') ()) ((CONSTANT (LOGICAL 4 0 0 0
+LOGICAL ()) 0 1) ()) ((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'UNKNOWN                                                         ') ())
+((NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0) ()) ((NULL (UNKNOWN 0 0 0 0
+UNKNOWN ()) 0) ()) ((STRUCTURE (DERIVED 119 0 0 0 DERIVED ()) 0 (((
+CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 40
+'hPa                                     ') ()) ((CONSTANT (CHARACTER 1
+0 0 0 CHARACTER (())) 0 40 '                                        ') ()))
+()) ()) ((STRUCTURE (DERIVED 120 0 0 0 DERIVED ()) 0 (((ARRAY (REAL 8 0
+0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.00000000000000@0')
+()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.7d000000000000@3') ())) ('2'))
+()) ((ARRAY (REAL 8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ())
+0 '0.00000000000000@0') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.20000000000000@1') ())) ('2')) ())) ()) ())) ())) (121 'units' (
+DERIVED 122 0 0 0 DERIVED ()) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC
+UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (STRUCTURE (DERIVED 122 0 0 0
+DERIVED ()) 0 (((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'bits                                                            ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'percent                                                         ') ()))
+())) (123 'range' (DERIVED 124 0 0 0 DERIVED ()) () (UNKNOWN-FL
+UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (
+STRUCTURE (DERIVED 124 0 0 0 DERIVED ()) 0 (((ARRAY (INTEGER 4 0 0 0
+INTEGER ()) 1 (((CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '0') ()) ((
+CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '32767') ())) ('2')) ()) ((
+ARRAY (REAL 8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.00000000000000@0') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.64000000000000@2') ())) ('2')) ())) ())) (125 'vlist' (DERIVED 126 0
+0 0 DERIVED ()) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
+UNKNOWN 0 0) UNKNOWN-ACCESS (STRUCTURE (DERIVED 126 0 0 0 DERIVED ()) 0
+(((NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0) ()) ((NULL (UNKNOWN 0 0 0 0
+UNKNOWN ()) 0) ()) ((NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0) ())) ())))
+PUBLIC (() () () ()) () 0 0 59804403)
+19 'Varconfig' 'ropp_1dvar_types' '' 6 ((DERIVED UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) (UNKNOWN 0 0 0 0 UNKNOWN ()) 0 0 () ()
+0 ((127 'obs_file' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0
+0 0 INTEGER ()) 0 '2048'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC
+UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0
+CHARACTER (())) 0 2048
+'ropp_obs.nc                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     '))
+(128 'obs_covar_method' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (
+INTEGER 4 0 0 0 INTEGER ()) 0 '2048'))) () (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1
+0 0 0 CHARACTER (())) 0 2048
+'VSDC                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            '))
+(129 'obs_corr_file' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4
+0 0 0 INTEGER ()) 0 '2048'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC
+UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0
+CHARACTER (())) 0 2048
+'ropp_obs_corr.nc                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                '))
+(130 'bg_file' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0 0 0
+INTEGER ()) 0 '2048'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC
+UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0
+CHARACTER (())) 0 2048
+'ropp_bg.nc                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      '))
+(131 'out_file' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0 0 0
+INTEGER ()) 0 '2048'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC
+UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0
+CHARACTER (())) 0 2048
+'ropp_out.nc                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     '))
+(132 'bg_covar_method' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER
+4 0 0 0 INTEGER ()) 0 '2048'))) () (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1
+0 0 0 CHARACTER (())) 0 2048
+'VSFC                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            '))
+(133 'bg_corr_file' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0
+0 0 INTEGER ()) 0 '2048'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC
+UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0
+CHARACTER (())) 0 2048
+'ropp_bg_corr.nc                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 '))
+(134 'min_1dvar_height' (REAL 8 0 0 0 REAL ()) () (UNKNOWN-FL
+UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (
+CONSTANT (REAL 8 0 0 0 REAL ()) 0 '-0.a0000000000000@1')) (135
+'max_1dvar_height' (REAL 8 0 0 0 REAL ()) () (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (REAL 8 0 0 0
+REAL ()) 0 '0.3c000000000000@2')) (136 'genqc_colocation_apply' (
+LOGICAL 4 0 0 0 LOGICAL ()) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC
+UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (LOGICAL 4 0 0 0 LOGICAL ())
+0 1)) (137 'genqc_max_distance' (REAL 8 0 0 0 REAL ()) () (UNKNOWN-FL
+UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (
+CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.12c00000000000@3')) (138
+'genqc_max_time_sep' (REAL 8 0 0 0 REAL ()) () (UNKNOWN-FL
+UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (
+CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.2a300000000000@4')) (139
+'genqc_min_temperature' (REAL 8 0 0 0 REAL ()) () (UNKNOWN-FL
+UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (
+CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.96000000000000@2')) (140
+'genqc_max_temperature' (REAL 8 0 0 0 REAL ()) () (UNKNOWN-FL
+UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (
+CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.15e00000000000@3')) (141
+'genqc_min_spec_humidity' (REAL 8 0 0 0 REAL ()) () (UNKNOWN-FL
+UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (
+CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.00000000000000@0')) (142
+'genqc_max_spec_humidity' (REAL 8 0 0 0 REAL ()) () (UNKNOWN-FL
+UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (
+CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.32000000000000@2')) (143
+'genqc_min_impact' (REAL 8 0 0 0 REAL ()) () (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (REAL 8 0 0 0
+REAL ()) 0 '0.5e9ac000000000@6')) (144 'genqc_max_impact' (REAL 8 0 0 0
+REAL ()) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0)
+UNKNOWN-ACCESS (CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.64b54000000000@6'))
+(145 'genqc_min_bangle' (REAL 8 0 0 0 REAL ()) () (UNKNOWN-FL
+UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (
+CONSTANT (REAL 8 0 0 0 REAL ()) 0 '-0.68db8bac710cb4@-3')) (146
+'genqc_max_bangle' (REAL 8 0 0 0 REAL ()) () (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (REAL 8 0 0 0
+REAL ()) 0 '0.1999999999999a@0')) (147 'genqc_min_geop_refrac' (REAL 8 0
+0 0 REAL ()) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN
+0 0) UNKNOWN-ACCESS (CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'-0.3e800000000000@3')) (148 'genqc_max_geop_refrac' (REAL 8 0 0 0 REAL
+()) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0)
+UNKNOWN-ACCESS (CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.186a0000000000@5'))
+(149 'genqc_min_refractivity' (REAL 8 0 0 0 REAL ()) () (UNKNOWN-FL
+UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (
+CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.00000000000000@0')) (150
+'genqc_max_refractivity' (REAL 8 0 0 0 REAL ()) () (UNKNOWN-FL
+UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (
+CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.1f400000000000@3')) (151
+'genqc_min_obheight' (REAL 8 0 0 0 REAL ()) () (UNKNOWN-FL
+UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (
+CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.4e200000000000@4')) (152 'bgqc_apply'
+(LOGICAL 4 0 0 0 LOGICAL ()) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC
+UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (LOGICAL 4 0 0 0 LOGICAL ())
+0 1)) (153 'bgqc_reject_factor' (REAL 8 0 0 0 REAL ()) () (UNKNOWN-FL
+UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (
+CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.a0000000000000@1')) (154
+'bgqc_reject_max_percent' (REAL 8 0 0 0 REAL ()) () (UNKNOWN-FL
+UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (
+CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.32000000000000@2')) (155 'pge_apply'
+(LOGICAL 4 0 0 0 LOGICAL ()) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC
+UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (LOGICAL 4 0 0 0 LOGICAL ())
+0 0)) (156 'pge_fg' (REAL 8 0 0 0 REAL ()) () (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (REAL 8 0 0 0
+REAL ()) 0 '0.4189374bc6a7f0@-2')) (157 'pge_d' (REAL 8 0 0 0 REAL ()) ()
+(UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0)
+UNKNOWN-ACCESS (CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.a0000000000000@1'))
+(158 'minropp' (DERIVED 159 0 0 0 DERIVED ()) () (UNKNOWN-FL
+UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (
+STRUCTURE (DERIVED 159 0 0 0 DERIVED ()) 0 (((CONSTANT (CHARACTER 1 0 0
+0 CHARACTER (())) 0 2048
+'MINROPP                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         ')
+()) ((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 2048
+'screen                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          ')
+()) ((CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '0') ()) ((CONSTANT (
+INTEGER 4 0 0 0 INTEGER ()) 0 '1500') ()) ((CONSTANT (INTEGER 4 0 0 0
+INTEGER ()) 0 '0') ()) ((CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '50') ())
+((CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.2af31dc4611874@-6') ()) ((
+CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.734aca5f6226f0@-13') ())) ())) (
+160 'use_precond' (LOGICAL 4 0 0 0 LOGICAL ()) () (UNKNOWN-FL
+UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (
+CONSTANT (LOGICAL 4 0 0 0 LOGICAL ()) 0 1)) (161 'conv_check_apply' (
+LOGICAL 4 0 0 0 LOGICAL ()) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC
+UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (LOGICAL 4 0 0 0 LOGICAL ())
+0 1)) (162 'conv_check_n_previous' (INTEGER 4 0 0 0 INTEGER ()) () (
+UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0)
+UNKNOWN-ACCESS (CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '2')) (163
+'conv_check_max_delta_state' (REAL 8 0 0 0 REAL ()) () (UNKNOWN-FL
+UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (
+CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.1999999999999a@0')) (164
+'conv_check_max_delta_j' (REAL 8 0 0 0 REAL ()) () (UNKNOWN-FL
+UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (
+CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.1999999999999a@0')) (165
+'extended_1dvar_diag' (LOGICAL 4 0 0 0 LOGICAL ()) () (UNKNOWN-FL
+UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (
+CONSTANT (LOGICAL 4 0 0 0 LOGICAL ()) 0 0)) (166 'use_logp' (LOGICAL 4 0
+0 0 LOGICAL ()) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
+UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (LOGICAL 4 0 0 0 LOGICAL ()) 0 0))
+(167 'use_logq' (LOGICAL 4 0 0 0 LOGICAL ()) () (UNKNOWN-FL
+UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (
+CONSTANT (LOGICAL 4 0 0 0 LOGICAL ()) 0 0)) (168 'compress' (LOGICAL 4 0
+0 0 LOGICAL ()) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
+UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (LOGICAL 4 0 0 0 LOGICAL ()) 0 0)))
+PUBLIC (() () () ()) () 0 0 91848278)
+20 'Obs1drefrac' 'ropp_fm_types' '' 11 ((DERIVED UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 POINTER_COMP) (UNKNOWN 0 0 0 0 UNKNOWN
+()) 0 0 () () 0 ((169 'refrac' (REAL 8 0 0 0 REAL ()) (1 0 DEFERRED () ())
+(UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION
+POINTER) UNKNOWN-ACCESS (NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0)) (170 'geop'
+(REAL 8 0 0 0 REAL ()) (1 0 DEFERRED () ()) (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION POINTER) UNKNOWN-ACCESS (
+NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0)) (171 'weights' (REAL 8 0 0 0 REAL
+()) (1 0 DEFERRED () ()) (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
+UNKNOWN 0 0 DIMENSION POINTER) UNKNOWN-ACCESS (NULL (UNKNOWN 0 0 0 0
+UNKNOWN ()) 0)) (172 'lon' (REAL 8 0 0 0 REAL ()) () (UNKNOWN-FL
+UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS ()) (
+173 'lat' (REAL 8 0 0 0 REAL ()) () (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS ()) (174 'time' (REAL 8
+0 0 0 REAL ()) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
+UNKNOWN 0 0) UNKNOWN-ACCESS ()) (175 'cov' (DERIVED 176 0 0 0 DERIVED ())
+() (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0)
+UNKNOWN-ACCESS (STRUCTURE (DERIVED 176 0 0 0 DERIVED ()) 0 (((NULL (
+UNKNOWN 0 0 0 0 UNKNOWN ()) 0) ()) ((CONSTANT (LOGICAL 4 0 0 0 LOGICAL ())
+0 0) ()) ((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 1 'N') ()) ((
+NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0) ()) ((NULL (UNKNOWN 0 0 0 0 UNKNOWN
+()) 0) ()) ((NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0) ())) ())) (177 'obs_ok'
+(LOGICAL 4 0 0 0 LOGICAL ()) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC
+UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS ()) (178 'cov_ok' (LOGICAL 4 0 0 0
+LOGICAL ()) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0
+0) UNKNOWN-ACCESS ())) PUBLIC (() () () ()) () 0 0 52984312)
+21 'Vardiag' 'ropp_1dvar_types' '' 11 ((DERIVED UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 POINTER_COMP) (UNKNOWN 0 0 0 0 UNKNOWN
+()) 0 0 () () 0 ((179 'n_data' (INTEGER 4 0 0 0 INTEGER ()) () (
+UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0)
+UNKNOWN-ACCESS ()) (180 'n_bgqc_reject' (INTEGER 4 0 0 0 INTEGER ()) ()
+(UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0)
+UNKNOWN-ACCESS ()) (181 'n_pge_reject' (INTEGER 4 0 0 0 INTEGER ()) () (
+UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0)
+UNKNOWN-ACCESS ()) (182 'bg_bangle' (DERIVED 183 0 0 0 DERIVED ()) () (
+UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0)
+UNKNOWN-ACCESS (STRUCTURE (DERIVED 183 0 0 0 DERIVED ()) 0 (((NULL (
+UNKNOWN 0 0 0 0 UNKNOWN ()) 0) ()) ((NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0)
+()) ((NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0) ()) ((NULL (UNKNOWN 0 0 0 0
+UNKNOWN ()) 0) ()) ((NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0) ()) (() ()) (
+() ()) (() ()) (() ()) (() ()) (() ()) (() ()) (() ()) (() ()) ((
+STRUCTURE (DERIVED 176 0 0 0 DERIVED ()) 0 (((NULL (UNKNOWN 0 0 0 0
+UNKNOWN ()) 0) ()) ((CONSTANT (LOGICAL 4 0 0 0 LOGICAL ()) 0 0) ()) ((
+CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 1 'N') ()) ((NULL (
+UNKNOWN 0 0 0 0 UNKNOWN ()) 0) ()) ((NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0)
+()) ((NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0) ())) ()) ()) (() ()) (() ()))
+())) (184 'bg_refrac' (DERIVED 20 0 0 0 DERIVED ()) () (UNKNOWN-FL
+UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (
+STRUCTURE (DERIVED 20 0 0 0 DERIVED ()) 0 (((NULL (UNKNOWN 0 0 0 0
+UNKNOWN ()) 0) ()) ((NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0) ()) ((NULL (
+UNKNOWN 0 0 0 0 UNKNOWN ()) 0) ()) (() ()) (() ()) (() ()) ((STRUCTURE (
+DERIVED 176 0 0 0 DERIVED ()) 0 (((NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0)
+()) ((CONSTANT (LOGICAL 4 0 0 0 LOGICAL ()) 0 0) ()) ((CONSTANT (
+CHARACTER 1 0 0 0 CHARACTER (())) 0 1 'N') ()) ((NULL (UNKNOWN 0 0 0 0
+UNKNOWN ()) 0) ()) ((NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0) ()) ((NULL (
+UNKNOWN 0 0 0 0 UNKNOWN ()) 0) ())) ()) ()) (() ()) (() ())) ())) (185
+'omb' (REAL 8 0 0 0 REAL ()) (1 0 DEFERRED () ()) (UNKNOWN-FL
+UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION POINTER)
+UNKNOWN-ACCESS (NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0)) (186 'omb_sigma' (
+REAL 8 0 0 0 REAL ()) (1 0 DEFERRED () ()) (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION POINTER) UNKNOWN-ACCESS (
+NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0)) (187 'pge_gamma' (REAL 8 0 0 0
+REAL ()) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0)
+UNKNOWN-ACCESS ()) (188 'pge' (REAL 8 0 0 0 REAL ()) (1 0 DEFERRED () ())
+(UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION
+POINTER) UNKNOWN-ACCESS (NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0)) (189
+'pge_weights' (REAL 8 0 0 0 REAL ()) (1 0 DEFERRED () ()) (UNKNOWN-FL
+UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION POINTER)
+UNKNOWN-ACCESS (NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0)) (190 'ok' (
+LOGICAL 4 0 0 0 LOGICAL ()) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC
+UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS ()) (191 'j' (REAL 8 0 0 0 REAL ())
+() (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0)
+UNKNOWN-ACCESS ()) (192 'j_scaled' (REAL 8 0 0 0 REAL ()) () (
+UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0)
+UNKNOWN-ACCESS ()) (193 'j_init' (REAL 8 0 0 0 REAL ()) () (UNKNOWN-FL
+UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS ()) (
+194 'j_bgr' (REAL 8 0 0 0 REAL ()) (1 0 DEFERRED () ()) (UNKNOWN-FL
+UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION POINTER)
+UNKNOWN-ACCESS (NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0)) (195 'j_obs' (
+REAL 8 0 0 0 REAL ()) (1 0 DEFERRED () ()) (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION POINTER) UNKNOWN-ACCESS (
+NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0)) (196 'b_sigma' (REAL 8 0 0 0 REAL
+()) (1 0 DEFERRED () ()) (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
+UNKNOWN 0 0 DIMENSION POINTER) UNKNOWN-ACCESS (NULL (UNKNOWN 0 0 0 0
+UNKNOWN ()) 0)) (197 'n_iter' (INTEGER 4 0 0 0 INTEGER ()) () (
+UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0)
+UNKNOWN-ACCESS ()) (198 'n_simul' (INTEGER 4 0 0 0 INTEGER ()) () (
+UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0)
+UNKNOWN-ACCESS ()) (199 'min_mode' (INTEGER 4 0 0 0 INTEGER ()) () (
+UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0)
+UNKNOWN-ACCESS ()) (200 'res_bangle' (DERIVED 183 0 0 0 DERIVED ()) () (
+UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0)
+UNKNOWN-ACCESS (STRUCTURE (DERIVED 183 0 0 0 DERIVED ()) 0 (((NULL (
+UNKNOWN 0 0 0 0 UNKNOWN ()) 0) ()) ((NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0)
+()) ((NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0) ()) ((NULL (UNKNOWN 0 0 0 0
+UNKNOWN ()) 0) ()) ((NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0) ()) (() ()) (
+() ()) (() ()) (() ()) (() ()) (() ()) (() ()) (() ()) (() ()) ((
+STRUCTURE (DERIVED 176 0 0 0 DERIVED ()) 0 (((NULL (UNKNOWN 0 0 0 0
+UNKNOWN ()) 0) ()) ((CONSTANT (LOGICAL 4 0 0 0 LOGICAL ()) 0 0) ()) ((
+CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 1 'N') ()) ((NULL (
+UNKNOWN 0 0 0 0 UNKNOWN ()) 0) ()) ((NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0)
+()) ((NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0) ())) ()) ()) (() ()) (() ()))
+())) (201 'res_refrac' (DERIVED 20 0 0 0 DERIVED ()) () (UNKNOWN-FL
+UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (
+STRUCTURE (DERIVED 20 0 0 0 DERIVED ()) 0 (((NULL (UNKNOWN 0 0 0 0
+UNKNOWN ()) 0) ()) ((NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0) ()) ((NULL (
+UNKNOWN 0 0 0 0 UNKNOWN ()) 0) ()) (() ()) (() ()) (() ()) ((STRUCTURE (
+DERIVED 176 0 0 0 DERIVED ()) 0 (((NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0)
+()) ((CONSTANT (LOGICAL 4 0 0 0 LOGICAL ()) 0 0) ()) ((CONSTANT (
+CHARACTER 1 0 0 0 CHARACTER (())) 0 1 'N') ()) ((NULL (UNKNOWN 0 0 0 0
+UNKNOWN ()) 0) ()) ((NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0) ()) ((NULL (
+UNKNOWN 0 0 0 0 UNKNOWN ()) 0) ())) ()) ()) (() ()) (() ())) ())) (202
+'oma' (REAL 8 0 0 0 REAL ()) (1 0 DEFERRED () ()) (UNKNOWN-FL
+UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION POINTER)
+UNKNOWN-ACCESS (NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0)) (203 'oma_sigma' (
+REAL 8 0 0 0 REAL ()) (1 0 DEFERRED () ()) (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION POINTER) UNKNOWN-ACCESS (
+NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0))) PUBLIC (() () () ()) () 0 0
+13524127)
+22 'Roprof' 'ropp_io_types' '' 11 ((DERIVED UNKNOWN-INTENT UNKNOWN-PROC
+UNKNOWN UNKNOWN 0 0 POINTER_COMP) (UNKNOWN 0 0 0 0 UNKNOWN ()) 0 0 () ()
+0 ((204 'fmtversion' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4
+0 0 0 INTEGER ()) 0 '21'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC
+UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0
+CHARACTER (())) 0 21 'UNKNOWN              ')) (205 'occ_id' (CHARACTER
+1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '40'))) () (
+UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0)
+UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 40
+'UNKNOWN                                 ')) (206 'leo_id' (CHARACTER 1
+0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '4'))) () (
+UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0)
+UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 4 'UNKN'))
+(207 'gns_id' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0 0 0
+INTEGER ()) 0 '4'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
+UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0 CHARACTER (()))
+0 4 'U999')) (208 'stn_id' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (
+INTEGER 4 0 0 0 INTEGER ()) 0 '4'))) () (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1
+0 0 0 CHARACTER (())) 0 4 'UNKN')) (209 'processing_centre' (CHARACTER 1
+0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '40'))) () (
+UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0)
+UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 40
+'UNKNOWN                                 ')) (210 'pod_method' (
+CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '40')))
+() (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0)
+UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 40
+'UNKNOWN                                 ')) (211 'phase_method' (
+CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '40')))
+() (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0)
+UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 40
+'UNKNOWN                                 ')) (212 'bangle_method' (
+CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '40')))
+() (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0)
+UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 40
+'UNKNOWN                                 ')) (213 'refrac_method' (
+CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '40')))
+() (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0)
+UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 40
+'UNKNOWN                                 ')) (214 'meteo_method' (
+CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '40')))
+() (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0)
+UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 40
+'UNKNOWN                                 ')) (215 'thin_method' (
+CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '80')))
+() (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0)
+UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 80
+'UNKNOWN                                                                         '))
+(216 'software_version' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (
+INTEGER 4 0 0 0 INTEGER ()) 0 '40'))) () (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1
+0 0 0 CHARACTER (())) 0 40 'UNKNOWN                                 '))
+(217 'dtocc' (DERIVED 218 0 0 0 DERIVED ()) () (UNKNOWN-FL
+UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (
+STRUCTURE (DERIVED 218 0 0 0 DERIVED ()) 0 (((CONSTANT (INTEGER 4 0 0 0
+INTEGER ()) 0 '9999') ()) ((CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '99')
+()) ((CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '99') ()) ((CONSTANT (
+INTEGER 4 0 0 0 INTEGER ()) 0 '99') ()) ((CONSTANT (INTEGER 4 0 0 0
+INTEGER ()) 0 '99') ()) ((CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '99')
+()) ((CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '9999') ()) ((STRUCTURE (
+DERIVED 219 0 0 0 DERIVED ()) 0 (((CONSTANT (CHARACTER 1 0 0 0 CHARACTER
+(())) 0 64
+'years                                                           ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'months                                                          ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'days                                                            ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'hours                                                           ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'minutes                                                         ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'seconds                                                         ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'milliseconds                                                    ') ()))
+()) ()) ((STRUCTURE (DERIVED 220 0 0 0 DERIVED ()) 0 (((ARRAY (INTEGER 4
+0 0 0 INTEGER ()) 1 (((CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '1995') ())
+((CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '2099') ())) ('2')) ()) ((
+ARRAY (INTEGER 4 0 0 0 INTEGER ()) 1 (((CONSTANT (INTEGER 4 0 0 0
+INTEGER ()) 0 '1') ()) ((CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '12') ()))
+('2')) ()) ((ARRAY (INTEGER 4 0 0 0 INTEGER ()) 1 (((CONSTANT (INTEGER 4
+0 0 0 INTEGER ()) 0 '1') ()) ((CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0
+'31') ())) ('2')) ()) ((ARRAY (INTEGER 4 0 0 0 INTEGER ()) 1 (((
+CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '0') ()) ((CONSTANT (INTEGER 4 0
+0 0 INTEGER ()) 0 '23') ())) ('2')) ()) ((ARRAY (INTEGER 4 0 0 0 INTEGER
+()) 1 (((CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '0') ()) ((CONSTANT (
+INTEGER 4 0 0 0 INTEGER ()) 0 '59') ())) ('2')) ()) ((ARRAY (INTEGER 4 0
+0 0 INTEGER ()) 1 (((CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '0') ()) (
+(CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '59') ())) ('2')) ()) ((ARRAY (
+INTEGER 4 0 0 0 INTEGER ()) 1 (((CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0
+'0') ()) ((CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '999') ())) ('2')) ()))
+()) ())) ())) (221 'dtpro' (DERIVED 218 0 0 0 DERIVED ()) () (
+UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0)
+UNKNOWN-ACCESS (STRUCTURE (DERIVED 218 0 0 0 DERIVED ()) 0 (((CONSTANT (
+INTEGER 4 0 0 0 INTEGER ()) 0 '9999') ()) ((CONSTANT (INTEGER 4 0 0 0
+INTEGER ()) 0 '99') ()) ((CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '99')
+()) ((CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '99') ()) ((CONSTANT (
+INTEGER 4 0 0 0 INTEGER ()) 0 '99') ()) ((CONSTANT (INTEGER 4 0 0 0
+INTEGER ()) 0 '99') ()) ((CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '9999')
+()) ((STRUCTURE (DERIVED 219 0 0 0 DERIVED ()) 0 (((CONSTANT (CHARACTER
+1 0 0 0 CHARACTER (())) 0 64
+'years                                                           ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'months                                                          ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'days                                                            ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'hours                                                           ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'minutes                                                         ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'seconds                                                         ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'milliseconds                                                    ') ()))
+()) ()) ((STRUCTURE (DERIVED 220 0 0 0 DERIVED ()) 0 (((ARRAY (INTEGER 4
+0 0 0 INTEGER ()) 1 (((CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '1995') ())
+((CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '2099') ())) ('2')) ()) ((
+ARRAY (INTEGER 4 0 0 0 INTEGER ()) 1 (((CONSTANT (INTEGER 4 0 0 0
+INTEGER ()) 0 '1') ()) ((CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '12') ()))
+('2')) ()) ((ARRAY (INTEGER 4 0 0 0 INTEGER ()) 1 (((CONSTANT (INTEGER 4
+0 0 0 INTEGER ()) 0 '1') ()) ((CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0
+'31') ())) ('2')) ()) ((ARRAY (INTEGER 4 0 0 0 INTEGER ()) 1 (((
+CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '0') ()) ((CONSTANT (INTEGER 4 0
+0 0 INTEGER ()) 0 '23') ())) ('2')) ()) ((ARRAY (INTEGER 4 0 0 0 INTEGER
+()) 1 (((CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '0') ()) ((CONSTANT (
+INTEGER 4 0 0 0 INTEGER ()) 0 '59') ())) ('2')) ()) ((ARRAY (INTEGER 4 0
+0 0 INTEGER ()) 1 (((CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '0') ()) (
+(CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '59') ())) ('2')) ()) ((ARRAY (
+INTEGER 4 0 0 0 INTEGER ()) 1 (((CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0
+'0') ()) ((CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '999') ())) ('2')) ()))
+()) ())) ())) (222 'pcd' (INTEGER 4 0 0 0 INTEGER ()) () (UNKNOWN-FL
+UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (
+CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '65535')) (223 'overall_qual' (
+REAL 8 0 0 0 REAL ()) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
+UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'-0.5f5dd180000000@7')) (224 'georef' (DERIVED 225 0 0 0 DERIVED ()) ()
+(UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0)
+UNKNOWN-ACCESS (STRUCTURE (DERIVED 225 0 0 0 DERIVED ()) 0 (((CONSTANT (
+REAL 8 0 0 0 REAL ()) 0 '-0.5f5dd180000000@7') ()) ((CONSTANT (REAL 8 0
+0 0 REAL ()) 0 '-0.5f5dd180000000@7') ()) ((CONSTANT (REAL 8 0 0 0 REAL
+()) 0 '-0.5f5dd180000000@7') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'-0.5f5dd180000000@7') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'-0.5f5dd180000000@7') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'-0.5f5dd180000000@7') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'-0.5f5dd180000000@7') ()) ((STRUCTURE (DERIVED 226 0 0 0 DERIVED ()) 0
+(((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'seconds                                                         ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'degrees_north                                                   ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'degrees_east                                                    ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'metres                                                          ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'metres                                                          ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'degrees_T                                                       ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'metres                                                          ') ()))
+()) ()) ((STRUCTURE (DERIVED 227 0 0 0 DERIVED ()) 0 (((ARRAY (REAL 8 0
+0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.00000000000000@0')
+()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.efffbe76c8b438@2') ())) ('2'))
+()) ((ARRAY (REAL 8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ())
+0 '-0.5a000000000000@2') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.5a000000000000@2') ())) ('2')) ()) ((ARRAY (REAL 8 0 0 0 REAL ()) 1 (
+((CONSTANT (REAL 8 0 0 0 REAL ()) 0 '-0.b4000000000000@2') ()) ((
+CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.b4000000000000@2') ())) ('2')) ())
+((ARRAY (REAL 8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.5e9ac000000000@6') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.64b54000000000@6') ())) ('2')) ()) ((ARRAY (REAL 8 0 0 0 REAL ()) 1 (
+((CONSTANT (REAL 8 0 0 0 REAL ()) 0 '-0.c3500000000000@4') ()) ((
+CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.c3500000000000@4') ())) ('2')) ())
+((ARRAY (REAL 8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.00000000000000@0') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.16800000000000@3') ())) ('2')) ()) ((ARRAY (REAL 8 0 0 0 REAL ()) 1 (
+((CONSTANT (REAL 8 0 0 0 REAL ()) 0 '-0.96000000000000@2') ()) ((
+CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.96000000000000@2') ())) ('2')) ()))
+()) ()) ((STRUCTURE (DERIVED 228 0 0 0 DERIVED ()) 0 (((CONSTANT (
+CHARACTER 1 0 0 0 CHARACTER (())) 0 3 'ECF') ())) ()) ())) ())) (229 'bg'
+(DERIVED 230 0 0 0 DERIVED ()) () (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (STRUCTURE (DERIVED 230
+0 0 0 DERIVED ()) 0 (((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 20
+'NONE                ') ()) ((CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0
+'9999') ()) ((CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '99') ()) ((
+CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '99') ()) ((CONSTANT (INTEGER 4
+0 0 0 INTEGER ()) 0 '99') ()) ((CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0
+'99') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.3e7e6680000000@3') ())
+((STRUCTURE (DERIVED 231 0 0 0 DERIVED ()) 0 (((CONSTANT (CHARACTER 1 0
+0 0 CHARACTER (())) 0 64
+'years                                                           ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'months                                                          ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'days                                                            ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'hours                                                           ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'minutes                                                         ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'hours                                                           ') ()))
+()) ()) ((STRUCTURE (DERIVED 232 0 0 0 DERIVED ()) 0 (((ARRAY (INTEGER 4
+0 0 0 INTEGER ()) 1 (((CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '1995') ())
+((CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '2099') ())) ('2')) ()) ((
+ARRAY (INTEGER 4 0 0 0 INTEGER ()) 1 (((CONSTANT (INTEGER 4 0 0 0
+INTEGER ()) 0 '1') ()) ((CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '12') ()))
+('2')) ()) ((ARRAY (INTEGER 4 0 0 0 INTEGER ()) 1 (((CONSTANT (INTEGER 4
+0 0 0 INTEGER ()) 0 '1') ()) ((CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0
+'31') ())) ('2')) ()) ((ARRAY (INTEGER 4 0 0 0 INTEGER ()) 1 (((
+CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '0') ()) ((CONSTANT (INTEGER 4 0
+0 0 INTEGER ()) 0 '23') ())) ('2')) ()) ((ARRAY (INTEGER 4 0 0 0 INTEGER
+()) 1 (((CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '0') ()) ((CONSTANT (
+INTEGER 4 0 0 0 INTEGER ()) 0 '59') ())) ('2')) ()) ((ARRAY (REAL 8 0 0
+0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.00000000000000@0')
+()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.18000000000000@2') ())) ('2'))
+())) ()) ())) ())) (233 'lev1a' (DERIVED 234 0 0 0 DERIVED ()) () (
+UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0)
+UNKNOWN-ACCESS (STRUCTURE (DERIVED 234 0 0 0 DERIVED ()) 0 (((CONSTANT (
+INTEGER 4 0 0 0 INTEGER ()) 0 '0') ()) ((CONSTANT (LOGICAL 4 0 0 0
+LOGICAL ()) 0 1) ()) ((NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0) ()) ((NULL (
+UNKNOWN 0 0 0 0 UNKNOWN ()) 0) ()) ((NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0)
+()) ((NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0) ()) ((NULL (UNKNOWN 0 0 0 0
+UNKNOWN ()) 0) ()) ((NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0) ()) ((NULL (
+UNKNOWN 0 0 0 0 UNKNOWN ()) 0) ()) ((NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0)
+()) ((NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0) ()) ((NULL (UNKNOWN 0 0 0 0
+UNKNOWN ()) 0) ()) ((NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0) ()) ((
+STRUCTURE (DERIVED 235 0 0 0 DERIVED ()) 0 (((CONSTANT (CHARACTER 1 0 0
+0 CHARACTER (())) 0 64
+'seconds                                                         ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'volt / volt                                                     ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'metres                                                          ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'metres                                                          ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'metres / seconds                                                ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'metres                                                          ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'metres / seconds                                                ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'percent                                                         ') ()))
+()) ()) ((STRUCTURE (DERIVED 236 0 0 0 DERIVED ()) 0 (((ARRAY (REAL 8 0
+0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0 '-0.10000000000000@1')
+()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.efffbe76c8b438@2') ())) ('2'))
+()) ((ARRAY (REAL 8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ())
+0 '0.00000000000000@0') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.c3500000000000@4') ())) ('2')) ()) ((ARRAY (REAL 8 0 0 0 REAL ()) 1 (
+((CONSTANT (REAL 8 0 0 0 REAL ()) 0 '-0.f4240000000000@5') ()) ((
+CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.f4240000000000@5') ())) ('2')) ())
+((ARRAY (REAL 8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'-0.29020c00000000@7') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.29020c00000000@7') ())) ('2')) ()) ((ARRAY (REAL 8 0 0 0 REAL ()) 1 (
+((CONSTANT (REAL 8 0 0 0 REAL ()) 0 '-0.27100000000000@4') ()) ((
+CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.27100000000000@4') ())) ('2')) ())
+((ARRAY (REAL 8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'-0.98968000000000@6') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.98968000000000@6') ())) ('2')) ()) ((ARRAY (REAL 8 0 0 0 REAL ()) 1 (
+((CONSTANT (REAL 8 0 0 0 REAL ()) 0 '-0.27100000000000@4') ()) ((
+CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.27100000000000@4') ())) ('2')) ())
+((ARRAY (REAL 8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.00000000000000@0') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.64000000000000@2') ())) ('2')) ())) ()) ()) ((STRUCTURE (DERIVED 237
+0 0 0 DERIVED ()) 0 (((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 3
+'ECF') ()) ((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 3 'ECI') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 3 'ECF') ()) ((CONSTANT
+(CHARACTER 1 0 0 0 CHARACTER (())) 0 3 'ECI') ())) ()) ())) ())) (238
+'lev1b' (DERIVED 239 0 0 0 DERIVED ()) () (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (STRUCTURE (DERIVED 239
+0 0 0 DERIVED ()) 0 (((CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '0') ())
+((CONSTANT (LOGICAL 4 0 0 0 LOGICAL ()) 0 1) ()) ((NULL (UNKNOWN 0 0 0 0
+UNKNOWN ()) 0) ()) ((NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0) ()) ((NULL (
+UNKNOWN 0 0 0 0 UNKNOWN ()) 0) ()) ((NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0)
+()) ((NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0) ()) ((NULL (UNKNOWN 0 0 0 0
+UNKNOWN ()) 0) ()) ((NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0) ()) ((NULL (
+UNKNOWN 0 0 0 0 UNKNOWN ()) 0) ()) ((NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0)
+()) ((NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0) ()) ((NULL (UNKNOWN 0 0 0 0
+UNKNOWN ()) 0) ()) ((NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0) ()) ((NULL (
+UNKNOWN 0 0 0 0 UNKNOWN ()) 0) ()) ((NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0)
+()) ((NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0) ()) ((NULL (UNKNOWN 0 0 0 0
+UNKNOWN ()) 0) ()) ((NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0) ()) ((NULL (
+UNKNOWN 0 0 0 0 UNKNOWN ()) 0) ()) ((NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0)
+()) ((STRUCTURE (DERIVED 240 0 0 0 DERIVED ()) 0 (((CONSTANT (CHARACTER
+1 0 0 0 CHARACTER (())) 0 64
+'degrees_north                                                   ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'degrees_east                                                    ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'degrees                                                         ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'metres                                                          ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'radians                                                         ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'radians                                                         ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'percent                                                         ') ()))
+()) ()) ((STRUCTURE (DERIVED 241 0 0 0 DERIVED ()) 0 (((ARRAY (REAL 8 0
+0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0 '-0.5a000000000000@2')
+()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.5a000000000000@2') ())) ('2'))
+()) ((ARRAY (REAL 8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ())
+0 '-0.b4000000000000@2') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.b4000000000000@2') ())) ('2')) ()) ((ARRAY (REAL 8 0 0 0 REAL ()) 1 (
+((CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.00000000000000@0') ()) ((
+CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.16800000000000@3') ())) ('2')) ())
+((ARRAY (REAL 8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.5e9ac000000000@6') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.64b54000000000@6') ())) ('2')) ()) ((ARRAY (REAL 8 0 0 0 REAL ()) 1 (
+((CONSTANT (REAL 8 0 0 0 REAL ()) 0 '-0.4189374bc6a7f0@-2') ()) ((
+CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.1999999999999a@0') ())) ('2')) ())
+((ARRAY (REAL 8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.00000000000000@0') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.28f5c28f5c28f6@-1') ())) ('2')) ()) ((ARRAY (REAL 8 0 0 0 REAL ()) 1
+(((CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.00000000000000@0') ()) ((
+CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.64000000000000@2') ())) ('2')) ()))
+()) ())) ())) (242 'lev2a' (DERIVED 243 0 0 0 DERIVED ()) () (
+UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0)
+UNKNOWN-ACCESS (STRUCTURE (DERIVED 243 0 0 0 DERIVED ()) 0 (((CONSTANT (
+INTEGER 4 0 0 0 INTEGER ()) 0 '0') ()) ((CONSTANT (LOGICAL 4 0 0 0
+LOGICAL ()) 0 1) ()) ((NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0) ()) ((NULL (
+UNKNOWN 0 0 0 0 UNKNOWN ()) 0) ()) ((NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0)
+()) ((NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0) ()) ((NULL (UNKNOWN 0 0 0 0
+UNKNOWN ()) 0) ()) ((NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0) ()) ((NULL (
+UNKNOWN 0 0 0 0 UNKNOWN ()) 0) ()) ((NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0)
+()) ((STRUCTURE (DERIVED 244 0 0 0 DERIVED ()) 0 (((CONSTANT (CHARACTER
+1 0 0 0 CHARACTER (())) 0 64
+'metres                                                          ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'geopotential metres                                             ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'N-units                                                         ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'N-units                                                         ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'percent                                                         ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'kelvin                                                          ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'kelvin                                                          ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'percent                                                         ') ()))
+()) ()) ((STRUCTURE (DERIVED 245 0 0 0 DERIVED ()) 0 (((ARRAY (REAL 8 0
+0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0 '-0.3e800000000000@3')
+()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.186a0000000000@5') ())) ('2'))
+()) ((ARRAY (REAL 8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ())
+0 '-0.3e800000000000@3') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.186a0000000000@5') ())) ('2')) ()) ((ARRAY (REAL 8 0 0 0 REAL ()) 1 (
+((CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.00000000000000@0') ()) ((
+CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.1f400000000000@3') ())) ('2')) ())
+((ARRAY (REAL 8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.00000000000000@0') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.32000000000000@2') ())) ('2')) ()) ((ARRAY (REAL 8 0 0 0 REAL ()) 1 (
+((CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.00000000000000@0') ()) ((
+CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.64000000000000@2') ())) ('2')) ())
+((ARRAY (REAL 8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.96000000000000@2') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.15e00000000000@3') ())) ('2')) ()) ((ARRAY (REAL 8 0 0 0 REAL ()) 1 (
+((CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.00000000000000@0') ()) ((
+CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.32000000000000@2') ())) ('2')) ())
+((ARRAY (REAL 8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.00000000000000@0') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.64000000000000@2') ())) ('2')) ())) ()) ())) ())) (246 'lev2b' (
+DERIVED 247 0 0 0 DERIVED ()) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC
+UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (STRUCTURE (DERIVED 247 0 0 0
+DERIVED ()) 0 (((CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '0') ()) ((
+CONSTANT (LOGICAL 4 0 0 0 LOGICAL ()) 0 1) ()) ((NULL (UNKNOWN 0 0 0 0
+UNKNOWN ()) 0) ()) ((NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0) ()) ((NULL (
+UNKNOWN 0 0 0 0 UNKNOWN ()) 0) ()) ((NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0)
+()) ((NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0) ()) ((NULL (UNKNOWN 0 0 0 0
+UNKNOWN ()) 0) ()) ((NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0) ()) ((NULL (
+UNKNOWN 0 0 0 0 UNKNOWN ()) 0) ()) ((NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0)
+()) ((STRUCTURE (DERIVED 248 0 0 0 DERIVED ()) 0 (((CONSTANT (CHARACTER
+1 0 0 0 CHARACTER (())) 0 64
+'geopotential metres                                             ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'geopotential metres                                             ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'hPa                                                             ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'hPa                                                             ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'kelvin                                                          ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'kelvin                                                          ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'gram / kilogram                                                 ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'gram / kilogram                                                 ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'percent                                                         ') ()))
+()) ()) ((STRUCTURE (DERIVED 249 0 0 0 DERIVED ()) 0 (((ARRAY (REAL 8 0
+0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0 '-0.3e800000000000@3')
+()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.186a0000000000@5') ())) ('2'))
+()) ((ARRAY (REAL 8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ())
+0 '0.00000000000000@0') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.1f400000000000@3') ())) ('2')) ()) ((ARRAY (REAL 8 0 0 0 REAL ()) 1 (
+((CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.68db8bac710cb4@-3') ()) ((
+CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.44c00000000000@3') ())) ('2')) ())
+((ARRAY (REAL 8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.00000000000000@0') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.50000000000000@1') ())) ('2')) ()) ((ARRAY (REAL 8 0 0 0 REAL ()) 1 (
+((CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.96000000000000@2') ()) ((
+CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.15e00000000000@3') ())) ('2')) ())
+((ARRAY (REAL 8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.00000000000000@0') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.50000000000000@1') ())) ('2')) ()) ((ARRAY (REAL 8 0 0 0 REAL ()) 1 (
+((CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.00000000000000@0') ()) ((
+CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.32000000000000@2') ())) ('2')) ())
+((ARRAY (REAL 8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.00000000000000@0') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.50000000000000@1') ())) ('2')) ()) ((ARRAY (REAL 8 0 0 0 REAL ()) 1 (
+((CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.00000000000000@0') ()) ((
+CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.64000000000000@2') ())) ('2')) ()))
+()) ())) ())) (250 'lev2c' (DERIVED 251 0 0 0 DERIVED ()) () (
+UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0)
+UNKNOWN-ACCESS (STRUCTURE (DERIVED 251 0 0 0 DERIVED ()) 0 (((CONSTANT (
+INTEGER 4 0 0 0 INTEGER ()) 0 '0') ()) ((CONSTANT (LOGICAL 4 0 0 0
+LOGICAL ()) 0 1) ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'-0.5f5dd180000000@7') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'-0.5f5dd180000000@7') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'-0.5f5dd180000000@7') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'-0.5f5dd180000000@7') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'-0.5f5dd180000000@7') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'-0.5f5dd180000000@7') ()) ((CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0
+'-999') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0 '-0.5f5dd180000000@7') ())
+((CONSTANT (REAL 8 0 0 0 REAL ()) 0 '-0.5f5dd180000000@7') ()) ((
+CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '-999') ()) ((CONSTANT (REAL 8 0
+0 0 REAL ()) 0 '-0.5f5dd180000000@7') ()) ((CONSTANT (REAL 8 0 0 0 REAL
+()) 0 '-0.5f5dd180000000@7') ()) ((CONSTANT (INTEGER 4 0 0 0 INTEGER ())
+0 '-999') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0 '-0.5f5dd180000000@7')
+()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0 '-0.5f5dd180000000@7') ()) ((
+CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '-999') ()) ((CONSTANT (REAL 8 0
+0 0 REAL ()) 0 '-0.5f5dd180000000@7') ()) ((CONSTANT (REAL 8 0 0 0 REAL
+()) 0 '-0.5f5dd180000000@7') ()) ((CONSTANT (INTEGER 4 0 0 0 INTEGER ())
+0 '-999') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0 '-0.5f5dd180000000@7')
+()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0 '-0.5f5dd180000000@7') ()) ((
+CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '-999') ()) ((CONSTANT (REAL 8 0
+0 0 REAL ()) 0 '-0.5f5dd180000000@7') ()) ((CONSTANT (REAL 8 0 0 0 REAL
+()) 0 '-0.5f5dd180000000@7') ()) ((CONSTANT (INTEGER 4 0 0 0 INTEGER ())
+0 '-999') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0 '-0.5f5dd180000000@7')
+()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0 '-0.5f5dd180000000@7') ()) ((
+CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '-999') ()) ((STRUCTURE (
+DERIVED 252 0 0 0 DERIVED ()) 0 (((CONSTANT (CHARACTER 1 0 0 0 CHARACTER
+(())) 0 64
+'degrees_north                                                   ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'degrees_east                                                    ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'radians                                                         ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'geopotential metres                                             ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'hPa                                                             ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'hPa                                                             ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'percent                                                         ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'metres                                                          ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'radians                                                         ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'                                                                ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'metres                                                          ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'N-units                                                         ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'                                                                ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'metres                                                          ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'kelvin                                                          ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'                                                                ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'metres                                                          ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'kelvin                                                          ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'                                                                ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'metres                                                          ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'kelvin                                                          ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'                                                                ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'geopotential metres                                             ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'kelvin                                                          ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'                                                                ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'geopotential metres                                             ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'kelvin                                                          ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'                                                                ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'metres                                                          ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'kelvin                                                          ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'                                                                ') ()))
+()) ()) ((STRUCTURE (DERIVED 253 0 0 0 DERIVED ()) 0 (((ARRAY (REAL 8 0
+0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0 '-0.5a000000000000@2')
+()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.5a000000000000@2') ())) ('2'))
+()) ((ARRAY (REAL 8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ())
+0 '-0.b4000000000000@2') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.b4000000000000@2') ())) ('2')) ()) ((ARRAY (REAL 8 0 0 0 REAL ()) 1 (
+((CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.00000000000000@0') ()) ((
+CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.3243f3e0370cdc@1') ())) ('2')) ())
+((ARRAY (REAL 8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'-0.3e800000000000@3') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.27100000000000@4') ())) ('2')) ()) ((ARRAY (REAL 8 0 0 0 REAL ()) 1 (
+((CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.fa000000000000@2') ()) ((
+CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.44c00000000000@3') ())) ('2')) ())
+((ARRAY (REAL 8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.00000000000000@0') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.50000000000000@1') ())) ('2')) ()) ((ARRAY (REAL 8 0 0 0 REAL ()) 1 (
+((CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.00000000000000@0') ()) ((
+CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.64000000000000@2') ())) ('2')) ())
+((ARRAY (REAL 8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.5e9ac000000000@6') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.64b54000000000@6') ())) ('2')) ()) ((ARRAY (REAL 8 0 0 0 REAL ()) 1 (
+((CONSTANT (REAL 8 0 0 0 REAL ()) 0 '-0.4189374bc6a7f0@-2') ()) ((
+CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.1999999999999a@0') ())) ('2')) ())
+((ARRAY (INTEGER 4 0 0 0 INTEGER ()) 1 (((CONSTANT (INTEGER 4 0 0 0
+INTEGER ()) 0 '0') ()) ((CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '255')
+())) ('2')) ()) ((ARRAY (REAL 8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0
+0 REAL ()) 0 '-0.3e800000000000@3') ()) ((CONSTANT (REAL 8 0 0 0 REAL ())
+0 '0.186a0000000000@5') ())) ('2')) ()) ((ARRAY (REAL 8 0 0 0 REAL ()) 1
+(((CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.00000000000000@0') ()) ((
+CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.1f400000000000@3') ())) ('2')) ())
+((ARRAY (INTEGER 4 0 0 0 INTEGER ()) 1 (((CONSTANT (INTEGER 4 0 0 0
+INTEGER ()) 0 '0') ()) ((CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '255')
+())) ('2')) ()) ((ARRAY (REAL 8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0
+0 REAL ()) 0 '-0.3e800000000000@3') ()) ((CONSTANT (REAL 8 0 0 0 REAL ())
+0 '0.186a0000000000@5') ())) ('2')) ()) ((ARRAY (REAL 8 0 0 0 REAL ()) 1
+(((CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.96000000000000@2') ()) ((
+CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.15e00000000000@3') ())) ('2')) ())
+((ARRAY (INTEGER 4 0 0 0 INTEGER ()) 1 (((CONSTANT (INTEGER 4 0 0 0
+INTEGER ()) 0 '0') ()) ((CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '255')
+())) ('2')) ()) ((ARRAY (REAL 8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0
+0 REAL ()) 0 '-0.3e800000000000@3') ()) ((CONSTANT (REAL 8 0 0 0 REAL ())
+0 '0.186a0000000000@5') ())) ('2')) ()) ((ARRAY (REAL 8 0 0 0 REAL ()) 1
+(((CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.96000000000000@2') ()) ((
+CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.15e00000000000@3') ())) ('2')) ())
+((ARRAY (INTEGER 4 0 0 0 INTEGER ()) 1 (((CONSTANT (INTEGER 4 0 0 0
+INTEGER ()) 0 '0') ()) ((CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '255')
+())) ('2')) ()) ((ARRAY (REAL 8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0
+0 REAL ()) 0 '-0.3e800000000000@3') ()) ((CONSTANT (REAL 8 0 0 0 REAL ())
+0 '0.186a0000000000@5') ())) ('2')) ()) ((ARRAY (REAL 8 0 0 0 REAL ()) 1
+(((CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.96000000000000@2') ()) ((
+CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.15e00000000000@3') ())) ('2')) ())
+((ARRAY (INTEGER 4 0 0 0 INTEGER ()) 1 (((CONSTANT (INTEGER 4 0 0 0
+INTEGER ()) 0 '0') ()) ((CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '255')
+())) ('2')) ()) ((ARRAY (REAL 8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0
+0 REAL ()) 0 '-0.3e800000000000@3') ()) ((CONSTANT (REAL 8 0 0 0 REAL ())
+0 '0.186a0000000000@5') ())) ('2')) ()) ((ARRAY (REAL 8 0 0 0 REAL ()) 1
+(((CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.96000000000000@2') ()) ((
+CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.15e00000000000@3') ())) ('2')) ())
+((ARRAY (INTEGER 4 0 0 0 INTEGER ()) 1 (((CONSTANT (INTEGER 4 0 0 0
+INTEGER ()) 0 '0') ()) ((CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '255')
+())) ('2')) ()) ((ARRAY (REAL 8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0
+0 REAL ()) 0 '-0.3e800000000000@3') ()) ((CONSTANT (REAL 8 0 0 0 REAL ())
+0 '0.186a0000000000@5') ())) ('2')) ()) ((ARRAY (REAL 8 0 0 0 REAL ()) 1
+(((CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.96000000000000@2') ()) ((
+CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.15e00000000000@3') ())) ('2')) ())
+((ARRAY (INTEGER 4 0 0 0 INTEGER ()) 1 (((CONSTANT (INTEGER 4 0 0 0
+INTEGER ()) 0 '0') ()) ((CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '255')
+())) ('2')) ()) ((ARRAY (REAL 8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0
+0 REAL ()) 0 '-0.3e800000000000@3') ()) ((CONSTANT (REAL 8 0 0 0 REAL ())
+0 '0.186a0000000000@5') ())) ('2')) ()) ((ARRAY (REAL 8 0 0 0 REAL ()) 1
+(((CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.96000000000000@2') ()) ((
+CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.15e00000000000@3') ())) ('2')) ())
+((ARRAY (INTEGER 4 0 0 0 INTEGER ()) 1 (((CONSTANT (INTEGER 4 0 0 0
+INTEGER ()) 0 '0') ()) ((CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '255')
+())) ('2')) ())) ()) ())) ())) (254 'lev2d' (DERIVED 255 0 0 0 DERIVED ())
+() (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0)
+UNKNOWN-ACCESS (STRUCTURE (DERIVED 255 0 0 0 DERIVED ()) 0 (((CONSTANT (
+INTEGER 4 0 0 0 INTEGER ()) 0 '0') ()) ((CONSTANT (LOGICAL 4 0 0 0
+LOGICAL ()) 0 1) ()) ((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'UNKNOWN                                                         ') ())
+((NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0) ()) ((NULL (UNKNOWN 0 0 0 0
+UNKNOWN ()) 0) ()) ((STRUCTURE (DERIVED 256 0 0 0 DERIVED ()) 0 (((
+CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 40
+'hPa                                     ') ()) ((CONSTANT (CHARACTER 1
+0 0 0 CHARACTER (())) 0 40 '                                        ') ()))
+()) ()) ((STRUCTURE (DERIVED 257 0 0 0 DERIVED ()) 0 (((ARRAY (REAL 8 0
+0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.00000000000000@0')
+()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.7d000000000000@3') ())) ('2'))
+()) ((ARRAY (REAL 8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ())
+0 '0.00000000000000@0') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.20000000000000@1') ())) ('2')) ())) ()) ())) ())) (258 'units' (
+DERIVED 259 0 0 0 DERIVED ()) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC
+UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (STRUCTURE (DERIVED 259 0 0 0
+DERIVED ()) 0 (((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'bits                                                            ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'percent                                                         ') ()))
+())) (260 'range' (DERIVED 261 0 0 0 DERIVED ()) () (UNKNOWN-FL
+UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (
+STRUCTURE (DERIVED 261 0 0 0 DERIVED ()) 0 (((ARRAY (INTEGER 4 0 0 0
+INTEGER ()) 1 (((CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '0') ()) ((
+CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '32767') ())) ('2')) ()) ((
+ARRAY (REAL 8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.00000000000000@0') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.64000000000000@2') ())) ('2')) ())) ())) (262 'vlist' (DERIVED 263 0
+0 0 DERIVED ()) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
+UNKNOWN 0 0) UNKNOWN-ACCESS (STRUCTURE (DERIVED 263 0 0 0 DERIVED ()) 0
+(((NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0) ()) ((NULL (UNKNOWN 0 0 0 0
+UNKNOWN ()) 0) ()) ((NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0) ())) ())))
+PUBLIC (() () () ()) () 0 0 59804403)
+23 'Varconfig' 'ropp_1dvar_types' '' 11 ((DERIVED UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) (UNKNOWN 0 0 0 0 UNKNOWN ()) 0 0 () ()
+0 ((264 'obs_file' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0
+0 0 INTEGER ()) 0 '2048'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC
+UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0
+CHARACTER (())) 0 2048
+'ropp_obs.nc                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     '))
+(265 'obs_covar_method' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (
+INTEGER 4 0 0 0 INTEGER ()) 0 '2048'))) () (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1
+0 0 0 CHARACTER (())) 0 2048
+'VSDC                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            '))
+(266 'obs_corr_file' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4
+0 0 0 INTEGER ()) 0 '2048'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC
+UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0
+CHARACTER (())) 0 2048
+'ropp_obs_corr.nc                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                '))
+(267 'bg_file' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0 0 0
+INTEGER ()) 0 '2048'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC
+UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0
+CHARACTER (())) 0 2048
+'ropp_bg.nc                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      '))
+(268 'out_file' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0 0 0
+INTEGER ()) 0 '2048'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC
+UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0
+CHARACTER (())) 0 2048
+'ropp_out.nc                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     '))
+(269 'bg_covar_method' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER
+4 0 0 0 INTEGER ()) 0 '2048'))) () (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1
+0 0 0 CHARACTER (())) 0 2048
+'VSFC                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            '))
+(270 'bg_corr_file' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0
+0 0 INTEGER ()) 0 '2048'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC
+UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0
+CHARACTER (())) 0 2048
+'ropp_bg_corr.nc                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 '))
+(271 'min_1dvar_height' (REAL 8 0 0 0 REAL ()) () (UNKNOWN-FL
+UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (
+CONSTANT (REAL 8 0 0 0 REAL ()) 0 '-0.a0000000000000@1')) (272
+'max_1dvar_height' (REAL 8 0 0 0 REAL ()) () (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (REAL 8 0 0 0
+REAL ()) 0 '0.3c000000000000@2')) (273 'genqc_colocation_apply' (
+LOGICAL 4 0 0 0 LOGICAL ()) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC
+UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (LOGICAL 4 0 0 0 LOGICAL ())
+0 1)) (274 'genqc_max_distance' (REAL 8 0 0 0 REAL ()) () (UNKNOWN-FL
+UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (
+CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.12c00000000000@3')) (275
+'genqc_max_time_sep' (REAL 8 0 0 0 REAL ()) () (UNKNOWN-FL
+UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (
+CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.2a300000000000@4')) (276
+'genqc_min_temperature' (REAL 8 0 0 0 REAL ()) () (UNKNOWN-FL
+UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (
+CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.96000000000000@2')) (277
+'genqc_max_temperature' (REAL 8 0 0 0 REAL ()) () (UNKNOWN-FL
+UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (
+CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.15e00000000000@3')) (278
+'genqc_min_spec_humidity' (REAL 8 0 0 0 REAL ()) () (UNKNOWN-FL
+UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (
+CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.00000000000000@0')) (279
+'genqc_max_spec_humidity' (REAL 8 0 0 0 REAL ()) () (UNKNOWN-FL
+UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (
+CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.32000000000000@2')) (280
+'genqc_min_impact' (REAL 8 0 0 0 REAL ()) () (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (REAL 8 0 0 0
+REAL ()) 0 '0.5e9ac000000000@6')) (281 'genqc_max_impact' (REAL 8 0 0 0
+REAL ()) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0)
+UNKNOWN-ACCESS (CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.64b54000000000@6'))
+(282 'genqc_min_bangle' (REAL 8 0 0 0 REAL ()) () (UNKNOWN-FL
+UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (
+CONSTANT (REAL 8 0 0 0 REAL ()) 0 '-0.68db8bac710cb4@-3')) (283
+'genqc_max_bangle' (REAL 8 0 0 0 REAL ()) () (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (REAL 8 0 0 0
+REAL ()) 0 '0.1999999999999a@0')) (284 'genqc_min_geop_refrac' (REAL 8 0
+0 0 REAL ()) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN
+0 0) UNKNOWN-ACCESS (CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'-0.3e800000000000@3')) (285 'genqc_max_geop_refrac' (REAL 8 0 0 0 REAL
+()) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0)
+UNKNOWN-ACCESS (CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.186a0000000000@5'))
+(286 'genqc_min_refractivity' (REAL 8 0 0 0 REAL ()) () (UNKNOWN-FL
+UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (
+CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.00000000000000@0')) (287
+'genqc_max_refractivity' (REAL 8 0 0 0 REAL ()) () (UNKNOWN-FL
+UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (
+CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.1f400000000000@3')) (288
+'genqc_min_obheight' (REAL 8 0 0 0 REAL ()) () (UNKNOWN-FL
+UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (
+CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.4e200000000000@4')) (289 'bgqc_apply'
+(LOGICAL 4 0 0 0 LOGICAL ()) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC
+UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (LOGICAL 4 0 0 0 LOGICAL ())
+0 1)) (290 'bgqc_reject_factor' (REAL 8 0 0 0 REAL ()) () (UNKNOWN-FL
+UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (
+CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.a0000000000000@1')) (291
+'bgqc_reject_max_percent' (REAL 8 0 0 0 REAL ()) () (UNKNOWN-FL
+UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (
+CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.32000000000000@2')) (292 'pge_apply'
+(LOGICAL 4 0 0 0 LOGICAL ()) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC
+UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (LOGICAL 4 0 0 0 LOGICAL ())
+0 0)) (293 'pge_fg' (REAL 8 0 0 0 REAL ()) () (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (REAL 8 0 0 0
+REAL ()) 0 '0.4189374bc6a7f0@-2')) (294 'pge_d' (REAL 8 0 0 0 REAL ()) ()
+(UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0)
+UNKNOWN-ACCESS (CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.a0000000000000@1'))
+(295 'minropp' (DERIVED 296 0 0 0 DERIVED ()) () (UNKNOWN-FL
+UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (
+STRUCTURE (DERIVED 296 0 0 0 DERIVED ()) 0 (((CONSTANT (CHARACTER 1 0 0
+0 CHARACTER (())) 0 2048
+'MINROPP                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         ')
+()) ((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 2048
+'screen                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          ')
+()) ((CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '0') ()) ((CONSTANT (
+INTEGER 4 0 0 0 INTEGER ()) 0 '1500') ()) ((CONSTANT (INTEGER 4 0 0 0
+INTEGER ()) 0 '0') ()) ((CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '50') ())
+((CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.2af31dc4611874@-6') ()) ((
+CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.734aca5f6226f0@-13') ())) ())) (
+297 'use_precond' (LOGICAL 4 0 0 0 LOGICAL ()) () (UNKNOWN-FL
+UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (
+CONSTANT (LOGICAL 4 0 0 0 LOGICAL ()) 0 1)) (298 'conv_check_apply' (
+LOGICAL 4 0 0 0 LOGICAL ()) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC
+UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (LOGICAL 4 0 0 0 LOGICAL ())
+0 1)) (299 'conv_check_n_previous' (INTEGER 4 0 0 0 INTEGER ()) () (
+UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0)
+UNKNOWN-ACCESS (CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '2')) (300
+'conv_check_max_delta_state' (REAL 8 0 0 0 REAL ()) () (UNKNOWN-FL
+UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (
+CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.1999999999999a@0')) (301
+'conv_check_max_delta_j' (REAL 8 0 0 0 REAL ()) () (UNKNOWN-FL
+UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (
+CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.1999999999999a@0')) (302
+'extended_1dvar_diag' (LOGICAL 4 0 0 0 LOGICAL ()) () (UNKNOWN-FL
+UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (
+CONSTANT (LOGICAL 4 0 0 0 LOGICAL ()) 0 0)) (303 'use_logp' (LOGICAL 4 0
+0 0 LOGICAL ()) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
+UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (LOGICAL 4 0 0 0 LOGICAL ()) 0 0))
+(304 'use_logq' (LOGICAL 4 0 0 0 LOGICAL ()) () (UNKNOWN-FL
+UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (
+CONSTANT (LOGICAL 4 0 0 0 LOGICAL ()) 0 0)) (305 'compress' (LOGICAL 4 0
+0 0 LOGICAL ()) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
+UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (LOGICAL 4 0 0 0 LOGICAL ()) 0 0)))
+PUBLIC (() () () ()) () 0 0 91848278)
+39 'Matrix_pp' 'matrix_types' '' 6 ((DERIVED UNKNOWN-INTENT UNKNOWN-PROC
+UNKNOWN UNKNOWN 0 0 POINTER_COMP) (UNKNOWN 0 0 0 0 UNKNOWN ()) 0 0 () ()
+0 ((306 'd' (REAL 8 0 0 0 REAL ()) (1 0 DEFERRED () ()) (UNKNOWN-FL
+UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION POINTER)
+UNKNOWN-ACCESS (NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0)) (307 'fact_chol' (
+LOGICAL 4 0 0 0 LOGICAL ()) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC
+UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (LOGICAL 4 0 0 0 LOGICAL ())
+0 0)) (308 'equi_chol' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER
+4 0 0 0 INTEGER ()) 0 '1'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC
+UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0
+CHARACTER (())) 0 1 'N')) (309 'e' (REAL 8 0 0 0 REAL ()) (1 0 DEFERRED
+() ()) (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0
+DIMENSION POINTER) UNKNOWN-ACCESS (NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0))
+(310 'f' (REAL 8 0 0 0 REAL ()) (1 0 DEFERRED () ()) (UNKNOWN-FL
+UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION POINTER)
+UNKNOWN-ACCESS (NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0)) (311 's' (REAL 8 0
+0 0 REAL ()) (1 0 DEFERRED () ()) (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION POINTER) UNKNOWN-ACCESS (
+NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0))) PUBLIC (() () () ()) () 0 0
+1928890)
+47 'Obs1drefrac' 'ropp_fm_types' '' 6 ((DERIVED UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 POINTER_COMP) (UNKNOWN 0 0 0 0 UNKNOWN
+()) 0 0 () () 0 ((312 'refrac' (REAL 8 0 0 0 REAL ()) (1 0 DEFERRED () ())
+(UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION
+POINTER) UNKNOWN-ACCESS (NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0)) (313 'geop'
+(REAL 8 0 0 0 REAL ()) (1 0 DEFERRED () ()) (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION POINTER) UNKNOWN-ACCESS (
+NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0)) (314 'weights' (REAL 8 0 0 0 REAL
+()) (1 0 DEFERRED () ()) (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
+UNKNOWN 0 0 DIMENSION POINTER) UNKNOWN-ACCESS (NULL (UNKNOWN 0 0 0 0
+UNKNOWN ()) 0)) (315 'lon' (REAL 8 0 0 0 REAL ()) () (UNKNOWN-FL
+UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS ()) (
+316 'lat' (REAL 8 0 0 0 REAL ()) () (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS ()) (317 'time' (REAL 8
+0 0 0 REAL ()) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
+UNKNOWN 0 0) UNKNOWN-ACCESS ()) (318 'cov' (DERIVED 39 0 0 0 DERIVED ())
+() (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0)
+UNKNOWN-ACCESS (STRUCTURE (DERIVED 39 0 0 0 DERIVED ()) 0 (((NULL (
+UNKNOWN 0 0 0 0 UNKNOWN ()) 0) ()) ((CONSTANT (LOGICAL 4 0 0 0 LOGICAL ())
+0 0) ()) ((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 1 'N') ()) ((
+NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0) ()) ((NULL (UNKNOWN 0 0 0 0 UNKNOWN
+()) 0) ()) ((NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0) ())) ())) (319 'obs_ok'
+(LOGICAL 4 0 0 0 LOGICAL ()) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC
+UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS ()) (320 'cov_ok' (LOGICAL 4 0 0 0
+LOGICAL ()) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0
+0) UNKNOWN-ACCESS ())) PUBLIC (() () () ()) () 0 0 52984312)
+81 'Dt7type' 'ropp_io_types' '' 6 ((DERIVED UNKNOWN-INTENT UNKNOWN-PROC
+UNKNOWN UNKNOWN 0 0) (UNKNOWN 0 0 0 0 UNKNOWN ()) 0 0 () () 0 ((321 'year'
+(INTEGER 4 0 0 0 INTEGER ()) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC
+UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (INTEGER 4 0 0 0 INTEGER ())
+0 '9999')) (322 'month' (INTEGER 4 0 0 0 INTEGER ()) () (UNKNOWN-FL
+UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (
+CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '99')) (323 'day' (INTEGER 4 0 0
+0 INTEGER ()) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN
+0 0) UNKNOWN-ACCESS (CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '99')) (
+324 'hour' (INTEGER 4 0 0 0 INTEGER ()) () (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (INTEGER 4 0
+0 0 INTEGER ()) 0 '99')) (325 'minute' (INTEGER 4 0 0 0 INTEGER ()) () (
+UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0)
+UNKNOWN-ACCESS (CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '99')) (326
+'second' (INTEGER 4 0 0 0 INTEGER ()) () (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (INTEGER 4 0
+0 0 INTEGER ()) 0 '99')) (327 'msec' (INTEGER 4 0 0 0 INTEGER ()) () (
+UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0)
+UNKNOWN-ACCESS (CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '9999')) (328
+'units' (DERIVED 82 0 0 0 DERIVED ()) () (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (STRUCTURE (DERIVED 82
+0 0 0 DERIVED ()) 0 (((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'years                                                           ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'months                                                          ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'days                                                            ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'hours                                                           ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'minutes                                                         ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'seconds                                                         ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'milliseconds                                                    ') ()))
+())) (329 'range' (DERIVED 83 0 0 0 DERIVED ()) () (UNKNOWN-FL
+UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (
+STRUCTURE (DERIVED 83 0 0 0 DERIVED ()) 0 (((ARRAY (INTEGER 4 0 0 0
+INTEGER ()) 1 (((CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '1995') ()) ((
+CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '2099') ())) ('2')) ()) ((ARRAY
+(INTEGER 4 0 0 0 INTEGER ()) 1 (((CONSTANT (INTEGER 4 0 0 0 INTEGER ())
+0 '1') ()) ((CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '12') ())) ('2')) ())
+((ARRAY (INTEGER 4 0 0 0 INTEGER ()) 1 (((CONSTANT (INTEGER 4 0 0 0
+INTEGER ()) 0 '1') ()) ((CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '31') ()))
+('2')) ()) ((ARRAY (INTEGER 4 0 0 0 INTEGER ()) 1 (((CONSTANT (INTEGER 4
+0 0 0 INTEGER ()) 0 '0') ()) ((CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0
+'23') ())) ('2')) ()) ((ARRAY (INTEGER 4 0 0 0 INTEGER ()) 1 (((
+CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '0') ()) ((CONSTANT (INTEGER 4 0
+0 0 INTEGER ()) 0 '59') ())) ('2')) ()) ((ARRAY (INTEGER 4 0 0 0 INTEGER
+()) 1 (((CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '0') ()) ((CONSTANT (
+INTEGER 4 0 0 0 INTEGER ()) 0 '59') ())) ('2')) ()) ((ARRAY (INTEGER 4 0
+0 0 INTEGER ()) 1 (((CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '0') ()) (
+(CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '999') ())) ('2')) ())) ())))
+PUBLIC (() () () ()) () 0 0 23067428)
+82 'Dt7units' 'ropp_io_types' '' 6 ((DERIVED UNKNOWN-INTENT UNKNOWN-PROC
+UNKNOWN UNKNOWN 0 0) (UNKNOWN 0 0 0 0 UNKNOWN ()) 0 0 () () 0 ((330 'year'
+(CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0
+'64'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0)
+UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'years                                                           ')) (
+331 'month' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0 0 0
+INTEGER ()) 0 '64'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
+UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0 CHARACTER (()))
+0 64 'months                                                          '))
+(332 'day' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0 0 0
+INTEGER ()) 0 '64'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
+UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0 CHARACTER (()))
+0 64 'days                                                            '))
+(333 'hour' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0 0 0
+INTEGER ()) 0 '64'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
+UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0 CHARACTER (()))
+0 64 'hours                                                           '))
+(334 'minute' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0 0 0
+INTEGER ()) 0 '64'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
+UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0 CHARACTER (()))
+0 64 'minutes                                                         '))
+(335 'second' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0 0 0
+INTEGER ()) 0 '64'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
+UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0 CHARACTER (()))
+0 64 'seconds                                                         '))
+(336 'msec' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0 0 0
+INTEGER ()) 0 '64'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
+UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0 CHARACTER (()))
+0 64 'milliseconds                                                    ')))
+PUBLIC (() () () ()) () 0 0 91172165)
+83 'Dt7range' 'ropp_io_types' '' 6 ((DERIVED UNKNOWN-INTENT UNKNOWN-PROC
+UNKNOWN UNKNOWN 0 0) (UNKNOWN 0 0 0 0 UNKNOWN ()) 0 0 () () 0 ((337 'year'
+(INTEGER 4 0 0 0 INTEGER ()) (1 0 EXPLICIT (CONSTANT (INTEGER 4 0 0 0
+INTEGER ()) 0 '1') (CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '2')) (
+UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION)
+UNKNOWN-ACCESS (ARRAY (INTEGER 4 0 0 0 INTEGER ()) 1 (((CONSTANT (
+INTEGER 4 0 0 0 INTEGER ()) 0 '1995') ()) ((CONSTANT (INTEGER 4 0 0 0
+INTEGER ()) 0 '2099') ())) ('2'))) (338 'month' (INTEGER 4 0 0 0 INTEGER
+()) (1 0 EXPLICIT (CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '1') (
+CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '2')) (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION) UNKNOWN-ACCESS (ARRAY (
+INTEGER 4 0 0 0 INTEGER ()) 1 (((CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0
+'1') ()) ((CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '12') ())) ('2'))) (
+339 'day' (INTEGER 4 0 0 0 INTEGER ()) (1 0 EXPLICIT (CONSTANT (INTEGER
+4 0 0 0 INTEGER ()) 0 '1') (CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '2'))
+(UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION)
+UNKNOWN-ACCESS (ARRAY (INTEGER 4 0 0 0 INTEGER ()) 1 (((CONSTANT (
+INTEGER 4 0 0 0 INTEGER ()) 0 '1') ()) ((CONSTANT (INTEGER 4 0 0 0
+INTEGER ()) 0 '31') ())) ('2'))) (340 'hour' (INTEGER 4 0 0 0 INTEGER ())
+(1 0 EXPLICIT (CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '1') (CONSTANT (
+INTEGER 4 0 0 0 INTEGER ()) 0 '2')) (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION) UNKNOWN-ACCESS (ARRAY (
+INTEGER 4 0 0 0 INTEGER ()) 1 (((CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0
+'0') ()) ((CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '23') ())) ('2'))) (
+341 'minute' (INTEGER 4 0 0 0 INTEGER ()) (1 0 EXPLICIT (CONSTANT (
+INTEGER 4 0 0 0 INTEGER ()) 0 '1') (CONSTANT (INTEGER 4 0 0 0 INTEGER ())
+0 '2')) (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0
+DIMENSION) UNKNOWN-ACCESS (ARRAY (INTEGER 4 0 0 0 INTEGER ()) 1 (((
+CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '0') ()) ((CONSTANT (INTEGER 4 0
+0 0 INTEGER ()) 0 '59') ())) ('2'))) (342 'second' (INTEGER 4 0 0 0
+INTEGER ()) (1 0 EXPLICIT (CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '1')
+(CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '2')) (UNKNOWN-FL
+UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION)
+UNKNOWN-ACCESS (ARRAY (INTEGER 4 0 0 0 INTEGER ()) 1 (((CONSTANT (
+INTEGER 4 0 0 0 INTEGER ()) 0 '0') ()) ((CONSTANT (INTEGER 4 0 0 0
+INTEGER ()) 0 '59') ())) ('2'))) (343 'msec' (INTEGER 4 0 0 0 INTEGER ())
+(1 0 EXPLICIT (CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '1') (CONSTANT (
+INTEGER 4 0 0 0 INTEGER ()) 0 '2')) (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION) UNKNOWN-ACCESS (ARRAY (
+INTEGER 4 0 0 0 INTEGER ()) 1 (((CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0
+'0') ()) ((CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '999') ())) ('2'))))
+PUBLIC (() () () ()) () 0 0 50202323)
+88 'Geotype' 'ropp_io_types' '' 6 ((DERIVED UNKNOWN-INTENT UNKNOWN-PROC
+UNKNOWN UNKNOWN 0 0) (UNKNOWN 0 0 0 0 UNKNOWN ()) 0 0 () () 0 ((344
+'time_offset' (REAL 8 0 0 0 REAL ()) () (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (REAL 8 0 0 0
+REAL ()) 0 '-0.5f5dd180000000@7')) (345 'lat' (REAL 8 0 0 0 REAL ()) ()
+(UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0)
+UNKNOWN-ACCESS (CONSTANT (REAL 8 0 0 0 REAL ()) 0 '-0.5f5dd180000000@7'))
+(346 'lon' (REAL 8 0 0 0 REAL ()) () (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (REAL 8 0 0 0
+REAL ()) 0 '-0.5f5dd180000000@7')) (347 'roc' (REAL 8 0 0 0 REAL ()) ()
+(UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0)
+UNKNOWN-ACCESS (CONSTANT (REAL 8 0 0 0 REAL ()) 0 '-0.5f5dd180000000@7'))
+(348 'r_coc' (REAL 8 0 0 0 REAL ()) (1 0 EXPLICIT (CONSTANT (INTEGER 4 0
+0 0 INTEGER ()) 0 '1') (CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '3')) (
+UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION)
+UNKNOWN-ACCESS (CONSTANT (REAL 8 0 0 0 REAL ()) 0 '-0.5f5dd180000000@7'))
+(349 'azimuth' (REAL 8 0 0 0 REAL ()) () (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (REAL 8 0 0 0
+REAL ()) 0 '-0.5f5dd180000000@7')) (350 'undulation' (REAL 8 0 0 0 REAL
+()) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0)
+UNKNOWN-ACCESS (CONSTANT (REAL 8 0 0 0 REAL ()) 0 '-0.5f5dd180000000@7'))
+(351 'units' (DERIVED 89 0 0 0 DERIVED ()) () (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (STRUCTURE (DERIVED 89
+0 0 0 DERIVED ()) 0 (((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'seconds                                                         ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'degrees_north                                                   ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'degrees_east                                                    ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'metres                                                          ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'metres                                                          ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'degrees_T                                                       ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'metres                                                          ') ()))
+())) (352 'range' (DERIVED 90 0 0 0 DERIVED ()) () (UNKNOWN-FL
+UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (
+STRUCTURE (DERIVED 90 0 0 0 DERIVED ()) 0 (((ARRAY (REAL 8 0 0 0 REAL ())
+1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.00000000000000@0') ()) ((
+CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.efffbe76c8b438@2') ())) ('2')) ())
+((ARRAY (REAL 8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'-0.5a000000000000@2') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.5a000000000000@2') ())) ('2')) ()) ((ARRAY (REAL 8 0 0 0 REAL ()) 1 (
+((CONSTANT (REAL 8 0 0 0 REAL ()) 0 '-0.b4000000000000@2') ()) ((
+CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.b4000000000000@2') ())) ('2')) ())
+((ARRAY (REAL 8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.5e9ac000000000@6') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.64b54000000000@6') ())) ('2')) ()) ((ARRAY (REAL 8 0 0 0 REAL ()) 1 (
+((CONSTANT (REAL 8 0 0 0 REAL ()) 0 '-0.c3500000000000@4') ()) ((
+CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.c3500000000000@4') ())) ('2')) ())
+((ARRAY (REAL 8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.00000000000000@0') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.16800000000000@3') ())) ('2')) ()) ((ARRAY (REAL 8 0 0 0 REAL ()) 1 (
+((CONSTANT (REAL 8 0 0 0 REAL ()) 0 '-0.96000000000000@2') ()) ((
+CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.96000000000000@2') ())) ('2')) ()))
+())) (353 'reference_frame' (DERIVED 91 0 0 0 DERIVED ()) () (
+UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0)
+UNKNOWN-ACCESS (STRUCTURE (DERIVED 91 0 0 0 DERIVED ()) 0 (((CONSTANT (
+CHARACTER 1 0 0 0 CHARACTER (())) 0 3 'ECF') ())) ()))) PUBLIC (() () ()
+()) () 0 0 18495790)
+89 'Geounits' 'ropp_io_types' '' 6 ((DERIVED UNKNOWN-INTENT UNKNOWN-PROC
+UNKNOWN UNKNOWN 0 0) (UNKNOWN 0 0 0 0 UNKNOWN ()) 0 0 () () 0 ((354
+'time_offset' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0 0 0
+INTEGER ()) 0 '64'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
+UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0 CHARACTER (()))
+0 64 'seconds                                                         '))
+(355 'lat' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0 0 0
+INTEGER ()) 0 '64'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
+UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0 CHARACTER (()))
+0 64 'degrees_north                                                   '))
+(356 'lon' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0 0 0
+INTEGER ()) 0 '64'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
+UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0 CHARACTER (()))
+0 64 'degrees_east                                                    '))
+(357 'roc' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0 0 0
+INTEGER ()) 0 '64'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
+UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0 CHARACTER (()))
+0 64 'metres                                                          '))
+(358 'r_coc' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0 0 0
+INTEGER ()) 0 '64'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
+UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0 CHARACTER (()))
+0 64 'metres                                                          '))
+(359 'azimuth' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0 0 0
+INTEGER ()) 0 '64'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
+UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0 CHARACTER (()))
+0 64 'degrees_T                                                       '))
+(360 'undulation' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0 0
+0 INTEGER ()) 0 '64'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC
+UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0
+CHARACTER (())) 0 64
+'metres                                                          ')))
+PUBLIC (() () () ()) () 0 0 3851451)
+90 'Georange' 'ropp_io_types' '' 6 ((DERIVED UNKNOWN-INTENT UNKNOWN-PROC
+UNKNOWN UNKNOWN 0 0) (UNKNOWN 0 0 0 0 UNKNOWN ()) 0 0 () () 0 ((361
+'time_offset' (REAL 8 0 0 0 REAL ()) (1 0 EXPLICIT (CONSTANT (INTEGER 4
+0 0 0 INTEGER ()) 0 '1') (CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '2'))
+(UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION)
+UNKNOWN-ACCESS (ARRAY (REAL 8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0
+REAL ()) 0 '0.00000000000000@0') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.efffbe76c8b438@2') ())) ('2'))) (362 'lat' (REAL 8 0 0 0 REAL ()) (1
+0 EXPLICIT (CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '1') (CONSTANT (
+INTEGER 4 0 0 0 INTEGER ()) 0 '2')) (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION) UNKNOWN-ACCESS (ARRAY (REAL
+8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'-0.5a000000000000@2') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.5a000000000000@2') ())) ('2'))) (363 'lon' (REAL 8 0 0 0 REAL ()) (1
+0 EXPLICIT (CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '1') (CONSTANT (
+INTEGER 4 0 0 0 INTEGER ()) 0 '2')) (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION) UNKNOWN-ACCESS (ARRAY (REAL
+8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'-0.b4000000000000@2') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.b4000000000000@2') ())) ('2'))) (364 'roc' (REAL 8 0 0 0 REAL ()) (1
+0 EXPLICIT (CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '1') (CONSTANT (
+INTEGER 4 0 0 0 INTEGER ()) 0 '2')) (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION) UNKNOWN-ACCESS (ARRAY (REAL
+8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.5e9ac000000000@6') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.64b54000000000@6') ())) ('2'))) (365 'r_coc' (REAL 8 0 0 0 REAL ()) (
+1 0 EXPLICIT (CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '1') (CONSTANT (
+INTEGER 4 0 0 0 INTEGER ()) 0 '2')) (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION) UNKNOWN-ACCESS (ARRAY (REAL
+8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'-0.c3500000000000@4') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.c3500000000000@4') ())) ('2'))) (366 'azimuth' (REAL 8 0 0 0 REAL ())
+(1 0 EXPLICIT (CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '1') (CONSTANT (
+INTEGER 4 0 0 0 INTEGER ()) 0 '2')) (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION) UNKNOWN-ACCESS (ARRAY (REAL
+8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.00000000000000@0') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.16800000000000@3') ())) ('2'))) (367 'undulation' (REAL 8 0 0 0 REAL
+()) (1 0 EXPLICIT (CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '1') (
+CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '2')) (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION) UNKNOWN-ACCESS (ARRAY (REAL
+8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'-0.96000000000000@2') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.96000000000000@2') ())) ('2')))) PUBLIC (() () () ()) () 0 0 62881609)
+91 'Georef' 'ropp_io_types' '' 6 ((DERIVED UNKNOWN-INTENT UNKNOWN-PROC
+UNKNOWN UNKNOWN 0 0) (UNKNOWN 0 0 0 0 UNKNOWN ()) 0 0 () () 0 ((368
+'r_coc' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0 0 0 INTEGER
+()) 0 '3'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN
+0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 3 'ECF')))
+PUBLIC (() () () ()) () 0 0 70707967)
+93 'Bgtype' 'ropp_io_types' '' 6 ((DERIVED UNKNOWN-INTENT UNKNOWN-PROC
+UNKNOWN UNKNOWN 0 0) (UNKNOWN 0 0 0 0 UNKNOWN ()) 0 0 () () 0 ((369
+'source' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0 0 0
+INTEGER ()) 0 '20'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
+UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0 CHARACTER (()))
+0 20 'NONE                ')) (370 'year' (INTEGER 4 0 0 0 INTEGER ()) ()
+(UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0)
+UNKNOWN-ACCESS (CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '9999')) (371
+'month' (INTEGER 4 0 0 0 INTEGER ()) () (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (INTEGER 4 0
+0 0 INTEGER ()) 0 '99')) (372 'day' (INTEGER 4 0 0 0 INTEGER ()) () (
+UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0)
+UNKNOWN-ACCESS (CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '99')) (373 'hour'
+(INTEGER 4 0 0 0 INTEGER ()) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC
+UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (INTEGER 4 0 0 0 INTEGER ())
+0 '99')) (374 'minute' (INTEGER 4 0 0 0 INTEGER ()) () (UNKNOWN-FL
+UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (
+CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '99')) (375 'fcperiod' (REAL 8 0
+0 0 REAL ()) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN
+0 0) UNKNOWN-ACCESS (CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.3e7e6680000000@3')) (376 'units' (DERIVED 94 0 0 0 DERIVED ()) () (
+UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0)
+UNKNOWN-ACCESS (STRUCTURE (DERIVED 94 0 0 0 DERIVED ()) 0 (((CONSTANT (
+CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'years                                                           ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'months                                                          ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'days                                                            ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'hours                                                           ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'minutes                                                         ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'hours                                                           ') ()))
+())) (377 'range' (DERIVED 95 0 0 0 DERIVED ()) () (UNKNOWN-FL
+UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (
+STRUCTURE (DERIVED 95 0 0 0 DERIVED ()) 0 (((ARRAY (INTEGER 4 0 0 0
+INTEGER ()) 1 (((CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '1995') ()) ((
+CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '2099') ())) ('2')) ()) ((ARRAY
+(INTEGER 4 0 0 0 INTEGER ()) 1 (((CONSTANT (INTEGER 4 0 0 0 INTEGER ())
+0 '1') ()) ((CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '12') ())) ('2')) ())
+((ARRAY (INTEGER 4 0 0 0 INTEGER ()) 1 (((CONSTANT (INTEGER 4 0 0 0
+INTEGER ()) 0 '1') ()) ((CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '31') ()))
+('2')) ()) ((ARRAY (INTEGER 4 0 0 0 INTEGER ()) 1 (((CONSTANT (INTEGER 4
+0 0 0 INTEGER ()) 0 '0') ()) ((CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0
+'23') ())) ('2')) ()) ((ARRAY (INTEGER 4 0 0 0 INTEGER ()) 1 (((
+CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '0') ()) ((CONSTANT (INTEGER 4 0
+0 0 INTEGER ()) 0 '59') ())) ('2')) ()) ((ARRAY (REAL 8 0 0 0 REAL ()) 1
+(((CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.00000000000000@0') ()) ((
+CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.18000000000000@2') ())) ('2')) ()))
+()))) PUBLIC (() () () ()) () 0 0 56321212)
+94 'Bgunits' 'ropp_io_types' '' 6 ((DERIVED UNKNOWN-INTENT UNKNOWN-PROC
+UNKNOWN UNKNOWN 0 0) (UNKNOWN 0 0 0 0 UNKNOWN ()) 0 0 () () 0 ((378 'year'
+(CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0
+'64'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0)
+UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'years                                                           ')) (
+379 'month' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0 0 0
+INTEGER ()) 0 '64'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
+UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0 CHARACTER (()))
+0 64 'months                                                          '))
+(380 'day' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0 0 0
+INTEGER ()) 0 '64'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
+UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0 CHARACTER (()))
+0 64 'days                                                            '))
+(381 'hour' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0 0 0
+INTEGER ()) 0 '64'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
+UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0 CHARACTER (()))
+0 64 'hours                                                           '))
+(382 'minute' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0 0 0
+INTEGER ()) 0 '64'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
+UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0 CHARACTER (()))
+0 64 'minutes                                                         '))
+(383 'fcperiod' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0 0 0
+INTEGER ()) 0 '64'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
+UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0 CHARACTER (()))
+0 64 'hours                                                           ')))
+PUBLIC (() () () ()) () 0 0 3664045)
+95 'Bgrange' 'ropp_io_types' '' 6 ((DERIVED UNKNOWN-INTENT UNKNOWN-PROC
+UNKNOWN UNKNOWN 0 0) (UNKNOWN 0 0 0 0 UNKNOWN ()) 0 0 () () 0 ((384 'year'
+(INTEGER 4 0 0 0 INTEGER ()) (1 0 EXPLICIT (CONSTANT (INTEGER 4 0 0 0
+INTEGER ()) 0 '1') (CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '2')) (
+UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION)
+UNKNOWN-ACCESS (ARRAY (INTEGER 4 0 0 0 INTEGER ()) 1 (((CONSTANT (
+INTEGER 4 0 0 0 INTEGER ()) 0 '1995') ()) ((CONSTANT (INTEGER 4 0 0 0
+INTEGER ()) 0 '2099') ())) ('2'))) (385 'month' (INTEGER 4 0 0 0 INTEGER
+()) (1 0 EXPLICIT (CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '1') (
+CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '2')) (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION) UNKNOWN-ACCESS (ARRAY (
+INTEGER 4 0 0 0 INTEGER ()) 1 (((CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0
+'1') ()) ((CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '12') ())) ('2'))) (
+386 'day' (INTEGER 4 0 0 0 INTEGER ()) (1 0 EXPLICIT (CONSTANT (INTEGER
+4 0 0 0 INTEGER ()) 0 '1') (CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '2'))
+(UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION)
+UNKNOWN-ACCESS (ARRAY (INTEGER 4 0 0 0 INTEGER ()) 1 (((CONSTANT (
+INTEGER 4 0 0 0 INTEGER ()) 0 '1') ()) ((CONSTANT (INTEGER 4 0 0 0
+INTEGER ()) 0 '31') ())) ('2'))) (387 'hour' (INTEGER 4 0 0 0 INTEGER ())
+(1 0 EXPLICIT (CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '1') (CONSTANT (
+INTEGER 4 0 0 0 INTEGER ()) 0 '2')) (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION) UNKNOWN-ACCESS (ARRAY (
+INTEGER 4 0 0 0 INTEGER ()) 1 (((CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0
+'0') ()) ((CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '23') ())) ('2'))) (
+388 'minute' (INTEGER 4 0 0 0 INTEGER ()) (1 0 EXPLICIT (CONSTANT (
+INTEGER 4 0 0 0 INTEGER ()) 0 '1') (CONSTANT (INTEGER 4 0 0 0 INTEGER ())
+0 '2')) (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0
+DIMENSION) UNKNOWN-ACCESS (ARRAY (INTEGER 4 0 0 0 INTEGER ()) 1 (((
+CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '0') ()) ((CONSTANT (INTEGER 4 0
+0 0 INTEGER ()) 0 '59') ())) ('2'))) (389 'fcperiod' (REAL 8 0 0 0 REAL
+()) (1 0 EXPLICIT (CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '1') (
+CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '2')) (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION) UNKNOWN-ACCESS (ARRAY (REAL
+8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.00000000000000@0') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.18000000000000@2') ())) ('2')))) PUBLIC (() () () ()) () 0 0 62694203)
+97 'L1atype' 'ropp_io_types' '' 6 ((DERIVED UNKNOWN-INTENT UNKNOWN-PROC
+UNKNOWN UNKNOWN 0 0 POINTER_COMP) (UNKNOWN 0 0 0 0 UNKNOWN ()) 0 0 () ()
+0 ((390 'npoints' (INTEGER 4 0 0 0 INTEGER ()) () (UNKNOWN-FL
+UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (
+CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '0')) (391 'missing' (LOGICAL 4
+0 0 0 LOGICAL ()) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
+UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (LOGICAL 4 0 0 0 LOGICAL ()) 0 1))
+(392 'dtime' (REAL 8 0 0 0 REAL ()) (1 0 DEFERRED () ()) (UNKNOWN-FL
+UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION POINTER)
+UNKNOWN-ACCESS (NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0)) (393 'snr_l1ca' (
+REAL 8 0 0 0 REAL ()) (1 0 DEFERRED () ()) (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION POINTER) UNKNOWN-ACCESS (
+NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0)) (394 'snr_l1p' (REAL 8 0 0 0 REAL
+()) (1 0 DEFERRED () ()) (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
+UNKNOWN 0 0 DIMENSION POINTER) UNKNOWN-ACCESS (NULL (UNKNOWN 0 0 0 0
+UNKNOWN ()) 0)) (395 'snr_l2p' (REAL 8 0 0 0 REAL ()) (1 0 DEFERRED () ())
+(UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION
+POINTER) UNKNOWN-ACCESS (NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0)) (396
+'phase_l1' (REAL 8 0 0 0 REAL ()) (1 0 DEFERRED () ()) (UNKNOWN-FL
+UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION POINTER)
+UNKNOWN-ACCESS (NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0)) (397 'phase_l2' (
+REAL 8 0 0 0 REAL ()) (1 0 DEFERRED () ()) (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION POINTER) UNKNOWN-ACCESS (
+NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0)) (398 'r_gns' (REAL 8 0 0 0 REAL ())
+(2 0 DEFERRED () () () ()) (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC
+UNKNOWN UNKNOWN 0 0 DIMENSION POINTER) UNKNOWN-ACCESS (NULL (UNKNOWN 0 0
+0 0 UNKNOWN ()) 0)) (399 'v_gns' (REAL 8 0 0 0 REAL ()) (2 0 DEFERRED ()
+() () ()) (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0
+DIMENSION POINTER) UNKNOWN-ACCESS (NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0))
+(400 'r_leo' (REAL 8 0 0 0 REAL ()) (2 0 DEFERRED () () () ()) (
+UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION
+POINTER) UNKNOWN-ACCESS (NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0)) (401
+'v_leo' (REAL 8 0 0 0 REAL ()) (2 0 DEFERRED () () () ()) (UNKNOWN-FL
+UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION POINTER)
+UNKNOWN-ACCESS (NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0)) (402 'phase_qual'
+(REAL 8 0 0 0 REAL ()) (1 0 DEFERRED () ()) (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION POINTER) UNKNOWN-ACCESS (
+NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0)) (403 'units' (DERIVED 98 0 0 0
+DERIVED ()) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0
+0) UNKNOWN-ACCESS (STRUCTURE (DERIVED 98 0 0 0 DERIVED ()) 0 (((
+CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'seconds                                                         ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'volt / volt                                                     ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'metres                                                          ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'metres                                                          ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'metres / seconds                                                ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'metres                                                          ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'metres / seconds                                                ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'percent                                                         ') ()))
+())) (404 'range' (DERIVED 99 0 0 0 DERIVED ()) () (UNKNOWN-FL
+UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (
+STRUCTURE (DERIVED 99 0 0 0 DERIVED ()) 0 (((ARRAY (REAL 8 0 0 0 REAL ())
+1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0 '-0.10000000000000@1') ()) ((
+CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.efffbe76c8b438@2') ())) ('2')) ())
+((ARRAY (REAL 8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.00000000000000@0') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.c3500000000000@4') ())) ('2')) ()) ((ARRAY (REAL 8 0 0 0 REAL ()) 1 (
+((CONSTANT (REAL 8 0 0 0 REAL ()) 0 '-0.f4240000000000@5') ()) ((
+CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.f4240000000000@5') ())) ('2')) ())
+((ARRAY (REAL 8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'-0.29020c00000000@7') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.29020c00000000@7') ())) ('2')) ()) ((ARRAY (REAL 8 0 0 0 REAL ()) 1 (
+((CONSTANT (REAL 8 0 0 0 REAL ()) 0 '-0.27100000000000@4') ()) ((
+CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.27100000000000@4') ())) ('2')) ())
+((ARRAY (REAL 8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'-0.98968000000000@6') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.98968000000000@6') ())) ('2')) ()) ((ARRAY (REAL 8 0 0 0 REAL ()) 1 (
+((CONSTANT (REAL 8 0 0 0 REAL ()) 0 '-0.27100000000000@4') ()) ((
+CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.27100000000000@4') ())) ('2')) ())
+((ARRAY (REAL 8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.00000000000000@0') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.64000000000000@2') ())) ('2')) ())) ())) (405 'reference_frame' (
+DERIVED 100 0 0 0 DERIVED ()) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC
+UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (STRUCTURE (DERIVED 100 0 0 0
+DERIVED ()) 0 (((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 3 'ECF')
+()) ((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 3 'ECI') ()) ((
+CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 3 'ECF') ()) ((CONSTANT (
+CHARACTER 1 0 0 0 CHARACTER (())) 0 3 'ECI') ())) ()))) PUBLIC (() () ()
+()) () 0 0 65777881)
+98 'L1aunits' 'ropp_io_types' '' 6 ((DERIVED UNKNOWN-INTENT UNKNOWN-PROC
+UNKNOWN UNKNOWN 0 0) (UNKNOWN 0 0 0 0 UNKNOWN ()) 0 0 () () 0 ((406
+'dtime' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0 0 0 INTEGER
+()) 0 '64'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN
+0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'seconds                                                         ')) (
+407 'snr' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0 0 0
+INTEGER ()) 0 '64'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
+UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0 CHARACTER (()))
+0 64 'volt / volt                                                     '))
+(408 'phase' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0 0 0
+INTEGER ()) 0 '64'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
+UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0 CHARACTER (()))
+0 64 'metres                                                          '))
+(409 'r_gns' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0 0 0
+INTEGER ()) 0 '64'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
+UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0 CHARACTER (()))
+0 64 'metres                                                          '))
+(410 'v_gns' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0 0 0
+INTEGER ()) 0 '64'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
+UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0 CHARACTER (()))
+0 64 'metres / seconds                                                '))
+(411 'r_leo' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0 0 0
+INTEGER ()) 0 '64'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
+UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0 CHARACTER (()))
+0 64 'metres                                                          '))
+(412 'v_leo' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0 0 0
+INTEGER ()) 0 '64'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
+UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0 CHARACTER (()))
+0 64 'metres / seconds                                                '))
+(413 'phase_qual' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0 0
+0 INTEGER ()) 0 '64'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC
+UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0
+CHARACTER (())) 0 64
+'percent                                                         ')))
+PUBLIC (() () () ()) () 0 0 25473232)
+99 'L1arange' 'ropp_io_types' '' 6 ((DERIVED UNKNOWN-INTENT UNKNOWN-PROC
+UNKNOWN UNKNOWN 0 0) (UNKNOWN 0 0 0 0 UNKNOWN ()) 0 0 () () 0 ((414
+'dtime' (REAL 8 0 0 0 REAL ()) (1 0 EXPLICIT (CONSTANT (INTEGER 4 0 0 0
+INTEGER ()) 0 '1') (CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '2')) (
+UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION)
+UNKNOWN-ACCESS (ARRAY (REAL 8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0
+REAL ()) 0 '-0.10000000000000@1') ()) ((CONSTANT (REAL 8 0 0 0 REAL ())
+0 '0.efffbe76c8b438@2') ())) ('2'))) (415 'snr' (REAL 8 0 0 0 REAL ()) (
+1 0 EXPLICIT (CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '1') (CONSTANT (
+INTEGER 4 0 0 0 INTEGER ()) 0 '2')) (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION) UNKNOWN-ACCESS (ARRAY (REAL
+8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.00000000000000@0') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.c3500000000000@4') ())) ('2'))) (416 'phase' (REAL 8 0 0 0 REAL ()) (
+1 0 EXPLICIT (CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '1') (CONSTANT (
+INTEGER 4 0 0 0 INTEGER ()) 0 '2')) (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION) UNKNOWN-ACCESS (ARRAY (REAL
+8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'-0.f4240000000000@5') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.f4240000000000@5') ())) ('2'))) (417 'r_gns' (REAL 8 0 0 0 REAL ()) (
+1 0 EXPLICIT (CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '1') (CONSTANT (
+INTEGER 4 0 0 0 INTEGER ()) 0 '2')) (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION) UNKNOWN-ACCESS (ARRAY (REAL
+8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'-0.29020c00000000@7') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.29020c00000000@7') ())) ('2'))) (418 'v_gns' (REAL 8 0 0 0 REAL ()) (
+1 0 EXPLICIT (CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '1') (CONSTANT (
+INTEGER 4 0 0 0 INTEGER ()) 0 '2')) (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION) UNKNOWN-ACCESS (ARRAY (REAL
+8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'-0.27100000000000@4') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.27100000000000@4') ())) ('2'))) (419 'r_leo' (REAL 8 0 0 0 REAL ()) (
+1 0 EXPLICIT (CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '1') (CONSTANT (
+INTEGER 4 0 0 0 INTEGER ()) 0 '2')) (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION) UNKNOWN-ACCESS (ARRAY (REAL
+8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'-0.98968000000000@6') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.98968000000000@6') ())) ('2'))) (420 'v_leo' (REAL 8 0 0 0 REAL ()) (
+1 0 EXPLICIT (CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '1') (CONSTANT (
+INTEGER 4 0 0 0 INTEGER ()) 0 '2')) (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION) UNKNOWN-ACCESS (ARRAY (REAL
+8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'-0.27100000000000@4') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.27100000000000@4') ())) ('2'))) (421 'phase_qual' (REAL 8 0 0 0 REAL
+()) (1 0 EXPLICIT (CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '1') (
+CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '2')) (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION) UNKNOWN-ACCESS (ARRAY (REAL
+8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.00000000000000@0') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.64000000000000@2') ())) ('2')))) PUBLIC (() () () ()) () 0 0 84503390)
+100 'L1aref' 'ropp_io_types' '' 6 ((DERIVED UNKNOWN-INTENT UNKNOWN-PROC
+UNKNOWN UNKNOWN 0 0) (UNKNOWN 0 0 0 0 UNKNOWN ()) 0 0 () () 0 ((422
+'r_gns' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0 0 0 INTEGER
+()) 0 '3'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN
+0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 3 'ECF'))
+(423 'v_gns' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0 0 0
+INTEGER ()) 0 '3'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
+UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0 CHARACTER (()))
+0 3 'ECI')) (424 'r_leo' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (
+INTEGER 4 0 0 0 INTEGER ()) 0 '3'))) () (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1
+0 0 0 CHARACTER (())) 0 3 'ECF')) (425 'v_leo' (CHARACTER 1 0 0 0
+CHARACTER ((CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '3'))) () (
+UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0)
+UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 3 'ECI')))
+PUBLIC (() () () ()) () 0 0 64657044)
+102 'L1btype' 'ropp_io_types' '' 6 ((DERIVED UNKNOWN-INTENT UNKNOWN-PROC
+UNKNOWN UNKNOWN 0 0 POINTER_COMP) (UNKNOWN 0 0 0 0 UNKNOWN ()) 0 0 () ()
+0 ((426 'npoints' (INTEGER 4 0 0 0 INTEGER ()) () (UNKNOWN-FL
+UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (
+CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '0')) (427 'missing' (LOGICAL 4
+0 0 0 LOGICAL ()) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
+UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (LOGICAL 4 0 0 0 LOGICAL ()) 0 1))
+(428 'lat_tp' (REAL 8 0 0 0 REAL ()) (1 0 DEFERRED () ()) (UNKNOWN-FL
+UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION POINTER)
+UNKNOWN-ACCESS (NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0)) (429 'lon_tp' (
+REAL 8 0 0 0 REAL ()) (1 0 DEFERRED () ()) (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION POINTER) UNKNOWN-ACCESS (
+NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0)) (430 'azimuth_tp' (REAL 8 0 0 0
+REAL ()) (1 0 DEFERRED () ()) (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC
+UNKNOWN UNKNOWN 0 0 DIMENSION POINTER) UNKNOWN-ACCESS (NULL (UNKNOWN 0 0
+0 0 UNKNOWN ()) 0)) (431 'impact_l1' (REAL 8 0 0 0 REAL ()) (1 0
+DEFERRED () ()) (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN
+0 0 DIMENSION POINTER) UNKNOWN-ACCESS (NULL (UNKNOWN 0 0 0 0 UNKNOWN ())
+0)) (432 'impact_l2' (REAL 8 0 0 0 REAL ()) (1 0 DEFERRED () ()) (
+UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION
+POINTER) UNKNOWN-ACCESS (NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0)) (433
+'impact' (REAL 8 0 0 0 REAL ()) (1 0 DEFERRED () ()) (UNKNOWN-FL
+UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION POINTER)
+UNKNOWN-ACCESS (NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0)) (434 'impact_opt'
+(REAL 8 0 0 0 REAL ()) (1 0 DEFERRED () ()) (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION POINTER) UNKNOWN-ACCESS (
+NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0)) (435 'bangle_l1' (REAL 8 0 0 0
+REAL ()) (1 0 DEFERRED () ()) (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC
+UNKNOWN UNKNOWN 0 0 DIMENSION POINTER) UNKNOWN-ACCESS (NULL (UNKNOWN 0 0
+0 0 UNKNOWN ()) 0)) (436 'bangle_l2' (REAL 8 0 0 0 REAL ()) (1 0
+DEFERRED () ()) (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN
+0 0 DIMENSION POINTER) UNKNOWN-ACCESS (NULL (UNKNOWN 0 0 0 0 UNKNOWN ())
+0)) (437 'bangle' (REAL 8 0 0 0 REAL ()) (1 0 DEFERRED () ()) (
+UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION
+POINTER) UNKNOWN-ACCESS (NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0)) (438
+'bangle_opt' (REAL 8 0 0 0 REAL ()) (1 0 DEFERRED () ()) (UNKNOWN-FL
+UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION POINTER)
+UNKNOWN-ACCESS (NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0)) (439
+'bangle_l1_sigma' (REAL 8 0 0 0 REAL ()) (1 0 DEFERRED () ()) (
+UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION
+POINTER) UNKNOWN-ACCESS (NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0)) (440
+'bangle_l2_sigma' (REAL 8 0 0 0 REAL ()) (1 0 DEFERRED () ()) (
+UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION
+POINTER) UNKNOWN-ACCESS (NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0)) (441
+'bangle_sigma' (REAL 8 0 0 0 REAL ()) (1 0 DEFERRED () ()) (UNKNOWN-FL
+UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION POINTER)
+UNKNOWN-ACCESS (NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0)) (442
+'bangle_opt_sigma' (REAL 8 0 0 0 REAL ()) (1 0 DEFERRED () ()) (
+UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION
+POINTER) UNKNOWN-ACCESS (NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0)) (443
+'bangle_l1_qual' (REAL 8 0 0 0 REAL ()) (1 0 DEFERRED () ()) (
+UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION
+POINTER) UNKNOWN-ACCESS (NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0)) (444
+'bangle_l2_qual' (REAL 8 0 0 0 REAL ()) (1 0 DEFERRED () ()) (
+UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION
+POINTER) UNKNOWN-ACCESS (NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0)) (445
+'bangle_qual' (REAL 8 0 0 0 REAL ()) (1 0 DEFERRED () ()) (UNKNOWN-FL
+UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION POINTER)
+UNKNOWN-ACCESS (NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0)) (446
+'bangle_opt_qual' (REAL 8 0 0 0 REAL ()) (1 0 DEFERRED () ()) (
+UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION
+POINTER) UNKNOWN-ACCESS (NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0)) (447
+'units' (DERIVED 103 0 0 0 DERIVED ()) () (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (STRUCTURE (DERIVED 103
+0 0 0 DERIVED ()) 0 (((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'degrees_north                                                   ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'degrees_east                                                    ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'degrees                                                         ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'metres                                                          ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'radians                                                         ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'radians                                                         ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'percent                                                         ') ()))
+())) (448 'range' (DERIVED 104 0 0 0 DERIVED ()) () (UNKNOWN-FL
+UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (
+STRUCTURE (DERIVED 104 0 0 0 DERIVED ()) 0 (((ARRAY (REAL 8 0 0 0 REAL ())
+1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0 '-0.5a000000000000@2') ()) ((
+CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.5a000000000000@2') ())) ('2')) ())
+((ARRAY (REAL 8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'-0.b4000000000000@2') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.b4000000000000@2') ())) ('2')) ()) ((ARRAY (REAL 8 0 0 0 REAL ()) 1 (
+((CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.00000000000000@0') ()) ((
+CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.16800000000000@3') ())) ('2')) ())
+((ARRAY (REAL 8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.5e9ac000000000@6') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.64b54000000000@6') ())) ('2')) ()) ((ARRAY (REAL 8 0 0 0 REAL ()) 1 (
+((CONSTANT (REAL 8 0 0 0 REAL ()) 0 '-0.4189374bc6a7f0@-2') ()) ((
+CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.1999999999999a@0') ())) ('2')) ())
+((ARRAY (REAL 8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.00000000000000@0') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.28f5c28f5c28f6@-1') ())) ('2')) ()) ((ARRAY (REAL 8 0 0 0 REAL ()) 1
+(((CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.00000000000000@0') ()) ((
+CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.64000000000000@2') ())) ('2')) ()))
+()))) PUBLIC (() () () ()) () 0 0 10374874)
+103 'L1bunits' 'ropp_io_types' '' 6 ((DERIVED UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) (UNKNOWN 0 0 0 0 UNKNOWN ()) 0 0 () ()
+0 ((449 'lat_tp' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0 0
+0 INTEGER ()) 0 '64'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC
+UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0
+CHARACTER (())) 0 64
+'degrees_north                                                   ')) (
+450 'lon_tp' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0 0 0
+INTEGER ()) 0 '64'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
+UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0 CHARACTER (()))
+0 64 'degrees_east                                                    '))
+(451 'azimuth_tp' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0 0
+0 INTEGER ()) 0 '64'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC
+UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0
+CHARACTER (())) 0 64
+'degrees                                                         ')) (
+452 'impact' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0 0 0
+INTEGER ()) 0 '64'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
+UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0 CHARACTER (()))
+0 64 'metres                                                          '))
+(453 'bangle' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0 0 0
+INTEGER ()) 0 '64'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
+UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0 CHARACTER (()))
+0 64 'radians                                                         '))
+(454 'bangle_sigma' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0
+0 0 INTEGER ()) 0 '64'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC
+UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0
+CHARACTER (())) 0 64
+'radians                                                         ')) (
+455 'bangle_qual' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0 0
+0 INTEGER ()) 0 '64'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC
+UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0
+CHARACTER (())) 0 64
+'percent                                                         ')))
+PUBLIC (() () () ()) () 0 0 97480463)
+104 'L1brange' 'ropp_io_types' '' 6 ((DERIVED UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) (UNKNOWN 0 0 0 0 UNKNOWN ()) 0 0 () ()
+0 ((456 'lat_tp' (REAL 8 0 0 0 REAL ()) (1 0 EXPLICIT (CONSTANT (
+INTEGER 4 0 0 0 INTEGER ()) 0 '1') (CONSTANT (INTEGER 4 0 0 0 INTEGER ())
+0 '2')) (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0
+DIMENSION) UNKNOWN-ACCESS (ARRAY (REAL 8 0 0 0 REAL ()) 1 (((CONSTANT (
+REAL 8 0 0 0 REAL ()) 0 '-0.5a000000000000@2') ()) ((CONSTANT (REAL 8 0
+0 0 REAL ()) 0 '0.5a000000000000@2') ())) ('2'))) (457 'lon_tp' (REAL 8
+0 0 0 REAL ()) (1 0 EXPLICIT (CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '1')
+(CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '2')) (UNKNOWN-FL
+UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION)
+UNKNOWN-ACCESS (ARRAY (REAL 8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0
+REAL ()) 0 '-0.b4000000000000@2') ()) ((CONSTANT (REAL 8 0 0 0 REAL ())
+0 '0.b4000000000000@2') ())) ('2'))) (458 'azimuth_tp' (REAL 8 0 0 0
+REAL ()) (1 0 EXPLICIT (CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '1') (
+CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '2')) (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION) UNKNOWN-ACCESS (ARRAY (REAL
+8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.00000000000000@0') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.16800000000000@3') ())) ('2'))) (459 'impact' (REAL 8 0 0 0 REAL ())
+(1 0 EXPLICIT (CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '1') (CONSTANT (
+INTEGER 4 0 0 0 INTEGER ()) 0 '2')) (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION) UNKNOWN-ACCESS (ARRAY (REAL
+8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.5e9ac000000000@6') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.64b54000000000@6') ())) ('2'))) (460 'bangle' (REAL 8 0 0 0 REAL ())
+(1 0 EXPLICIT (CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '1') (CONSTANT (
+INTEGER 4 0 0 0 INTEGER ()) 0 '2')) (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION) UNKNOWN-ACCESS (ARRAY (REAL
+8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'-0.4189374bc6a7f0@-2') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.1999999999999a@0') ())) ('2'))) (461 'bangle_sigma' (REAL 8 0 0 0
+REAL ()) (1 0 EXPLICIT (CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '1') (
+CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '2')) (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION) UNKNOWN-ACCESS (ARRAY (REAL
+8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.00000000000000@0') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.28f5c28f5c28f6@-1') ())) ('2'))) (462 'bangle_qual' (REAL 8 0 0 0
+REAL ()) (1 0 EXPLICIT (CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '1') (
+CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '2')) (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION) UNKNOWN-ACCESS (ARRAY (REAL
+8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.00000000000000@0') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.64000000000000@2') ())) ('2')))) PUBLIC (() () () ()) () 0 0 56510621)
+106 'L2atype' 'ropp_io_types' '' 6 ((DERIVED UNKNOWN-INTENT UNKNOWN-PROC
+UNKNOWN UNKNOWN 0 0 POINTER_COMP) (UNKNOWN 0 0 0 0 UNKNOWN ()) 0 0 () ()
+0 ((463 'npoints' (INTEGER 4 0 0 0 INTEGER ()) () (UNKNOWN-FL
+UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (
+CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '0')) (464 'missing' (LOGICAL 4
+0 0 0 LOGICAL ()) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
+UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (LOGICAL 4 0 0 0 LOGICAL ()) 0 1))
+(465 'alt_refrac' (REAL 8 0 0 0 REAL ()) (1 0 DEFERRED () ()) (
+UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION
+POINTER) UNKNOWN-ACCESS (NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0)) (466
+'geop_refrac' (REAL 8 0 0 0 REAL ()) (1 0 DEFERRED () ()) (UNKNOWN-FL
+UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION POINTER)
+UNKNOWN-ACCESS (NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0)) (467 'refrac' (
+REAL 8 0 0 0 REAL ()) (1 0 DEFERRED () ()) (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION POINTER) UNKNOWN-ACCESS (
+NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0)) (468 'refrac_sigma' (REAL 8 0 0 0
+REAL ()) (1 0 DEFERRED () ()) (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC
+UNKNOWN UNKNOWN 0 0 DIMENSION POINTER) UNKNOWN-ACCESS (NULL (UNKNOWN 0 0
+0 0 UNKNOWN ()) 0)) (469 'refrac_qual' (REAL 8 0 0 0 REAL ()) (1 0
+DEFERRED () ()) (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN
+0 0 DIMENSION POINTER) UNKNOWN-ACCESS (NULL (UNKNOWN 0 0 0 0 UNKNOWN ())
+0)) (470 'dry_temp' (REAL 8 0 0 0 REAL ()) (1 0 DEFERRED () ()) (
+UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION
+POINTER) UNKNOWN-ACCESS (NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0)) (471
+'dry_temp_sigma' (REAL 8 0 0 0 REAL ()) (1 0 DEFERRED () ()) (
+UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION
+POINTER) UNKNOWN-ACCESS (NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0)) (472
+'dry_temp_qual' (REAL 8 0 0 0 REAL ()) (1 0 DEFERRED () ()) (UNKNOWN-FL
+UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION POINTER)
+UNKNOWN-ACCESS (NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0)) (473 'units' (
+DERIVED 107 0 0 0 DERIVED ()) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC
+UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (STRUCTURE (DERIVED 107 0 0 0
+DERIVED ()) 0 (((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'metres                                                          ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'geopotential metres                                             ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'N-units                                                         ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'N-units                                                         ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'percent                                                         ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'kelvin                                                          ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'kelvin                                                          ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'percent                                                         ') ()))
+())) (474 'range' (DERIVED 108 0 0 0 DERIVED ()) () (UNKNOWN-FL
+UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (
+STRUCTURE (DERIVED 108 0 0 0 DERIVED ()) 0 (((ARRAY (REAL 8 0 0 0 REAL ())
+1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0 '-0.3e800000000000@3') ()) ((
+CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.186a0000000000@5') ())) ('2')) ())
+((ARRAY (REAL 8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'-0.3e800000000000@3') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.186a0000000000@5') ())) ('2')) ()) ((ARRAY (REAL 8 0 0 0 REAL ()) 1 (
+((CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.00000000000000@0') ()) ((
+CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.1f400000000000@3') ())) ('2')) ())
+((ARRAY (REAL 8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.00000000000000@0') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.32000000000000@2') ())) ('2')) ()) ((ARRAY (REAL 8 0 0 0 REAL ()) 1 (
+((CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.00000000000000@0') ()) ((
+CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.64000000000000@2') ())) ('2')) ())
+((ARRAY (REAL 8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.96000000000000@2') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.15e00000000000@3') ())) ('2')) ()) ((ARRAY (REAL 8 0 0 0 REAL ()) 1 (
+((CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.00000000000000@0') ()) ((
+CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.32000000000000@2') ())) ('2')) ())
+((ARRAY (REAL 8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.00000000000000@0') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.64000000000000@2') ())) ('2')) ())) ()))) PUBLIC (() () () ()) () 0 0
+37785112)
+107 'L2aunits' 'ropp_io_types' '' 6 ((DERIVED UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) (UNKNOWN 0 0 0 0 UNKNOWN ()) 0 0 () ()
+0 ((475 'alt_refrac' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4
+0 0 0 INTEGER ()) 0 '64'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC
+UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0
+CHARACTER (())) 0 64
+'metres                                                          ')) (
+476 'geop_refrac' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0 0
+0 INTEGER ()) 0 '64'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC
+UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0
+CHARACTER (())) 0 64
+'geopotential metres                                             ')) (
+477 'refrac' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0 0 0
+INTEGER ()) 0 '64'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
+UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0 CHARACTER (()))
+0 64 'N-units                                                         '))
+(478 'refrac_sigma' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0
+0 0 INTEGER ()) 0 '64'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC
+UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0
+CHARACTER (())) 0 64
+'N-units                                                         ')) (
+479 'refrac_qual' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0 0
+0 INTEGER ()) 0 '64'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC
+UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0
+CHARACTER (())) 0 64
+'percent                                                         ')) (
+480 'dry_temp' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0 0 0
+INTEGER ()) 0 '64'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
+UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0 CHARACTER (()))
+0 64 'kelvin                                                          '))
+(481 'dry_temp_sigma' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4
+0 0 0 INTEGER ()) 0 '64'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC
+UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0
+CHARACTER (())) 0 64
+'kelvin                                                          ')) (
+482 'dry_temp_qual' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0
+0 0 INTEGER ()) 0 '64'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC
+UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0
+CHARACTER (())) 0 64
+'percent                                                         ')))
+PUBLIC (() () () ()) () 0 0 23643729)
+108 'L2arange' 'ropp_io_types' '' 6 ((DERIVED UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) (UNKNOWN 0 0 0 0 UNKNOWN ()) 0 0 () ()
+0 ((483 'alt_refrac' (REAL 8 0 0 0 REAL ()) (1 0 EXPLICIT (CONSTANT (
+INTEGER 4 0 0 0 INTEGER ()) 0 '1') (CONSTANT (INTEGER 4 0 0 0 INTEGER ())
+0 '2')) (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0
+DIMENSION) UNKNOWN-ACCESS (ARRAY (REAL 8 0 0 0 REAL ()) 1 (((CONSTANT (
+REAL 8 0 0 0 REAL ()) 0 '-0.3e800000000000@3') ()) ((CONSTANT (REAL 8 0
+0 0 REAL ()) 0 '0.186a0000000000@5') ())) ('2'))) (484 'geop_refrac' (
+REAL 8 0 0 0 REAL ()) (1 0 EXPLICIT (CONSTANT (INTEGER 4 0 0 0 INTEGER ())
+0 '1') (CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '2')) (UNKNOWN-FL
+UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION)
+UNKNOWN-ACCESS (ARRAY (REAL 8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0
+REAL ()) 0 '-0.3e800000000000@3') ()) ((CONSTANT (REAL 8 0 0 0 REAL ())
+0 '0.186a0000000000@5') ())) ('2'))) (485 'refrac' (REAL 8 0 0 0 REAL ())
+(1 0 EXPLICIT (CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '1') (CONSTANT (
+INTEGER 4 0 0 0 INTEGER ()) 0 '2')) (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION) UNKNOWN-ACCESS (ARRAY (REAL
+8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.00000000000000@0') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.1f400000000000@3') ())) ('2'))) (486 'refrac_sigma' (REAL 8 0 0 0
+REAL ()) (1 0 EXPLICIT (CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '1') (
+CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '2')) (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION) UNKNOWN-ACCESS (ARRAY (REAL
+8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.00000000000000@0') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.32000000000000@2') ())) ('2'))) (487 'refrac_qual' (REAL 8 0 0 0 REAL
+()) (1 0 EXPLICIT (CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '1') (
+CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '2')) (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION) UNKNOWN-ACCESS (ARRAY (REAL
+8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.00000000000000@0') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.64000000000000@2') ())) ('2'))) (488 'dry_temp' (REAL 8 0 0 0 REAL ())
+(1 0 EXPLICIT (CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '1') (CONSTANT (
+INTEGER 4 0 0 0 INTEGER ()) 0 '2')) (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION) UNKNOWN-ACCESS (ARRAY (REAL
+8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.96000000000000@2') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.15e00000000000@3') ())) ('2'))) (489 'dry_temp_sigma' (REAL 8 0 0 0
+REAL ()) (1 0 EXPLICIT (CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '1') (
+CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '2')) (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION) UNKNOWN-ACCESS (ARRAY (REAL
+8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.00000000000000@0') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.32000000000000@2') ())) ('2'))) (490 'dry_temp_qual' (REAL 8 0 0 0
+REAL ()) (1 0 EXPLICIT (CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '1') (
+CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '2')) (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION) UNKNOWN-ACCESS (ARRAY (REAL
+8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.00000000000000@0') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.64000000000000@2') ())) ('2')))) PUBLIC (() () () ()) () 0 0 82673887)
+110 'L2btype' 'ropp_io_types' '' 6 ((DERIVED UNKNOWN-INTENT UNKNOWN-PROC
+UNKNOWN UNKNOWN 0 0 POINTER_COMP) (UNKNOWN 0 0 0 0 UNKNOWN ()) 0 0 () ()
+0 ((491 'npoints' (INTEGER 4 0 0 0 INTEGER ()) () (UNKNOWN-FL
+UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (
+CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '0')) (492 'missing' (LOGICAL 4
+0 0 0 LOGICAL ()) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
+UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (LOGICAL 4 0 0 0 LOGICAL ()) 0 1))
+(493 'geop' (REAL 8 0 0 0 REAL ()) (1 0 DEFERRED () ()) (UNKNOWN-FL
+UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION POINTER)
+UNKNOWN-ACCESS (NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0)) (494 'geop_sigma'
+(REAL 8 0 0 0 REAL ()) (1 0 DEFERRED () ()) (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION POINTER) UNKNOWN-ACCESS (
+NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0)) (495 'press' (REAL 8 0 0 0 REAL ())
+(1 0 DEFERRED () ()) (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
+UNKNOWN 0 0 DIMENSION POINTER) UNKNOWN-ACCESS (NULL (UNKNOWN 0 0 0 0
+UNKNOWN ()) 0)) (496 'press_sigma' (REAL 8 0 0 0 REAL ()) (1 0 DEFERRED
+() ()) (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0
+DIMENSION POINTER) UNKNOWN-ACCESS (NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0))
+(497 'temp' (REAL 8 0 0 0 REAL ()) (1 0 DEFERRED () ()) (UNKNOWN-FL
+UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION POINTER)
+UNKNOWN-ACCESS (NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0)) (498 'temp_sigma'
+(REAL 8 0 0 0 REAL ()) (1 0 DEFERRED () ()) (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION POINTER) UNKNOWN-ACCESS (
+NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0)) (499 'shum' (REAL 8 0 0 0 REAL ())
+(1 0 DEFERRED () ()) (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
+UNKNOWN 0 0 DIMENSION POINTER) UNKNOWN-ACCESS (NULL (UNKNOWN 0 0 0 0
+UNKNOWN ()) 0)) (500 'shum_sigma' (REAL 8 0 0 0 REAL ()) (1 0 DEFERRED ()
+()) (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0
+DIMENSION POINTER) UNKNOWN-ACCESS (NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0))
+(501 'meteo_qual' (REAL 8 0 0 0 REAL ()) (1 0 DEFERRED () ()) (
+UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION
+POINTER) UNKNOWN-ACCESS (NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0)) (502
+'units' (DERIVED 111 0 0 0 DERIVED ()) () (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (STRUCTURE (DERIVED 111
+0 0 0 DERIVED ()) 0 (((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'geopotential metres                                             ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'geopotential metres                                             ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'hPa                                                             ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'hPa                                                             ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'kelvin                                                          ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'kelvin                                                          ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'gram / kilogram                                                 ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'gram / kilogram                                                 ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'percent                                                         ') ()))
+())) (503 'range' (DERIVED 112 0 0 0 DERIVED ()) () (UNKNOWN-FL
+UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (
+STRUCTURE (DERIVED 112 0 0 0 DERIVED ()) 0 (((ARRAY (REAL 8 0 0 0 REAL ())
+1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0 '-0.3e800000000000@3') ()) ((
+CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.186a0000000000@5') ())) ('2')) ())
+((ARRAY (REAL 8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.00000000000000@0') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.1f400000000000@3') ())) ('2')) ()) ((ARRAY (REAL 8 0 0 0 REAL ()) 1 (
+((CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.68db8bac710cb4@-3') ()) ((
+CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.44c00000000000@3') ())) ('2')) ())
+((ARRAY (REAL 8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.00000000000000@0') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.50000000000000@1') ())) ('2')) ()) ((ARRAY (REAL 8 0 0 0 REAL ()) 1 (
+((CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.96000000000000@2') ()) ((
+CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.15e00000000000@3') ())) ('2')) ())
+((ARRAY (REAL 8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.00000000000000@0') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.50000000000000@1') ())) ('2')) ()) ((ARRAY (REAL 8 0 0 0 REAL ()) 1 (
+((CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.00000000000000@0') ()) ((
+CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.32000000000000@2') ())) ('2')) ())
+((ARRAY (REAL 8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.00000000000000@0') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.50000000000000@1') ())) ('2')) ()) ((ARRAY (REAL 8 0 0 0 REAL ()) 1 (
+((CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.00000000000000@0') ()) ((
+CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.64000000000000@2') ())) ('2')) ()))
+()))) PUBLIC (() () () ()) () 0 0 82382105)
+111 'L2bunits' 'ropp_io_types' '' 6 ((DERIVED UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) (UNKNOWN 0 0 0 0 UNKNOWN ()) 0 0 () ()
+0 ((504 'geop' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0 0 0
+INTEGER ()) 0 '64'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
+UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0 CHARACTER (()))
+0 64 'geopotential metres                                             '))
+(505 'geop_sigma' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0 0
+0 INTEGER ()) 0 '64'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC
+UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0
+CHARACTER (())) 0 64
+'geopotential metres                                             ')) (
+506 'press' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0 0 0
+INTEGER ()) 0 '64'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
+UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0 CHARACTER (()))
+0 64 'hPa                                                             '))
+(507 'press_sigma' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0
+0 0 INTEGER ()) 0 '64'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC
+UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0
+CHARACTER (())) 0 64
+'hPa                                                             ')) (
+508 'temp' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0 0 0
+INTEGER ()) 0 '64'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
+UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0 CHARACTER (()))
+0 64 'kelvin                                                          '))
+(509 'temp_sigma' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0 0
+0 INTEGER ()) 0 '64'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC
+UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0
+CHARACTER (())) 0 64
+'kelvin                                                          ')) (
+510 'shum' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0 0 0
+INTEGER ()) 0 '64'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
+UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0 CHARACTER (()))
+0 64 'gram / kilogram                                                 '))
+(511 'shum_sigma' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0 0
+0 INTEGER ()) 0 '64'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC
+UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0
+CHARACTER (())) 0 64
+'gram / kilogram                                                 ')) (
+512 'meteo_qual' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0 0
+0 INTEGER ()) 0 '64'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC
+UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0
+CHARACTER (())) 0 64
+'percent                                                         ')))
+PUBLIC (() () () ()) () 0 0 95650960)
+112 'L2brange' 'ropp_io_types' '' 6 ((DERIVED UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) (UNKNOWN 0 0 0 0 UNKNOWN ()) 0 0 () ()
+0 ((513 'geop' (REAL 8 0 0 0 REAL ()) (1 0 EXPLICIT (CONSTANT (INTEGER 4
+0 0 0 INTEGER ()) 0 '1') (CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '2'))
+(UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION)
+UNKNOWN-ACCESS (ARRAY (REAL 8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0
+REAL ()) 0 '-0.3e800000000000@3') ()) ((CONSTANT (REAL 8 0 0 0 REAL ())
+0 '0.186a0000000000@5') ())) ('2'))) (514 'geop_sigma' (REAL 8 0 0 0
+REAL ()) (1 0 EXPLICIT (CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '1') (
+CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '2')) (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION) UNKNOWN-ACCESS (ARRAY (REAL
+8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.00000000000000@0') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.1f400000000000@3') ())) ('2'))) (515 'press' (REAL 8 0 0 0 REAL ()) (
+1 0 EXPLICIT (CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '1') (CONSTANT (
+INTEGER 4 0 0 0 INTEGER ()) 0 '2')) (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION) UNKNOWN-ACCESS (ARRAY (REAL
+8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.68db8bac710cb4@-3') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.44c00000000000@3') ())) ('2'))) (516 'press_sigma' (REAL 8 0 0 0 REAL
+()) (1 0 EXPLICIT (CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '1') (
+CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '2')) (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION) UNKNOWN-ACCESS (ARRAY (REAL
+8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.00000000000000@0') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.50000000000000@1') ())) ('2'))) (517 'temp' (REAL 8 0 0 0 REAL ()) (
+1 0 EXPLICIT (CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '1') (CONSTANT (
+INTEGER 4 0 0 0 INTEGER ()) 0 '2')) (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION) UNKNOWN-ACCESS (ARRAY (REAL
+8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.96000000000000@2') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.15e00000000000@3') ())) ('2'))) (518 'temp_sigma' (REAL 8 0 0 0 REAL
+()) (1 0 EXPLICIT (CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '1') (
+CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '2')) (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION) UNKNOWN-ACCESS (ARRAY (REAL
+8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.00000000000000@0') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.50000000000000@1') ())) ('2'))) (519 'shum' (REAL 8 0 0 0 REAL ()) (
+1 0 EXPLICIT (CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '1') (CONSTANT (
+INTEGER 4 0 0 0 INTEGER ()) 0 '2')) (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION) UNKNOWN-ACCESS (ARRAY (REAL
+8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.00000000000000@0') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.32000000000000@2') ())) ('2'))) (520 'shum_sigma' (REAL 8 0 0 0 REAL
+()) (1 0 EXPLICIT (CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '1') (
+CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '2')) (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION) UNKNOWN-ACCESS (ARRAY (REAL
+8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.00000000000000@0') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.50000000000000@1') ())) ('2'))) (521 'meteo_qual' (REAL 8 0 0 0 REAL
+()) (1 0 EXPLICIT (CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '1') (
+CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '2')) (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION) UNKNOWN-ACCESS (ARRAY (REAL
+8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.00000000000000@0') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.64000000000000@2') ())) ('2')))) PUBLIC (() () () ()) () 0 0 54681118)
+114 'L2ctype' 'ropp_io_types' '' 6 ((DERIVED UNKNOWN-INTENT UNKNOWN-PROC
+UNKNOWN UNKNOWN 0 0) (UNKNOWN 0 0 0 0 UNKNOWN ()) 0 0 () () 0 ((522
+'npoints' (INTEGER 4 0 0 0 INTEGER ()) () (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (INTEGER 4 0
+0 0 INTEGER ()) 0 '0')) (523 'missing' (LOGICAL 4 0 0 0 LOGICAL ()) () (
+UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0)
+UNKNOWN-ACCESS (CONSTANT (LOGICAL 4 0 0 0 LOGICAL ()) 0 1)) (524
+'geop_sfc' (REAL 8 0 0 0 REAL ()) () (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (REAL 8 0 0 0
+REAL ()) 0 '-0.5f5dd180000000@7')) (525 'press_sfc' (REAL 8 0 0 0 REAL ())
+() (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0)
+UNKNOWN-ACCESS (CONSTANT (REAL 8 0 0 0 REAL ()) 0 '-0.5f5dd180000000@7'))
+(526 'press_sfc_sigma' (REAL 8 0 0 0 REAL ()) () (UNKNOWN-FL
+UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (
+CONSTANT (REAL 8 0 0 0 REAL ()) 0 '-0.5f5dd180000000@7')) (527
+'press_sfc_qual' (REAL 8 0 0 0 REAL ()) () (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (REAL 8 0 0 0
+REAL ()) 0 '-0.5f5dd180000000@7')) (528 'tph_bangle' (REAL 8 0 0 0 REAL
+()) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0)
+UNKNOWN-ACCESS (CONSTANT (REAL 8 0 0 0 REAL ()) 0 '-0.5f5dd180000000@7'))
+(529 'tpa_bangle' (REAL 8 0 0 0 REAL ()) () (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (REAL 8 0 0 0
+REAL ()) 0 '-0.5f5dd180000000@7')) (530 'tph_bangle_flag' (INTEGER 4 0 0
+0 INTEGER ()) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN
+0 0) UNKNOWN-ACCESS (CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '-999')) (
+531 'tph_refrac' (REAL 8 0 0 0 REAL ()) () (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (REAL 8 0 0 0
+REAL ()) 0 '-0.5f5dd180000000@7')) (532 'tpn_refrac' (REAL 8 0 0 0 REAL
+()) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0)
+UNKNOWN-ACCESS (CONSTANT (REAL 8 0 0 0 REAL ()) 0 '-0.5f5dd180000000@7'))
+(533 'tph_refrac_flag' (INTEGER 4 0 0 0 INTEGER ()) () (UNKNOWN-FL
+UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (
+CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '-999')) (534 'tph_tdry_lrt' (
+REAL 8 0 0 0 REAL ()) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
+UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'-0.5f5dd180000000@7')) (535 'tpt_tdry_lrt' (REAL 8 0 0 0 REAL ()) () (
+UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0)
+UNKNOWN-ACCESS (CONSTANT (REAL 8 0 0 0 REAL ()) 0 '-0.5f5dd180000000@7'))
+(536 'tph_tdry_lrt_flag' (INTEGER 4 0 0 0 INTEGER ()) () (UNKNOWN-FL
+UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (
+CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '-999')) (537 'tph_tdry_cpt' (
+REAL 8 0 0 0 REAL ()) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
+UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'-0.5f5dd180000000@7')) (538 'tpt_tdry_cpt' (REAL 8 0 0 0 REAL ()) () (
+UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0)
+UNKNOWN-ACCESS (CONSTANT (REAL 8 0 0 0 REAL ()) 0 '-0.5f5dd180000000@7'))
+(539 'tph_tdry_cpt_flag' (INTEGER 4 0 0 0 INTEGER ()) () (UNKNOWN-FL
+UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (
+CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '-999')) (540 'prh_tdry_cpt' (
+REAL 8 0 0 0 REAL ()) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
+UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'-0.5f5dd180000000@7')) (541 'prt_tdry_cpt' (REAL 8 0 0 0 REAL ()) () (
+UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0)
+UNKNOWN-ACCESS (CONSTANT (REAL 8 0 0 0 REAL ()) 0 '-0.5f5dd180000000@7'))
+(542 'prh_tdry_cpt_flag' (INTEGER 4 0 0 0 INTEGER ()) () (UNKNOWN-FL
+UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (
+CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '-999')) (543 'tph_temp_lrt' (
+REAL 8 0 0 0 REAL ()) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
+UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'-0.5f5dd180000000@7')) (544 'tpt_temp_lrt' (REAL 8 0 0 0 REAL ()) () (
+UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0)
+UNKNOWN-ACCESS (CONSTANT (REAL 8 0 0 0 REAL ()) 0 '-0.5f5dd180000000@7'))
+(545 'tph_temp_lrt_flag' (INTEGER 4 0 0 0 INTEGER ()) () (UNKNOWN-FL
+UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (
+CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '-999')) (546 'tph_temp_cpt' (
+REAL 8 0 0 0 REAL ()) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
+UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'-0.5f5dd180000000@7')) (547 'tpt_temp_cpt' (REAL 8 0 0 0 REAL ()) () (
+UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0)
+UNKNOWN-ACCESS (CONSTANT (REAL 8 0 0 0 REAL ()) 0 '-0.5f5dd180000000@7'))
+(548 'tph_temp_cpt_flag' (INTEGER 4 0 0 0 INTEGER ()) () (UNKNOWN-FL
+UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (
+CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '-999')) (549 'prh_temp_cpt' (
+REAL 8 0 0 0 REAL ()) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
+UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'-0.5f5dd180000000@7')) (550 'prt_temp_cpt' (REAL 8 0 0 0 REAL ()) () (
+UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0)
+UNKNOWN-ACCESS (CONSTANT (REAL 8 0 0 0 REAL ()) 0 '-0.5f5dd180000000@7'))
+(551 'prh_temp_cpt_flag' (INTEGER 4 0 0 0 INTEGER ()) () (UNKNOWN-FL
+UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (
+CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '-999')) (552 'units' (DERIVED
+115 0 0 0 DERIVED ()) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
+UNKNOWN 0 0) UNKNOWN-ACCESS (STRUCTURE (DERIVED 115 0 0 0 DERIVED ()) 0
+(((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'degrees_north                                                   ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'degrees_east                                                    ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'radians                                                         ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'geopotential metres                                             ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'hPa                                                             ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'hPa                                                             ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'percent                                                         ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'metres                                                          ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'radians                                                         ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'                                                                ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'metres                                                          ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'N-units                                                         ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'                                                                ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'metres                                                          ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'kelvin                                                          ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'                                                                ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'metres                                                          ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'kelvin                                                          ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'                                                                ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'metres                                                          ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'kelvin                                                          ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'                                                                ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'geopotential metres                                             ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'kelvin                                                          ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'                                                                ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'geopotential metres                                             ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'kelvin                                                          ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'                                                                ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'metres                                                          ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'kelvin                                                          ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'                                                                ') ()))
+())) (553 'range' (DERIVED 116 0 0 0 DERIVED ()) () (UNKNOWN-FL
+UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (
+STRUCTURE (DERIVED 116 0 0 0 DERIVED ()) 0 (((ARRAY (REAL 8 0 0 0 REAL ())
+1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0 '-0.5a000000000000@2') ()) ((
+CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.5a000000000000@2') ())) ('2')) ())
+((ARRAY (REAL 8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'-0.b4000000000000@2') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.b4000000000000@2') ())) ('2')) ()) ((ARRAY (REAL 8 0 0 0 REAL ()) 1 (
+((CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.00000000000000@0') ()) ((
+CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.3243f3e0370cdc@1') ())) ('2')) ())
+((ARRAY (REAL 8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'-0.3e800000000000@3') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.27100000000000@4') ())) ('2')) ()) ((ARRAY (REAL 8 0 0 0 REAL ()) 1 (
+((CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.fa000000000000@2') ()) ((
+CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.44c00000000000@3') ())) ('2')) ())
+((ARRAY (REAL 8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.00000000000000@0') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.50000000000000@1') ())) ('2')) ()) ((ARRAY (REAL 8 0 0 0 REAL ()) 1 (
+((CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.00000000000000@0') ()) ((
+CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.64000000000000@2') ())) ('2')) ())
+((ARRAY (REAL 8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.5e9ac000000000@6') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.64b54000000000@6') ())) ('2')) ()) ((ARRAY (REAL 8 0 0 0 REAL ()) 1 (
+((CONSTANT (REAL 8 0 0 0 REAL ()) 0 '-0.4189374bc6a7f0@-2') ()) ((
+CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.1999999999999a@0') ())) ('2')) ())
+((ARRAY (INTEGER 4 0 0 0 INTEGER ()) 1 (((CONSTANT (INTEGER 4 0 0 0
+INTEGER ()) 0 '0') ()) ((CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '255')
+())) ('2')) ()) ((ARRAY (REAL 8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0
+0 REAL ()) 0 '-0.3e800000000000@3') ()) ((CONSTANT (REAL 8 0 0 0 REAL ())
+0 '0.186a0000000000@5') ())) ('2')) ()) ((ARRAY (REAL 8 0 0 0 REAL ()) 1
+(((CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.00000000000000@0') ()) ((
+CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.1f400000000000@3') ())) ('2')) ())
+((ARRAY (INTEGER 4 0 0 0 INTEGER ()) 1 (((CONSTANT (INTEGER 4 0 0 0
+INTEGER ()) 0 '0') ()) ((CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '255')
+())) ('2')) ()) ((ARRAY (REAL 8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0
+0 REAL ()) 0 '-0.3e800000000000@3') ()) ((CONSTANT (REAL 8 0 0 0 REAL ())
+0 '0.186a0000000000@5') ())) ('2')) ()) ((ARRAY (REAL 8 0 0 0 REAL ()) 1
+(((CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.96000000000000@2') ()) ((
+CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.15e00000000000@3') ())) ('2')) ())
+((ARRAY (INTEGER 4 0 0 0 INTEGER ()) 1 (((CONSTANT (INTEGER 4 0 0 0
+INTEGER ()) 0 '0') ()) ((CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '255')
+())) ('2')) ()) ((ARRAY (REAL 8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0
+0 REAL ()) 0 '-0.3e800000000000@3') ()) ((CONSTANT (REAL 8 0 0 0 REAL ())
+0 '0.186a0000000000@5') ())) ('2')) ()) ((ARRAY (REAL 8 0 0 0 REAL ()) 1
+(((CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.96000000000000@2') ()) ((
+CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.15e00000000000@3') ())) ('2')) ())
+((ARRAY (INTEGER 4 0 0 0 INTEGER ()) 1 (((CONSTANT (INTEGER 4 0 0 0
+INTEGER ()) 0 '0') ()) ((CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '255')
+())) ('2')) ()) ((ARRAY (REAL 8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0
+0 REAL ()) 0 '-0.3e800000000000@3') ()) ((CONSTANT (REAL 8 0 0 0 REAL ())
+0 '0.186a0000000000@5') ())) ('2')) ()) ((ARRAY (REAL 8 0 0 0 REAL ()) 1
+(((CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.96000000000000@2') ()) ((
+CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.15e00000000000@3') ())) ('2')) ())
+((ARRAY (INTEGER 4 0 0 0 INTEGER ()) 1 (((CONSTANT (INTEGER 4 0 0 0
+INTEGER ()) 0 '0') ()) ((CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '255')
+())) ('2')) ()) ((ARRAY (REAL 8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0
+0 REAL ()) 0 '-0.3e800000000000@3') ()) ((CONSTANT (REAL 8 0 0 0 REAL ())
+0 '0.186a0000000000@5') ())) ('2')) ()) ((ARRAY (REAL 8 0 0 0 REAL ()) 1
+(((CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.96000000000000@2') ()) ((
+CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.15e00000000000@3') ())) ('2')) ())
+((ARRAY (INTEGER 4 0 0 0 INTEGER ()) 1 (((CONSTANT (INTEGER 4 0 0 0
+INTEGER ()) 0 '0') ()) ((CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '255')
+())) ('2')) ()) ((ARRAY (REAL 8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0
+0 REAL ()) 0 '-0.3e800000000000@3') ()) ((CONSTANT (REAL 8 0 0 0 REAL ())
+0 '0.186a0000000000@5') ())) ('2')) ()) ((ARRAY (REAL 8 0 0 0 REAL ()) 1
+(((CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.96000000000000@2') ()) ((
+CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.15e00000000000@3') ())) ('2')) ())
+((ARRAY (INTEGER 4 0 0 0 INTEGER ()) 1 (((CONSTANT (INTEGER 4 0 0 0
+INTEGER ()) 0 '0') ()) ((CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '255')
+())) ('2')) ()) ((ARRAY (REAL 8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0
+0 REAL ()) 0 '-0.3e800000000000@3') ()) ((CONSTANT (REAL 8 0 0 0 REAL ())
+0 '0.186a0000000000@5') ())) ('2')) ()) ((ARRAY (REAL 8 0 0 0 REAL ()) 1
+(((CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.96000000000000@2') ()) ((
+CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.15e00000000000@3') ())) ('2')) ())
+((ARRAY (INTEGER 4 0 0 0 INTEGER ()) 1 (((CONSTANT (INTEGER 4 0 0 0
+INTEGER ()) 0 '0') ()) ((CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '255')
+())) ('2')) ())) ()))) PUBLIC (() () () ()) () 0 0 21946394)
+115 'L2cunits' 'ropp_io_types' '' 6 ((DERIVED UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) (UNKNOWN 0 0 0 0 UNKNOWN ()) 0 0 () ()
+0 ((554 'lat_2d' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0 0
+0 INTEGER ()) 0 '64'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC
+UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0
+CHARACTER (())) 0 64
+'degrees_north                                                   ')) (
+555 'lon_2d' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0 0 0
+INTEGER ()) 0 '64'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
+UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0 CHARACTER (()))
+0 64 'degrees_east                                                    '))
+(556 'dtheta' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0 0 0
+INTEGER ()) 0 '64'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
+UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0 CHARACTER (()))
+0 64 'radians                                                         '))
+(557 'geop_sfc' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0 0 0
+INTEGER ()) 0 '64'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
+UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0 CHARACTER (()))
+0 64 'geopotential metres                                             '))
+(558 'press_sfc' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0 0
+0 INTEGER ()) 0 '64'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC
+UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0
+CHARACTER (())) 0 64
+'hPa                                                             ')) (
+559 'press_sfc_sigma' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4
+0 0 0 INTEGER ()) 0 '64'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC
+UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0
+CHARACTER (())) 0 64
+'hPa                                                             ')) (
+560 'press_sfc_qual' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4
+0 0 0 INTEGER ()) 0 '64'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC
+UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0
+CHARACTER (())) 0 64
+'percent                                                         ')) (
+561 'tph_bangle' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0 0
+0 INTEGER ()) 0 '64'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC
+UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0
+CHARACTER (())) 0 64
+'metres                                                          ')) (
+562 'tpa_bangle' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0 0
+0 INTEGER ()) 0 '64'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC
+UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0
+CHARACTER (())) 0 64
+'radians                                                         ')) (
+563 'tph_bangle_flag' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4
+0 0 0 INTEGER ()) 0 '64'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC
+UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0
+CHARACTER (())) 0 64
+'                                                                ')) (
+564 'tph_refrac' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0 0
+0 INTEGER ()) 0 '64'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC
+UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0
+CHARACTER (())) 0 64
+'metres                                                          ')) (
+565 'tpn_refrac' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0 0
+0 INTEGER ()) 0 '64'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC
+UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0
+CHARACTER (())) 0 64
+'N-units                                                         ')) (
+566 'tph_refrac_flag' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4
+0 0 0 INTEGER ()) 0 '64'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC
+UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0
+CHARACTER (())) 0 64
+'                                                                ')) (
+567 'tph_tdry_lrt' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0
+0 0 INTEGER ()) 0 '64'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC
+UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0
+CHARACTER (())) 0 64
+'metres                                                          ')) (
+568 'tpt_tdry_lrt' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0
+0 0 INTEGER ()) 0 '64'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC
+UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0
+CHARACTER (())) 0 64
+'kelvin                                                          ')) (
+569 'tph_tdry_lrt_flag' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (
+INTEGER 4 0 0 0 INTEGER ()) 0 '64'))) () (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1
+0 0 0 CHARACTER (())) 0 64
+'                                                                ')) (
+570 'tph_tdry_cpt' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0
+0 0 INTEGER ()) 0 '64'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC
+UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0
+CHARACTER (())) 0 64
+'metres                                                          ')) (
+571 'tpt_tdry_cpt' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0
+0 0 INTEGER ()) 0 '64'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC
+UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0
+CHARACTER (())) 0 64
+'kelvin                                                          ')) (
+572 'tph_tdry_cpt_flag' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (
+INTEGER 4 0 0 0 INTEGER ()) 0 '64'))) () (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1
+0 0 0 CHARACTER (())) 0 64
+'                                                                ')) (
+573 'prh_tdry_cpt' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0
+0 0 INTEGER ()) 0 '64'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC
+UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0
+CHARACTER (())) 0 64
+'metres                                                          ')) (
+574 'prt_tdry_cpt' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0
+0 0 INTEGER ()) 0 '64'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC
+UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0
+CHARACTER (())) 0 64
+'kelvin                                                          ')) (
+575 'prh_tdry_cpt_flag' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (
+INTEGER 4 0 0 0 INTEGER ()) 0 '64'))) () (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1
+0 0 0 CHARACTER (())) 0 64
+'                                                                ')) (
+576 'tph_temp_lrt' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0
+0 0 INTEGER ()) 0 '64'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC
+UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0
+CHARACTER (())) 0 64
+'geopotential metres                                             ')) (
+577 'tpt_temp_lrt' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0
+0 0 INTEGER ()) 0 '64'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC
+UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0
+CHARACTER (())) 0 64
+'kelvin                                                          ')) (
+578 'tph_temp_lrt_flag' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (
+INTEGER 4 0 0 0 INTEGER ()) 0 '64'))) () (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1
+0 0 0 CHARACTER (())) 0 64
+'                                                                ')) (
+579 'tph_temp_cpt' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0
+0 0 INTEGER ()) 0 '64'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC
+UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0
+CHARACTER (())) 0 64
+'geopotential metres                                             ')) (
+580 'tpt_temp_cpt' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0
+0 0 INTEGER ()) 0 '64'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC
+UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0
+CHARACTER (())) 0 64
+'kelvin                                                          ')) (
+581 'tph_temp_cpt_flag' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (
+INTEGER 4 0 0 0 INTEGER ()) 0 '64'))) () (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1
+0 0 0 CHARACTER (())) 0 64
+'                                                                ')) (
+582 'prh_temp_cpt' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0
+0 0 INTEGER ()) 0 '64'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC
+UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0
+CHARACTER (())) 0 64
+'metres                                                          ')) (
+583 'prt_temp_cpt' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0
+0 0 INTEGER ()) 0 '64'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC
+UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0
+CHARACTER (())) 0 64
+'kelvin                                                          ')) (
+584 'prh_temp_cpt_flag' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (
+INTEGER 4 0 0 0 INTEGER ()) 0 '64'))) () (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1
+0 0 0 CHARACTER (())) 0 64
+'                                                                ')))
+PUBLIC (() () () ()) () 0 0 67658191)
+116 'L2crange' 'ropp_io_types' '' 6 ((DERIVED UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) (UNKNOWN 0 0 0 0 UNKNOWN ()) 0 0 () ()
+0 ((585 'lat_2d' (REAL 8 0 0 0 REAL ()) (1 0 EXPLICIT (CONSTANT (
+INTEGER 4 0 0 0 INTEGER ()) 0 '1') (CONSTANT (INTEGER 4 0 0 0 INTEGER ())
+0 '2')) (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0
+DIMENSION) UNKNOWN-ACCESS (ARRAY (REAL 8 0 0 0 REAL ()) 1 (((CONSTANT (
+REAL 8 0 0 0 REAL ()) 0 '-0.5a000000000000@2') ()) ((CONSTANT (REAL 8 0
+0 0 REAL ()) 0 '0.5a000000000000@2') ())) ('2'))) (586 'lon_2d' (REAL 8
+0 0 0 REAL ()) (1 0 EXPLICIT (CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '1')
+(CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '2')) (UNKNOWN-FL
+UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION)
+UNKNOWN-ACCESS (ARRAY (REAL 8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0
+REAL ()) 0 '-0.b4000000000000@2') ()) ((CONSTANT (REAL 8 0 0 0 REAL ())
+0 '0.b4000000000000@2') ())) ('2'))) (587 'dtheta' (REAL 8 0 0 0 REAL ())
+(1 0 EXPLICIT (CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '1') (CONSTANT (
+INTEGER 4 0 0 0 INTEGER ()) 0 '2')) (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION) UNKNOWN-ACCESS (ARRAY (REAL
+8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.00000000000000@0') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.3243f3e0370cdc@1') ())) ('2'))) (588 'geop_sfc' (REAL 8 0 0 0 REAL ())
+(1 0 EXPLICIT (CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '1') (CONSTANT (
+INTEGER 4 0 0 0 INTEGER ()) 0 '2')) (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION) UNKNOWN-ACCESS (ARRAY (REAL
+8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'-0.3e800000000000@3') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.27100000000000@4') ())) ('2'))) (589 'press_sfc' (REAL 8 0 0 0 REAL ())
+(1 0 EXPLICIT (CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '1') (CONSTANT (
+INTEGER 4 0 0 0 INTEGER ()) 0 '2')) (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION) UNKNOWN-ACCESS (ARRAY (REAL
+8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.fa000000000000@2') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.44c00000000000@3') ())) ('2'))) (590 'press_sfc_sigma' (REAL 8 0 0 0
+REAL ()) (1 0 EXPLICIT (CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '1') (
+CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '2')) (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION) UNKNOWN-ACCESS (ARRAY (REAL
+8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.00000000000000@0') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.50000000000000@1') ())) ('2'))) (591 'press_sfc_qual' (REAL 8 0 0 0
+REAL ()) (1 0 EXPLICIT (CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '1') (
+CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '2')) (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION) UNKNOWN-ACCESS (ARRAY (REAL
+8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.00000000000000@0') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.64000000000000@2') ())) ('2'))) (592 'tph_bangle' (REAL 8 0 0 0 REAL
+()) (1 0 EXPLICIT (CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '1') (
+CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '2')) (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION) UNKNOWN-ACCESS (ARRAY (REAL
+8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.5e9ac000000000@6') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.64b54000000000@6') ())) ('2'))) (593 'tpa_bangle' (REAL 8 0 0 0 REAL
+()) (1 0 EXPLICIT (CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '1') (
+CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '2')) (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION) UNKNOWN-ACCESS (ARRAY (REAL
+8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'-0.4189374bc6a7f0@-2') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.1999999999999a@0') ())) ('2'))) (594 'tph_bangle_flag' (INTEGER 4 0 0
+0 INTEGER ()) (1 0 EXPLICIT (CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '1')
+(CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '2')) (UNKNOWN-FL
+UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION)
+UNKNOWN-ACCESS (ARRAY (INTEGER 4 0 0 0 INTEGER ()) 1 (((CONSTANT (
+INTEGER 4 0 0 0 INTEGER ()) 0 '0') ()) ((CONSTANT (INTEGER 4 0 0 0
+INTEGER ()) 0 '255') ())) ('2'))) (595 'tph_refrac' (REAL 8 0 0 0 REAL ())
+(1 0 EXPLICIT (CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '1') (CONSTANT (
+INTEGER 4 0 0 0 INTEGER ()) 0 '2')) (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION) UNKNOWN-ACCESS (ARRAY (REAL
+8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'-0.3e800000000000@3') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.186a0000000000@5') ())) ('2'))) (596 'tpn_refrac' (REAL 8 0 0 0 REAL
+()) (1 0 EXPLICIT (CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '1') (
+CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '2')) (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION) UNKNOWN-ACCESS (ARRAY (REAL
+8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.00000000000000@0') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.1f400000000000@3') ())) ('2'))) (597 'tph_refrac_flag' (INTEGER 4 0 0
+0 INTEGER ()) (1 0 EXPLICIT (CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '1')
+(CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '2')) (UNKNOWN-FL
+UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION)
+UNKNOWN-ACCESS (ARRAY (INTEGER 4 0 0 0 INTEGER ()) 1 (((CONSTANT (
+INTEGER 4 0 0 0 INTEGER ()) 0 '0') ()) ((CONSTANT (INTEGER 4 0 0 0
+INTEGER ()) 0 '255') ())) ('2'))) (598 'tph_tdry_lrt' (REAL 8 0 0 0 REAL
+()) (1 0 EXPLICIT (CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '1') (
+CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '2')) (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION) UNKNOWN-ACCESS (ARRAY (REAL
+8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'-0.3e800000000000@3') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.186a0000000000@5') ())) ('2'))) (599 'tpt_tdry_lrt' (REAL 8 0 0 0
+REAL ()) (1 0 EXPLICIT (CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '1') (
+CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '2')) (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION) UNKNOWN-ACCESS (ARRAY (REAL
+8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.96000000000000@2') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.15e00000000000@3') ())) ('2'))) (600 'tph_tdry_lrt_flag' (INTEGER 4 0
+0 0 INTEGER ()) (1 0 EXPLICIT (CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '1')
+(CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '2')) (UNKNOWN-FL
+UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION)
+UNKNOWN-ACCESS (ARRAY (INTEGER 4 0 0 0 INTEGER ()) 1 (((CONSTANT (
+INTEGER 4 0 0 0 INTEGER ()) 0 '0') ()) ((CONSTANT (INTEGER 4 0 0 0
+INTEGER ()) 0 '255') ())) ('2'))) (601 'tph_tdry_cpt' (REAL 8 0 0 0 REAL
+()) (1 0 EXPLICIT (CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '1') (
+CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '2')) (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION) UNKNOWN-ACCESS (ARRAY (REAL
+8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'-0.3e800000000000@3') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.186a0000000000@5') ())) ('2'))) (602 'tpt_tdry_cpt' (REAL 8 0 0 0
+REAL ()) (1 0 EXPLICIT (CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '1') (
+CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '2')) (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION) UNKNOWN-ACCESS (ARRAY (REAL
+8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.96000000000000@2') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.15e00000000000@3') ())) ('2'))) (603 'tph_tdry_cpt_flag' (INTEGER 4 0
+0 0 INTEGER ()) (1 0 EXPLICIT (CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '1')
+(CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '2')) (UNKNOWN-FL
+UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION)
+UNKNOWN-ACCESS (ARRAY (INTEGER 4 0 0 0 INTEGER ()) 1 (((CONSTANT (
+INTEGER 4 0 0 0 INTEGER ()) 0 '0') ()) ((CONSTANT (INTEGER 4 0 0 0
+INTEGER ()) 0 '255') ())) ('2'))) (604 'prh_tdry_cpt' (REAL 8 0 0 0 REAL
+()) (1 0 EXPLICIT (CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '1') (
+CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '2')) (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION) UNKNOWN-ACCESS (ARRAY (REAL
+8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'-0.3e800000000000@3') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.186a0000000000@5') ())) ('2'))) (605 'prt_tdry_cpt' (REAL 8 0 0 0
+REAL ()) (1 0 EXPLICIT (CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '1') (
+CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '2')) (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION) UNKNOWN-ACCESS (ARRAY (REAL
+8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.96000000000000@2') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.15e00000000000@3') ())) ('2'))) (606 'prh_tdry_cpt_flag' (INTEGER 4 0
+0 0 INTEGER ()) (1 0 EXPLICIT (CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '1')
+(CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '2')) (UNKNOWN-FL
+UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION)
+UNKNOWN-ACCESS (ARRAY (INTEGER 4 0 0 0 INTEGER ()) 1 (((CONSTANT (
+INTEGER 4 0 0 0 INTEGER ()) 0 '0') ()) ((CONSTANT (INTEGER 4 0 0 0
+INTEGER ()) 0 '255') ())) ('2'))) (607 'tph_temp_lrt' (REAL 8 0 0 0 REAL
+()) (1 0 EXPLICIT (CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '1') (
+CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '2')) (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION) UNKNOWN-ACCESS (ARRAY (REAL
+8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'-0.3e800000000000@3') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.186a0000000000@5') ())) ('2'))) (608 'tpt_temp_lrt' (REAL 8 0 0 0
+REAL ()) (1 0 EXPLICIT (CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '1') (
+CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '2')) (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION) UNKNOWN-ACCESS (ARRAY (REAL
+8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.96000000000000@2') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.15e00000000000@3') ())) ('2'))) (609 'tph_temp_lrt_flag' (INTEGER 4 0
+0 0 INTEGER ()) (1 0 EXPLICIT (CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '1')
+(CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '2')) (UNKNOWN-FL
+UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION)
+UNKNOWN-ACCESS (ARRAY (INTEGER 4 0 0 0 INTEGER ()) 1 (((CONSTANT (
+INTEGER 4 0 0 0 INTEGER ()) 0 '0') ()) ((CONSTANT (INTEGER 4 0 0 0
+INTEGER ()) 0 '255') ())) ('2'))) (610 'tph_temp_cpt' (REAL 8 0 0 0 REAL
+()) (1 0 EXPLICIT (CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '1') (
+CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '2')) (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION) UNKNOWN-ACCESS (ARRAY (REAL
+8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'-0.3e800000000000@3') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.186a0000000000@5') ())) ('2'))) (611 'tpt_temp_cpt' (REAL 8 0 0 0
+REAL ()) (1 0 EXPLICIT (CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '1') (
+CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '2')) (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION) UNKNOWN-ACCESS (ARRAY (REAL
+8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.96000000000000@2') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.15e00000000000@3') ())) ('2'))) (612 'tph_temp_cpt_flag' (INTEGER 4 0
+0 0 INTEGER ()) (1 0 EXPLICIT (CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '1')
+(CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '2')) (UNKNOWN-FL
+UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION)
+UNKNOWN-ACCESS (ARRAY (INTEGER 4 0 0 0 INTEGER ()) 1 (((CONSTANT (
+INTEGER 4 0 0 0 INTEGER ()) 0 '0') ()) ((CONSTANT (INTEGER 4 0 0 0
+INTEGER ()) 0 '255') ())) ('2'))) (613 'prh_temp_cpt' (REAL 8 0 0 0 REAL
+()) (1 0 EXPLICIT (CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '1') (
+CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '2')) (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION) UNKNOWN-ACCESS (ARRAY (REAL
+8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'-0.3e800000000000@3') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.186a0000000000@5') ())) ('2'))) (614 'prt_temp_cpt' (REAL 8 0 0 0
+REAL ()) (1 0 EXPLICIT (CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '1') (
+CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '2')) (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION) UNKNOWN-ACCESS (ARRAY (REAL
+8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.96000000000000@2') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.15e00000000000@3') ())) ('2'))) (615 'prh_temp_cpt_flag' (INTEGER 4 0
+0 0 INTEGER ()) (1 0 EXPLICIT (CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '1')
+(CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '2')) (UNKNOWN-FL
+UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION)
+UNKNOWN-ACCESS (ARRAY (INTEGER 4 0 0 0 INTEGER ()) 1 (((CONSTANT (
+INTEGER 4 0 0 0 INTEGER ()) 0 '0') ()) ((CONSTANT (INTEGER 4 0 0 0
+INTEGER ()) 0 '255') ())) ('2')))) PUBLIC (() () () ()) () 0 0 26688349)
+118 'L2dtype' 'ropp_io_types' '' 6 ((DERIVED UNKNOWN-INTENT UNKNOWN-PROC
+UNKNOWN UNKNOWN 0 0 POINTER_COMP) (UNKNOWN 0 0 0 0 UNKNOWN ()) 0 0 () ()
+0 ((616 'npoints' (INTEGER 4 0 0 0 INTEGER ()) () (UNKNOWN-FL
+UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (
+CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '0')) (617 'missing' (LOGICAL 4
+0 0 0 LOGICAL ()) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
+UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (LOGICAL 4 0 0 0 LOGICAL ()) 0 1))
+(618 'level_type' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0 0
+0 INTEGER ()) 0 '64'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC
+UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0
+CHARACTER (())) 0 64
+'UNKNOWN                                                         ')) (
+619 'level_coeff_a' (REAL 8 0 0 0 REAL ()) (1 0 DEFERRED () ()) (
+UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION
+POINTER) UNKNOWN-ACCESS (NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0)) (620
+'level_coeff_b' (REAL 8 0 0 0 REAL ()) (1 0 DEFERRED () ()) (UNKNOWN-FL
+UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION POINTER)
+UNKNOWN-ACCESS (NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0)) (621 'units' (
+DERIVED 119 0 0 0 DERIVED ()) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC
+UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (STRUCTURE (DERIVED 119 0 0 0
+DERIVED ()) 0 (((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 40
+'hPa                                     ') ()) ((CONSTANT (CHARACTER 1
+0 0 0 CHARACTER (())) 0 40 '                                        ') ()))
+())) (622 'range' (DERIVED 120 0 0 0 DERIVED ()) () (UNKNOWN-FL
+UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (
+STRUCTURE (DERIVED 120 0 0 0 DERIVED ()) 0 (((ARRAY (REAL 8 0 0 0 REAL ())
+1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.00000000000000@0') ()) ((
+CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.7d000000000000@3') ())) ('2')) ())
+((ARRAY (REAL 8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.00000000000000@0') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.20000000000000@1') ())) ('2')) ())) ()))) PUBLIC (() () () ()) () 0 0
+61510683)
+119 'L2dunits' 'ropp_io_types' '' 6 ((DERIVED UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) (UNKNOWN 0 0 0 0 UNKNOWN ()) 0 0 () ()
+0 ((623 'level_coeff_a' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (
+INTEGER 4 0 0 0 INTEGER ()) 0 '40'))) () (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1
+0 0 0 CHARACTER (())) 0 40 'hPa                                     '))
+(624 'level_coeff_b' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4
+0 0 0 INTEGER ()) 0 '40'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC
+UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0
+CHARACTER (())) 0 40 '                                        ')))
+PUBLIC (() () () ()) () 0 0 39665422)
+120 'L2drange' 'ropp_io_types' '' 6 ((DERIVED UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) (UNKNOWN 0 0 0 0 UNKNOWN ()) 0 0 () ()
+0 ((625 'level_coeff_a' (REAL 8 0 0 0 REAL ()) (1 0 EXPLICIT (CONSTANT (
+INTEGER 4 0 0 0 INTEGER ()) 0 '1') (CONSTANT (INTEGER 4 0 0 0 INTEGER ())
+0 '2')) (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0
+DIMENSION) UNKNOWN-ACCESS (ARRAY (REAL 8 0 0 0 REAL ()) 1 (((CONSTANT (
+REAL 8 0 0 0 REAL ()) 0 '0.00000000000000@0') ()) ((CONSTANT (REAL 8 0 0
+0 REAL ()) 0 '0.7d000000000000@3') ())) ('2'))) (626 'level_coeff_b' (
+REAL 8 0 0 0 REAL ()) (1 0 EXPLICIT (CONSTANT (INTEGER 4 0 0 0 INTEGER ())
+0 '1') (CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '2')) (UNKNOWN-FL
+UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION)
+UNKNOWN-ACCESS (ARRAY (REAL 8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0
+REAL ()) 0 '0.00000000000000@0') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.20000000000000@1') ())) ('2')))) PUBLIC (() () () ()) () 0 0 98695580)
+122 'Rounits' 'ropp_io_types' '' 6 ((DERIVED UNKNOWN-INTENT UNKNOWN-PROC
+UNKNOWN UNKNOWN 0 0) (UNKNOWN 0 0 0 0 UNKNOWN ()) 0 0 () () 0 ((627 'pcd'
+(CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0
+'64'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0)
+UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'bits                                                            ')) (
+628 'overall_qual' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0
+0 0 INTEGER ()) 0 '64'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC
+UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0
+CHARACTER (())) 0 64
+'percent                                                         ')))
+PUBLIC (() () () ()) () 0 0 40384437)
+124 'Rorange' 'ropp_io_types' '' 6 ((DERIVED UNKNOWN-INTENT UNKNOWN-PROC
+UNKNOWN UNKNOWN 0 0) (UNKNOWN 0 0 0 0 UNKNOWN ()) 0 0 () () 0 ((629 'pcd'
+(INTEGER 4 0 0 0 INTEGER ()) (1 0 EXPLICIT (CONSTANT (INTEGER 4 0 0 0
+INTEGER ()) 0 '1') (CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '2')) (
+UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION)
+UNKNOWN-ACCESS (ARRAY (INTEGER 4 0 0 0 INTEGER ()) 1 (((CONSTANT (
+INTEGER 4 0 0 0 INTEGER ()) 0 '0') ()) ((CONSTANT (INTEGER 4 0 0 0
+INTEGER ()) 0 '32767') ())) ('2'))) (630 'overall_qual' (REAL 8 0 0 0
+REAL ()) (1 0 EXPLICIT (CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '1') (
+CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '2')) (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION) UNKNOWN-ACCESS (ARRAY (REAL
+8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.00000000000000@0') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.64000000000000@2') ())) ('2')))) PUBLIC (() () () ()) () 0 0 99414595)
+126 'Vlisttype' 'ropp_io_types' '' 6 ((DERIVED UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 POINTER_COMP) (UNKNOWN 0 0 0 0 UNKNOWN
+()) 0 0 () () 0 ((631 'vlistd0d' (DERIVED 632 0 0 0 DERIVED ()) () (
+UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 POINTER)
+UNKNOWN-ACCESS (NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0)) (633 'vlistd1d' (
+DERIVED 634 0 0 0 DERIVED ()) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC
+UNKNOWN UNKNOWN 0 0 POINTER) UNKNOWN-ACCESS (NULL (UNKNOWN 0 0 0 0
+UNKNOWN ()) 0)) (635 'vlistd2d' (DERIVED 636 0 0 0 DERIVED ()) () (
+UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 POINTER)
+UNKNOWN-ACCESS (NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0))) PUBLIC (() () ()
+()) () 0 0 55091249)
+159 'Minroppconfig' 'ropp_1dvar_types' '' 6 ((DERIVED UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) (UNKNOWN 0 0 0 0 UNKNOWN ()) 0 0 () ()
+0 ((637 'method' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0 0
+0 INTEGER ()) 0 '2048'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC
+UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0
+CHARACTER (())) 0 2048
+'MINROPP                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         '))
+(638 'log_file' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0 0 0
+INTEGER ()) 0 '2048'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC
+UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0
+CHARACTER (())) 0 2048
+'screen                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          '))
+(639 'impres' (INTEGER 4 0 0 0 INTEGER ()) () (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (INTEGER 4 0
+0 0 INTEGER ()) 0 '0')) (640 'n_iter' (INTEGER 4 0 0 0 INTEGER ()) () (
+UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0)
+UNKNOWN-ACCESS (CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '1500')) (641
+'mode' (INTEGER 4 0 0 0 INTEGER ()) () (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (INTEGER 4 0
+0 0 INTEGER ()) 0 '0')) (642 'n_updates' (INTEGER 4 0 0 0 INTEGER ()) ()
+(UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0)
+UNKNOWN-ACCESS (CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '50')) (643
+'eps_grad' (REAL 8 0 0 0 REAL ()) () (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (REAL 8 0 0 0
+REAL ()) 0 '0.2af31dc4611874@-6')) (644 'dx_min' (REAL 8 0 0 0 REAL ())
+() (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0)
+UNKNOWN-ACCESS (CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.734aca5f6226f0@-13')))
+PUBLIC (() () () ()) () 0 0 47668414)
+176 'Matrix_pp' 'matrix_types' '' 11 ((DERIVED UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 POINTER_COMP) (UNKNOWN 0 0 0 0 UNKNOWN
+()) 0 0 () () 0 ((645 'd' (REAL 8 0 0 0 REAL ()) (1 0 DEFERRED () ()) (
+UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION
+POINTER) UNKNOWN-ACCESS (NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0)) (646
+'fact_chol' (LOGICAL 4 0 0 0 LOGICAL ()) () (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (LOGICAL 4 0
+0 0 LOGICAL ()) 0 0)) (647 'equi_chol' (CHARACTER 1 0 0 0 CHARACTER ((
+CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '1'))) () (UNKNOWN-FL
+UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (
+CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 1 'N')) (648 'e' (REAL 8 0
+0 0 REAL ()) (1 0 DEFERRED () ()) (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION POINTER) UNKNOWN-ACCESS (
+NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0)) (649 'f' (REAL 8 0 0 0 REAL ()) (
+1 0 DEFERRED () ()) (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
+UNKNOWN 0 0 DIMENSION POINTER) UNKNOWN-ACCESS (NULL (UNKNOWN 0 0 0 0
+UNKNOWN ()) 0)) (650 's' (REAL 8 0 0 0 REAL ()) (1 0 DEFERRED () ()) (
+UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION
+POINTER) UNKNOWN-ACCESS (NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0))) PUBLIC (
+() () () ()) () 0 0 1928890)
+183 'Obs1dbangle' 'ropp_fm_types' '' 11 ((DERIVED UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 POINTER_COMP) (UNKNOWN 0 0 0 0 UNKNOWN
+()) 0 0 () () 0 ((651 'bangle' (REAL 8 0 0 0 REAL ()) (1 0 DEFERRED () ())
+(UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION
+POINTER) UNKNOWN-ACCESS (NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0)) (652
+'impact' (REAL 8 0 0 0 REAL ()) (1 0 DEFERRED () ()) (UNKNOWN-FL
+UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION POINTER)
+UNKNOWN-ACCESS (NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0)) (653 'weights' (
+REAL 8 0 0 0 REAL ()) (1 0 DEFERRED () ()) (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION POINTER) UNKNOWN-ACCESS (
+NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0)) (654 'rtan' (REAL 8 0 0 0 REAL ())
+(1 0 DEFERRED () ()) (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
+UNKNOWN 0 0 DIMENSION POINTER) UNKNOWN-ACCESS (NULL (UNKNOWN 0 0 0 0
+UNKNOWN ()) 0)) (655 'a_path' (REAL 8 0 0 0 REAL ()) (2 0 DEFERRED () ()
+() ()) (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0
+DIMENSION POINTER) UNKNOWN-ACCESS (NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0))
+(656 'nobs' (INTEGER 4 0 0 0 INTEGER ()) () (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS ()) (657 'lon' (REAL 8
+0 0 0 REAL ()) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
+UNKNOWN 0 0) UNKNOWN-ACCESS ()) (658 'lat' (REAL 8 0 0 0 REAL ()) () (
+UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0)
+UNKNOWN-ACCESS ()) (659 'time' (REAL 8 0 0 0 REAL ()) () (UNKNOWN-FL
+UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS ()) (
+660 'g_sfc' (REAL 8 0 0 0 REAL ()) () (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS ()) (661 'r_earth' (
+REAL 8 0 0 0 REAL ()) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
+UNKNOWN 0 0) UNKNOWN-ACCESS ()) (662 'r_curve' (REAL 8 0 0 0 REAL ()) ()
+(UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0)
+UNKNOWN-ACCESS ()) (663 'undulation' (REAL 8 0 0 0 REAL ()) () (
+UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0)
+UNKNOWN-ACCESS ()) (664 'azimuth' (REAL 8 0 0 0 REAL ()) () (UNKNOWN-FL
+UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS ()) (
+665 'cov' (DERIVED 176 0 0 0 DERIVED ()) () (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (STRUCTURE (DERIVED 176
+0 0 0 DERIVED ()) 0 (((NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0) ()) ((
+CONSTANT (LOGICAL 4 0 0 0 LOGICAL ()) 0 0) ()) ((CONSTANT (CHARACTER 1 0
+0 0 CHARACTER (())) 0 1 'N') ()) ((NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0)
+()) ((NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0) ()) ((NULL (UNKNOWN 0 0 0 0
+UNKNOWN ()) 0) ())) ())) (666 'obs_ok' (LOGICAL 4 0 0 0 LOGICAL ()) () (
+UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0)
+UNKNOWN-ACCESS ()) (667 'cov_ok' (LOGICAL 4 0 0 0 LOGICAL ()) () (
+UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0)
+UNKNOWN-ACCESS ())) PUBLIC (() () () ()) () 0 0 92121384)
+218 'Dt7type' 'ropp_io_types' '' 11 ((DERIVED UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) (UNKNOWN 0 0 0 0 UNKNOWN ()) 0 0 () ()
+0 ((668 'year' (INTEGER 4 0 0 0 INTEGER ()) () (UNKNOWN-FL
+UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (
+CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '9999')) (669 'month' (INTEGER 4
+0 0 0 INTEGER ()) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
+UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '99'))
+(670 'day' (INTEGER 4 0 0 0 INTEGER ()) () (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (INTEGER 4 0
+0 0 INTEGER ()) 0 '99')) (671 'hour' (INTEGER 4 0 0 0 INTEGER ()) () (
+UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0)
+UNKNOWN-ACCESS (CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '99')) (672
+'minute' (INTEGER 4 0 0 0 INTEGER ()) () (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (INTEGER 4 0
+0 0 INTEGER ()) 0 '99')) (673 'second' (INTEGER 4 0 0 0 INTEGER ()) () (
+UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0)
+UNKNOWN-ACCESS (CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '99')) (674 'msec'
+(INTEGER 4 0 0 0 INTEGER ()) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC
+UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (INTEGER 4 0 0 0 INTEGER ())
+0 '9999')) (675 'units' (DERIVED 219 0 0 0 DERIVED ()) () (UNKNOWN-FL
+UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (
+STRUCTURE (DERIVED 219 0 0 0 DERIVED ()) 0 (((CONSTANT (CHARACTER 1 0 0
+0 CHARACTER (())) 0 64
+'years                                                           ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'months                                                          ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'days                                                            ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'hours                                                           ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'minutes                                                         ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'seconds                                                         ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'milliseconds                                                    ') ()))
+())) (676 'range' (DERIVED 220 0 0 0 DERIVED ()) () (UNKNOWN-FL
+UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (
+STRUCTURE (DERIVED 220 0 0 0 DERIVED ()) 0 (((ARRAY (INTEGER 4 0 0 0
+INTEGER ()) 1 (((CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '1995') ()) ((
+CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '2099') ())) ('2')) ()) ((ARRAY
+(INTEGER 4 0 0 0 INTEGER ()) 1 (((CONSTANT (INTEGER 4 0 0 0 INTEGER ())
+0 '1') ()) ((CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '12') ())) ('2')) ())
+((ARRAY (INTEGER 4 0 0 0 INTEGER ()) 1 (((CONSTANT (INTEGER 4 0 0 0
+INTEGER ()) 0 '1') ()) ((CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '31') ()))
+('2')) ()) ((ARRAY (INTEGER 4 0 0 0 INTEGER ()) 1 (((CONSTANT (INTEGER 4
+0 0 0 INTEGER ()) 0 '0') ()) ((CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0
+'23') ())) ('2')) ()) ((ARRAY (INTEGER 4 0 0 0 INTEGER ()) 1 (((
+CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '0') ()) ((CONSTANT (INTEGER 4 0
+0 0 INTEGER ()) 0 '59') ())) ('2')) ()) ((ARRAY (INTEGER 4 0 0 0 INTEGER
+()) 1 (((CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '0') ()) ((CONSTANT (
+INTEGER 4 0 0 0 INTEGER ()) 0 '59') ())) ('2')) ()) ((ARRAY (INTEGER 4 0
+0 0 INTEGER ()) 1 (((CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '0') ()) (
+(CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '999') ())) ('2')) ())) ())))
+PUBLIC (() () () ()) () 0 0 23067428)
+219 'Dt7units' 'ropp_io_types' '' 11 ((DERIVED UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) (UNKNOWN 0 0 0 0 UNKNOWN ()) 0 0 () ()
+0 ((677 'year' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0 0 0
+INTEGER ()) 0 '64'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
+UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0 CHARACTER (()))
+0 64 'years                                                           '))
+(678 'month' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0 0 0
+INTEGER ()) 0 '64'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
+UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0 CHARACTER (()))
+0 64 'months                                                          '))
+(679 'day' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0 0 0
+INTEGER ()) 0 '64'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
+UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0 CHARACTER (()))
+0 64 'days                                                            '))
+(680 'hour' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0 0 0
+INTEGER ()) 0 '64'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
+UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0 CHARACTER (()))
+0 64 'hours                                                           '))
+(681 'minute' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0 0 0
+INTEGER ()) 0 '64'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
+UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0 CHARACTER (()))
+0 64 'minutes                                                         '))
+(682 'second' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0 0 0
+INTEGER ()) 0 '64'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
+UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0 CHARACTER (()))
+0 64 'seconds                                                         '))
+(683 'msec' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0 0 0
+INTEGER ()) 0 '64'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
+UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0 CHARACTER (()))
+0 64 'milliseconds                                                    ')))
+PUBLIC (() () () ()) () 0 0 91172165)
+220 'Dt7range' 'ropp_io_types' '' 11 ((DERIVED UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) (UNKNOWN 0 0 0 0 UNKNOWN ()) 0 0 () ()
+0 ((684 'year' (INTEGER 4 0 0 0 INTEGER ()) (1 0 EXPLICIT (CONSTANT (
+INTEGER 4 0 0 0 INTEGER ()) 0 '1') (CONSTANT (INTEGER 4 0 0 0 INTEGER ())
+0 '2')) (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0
+DIMENSION) UNKNOWN-ACCESS (ARRAY (INTEGER 4 0 0 0 INTEGER ()) 1 (((
+CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '1995') ()) ((CONSTANT (INTEGER
+4 0 0 0 INTEGER ()) 0 '2099') ())) ('2'))) (685 'month' (INTEGER 4 0 0 0
+INTEGER ()) (1 0 EXPLICIT (CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '1')
+(CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '2')) (UNKNOWN-FL
+UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION)
+UNKNOWN-ACCESS (ARRAY (INTEGER 4 0 0 0 INTEGER ()) 1 (((CONSTANT (
+INTEGER 4 0 0 0 INTEGER ()) 0 '1') ()) ((CONSTANT (INTEGER 4 0 0 0
+INTEGER ()) 0 '12') ())) ('2'))) (686 'day' (INTEGER 4 0 0 0 INTEGER ())
+(1 0 EXPLICIT (CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '1') (CONSTANT (
+INTEGER 4 0 0 0 INTEGER ()) 0 '2')) (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION) UNKNOWN-ACCESS (ARRAY (
+INTEGER 4 0 0 0 INTEGER ()) 1 (((CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0
+'1') ()) ((CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '31') ())) ('2'))) (
+687 'hour' (INTEGER 4 0 0 0 INTEGER ()) (1 0 EXPLICIT (CONSTANT (
+INTEGER 4 0 0 0 INTEGER ()) 0 '1') (CONSTANT (INTEGER 4 0 0 0 INTEGER ())
+0 '2')) (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0
+DIMENSION) UNKNOWN-ACCESS (ARRAY (INTEGER 4 0 0 0 INTEGER ()) 1 (((
+CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '0') ()) ((CONSTANT (INTEGER 4 0
+0 0 INTEGER ()) 0 '23') ())) ('2'))) (688 'minute' (INTEGER 4 0 0 0
+INTEGER ()) (1 0 EXPLICIT (CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '1')
+(CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '2')) (UNKNOWN-FL
+UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION)
+UNKNOWN-ACCESS (ARRAY (INTEGER 4 0 0 0 INTEGER ()) 1 (((CONSTANT (
+INTEGER 4 0 0 0 INTEGER ()) 0 '0') ()) ((CONSTANT (INTEGER 4 0 0 0
+INTEGER ()) 0 '59') ())) ('2'))) (689 'second' (INTEGER 4 0 0 0 INTEGER
+()) (1 0 EXPLICIT (CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '1') (
+CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '2')) (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION) UNKNOWN-ACCESS (ARRAY (
+INTEGER 4 0 0 0 INTEGER ()) 1 (((CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0
+'0') ()) ((CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '59') ())) ('2'))) (
+690 'msec' (INTEGER 4 0 0 0 INTEGER ()) (1 0 EXPLICIT (CONSTANT (
+INTEGER 4 0 0 0 INTEGER ()) 0 '1') (CONSTANT (INTEGER 4 0 0 0 INTEGER ())
+0 '2')) (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0
+DIMENSION) UNKNOWN-ACCESS (ARRAY (INTEGER 4 0 0 0 INTEGER ()) 1 (((
+CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '0') ()) ((CONSTANT (INTEGER 4 0
+0 0 INTEGER ()) 0 '999') ())) ('2')))) PUBLIC (() () () ()) () 0 0
+50202323)
+225 'Geotype' 'ropp_io_types' '' 11 ((DERIVED UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) (UNKNOWN 0 0 0 0 UNKNOWN ()) 0 0 () ()
+0 ((691 'time_offset' (REAL 8 0 0 0 REAL ()) () (UNKNOWN-FL
+UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (
+CONSTANT (REAL 8 0 0 0 REAL ()) 0 '-0.5f5dd180000000@7')) (692 'lat' (
+REAL 8 0 0 0 REAL ()) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
+UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'-0.5f5dd180000000@7')) (693 'lon' (REAL 8 0 0 0 REAL ()) () (
+UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0)
+UNKNOWN-ACCESS (CONSTANT (REAL 8 0 0 0 REAL ()) 0 '-0.5f5dd180000000@7'))
+(694 'roc' (REAL 8 0 0 0 REAL ()) () (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (REAL 8 0 0 0
+REAL ()) 0 '-0.5f5dd180000000@7')) (695 'r_coc' (REAL 8 0 0 0 REAL ()) (
+1 0 EXPLICIT (CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '1') (CONSTANT (
+INTEGER 4 0 0 0 INTEGER ()) 0 '3')) (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION) UNKNOWN-ACCESS (CONSTANT (
+REAL 8 0 0 0 REAL ()) 0 '-0.5f5dd180000000@7')) (696 'azimuth' (REAL 8 0
+0 0 REAL ()) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN
+0 0) UNKNOWN-ACCESS (CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'-0.5f5dd180000000@7')) (697 'undulation' (REAL 8 0 0 0 REAL ()) () (
+UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0)
+UNKNOWN-ACCESS (CONSTANT (REAL 8 0 0 0 REAL ()) 0 '-0.5f5dd180000000@7'))
+(698 'units' (DERIVED 226 0 0 0 DERIVED ()) () (UNKNOWN-FL
+UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (
+STRUCTURE (DERIVED 226 0 0 0 DERIVED ()) 0 (((CONSTANT (CHARACTER 1 0 0
+0 CHARACTER (())) 0 64
+'seconds                                                         ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'degrees_north                                                   ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'degrees_east                                                    ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'metres                                                          ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'metres                                                          ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'degrees_T                                                       ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'metres                                                          ') ()))
+())) (699 'range' (DERIVED 227 0 0 0 DERIVED ()) () (UNKNOWN-FL
+UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (
+STRUCTURE (DERIVED 227 0 0 0 DERIVED ()) 0 (((ARRAY (REAL 8 0 0 0 REAL ())
+1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.00000000000000@0') ()) ((
+CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.efffbe76c8b438@2') ())) ('2')) ())
+((ARRAY (REAL 8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'-0.5a000000000000@2') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.5a000000000000@2') ())) ('2')) ()) ((ARRAY (REAL 8 0 0 0 REAL ()) 1 (
+((CONSTANT (REAL 8 0 0 0 REAL ()) 0 '-0.b4000000000000@2') ()) ((
+CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.b4000000000000@2') ())) ('2')) ())
+((ARRAY (REAL 8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.5e9ac000000000@6') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.64b54000000000@6') ())) ('2')) ()) ((ARRAY (REAL 8 0 0 0 REAL ()) 1 (
+((CONSTANT (REAL 8 0 0 0 REAL ()) 0 '-0.c3500000000000@4') ()) ((
+CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.c3500000000000@4') ())) ('2')) ())
+((ARRAY (REAL 8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.00000000000000@0') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.16800000000000@3') ())) ('2')) ()) ((ARRAY (REAL 8 0 0 0 REAL ()) 1 (
+((CONSTANT (REAL 8 0 0 0 REAL ()) 0 '-0.96000000000000@2') ()) ((
+CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.96000000000000@2') ())) ('2')) ()))
+())) (700 'reference_frame' (DERIVED 228 0 0 0 DERIVED ()) () (
+UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0)
+UNKNOWN-ACCESS (STRUCTURE (DERIVED 228 0 0 0 DERIVED ()) 0 (((CONSTANT (
+CHARACTER 1 0 0 0 CHARACTER (())) 0 3 'ECF') ())) ()))) PUBLIC (() () ()
+()) () 0 0 18495790)
+226 'Geounits' 'ropp_io_types' '' 11 ((DERIVED UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) (UNKNOWN 0 0 0 0 UNKNOWN ()) 0 0 () ()
+0 ((701 'time_offset' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4
+0 0 0 INTEGER ()) 0 '64'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC
+UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0
+CHARACTER (())) 0 64
+'seconds                                                         ')) (
+702 'lat' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0 0 0
+INTEGER ()) 0 '64'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
+UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0 CHARACTER (()))
+0 64 'degrees_north                                                   '))
+(703 'lon' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0 0 0
+INTEGER ()) 0 '64'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
+UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0 CHARACTER (()))
+0 64 'degrees_east                                                    '))
+(704 'roc' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0 0 0
+INTEGER ()) 0 '64'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
+UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0 CHARACTER (()))
+0 64 'metres                                                          '))
+(705 'r_coc' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0 0 0
+INTEGER ()) 0 '64'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
+UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0 CHARACTER (()))
+0 64 'metres                                                          '))
+(706 'azimuth' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0 0 0
+INTEGER ()) 0 '64'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
+UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0 CHARACTER (()))
+0 64 'degrees_T                                                       '))
+(707 'undulation' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0 0
+0 INTEGER ()) 0 '64'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC
+UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0
+CHARACTER (())) 0 64
+'metres                                                          ')))
+PUBLIC (() () () ()) () 0 0 3851451)
+227 'Georange' 'ropp_io_types' '' 11 ((DERIVED UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) (UNKNOWN 0 0 0 0 UNKNOWN ()) 0 0 () ()
+0 ((708 'time_offset' (REAL 8 0 0 0 REAL ()) (1 0 EXPLICIT (CONSTANT (
+INTEGER 4 0 0 0 INTEGER ()) 0 '1') (CONSTANT (INTEGER 4 0 0 0 INTEGER ())
+0 '2')) (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0
+DIMENSION) UNKNOWN-ACCESS (ARRAY (REAL 8 0 0 0 REAL ()) 1 (((CONSTANT (
+REAL 8 0 0 0 REAL ()) 0 '0.00000000000000@0') ()) ((CONSTANT (REAL 8 0 0
+0 REAL ()) 0 '0.efffbe76c8b438@2') ())) ('2'))) (709 'lat' (REAL 8 0 0 0
+REAL ()) (1 0 EXPLICIT (CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '1') (
+CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '2')) (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION) UNKNOWN-ACCESS (ARRAY (REAL
+8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'-0.5a000000000000@2') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.5a000000000000@2') ())) ('2'))) (710 'lon' (REAL 8 0 0 0 REAL ()) (1
+0 EXPLICIT (CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '1') (CONSTANT (
+INTEGER 4 0 0 0 INTEGER ()) 0 '2')) (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION) UNKNOWN-ACCESS (ARRAY (REAL
+8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'-0.b4000000000000@2') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.b4000000000000@2') ())) ('2'))) (711 'roc' (REAL 8 0 0 0 REAL ()) (1
+0 EXPLICIT (CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '1') (CONSTANT (
+INTEGER 4 0 0 0 INTEGER ()) 0 '2')) (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION) UNKNOWN-ACCESS (ARRAY (REAL
+8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.5e9ac000000000@6') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.64b54000000000@6') ())) ('2'))) (712 'r_coc' (REAL 8 0 0 0 REAL ()) (
+1 0 EXPLICIT (CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '1') (CONSTANT (
+INTEGER 4 0 0 0 INTEGER ()) 0 '2')) (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION) UNKNOWN-ACCESS (ARRAY (REAL
+8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'-0.c3500000000000@4') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.c3500000000000@4') ())) ('2'))) (713 'azimuth' (REAL 8 0 0 0 REAL ())
+(1 0 EXPLICIT (CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '1') (CONSTANT (
+INTEGER 4 0 0 0 INTEGER ()) 0 '2')) (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION) UNKNOWN-ACCESS (ARRAY (REAL
+8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.00000000000000@0') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.16800000000000@3') ())) ('2'))) (714 'undulation' (REAL 8 0 0 0 REAL
+()) (1 0 EXPLICIT (CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '1') (
+CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '2')) (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION) UNKNOWN-ACCESS (ARRAY (REAL
+8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'-0.96000000000000@2') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.96000000000000@2') ())) ('2')))) PUBLIC (() () () ()) () 0 0 62881609)
+228 'Georef' 'ropp_io_types' '' 11 ((DERIVED UNKNOWN-INTENT UNKNOWN-PROC
+UNKNOWN UNKNOWN 0 0) (UNKNOWN 0 0 0 0 UNKNOWN ()) 0 0 () () 0 ((715
+'r_coc' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0 0 0 INTEGER
+()) 0 '3'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN
+0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 3 'ECF')))
+PUBLIC (() () () ()) () 0 0 70707967)
+230 'Bgtype' 'ropp_io_types' '' 11 ((DERIVED UNKNOWN-INTENT UNKNOWN-PROC
+UNKNOWN UNKNOWN 0 0) (UNKNOWN 0 0 0 0 UNKNOWN ()) 0 0 () () 0 ((716
+'source' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0 0 0
+INTEGER ()) 0 '20'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
+UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0 CHARACTER (()))
+0 20 'NONE                ')) (717 'year' (INTEGER 4 0 0 0 INTEGER ()) ()
+(UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0)
+UNKNOWN-ACCESS (CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '9999')) (718
+'month' (INTEGER 4 0 0 0 INTEGER ()) () (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (INTEGER 4 0
+0 0 INTEGER ()) 0 '99')) (719 'day' (INTEGER 4 0 0 0 INTEGER ()) () (
+UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0)
+UNKNOWN-ACCESS (CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '99')) (720 'hour'
+(INTEGER 4 0 0 0 INTEGER ()) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC
+UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (INTEGER 4 0 0 0 INTEGER ())
+0 '99')) (721 'minute' (INTEGER 4 0 0 0 INTEGER ()) () (UNKNOWN-FL
+UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (
+CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '99')) (722 'fcperiod' (REAL 8 0
+0 0 REAL ()) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN
+0 0) UNKNOWN-ACCESS (CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.3e7e6680000000@3')) (723 'units' (DERIVED 231 0 0 0 DERIVED ()) () (
+UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0)
+UNKNOWN-ACCESS (STRUCTURE (DERIVED 231 0 0 0 DERIVED ()) 0 (((CONSTANT (
+CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'years                                                           ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'months                                                          ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'days                                                            ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'hours                                                           ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'minutes                                                         ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'hours                                                           ') ()))
+())) (724 'range' (DERIVED 232 0 0 0 DERIVED ()) () (UNKNOWN-FL
+UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (
+STRUCTURE (DERIVED 232 0 0 0 DERIVED ()) 0 (((ARRAY (INTEGER 4 0 0 0
+INTEGER ()) 1 (((CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '1995') ()) ((
+CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '2099') ())) ('2')) ()) ((ARRAY
+(INTEGER 4 0 0 0 INTEGER ()) 1 (((CONSTANT (INTEGER 4 0 0 0 INTEGER ())
+0 '1') ()) ((CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '12') ())) ('2')) ())
+((ARRAY (INTEGER 4 0 0 0 INTEGER ()) 1 (((CONSTANT (INTEGER 4 0 0 0
+INTEGER ()) 0 '1') ()) ((CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '31') ()))
+('2')) ()) ((ARRAY (INTEGER 4 0 0 0 INTEGER ()) 1 (((CONSTANT (INTEGER 4
+0 0 0 INTEGER ()) 0 '0') ()) ((CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0
+'23') ())) ('2')) ()) ((ARRAY (INTEGER 4 0 0 0 INTEGER ()) 1 (((
+CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '0') ()) ((CONSTANT (INTEGER 4 0
+0 0 INTEGER ()) 0 '59') ())) ('2')) ()) ((ARRAY (REAL 8 0 0 0 REAL ()) 1
+(((CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.00000000000000@0') ()) ((
+CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.18000000000000@2') ())) ('2')) ()))
+()))) PUBLIC (() () () ()) () 0 0 56321212)
+231 'Bgunits' 'ropp_io_types' '' 11 ((DERIVED UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) (UNKNOWN 0 0 0 0 UNKNOWN ()) 0 0 () ()
+0 ((725 'year' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0 0 0
+INTEGER ()) 0 '64'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
+UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0 CHARACTER (()))
+0 64 'years                                                           '))
+(726 'month' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0 0 0
+INTEGER ()) 0 '64'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
+UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0 CHARACTER (()))
+0 64 'months                                                          '))
+(727 'day' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0 0 0
+INTEGER ()) 0 '64'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
+UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0 CHARACTER (()))
+0 64 'days                                                            '))
+(728 'hour' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0 0 0
+INTEGER ()) 0 '64'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
+UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0 CHARACTER (()))
+0 64 'hours                                                           '))
+(729 'minute' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0 0 0
+INTEGER ()) 0 '64'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
+UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0 CHARACTER (()))
+0 64 'minutes                                                         '))
+(730 'fcperiod' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0 0 0
+INTEGER ()) 0 '64'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
+UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0 CHARACTER (()))
+0 64 'hours                                                           ')))
+PUBLIC (() () () ()) () 0 0 3664045)
+232 'Bgrange' 'ropp_io_types' '' 11 ((DERIVED UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) (UNKNOWN 0 0 0 0 UNKNOWN ()) 0 0 () ()
+0 ((731 'year' (INTEGER 4 0 0 0 INTEGER ()) (1 0 EXPLICIT (CONSTANT (
+INTEGER 4 0 0 0 INTEGER ()) 0 '1') (CONSTANT (INTEGER 4 0 0 0 INTEGER ())
+0 '2')) (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0
+DIMENSION) UNKNOWN-ACCESS (ARRAY (INTEGER 4 0 0 0 INTEGER ()) 1 (((
+CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '1995') ()) ((CONSTANT (INTEGER
+4 0 0 0 INTEGER ()) 0 '2099') ())) ('2'))) (732 'month' (INTEGER 4 0 0 0
+INTEGER ()) (1 0 EXPLICIT (CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '1')
+(CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '2')) (UNKNOWN-FL
+UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION)
+UNKNOWN-ACCESS (ARRAY (INTEGER 4 0 0 0 INTEGER ()) 1 (((CONSTANT (
+INTEGER 4 0 0 0 INTEGER ()) 0 '1') ()) ((CONSTANT (INTEGER 4 0 0 0
+INTEGER ()) 0 '12') ())) ('2'))) (733 'day' (INTEGER 4 0 0 0 INTEGER ())
+(1 0 EXPLICIT (CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '1') (CONSTANT (
+INTEGER 4 0 0 0 INTEGER ()) 0 '2')) (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION) UNKNOWN-ACCESS (ARRAY (
+INTEGER 4 0 0 0 INTEGER ()) 1 (((CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0
+'1') ()) ((CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '31') ())) ('2'))) (
+734 'hour' (INTEGER 4 0 0 0 INTEGER ()) (1 0 EXPLICIT (CONSTANT (
+INTEGER 4 0 0 0 INTEGER ()) 0 '1') (CONSTANT (INTEGER 4 0 0 0 INTEGER ())
+0 '2')) (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0
+DIMENSION) UNKNOWN-ACCESS (ARRAY (INTEGER 4 0 0 0 INTEGER ()) 1 (((
+CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '0') ()) ((CONSTANT (INTEGER 4 0
+0 0 INTEGER ()) 0 '23') ())) ('2'))) (735 'minute' (INTEGER 4 0 0 0
+INTEGER ()) (1 0 EXPLICIT (CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '1')
+(CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '2')) (UNKNOWN-FL
+UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION)
+UNKNOWN-ACCESS (ARRAY (INTEGER 4 0 0 0 INTEGER ()) 1 (((CONSTANT (
+INTEGER 4 0 0 0 INTEGER ()) 0 '0') ()) ((CONSTANT (INTEGER 4 0 0 0
+INTEGER ()) 0 '59') ())) ('2'))) (736 'fcperiod' (REAL 8 0 0 0 REAL ())
+(1 0 EXPLICIT (CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '1') (CONSTANT (
+INTEGER 4 0 0 0 INTEGER ()) 0 '2')) (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION) UNKNOWN-ACCESS (ARRAY (REAL
+8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.00000000000000@0') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.18000000000000@2') ())) ('2')))) PUBLIC (() () () ()) () 0 0 62694203)
+234 'L1atype' 'ropp_io_types' '' 11 ((DERIVED UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 POINTER_COMP) (UNKNOWN 0 0 0 0 UNKNOWN
+()) 0 0 () () 0 ((737 'npoints' (INTEGER 4 0 0 0 INTEGER ()) () (
+UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0)
+UNKNOWN-ACCESS (CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '0')) (738
+'missing' (LOGICAL 4 0 0 0 LOGICAL ()) () (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (LOGICAL 4 0
+0 0 LOGICAL ()) 0 1)) (739 'dtime' (REAL 8 0 0 0 REAL ()) (1 0 DEFERRED
+() ()) (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0
+DIMENSION POINTER) UNKNOWN-ACCESS (NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0))
+(740 'snr_l1ca' (REAL 8 0 0 0 REAL ()) (1 0 DEFERRED () ()) (UNKNOWN-FL
+UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION POINTER)
+UNKNOWN-ACCESS (NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0)) (741 'snr_l1p' (
+REAL 8 0 0 0 REAL ()) (1 0 DEFERRED () ()) (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION POINTER) UNKNOWN-ACCESS (
+NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0)) (742 'snr_l2p' (REAL 8 0 0 0 REAL
+()) (1 0 DEFERRED () ()) (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
+UNKNOWN 0 0 DIMENSION POINTER) UNKNOWN-ACCESS (NULL (UNKNOWN 0 0 0 0
+UNKNOWN ()) 0)) (743 'phase_l1' (REAL 8 0 0 0 REAL ()) (1 0 DEFERRED ()
+()) (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0
+DIMENSION POINTER) UNKNOWN-ACCESS (NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0))
+(744 'phase_l2' (REAL 8 0 0 0 REAL ()) (1 0 DEFERRED () ()) (UNKNOWN-FL
+UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION POINTER)
+UNKNOWN-ACCESS (NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0)) (745 'r_gns' (
+REAL 8 0 0 0 REAL ()) (2 0 DEFERRED () () () ()) (UNKNOWN-FL
+UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION POINTER)
+UNKNOWN-ACCESS (NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0)) (746 'v_gns' (
+REAL 8 0 0 0 REAL ()) (2 0 DEFERRED () () () ()) (UNKNOWN-FL
+UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION POINTER)
+UNKNOWN-ACCESS (NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0)) (747 'r_leo' (
+REAL 8 0 0 0 REAL ()) (2 0 DEFERRED () () () ()) (UNKNOWN-FL
+UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION POINTER)
+UNKNOWN-ACCESS (NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0)) (748 'v_leo' (
+REAL 8 0 0 0 REAL ()) (2 0 DEFERRED () () () ()) (UNKNOWN-FL
+UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION POINTER)
+UNKNOWN-ACCESS (NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0)) (749 'phase_qual'
+(REAL 8 0 0 0 REAL ()) (1 0 DEFERRED () ()) (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION POINTER) UNKNOWN-ACCESS (
+NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0)) (750 'units' (DERIVED 235 0 0 0
+DERIVED ()) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0
+0) UNKNOWN-ACCESS (STRUCTURE (DERIVED 235 0 0 0 DERIVED ()) 0 (((
+CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'seconds                                                         ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'volt / volt                                                     ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'metres                                                          ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'metres                                                          ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'metres / seconds                                                ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'metres                                                          ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'metres / seconds                                                ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'percent                                                         ') ()))
+())) (751 'range' (DERIVED 236 0 0 0 DERIVED ()) () (UNKNOWN-FL
+UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (
+STRUCTURE (DERIVED 236 0 0 0 DERIVED ()) 0 (((ARRAY (REAL 8 0 0 0 REAL ())
+1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0 '-0.10000000000000@1') ()) ((
+CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.efffbe76c8b438@2') ())) ('2')) ())
+((ARRAY (REAL 8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.00000000000000@0') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.c3500000000000@4') ())) ('2')) ()) ((ARRAY (REAL 8 0 0 0 REAL ()) 1 (
+((CONSTANT (REAL 8 0 0 0 REAL ()) 0 '-0.f4240000000000@5') ()) ((
+CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.f4240000000000@5') ())) ('2')) ())
+((ARRAY (REAL 8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'-0.29020c00000000@7') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.29020c00000000@7') ())) ('2')) ()) ((ARRAY (REAL 8 0 0 0 REAL ()) 1 (
+((CONSTANT (REAL 8 0 0 0 REAL ()) 0 '-0.27100000000000@4') ()) ((
+CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.27100000000000@4') ())) ('2')) ())
+((ARRAY (REAL 8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'-0.98968000000000@6') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.98968000000000@6') ())) ('2')) ()) ((ARRAY (REAL 8 0 0 0 REAL ()) 1 (
+((CONSTANT (REAL 8 0 0 0 REAL ()) 0 '-0.27100000000000@4') ()) ((
+CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.27100000000000@4') ())) ('2')) ())
+((ARRAY (REAL 8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.00000000000000@0') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.64000000000000@2') ())) ('2')) ())) ())) (752 'reference_frame' (
+DERIVED 237 0 0 0 DERIVED ()) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC
+UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (STRUCTURE (DERIVED 237 0 0 0
+DERIVED ()) 0 (((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 3 'ECF')
+()) ((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 3 'ECI') ()) ((
+CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 3 'ECF') ()) ((CONSTANT (
+CHARACTER 1 0 0 0 CHARACTER (())) 0 3 'ECI') ())) ()))) PUBLIC (() () ()
+()) () 0 0 65777881)
+235 'L1aunits' 'ropp_io_types' '' 11 ((DERIVED UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) (UNKNOWN 0 0 0 0 UNKNOWN ()) 0 0 () ()
+0 ((753 'dtime' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0 0 0
+INTEGER ()) 0 '64'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
+UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0 CHARACTER (()))
+0 64 'seconds                                                         '))
+(754 'snr' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0 0 0
+INTEGER ()) 0 '64'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
+UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0 CHARACTER (()))
+0 64 'volt / volt                                                     '))
+(755 'phase' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0 0 0
+INTEGER ()) 0 '64'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
+UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0 CHARACTER (()))
+0 64 'metres                                                          '))
+(756 'r_gns' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0 0 0
+INTEGER ()) 0 '64'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
+UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0 CHARACTER (()))
+0 64 'metres                                                          '))
+(757 'v_gns' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0 0 0
+INTEGER ()) 0 '64'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
+UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0 CHARACTER (()))
+0 64 'metres / seconds                                                '))
+(758 'r_leo' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0 0 0
+INTEGER ()) 0 '64'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
+UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0 CHARACTER (()))
+0 64 'metres                                                          '))
+(759 'v_leo' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0 0 0
+INTEGER ()) 0 '64'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
+UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0 CHARACTER (()))
+0 64 'metres / seconds                                                '))
+(760 'phase_qual' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0 0
+0 INTEGER ()) 0 '64'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC
+UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0
+CHARACTER (())) 0 64
+'percent                                                         ')))
+PUBLIC (() () () ()) () 0 0 25473232)
+236 'L1arange' 'ropp_io_types' '' 11 ((DERIVED UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) (UNKNOWN 0 0 0 0 UNKNOWN ()) 0 0 () ()
+0 ((761 'dtime' (REAL 8 0 0 0 REAL ()) (1 0 EXPLICIT (CONSTANT (INTEGER
+4 0 0 0 INTEGER ()) 0 '1') (CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '2'))
+(UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION)
+UNKNOWN-ACCESS (ARRAY (REAL 8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0
+REAL ()) 0 '-0.10000000000000@1') ()) ((CONSTANT (REAL 8 0 0 0 REAL ())
+0 '0.efffbe76c8b438@2') ())) ('2'))) (762 'snr' (REAL 8 0 0 0 REAL ()) (
+1 0 EXPLICIT (CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '1') (CONSTANT (
+INTEGER 4 0 0 0 INTEGER ()) 0 '2')) (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION) UNKNOWN-ACCESS (ARRAY (REAL
+8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.00000000000000@0') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.c3500000000000@4') ())) ('2'))) (763 'phase' (REAL 8 0 0 0 REAL ()) (
+1 0 EXPLICIT (CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '1') (CONSTANT (
+INTEGER 4 0 0 0 INTEGER ()) 0 '2')) (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION) UNKNOWN-ACCESS (ARRAY (REAL
+8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'-0.f4240000000000@5') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.f4240000000000@5') ())) ('2'))) (764 'r_gns' (REAL 8 0 0 0 REAL ()) (
+1 0 EXPLICIT (CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '1') (CONSTANT (
+INTEGER 4 0 0 0 INTEGER ()) 0 '2')) (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION) UNKNOWN-ACCESS (ARRAY (REAL
+8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'-0.29020c00000000@7') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.29020c00000000@7') ())) ('2'))) (765 'v_gns' (REAL 8 0 0 0 REAL ()) (
+1 0 EXPLICIT (CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '1') (CONSTANT (
+INTEGER 4 0 0 0 INTEGER ()) 0 '2')) (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION) UNKNOWN-ACCESS (ARRAY (REAL
+8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'-0.27100000000000@4') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.27100000000000@4') ())) ('2'))) (766 'r_leo' (REAL 8 0 0 0 REAL ()) (
+1 0 EXPLICIT (CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '1') (CONSTANT (
+INTEGER 4 0 0 0 INTEGER ()) 0 '2')) (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION) UNKNOWN-ACCESS (ARRAY (REAL
+8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'-0.98968000000000@6') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.98968000000000@6') ())) ('2'))) (767 'v_leo' (REAL 8 0 0 0 REAL ()) (
+1 0 EXPLICIT (CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '1') (CONSTANT (
+INTEGER 4 0 0 0 INTEGER ()) 0 '2')) (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION) UNKNOWN-ACCESS (ARRAY (REAL
+8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'-0.27100000000000@4') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.27100000000000@4') ())) ('2'))) (768 'phase_qual' (REAL 8 0 0 0 REAL
+()) (1 0 EXPLICIT (CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '1') (
+CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '2')) (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION) UNKNOWN-ACCESS (ARRAY (REAL
+8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.00000000000000@0') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.64000000000000@2') ())) ('2')))) PUBLIC (() () () ()) () 0 0 84503390)
+237 'L1aref' 'ropp_io_types' '' 11 ((DERIVED UNKNOWN-INTENT UNKNOWN-PROC
+UNKNOWN UNKNOWN 0 0) (UNKNOWN 0 0 0 0 UNKNOWN ()) 0 0 () () 0 ((769
+'r_gns' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0 0 0 INTEGER
+()) 0 '3'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN
+0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 3 'ECF'))
+(770 'v_gns' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0 0 0
+INTEGER ()) 0 '3'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
+UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0 CHARACTER (()))
+0 3 'ECI')) (771 'r_leo' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (
+INTEGER 4 0 0 0 INTEGER ()) 0 '3'))) () (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1
+0 0 0 CHARACTER (())) 0 3 'ECF')) (772 'v_leo' (CHARACTER 1 0 0 0
+CHARACTER ((CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '3'))) () (
+UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0)
+UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 3 'ECI')))
+PUBLIC (() () () ()) () 0 0 64657044)
+239 'L1btype' 'ropp_io_types' '' 11 ((DERIVED UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 POINTER_COMP) (UNKNOWN 0 0 0 0 UNKNOWN
+()) 0 0 () () 0 ((773 'npoints' (INTEGER 4 0 0 0 INTEGER ()) () (
+UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0)
+UNKNOWN-ACCESS (CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '0')) (774
+'missing' (LOGICAL 4 0 0 0 LOGICAL ()) () (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (LOGICAL 4 0
+0 0 LOGICAL ()) 0 1)) (775 'lat_tp' (REAL 8 0 0 0 REAL ()) (1 0 DEFERRED
+() ()) (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0
+DIMENSION POINTER) UNKNOWN-ACCESS (NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0))
+(776 'lon_tp' (REAL 8 0 0 0 REAL ()) (1 0 DEFERRED () ()) (UNKNOWN-FL
+UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION POINTER)
+UNKNOWN-ACCESS (NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0)) (777 'azimuth_tp'
+(REAL 8 0 0 0 REAL ()) (1 0 DEFERRED () ()) (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION POINTER) UNKNOWN-ACCESS (
+NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0)) (778 'impact_l1' (REAL 8 0 0 0
+REAL ()) (1 0 DEFERRED () ()) (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC
+UNKNOWN UNKNOWN 0 0 DIMENSION POINTER) UNKNOWN-ACCESS (NULL (UNKNOWN 0 0
+0 0 UNKNOWN ()) 0)) (779 'impact_l2' (REAL 8 0 0 0 REAL ()) (1 0
+DEFERRED () ()) (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN
+0 0 DIMENSION POINTER) UNKNOWN-ACCESS (NULL (UNKNOWN 0 0 0 0 UNKNOWN ())
+0)) (780 'impact' (REAL 8 0 0 0 REAL ()) (1 0 DEFERRED () ()) (
+UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION
+POINTER) UNKNOWN-ACCESS (NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0)) (781
+'impact_opt' (REAL 8 0 0 0 REAL ()) (1 0 DEFERRED () ()) (UNKNOWN-FL
+UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION POINTER)
+UNKNOWN-ACCESS (NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0)) (782 'bangle_l1' (
+REAL 8 0 0 0 REAL ()) (1 0 DEFERRED () ()) (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION POINTER) UNKNOWN-ACCESS (
+NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0)) (783 'bangle_l2' (REAL 8 0 0 0
+REAL ()) (1 0 DEFERRED () ()) (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC
+UNKNOWN UNKNOWN 0 0 DIMENSION POINTER) UNKNOWN-ACCESS (NULL (UNKNOWN 0 0
+0 0 UNKNOWN ()) 0)) (784 'bangle' (REAL 8 0 0 0 REAL ()) (1 0 DEFERRED ()
+()) (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0
+DIMENSION POINTER) UNKNOWN-ACCESS (NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0))
+(785 'bangle_opt' (REAL 8 0 0 0 REAL ()) (1 0 DEFERRED () ()) (
+UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION
+POINTER) UNKNOWN-ACCESS (NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0)) (786
+'bangle_l1_sigma' (REAL 8 0 0 0 REAL ()) (1 0 DEFERRED () ()) (
+UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION
+POINTER) UNKNOWN-ACCESS (NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0)) (787
+'bangle_l2_sigma' (REAL 8 0 0 0 REAL ()) (1 0 DEFERRED () ()) (
+UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION
+POINTER) UNKNOWN-ACCESS (NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0)) (788
+'bangle_sigma' (REAL 8 0 0 0 REAL ()) (1 0 DEFERRED () ()) (UNKNOWN-FL
+UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION POINTER)
+UNKNOWN-ACCESS (NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0)) (789
+'bangle_opt_sigma' (REAL 8 0 0 0 REAL ()) (1 0 DEFERRED () ()) (
+UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION
+POINTER) UNKNOWN-ACCESS (NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0)) (790
+'bangle_l1_qual' (REAL 8 0 0 0 REAL ()) (1 0 DEFERRED () ()) (
+UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION
+POINTER) UNKNOWN-ACCESS (NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0)) (791
+'bangle_l2_qual' (REAL 8 0 0 0 REAL ()) (1 0 DEFERRED () ()) (
+UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION
+POINTER) UNKNOWN-ACCESS (NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0)) (792
+'bangle_qual' (REAL 8 0 0 0 REAL ()) (1 0 DEFERRED () ()) (UNKNOWN-FL
+UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION POINTER)
+UNKNOWN-ACCESS (NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0)) (793
+'bangle_opt_qual' (REAL 8 0 0 0 REAL ()) (1 0 DEFERRED () ()) (
+UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION
+POINTER) UNKNOWN-ACCESS (NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0)) (794
+'units' (DERIVED 240 0 0 0 DERIVED ()) () (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (STRUCTURE (DERIVED 240
+0 0 0 DERIVED ()) 0 (((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'degrees_north                                                   ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'degrees_east                                                    ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'degrees                                                         ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'metres                                                          ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'radians                                                         ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'radians                                                         ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'percent                                                         ') ()))
+())) (795 'range' (DERIVED 241 0 0 0 DERIVED ()) () (UNKNOWN-FL
+UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (
+STRUCTURE (DERIVED 241 0 0 0 DERIVED ()) 0 (((ARRAY (REAL 8 0 0 0 REAL ())
+1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0 '-0.5a000000000000@2') ()) ((
+CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.5a000000000000@2') ())) ('2')) ())
+((ARRAY (REAL 8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'-0.b4000000000000@2') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.b4000000000000@2') ())) ('2')) ()) ((ARRAY (REAL 8 0 0 0 REAL ()) 1 (
+((CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.00000000000000@0') ()) ((
+CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.16800000000000@3') ())) ('2')) ())
+((ARRAY (REAL 8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.5e9ac000000000@6') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.64b54000000000@6') ())) ('2')) ()) ((ARRAY (REAL 8 0 0 0 REAL ()) 1 (
+((CONSTANT (REAL 8 0 0 0 REAL ()) 0 '-0.4189374bc6a7f0@-2') ()) ((
+CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.1999999999999a@0') ())) ('2')) ())
+((ARRAY (REAL 8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.00000000000000@0') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.28f5c28f5c28f6@-1') ())) ('2')) ()) ((ARRAY (REAL 8 0 0 0 REAL ()) 1
+(((CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.00000000000000@0') ()) ((
+CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.64000000000000@2') ())) ('2')) ()))
+()))) PUBLIC (() () () ()) () 0 0 10374874)
+240 'L1bunits' 'ropp_io_types' '' 11 ((DERIVED UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) (UNKNOWN 0 0 0 0 UNKNOWN ()) 0 0 () ()
+0 ((796 'lat_tp' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0 0
+0 INTEGER ()) 0 '64'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC
+UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0
+CHARACTER (())) 0 64
+'degrees_north                                                   ')) (
+797 'lon_tp' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0 0 0
+INTEGER ()) 0 '64'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
+UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0 CHARACTER (()))
+0 64 'degrees_east                                                    '))
+(798 'azimuth_tp' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0 0
+0 INTEGER ()) 0 '64'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC
+UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0
+CHARACTER (())) 0 64
+'degrees                                                         ')) (
+799 'impact' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0 0 0
+INTEGER ()) 0 '64'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
+UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0 CHARACTER (()))
+0 64 'metres                                                          '))
+(800 'bangle' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0 0 0
+INTEGER ()) 0 '64'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
+UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0 CHARACTER (()))
+0 64 'radians                                                         '))
+(801 'bangle_sigma' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0
+0 0 INTEGER ()) 0 '64'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC
+UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0
+CHARACTER (())) 0 64
+'radians                                                         ')) (
+802 'bangle_qual' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0 0
+0 INTEGER ()) 0 '64'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC
+UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0
+CHARACTER (())) 0 64
+'percent                                                         ')))
+PUBLIC (() () () ()) () 0 0 97480463)
+241 'L1brange' 'ropp_io_types' '' 11 ((DERIVED UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) (UNKNOWN 0 0 0 0 UNKNOWN ()) 0 0 () ()
+0 ((803 'lat_tp' (REAL 8 0 0 0 REAL ()) (1 0 EXPLICIT (CONSTANT (
+INTEGER 4 0 0 0 INTEGER ()) 0 '1') (CONSTANT (INTEGER 4 0 0 0 INTEGER ())
+0 '2')) (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0
+DIMENSION) UNKNOWN-ACCESS (ARRAY (REAL 8 0 0 0 REAL ()) 1 (((CONSTANT (
+REAL 8 0 0 0 REAL ()) 0 '-0.5a000000000000@2') ()) ((CONSTANT (REAL 8 0
+0 0 REAL ()) 0 '0.5a000000000000@2') ())) ('2'))) (804 'lon_tp' (REAL 8
+0 0 0 REAL ()) (1 0 EXPLICIT (CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '1')
+(CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '2')) (UNKNOWN-FL
+UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION)
+UNKNOWN-ACCESS (ARRAY (REAL 8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0
+REAL ()) 0 '-0.b4000000000000@2') ()) ((CONSTANT (REAL 8 0 0 0 REAL ())
+0 '0.b4000000000000@2') ())) ('2'))) (805 'azimuth_tp' (REAL 8 0 0 0
+REAL ()) (1 0 EXPLICIT (CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '1') (
+CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '2')) (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION) UNKNOWN-ACCESS (ARRAY (REAL
+8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.00000000000000@0') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.16800000000000@3') ())) ('2'))) (806 'impact' (REAL 8 0 0 0 REAL ())
+(1 0 EXPLICIT (CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '1') (CONSTANT (
+INTEGER 4 0 0 0 INTEGER ()) 0 '2')) (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION) UNKNOWN-ACCESS (ARRAY (REAL
+8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.5e9ac000000000@6') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.64b54000000000@6') ())) ('2'))) (807 'bangle' (REAL 8 0 0 0 REAL ())
+(1 0 EXPLICIT (CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '1') (CONSTANT (
+INTEGER 4 0 0 0 INTEGER ()) 0 '2')) (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION) UNKNOWN-ACCESS (ARRAY (REAL
+8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'-0.4189374bc6a7f0@-2') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.1999999999999a@0') ())) ('2'))) (808 'bangle_sigma' (REAL 8 0 0 0
+REAL ()) (1 0 EXPLICIT (CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '1') (
+CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '2')) (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION) UNKNOWN-ACCESS (ARRAY (REAL
+8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.00000000000000@0') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.28f5c28f5c28f6@-1') ())) ('2'))) (809 'bangle_qual' (REAL 8 0 0 0
+REAL ()) (1 0 EXPLICIT (CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '1') (
+CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '2')) (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION) UNKNOWN-ACCESS (ARRAY (REAL
+8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.00000000000000@0') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.64000000000000@2') ())) ('2')))) PUBLIC (() () () ()) () 0 0 56510621)
+243 'L2atype' 'ropp_io_types' '' 11 ((DERIVED UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 POINTER_COMP) (UNKNOWN 0 0 0 0 UNKNOWN
+()) 0 0 () () 0 ((810 'npoints' (INTEGER 4 0 0 0 INTEGER ()) () (
+UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0)
+UNKNOWN-ACCESS (CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '0')) (811
+'missing' (LOGICAL 4 0 0 0 LOGICAL ()) () (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (LOGICAL 4 0
+0 0 LOGICAL ()) 0 1)) (812 'alt_refrac' (REAL 8 0 0 0 REAL ()) (1 0
+DEFERRED () ()) (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN
+0 0 DIMENSION POINTER) UNKNOWN-ACCESS (NULL (UNKNOWN 0 0 0 0 UNKNOWN ())
+0)) (813 'geop_refrac' (REAL 8 0 0 0 REAL ()) (1 0 DEFERRED () ()) (
+UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION
+POINTER) UNKNOWN-ACCESS (NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0)) (814
+'refrac' (REAL 8 0 0 0 REAL ()) (1 0 DEFERRED () ()) (UNKNOWN-FL
+UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION POINTER)
+UNKNOWN-ACCESS (NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0)) (815 'refrac_sigma'
+(REAL 8 0 0 0 REAL ()) (1 0 DEFERRED () ()) (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION POINTER) UNKNOWN-ACCESS (
+NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0)) (816 'refrac_qual' (REAL 8 0 0 0
+REAL ()) (1 0 DEFERRED () ()) (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC
+UNKNOWN UNKNOWN 0 0 DIMENSION POINTER) UNKNOWN-ACCESS (NULL (UNKNOWN 0 0
+0 0 UNKNOWN ()) 0)) (817 'dry_temp' (REAL 8 0 0 0 REAL ()) (1 0 DEFERRED
+() ()) (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0
+DIMENSION POINTER) UNKNOWN-ACCESS (NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0))
+(818 'dry_temp_sigma' (REAL 8 0 0 0 REAL ()) (1 0 DEFERRED () ()) (
+UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION
+POINTER) UNKNOWN-ACCESS (NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0)) (819
+'dry_temp_qual' (REAL 8 0 0 0 REAL ()) (1 0 DEFERRED () ()) (UNKNOWN-FL
+UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION POINTER)
+UNKNOWN-ACCESS (NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0)) (820 'units' (
+DERIVED 244 0 0 0 DERIVED ()) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC
+UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (STRUCTURE (DERIVED 244 0 0 0
+DERIVED ()) 0 (((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'metres                                                          ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'geopotential metres                                             ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'N-units                                                         ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'N-units                                                         ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'percent                                                         ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'kelvin                                                          ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'kelvin                                                          ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'percent                                                         ') ()))
+())) (821 'range' (DERIVED 245 0 0 0 DERIVED ()) () (UNKNOWN-FL
+UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (
+STRUCTURE (DERIVED 245 0 0 0 DERIVED ()) 0 (((ARRAY (REAL 8 0 0 0 REAL ())
+1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0 '-0.3e800000000000@3') ()) ((
+CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.186a0000000000@5') ())) ('2')) ())
+((ARRAY (REAL 8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'-0.3e800000000000@3') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.186a0000000000@5') ())) ('2')) ()) ((ARRAY (REAL 8 0 0 0 REAL ()) 1 (
+((CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.00000000000000@0') ()) ((
+CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.1f400000000000@3') ())) ('2')) ())
+((ARRAY (REAL 8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.00000000000000@0') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.32000000000000@2') ())) ('2')) ()) ((ARRAY (REAL 8 0 0 0 REAL ()) 1 (
+((CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.00000000000000@0') ()) ((
+CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.64000000000000@2') ())) ('2')) ())
+((ARRAY (REAL 8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.96000000000000@2') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.15e00000000000@3') ())) ('2')) ()) ((ARRAY (REAL 8 0 0 0 REAL ()) 1 (
+((CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.00000000000000@0') ()) ((
+CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.32000000000000@2') ())) ('2')) ())
+((ARRAY (REAL 8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.00000000000000@0') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.64000000000000@2') ())) ('2')) ())) ()))) PUBLIC (() () () ()) () 0 0
+37785112)
+244 'L2aunits' 'ropp_io_types' '' 11 ((DERIVED UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) (UNKNOWN 0 0 0 0 UNKNOWN ()) 0 0 () ()
+0 ((822 'alt_refrac' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4
+0 0 0 INTEGER ()) 0 '64'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC
+UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0
+CHARACTER (())) 0 64
+'metres                                                          ')) (
+823 'geop_refrac' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0 0
+0 INTEGER ()) 0 '64'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC
+UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0
+CHARACTER (())) 0 64
+'geopotential metres                                             ')) (
+824 'refrac' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0 0 0
+INTEGER ()) 0 '64'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
+UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0 CHARACTER (()))
+0 64 'N-units                                                         '))
+(825 'refrac_sigma' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0
+0 0 INTEGER ()) 0 '64'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC
+UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0
+CHARACTER (())) 0 64
+'N-units                                                         ')) (
+826 'refrac_qual' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0 0
+0 INTEGER ()) 0 '64'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC
+UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0
+CHARACTER (())) 0 64
+'percent                                                         ')) (
+827 'dry_temp' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0 0 0
+INTEGER ()) 0 '64'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
+UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0 CHARACTER (()))
+0 64 'kelvin                                                          '))
+(828 'dry_temp_sigma' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4
+0 0 0 INTEGER ()) 0 '64'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC
+UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0
+CHARACTER (())) 0 64
+'kelvin                                                          ')) (
+829 'dry_temp_qual' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0
+0 0 INTEGER ()) 0 '64'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC
+UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0
+CHARACTER (())) 0 64
+'percent                                                         ')))
+PUBLIC (() () () ()) () 0 0 23643729)
+245 'L2arange' 'ropp_io_types' '' 11 ((DERIVED UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) (UNKNOWN 0 0 0 0 UNKNOWN ()) 0 0 () ()
+0 ((830 'alt_refrac' (REAL 8 0 0 0 REAL ()) (1 0 EXPLICIT (CONSTANT (
+INTEGER 4 0 0 0 INTEGER ()) 0 '1') (CONSTANT (INTEGER 4 0 0 0 INTEGER ())
+0 '2')) (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0
+DIMENSION) UNKNOWN-ACCESS (ARRAY (REAL 8 0 0 0 REAL ()) 1 (((CONSTANT (
+REAL 8 0 0 0 REAL ()) 0 '-0.3e800000000000@3') ()) ((CONSTANT (REAL 8 0
+0 0 REAL ()) 0 '0.186a0000000000@5') ())) ('2'))) (831 'geop_refrac' (
+REAL 8 0 0 0 REAL ()) (1 0 EXPLICIT (CONSTANT (INTEGER 4 0 0 0 INTEGER ())
+0 '1') (CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '2')) (UNKNOWN-FL
+UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION)
+UNKNOWN-ACCESS (ARRAY (REAL 8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0
+REAL ()) 0 '-0.3e800000000000@3') ()) ((CONSTANT (REAL 8 0 0 0 REAL ())
+0 '0.186a0000000000@5') ())) ('2'))) (832 'refrac' (REAL 8 0 0 0 REAL ())
+(1 0 EXPLICIT (CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '1') (CONSTANT (
+INTEGER 4 0 0 0 INTEGER ()) 0 '2')) (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION) UNKNOWN-ACCESS (ARRAY (REAL
+8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.00000000000000@0') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.1f400000000000@3') ())) ('2'))) (833 'refrac_sigma' (REAL 8 0 0 0
+REAL ()) (1 0 EXPLICIT (CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '1') (
+CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '2')) (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION) UNKNOWN-ACCESS (ARRAY (REAL
+8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.00000000000000@0') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.32000000000000@2') ())) ('2'))) (834 'refrac_qual' (REAL 8 0 0 0 REAL
+()) (1 0 EXPLICIT (CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '1') (
+CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '2')) (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION) UNKNOWN-ACCESS (ARRAY (REAL
+8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.00000000000000@0') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.64000000000000@2') ())) ('2'))) (835 'dry_temp' (REAL 8 0 0 0 REAL ())
+(1 0 EXPLICIT (CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '1') (CONSTANT (
+INTEGER 4 0 0 0 INTEGER ()) 0 '2')) (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION) UNKNOWN-ACCESS (ARRAY (REAL
+8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.96000000000000@2') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.15e00000000000@3') ())) ('2'))) (836 'dry_temp_sigma' (REAL 8 0 0 0
+REAL ()) (1 0 EXPLICIT (CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '1') (
+CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '2')) (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION) UNKNOWN-ACCESS (ARRAY (REAL
+8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.00000000000000@0') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.32000000000000@2') ())) ('2'))) (837 'dry_temp_qual' (REAL 8 0 0 0
+REAL ()) (1 0 EXPLICIT (CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '1') (
+CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '2')) (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION) UNKNOWN-ACCESS (ARRAY (REAL
+8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.00000000000000@0') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.64000000000000@2') ())) ('2')))) PUBLIC (() () () ()) () 0 0 82673887)
+247 'L2btype' 'ropp_io_types' '' 11 ((DERIVED UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 POINTER_COMP) (UNKNOWN 0 0 0 0 UNKNOWN
+()) 0 0 () () 0 ((838 'npoints' (INTEGER 4 0 0 0 INTEGER ()) () (
+UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0)
+UNKNOWN-ACCESS (CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '0')) (839
+'missing' (LOGICAL 4 0 0 0 LOGICAL ()) () (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (LOGICAL 4 0
+0 0 LOGICAL ()) 0 1)) (840 'geop' (REAL 8 0 0 0 REAL ()) (1 0 DEFERRED ()
+()) (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0
+DIMENSION POINTER) UNKNOWN-ACCESS (NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0))
+(841 'geop_sigma' (REAL 8 0 0 0 REAL ()) (1 0 DEFERRED () ()) (
+UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION
+POINTER) UNKNOWN-ACCESS (NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0)) (842
+'press' (REAL 8 0 0 0 REAL ()) (1 0 DEFERRED () ()) (UNKNOWN-FL
+UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION POINTER)
+UNKNOWN-ACCESS (NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0)) (843 'press_sigma'
+(REAL 8 0 0 0 REAL ()) (1 0 DEFERRED () ()) (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION POINTER) UNKNOWN-ACCESS (
+NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0)) (844 'temp' (REAL 8 0 0 0 REAL ())
+(1 0 DEFERRED () ()) (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
+UNKNOWN 0 0 DIMENSION POINTER) UNKNOWN-ACCESS (NULL (UNKNOWN 0 0 0 0
+UNKNOWN ()) 0)) (845 'temp_sigma' (REAL 8 0 0 0 REAL ()) (1 0 DEFERRED ()
+()) (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0
+DIMENSION POINTER) UNKNOWN-ACCESS (NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0))
+(846 'shum' (REAL 8 0 0 0 REAL ()) (1 0 DEFERRED () ()) (UNKNOWN-FL
+UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION POINTER)
+UNKNOWN-ACCESS (NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0)) (847 'shum_sigma'
+(REAL 8 0 0 0 REAL ()) (1 0 DEFERRED () ()) (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION POINTER) UNKNOWN-ACCESS (
+NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0)) (848 'meteo_qual' (REAL 8 0 0 0
+REAL ()) (1 0 DEFERRED () ()) (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC
+UNKNOWN UNKNOWN 0 0 DIMENSION POINTER) UNKNOWN-ACCESS (NULL (UNKNOWN 0 0
+0 0 UNKNOWN ()) 0)) (849 'units' (DERIVED 248 0 0 0 DERIVED ()) () (
+UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0)
+UNKNOWN-ACCESS (STRUCTURE (DERIVED 248 0 0 0 DERIVED ()) 0 (((CONSTANT (
+CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'geopotential metres                                             ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'geopotential metres                                             ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'hPa                                                             ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'hPa                                                             ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'kelvin                                                          ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'kelvin                                                          ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'gram / kilogram                                                 ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'gram / kilogram                                                 ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'percent                                                         ') ()))
+())) (850 'range' (DERIVED 249 0 0 0 DERIVED ()) () (UNKNOWN-FL
+UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (
+STRUCTURE (DERIVED 249 0 0 0 DERIVED ()) 0 (((ARRAY (REAL 8 0 0 0 REAL ())
+1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0 '-0.3e800000000000@3') ()) ((
+CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.186a0000000000@5') ())) ('2')) ())
+((ARRAY (REAL 8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.00000000000000@0') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.1f400000000000@3') ())) ('2')) ()) ((ARRAY (REAL 8 0 0 0 REAL ()) 1 (
+((CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.68db8bac710cb4@-3') ()) ((
+CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.44c00000000000@3') ())) ('2')) ())
+((ARRAY (REAL 8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.00000000000000@0') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.50000000000000@1') ())) ('2')) ()) ((ARRAY (REAL 8 0 0 0 REAL ()) 1 (
+((CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.96000000000000@2') ()) ((
+CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.15e00000000000@3') ())) ('2')) ())
+((ARRAY (REAL 8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.00000000000000@0') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.50000000000000@1') ())) ('2')) ()) ((ARRAY (REAL 8 0 0 0 REAL ()) 1 (
+((CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.00000000000000@0') ()) ((
+CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.32000000000000@2') ())) ('2')) ())
+((ARRAY (REAL 8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.00000000000000@0') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.50000000000000@1') ())) ('2')) ()) ((ARRAY (REAL 8 0 0 0 REAL ()) 1 (
+((CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.00000000000000@0') ()) ((
+CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.64000000000000@2') ())) ('2')) ()))
+()))) PUBLIC (() () () ()) () 0 0 82382105)
+248 'L2bunits' 'ropp_io_types' '' 11 ((DERIVED UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) (UNKNOWN 0 0 0 0 UNKNOWN ()) 0 0 () ()
+0 ((851 'geop' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0 0 0
+INTEGER ()) 0 '64'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
+UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0 CHARACTER (()))
+0 64 'geopotential metres                                             '))
+(852 'geop_sigma' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0 0
+0 INTEGER ()) 0 '64'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC
+UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0
+CHARACTER (())) 0 64
+'geopotential metres                                             ')) (
+853 'press' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0 0 0
+INTEGER ()) 0 '64'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
+UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0 CHARACTER (()))
+0 64 'hPa                                                             '))
+(854 'press_sigma' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0
+0 0 INTEGER ()) 0 '64'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC
+UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0
+CHARACTER (())) 0 64
+'hPa                                                             ')) (
+855 'temp' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0 0 0
+INTEGER ()) 0 '64'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
+UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0 CHARACTER (()))
+0 64 'kelvin                                                          '))
+(856 'temp_sigma' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0 0
+0 INTEGER ()) 0 '64'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC
+UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0
+CHARACTER (())) 0 64
+'kelvin                                                          ')) (
+857 'shum' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0 0 0
+INTEGER ()) 0 '64'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
+UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0 CHARACTER (()))
+0 64 'gram / kilogram                                                 '))
+(858 'shum_sigma' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0 0
+0 INTEGER ()) 0 '64'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC
+UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0
+CHARACTER (())) 0 64
+'gram / kilogram                                                 ')) (
+859 'meteo_qual' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0 0
+0 INTEGER ()) 0 '64'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC
+UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0
+CHARACTER (())) 0 64
+'percent                                                         ')))
+PUBLIC (() () () ()) () 0 0 95650960)
+249 'L2brange' 'ropp_io_types' '' 11 ((DERIVED UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) (UNKNOWN 0 0 0 0 UNKNOWN ()) 0 0 () ()
+0 ((860 'geop' (REAL 8 0 0 0 REAL ()) (1 0 EXPLICIT (CONSTANT (INTEGER 4
+0 0 0 INTEGER ()) 0 '1') (CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '2'))
+(UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION)
+UNKNOWN-ACCESS (ARRAY (REAL 8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0
+REAL ()) 0 '-0.3e800000000000@3') ()) ((CONSTANT (REAL 8 0 0 0 REAL ())
+0 '0.186a0000000000@5') ())) ('2'))) (861 'geop_sigma' (REAL 8 0 0 0
+REAL ()) (1 0 EXPLICIT (CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '1') (
+CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '2')) (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION) UNKNOWN-ACCESS (ARRAY (REAL
+8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.00000000000000@0') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.1f400000000000@3') ())) ('2'))) (862 'press' (REAL 8 0 0 0 REAL ()) (
+1 0 EXPLICIT (CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '1') (CONSTANT (
+INTEGER 4 0 0 0 INTEGER ()) 0 '2')) (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION) UNKNOWN-ACCESS (ARRAY (REAL
+8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.68db8bac710cb4@-3') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.44c00000000000@3') ())) ('2'))) (863 'press_sigma' (REAL 8 0 0 0 REAL
+()) (1 0 EXPLICIT (CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '1') (
+CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '2')) (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION) UNKNOWN-ACCESS (ARRAY (REAL
+8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.00000000000000@0') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.50000000000000@1') ())) ('2'))) (864 'temp' (REAL 8 0 0 0 REAL ()) (
+1 0 EXPLICIT (CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '1') (CONSTANT (
+INTEGER 4 0 0 0 INTEGER ()) 0 '2')) (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION) UNKNOWN-ACCESS (ARRAY (REAL
+8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.96000000000000@2') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.15e00000000000@3') ())) ('2'))) (865 'temp_sigma' (REAL 8 0 0 0 REAL
+()) (1 0 EXPLICIT (CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '1') (
+CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '2')) (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION) UNKNOWN-ACCESS (ARRAY (REAL
+8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.00000000000000@0') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.50000000000000@1') ())) ('2'))) (866 'shum' (REAL 8 0 0 0 REAL ()) (
+1 0 EXPLICIT (CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '1') (CONSTANT (
+INTEGER 4 0 0 0 INTEGER ()) 0 '2')) (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION) UNKNOWN-ACCESS (ARRAY (REAL
+8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.00000000000000@0') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.32000000000000@2') ())) ('2'))) (867 'shum_sigma' (REAL 8 0 0 0 REAL
+()) (1 0 EXPLICIT (CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '1') (
+CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '2')) (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION) UNKNOWN-ACCESS (ARRAY (REAL
+8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.00000000000000@0') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.50000000000000@1') ())) ('2'))) (868 'meteo_qual' (REAL 8 0 0 0 REAL
+()) (1 0 EXPLICIT (CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '1') (
+CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '2')) (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION) UNKNOWN-ACCESS (ARRAY (REAL
+8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.00000000000000@0') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.64000000000000@2') ())) ('2')))) PUBLIC (() () () ()) () 0 0 54681118)
+251 'L2ctype' 'ropp_io_types' '' 11 ((DERIVED UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) (UNKNOWN 0 0 0 0 UNKNOWN ()) 0 0 () ()
+0 ((869 'npoints' (INTEGER 4 0 0 0 INTEGER ()) () (UNKNOWN-FL
+UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (
+CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '0')) (870 'missing' (LOGICAL 4
+0 0 0 LOGICAL ()) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
+UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (LOGICAL 4 0 0 0 LOGICAL ()) 0 1))
+(871 'geop_sfc' (REAL 8 0 0 0 REAL ()) () (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (REAL 8 0 0 0
+REAL ()) 0 '-0.5f5dd180000000@7')) (872 'press_sfc' (REAL 8 0 0 0 REAL ())
+() (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0)
+UNKNOWN-ACCESS (CONSTANT (REAL 8 0 0 0 REAL ()) 0 '-0.5f5dd180000000@7'))
+(873 'press_sfc_sigma' (REAL 8 0 0 0 REAL ()) () (UNKNOWN-FL
+UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (
+CONSTANT (REAL 8 0 0 0 REAL ()) 0 '-0.5f5dd180000000@7')) (874
+'press_sfc_qual' (REAL 8 0 0 0 REAL ()) () (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (REAL 8 0 0 0
+REAL ()) 0 '-0.5f5dd180000000@7')) (875 'tph_bangle' (REAL 8 0 0 0 REAL
+()) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0)
+UNKNOWN-ACCESS (CONSTANT (REAL 8 0 0 0 REAL ()) 0 '-0.5f5dd180000000@7'))
+(876 'tpa_bangle' (REAL 8 0 0 0 REAL ()) () (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (REAL 8 0 0 0
+REAL ()) 0 '-0.5f5dd180000000@7')) (877 'tph_bangle_flag' (INTEGER 4 0 0
+0 INTEGER ()) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN
+0 0) UNKNOWN-ACCESS (CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '-999')) (
+878 'tph_refrac' (REAL 8 0 0 0 REAL ()) () (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (REAL 8 0 0 0
+REAL ()) 0 '-0.5f5dd180000000@7')) (879 'tpn_refrac' (REAL 8 0 0 0 REAL
+()) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0)
+UNKNOWN-ACCESS (CONSTANT (REAL 8 0 0 0 REAL ()) 0 '-0.5f5dd180000000@7'))
+(880 'tph_refrac_flag' (INTEGER 4 0 0 0 INTEGER ()) () (UNKNOWN-FL
+UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (
+CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '-999')) (881 'tph_tdry_lrt' (
+REAL 8 0 0 0 REAL ()) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
+UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'-0.5f5dd180000000@7')) (882 'tpt_tdry_lrt' (REAL 8 0 0 0 REAL ()) () (
+UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0)
+UNKNOWN-ACCESS (CONSTANT (REAL 8 0 0 0 REAL ()) 0 '-0.5f5dd180000000@7'))
+(883 'tph_tdry_lrt_flag' (INTEGER 4 0 0 0 INTEGER ()) () (UNKNOWN-FL
+UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (
+CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '-999')) (884 'tph_tdry_cpt' (
+REAL 8 0 0 0 REAL ()) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
+UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'-0.5f5dd180000000@7')) (885 'tpt_tdry_cpt' (REAL 8 0 0 0 REAL ()) () (
+UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0)
+UNKNOWN-ACCESS (CONSTANT (REAL 8 0 0 0 REAL ()) 0 '-0.5f5dd180000000@7'))
+(886 'tph_tdry_cpt_flag' (INTEGER 4 0 0 0 INTEGER ()) () (UNKNOWN-FL
+UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (
+CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '-999')) (887 'prh_tdry_cpt' (
+REAL 8 0 0 0 REAL ()) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
+UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'-0.5f5dd180000000@7')) (888 'prt_tdry_cpt' (REAL 8 0 0 0 REAL ()) () (
+UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0)
+UNKNOWN-ACCESS (CONSTANT (REAL 8 0 0 0 REAL ()) 0 '-0.5f5dd180000000@7'))
+(889 'prh_tdry_cpt_flag' (INTEGER 4 0 0 0 INTEGER ()) () (UNKNOWN-FL
+UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (
+CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '-999')) (890 'tph_temp_lrt' (
+REAL 8 0 0 0 REAL ()) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
+UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'-0.5f5dd180000000@7')) (891 'tpt_temp_lrt' (REAL 8 0 0 0 REAL ()) () (
+UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0)
+UNKNOWN-ACCESS (CONSTANT (REAL 8 0 0 0 REAL ()) 0 '-0.5f5dd180000000@7'))
+(892 'tph_temp_lrt_flag' (INTEGER 4 0 0 0 INTEGER ()) () (UNKNOWN-FL
+UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (
+CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '-999')) (893 'tph_temp_cpt' (
+REAL 8 0 0 0 REAL ()) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
+UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'-0.5f5dd180000000@7')) (894 'tpt_temp_cpt' (REAL 8 0 0 0 REAL ()) () (
+UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0)
+UNKNOWN-ACCESS (CONSTANT (REAL 8 0 0 0 REAL ()) 0 '-0.5f5dd180000000@7'))
+(895 'tph_temp_cpt_flag' (INTEGER 4 0 0 0 INTEGER ()) () (UNKNOWN-FL
+UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (
+CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '-999')) (896 'prh_temp_cpt' (
+REAL 8 0 0 0 REAL ()) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
+UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'-0.5f5dd180000000@7')) (897 'prt_temp_cpt' (REAL 8 0 0 0 REAL ()) () (
+UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0)
+UNKNOWN-ACCESS (CONSTANT (REAL 8 0 0 0 REAL ()) 0 '-0.5f5dd180000000@7'))
+(898 'prh_temp_cpt_flag' (INTEGER 4 0 0 0 INTEGER ()) () (UNKNOWN-FL
+UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (
+CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '-999')) (899 'units' (DERIVED
+252 0 0 0 DERIVED ()) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
+UNKNOWN 0 0) UNKNOWN-ACCESS (STRUCTURE (DERIVED 252 0 0 0 DERIVED ()) 0
+(((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'degrees_north                                                   ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'degrees_east                                                    ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'radians                                                         ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'geopotential metres                                             ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'hPa                                                             ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'hPa                                                             ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'percent                                                         ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'metres                                                          ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'radians                                                         ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'                                                                ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'metres                                                          ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'N-units                                                         ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'                                                                ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'metres                                                          ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'kelvin                                                          ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'                                                                ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'metres                                                          ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'kelvin                                                          ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'                                                                ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'metres                                                          ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'kelvin                                                          ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'                                                                ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'geopotential metres                                             ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'kelvin                                                          ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'                                                                ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'geopotential metres                                             ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'kelvin                                                          ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'                                                                ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'metres                                                          ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'kelvin                                                          ') ())
+((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'                                                                ') ()))
+())) (900 'range' (DERIVED 253 0 0 0 DERIVED ()) () (UNKNOWN-FL
+UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (
+STRUCTURE (DERIVED 253 0 0 0 DERIVED ()) 0 (((ARRAY (REAL 8 0 0 0 REAL ())
+1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0 '-0.5a000000000000@2') ()) ((
+CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.5a000000000000@2') ())) ('2')) ())
+((ARRAY (REAL 8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'-0.b4000000000000@2') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.b4000000000000@2') ())) ('2')) ()) ((ARRAY (REAL 8 0 0 0 REAL ()) 1 (
+((CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.00000000000000@0') ()) ((
+CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.3243f3e0370cdc@1') ())) ('2')) ())
+((ARRAY (REAL 8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'-0.3e800000000000@3') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.27100000000000@4') ())) ('2')) ()) ((ARRAY (REAL 8 0 0 0 REAL ()) 1 (
+((CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.fa000000000000@2') ()) ((
+CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.44c00000000000@3') ())) ('2')) ())
+((ARRAY (REAL 8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.00000000000000@0') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.50000000000000@1') ())) ('2')) ()) ((ARRAY (REAL 8 0 0 0 REAL ()) 1 (
+((CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.00000000000000@0') ()) ((
+CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.64000000000000@2') ())) ('2')) ())
+((ARRAY (REAL 8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.5e9ac000000000@6') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.64b54000000000@6') ())) ('2')) ()) ((ARRAY (REAL 8 0 0 0 REAL ()) 1 (
+((CONSTANT (REAL 8 0 0 0 REAL ()) 0 '-0.4189374bc6a7f0@-2') ()) ((
+CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.1999999999999a@0') ())) ('2')) ())
+((ARRAY (INTEGER 4 0 0 0 INTEGER ()) 1 (((CONSTANT (INTEGER 4 0 0 0
+INTEGER ()) 0 '0') ()) ((CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '255')
+())) ('2')) ()) ((ARRAY (REAL 8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0
+0 REAL ()) 0 '-0.3e800000000000@3') ()) ((CONSTANT (REAL 8 0 0 0 REAL ())
+0 '0.186a0000000000@5') ())) ('2')) ()) ((ARRAY (REAL 8 0 0 0 REAL ()) 1
+(((CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.00000000000000@0') ()) ((
+CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.1f400000000000@3') ())) ('2')) ())
+((ARRAY (INTEGER 4 0 0 0 INTEGER ()) 1 (((CONSTANT (INTEGER 4 0 0 0
+INTEGER ()) 0 '0') ()) ((CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '255')
+())) ('2')) ()) ((ARRAY (REAL 8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0
+0 REAL ()) 0 '-0.3e800000000000@3') ()) ((CONSTANT (REAL 8 0 0 0 REAL ())
+0 '0.186a0000000000@5') ())) ('2')) ()) ((ARRAY (REAL 8 0 0 0 REAL ()) 1
+(((CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.96000000000000@2') ()) ((
+CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.15e00000000000@3') ())) ('2')) ())
+((ARRAY (INTEGER 4 0 0 0 INTEGER ()) 1 (((CONSTANT (INTEGER 4 0 0 0
+INTEGER ()) 0 '0') ()) ((CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '255')
+())) ('2')) ()) ((ARRAY (REAL 8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0
+0 REAL ()) 0 '-0.3e800000000000@3') ()) ((CONSTANT (REAL 8 0 0 0 REAL ())
+0 '0.186a0000000000@5') ())) ('2')) ()) ((ARRAY (REAL 8 0 0 0 REAL ()) 1
+(((CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.96000000000000@2') ()) ((
+CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.15e00000000000@3') ())) ('2')) ())
+((ARRAY (INTEGER 4 0 0 0 INTEGER ()) 1 (((CONSTANT (INTEGER 4 0 0 0
+INTEGER ()) 0 '0') ()) ((CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '255')
+())) ('2')) ()) ((ARRAY (REAL 8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0
+0 REAL ()) 0 '-0.3e800000000000@3') ()) ((CONSTANT (REAL 8 0 0 0 REAL ())
+0 '0.186a0000000000@5') ())) ('2')) ()) ((ARRAY (REAL 8 0 0 0 REAL ()) 1
+(((CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.96000000000000@2') ()) ((
+CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.15e00000000000@3') ())) ('2')) ())
+((ARRAY (INTEGER 4 0 0 0 INTEGER ()) 1 (((CONSTANT (INTEGER 4 0 0 0
+INTEGER ()) 0 '0') ()) ((CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '255')
+())) ('2')) ()) ((ARRAY (REAL 8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0
+0 REAL ()) 0 '-0.3e800000000000@3') ()) ((CONSTANT (REAL 8 0 0 0 REAL ())
+0 '0.186a0000000000@5') ())) ('2')) ()) ((ARRAY (REAL 8 0 0 0 REAL ()) 1
+(((CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.96000000000000@2') ()) ((
+CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.15e00000000000@3') ())) ('2')) ())
+((ARRAY (INTEGER 4 0 0 0 INTEGER ()) 1 (((CONSTANT (INTEGER 4 0 0 0
+INTEGER ()) 0 '0') ()) ((CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '255')
+())) ('2')) ()) ((ARRAY (REAL 8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0
+0 REAL ()) 0 '-0.3e800000000000@3') ()) ((CONSTANT (REAL 8 0 0 0 REAL ())
+0 '0.186a0000000000@5') ())) ('2')) ()) ((ARRAY (REAL 8 0 0 0 REAL ()) 1
+(((CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.96000000000000@2') ()) ((
+CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.15e00000000000@3') ())) ('2')) ())
+((ARRAY (INTEGER 4 0 0 0 INTEGER ()) 1 (((CONSTANT (INTEGER 4 0 0 0
+INTEGER ()) 0 '0') ()) ((CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '255')
+())) ('2')) ()) ((ARRAY (REAL 8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0
+0 REAL ()) 0 '-0.3e800000000000@3') ()) ((CONSTANT (REAL 8 0 0 0 REAL ())
+0 '0.186a0000000000@5') ())) ('2')) ()) ((ARRAY (REAL 8 0 0 0 REAL ()) 1
+(((CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.96000000000000@2') ()) ((
+CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.15e00000000000@3') ())) ('2')) ())
+((ARRAY (INTEGER 4 0 0 0 INTEGER ()) 1 (((CONSTANT (INTEGER 4 0 0 0
+INTEGER ()) 0 '0') ()) ((CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '255')
+())) ('2')) ())) ()))) PUBLIC (() () () ()) () 0 0 21946394)
+252 'L2cunits' 'ropp_io_types' '' 11 ((DERIVED UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) (UNKNOWN 0 0 0 0 UNKNOWN ()) 0 0 () ()
+0 ((901 'lat_2d' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0 0
+0 INTEGER ()) 0 '64'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC
+UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0
+CHARACTER (())) 0 64
+'degrees_north                                                   ')) (
+902 'lon_2d' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0 0 0
+INTEGER ()) 0 '64'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
+UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0 CHARACTER (()))
+0 64 'degrees_east                                                    '))
+(903 'dtheta' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0 0 0
+INTEGER ()) 0 '64'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
+UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0 CHARACTER (()))
+0 64 'radians                                                         '))
+(904 'geop_sfc' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0 0 0
+INTEGER ()) 0 '64'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
+UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0 CHARACTER (()))
+0 64 'geopotential metres                                             '))
+(905 'press_sfc' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0 0
+0 INTEGER ()) 0 '64'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC
+UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0
+CHARACTER (())) 0 64
+'hPa                                                             ')) (
+906 'press_sfc_sigma' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4
+0 0 0 INTEGER ()) 0 '64'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC
+UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0
+CHARACTER (())) 0 64
+'hPa                                                             ')) (
+907 'press_sfc_qual' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4
+0 0 0 INTEGER ()) 0 '64'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC
+UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0
+CHARACTER (())) 0 64
+'percent                                                         ')) (
+908 'tph_bangle' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0 0
+0 INTEGER ()) 0 '64'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC
+UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0
+CHARACTER (())) 0 64
+'metres                                                          ')) (
+909 'tpa_bangle' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0 0
+0 INTEGER ()) 0 '64'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC
+UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0
+CHARACTER (())) 0 64
+'radians                                                         ')) (
+910 'tph_bangle_flag' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4
+0 0 0 INTEGER ()) 0 '64'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC
+UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0
+CHARACTER (())) 0 64
+'                                                                ')) (
+911 'tph_refrac' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0 0
+0 INTEGER ()) 0 '64'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC
+UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0
+CHARACTER (())) 0 64
+'metres                                                          ')) (
+912 'tpn_refrac' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0 0
+0 INTEGER ()) 0 '64'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC
+UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0
+CHARACTER (())) 0 64
+'N-units                                                         ')) (
+913 'tph_refrac_flag' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4
+0 0 0 INTEGER ()) 0 '64'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC
+UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0
+CHARACTER (())) 0 64
+'                                                                ')) (
+914 'tph_tdry_lrt' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0
+0 0 INTEGER ()) 0 '64'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC
+UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0
+CHARACTER (())) 0 64
+'metres                                                          ')) (
+915 'tpt_tdry_lrt' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0
+0 0 INTEGER ()) 0 '64'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC
+UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0
+CHARACTER (())) 0 64
+'kelvin                                                          ')) (
+916 'tph_tdry_lrt_flag' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (
+INTEGER 4 0 0 0 INTEGER ()) 0 '64'))) () (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1
+0 0 0 CHARACTER (())) 0 64
+'                                                                ')) (
+917 'tph_tdry_cpt' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0
+0 0 INTEGER ()) 0 '64'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC
+UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0
+CHARACTER (())) 0 64
+'metres                                                          ')) (
+918 'tpt_tdry_cpt' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0
+0 0 INTEGER ()) 0 '64'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC
+UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0
+CHARACTER (())) 0 64
+'kelvin                                                          ')) (
+919 'tph_tdry_cpt_flag' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (
+INTEGER 4 0 0 0 INTEGER ()) 0 '64'))) () (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1
+0 0 0 CHARACTER (())) 0 64
+'                                                                ')) (
+920 'prh_tdry_cpt' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0
+0 0 INTEGER ()) 0 '64'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC
+UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0
+CHARACTER (())) 0 64
+'metres                                                          ')) (
+921 'prt_tdry_cpt' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0
+0 0 INTEGER ()) 0 '64'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC
+UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0
+CHARACTER (())) 0 64
+'kelvin                                                          ')) (
+922 'prh_tdry_cpt_flag' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (
+INTEGER 4 0 0 0 INTEGER ()) 0 '64'))) () (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1
+0 0 0 CHARACTER (())) 0 64
+'                                                                ')) (
+923 'tph_temp_lrt' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0
+0 0 INTEGER ()) 0 '64'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC
+UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0
+CHARACTER (())) 0 64
+'geopotential metres                                             ')) (
+924 'tpt_temp_lrt' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0
+0 0 INTEGER ()) 0 '64'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC
+UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0
+CHARACTER (())) 0 64
+'kelvin                                                          ')) (
+925 'tph_temp_lrt_flag' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (
+INTEGER 4 0 0 0 INTEGER ()) 0 '64'))) () (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1
+0 0 0 CHARACTER (())) 0 64
+'                                                                ')) (
+926 'tph_temp_cpt' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0
+0 0 INTEGER ()) 0 '64'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC
+UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0
+CHARACTER (())) 0 64
+'geopotential metres                                             ')) (
+927 'tpt_temp_cpt' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0
+0 0 INTEGER ()) 0 '64'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC
+UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0
+CHARACTER (())) 0 64
+'kelvin                                                          ')) (
+928 'tph_temp_cpt_flag' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (
+INTEGER 4 0 0 0 INTEGER ()) 0 '64'))) () (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1
+0 0 0 CHARACTER (())) 0 64
+'                                                                ')) (
+929 'prh_temp_cpt' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0
+0 0 INTEGER ()) 0 '64'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC
+UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0
+CHARACTER (())) 0 64
+'metres                                                          ')) (
+930 'prt_temp_cpt' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0
+0 0 INTEGER ()) 0 '64'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC
+UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0
+CHARACTER (())) 0 64
+'kelvin                                                          ')) (
+931 'prh_temp_cpt_flag' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (
+INTEGER 4 0 0 0 INTEGER ()) 0 '64'))) () (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1
+0 0 0 CHARACTER (())) 0 64
+'                                                                ')))
+PUBLIC (() () () ()) () 0 0 67658191)
+253 'L2crange' 'ropp_io_types' '' 11 ((DERIVED UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) (UNKNOWN 0 0 0 0 UNKNOWN ()) 0 0 () ()
+0 ((932 'lat_2d' (REAL 8 0 0 0 REAL ()) (1 0 EXPLICIT (CONSTANT (
+INTEGER 4 0 0 0 INTEGER ()) 0 '1') (CONSTANT (INTEGER 4 0 0 0 INTEGER ())
+0 '2')) (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0
+DIMENSION) UNKNOWN-ACCESS (ARRAY (REAL 8 0 0 0 REAL ()) 1 (((CONSTANT (
+REAL 8 0 0 0 REAL ()) 0 '-0.5a000000000000@2') ()) ((CONSTANT (REAL 8 0
+0 0 REAL ()) 0 '0.5a000000000000@2') ())) ('2'))) (933 'lon_2d' (REAL 8
+0 0 0 REAL ()) (1 0 EXPLICIT (CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '1')
+(CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '2')) (UNKNOWN-FL
+UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION)
+UNKNOWN-ACCESS (ARRAY (REAL 8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0
+REAL ()) 0 '-0.b4000000000000@2') ()) ((CONSTANT (REAL 8 0 0 0 REAL ())
+0 '0.b4000000000000@2') ())) ('2'))) (934 'dtheta' (REAL 8 0 0 0 REAL ())
+(1 0 EXPLICIT (CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '1') (CONSTANT (
+INTEGER 4 0 0 0 INTEGER ()) 0 '2')) (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION) UNKNOWN-ACCESS (ARRAY (REAL
+8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.00000000000000@0') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.3243f3e0370cdc@1') ())) ('2'))) (935 'geop_sfc' (REAL 8 0 0 0 REAL ())
+(1 0 EXPLICIT (CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '1') (CONSTANT (
+INTEGER 4 0 0 0 INTEGER ()) 0 '2')) (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION) UNKNOWN-ACCESS (ARRAY (REAL
+8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'-0.3e800000000000@3') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.27100000000000@4') ())) ('2'))) (936 'press_sfc' (REAL 8 0 0 0 REAL ())
+(1 0 EXPLICIT (CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '1') (CONSTANT (
+INTEGER 4 0 0 0 INTEGER ()) 0 '2')) (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION) UNKNOWN-ACCESS (ARRAY (REAL
+8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.fa000000000000@2') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.44c00000000000@3') ())) ('2'))) (937 'press_sfc_sigma' (REAL 8 0 0 0
+REAL ()) (1 0 EXPLICIT (CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '1') (
+CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '2')) (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION) UNKNOWN-ACCESS (ARRAY (REAL
+8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.00000000000000@0') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.50000000000000@1') ())) ('2'))) (938 'press_sfc_qual' (REAL 8 0 0 0
+REAL ()) (1 0 EXPLICIT (CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '1') (
+CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '2')) (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION) UNKNOWN-ACCESS (ARRAY (REAL
+8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.00000000000000@0') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.64000000000000@2') ())) ('2'))) (939 'tph_bangle' (REAL 8 0 0 0 REAL
+()) (1 0 EXPLICIT (CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '1') (
+CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '2')) (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION) UNKNOWN-ACCESS (ARRAY (REAL
+8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.5e9ac000000000@6') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.64b54000000000@6') ())) ('2'))) (940 'tpa_bangle' (REAL 8 0 0 0 REAL
+()) (1 0 EXPLICIT (CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '1') (
+CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '2')) (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION) UNKNOWN-ACCESS (ARRAY (REAL
+8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'-0.4189374bc6a7f0@-2') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.1999999999999a@0') ())) ('2'))) (941 'tph_bangle_flag' (INTEGER 4 0 0
+0 INTEGER ()) (1 0 EXPLICIT (CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '1')
+(CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '2')) (UNKNOWN-FL
+UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION)
+UNKNOWN-ACCESS (ARRAY (INTEGER 4 0 0 0 INTEGER ()) 1 (((CONSTANT (
+INTEGER 4 0 0 0 INTEGER ()) 0 '0') ()) ((CONSTANT (INTEGER 4 0 0 0
+INTEGER ()) 0 '255') ())) ('2'))) (942 'tph_refrac' (REAL 8 0 0 0 REAL ())
+(1 0 EXPLICIT (CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '1') (CONSTANT (
+INTEGER 4 0 0 0 INTEGER ()) 0 '2')) (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION) UNKNOWN-ACCESS (ARRAY (REAL
+8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'-0.3e800000000000@3') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.186a0000000000@5') ())) ('2'))) (943 'tpn_refrac' (REAL 8 0 0 0 REAL
+()) (1 0 EXPLICIT (CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '1') (
+CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '2')) (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION) UNKNOWN-ACCESS (ARRAY (REAL
+8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.00000000000000@0') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.1f400000000000@3') ())) ('2'))) (944 'tph_refrac_flag' (INTEGER 4 0 0
+0 INTEGER ()) (1 0 EXPLICIT (CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '1')
+(CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '2')) (UNKNOWN-FL
+UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION)
+UNKNOWN-ACCESS (ARRAY (INTEGER 4 0 0 0 INTEGER ()) 1 (((CONSTANT (
+INTEGER 4 0 0 0 INTEGER ()) 0 '0') ()) ((CONSTANT (INTEGER 4 0 0 0
+INTEGER ()) 0 '255') ())) ('2'))) (945 'tph_tdry_lrt' (REAL 8 0 0 0 REAL
+()) (1 0 EXPLICIT (CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '1') (
+CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '2')) (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION) UNKNOWN-ACCESS (ARRAY (REAL
+8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'-0.3e800000000000@3') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.186a0000000000@5') ())) ('2'))) (946 'tpt_tdry_lrt' (REAL 8 0 0 0
+REAL ()) (1 0 EXPLICIT (CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '1') (
+CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '2')) (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION) UNKNOWN-ACCESS (ARRAY (REAL
+8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.96000000000000@2') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.15e00000000000@3') ())) ('2'))) (947 'tph_tdry_lrt_flag' (INTEGER 4 0
+0 0 INTEGER ()) (1 0 EXPLICIT (CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '1')
+(CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '2')) (UNKNOWN-FL
+UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION)
+UNKNOWN-ACCESS (ARRAY (INTEGER 4 0 0 0 INTEGER ()) 1 (((CONSTANT (
+INTEGER 4 0 0 0 INTEGER ()) 0 '0') ()) ((CONSTANT (INTEGER 4 0 0 0
+INTEGER ()) 0 '255') ())) ('2'))) (948 'tph_tdry_cpt' (REAL 8 0 0 0 REAL
+()) (1 0 EXPLICIT (CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '1') (
+CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '2')) (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION) UNKNOWN-ACCESS (ARRAY (REAL
+8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'-0.3e800000000000@3') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.186a0000000000@5') ())) ('2'))) (949 'tpt_tdry_cpt' (REAL 8 0 0 0
+REAL ()) (1 0 EXPLICIT (CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '1') (
+CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '2')) (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION) UNKNOWN-ACCESS (ARRAY (REAL
+8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.96000000000000@2') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.15e00000000000@3') ())) ('2'))) (950 'tph_tdry_cpt_flag' (INTEGER 4 0
+0 0 INTEGER ()) (1 0 EXPLICIT (CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '1')
+(CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '2')) (UNKNOWN-FL
+UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION)
+UNKNOWN-ACCESS (ARRAY (INTEGER 4 0 0 0 INTEGER ()) 1 (((CONSTANT (
+INTEGER 4 0 0 0 INTEGER ()) 0 '0') ()) ((CONSTANT (INTEGER 4 0 0 0
+INTEGER ()) 0 '255') ())) ('2'))) (951 'prh_tdry_cpt' (REAL 8 0 0 0 REAL
+()) (1 0 EXPLICIT (CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '1') (
+CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '2')) (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION) UNKNOWN-ACCESS (ARRAY (REAL
+8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'-0.3e800000000000@3') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.186a0000000000@5') ())) ('2'))) (952 'prt_tdry_cpt' (REAL 8 0 0 0
+REAL ()) (1 0 EXPLICIT (CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '1') (
+CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '2')) (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION) UNKNOWN-ACCESS (ARRAY (REAL
+8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.96000000000000@2') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.15e00000000000@3') ())) ('2'))) (953 'prh_tdry_cpt_flag' (INTEGER 4 0
+0 0 INTEGER ()) (1 0 EXPLICIT (CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '1')
+(CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '2')) (UNKNOWN-FL
+UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION)
+UNKNOWN-ACCESS (ARRAY (INTEGER 4 0 0 0 INTEGER ()) 1 (((CONSTANT (
+INTEGER 4 0 0 0 INTEGER ()) 0 '0') ()) ((CONSTANT (INTEGER 4 0 0 0
+INTEGER ()) 0 '255') ())) ('2'))) (954 'tph_temp_lrt' (REAL 8 0 0 0 REAL
+()) (1 0 EXPLICIT (CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '1') (
+CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '2')) (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION) UNKNOWN-ACCESS (ARRAY (REAL
+8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'-0.3e800000000000@3') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.186a0000000000@5') ())) ('2'))) (955 'tpt_temp_lrt' (REAL 8 0 0 0
+REAL ()) (1 0 EXPLICIT (CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '1') (
+CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '2')) (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION) UNKNOWN-ACCESS (ARRAY (REAL
+8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.96000000000000@2') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.15e00000000000@3') ())) ('2'))) (956 'tph_temp_lrt_flag' (INTEGER 4 0
+0 0 INTEGER ()) (1 0 EXPLICIT (CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '1')
+(CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '2')) (UNKNOWN-FL
+UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION)
+UNKNOWN-ACCESS (ARRAY (INTEGER 4 0 0 0 INTEGER ()) 1 (((CONSTANT (
+INTEGER 4 0 0 0 INTEGER ()) 0 '0') ()) ((CONSTANT (INTEGER 4 0 0 0
+INTEGER ()) 0 '255') ())) ('2'))) (957 'tph_temp_cpt' (REAL 8 0 0 0 REAL
+()) (1 0 EXPLICIT (CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '1') (
+CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '2')) (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION) UNKNOWN-ACCESS (ARRAY (REAL
+8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'-0.3e800000000000@3') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.186a0000000000@5') ())) ('2'))) (958 'tpt_temp_cpt' (REAL 8 0 0 0
+REAL ()) (1 0 EXPLICIT (CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '1') (
+CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '2')) (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION) UNKNOWN-ACCESS (ARRAY (REAL
+8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.96000000000000@2') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.15e00000000000@3') ())) ('2'))) (959 'tph_temp_cpt_flag' (INTEGER 4 0
+0 0 INTEGER ()) (1 0 EXPLICIT (CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '1')
+(CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '2')) (UNKNOWN-FL
+UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION)
+UNKNOWN-ACCESS (ARRAY (INTEGER 4 0 0 0 INTEGER ()) 1 (((CONSTANT (
+INTEGER 4 0 0 0 INTEGER ()) 0 '0') ()) ((CONSTANT (INTEGER 4 0 0 0
+INTEGER ()) 0 '255') ())) ('2'))) (960 'prh_temp_cpt' (REAL 8 0 0 0 REAL
+()) (1 0 EXPLICIT (CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '1') (
+CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '2')) (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION) UNKNOWN-ACCESS (ARRAY (REAL
+8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'-0.3e800000000000@3') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.186a0000000000@5') ())) ('2'))) (961 'prt_temp_cpt' (REAL 8 0 0 0
+REAL ()) (1 0 EXPLICIT (CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '1') (
+CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '2')) (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION) UNKNOWN-ACCESS (ARRAY (REAL
+8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.96000000000000@2') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.15e00000000000@3') ())) ('2'))) (962 'prh_temp_cpt_flag' (INTEGER 4 0
+0 0 INTEGER ()) (1 0 EXPLICIT (CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '1')
+(CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '2')) (UNKNOWN-FL
+UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION)
+UNKNOWN-ACCESS (ARRAY (INTEGER 4 0 0 0 INTEGER ()) 1 (((CONSTANT (
+INTEGER 4 0 0 0 INTEGER ()) 0 '0') ()) ((CONSTANT (INTEGER 4 0 0 0
+INTEGER ()) 0 '255') ())) ('2')))) PUBLIC (() () () ()) () 0 0 26688349)
+255 'L2dtype' 'ropp_io_types' '' 11 ((DERIVED UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 POINTER_COMP) (UNKNOWN 0 0 0 0 UNKNOWN
+()) 0 0 () () 0 ((963 'npoints' (INTEGER 4 0 0 0 INTEGER ()) () (
+UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0)
+UNKNOWN-ACCESS (CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '0')) (964
+'missing' (LOGICAL 4 0 0 0 LOGICAL ()) () (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (LOGICAL 4 0
+0 0 LOGICAL ()) 0 1)) (965 'level_type' (CHARACTER 1 0 0 0 CHARACTER ((
+CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '64'))) () (UNKNOWN-FL
+UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (
+CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 64
+'UNKNOWN                                                         ')) (
+966 'level_coeff_a' (REAL 8 0 0 0 REAL ()) (1 0 DEFERRED () ()) (
+UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION
+POINTER) UNKNOWN-ACCESS (NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0)) (967
+'level_coeff_b' (REAL 8 0 0 0 REAL ()) (1 0 DEFERRED () ()) (UNKNOWN-FL
+UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION POINTER)
+UNKNOWN-ACCESS (NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0)) (968 'units' (
+DERIVED 256 0 0 0 DERIVED ()) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC
+UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (STRUCTURE (DERIVED 256 0 0 0
+DERIVED ()) 0 (((CONSTANT (CHARACTER 1 0 0 0 CHARACTER (())) 0 40
+'hPa                                     ') ()) ((CONSTANT (CHARACTER 1
+0 0 0 CHARACTER (())) 0 40 '                                        ') ()))
+())) (969 'range' (DERIVED 257 0 0 0 DERIVED ()) () (UNKNOWN-FL
+UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (
+STRUCTURE (DERIVED 257 0 0 0 DERIVED ()) 0 (((ARRAY (REAL 8 0 0 0 REAL ())
+1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.00000000000000@0') ()) ((
+CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.7d000000000000@3') ())) ('2')) ())
+((ARRAY (REAL 8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.00000000000000@0') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.20000000000000@1') ())) ('2')) ())) ()))) PUBLIC (() () () ()) () 0 0
+61510683)
+256 'L2dunits' 'ropp_io_types' '' 11 ((DERIVED UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) (UNKNOWN 0 0 0 0 UNKNOWN ()) 0 0 () ()
+0 ((970 'level_coeff_a' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (
+INTEGER 4 0 0 0 INTEGER ()) 0 '40'))) () (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1
+0 0 0 CHARACTER (())) 0 40 'hPa                                     '))
+(971 'level_coeff_b' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4
+0 0 0 INTEGER ()) 0 '40'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC
+UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0
+CHARACTER (())) 0 40 '                                        ')))
+PUBLIC (() () () ()) () 0 0 39665422)
+257 'L2drange' 'ropp_io_types' '' 11 ((DERIVED UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) (UNKNOWN 0 0 0 0 UNKNOWN ()) 0 0 () ()
+0 ((972 'level_coeff_a' (REAL 8 0 0 0 REAL ()) (1 0 EXPLICIT (CONSTANT (
+INTEGER 4 0 0 0 INTEGER ()) 0 '1') (CONSTANT (INTEGER 4 0 0 0 INTEGER ())
+0 '2')) (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0
+DIMENSION) UNKNOWN-ACCESS (ARRAY (REAL 8 0 0 0 REAL ()) 1 (((CONSTANT (
+REAL 8 0 0 0 REAL ()) 0 '0.00000000000000@0') ()) ((CONSTANT (REAL 8 0 0
+0 REAL ()) 0 '0.7d000000000000@3') ())) ('2'))) (973 'level_coeff_b' (
+REAL 8 0 0 0 REAL ()) (1 0 EXPLICIT (CONSTANT (INTEGER 4 0 0 0 INTEGER ())
+0 '1') (CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '2')) (UNKNOWN-FL
+UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION)
+UNKNOWN-ACCESS (ARRAY (REAL 8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0
+REAL ()) 0 '0.00000000000000@0') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.20000000000000@1') ())) ('2')))) PUBLIC (() () () ()) () 0 0 98695580)
+259 'Rounits' 'ropp_io_types' '' 11 ((DERIVED UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) (UNKNOWN 0 0 0 0 UNKNOWN ()) 0 0 () ()
+0 ((974 'pcd' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0 0 0
+INTEGER ()) 0 '64'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
+UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0 CHARACTER (()))
+0 64 'bits                                                            '))
+(975 'overall_qual' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0
+0 0 INTEGER ()) 0 '64'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC
+UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0
+CHARACTER (())) 0 64
+'percent                                                         ')))
+PUBLIC (() () () ()) () 0 0 40384437)
+261 'Rorange' 'ropp_io_types' '' 11 ((DERIVED UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) (UNKNOWN 0 0 0 0 UNKNOWN ()) 0 0 () ()
+0 ((976 'pcd' (INTEGER 4 0 0 0 INTEGER ()) (1 0 EXPLICIT (CONSTANT (
+INTEGER 4 0 0 0 INTEGER ()) 0 '1') (CONSTANT (INTEGER 4 0 0 0 INTEGER ())
+0 '2')) (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0
+DIMENSION) UNKNOWN-ACCESS (ARRAY (INTEGER 4 0 0 0 INTEGER ()) 1 (((
+CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '0') ()) ((CONSTANT (INTEGER 4 0
+0 0 INTEGER ()) 0 '32767') ())) ('2'))) (977 'overall_qual' (REAL 8 0 0
+0 REAL ()) (1 0 EXPLICIT (CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '1') (
+CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '2')) (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION) UNKNOWN-ACCESS (ARRAY (REAL
+8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.00000000000000@0') ()) ((CONSTANT (REAL 8 0 0 0 REAL ()) 0
+'0.64000000000000@2') ())) ('2')))) PUBLIC (() () () ()) () 0 0 99414595)
+263 'Vlisttype' 'ropp_io_types' '' 11 ((DERIVED UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 POINTER_COMP) (UNKNOWN 0 0 0 0 UNKNOWN
+()) 0 0 () () 0 ((978 'vlistd0d' (DERIVED 979 0 0 0 DERIVED ()) () (
+UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 POINTER)
+UNKNOWN-ACCESS (NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0)) (980 'vlistd1d' (
+DERIVED 981 0 0 0 DERIVED ()) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC
+UNKNOWN UNKNOWN 0 0 POINTER) UNKNOWN-ACCESS (NULL (UNKNOWN 0 0 0 0
+UNKNOWN ()) 0)) (982 'vlistd2d' (DERIVED 983 0 0 0 DERIVED ()) () (
+UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 POINTER)
+UNKNOWN-ACCESS (NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0))) PUBLIC (() () ()
+()) () 0 0 55091249)
+296 'Minroppconfig' 'ropp_1dvar_types' '' 11 ((DERIVED UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) (UNKNOWN 0 0 0 0 UNKNOWN ()) 0 0 () ()
+0 ((984 'method' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0 0
+0 INTEGER ()) 0 '2048'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC
+UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0
+CHARACTER (())) 0 2048
+'MINROPP                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         '))
+(985 'log_file' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0 0 0
+INTEGER ()) 0 '2048'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC
+UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0
+CHARACTER (())) 0 2048
+'screen                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          '))
+(986 'impres' (INTEGER 4 0 0 0 INTEGER ()) () (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (INTEGER 4 0
+0 0 INTEGER ()) 0 '0')) (987 'n_iter' (INTEGER 4 0 0 0 INTEGER ()) () (
+UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0)
+UNKNOWN-ACCESS (CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '1500')) (988
+'mode' (INTEGER 4 0 0 0 INTEGER ()) () (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (INTEGER 4 0
+0 0 INTEGER ()) 0 '0')) (989 'n_updates' (INTEGER 4 0 0 0 INTEGER ()) ()
+(UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0)
+UNKNOWN-ACCESS (CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '50')) (990
+'eps_grad' (REAL 8 0 0 0 REAL ()) () (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (REAL 8 0 0 0
+REAL ()) 0 '0.2af31dc4611874@-6')) (991 'dx_min' (REAL 8 0 0 0 REAL ())
+() (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0)
+UNKNOWN-ACCESS (CONSTANT (REAL 8 0 0 0 REAL ()) 0 '0.734aca5f6226f0@-13')))
+PUBLIC (() () () ()) () 0 0 47668414)
+632 'Vlisttyped0d' 'ropp_io_types' '' 6 ((DERIVED UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 POINTER_COMP) (UNKNOWN 0 0 0 0 UNKNOWN
+()) 0 0 () () 0 ((992 'name' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (
+INTEGER 4 0 0 0 INTEGER ()) 0 '1024'))) () (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1
+0 0 0 CHARACTER (())) 0 1024
+'                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                '))
+(993 'long_name' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0 0
+0 INTEGER ()) 0 '1024'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC
+UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0
+CHARACTER (())) 0 1024
+'                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                '))
+(994 'units' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0 0 0
+INTEGER ()) 0 '1024'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC
+UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0
+CHARACTER (())) 0 1024
+'                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                '))
+(995 'range' (REAL 8 0 0 0 REAL ()) (1 0 EXPLICIT (CONSTANT (INTEGER 4 0
+0 0 INTEGER ()) 0 '1') (CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '2')) (
+UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION)
+UNKNOWN-ACCESS (ARRAY (REAL 8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0
+REAL ()) 0 '-0.5f5dd180000000@7') ()) ((CONSTANT (REAL 8 0 0 0 REAL ())
+0 '-0.5f5dd180000000@7') ())) ('2'))) (996 'data' (REAL 8 0 0 0 REAL ())
+() (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0)
+UNKNOWN-ACCESS ()) (997 'next' (DERIVED 632 0 0 0 DERIVED ()) () (
+UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 POINTER)
+UNKNOWN-ACCESS (NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0))) PUBLIC (() () ()
+()) () 0 0 16505639)
+634 'Vlisttyped1d' 'ropp_io_types' '' 6 ((DERIVED UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 POINTER_COMP) (UNKNOWN 0 0 0 0 UNKNOWN
+()) 0 0 () () 0 ((998 'name' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (
+INTEGER 4 0 0 0 INTEGER ()) 0 '1024'))) () (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1
+0 0 0 CHARACTER (())) 0 1024
+'                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                '))
+(999 'long_name' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0 0
+0 INTEGER ()) 0 '1024'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC
+UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0
+CHARACTER (())) 0 1024
+'                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                '))
+(1000 'units' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0 0 0
+INTEGER ()) 0 '1024'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC
+UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0
+CHARACTER (())) 0 1024
+'                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                '))
+(1001 'range' (REAL 8 0 0 0 REAL ()) (1 0 EXPLICIT (CONSTANT (INTEGER 4
+0 0 0 INTEGER ()) 0 '1') (CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '2'))
+(UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION)
+UNKNOWN-ACCESS (ARRAY (REAL 8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0
+REAL ()) 0 '-0.5f5dd180000000@7') ()) ((CONSTANT (REAL 8 0 0 0 REAL ())
+0 '-0.5f5dd180000000@7') ())) ('2'))) (1002 'data' (REAL 8 0 0 0 REAL ())
+(1 0 DEFERRED () ()) (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
+UNKNOWN 0 0 DIMENSION POINTER) UNKNOWN-ACCESS ()) (1003 'next' (DERIVED
+634 0 0 0 DERIVED ()) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
+UNKNOWN 0 0 POINTER) UNKNOWN-ACCESS (NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0)))
+PUBLIC (() () () ()) () 0 0 16571238)
+636 'Vlisttyped2d' 'ropp_io_types' '' 6 ((DERIVED UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 POINTER_COMP) (UNKNOWN 0 0 0 0 UNKNOWN
+()) 0 0 () () 0 ((1004 'name' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (
+INTEGER 4 0 0 0 INTEGER ()) 0 '1024'))) () (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1
+0 0 0 CHARACTER (())) 0 1024
+'                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                '))
+(1005 'long_name' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0 0
+0 INTEGER ()) 0 '1024'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC
+UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0
+CHARACTER (())) 0 1024
+'                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                '))
+(1006 'units' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0 0 0
+INTEGER ()) 0 '1024'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC
+UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0
+CHARACTER (())) 0 1024
+'                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                '))
+(1007 'range' (REAL 8 0 0 0 REAL ()) (1 0 EXPLICIT (CONSTANT (INTEGER 4
+0 0 0 INTEGER ()) 0 '1') (CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '2'))
+(UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION)
+UNKNOWN-ACCESS (ARRAY (REAL 8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0
+REAL ()) 0 '-0.5f5dd180000000@7') ()) ((CONSTANT (REAL 8 0 0 0 REAL ())
+0 '-0.5f5dd180000000@7') ())) ('2'))) (1008 'data' (REAL 8 0 0 0 REAL ())
+(2 0 DEFERRED () () () ()) (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC
+UNKNOWN UNKNOWN 0 0 DIMENSION POINTER) UNKNOWN-ACCESS ()) (1009 'next' (
+DERIVED 636 0 0 0 DERIVED ()) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC
+UNKNOWN UNKNOWN 0 0 POINTER) UNKNOWN-ACCESS (NULL (UNKNOWN 0 0 0 0
+UNKNOWN ()) 0))) PUBLIC (() () () ()) () 0 0 16636837)
+979 'Vlisttyped0d' 'ropp_io_types' '' 11 ((DERIVED UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 POINTER_COMP) (UNKNOWN 0 0 0 0 UNKNOWN
+()) 0 0 () () 0 ((1010 'name' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (
+INTEGER 4 0 0 0 INTEGER ()) 0 '1024'))) () (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1
+0 0 0 CHARACTER (())) 0 1024
+'                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                '))
+(1011 'long_name' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0 0
+0 INTEGER ()) 0 '1024'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC
+UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0
+CHARACTER (())) 0 1024
+'                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                '))
+(1012 'units' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0 0 0
+INTEGER ()) 0 '1024'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC
+UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0
+CHARACTER (())) 0 1024
+'                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                '))
+(1013 'range' (REAL 8 0 0 0 REAL ()) (1 0 EXPLICIT (CONSTANT (INTEGER 4
+0 0 0 INTEGER ()) 0 '1') (CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '2'))
+(UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION)
+UNKNOWN-ACCESS (ARRAY (REAL 8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0
+REAL ()) 0 '-0.5f5dd180000000@7') ()) ((CONSTANT (REAL 8 0 0 0 REAL ())
+0 '-0.5f5dd180000000@7') ())) ('2'))) (1014 'data' (REAL 8 0 0 0 REAL ())
+() (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0)
+UNKNOWN-ACCESS ()) (1015 'next' (DERIVED 979 0 0 0 DERIVED ()) () (
+UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 POINTER)
+UNKNOWN-ACCESS (NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0))) PUBLIC (() () ()
+()) () 0 0 16505639)
+981 'Vlisttyped1d' 'ropp_io_types' '' 11 ((DERIVED UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 POINTER_COMP) (UNKNOWN 0 0 0 0 UNKNOWN
+()) 0 0 () () 0 ((1016 'name' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (
+INTEGER 4 0 0 0 INTEGER ()) 0 '1024'))) () (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1
+0 0 0 CHARACTER (())) 0 1024
+'                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                '))
+(1017 'long_name' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0 0
+0 INTEGER ()) 0 '1024'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC
+UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0
+CHARACTER (())) 0 1024
+'                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                '))
+(1018 'units' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0 0 0
+INTEGER ()) 0 '1024'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC
+UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0
+CHARACTER (())) 0 1024
+'                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                '))
+(1019 'range' (REAL 8 0 0 0 REAL ()) (1 0 EXPLICIT (CONSTANT (INTEGER 4
+0 0 0 INTEGER ()) 0 '1') (CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '2'))
+(UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION)
+UNKNOWN-ACCESS (ARRAY (REAL 8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0
+REAL ()) 0 '-0.5f5dd180000000@7') ()) ((CONSTANT (REAL 8 0 0 0 REAL ())
+0 '-0.5f5dd180000000@7') ())) ('2'))) (1020 'data' (REAL 8 0 0 0 REAL ())
+(1 0 DEFERRED () ()) (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
+UNKNOWN 0 0 DIMENSION POINTER) UNKNOWN-ACCESS ()) (1021 'next' (DERIVED
+981 0 0 0 DERIVED ()) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
+UNKNOWN 0 0 POINTER) UNKNOWN-ACCESS (NULL (UNKNOWN 0 0 0 0 UNKNOWN ()) 0)))
+PUBLIC (() () () ()) () 0 0 16571238)
+983 'Vlisttyped2d' 'ropp_io_types' '' 11 ((DERIVED UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 POINTER_COMP) (UNKNOWN 0 0 0 0 UNKNOWN
+()) 0 0 () () 0 ((1022 'name' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (
+INTEGER 4 0 0 0 INTEGER ()) 0 '1024'))) () (UNKNOWN-FL UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1
+0 0 0 CHARACTER (())) 0 1024
+'                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                '))
+(1023 'long_name' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0 0
+0 INTEGER ()) 0 '1024'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC
+UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0
+CHARACTER (())) 0 1024
+'                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                '))
+(1024 'units' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0 0 0
+INTEGER ()) 0 '1024'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC
+UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS (CONSTANT (CHARACTER 1 0 0 0
+CHARACTER (())) 0 1024
+'                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                '))
+(1025 'range' (REAL 8 0 0 0 REAL ()) (1 0 EXPLICIT (CONSTANT (INTEGER 4
+0 0 0 INTEGER ()) 0 '1') (CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '2'))
+(UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DIMENSION)
+UNKNOWN-ACCESS (ARRAY (REAL 8 0 0 0 REAL ()) 1 (((CONSTANT (REAL 8 0 0 0
+REAL ()) 0 '-0.5f5dd180000000@7') ()) ((CONSTANT (REAL 8 0 0 0 REAL ())
+0 '-0.5f5dd180000000@7') ())) ('2'))) (1026 'data' (REAL 8 0 0 0 REAL ())
+(2 0 DEFERRED () () () ()) (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC
+UNKNOWN UNKNOWN 0 0 DIMENSION POINTER) UNKNOWN-ACCESS ()) (1027 'next' (
+DERIVED 983 0 0 0 DERIVED ()) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC
+UNKNOWN UNKNOWN 0 0 POINTER) UNKNOWN-ACCESS (NULL (UNKNOWN 0 0 0 0
+UNKNOWN ()) 0))) PUBLIC (() () () ()) () 0 0 16636837)
+)
+
+('ropp_1dvar_copy' 0 4 'ropp_1dvar_diag2roprof' 0 5
+'ropp_1dvar_diag2roprof_bangle' 0 3 'ropp_1dvar_diag2roprof_refrac' 0 2)

@@ -1,0 +1,86 @@
+./" $Id: bgrasc2ropp.1 3696 2013-06-17 08:48:37Z idculv $
+./"
+.TH bgrasc2ropp 1 31-Jul-2013 ROPP-7.0 ROPP-7.0
+./"
+.SH NAME
+bgrasc2ropp
+./"
+.SH SYNOPSIS
+Convert ASCII file containing background profile data to a ROPP netCDF file.
+.PP
+>
+.B bgrasc2ropp
+.I file_in
+              [-o <file_out>]]
+.br
+              [-n] [-d] [-h|?] [-v]
+./"
+.SH DESCRIPTION
+.I bgrasc2ropp
+converts ascii file containing background data profiles in the 
+form of the fortran namelist bgr_profile into ROPP netCDF file format.
+This namelist contains those elements of the {bg, GEOref, Lev2b, Lev2c and Lev2d} 
+substructures of the ROprof structure needed by the ropp forward model. 
+This could be generated from ECMWF grib data by the sister tool ropp_io/tools/grib2bgrasc. 
+If there are 60, 91 or 137 levels of data, the appropriate standard 
+ECMWF level coefficients are used. Otherwise they must be included in the namelist.
+./"
+.SH FILES
+.SS Input
+There is no default.
+.I bgrasc2ropp
+will stop after displaying a usage summary if no input file names are
+given on the command line.
+.PP
+One input file name must be given.
+./"
+.SS Output
+An output netCDF file name can be specified on the command line, or a default
+($PWD/input_file.nc) will be generated.
+./"
+.SH NOTES
+.SH OPTIONS
+Option switches are not case\-sensitive and may be placed before or after
+the input file name and in any order. All arguments to switches are
+mandatory when the switch is used.
+.PP
+.B -d
+\- output diagnostics
+.IP
+Allows additional diagnostics to be written to stdout.
+.PP
+.B -h
+or
+.B ?
+\- help
+.IP
+Requests brief help on the command to stdout.
+.PP
+.B -n
+\- no range-checking
+.IP
+Switches off range-checking before writing ROPP file.
+.PP
+.B -o
+.I file_out
+\- ROPP output file name
+.IP
+Specifies the file name for the output ROPP netCDF file.
+A valid file name is mandatory if this switch is present.
+.PP
+.B -v
+\- version
+.IP
+Requests the program version ID to be written to stdout.
+./"
+.SH REFERENCES
+.B 1.
+ROPP User Guide - Part I.
+.br
+SAF/ROM/METO/UG/ROPP/002
+./"
+.SH SEE ALSO
+.IR grib2bgrasc (1)
+./"
+.SH AUTHORS
+ROPP Development Team, Met Office <romsaf@metoffice.gov.uk>

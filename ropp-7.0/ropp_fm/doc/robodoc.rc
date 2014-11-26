@@ -1,0 +1,45 @@
+# $Id: robodoc.rc 213 2004-10-29 07:58:56Z frcm $
+#
+# Robodoc configuration file for the ropp_fm library
+# --------------------------------------------------
+#
+items:
+   NAME
+   SYNOPSIS
+   DESCRIPTION
+   ARGUMENTS
+   OPTIONS
+   INPUTS
+   OUTPUT
+   USES
+   USED BY
+   NOTES
+   EXAMPLE
+   SEE ALSO
+   CALLS
+   CALLED BY
+   REFERENCES
+   BUGS
+   TODO
+   MODIFICATION HISTORY
+   EARLIER HISTORY
+   COPYRIGHT
+   AUTHOR
+ignore items:
+   BUGS
+   TODO
+   MODIFICATION HISTORY
+   EARLIER HISTORY
+   COPYRIGHT
+   AUTHOR
+headertypes:
+   f   "Functions"      index
+   s   "Subroutines"    index
+   m   "Modules"        index
+   v   "Variables"      index
+   p   "Parameters"     index
+   d   "Structures"     index
+   t   "Topics"         index
+ignore files:
+   .svn
+   CVS

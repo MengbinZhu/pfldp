@@ -1,0 +1,28 @@
+#!/bin/sh
+# $Id: ropp_configure_ifort13_linux 3551 2013-02-25 09:51:28Z idculv $
+#
+# ROPP shell script for a local configure.
+# USERS SHOULD MODIFY THIS SCRIPT AS REQUIRED FOR LOCAL INSTALL
+#
+# Compiler: ifort13 / Linux
+#
+PREFIX=${1-$ROPP_ROOT/ifort13}
+echo
+echo "Platform:"
+uname -a
+echo
+echo "Fortran compiler:"
+ifort13 --version
+echo
+echo "C compiler:"
+gcc --version
+echo
+echo "Installation target:"
+echo "$PREFIX"
+echo
+#
+CC=gcc \
+F77=ifort13  FFLAGS="-O2 -I$PREFIX/include" \
+FC=ifort13  FCFLAGS="-O2 -I$PREFIX/include" \
+            LDFLAGS="-L$PREFIX/lib -L$PREFIX/lib64" \
+ ./configure --prefix=$PREFIX

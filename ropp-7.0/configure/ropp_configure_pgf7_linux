@@ -1,0 +1,31 @@
+#!/bin/sh
+# $Id: ropp_configure_pgf7_linux 3752 2013-07-09 18:55:03Z frdo $
+#
+# ROPP shell script for a local configure.
+# USERS SHOULD MODIFY THIS SCRIPT AS REQUIRED FOR LOCAL INSTALL
+#
+# Compiler: pgf7 / Linux
+# 
+PREFIX=${1-$ROPP_ROOT/pgf7}
+echo
+echo "Platform:"
+uname -a
+echo
+echo "Fortran compiler:"
+pgf7 --version
+ver=7.0-2
+echo
+echo "C compiler:"
+gcc --version
+echo
+echo "Installation target:"
+echo "$PREFIX"
+echo
+pgfinc=/opt/pgi/linux86/$ver/include
+pgflib=/opt/pgi/linux86/$ver/lib
+#
+CC=gcc \
+F77=pgf7     FFLAGS="-O2 -Mbackslash -I$PREFIX/include -I$pgfinc" \
+FC=pgf7     FCFLAGS="-O2 -Mbackslash -I$PREFIX/include -I$pgfinc" \
+            LDFLAGS="-L$PREFIX/lib   -L$PREFIX/lib64   -L$pgflib" \
+  ./configure --prefix=$PREFIX

@@ -1,0 +1,278 @@
+./" $Id: decbufr.1 20 2011-04-18 10:49:17Z frdo $
+./
+.TH DECBUFR 1 27-Mar-2011 BUFR BUFR
+./"
+.SH NAME
+decbufr
+./"
+.SH SYNOPSIS
+Decode generic BUFR messages
+.PP
+>
+.B decbufr 
+.I bufr_file
+[\-d[h]] [\-o decode_file]
+                    [-f first|-s skip] [-l last|-n number] 
+                    [-h|--help|?] [-v|--version]
+./"
+.SH DESCRIPTION
+.I decbufr
+is a tool to decode and (optionally) output generic BUFR messages. Its 
+principle use is to check what's in an unknown BUFR message or in confirming 
+correct encoding of new data types without having to develop a data-specific
+decoder. This utility gives more header information and provides a more 
+flexible user interface than the much simpler example decoder provided in the
+MetDB kernel package. By default,
+.I decbufr
+silently - unless there are decoding errors - decodes all BUFR messages in a 
+file and reports the results. Options can be given to select a range of 
+messages and to output two forms of diagnostic text output, a 'dump' or 
+a  'list'.
+./"
+.SH FILES
+.SS Input
+The input 
+.I bufr_file
+should contain at least one BUFR message (ie a string
+of 'octets' starting with the tag 'BUFR' and ending with the tag '7777'.
+BUFR messages can be wrapped within WMO/GTS routing headers and may
+also have prepended transmission protocol\-related information.
+.I decbufr
+will ignore these and processes only the raw BUFR.
+.I decbufr
+will decode and display data encoded in BUFR Editions 1, 2, 3 or 4, though only
+Editions 3 or 4 are valid on the GTS today.
+.PP
+An input file name is required. If none is specified, a summary of
+usage is written to stdout and the program terminates.
+./"
+.SS Look-up tables
+.I decbufr
+uses look-up tables in addition to the standard MetDB BUFR kernel
+library files TABLEB, TABLED and CODEFIG:
+.IP
+MASTERTABLE : Master Table versions (operational implementation dates)
+.IP
+DATACATEGORY : Data Categories and their sub-categories
+.IP
+ORIGCENTER : Originating/Generating Centres and their ICAO codes and
+sub-centres
+
+.PP
+These three tables are used to decode elements from Section 1 of the BUFR
+message to plain text and are not neccessary to the normal binary
+decoding of BUFR messages. All look-up tables are expected in the path
+specified by
+.BR BUFR_LIBRARY .
+./"
+.SH OPTIONS
+Option switches are not case\-sensitive and may be placed before or after
+the input file name.
+.PP
+.B -d
+\- output a dump to sdtout
+.IP
+A dump is interpreted data \- ie values are qualified by their Table B
+parameter name and code/flag table description where applicable - to
+human-readable text, which is written to stdout. A header-only dump
+(ie supressing the Section 4 user data) can be obtained by using
+the option
+.B -dh
+while
+.B -d
+dumps all data.
+.IP
+If the option is not given, the default is not to produce any dump output.
+.IP
+NB dump files can be large, and are not intended as other than aids to
+diagnosing problems, and not as normal or operational output.
+
+.PP
+.B -dh
+\- output a header-only dump to stdout
+.IP
+As for the
+.B -d
+option, but outputting a header-only dump (ie supressing the Section 4
+user data).
+.IP
+If the option is not given, the default is not to produce any dump output.
+
+.PP
+.B -o
+.I decode_file
+\- output a decoded listing file
+.IP
+A decode file is an uninterpreted plain text output file more suited
+to machinable re-reading. Only the decoded data from BUFR Section 4
+is output to this file.
+.IP
+The file contains, for each message and each observation within a
+message, three columns of data:
+ - element sequence number
+ - element descriptor as FXXYYY
+ - element value
+.br
+The element value can be an (unscaled) integer, floating-point value
+with variable number of decimal places or a character string. Missing data
+is indicated by the value -9999999.
+.IP
+If the option is not given, the default is not to produce any decode listing.
+.IP
+NB decode files can be large, and are not intended as other than aids to
+diagnosing problems, and not as normal or operational output.
+.PP
+.B -f 
+.I first
+\- first message
+.IP
+Start decoding at the
+.I first
+message in the input file
+.IP
+.I first
+(or
+.IR skip ) 
+allows the decoder to start part-way through the input
+file. The default for
+.I first
+is 1.
+.PP
+.B -s 
+.I skip
+\- skip messages
+.IP
+Ignore the first
+.I skip
+messages in the input file
+.IP
+.I skip
+(or
+.IR first ) 
+allows the decoder to start part-way through the input
+file. The default for
+.I skip
+is 0.
+.PP
+.B -l 
+.I last
+\- last message
+.IP
+Stop decoding after the
+.I last
+message in the input file
+.IP
+.I last
+(or
+.IR number )
+allows stopping before the end of file. The default for
+.I last
+is 999999.
+.PP
+.B -n 
+.I number
+\- number of messages
+.IP
+Decode only
+.I number
+messages from the input file
+.IP
+.I number
+(or
+.IR last )
+allows stopping before the end of file. The default for
+.I number
+is 999999.
+.PP
+.B -h 
+or 
+.B --help
+or
+.B ?
+\- summary help
+.IP
+Help is also output if there is no input BUFR file on the command line
+.PP
+.B -v
+or
+.B --version
+\- program version ID
+./"
+.SH ENVIRONMENT
+.PP
+.B BUFR_LIBRARY
+\- path to run-time BUFR files
+.IP
+This should point to a directory containing run-time BUFR files, e.g.
+.IP
+  > export 
+.BR BUFR_LIBRARY =$HOME/data/bufr/
+.IP
+Note the required trailing '/'.
+
+It is recommended to include this definition in the user's 
+.I .profile 
+or other appropriate place so that it is always available when logged in,
+interactively or otherwise.
+./"
+.SH EXAMPLES
+In the following examples, file 'myfile.bfr' contains 10 BUFR
+messages.
+.PP
+.B 1.
+Simple check for correct decoding of messages:
+.PP
+  > 
+.B decbufr 
+myfile.bfr
+.PP
+.B 2.
+Produce a header-only dump file of the just the first message:
+.PP
+  > 
+.B decbufr 
+\-n1 -dh myfile.bfr > myfile.dmp
+
+Note that stdout has been redirected to a file.
+.PP
+.B 3.
+Produce a full dump file and a decoded listing file of the 5th and 6th
+messages.
+.PP
+  > 
+.B decbufr 
+\-s4 -l6 -d -o myfile.out > myfile.dmp
+.PP
+In this example, options -s4 and -f5 would be equivalent as would -l6 and -n2.
+./"
+.SH ERRORS
+The program will terminate on encountering an error, including:
+  - input file not found
+  - input file read error
+  - nothing read from file (found no 'BUFR' start tag)
+  - truncated message (found no '7777' end tag)
+.br
+In these cases, an error message will be written to stdout and
+.I decbufr
+will return an exit code 1 to the calling shell.
+.PP
+Diagnostics relating to errors in decoding the BUFR itself are output
+to stdout. These messages are produced by the MetDB kernel routines,
+and documentation for that package should be consulted for more
+details.
+./"
+.SH REFERENCES
+.PP
+ 1. Manual on Codes: International Codes, Part B & Part C.
+    WMO-No. 306, World Meteorological Organisation, Geneva.
+    http://www.wmo.int/pages/prog/www/WMOCodes/VolumeI2.html
+
+ 2. Met Office (2011). Decoding and Encoding BUFR messages.
+    MetDB Technote 1, Rev.4, Feb 2011 [dmtn1.html].
+
+ 3. Dragosavac, Milan (2009). BUFR User's Guide.
+    ECMWF Operations Department Technical Note, July 2009.
+./"
+.SH AUTHORS
+Dave Offiler, Met Office, <dave.offiler@metoffice.gov.uk>
+

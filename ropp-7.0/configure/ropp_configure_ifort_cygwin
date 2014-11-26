@@ -1,0 +1,28 @@
+#!/bin/sh
+# $Id: ropp_configure_ifort_cygwin 3752 2013-07-09 18:55:03Z frdo $
+#
+# ROPP shell script for a local configure.
+# USERS SHOULD MODIFY THIS SCRIPT AS REQUIRED FOR LOCAL INSTALL
+#
+# Compiler: ifort / Cygwin
+#
+PREFIX=${1-$ROPP_ROOT/ifort}
+echo
+echo "Platform:"
+uname -a
+echo
+echo "Fortran compiler:"
+ifort /logo
+echo
+echo "C compiler:"
+cl /logo
+echo
+echo "Installation target:"
+echo "$PREFIX"
+echo
+#
+CC=cl        CFLAGS="-nologo -Fo\$@"                                   \
+F77=ifort    FFLAGS="-nologo -O2 -G7 -w -Fo\$@ -nbs -I$PREFIX/include" \
+FC=ifort    FCFLAGS="-nologo -O2 -G7 -w -Fo\$@ -nbs -I$PREFIX/include" \
+            LDFLAGS="-L$PREFIX/lib" \
+  ./configure --prefix=$PREFIX

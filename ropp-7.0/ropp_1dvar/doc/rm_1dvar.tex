@@ -1,0 +1,2091 @@
+% Document: ./rm_1dvar
+% Source: ./mywork/
+% Generated with ROBODoc Version 4.99.36 (Jul 28 2009)
+\section{1DVar/ropp\_1dvar\_cost}
+\textsl{[ Functions ]}
+
+\label{ch:robo0}
+\label{ch:1DVar_ropp_1dvar_cost}
+\index{unsorted!ropp\_1dvar\_cost}\index{Functions!ropp\_1dvar\_cost}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    ropp_1dvar_cost - Evaluate a cost function for a one-dimensional 
+                      variational retrieval of radio occultation data.
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    call ropp_1dvar_cost(yo, bg, control, precon, J, control_ad, config, indic)
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    This subroutine evaluates a quadratic cost function for a
+    variational data assimilation procedure. 
+
+    More specifically, this routine calculates a cost function
+
+           1  /         |  -1 |         \
+       J = - < y - H(x) | O   | y - H(x) > + 
+           2  \         |     |         /
+
+                       1  /       |  -1 |       \
+                       - < x - x  | B   | x - x  >
+                       2  \     b |     |      b/
+
+    where the background state x_b is given by the state vector
+    state.
+
+    On exit, control_ad contains the gradient of J with respect to the 
+    variables in control.
+\end{Verbatim}
+\textbf{INPUTS:}\hspace{0.08in}\begin{Verbatim}
+    yo                 Observation data structure.
+    bg                 Background data structure.
+    control            Control variable structure.
+    precon             Preconditioning matrix.
+    J                  Cost function value.
+    config             Configuration structure.
+    indic              State variable used for the communication with the
+                         calling program and the minimiser. The following
+                         values are recognised as input:
+                           1       Initialise arrays if additional 
+                                     convergence checks are to be applied.
+                           other:  Ignored
+                         The following values are output if additional
+                         convergence checks are to be applied:
+                           0       Iteration converged
+                           4       Iteration not converged
+\end{Verbatim}
+\textbf{OUTPUT:}\hspace{0.08in}\begin{Verbatim}
+    J 
+    control_ad
+\end{Verbatim}
+\textbf{NOTES:}\hspace{0.08in}\begin{Verbatim}
+    If called with indic < 0 (which should never happen during the 
+    minimization), variables for the convergence checks are reset. The 
+    calculations for cost function and its gradient are nevertheless 
+    performed. This allows the simultanious initialization
+    of the cost function minimization and the convergence checks with a single
+    call to ropp_1dvar_cost.
+\end{Verbatim}
+\textbf{EXAMPLE:}\hspace{0.08in}\textbf{SEE ALSO:}\hspace{0.08in}\textbf{REFERENCES:}\hspace{0.08in}\section{1DVar/ropp\_1dvar\_diag2roprof}
+\textsl{[ Subroutines ]}
+
+\label{ch:robo1}
+\label{ch:1DVar_ropp_1dvar_diag2roprof}
+\index{unsorted!ropp\_1dvar\_diag2roprof}\index{Subroutines!ropp\_1dvar\_diag2roprof}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    ropp_1dvar_diag2roprof - Add diagnostic information gathered during a
+                             1DVar retrieval to an ROProf data structure.
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    call ropp_1dvar_diag2roprof(obs, diag, ro_data, config)
+\end{Verbatim}
+\textbf{INPUTS:}\hspace{0.08in}\begin{Verbatim}
+    diag        - Diagnostic information structure
+    ro_data     - RO data file structure
+    config      - configuration options
+\end{Verbatim}
+\textbf{OUTPUT:}\hspace{0.08in}\begin{Verbatim}
+    ro_data     - Updated RO data file structure containing diagnostics
+\end{Verbatim}
+\section{1DVar/ropp\_1dvar\_levmarq}
+\textsl{[ Functions ]}
+
+\label{ch:robo2}
+\label{ch:1DVar_ropp_1dvar_levmarq}
+\index{unsorted!ropp\_1dvar\_levmarq}\index{Functions!ropp\_1dvar\_levmarq}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    ropp_1dvar_levmarq - Solve the 1DVar for background data using the
+                         Levenberg-Marquardt minimiser
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    call ropp_1dvar_levmarq(obs, bg, state, config, diag)
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    This subroutine evaluates a quadratic cost function for a
+    variational data assimilation procedure. 
+
+    More specifically, this routine calculates a cost function
+
+           1  /         |  -1 |         \
+       J = - < y - H(x) | O   | y - H(x) > + 
+           2  \         |     |         /
+
+                       1  /       |  -1 |       \
+                       - < x - x  | B   | x - x  >
+                       2  \     b |     |      b/
+
+    where the background state x_b is given by the state vector
+    state. 
+
+    A solution for x is obtained by minimising J using the Levenberg-Marquardt
+    minimisation method.
+\end{Verbatim}
+\textbf{INPUTS:}\hspace{0.08in}\begin{Verbatim}
+    obs                Observation data structure.
+    bg                 Background data structure.
+    state              State vector structure.
+    config             Configuration structure.
+    diag               Diagnostics structure.
+\end{Verbatim}
+\textbf{OUTPUT:}\hspace{0.08in}\begin{Verbatim}
+    state 
+    diag
+\end{Verbatim}
+\textbf{REFERENCES:}\hspace{0.08in}\begin{Verbatim}
+   W.H. Press, S.A. Teukolsjy, W.T. Vetterling and B.P. Flannery,
+   Numerical Recipes in C - The Art of Scientific Computing.
+   2nd Ed., Cambridge University Press, 1992.
+\end{Verbatim}
+\section{1DVar/ropp\_1dvar\_minropp}
+\textsl{[ Parameters ]}
+
+\label{ch:robo3}
+\label{ch:1DVar_ropp_1dvar_minropp}
+\index{unsorted!ropp\_1dvar\_minropp}\index{Parameters!ropp\_1dvar\_minropp}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    ropp_1dvar_minropp - Minimisation routine using Quasi-Newton method
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    ropp_1dvar_minropp(state, J_grad, J_dir, dJ, gconv, niter, indic, 
+                       miter, maxstore)
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\textbf{INPUTS:}\hspace{0.08in}\begin{Verbatim}
+    state      - control vector (1st guess)
+    J_grad     - penalty function gradient
+    J_dir      - quasi-Newton method direction
+    dJ         - expected decrease of cost function
+    gconv      - decrease in norm of penalty function for convergence
+    niter      - iteration counter
+    indic      - communication flag
+    miter      - maximum number of iterations allowed
+    maxstore   - size of storage available
+\end{Verbatim}
+\textbf{OUTPUT:}\hspace{0.08in}\begin{Verbatim}
+    state      - control vector solution
+    J_grad     - penalty function gradient
+    J_dir      - quasi-Newton method direction
+    niter      - iteration counter
+    indic      - communication flag
+\end{Verbatim}
+\textbf{NOTES:}\hspace{0.08in}\begin{Verbatim}
+       Based on limited-memory quasi-Newton method with diagonal scaling.
+       Further details on algorithm methods in  
+       Gilbert, J. C., Lemarechal, C. (1989) Some numerical experiments with 
+          variable storage quasi-Newton algorithms. Mathematical Programming, 
+          45, 407-435  
+      Nocedal, J. (1980) Updating quasi-Newton matrices with limited
+          storage. Mathematics of Computation, 35, 773-782
+      Based on original code written by Don Allan.
+
+      Cost function and gradient must be computed external to this routine.
+      Communication with external routines achieved using indic flag
+            indic = 0   : convergence achieved, no further minimisation
+            indic = 1   : first call in loop
+            indic = 4   : calling program has to compute new values for J and 
+                          gradient of J based for updated control vector
+\end{Verbatim}
+\section{1DVar/ropp\_1dvar\_read\_config}
+\textsl{[ Subroutines ]}
+
+\label{ch:robo4}
+\label{ch:1DVar_ropp_1dvar_read_config}
+\index{unsorted!ropp\_1dvar\_read\_config}\index{Subroutines!ropp\_1dvar\_read\_config}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    ropp_1dvar_read_config - Read a configuration file for a 1DVar retrieval.
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    call ropp_1dvar_read_config(file, config)
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\textbf{INPUTS:}\hspace{0.08in}\begin{Verbatim}
+      file        - configuration file name
+\end{Verbatim}
+\textbf{OUTPUT:}\hspace{0.08in}\begin{Verbatim}
+     config       - configuration options
+\end{Verbatim}
+\section{1DVar/ropp\_1dvar\_solve}
+\textsl{[ Parameters ]}
+
+\label{ch:robo5}
+\label{ch:1DVar_ropp_1dvar_solve}
+\index{unsorted!ropp\_1dvar\_solve}\index{Parameters!ropp\_1dvar\_solve}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    ropp_1dvar_solve - Solve the 1DVar for background data.
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    ropp_1dvar_solve(obs, bg, state, config, diag)
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+   Minimisation of the cost function is achieved by an iterative method which
+   computes the cost function value and updates the state vector on each of
+   n = 1, ..., n_iter iterations until convergence to a solution is achieved.
+   The state vector is updated using the ROPP-specific minimiser minROPP. This
+   implements a quasi-Newton method using a BFGS algorithm.
+\end{Verbatim}
+\textbf{INPUTS:}\hspace{0.08in}\begin{Verbatim}
+    obs         - Observation vector
+    bg          - Background vector
+    state       - First guess state vector
+    config      - Configuration options
+\end{Verbatim}
+\textbf{OUTPUT:}\hspace{0.08in}\begin{Verbatim}
+    state       - Modified state vector with 1dVar solution
+    diag        - Output diagnostics
+\end{Verbatim}
+\section{common/ropp\_1dvar\_version}
+\textsl{[ Functions ]}
+
+\label{ch:robo6}
+\label{ch:common_ropp_1dvar_version}
+\index{unsorted!ropp\_1dvar\_version}\index{Functions!ropp\_1dvar\_version}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+   ropp_1dvar_version
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+   Return ROPP_1DVAR version ID string
+
+   USE ropp_1dvar
+   version = ropp_1dvar_version()
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+   This function returns the (common) version string for the ROPP_1DVAR
+   module. By default, this function should be called by all ROPP_1DVAR
+   tools to display a version ID when the '-v' command-line switch is
+   used.
+\end{Verbatim}
+\section{Datatypes/KeyConfig}
+\textsl{[ Structures ]}
+
+\label{ch:robo7}
+\label{ch:Datatypes_KeyConfig}
+\index{unsorted!KeyConfig}\index{Structures!KeyConfig}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    KeyConfig - Key-value pairs defined in 1dVar config files
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    use ropp_1dvar_types
+      ...
+    type(KeyConfig) :: key_value
+\end{Verbatim}
+\textbf{NOTES:}\hspace{0.08in}\textbf{SEE ALSO:}\hspace{0.08in}\textbf{SOURCE:}\hspace{0.08in}\begin{Verbatim}
+  TYPE KeyConfig
+
+     CHARACTER(len = 1024), DIMENSION(:), POINTER :: keys   => null()
+     CHARACTER(len = 4096), DIMENSION(:), POINTER :: values => null()
+
+  END TYPE KeyConfig
+\end{Verbatim}
+\section{Datatypes/minROPPConfig}
+\textsl{[ Structures ]}
+
+\label{ch:robo8}
+\label{ch:Datatypes_minROPPConfig}
+\index{unsorted!minROPPConfig}\index{Structures!minROPPConfig}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    minROPPConfig - 
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    use ropp_1dvar_types
+      ...
+    type(VarConfig) :: config
+\end{Verbatim}
+\textbf{NOTES:}\hspace{0.08in}\textbf{SEE ALSO:}\hspace{0.08in}\begin{Verbatim}
+    VarConfig
+\end{Verbatim}
+\textbf{SOURCE:}\hspace{0.08in}\begin{Verbatim}
+  TYPE minROPPConfig
+     CHARACTER(len = nmax_fname) :: method       = "MINROPP"
+     CHARACTER(len = nmax_fname) :: log_file     = "screen"
+     INTEGER                     :: impres       =    0
+     INTEGER                     :: n_iter       = 1500
+     INTEGER                     :: mode         =    0
+     INTEGER                     :: n_updates    =   50
+     REAL(wp)                    :: eps_grad     = 1.0e-8_wp
+     REAL(wp)                    :: dx_min       = 1.0e-16_wp
+  END TYPE minROPPConfig
+\end{Verbatim}
+\section{Datatypes/VarConfig}
+\textsl{[ Structures ]}
+
+\label{ch:robo9}
+\label{ch:Datatypes_VarConfig}
+\index{unsorted!VarConfig}\index{Structures!VarConfig}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    VarConfig - 
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    use ropp_1dvar_types
+      ...
+    type(VarConfig) :: config
+\end{Verbatim}
+\textbf{NOTES:}\hspace{0.08in}\begin{Verbatim}
+    The VarConfigType structure is composed out of several other structures; 
+    see the user guide for a breakdown of the actual element names.
+\end{Verbatim}
+\textbf{SEE ALSO:}\hspace{0.08in}\begin{Verbatim}
+    minROPPConfig
+\end{Verbatim}
+\textbf{SOURCE:}\hspace{0.08in}\begin{Verbatim}
+  TYPE VarConfig
+
+!    Input and output files
+
+     ! Input observation file
+     CHARACTER(len = nmax_fname) :: obs_file         = "ropp_obs.nc"      
+     ! Observation error covariance method
+     CHARACTER(len = nmax_fname) :: obs_covar_method = "VSDC"             
+     ! Observation error correlation file
+     CHARACTER(len = nmax_fname) :: obs_corr_file    = "ropp_obs_corr.nc" 
+     ! Input background file
+     CHARACTER(len = nmax_fname) :: bg_file          = "ropp_bg.nc"       
+     ! Output file
+     CHARACTER(len = nmax_fname) :: out_file         = "ropp_out.nc"      
+     ! Background error covariance method
+     CHARACTER(len = nmax_fname) :: bg_covar_method  = "VSFC"             
+     ! Background error correlation file
+     CHARACTER(len = nmax_fname) :: bg_corr_file     = "ropp_bg_corr.nc"  
+
+!    Observation cutoff range
+
+     ! Minimum obs height to include in 1dVar analysis (km)
+     REAL(wp)                    :: min_1dvar_height         = -10.0_wp 
+     ! Maximum obs height to include in 1dVar analysis (km)
+     REAL(wp)                    :: max_1dvar_height         = 60.0_wp   
+
+!    Generic quality control
+
+     ! Apply obs vs. bg colocation check?
+     LOGICAL                     :: genqc_colocation_apply     = .TRUE.      
+     ! Maximum obs vs. bg great circle distance (km)
+     REAL(wp)                    :: genqc_max_distance         = 300.0_wp    
+     ! Maximum obs vs. bg temporal seperation (sec)
+     REAL(wp)                    :: genqc_max_time_sep         = 10800.0_wp    
+     ! Minimium temperature value (K)
+     REAL(wp)                    :: genqc_min_temperature      = 150.0_wp
+     ! Maximium temperature value (K)
+     REAL(wp)                    :: genqc_max_temperature      = 350.0_wp
+     ! Minimium specific humidity value (g/kg)
+     REAL(wp)                    :: genqc_min_spec_humidity    =  0.0_wp
+     ! Maximium specific humidity value (g/kg)
+     REAL(wp)                    :: genqc_max_spec_humidity    = 50.0_wp
+     ! Minimium impact parameter value (m)
+     REAL(wp)                    :: genqc_min_impact           = 6.2e6_wp   
+     ! Maximium impact parameter value (m)
+     REAL(wp)                    :: genqc_max_impact           = 6.6e6_wp  
+     ! Minimium bending angle value (rad)
+     REAL(wp)                    :: genqc_min_bangle           = -1.0e-4_wp
+     ! Maximium bending angle value (rad)
+     REAL(wp)                    :: genqc_max_bangle           =  0.1_wp 
+     ! Minimium geopotential height for refractivity value (m)
+     REAL(wp)                    :: genqc_min_geop_refrac      = -1.0e3_wp
+     ! Maximum geopotential height for refractivity value (m)
+     REAL(wp)                    :: genqc_max_geop_refrac      = 1.e5_wp  
+     ! Minimium refractivity value (N-units)
+     REAL(wp)                    :: genqc_min_refractivity     = 0.0_wp 
+     ! Maximium refractivity value (N-units)
+     REAL(wp)                    :: genqc_max_refractivity     = 500.0_wp  
+     ! Minimum threshold observation height (m)
+     REAL(wp)                    :: genqc_min_obheight         = 20000.0_wp
+
+     !    Background quality control
+
+     ! Apply background quality control?
+     LOGICAL                     :: bgqc_apply                 = .TRUE.    
+     ! Data rejected if O-B > factor * sigma
+     REAL(wp)                    :: bgqc_reject_factor         = 10.0_wp    
+     ! Maximum percentage of data rejected
+     REAL(wp)                    :: bgqc_reject_max_percent    = 50.0_wp     
+
+!    Probability of Gross Error
+
+     ! Apply PGE for quality control?
+     LOGICAL                     :: pge_apply                  = .FALSE.    
+     ! First guess PGE
+     REAL(wp)                    :: pge_fg                     = 0.001_wp  
+     ! Width of gross error plateau
+     REAL(wp)                    :: pge_d                      = 10.0_wp   
+
+!    Minimiser
+
+     TYPE(minROPPConfig)         :: minROPP
+     LOGICAL                     :: use_precond                = .TRUE.
+
+!    Additional convergence checks
+
+     ! Apply additional convergence checks?
+     LOGICAL                     :: conv_check_apply           = .TRUE.    
+     ! Minimum number of iterations required
+     INTEGER                     :: conv_check_n_previous      = 2         
+     ! State vector must change less than this * bg error
+     REAL(wp)                    :: conv_check_max_delta_state = 0.1_wp    
+     ! Cost function must change less than this
+     REAL(wp)                    :: conv_check_max_delta_J     = 0.1_wp     
+
+!    Additional output
+
+     LOGICAL                     :: extended_1dvar_diag     = .FALSE.
+
+!    Log(pressure) and Log(humidity) calculations
+
+     LOGICAL                     :: use_logp                = .FALSE.
+     LOGICAL                     :: use_logq                = .FALSE.
+
+!    compressibility 
+     
+     LOGICAL                     :: compress                = .FALSE. 
+
+  END TYPE VarConfig
+\end{Verbatim}
+\section{Datatypes/VarDiag}
+\textsl{[ Structures ]}
+
+\label{ch:robo10}
+\label{ch:Datatypes_VarDiag}
+\index{unsorted!VarDiag}\index{Structures!VarDiag}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    VarDiag - Diagnostics of a 1DVar retrieval.
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    use ropp_1dvar_types
+      ...
+    type(VarDiag) :: diag
+\end{Verbatim}
+\textbf{NOTES:}\hspace{0.08in}\begin{Verbatim}
+    The VarDiag structure is composed out of several other structures; 
+    see the user guide for a breakdown of the actual element names.
+\end{Verbatim}
+\textbf{SEE ALSO:}\hspace{0.08in}\textbf{SOURCE:}\hspace{0.08in}\begin{Verbatim}
+  TYPE VarDiag
+     INTEGER                         :: n_data
+     INTEGER                         :: n_bgqc_reject
+     INTEGER                         :: n_pge_reject
+     TYPE(Obs1DBangle)               :: bg_bangle
+     TYPE(Obs1DRefrac)               :: bg_refrac
+     REAL(wp), DIMENSION(:), POINTER :: OmB         => null() ! O - B
+     REAL(wp), DIMENSION(:), POINTER :: OmB_sigma   => null() ! O - B std dev
+     REAL(wp)                        :: pge_gamma             ! PGE gamma value
+     REAL(wp), DIMENSION(:), POINTER :: pge         => null() ! PGE of obs
+     REAL(wp), DIMENSION(:), POINTER :: pge_weights => null() ! PGE weights
+     LOGICAL                         :: ok             ! Overall quality flag
+     REAL(wp)                        :: J              ! Value of cost function
+     REAL(wp)                        :: J_scaled ! Value of cost (scaled, 2J/m)
+     REAL(wp)                        :: J_init ! Initial cost function
+     REAL(wp), DIMENSION(:), POINTER :: J_bgr => null() ! BG cost profile
+     REAL(wp), DIMENSION(:), POINTER :: J_obs => null() ! OB cost profile
+     REAL(wp), DIMENSION(:), POINTER :: B_sigma => null() ! Bg obs std dev
+     INTEGER                         :: n_iter         ! Number of iterations
+     INTEGER                         :: n_simul        ! Number of simulations
+     INTEGER                         :: min_mode       ! Minimiser exit mode
+     TYPE(Obs1DBangle)               :: res_bangle     ! Analysis bending angle
+     TYPE(Obs1DRefrac)               :: res_refrac     ! Analysis refractivity
+     REAL(wp), DIMENSION(:), POINTER :: OmA         => null() ! O - A
+     REAL(wp), DIMENSION(:), POINTER :: OmA_sigma   => null() ! O - A std dev
+  END TYPE VarDiag
+\end{Verbatim}
+\section{Diagnostics/ropp\_1dvar\_diagnostics}
+\textsl{[ Subroutines ]}
+
+\label{ch:robo11}
+\label{ch:Diagnostics_ropp_1dvar_diagnostics}
+\index{unsorted!ropp\_1dvar\_diagnostics}\index{Subroutines!ropp\_1dvar\_diagnostics}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    ropp_1dvar_diagnostics - 1DVar postprocessing and diagnostics.
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    call rop_1dvar_diagnostics(obs, state, config, diag)
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    This subroutine performs some postprocessing and diagnostic
+    calculations for a 1DVar. In particular,
+
+       - O - A differences for the solution
+       - error estimates for the solution
+
+    are calculated and stored into the respective members of the
+    diagnostic structure 'diag' as well as into the state vector's
+    error covariance matrix.
+\end{Verbatim}
+\textbf{INPUTS:}\hspace{0.08in}\begin{Verbatim}
+    obs
+    bg
+    config
+\end{Verbatim}
+\textbf{OUTPUT:}\hspace{0.08in}\begin{Verbatim}
+    bg
+    diag
+\end{Verbatim}
+\textbf{NOTES:}\hspace{0.08in}\begin{Verbatim}
+    The calculation of the expected errors in O - A is currently open.
+\end{Verbatim}
+\textbf{EXAMPLE:}\hspace{0.08in}\textbf{SEE ALSO:}\hspace{0.08in}\textbf{REFERENCES:}\hspace{0.08in}\section{Error covariances/ropp\_1dvar\_covar\_bangle}
+\textsl{[ Subroutines ]}
+
+\label{ch:robo12}
+\label{ch:Error_covariances_ropp_1dvar_covar_bangle}
+\index{unsorted!ropp\_1dvar\_covar\_bangle}\index{Subroutines!ropp\_1dvar\_covar\_bangle}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    ropp_1dvar_covar_bangle - Set up covariance matrices for a bending angle
+                                observation profile.
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    call ropp_1dvar_covar(obs, obs_covar_config)
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    This subroutine sets up an error covariance matrix for a vector of bending
+    angle observations. This particular routine provides the implementation for
+    an overloaded interface to various background and observation data types.
+\end{Verbatim}
+\textbf{INPUTS:}\hspace{0.08in}\begin{Verbatim}
+    type(Obs1dBangle)   :: obs  Bending angle observation vector
+\end{Verbatim}
+\textbf{OUTPUT:}\hspace{0.08in}\begin{Verbatim}
+    The observation vector's error covariance elements are
+    filled or updated according to the settings in the configuration
+    structures. 
+\end{Verbatim}
+\textbf{NOTES:}\hspace{0.08in}\begin{Verbatim}
+    Bending angle error covariances can be constructed using the following 
+    methods:
+
+       FSFC   Fixed Sigmas, Fixed correlations: Both error correlations and
+                and error standard deviations are read from an observation
+                error correlation file. The error correlation file must 
+                contain both the error correlation matrix as well as the
+                standard deviations (errors) for all observation vector
+                elements.
+
+       VSDC   Variable Sigmas, Diagonal Correlations: A diagonal error 
+                correlation structure (i.e., no error correlations) is assumed,
+                while per profile error estimates as contained in the 
+                observation data file are used. In this case, no error 
+                correlation / covariance data file is required.
+
+       VSFC   Variable Sigmas, Fixed Correlations: Error correlations are read
+                from an error correlation file, while per profile error 
+                estimates as contained in the observation data file are used.
+                In this case, the error correlation / covariance data files
+                only require to contain the error correlations.
+
+    Note that error correlation files may contain latitudinally binned error
+    correlations and standard deviations, allowing to have latitudinally 
+    varying error correlation structures and standard deviations in the FSFC  
+    and VSFC scenarios.
+\end{Verbatim}
+\textbf{EXAMPLE:}\hspace{0.08in}\textbf{SEE ALSO:}\hspace{0.08in}\begin{Verbatim}
+    ropp_1dvar_covar_bg
+    ropp_1dvar_covar_refrac
+    ropp_1dvar_covar_bangle
+\end{Verbatim}
+\textbf{REFERENCES:}\hspace{0.08in}\section{Error covariances/ropp\_1dvar\_covar\_bg}
+\textsl{[ Subroutines ]}
+
+\label{ch:robo13}
+\label{ch:Error_covariances_ropp_1dvar_covar_bg}
+\index{unsorted!ropp\_1dvar\_covar\_bg}\index{Subroutines!ropp\_1dvar\_covar\_bg}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    ropp_1dvar_covar_bg - Set up covariance matrices for background data.
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    call ropp_1dvar_covar(bg,  bg_covar_config)
+    call ropp_1dvar_covar(obs, obs_covar_config)
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    This subroutine sets up an error covariance matrix for a background
+    or an observation vector. It is an overloaded interface to various 
+    specialised error covariance routines.
+\end{Verbatim}
+\textbf{INPUTS:}\hspace{0.08in}\begin{Verbatim}
+    type(State1dFM) :: bg   Background state vector
+\end{Verbatim}
+\textbf{OUTPUT:}\hspace{0.08in}\begin{Verbatim}
+    The state vector's error covariance elements are
+    filled or updated according to the settings in the configuration
+    structures. 
+\end{Verbatim}
+\textbf{NOTES:}\hspace{0.08in}\begin{Verbatim}
+    Background covariances can be constructed using the following methods:
+
+       FSFC   Fixed Sigmas, Fixed correlations: Both error correlations and
+                and error standard deviations are read from a background
+                error correlation file. The error correlation file must 
+                contain both the error correlation matrix as well as the
+                standard deviations (errors) for all background state vector
+                elements.
+
+       VSFC   Variable Sigmas, Fixed Correlations: Error correlations are read
+                from an error correlation file, while per profile error 
+                estimates as contained in the background data file are used.
+                In this case, the error correlation / covariance data files
+                only require to contain the error correlations.
+
+    Note that error correlation files may contain latitudinally binned error
+    correlations and standard deviations, allowing to have latitudinally 
+    varying error correlation structures and standard deviations even in the 
+    FCFS scenario.
+\end{Verbatim}
+\textbf{EXAMPLE:}\hspace{0.08in}\textbf{SEE ALSO:}\hspace{0.08in}\begin{Verbatim}
+    ropp_1dvar_covar_bg
+    ropp_1dvar_covar_refrac
+    ropp_1dvar_covar_bangle
+\end{Verbatim}
+\textbf{REFERENCES:}\hspace{0.08in}\section{Error covariances/ropp\_1dvar\_covar\_refrac}
+\textsl{[ Subroutines ]}
+
+\label{ch:robo14}
+\label{ch:Error_covariances_ropp_1dvar_covar_refrac}
+\index{unsorted!ropp\_1dvar\_covar\_refrac}\index{Subroutines!ropp\_1dvar\_covar\_refrac}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    ropp_1dvar_covar_refrac - Set up covariance matrices for a refractivity
+                                observation profile.
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    call ropp_1dvar_covar(obs, obs_covar_config)
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    This subroutine sets up an error covariance matrix for a vector of 
+    refractivity observations. This particular routine provides the 
+    implementation for an overloaded interface to various background and 
+    observation data types.
+\end{Verbatim}
+\textbf{INPUTS:}\hspace{0.08in}\begin{Verbatim}
+    type(Obs1dRefrac)   :: obs  Refractivity observation vector
+\end{Verbatim}
+\textbf{OUTPUT:}\hspace{0.08in}\begin{Verbatim}
+    The observation vector's error covariance elements are
+    filled or updated according to the settings in the configuration
+    structures. 
+\end{Verbatim}
+\textbf{NOTES:}\hspace{0.08in}\begin{Verbatim}
+    Background covariances can be constructed using the following methods:
+
+       FSFC   Fixed Sigmas, Fixed correlations: Both error correlations and
+                and error standard deviations are read from an observation
+                error correlation file. The error correlation file must 
+                contain both the error correlation matrix as well as the
+                standard deviations (errors) for all observation vector
+                elements.
+
+       VSDC   Variable Sigmas, Diagonal Correlations: A diagonal error 
+                correlation structure (i.e., no error correlations) is assumed,
+                while per profile error estimates as contained in the 
+                observation data file are used. In this case, no error 
+                correlation / covariance data file is required.
+
+       VSFC   Variable Sigmas, Fixed Correlations: Error correlations are read
+                from an error correlation file, while per profile error 
+                estimates as contained in the observation data file are used.
+                In this case, the error correlation / covariance data files
+                only require to contain the error correlations.
+
+    Note that error correlation files may contain latitudinally binned error
+    correlations and standard deviations, allowing to have latitudinally 
+    varying error correlation structures and standard deviations in the FSFC  
+    and VSFC scenarios.
+\end{Verbatim}
+\textbf{EXAMPLE:}\hspace{0.08in}\textbf{SEE ALSO:}\hspace{0.08in}\begin{Verbatim}
+    ropp_1dvar_covar_bg
+    ropp_1dvar_covar_refrac
+    ropp_1dvar_covar_bangle
+\end{Verbatim}
+\textbf{REFERENCES:}\hspace{0.08in}\section{Interface/Modules}
+\textsl{[ Topics ]}
+
+\label{ch:robo15}
+\label{ch:Interface_Modules}
+\index{unsorted!Modules}\index{Topics!Modules}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    use ropp_1dvar
+
+    use ropp_fm_types
+    use ropp_fm_constants
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    Access to the routines in the ROPP 1dVar library ropp_1dvar is
+    provided by the single Fortran 90 module ropp_1dvar. The ropp_1dvar module
+    also includes the module ropp_1dvar_types, which contains derived type
+    (structure) declarations used by the 1dVar routines.
+
+    Meteorological and physical constants are provided in the module
+    ropp_1dvar_constants; this module is loaded with the ropp_1dvar module.
+\end{Verbatim}
+\textbf{SEE ALSO:}\hspace{0.08in}\begin{Verbatim}
+    ropp_1dvar
+    ropp_1dvar_types
+    ropp_1dvar_constants
+    ropp_1dvar_copy
+\end{Verbatim}
+\subsection{Modules/matrix}
+\textsl{[ Modules ]}
+\textsl{[ Modules ]}
+
+\label{ch:robo35}
+\label{ch:Modules_matrix}
+\index{unsorted!matrix}\index{Modules!matrix}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    matrix - Matrix routines and functions.
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    use matrix
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    This Fortran module provides interfaces and data types required for
+    matrix operations.
+\end{Verbatim}
+\textbf{NOTES:}\hspace{0.08in}\textbf{SEE ALSO:}\hspace{0.08in}\subsection{Modules/ropp\_1dvar}
+\textsl{[ Modules ]}
+\textsl{[ Modules ]}
+
+\label{ch:robo36}
+\label{ch:Modules_ropp_1dvar}
+\index{unsorted!ropp\_1dvar}\index{Modules!ropp\_1dvar}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    ropp_1dvar - Interface module for the ROPP 1DVar implementations.
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    use ropp_1dvar
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    This module provides interfaces for all 1DVar functions and routines
+    in the ROPP 1DVar library.
+\end{Verbatim}
+\textbf{NOTES:}\hspace{0.08in}\textbf{SEE ALSO:}\hspace{0.08in}\subsection{Modules/ropp\_1dvar\_copy}
+\textsl{[ Modules ]}
+\textsl{[ Modules ]}
+
+\label{ch:robo37}
+\label{ch:Modules_ropp_1dvar_copy}
+\index{unsorted!ropp\_1dvar\_copy}\index{Modules!ropp\_1dvar\_copy}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    ropp_1dvar_copy - Interface module for the ROPP 1dVar
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    use ropp_1dVar_copy
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    Data type/structure copying functions using ROprof structures used by the
+    forward models of ROPP and converting units within the ROprof structure.
+\end{Verbatim}
+\textbf{SEE ALSO:}\hspace{0.08in}\begin{Verbatim}
+    ropp_1dvar_diag2roprof
+\end{Verbatim}
+\subsection{Modules/ropp\_1dvar\_types}
+\textsl{[ Modules ]}
+\textsl{[ Modules ]}
+
+\label{ch:robo38}
+\label{ch:Modules_ropp_1dvar_types}
+\index{unsorted!ropp\_1dvar\_types}\index{Modules!ropp\_1dvar\_types}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    ropp_1dvar_types - Type declarations for the ROPP 1DVAR libary.
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    use ropp_1dvar
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    This Fortran module supports the ROPP 1DVar library and provides
+    derived data types used by the ropp_1dvar library. It must be loaded
+    for all applications using the ropp_io library / package. Note that
+    loading the ropp_1dvar module includes the ropp_1dvar_types module.
+\end{Verbatim}
+\textbf{NOTES:}\hspace{0.08in}\textbf{SEE ALSO:}\hspace{0.08in}\subsection{Modules/ropp\_qc}
+\textsl{[ Modules ]}
+\textsl{[ Modules ]}
+
+\label{ch:robo39}
+\label{ch:Modules_ropp_qc}
+\index{unsorted!ropp\_qc}\index{Modules!ropp\_qc}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    ropp_qc - Interface module for the ROPP Quality Control implementations.
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    use ropp_qc
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    This module provides interfaces for all quality control routines contained
+    in the ROPP 1DVar library.
+\end{Verbatim}
+\textbf{NOTES:}\hspace{0.08in}\textbf{SEE ALSO:}\hspace{0.08in}\section{Matrices/matrix\_bm2full}
+\textsl{[ Subroutines ]}
+
+\label{ch:robo16}
+\label{ch:Matrices_matrix_bm2full}
+\index{unsorted!matrix\_bm2full}\index{Subroutines!matrix\_bm2full}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    matrix_bm2full - Convert a symmetric or hermitian matrix from
+                     Lapack's banded into full (general) form.
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    call matrix_bm2full(banded, ku, matrix)
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    This subroutine copies a symmetric matrix in Lapack's packed form
+    into full (or general) form.
+\end{Verbatim}
+\textbf{INPUTS:}\hspace{0.08in}\begin{Verbatim}
+    banded    Matrix in banded form.
+    ku        Number of upper side diagonals.
+\end{Verbatim}
+\textbf{OUTPUT:}\hspace{0.08in}\begin{Verbatim}
+    matrix    Matrix in full (general) form.
+\end{Verbatim}
+\textbf{NOTES:}\hspace{0.08in}\begin{Verbatim}
+    The number of lower side diagonals will be computed from the shape
+    of the full matrix. If the dimensions of the full matrix do not equal
+    the shape of the original matrix, the conversion will give a wrong
+    result.
+
+    See the Lapack User Guide for details on matrix storage systems 
+    supported by Lapack. 
+\end{Verbatim}
+\textbf{EXAMPLE:}\hspace{0.08in}\begin{Verbatim}
+    To convert a general symmetric matrix with ku side diagonals into 
+    banded form, use
+
+       call matrix_full2bm(gen_matrix, ku, banded_matrix)
+
+    A full matrix can be obtained from a banded symmetric matrix via
+
+       call matrix_bm2full(banded_matrix, ku, gen_matrix)
+\end{Verbatim}
+\textbf{SEE ALSO:}\hspace{0.08in}\begin{Verbatim}
+    matrix_pp2full
+    matrix_pp2full_alloc
+
+    matrix_full2pp
+    matrix_full2pp_alloc
+
+    matrix_bm2full
+    matrix_bm2full_alloc
+
+    matrix_full2bm
+    matrix_full2bm_alloc
+\end{Verbatim}
+\textbf{REFERENCES:}\hspace{0.08in}\begin{Verbatim}
+    E. Anderson, Z. Bai, C. Bischof, S. Blackford, J. Demmel, J. Dongarra,
+       J. Du Croz, A. Greenbaum, S. Hammarling, A. McKenney, D. Sorensen,
+       LAPACK Users' Guide, 3rd Ed., SIAM, 1999.
+\end{Verbatim}
+\section{Matrices/matrix\_bm2full\_alloc}
+\textsl{[ Subroutines ]}
+
+\label{ch:robo17}
+\label{ch:Matrices_matrix_bm2full_alloc}
+\index{unsorted!matrix\_bm2full\_alloc}\index{Subroutines!matrix\_bm2full\_alloc}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    matrix_bm2full_alloc - Convert a symmetric or hermitian matrix from 
+                           Lapack's packed into full (general) form.
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    call matrix_bm2full_alloc(banded, m, ku, matrix)
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    This subroutine copies a symmetric matrix in Lapack's banded form 
+    into full (or general) form. The general matrix to be filled is allocated.
+\end{Verbatim}
+\textbf{INPUTS:}\hspace{0.08in}\begin{Verbatim}
+    banded    Matrix in banded form.
+    m         Number rows of the full matrix.
+    ku        Number of upper side diagonals.
+\end{Verbatim}
+\textbf{OUTPUT:}\hspace{0.08in}\begin{Verbatim}
+    matrix    Pointer to a matrix in full (general) form.
+\end{Verbatim}
+\textbf{NOTES:}\hspace{0.08in}\begin{Verbatim}
+    The number of lower side diagonals will be computed from the number m
+    of rows of the full matrix. If the number of rows does not equal the
+    shape of the original matrix, the conversion will give a wrong result.
+
+    The matrix argument is a 2d Fortran pointer which is allocated within
+    this routine. If the pointer has been used before, all data will be lost.
+
+    See the Lapack User Guide for details on matrix storage systems supported 
+    by Lapack. 
+\end{Verbatim}
+\textbf{EXAMPLE:}\hspace{0.08in}\begin{Verbatim}
+    To convert a general symmetric matrix into packed form, use
+
+       call matrix_full2pp(gen_matrix, packed_matrix)
+
+    A full matrix can be obtained from a packed positive definitive matrix via
+
+       call matrix_pp2full(packed_matrix, gen_matrix)
+\end{Verbatim}
+\textbf{SEE ALSO:}\hspace{0.08in}\begin{Verbatim}
+    matrix_pp2full
+
+    matrix_full2pp
+    matrix_full2pp_alloc
+
+    matrix_bm2full
+    matrix_bm2full_alloc
+
+    matrix_full2bm
+    matrix_full2bm_alloc
+\end{Verbatim}
+\textbf{REFERENCES:}\hspace{0.08in}\begin{Verbatim}
+    E. Anderson, Z. Bai, C. Bischof, S. Blackford, J. Demmel, J. Dongarra,
+       J. Du Croz, A. Greenbaum, S. Hammarling, A. McKenney, D. Sorensen,
+       LAPACK Users' Guide, 3rd Ed., SIAM, 1999.
+\end{Verbatim}
+\section{Matrices/matrix\_full2bm}
+\textsl{[ Subroutines ]}
+
+\label{ch:robo18}
+\label{ch:Matrices_matrix_full2bm}
+\index{unsorted!matrix\_full2bm}\index{Subroutines!matrix\_full2bm}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    matrix_full2bm - Convert a symmetric or hermitian matrix in full
+                     (or general) form into Lapack's banded form.
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    call matrix_full2bm(matrix, ku, banded)
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    This subroutine copies a symmetric matrix into Lapack's banded form.
+\end{Verbatim}
+\textbf{INPUTS:}\hspace{0.08in}\begin{Verbatim}
+    matrix    Matrix in full (general) form.
+    ku        Number of upper side diagonals.
+\end{Verbatim}
+\textbf{OUTPUT:}\hspace{0.08in}\begin{Verbatim}
+    banded    Matrix in banded form.
+\end{Verbatim}
+\textbf{NOTES:}\hspace{0.08in}\begin{Verbatim}
+    See the Lapack User Guide for details on matrix storage systems
+    supported by Lapack. 
+\end{Verbatim}
+\textbf{EXAMPLE:}\hspace{0.08in}\begin{Verbatim}
+    To convert a general symmetric matrix with ku side diagonals into 
+    banded form, use
+
+       call matrix_full2bm(gen_matrix, ku, banded_matrix)
+
+    A full matrix can be obtained from a banded symmetric matrix via
+
+       call matrix_bm2full(banded_matrix, ku, gen_matrix)
+\end{Verbatim}
+\textbf{SEE ALSO:}\hspace{0.08in}\begin{Verbatim}
+    matrix_pp2full
+    matrix_pp2full_alloc
+
+    matrix_full2pp
+    matrix_full2pp_alloc
+
+    matrix_bm2full
+    matrix_bm2full_alloc
+
+    matrix_full2bm
+    matrix_full2bm_alloc
+\end{Verbatim}
+\textbf{REFERENCES:}\hspace{0.08in}\begin{Verbatim}
+    E. Anderson, Z. Bai, C. Bischof, S. Blackford, J. Demmel, J. Dongarra,
+       J. Du Croz, A. Greenbaum, S. Hammarling, A. McKenney, D. Sorensen,
+       LAPACK Users' Guide, 3rd Ed., SIAM, 1999.
+\end{Verbatim}
+\section{Matrices/matrix\_full2bm\_alloc}
+\textsl{[ Subroutines ]}
+
+\label{ch:robo19}
+\label{ch:Matrices_matrix_full2bm_alloc}
+\index{unsorted!matrix\_full2bm\_alloc}\index{Subroutines!matrix\_full2bm\_alloc}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    matrix_full2bm_alloc - Convert a symmetric or hermitian matrix in full
+                           (or general) form into Lapack's banded form.
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    call matrix_full2bm_alloc(matrix, ku, kl, banded)
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    This subroutine copies a symmetric matrix into Lapack's banded form. 
+    The banded matrix to be filled is allocated.
+\end{Verbatim}
+\textbf{INPUTS:}\hspace{0.08in}\begin{Verbatim}
+    matrix    Matrix in full (general) form.
+    ku        Number of upper side diagonals.
+    kl        Number of lower side diagonals.
+\end{Verbatim}
+\textbf{OUTPUT:}\hspace{0.08in}\begin{Verbatim}
+    banded    Matrix in banded form.
+\end{Verbatim}
+\textbf{NOTES:}\hspace{0.08in}\begin{Verbatim}
+    The banded argument is a 2d Fortran pointer which is allocated within
+    this routine. If the pointer has been used before, all data will be lost.
+
+    See the Lapack User Guide for details on matrix storage systems 
+    supported by Lapack. 
+\end{Verbatim}
+\textbf{EXAMPLE:}\hspace{0.08in}\begin{Verbatim}
+    To convert a general symmetric matrix with ku side diagonals into 
+    banded form, use
+
+       call matrix_full2bm_alloc(gen_matrix, ku, kl, banded_matrix)
+
+    A full matrix can be obtained from a banded symmetric matrix via
+
+       call matrix_bm2full(banded_matrix, ku, gen_matrix)
+\end{Verbatim}
+\textbf{SEE ALSO:}\hspace{0.08in}\begin{Verbatim}
+    matrix_pp2full
+    matrix_pp2full_alloc
+
+    matrix_full2pp
+    matrix_full2pp_alloc
+
+    matrix_bm2full
+    matrix_bm2full_alloc
+
+    matrix_full2bm
+    matrix_full2bm_alloc
+\end{Verbatim}
+\textbf{REFERENCES:}\hspace{0.08in}\begin{Verbatim}
+    E. Anderson, Z. Bai, C. Bischof, S. Blackford, J. Demmel, J. Dongarra,
+       J. Du Croz, A. Greenbaum, S. Hammarling, A. McKenney, D. Sorensen,
+       LAPACK Users' Guide, 3rd Ed., SIAM, 1999.
+\end{Verbatim}
+\section{Matrices/matrix\_full2pp}
+\textsl{[ Subroutines ]}
+
+\label{ch:robo20}
+\label{ch:Matrices_matrix_full2pp}
+\index{unsorted!matrix\_full2pp}\index{Subroutines!matrix\_full2pp}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    matrix_full2pp - Convert a symmetric or hermitian matrix into full
+                     (or general) form into Lapack's packed form.
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    call matrix_full2pp(matrix, packed [, uplo])
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    This subroutine copies a symmetric matrix into Lapack's packed form.
+\end{Verbatim}
+\textbf{INPUTS:}\hspace{0.08in}\begin{Verbatim}
+    matrix    Matrix in full (general) form.
+    uplo      'UPLO' parameter; determines if the packed matrix has been packed
+                 from an upper ('U') or lower ('L') full matrix. This parameter
+                 is optional; it defaults to 'U'.
+\end{Verbatim}
+\textbf{OUTPUT:}\hspace{0.08in}\begin{Verbatim}
+    packed    Matrix in packed form.
+\end{Verbatim}
+\textbf{NOTES:}\hspace{0.08in}\begin{Verbatim}
+    See the Lapack User Guide for details on matrix storage systems
+    supported by Lapack. 
+\end{Verbatim}
+\textbf{EXAMPLE:}\hspace{0.08in}\begin{Verbatim}
+    To convert a general symmetric matrix into a packed form, use
+
+       call matrix_full2pp(gen_matrix, packed_matrix)
+
+    A full matrix can be obtained from a packed symmetric matrix via
+
+       call matrix_pp2full(packed_matrix, gen_matrix)
+\end{Verbatim}
+\textbf{SEE ALSO:}\hspace{0.08in}\begin{Verbatim}
+    matrix_pp2full
+    matrix_pp2full_alloc
+
+    matrix_full2pp
+    matrix_full2pp_alloc
+
+    matrix_bm2full
+    matrix_bm2full_alloc
+
+    matrix_full2bm
+    matrix_full2bm_alloc
+\end{Verbatim}
+\textbf{REFERENCES:}\hspace{0.08in}\begin{Verbatim}
+    E. Anderson, Z. Bai, C. Bischof, S. Blackford, J. Demmel, J. Dongarra,
+       J. Du Croz, A. Greenbaum, S. Hammarling, A. McKenney, D. Sorensen,
+       LAPACK Users' Guide, 3rd Ed., SIAM, 1999.
+\end{Verbatim}
+\section{Matrices/matrix\_full2pp\_alloc}
+\textsl{[ Subroutines ]}
+
+\label{ch:robo21}
+\label{ch:Matrices_matrix_full2pp_alloc}
+\index{unsorted!matrix\_full2pp\_alloc}\index{Subroutines!matrix\_full2pp\_alloc}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    matrix_full2pp_alloc - Convert a symmetric or hermitian matrix into full
+                     (or general) form into Lapack's packed form.
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    call matrix_full2pp_alloc(matrix, packed [, uplo])
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    This subroutine copies a symmetric matrix into Lapack's packed form.
+    The packed matrix to be filled is allocated.
+\end{Verbatim}
+\textbf{INPUTS:}\hspace{0.08in}\begin{Verbatim}
+    matrix    Matrix in full (general) form.
+    uplo      'UPLO' parameter; determines if the packed matrix has been packed
+                 from an upper ('U') or lower ('L') full matrix. This parameter
+                 is optional; it defaults to 'U'.
+\end{Verbatim}
+\textbf{OUTPUT:}\hspace{0.08in}\begin{Verbatim}
+    packed    Matrix in packed form.
+\end{Verbatim}
+\textbf{NOTES:}\hspace{0.08in}\begin{Verbatim}
+    See the Lapack User Guide for details on matrix storage systems
+    supported by Lapack. 
+\end{Verbatim}
+\textbf{EXAMPLE:}\hspace{0.08in}\begin{Verbatim}
+    To convert a general symmetric matrix with ku side diagonals into 
+    banded form, use
+
+       call matrix_full2pp(gen_matrix, packed_matrix)
+
+    A full matrix can be obtained from a packed symmetric matrix via
+
+       call matrix_pp2full(packed_matrix, gen_matrix)
+\end{Verbatim}
+\textbf{SEE ALSO:}\hspace{0.08in}\begin{Verbatim}
+    matrix_pp2full
+    matrix_pp2full_alloc
+
+    matrix_full2pp
+    matrix_full2pp_alloc
+
+    matrix_bm2full
+    matrix_bm2full_alloc
+
+    matrix_full2bm
+    matrix_full2bm_alloc
+\end{Verbatim}
+\textbf{REFERENCES:}\hspace{0.08in}\begin{Verbatim}
+    E. Anderson, Z. Bai, C. Bischof, S. Blackford, J. Demmel, J. Dongarra,
+       J. Du Croz, A. Greenbaum, S. Hammarling, A. McKenney, D. Sorensen,
+       LAPACK Users' Guide, 3rd Ed., SIAM, 1999.
+\end{Verbatim}
+\section{Matrices/matrix\_pp2full}
+\textsl{[ Subroutines ]}
+
+\label{ch:robo22}
+\label{ch:Matrices_matrix_pp2full}
+\index{unsorted!matrix\_pp2full}\index{Subroutines!matrix\_pp2full}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    matrix_pp2full - Convert a symmetric or hermitian matrix from Lapack's
+                        packed into full (general) form.
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    call matrix_pp2full(packed, matrix [, uplo])
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    This subroutine copies a matrix in Lapack's packed form into full (or 
+    general) form.
+\end{Verbatim}
+\textbf{INPUTS:}\hspace{0.08in}\begin{Verbatim}
+    packed    Matrix in packed form.
+    uplo      'UPLO' parameter; determines if the packed matrix has been packed
+                 from an upper ('U') or lower ('L') full matrix. This parameter
+                 is optional; it defaults to 'U'.
+\end{Verbatim}
+\textbf{OUTPUT:}\hspace{0.08in}\begin{Verbatim}
+    matrix    Matrix in full (general) form.
+\end{Verbatim}
+\textbf{NOTES:}\hspace{0.08in}\begin{Verbatim}
+    Packed matrix storage in Lapack is reserved for symmetric or Hermitian
+    postive definite matrices. See the Lapack User Guide for details on this
+    and other matrix storage systems supported by Lapack. 
+\end{Verbatim}
+\textbf{EXAMPLE:}\hspace{0.08in}\begin{Verbatim}
+    To convert a general symmetric matrix into packed form, use
+
+       call matrix_full2pp(gen_matrix, packed_matrix)
+
+    A full matrix can be obtained from a packed positive definitive matrix via
+
+       call matrix_pp2full(packed_matrix, gen_matrix)
+\end{Verbatim}
+\textbf{SEE ALSO:}\hspace{0.08in}\begin{Verbatim}
+    matrix_pp2full
+    matrix_pp2full_alloc
+
+    matrix_full2pp
+    matrix_full2pp_alloc
+
+    matrix_bm2full
+    matrix_bm2full_alloc
+
+    matrix_full2bm
+    matrix_full2bm_alloc
+\end{Verbatim}
+\textbf{REFERENCES:}\hspace{0.08in}\begin{Verbatim}
+    E. Anderson, Z. Bai, C. Bischof, S. Blackford, J. Demmel, J. Dongarra,
+       J. Du Croz, A. Greenbaum, S. Hammarling, A. McKenney, D. Sorensen,
+       LAPACK Users' Guide, 3rd Ed., SIAM, 1999.
+\end{Verbatim}
+\section{Matrices/matrix\_pp2full\_alloc}
+\textsl{[ Subroutines ]}
+
+\label{ch:robo23}
+\label{ch:Matrices_matrix_pp2full_alloc}
+\index{unsorted!matrix\_pp2full\_alloc}\index{Subroutines!matrix\_pp2full\_alloc}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    matrix_pp2full_alloc - Convert a symmetric or hermitian positive definite
+                           matrix from Lapack's packed into full (general)
+                           form.
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    call matrix_pp2full(packed, matrix [, uplo])
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    This subroutine copies a matrix in Lapack's packed form into full (or 
+    general) form. The general matrix to be filled is allocated.
+\end{Verbatim}
+\textbf{INPUTS:}\hspace{0.08in}\begin{Verbatim}
+    packed    Matrix in packed form.
+    uplo      'UPLO' parameter; determines if the packed matrix has been packed
+                 from an upper ('U') or lower ('L') full matrix. This parameter
+                 is optional; it defaults to 'U'.
+\end{Verbatim}
+\textbf{OUTPUT:}\hspace{0.08in}\begin{Verbatim}
+    matrix    Pointer to a matrix in full (general) form.
+\end{Verbatim}
+\textbf{NOTES:}\hspace{0.08in}\begin{Verbatim}
+    The matrix argument is a 2d Fortran pointer which is allocated within
+    this routine. If the pointer has been used before, all data will be lost.
+
+    Packed matrix storage in Lapack is reserved for symmetric or Hermitian
+    postive definite matrices. See the Lapack User Guide for details on this
+    and other matrix storage systems supported by Lapack. 
+\end{Verbatim}
+\textbf{EXAMPLE:}\hspace{0.08in}\begin{Verbatim}
+    To convert a general symmetric matrix into packed form, use
+
+       call matrix_full2pp(gen_matrix, packed_matrix)
+
+    A full matrix can be obtained from a packed positive definitive matrix via
+
+       call matrix_pp2full(packed_matrix, gen_matrix)
+\end{Verbatim}
+\textbf{SEE ALSO:}\hspace{0.08in}\begin{Verbatim}
+    matrix_pp2full
+    matrix_pp2full_alloc
+
+    matrix_full2pp
+    matrix_full2pp_alloc
+
+    matrix_bm2full
+    matrix_bm2full_alloc
+
+    matrix_full2bm
+    matrix_full2bm_alloc
+\end{Verbatim}
+\textbf{REFERENCES:}\hspace{0.08in}\begin{Verbatim}
+    E. Anderson, Z. Bai, C. Bischof, S. Blackford, J. Demmel, J. Dongarra,
+       J. Du Croz, A. Greenbaum, S. Hammarling, A. McKenney, D. Sorensen,
+       LAPACK Users' Guide, 3rd Ed., SIAM, 1999.
+\end{Verbatim}
+\section{Matrices/matrix\_pp2full\_subset}
+\textsl{[ Subroutines ]}
+
+\label{ch:robo24}
+\label{ch:Matrices_matrix_pp2full_subset}
+\index{unsorted!matrix\_pp2full\_subset}\index{Subroutines!matrix\_pp2full\_subset}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    matrix_pp2full_subset - Convert a subset of a symmetric or hermitian 
+                            matrix from Lapack's packed into full (general) 
+                            form.
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    call matrix_pp2full_subset(packed, matrix [, uplo])
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    This subroutine copies part of a matrix in Lapack's packed form into full 
+    (or general) form.
+\end{Verbatim}
+\textbf{INPUTS:}\hspace{0.08in}\begin{Verbatim}
+    packed    Matrix in packed form.
+    uplo      'UPLO' parameter; determines if the packed matrix has been packed
+                 from an upper ('U') or lower ('L') full matrix. This parameter
+                 is optional; it defaults to 'U'.
+\end{Verbatim}
+\textbf{OUTPUT:}\hspace{0.08in}\begin{Verbatim}
+    matrix    Matrix in full (general) form.
+\end{Verbatim}
+\textbf{NOTES:}\hspace{0.08in}\begin{Verbatim}
+    Packed matrix storage in Lapack is reserved for symmetric or Hermitian
+    postive definite matrices. See the Lapack User Guide for details on this
+    and other matrix storage systems supported by Lapack. 
+\end{Verbatim}
+\textbf{EXAMPLE:}\hspace{0.08in}\begin{Verbatim}
+    To convert a general symmetric matrix into packed form, use
+
+       call matrix_full2pp(gen_matrix, packed_matrix)
+
+    A full matrix can be obtained from a packed positive definitive matrix via
+
+       call matrix_pp2full(packed_matrix, gen_matrix)
+\end{Verbatim}
+\textbf{SEE ALSO:}\hspace{0.08in}\begin{Verbatim}
+    matrix_pp2full
+    matrix_pp2full_alloc
+
+    matrix_full2pp
+    matrix_full2pp_alloc
+
+    matrix_bm2full
+    matrix_bm2full_alloc
+
+    matrix_full2bm
+    matrix_full2bm_alloc
+\end{Verbatim}
+\textbf{REFERENCES:}\hspace{0.08in}\begin{Verbatim}
+    E. Anderson, Z. Bai, C. Bischof, S. Blackford, J. Demmel, J. Dongarra,
+       J. Du Croz, A. Greenbaum, S. Hammarling, A. McKenney, D. Sorensen,
+       LAPACK Users' Guide, 3rd Ed., SIAM, 1999.
+\end{Verbatim}
+\section{Matrices/matrix\_types}
+\textsl{[ Modules ]}
+
+\label{ch:robo25}
+\label{ch:Matrices_matrix_types}
+\index{unsorted!matrix\_types}\index{Modules!matrix\_types}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    matrix_types - Type declaration for positive definite matrices.
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    use matrix_types
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    This module provides derived data types for matrices.
+\end{Verbatim}
+\textbf{NOTES:}\hspace{0.08in}\begin{Verbatim}
+    The main purpose of these matrix types is to be used with the matrix
+    equation solving routines of this library for the respective matrix
+    types. The derived matrix types store decomposition information as
+    obtained by Lapack in addition to the actual matrix. For example, if
+    a positive definite packed matrix is used for the first time with
+    matrix_solve(), a Cholesky decomposition of the matrix is calculated
+    and used for the solving the given linear equation. The decomposition
+    is also stored in the same matrix data structure. In the next call
+    to matrix_solve, the Cholesky decomposition obtained previously is
+    reused, saving significant amounts of computations when solving
+    linear equations with many different right hand sides.
+
+    At present, only double precision matrices are supported.
+\end{Verbatim}
+\textbf{SEE ALSO:}\hspace{0.08in}\begin{Verbatim}
+    matrix_ge
+    matrix_pp
+    matrix_pb
+    matrix_sq
+\end{Verbatim}
+\section{Matrix/delete}
+\textsl{[ Subroutines ]}
+
+\label{ch:robo26}
+\label{ch:Matrix_delete}
+\index{unsorted!delete}\index{Subroutines!delete}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    delete - Delete the data contained in the matrix type.
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    call delete(matrix)
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    This subroutine deletes all data / memory hold in the given matrix
+    type variable
+\end{Verbatim}
+\textbf{INPUTS:}\hspace{0.08in}\begin{Verbatim}
+    matrix
+\end{Verbatim}
+\textbf{OUTPUT:}\hspace{0.08in}\textbf{NOTES:}\hspace{0.08in}\textbf{EXAMPLE:}\hspace{0.08in}\textbf{SEE ALSO:}\hspace{0.08in}\textbf{REFERENCES:}\hspace{0.08in}\section{Matrix/matrix\_assign}
+\textsl{[ Modules ]}
+
+\label{ch:robo27}
+\label{ch:Matrix_matrix_assign}
+\index{unsorted!matrix\_assign}\index{Modules!matrix\_assign}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    matrix_assign - Implement matrix assignment (i.e., the operator =).
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    This file contains implementations for the assignment operator (=) for
+    the various types in the matrix class.
+\end{Verbatim}
+\textbf{INPUTS:}\hspace{0.08in}\textbf{OUTPUT:}\hspace{0.08in}\textbf{NOTES:}\hspace{0.08in}\textbf{EXAMPLE:}\hspace{0.08in}\textbf{SEE ALSO:}\hspace{0.08in}\textbf{REFERENCES:}\hspace{0.08in}\section{Matrix/matrix\_invert}
+\textsl{[ Functions ]}
+
+\label{ch:robo28}
+\label{ch:Matrix_matrix_invert}
+\index{unsorted!matrix\_invert}\index{Functions!matrix\_invert}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    matrix_invert - Invert a square matrix 
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    use matrix
+      ...
+    x = matrix_invert(A)
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    This function calls matrix_solve to solve a linear equation of the form
+
+       A x = b
+
+    for matrix A. It is assumed that the matrix A is positive 
+    definite, and the solution is obtained using a Cholesky decomposition. 
+    The matrix b is defined zero everywhere except for one element equal to 1.
+\end{Verbatim}
+\textbf{INPUTS:}\hspace{0.08in}\begin{Verbatim}
+    A     Matrix to be inverted.
+\end{Verbatim}
+\textbf{OUTPUT:}\hspace{0.08in}\begin{Verbatim}
+    x     Inverted matrix.
+\end{Verbatim}
+\textbf{NOTES:}\hspace{0.08in}\begin{Verbatim}
+    The matrix A may be in either full or packed form. If the matrix is not 
+    positive definite, the attempt to solve will fail with an error message.
+    These routines are currently available in double precision only.
+\end{Verbatim}
+\textbf{EXAMPLE:}\hspace{0.08in}\begin{Verbatim}
+    To invert a positive definite matrix A,
+
+       A_inverted = matrix_invert(A)
+\end{Verbatim}
+\textbf{SEE ALSO:}\hspace{0.08in}\begin{Verbatim}
+    matrix_types
+    matrix_solve
+\end{Verbatim}
+\textbf{REFERENCES:}\hspace{0.08in}\section{Matrix/matrix\_operators}
+\textsl{[ Subroutines ]}
+
+\label{ch:robo29}
+\label{ch:Matrix_matrix_operators}
+\index{unsorted!matrix\_operators}\index{Subroutines!matrix\_operators}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    matrix_operators - Implement matrix operators (i.e., the operators +, -, *, /).
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    This file implements various operators for the types of the matrix clas.
+    In particular, these operations are supported:
+
+      - Addition
+      - Subtraction
+      - Scalar multiplication
+      - Scalar division
+\end{Verbatim}
+\textbf{INPUTS:}\hspace{0.08in}\textbf{OUTPUT:}\hspace{0.08in}\textbf{NOTES:}\hspace{0.08in}\textbf{EXAMPLE:}\hspace{0.08in}\textbf{SEE ALSO:}\hspace{0.08in}\textbf{REFERENCES:}\hspace{0.08in}\section{Matrix/matrix\_solve}
+\textsl{[ Functions ]}
+
+\label{ch:robo30}
+\label{ch:Matrix_matrix_solve}
+\index{unsorted!matrix\_solve}\index{Functions!matrix\_solve}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    matrix_solve - Solve a linear matrix equation
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    use matrix
+      ...
+    x = matrix_solve(A, b)
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    This function calls matrix_solve to solve a linear equation of the form
+
+       A x = b
+
+    for arbitrary matrices A and arbitrary right hand side vectors b. 
+    It is assumed that the matrix A is positive 
+    definite, and the solution is obtained using a Cholesky decomposition. 
+\end{Verbatim}
+\textbf{INPUTS:}\hspace{0.08in}\begin{Verbatim}
+    A     Matrix defining the linear equation system.
+    b     Right hand side of the linear equation system.
+\end{Verbatim}
+\textbf{OUTPUT:}\hspace{0.08in}\begin{Verbatim}
+    x     Solution of the linear equation system.
+\end{Verbatim}
+\textbf{NOTES:}\hspace{0.08in}\begin{Verbatim}
+    The matrix A may be in either full or packed form. If the matrix is not 
+    positive definite, the attempt to solve will fail with an error message.
+    These routines are currently available in double precision only.
+\end{Verbatim}
+\textbf{EXAMPLE:}\hspace{0.08in}\begin{Verbatim}
+    The solution of a linear equation with right hand side vector b is
+
+       x = solve(A, b)
+\end{Verbatim}
+\textbf{SEE ALSO:}\hspace{0.08in}\begin{Verbatim}
+    matrix_types
+\end{Verbatim}
+\textbf{REFERENCES:}\hspace{0.08in}\section{Matrix/matrix\_sqrt}
+\textsl{[ Functions ]}
+
+\label{ch:robo31}
+\label{ch:Matrix_matrix_sqrt}
+\index{unsorted!matrix\_sqrt}\index{Functions!matrix\_sqrt}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    matrix_sqrt - Square root and it's inverse of a symmetric matrix
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    call matrix_sqrt(A, R)
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    This subroutine calculates the (symmetric) square root of symmetric
+    matrix from it's SVD along with the inverse square root.
+\end{Verbatim}
+\textbf{INPUTS:}\hspace{0.08in}\begin{Verbatim}
+    A   Matrix to be used for calculating the preconditioner.
+\end{Verbatim}
+\textbf{OUTPUT:}\hspace{0.08in}\begin{Verbatim}
+    R   Symmetric square root and its inverse.
+\end{Verbatim}
+\textbf{NOTES:}\hspace{0.08in}\begin{Verbatim}
+   The routine works for regular (square) matrices as well as for positive
+   definite matrices in packed form. Matrix types matrix_ge and matrix_pp
+   are also supported.
+
+   If square roots have been calculated before, the matrices will silently
+   be deallocated, and all data will be lost.
+\end{Verbatim}
+\textbf{EXAMPLE:}\hspace{0.08in}\begin{Verbatim}
+   use matrix
+     ...
+   type(matrix_sq) :: R
+\end{Verbatim}
+\textbf{SEE ALSO:}\hspace{0.08in}\textbf{REFERENCES:}\hspace{0.08in}\section{Matrix/matrix\_svd}
+\textsl{[ Functions ]}
+
+\label{ch:robo32}
+\label{ch:Matrix_matrix_svd}
+\index{unsorted!matrix\_svd}\index{Functions!matrix\_svd}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    matrix_svd - Compute singular value decomposition (SVD) of a matrix.
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    call matrix_svd(A, W, U, V)
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    This subroutine calculates the SVD of a matrix.
+               A = U diag(W) V^T
+    where U and V are matrices containing eigenvectors of A and
+    the diagonal elements of W give the singular values.
+\end{Verbatim}
+\textbf{INPUTS:}\hspace{0.08in}\begin{Verbatim}
+    A   Matrix to be used for calculating the SVD
+\end{Verbatim}
+\textbf{OUTPUT:}\hspace{0.08in}\begin{Verbatim}
+    W   Diagonal elements of singular values of A
+    U   Left-hand singular vector of A
+    V   Right-hand singular vector of A. (Note routine returns V and NOT its 
+        transpose V^T).
+\end{Verbatim}
+\textbf{NOTES:}\hspace{0.08in}\begin{Verbatim}
+   The routine is based on the Numerical Recipes (Press et al. 1992) algorithm
+   for computing the SVD. Only full matrices are supported. Matrices in packed
+   form should be converted to full type before calling matrix_svd.
+\end{Verbatim}
+\textbf{EXAMPLE:}\hspace{0.08in}\textbf{SEE ALSO:}\hspace{0.08in}\begin{Verbatim}
+      matrix_sqrt
+\end{Verbatim}
+\textbf{REFERENCES:}\hspace{0.08in}\begin{Verbatim}
+   W.H. Press, S.A. Teukolsjy, W.T. Vetterling and B.P. Flannery,
+   Numerical Recipes in C - The Art of Scientific Computing.
+   2nd Ed., Cambridge University Press, 1992.
+
+    G.H. Golub, C.H. van Loan
+    Matrix computations. 
+    3rd Ed., The Johns Hopkins University Press, 1996.
+\end{Verbatim}
+\section{Matrix/matrix\_toast}
+\textsl{[ Functions ]}
+
+\label{ch:robo33}
+\label{ch:Matrix_matrix_toast}
+\index{unsorted!matrix\_toast}\index{Functions!matrix\_toast}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    matrix_toast - Toast a matrix with a second one.
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    call matrix_toast(A, B [, BABt])
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    This routine calculates the 'toast product' of two matrices. It is
+    possible to toast with a non-square matrix B if the optional result
+    matrix is provided in the call to toast_transpose and dimensioned
+    appropriately.
+\end{Verbatim}
+\textbf{INPUTS:}\hspace{0.08in}\begin{Verbatim}
+    A     Matrix to be toasted.
+    B     Toaster matrix.
+\end{Verbatim}
+\textbf{OUTPUT:}\hspace{0.08in}\begin{Verbatim}
+    BABt  Toasted matrix.
+\end{Verbatim}
+\textbf{NOTES:}\hspace{0.08in}\begin{Verbatim}
+    If no optional argument is given, calculations are done in place. The
+    result is then returned in A. This is only possible if the toaster is
+    a square matrix.
+\end{Verbatim}
+\textbf{EXAMPLE:}\hspace{0.08in}\textbf{SEE ALSO:}\hspace{0.08in}\section{Matrix/ropp\_state2control}
+\textsl{[ Functions ]}
+
+\label{ch:robo34}
+\label{ch:Matrix_ropp_state2control}
+\index{unsorted!ropp\_state2control}\index{Functions!ropp\_state2control}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    ropp_state2control - Convert a state to a control variable.
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    call ropp_state2control(precon, state, control)
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    This routine performs the variable transform from a control variable to
+    the original variable, given the preconditioner P.
+\end{Verbatim}
+\textbf{INPUTS:}\hspace{0.08in}\begin{Verbatim}
+    precon     preconditioner
+    state      variable in state space
+\end{Verbatim}
+\textbf{OUTPUT:}\hspace{0.08in}\begin{Verbatim}
+    control    variable in control space
+\end{Verbatim}
+\textbf{NOTES:}\hspace{0.08in}\begin{Verbatim}
+    The preconditioner must be set up previously by a call to preconditioner().
+\end{Verbatim}
+\textbf{EXAMPLE:}\hspace{0.08in}\begin{Verbatim}
+    use matrix
+    use ropp_1dvar
+      ...
+    type(matrix_pp) :: B
+    type(matrix_sq) :: precon
+      ...
+    call matrix_sqrt(B, precon)
+      ...
+    call ropp_state2control(precon, state, control)
+      ... [do something in control space] ...
+    call ropp_control2state(precon, control, state)
+\end{Verbatim}
+\textbf{SEE ALSO:}\hspace{0.08in}\begin{Verbatim}
+    matrix_sqrt
+    ropp_controle2state
+\end{Verbatim}
+\textbf{REFERENCES:}\hspace{0.08in}\section{Preconditioning/ropp\_control2state}
+\textsl{[ Functions ]}
+
+\label{ch:robo40}
+\label{ch:Preconditioning_ropp_control2state}
+\index{unsorted!ropp\_control2state}\index{Functions!ropp\_control2state}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    control2state - Convert the control variable back to a state.
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    call ropp_control2state(precon, control, state)
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    This routine performs the variable transform from a control variable to
+    the original variable, given the preconditioner P.
+\end{Verbatim}
+\textbf{INPUTS:}\hspace{0.08in}\begin{Verbatim}
+    precon     preconditioner
+    control    variable in control space
+\end{Verbatim}
+\textbf{OUTPUT:}\hspace{0.08in}\begin{Verbatim}
+    state      variable in state space
+\end{Verbatim}
+\textbf{NOTES:}\hspace{0.08in}\begin{Verbatim}
+    The preconditioner must be set up previously by a call to preconditioner().
+\end{Verbatim}
+\textbf{EXAMPLE:}\hspace{0.08in}\begin{Verbatim}
+    use matrix
+    use ropp_1dvar
+      ...
+    type(matrix_pp) :: B
+    type(matrix_sq) :: precon
+      ...
+    call matrix_sqrt(B, precon)
+      ...
+    call ropp_state2control(precon, state, control)
+      ... [do something in control space] ...
+    call ropp_control2state(precon, control, state)
+\end{Verbatim}
+\textbf{SEE ALSO:}\hspace{0.08in}\begin{Verbatim}
+    matrix_sqrt
+    ropp_state2control
+\end{Verbatim}
+\textbf{REFERENCES:}\hspace{0.08in}\section{Preconditioning/ropp\_control2state\_ad}
+\textsl{[ Functions ]}
+
+\label{ch:robo41}
+\label{ch:Preconditioning_ropp_control2state_ad}
+\index{unsorted!ropp\_control2state\_ad}\index{Functions!ropp\_control2state\_ad}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    ropp_control2state_ad - Adjoint of ropp_control2state.
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    call ropp_control2state_ad(precon, control_ad, state_ad)
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    This routine performs the variable transform from a control variable to
+    the original variable, given the preconditioner P.
+\end{Verbatim}
+\textbf{INPUTS:}\hspace{0.08in}\begin{Verbatim}
+    precon        preconditioner
+    state_ad      adjoint state variable
+\end{Verbatim}
+\textbf{OUTPUT:}\hspace{0.08in}\begin{Verbatim}
+    control_ad    adjoint control variable
+\end{Verbatim}
+\textbf{NOTES:}\hspace{0.08in}\begin{Verbatim}
+    The preconditioner must be set up previously by a call to preconditioner().
+\end{Verbatim}
+\textbf{EXAMPLE:}\hspace{0.08in}\begin{Verbatim}
+    use matrix
+    use ropp_1dvar
+      ...
+    type(matrix_pp) :: B
+    type(matrix_sq) :: precon
+      ...
+    call matrix_sqrt(B, precon)
+      ...
+    call ropp_state2control(precon, state, control)
+      ... [do something in control space] ...
+    call ropp_control2state(precon, control, state)
+\end{Verbatim}
+\textbf{SEE ALSO:}\hspace{0.08in}\begin{Verbatim}
+    matrix_sqrt
+    ropp_state2control
+\end{Verbatim}
+\textbf{REFERENCES:}\hspace{0.08in}\section{Programs/ropp\_1dvar\_add\_bangle\_error}
+\textsl{[ Parameters ]}
+
+\label{ch:robo42}
+\label{ch:Programs_ropp_1dvar_add_bangle_error}
+\index{unsorted!ropp\_1dvar\_add\_bangle\_error}\index{Parameters!ropp\_1dvar\_add\_bangle\_error}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    ropp_1dvar_add_bangle_error - Read a ROPP format netCDF radio
+                                  occultation bending angle
+                                  observation data file and add an error
+                                  description (sigma) to the data. Write the
+                                  resulting file
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    ropp_1dvar_add_bangle_error <obs_file> -Omod <Omodel> -o <out_file> [-h]
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\textbf{ARGUMENTS:}\hspace{0.08in}\begin{Verbatim}
+    <obs_file>       Name of input observation file.
+    -Omod <Omodel>   Observational error model:
+                        '1%': 1% at 0 km, 0.1% from 12 km,min(std(BA))=6urad
+                        '2%': 2% at 0 km, 0.2% from 12 km,min(std(BA))=6urad
+                        '3%': 3% at 0 km, 0.3% from 12 km,min(std(BA))=6urad
+                        'MO : Met Office operational implementation
+                              latitudinally varying
+                        'EC': ECMWF operational implementation
+    -o <out_file>    Name of output file (default for single profile files
+                     to write to input file)
+    -h               Help.
+\end{Verbatim}
+\textbf{NOTES:}\hspace{0.08in}\begin{Verbatim}
+    Default is for the output file to overwrite the input file.
+\end{Verbatim}
+\textbf{SEE ALSO:}\hspace{0.08in}\begin{Verbatim}
+    ropp_1dvar_add_refrac_error.f90
+    ropp_1dvar_add_bgr_error.f90
+\end{Verbatim}
+\section{Programs/ropp\_1dvar\_add\_bgr\_error}
+\textsl{[ Parameters ]}
+
+\label{ch:robo43}
+\label{ch:Programs_ropp_1dvar_add_bgr_error}
+\index{unsorted!ropp\_1dvar\_add\_bgr\_error}\index{Parameters!ropp\_1dvar\_add\_bgr\_error}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    ropp_1dvar_add_bgr_error - Read a ROPP netCDF background file containing
+                               p, T, q and add an error description (sigma
+                               values) to the data. Write resulting file.
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    ropp_1dvar_add_bgr_error <bg_file> -c <cov_file> [-o <out_file>] [-h]
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+       This program adds profile-by-profile background error values to a
+       ROPP format file by reading sigma values from the provided error
+       covariance matrix files (in the errors/ directory).
+       Users should modify this program to utilise background error
+       descriptions from other sources.
+\end{Verbatim}
+\textbf{ARGUMENTS:}\hspace{0.08in}\begin{Verbatim}
+    <bg_file>        Name of input background file.
+    -c <cov_file>    Name of background error covariance matrix file
+    -o <out_file>    Name of output file (default for single profile files
+                     to write to input file)
+    -h               Help.
+\end{Verbatim}
+\textbf{SEE ALSO:}\hspace{0.08in}\begin{Verbatim}
+    ropp_1dvar_add_refrac_error.f90
+    ropp_1dvar_add_bangle_error.f90
+\end{Verbatim}
+\section{Programs/ropp\_1dvar\_add\_refrac\_error}
+\textsl{[ Parameters ]}
+
+\label{ch:robo44}
+\label{ch:Programs_ropp_1dvar_add_refrac_error}
+\index{unsorted!ropp\_1dvar\_add\_refrac\_error}\index{Parameters!ropp\_1dvar\_add\_refrac\_error}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    ropp_1dvar_add_refrac_error - Read a ROPP format netCDF radio
+                                  occultation refractivity
+                                  observation data file and add an error
+                                  description (sigma) to the data. Write the
+                                  resulting file
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    ropp_1dvar_add_refrac_error <obs_file> -Omod <Omodel> -o <out_file> [-b <bg_file>] [-c <corr_file>] [-h]
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\textbf{ARGUMENTS:}\hspace{0.08in}\begin{Verbatim}
+    <obs_file>       Name of input observation file.
+    -Omod <Omodel>   Observational error model:
+                        '1%': 1% at 0 km, 0.1% from 12 km, min(std(N))=0.02
+                        '2%': 2% at 0 km, 0.2% from 12 km, min(std(N))=0.02
+                        '3%': 3% at 0 km, 0.3% from 12 km, min(std(N))=0.02
+                        'TP : ROM SAF operational implementation. As '2%'
+                              model with dynamic tropopause height (default)
+                              calculation from bg data rather than 12 km.
+                        'MO : Met Office operational implementation
+                              latitudinally varying
+                        'SK': according to Steiner-Kirchengast [2005]
+    -o <out_file>    Name of output file
+    -b <bg_file>     Name of background file (only required for 'TP' model).
+    -c <corr_file>   Name of optional output correlation file
+    -h               Help.
+\end{Verbatim}
+\textbf{NOTES:}\hspace{0.08in}\begin{Verbatim}
+    Default is for the output file to overwrite the input file.
+\end{Verbatim}
+\textbf{SEE ALSO:}\hspace{0.08in}\begin{Verbatim}
+    ropp_1dvar_add_bgr_error.f90
+\end{Verbatim}
+\section{Programs/ropp\_1dvar\_bangle}
+\textsl{[ Parameters ]}
+
+\label{ch:robo45}
+\label{ch:Programs_ropp_1dvar_bangle}
+\index{unsorted!ropp\_1dvar\_bangle}\index{Parameters!ropp\_1dvar\_bangle}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    ropp_1dvar_bangle
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+   Perform a 1DVar retrieval of radio occultation data using bending angle
+   observations and a background
+
+   > ropp_1dvar_bangle [-c <cfg_file>] [-y <obs_file>] [-b <bg_file>]
+                       [-o <out_file>] [-no_ranchk] [-comp] [-check_qsat]
+                       [-d] [-h] [-v]
+\end{Verbatim}
+\textbf{OPTIONS:}\hspace{0.08in}\begin{Verbatim}
+   -c <cfg_file>               name of configuation file
+   -y <obs_file>               name of observation file
+   --obs-corr <obs_corr_file>  name of observation covariance file
+   -b <bg_file>                name of background file
+   --bg-corr <bg_corr_file>    name of background covariance file
+   -o <output_file>            name of output file
+   -no-ranchk                  do not range check input or output
+   -comp                       include non ideal gas compressibility
+   -check_qsat                 include check against saturation
+   -d                          output additional diagnostics
+   -h                          help
+   -v                          version information
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+   Perform a 1DVar retrieval of radio occultation data using bending angle
+   observations and a background
+\end{Verbatim}
+\textbf{NOTES:}\hspace{0.08in}\begin{Verbatim}
+    Names of input and output files can be specified in both the configuration
+    file and on the command line; command line arguments will overwrite
+    configuration file settings.
+
+    If the input file is a multifile, both input files must be multifiles, and
+    the output file is also a multifile. It this case, it is assumed that
+    observation and background profiles have been arranged in identical order
+    in their respective input files.
+
+    Already existing output files will be overwritten.
+\end{Verbatim}
+\textbf{SEE ALSO:}\hspace{0.08in}\begin{Verbatim}
+   ropp_1dvar_refrac
+\end{Verbatim}
+\section{Programs/ropp\_1dvar\_refrac}
+\textsl{[ Parameters ]}
+
+\label{ch:robo46}
+\label{ch:Programs_ropp_1dvar_refrac}
+\index{unsorted!ropp\_1dvar\_refrac}\index{Parameters!ropp\_1dvar\_refrac}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+   ropp_1dvar_refrac
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+   Perform a 1DVar retrieval of radio occultation data using refractivity
+   observations and a background
+
+   > ropp_1dvar_refrac [-c <cfg_file>] [-y <obs_file>] [-b <bg_file>]
+                       [-o <out_file>] [-no_ranchk] [-comp] [-check_qsat]
+                       [-d] [-h] [-v]
+\end{Verbatim}
+\textbf{OPTIONS:}\hspace{0.08in}\begin{Verbatim}
+   -c <cfg_file>               name of configuation file
+   -y <obs_file>               name of observation file
+   --obs-corr <obs_corr_file>  name of observation covariance file
+   -b <bg_file>                name of background file
+   --bg-corr <bg_corr_file>    name of background covariance file
+   -o <output_file>            name of output file
+   -no-ranchk                  do not range check input or output
+   -comp                       include non-ideal gas compressibility
+   -check_qsat                 include check against saturation
+   -d                          output additional diagnostics
+   -h                          help
+   -v                          version information
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+   Perform a 1DVar retrieval of radio occultation data using refractivity
+   observations and a background.
+\end{Verbatim}
+\textbf{NOTES:}\hspace{0.08in}\begin{Verbatim}
+   Names of input and output files can be specified in both the configuration
+   file and on the command line; command line arguments will overwrite
+   configuration file settings.
+
+   If the input file is a multifile, both input files must be multifiles, and
+   the output file is also a multifile. It this case, it is assumed that
+   observation and background profiles have been arranged in identical order
+   in their respective input files.
+
+   Already existing output files will be overwritten.
+\end{Verbatim}
+\textbf{SEE ALSO:}\hspace{0.08in}\begin{Verbatim}
+   ropp_1dvar_bangle
+\end{Verbatim}
+\section{QC/ropp\_qc\_bgqc}
+\textsl{[ Subroutines ]}
+
+\label{ch:robo47}
+\label{ch:QC_ropp_qc_bgqc}
+\index{unsorted!ropp\_qc\_bgqc}\index{Subroutines!ropp\_qc\_bgqc}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    ropp_qc_bgqc - Background quality control.
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    call ropp_qc_bgqc(obs, config, diag)
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    This subroutine performs a background quality control on bending
+    angle or refractivity observation data.
+\end{Verbatim}
+\textbf{INPUTS:}\hspace{0.08in}\begin{Verbatim}
+    obs         Observation vector
+    config      Configuration options
+    diag        Diagnostic output structure
+\end{Verbatim}
+\textbf{OUTPUT:}\hspace{0.08in}\begin{Verbatim}
+    diag        Diagnostic structure with updated variables
+\end{Verbatim}
+\textbf{NOTES:}\hspace{0.08in}\begin{Verbatim}
+    ropp_qc_bgqc requires that some fields in the diag structure have
+    been properly filled, e.g. by a previous call to ropp_qc_OmB().
+\end{Verbatim}
+\textbf{EXAMPLE:}\hspace{0.08in}\textbf{SEE ALSO:}\hspace{0.08in}\begin{Verbatim}
+    ropp_qc_OmB
+    ropp_qc_pge
+\end{Verbatim}
+\textbf{REFERENCES:}\hspace{0.08in}\section{QC/ropp\_qc\_cutoff}
+\textsl{[ Subroutines ]}
+
+\label{ch:robo48}
+\label{ch:QC_ropp_qc_cutoff}
+\index{unsorted!ropp\_qc\_cutoff}\index{Subroutines!ropp\_qc\_cutoff}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    ropp_qc_cutoff - Down-weight data outside required observation
+                     height range [min_1dvar_height to max_1dvar_height]
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    call ropp_qc_cutoff(obs, config)
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    This subroutine down-weights all observations outside the height range
+    interval specified by configuration parameters min_1dvar_height and
+    max_1dvar_height
+\end{Verbatim}
+\textbf{INPUTS:}\hspace{0.08in}\begin{Verbatim}
+    obs         Observation vector
+    config      Configuration options
+\end{Verbatim}
+\textbf{OUTPUT:}\hspace{0.08in}\begin{Verbatim}
+    obs         Updated observation vector
+\end{Verbatim}
+\textbf{NOTES:}\hspace{0.08in}\textbf{EXAMPLE:}\hspace{0.08in}\textbf{SEE ALSO:}\hspace{0.08in}\textbf{REFERENCES:}\hspace{0.08in}\section{QC/ropp\_qc\_genqc}
+\textsl{[ Subroutines ]}
+
+\label{ch:robo49}
+\label{ch:QC_ropp_qc_genqc}
+\index{unsorted!ropp\_qc\_genqc}\index{Subroutines!ropp\_qc\_genqc}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    ropp_qc_genqc - Generic quality control checks.
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    call ropp_qc_genqc(obs, bg, config, diag)
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    This subroutine performs generic quality control checks, e.g. for the 
+    proper co-location of observation and background data in both space and 
+    time, for fullfilling monotonicity constraints, and also basic unit checks.
+\end{Verbatim}
+\textbf{INPUTS:}\hspace{0.08in}\begin{Verbatim}
+    obs         Observation vector
+    bg          Background vector
+    config      Configuration options
+\end{Verbatim}
+\textbf{OUTPUT:}\hspace{0.08in}\begin{Verbatim}
+    diag        Diagnostics structure with updated status
+\end{Verbatim}
+\textbf{NOTES:}\hspace{0.08in}\textbf{EXAMPLE:}\hspace{0.08in}\textbf{SEE ALSO:}\hspace{0.08in}\textbf{REFERENCES:}\hspace{0.08in}\section{QC/ropp\_qc\_OmB}
+\textsl{[ Subroutines ]}
+
+\label{ch:robo50}
+\label{ch:QC_ropp_qc_OmB}
+\index{unsorted!ropp\_qc\_OmB}\index{Subroutines!ropp\_qc\_OmB}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    ropp_qc_OmB - Calculate O minus B.
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    call ropp_qc_OmB(obs, bg, diag)
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    This subroutine calculates the O minus B (i.e., the difference between
+    the actual observations and the background forward modelled into
+    observation space) along with the expected uncertainty of this difference.
+    The results are placed in the diag structure.
+\end{Verbatim}
+\textbf{INPUTS:}\hspace{0.08in}\begin{Verbatim}
+    obs      Observation vector
+    bg       Background vector
+\end{Verbatim}
+\textbf{OUTPUT:}\hspace{0.08in}\begin{Verbatim}
+    diag     Diagnostic structure updated with O - B field
+\end{Verbatim}
+\section{QC/ropp\_qc\_pge}
+\textsl{[ Subroutines ]}
+
+\label{ch:robo51}
+\label{ch:QC_ropp_qc_pge}
+\index{unsorted!ropp\_qc\_pge}\index{Subroutines!ropp\_qc\_pge}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    ropp_qc_pge - Probability of gross error.
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    call rop_qc_pge(obs, config, diag)
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    This subroutine calculates the Probability of Gross Error for bending
+    angle or refractivity observation data, and optionally uses the result
+    for quality control.
+\end{Verbatim}
+\textbf{INPUTS:}\hspace{0.08in}\begin{Verbatim}
+    obs          Observation vector
+    config       Configuration options
+    diag         Diagnostic structure
+\end{Verbatim}
+\textbf{OUTPUT:}\hspace{0.08in}\begin{Verbatim}
+    diag         Diagnostic structure with updated PGE variable
+\end{Verbatim}
+\textbf{NOTES:}\hspace{0.08in}\begin{Verbatim}
+    ropp_qc_pge requires that some fields in the diag structure have
+    been properly filled, e.g. by a previous call to ropp_qc_OmB().
+\end{Verbatim}
+\textbf{SEE ALSO:}\hspace{0.08in}\begin{Verbatim}
+    ropp_qc_OmB
+    ropp_qc_bgqc
+\end{Verbatim}

@@ -1,0 +1,33 @@
+#!/bin/sh
+# $Id: netcdf4_configure_pgf7_linux 3007 2011-09-05 15:45:37Z frdo $
+#
+# netcdf-4 (v4.1.x) shell script for a local configure
+# USERS SHOULD MODIFY THIS SCRIPT AS REQUIRED FOR LOCAL INSTALL
+#
+# Compiler: pgf7 / Linux
+#
+PREFIX=${1-$ROPP_ROOT/pgf7}
+echo
+echo "Platform:"
+uname -a
+echo
+echo "Fortran compiler:"
+pgf7 --version
+echo
+echo "C compiler:"
+gcc --version
+echo
+echo "Installation target:"
+echo "$PREFIX"
+echo
+#
+CXX="" \
+CC=gcc       CFLAGS="-O2 -w -I$PREFIX/include"                 \
+FC=pgf7     FCFLAGS="-O2 -w -I$PREFIX/include"                 \
+F77=pgf7     FFLAGS="-O2 -w -I$PREFIX/include"                 \
+              FLIBS="" LDFLAGS="-L$PREFIX/lib -L$PREFIX/lib64" \
+  ./configure --prefix=$PREFIX   --disable-option-checking \
+              --disable-cxx                                \
+              --disable-v2       --disable-dap             \
+              --disable-shared   --disable-largefile       \
+              --enable-separate-fortran

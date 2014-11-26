@@ -1,0 +1,61 @@
+#!/bin/bash
+#
+# $Id: build_ropp 3086 2011-10-14 08:54:50Z idculv $
+#
+#---------------------------------------------------------------------
+# (Re)build all ROPP modules using a particular compiler
+# Usage: > build_ropp <compiler>
+# where <compiler> is the compiler ID (ifort, nag, g95...)
+# and module is none, one or more (optional) supported ROPP
+# modules (default: all)
+#---------------------------------------------------------------------
+#
+if [[ -z $1 ]] || [[ $1 == "-h" ]] || \
+   [[ $1 == "--help" ]]; then
+  echo
+  echo "Purpose:  build ROPP modules in the correct order"
+  echo
+  echo "Usage:    build_ropp <compiler> [module...]"
+  echo
+  echo "Required: F95 <compiler> tag, e.g. ifort or gfortran"
+  echo
+  echo "Options:  list of none, one or more ROPP modules"
+  echo
+  echo "Default:  ropp_utils ropp_io ropp_pp ropp_fm ropp_1dvar"
+  echo
+  echo "Installs to ROPP_ROOT/<compiler>; saves a a log file in"
+  echo "ROPP_ROOT/<compiler>/build_ropp.log"
+  echo
+  echo "NB: dependency packages must be built before any ROPP modules,"
+  echo "for instance with build_deps"
+  echo
+  exit 1
+fi
+compiler=$1
+#
+packlist=""
+while [[ -n $2 ]]; do packlist="$packlist $2"; shift; done
+if [[ -z $packlist ]]; then 
+  packlist="ropp_utils ropp_io ropp_pp ropp_fm ropp_1dvar"; 
+fi
+packlist=$(echo $packlist | tr [:upper:] [:lower:])
+#
+prefix=$ROPP_ROOT/$compiler
+mkdir -p $prefix
+log=$prefix/$(basename $0).log
+rm -f $log > /dev/null 2>&1
+#
+echo " " | tee $log
+echo "-------------------------------------------------------------" | tee -a $log
+echo "Building ROPP modules with $compiler on $(date)"               | tee -a $log
+for pack in $packlist; do
+  PACK=$(echo $pack | tr [:lower:] [:upper:])
+  echo "---$PACK------------------------------------------------"    | tee -a $log
+  ./buildpack $pack $compiler 2>&1 5>&1 6>&1                         | tee -a $log
+  if [[ $? -ne 0 ]]; then break; fi
+done
+echo "-------------------------------------------------------------" | tee -a $log
+echo "See $log for build status"
+#
+exit
+

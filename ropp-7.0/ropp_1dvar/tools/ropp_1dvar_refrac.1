@@ -1,0 +1,122 @@
+./" $Id: <tool>.1 3551 2013-02-25 09:51:28Z idculv $
+./"
+.TH ROPP_1DVAR_REFRAC 1 31-Jul-2013 ROPP-7 ROPP-7
+./"
+.SH NAME
+ropp_1dvar_refrac
+./"
+.SH SYNOPSIS
+Perform a 1D-Var retrieval of radio occultation data using refractivity observations and a background profile.
+.PP
+./"
+.B ropp_1dvar_refrac
+[-c <cfg_file>]  [-y <obs_file>] [-b <bg_file>]
+                 [-o <out_file>] [-comp] [-check_qsat]
+                 [-d] [-h] [-v]
+./"
+.SH DESCRIPTION
+.I ropp_1dvar_refrac
+Perform a 1D-Var retrieval of radio occultation data using refractivity
+observations and a background profile.
+./"
+.SH FILES
+.SS Input
+All input files must be in the ROPP netCDF format
+.BR (Reference\ 1 ).
+The observation file must contain one or more observed refractivity profiles,
+the background file must contain the same number of model background profiles.
+These should be co-located with the observations and, in the case of multifiles,
+the background profiles must be in the same order as the corresponding
+observation profiles. The error correlation files for the observation and
+background must also be specified
+.BR (Reference\ 2 ). 
+A configuration file may also be specified to override program defaults at run
+time to give more control over the minimisation and QC.
+.SS Output
+The 1D-Var solution values are saved in a ROPP netCDF file specified by the [-o]
+option. This is a multifile if multifiles are used as the inputs. The solution
+model variables, as well as forward-modelled refractivities from the solution
+state are ouput, as well as the errors of these quantities.
+./"
+.SH OPTIONS
+Option switches are not case\-sensitive and may be placed before or after the
+<keyword|argument(s)> and in any order. All arguments to switches are mandatory
+when the switch is used.
+.PP
+.B -c
+\- config file
+.IP
+The configuration file allows additional options to be specified, such as QC,
+preconditioning and minimisation options.
+.PP
+.B -y
+\- observation data file (required)
+.IP
+Specifies the input ROPP file containing observed refractivity data.
+.PP
+.B --obs-corr
+\- observation error correlation file
+.IP
+Specifies the refractivity error correlation file in the required format.
+.PP
+.B -b
+\- background data file (required)
+.IP
+Specifies the input ROPP file containing model background data.
+.PP
+.B --bg-corr
+\- background error correlation file
+.IP
+Specifies the model background error correlation file.
+.PP
+.B -o
+\- output file name (required)
+.IP
+Specifies the model background error correlation file.
+.PP
+.B -comp
+\- Use compressibility option
+.IP
+Use compressibility factors in the refractivity calculation in the forward model
+.PP
+.B -check_qsat
+\- Check against saturation
+.IP
+Check against humidity saturation
+.PP
+.B -h
+\- show help
+.IP
+Requests brief help on the command to stdout.
+.PP
+.B -v
+\- version
+.IP
+Requests the program version ID to be written to stdout.
+./"
+.SH EXAMPLES
+.B 1.
+Perform a 1D-Var retrieval using refractivity values in the input file and
+including compressibility factors in the refractivity calculation:
+.PP
+ > 
+.B ropp_1dvar_refrac
+-y ref_obs.nc --obs-corr ba_corr.nc -b background.nc --bg-corr bg_corr.nc -comp -o solution.nc
+./"
+.SH REFERENCES
+.PP
+.B 1.
+ROPP User Guide - Part I: Input/Output module
+.br
+SAF/ROM/METO/UG/ROPP/002
+.PP
+.B 2.
+ROPP User Guide - Part II: Forward model and 1D-Var modules
+.br
+SAF/ROM/METO/UG/ROPP/003
+./"
+.SH SEE ALSO
+.BR ropp_1dvar_bangle (1)
+./"
+.SH AUTHORS
+ROPP Development Team, Met Office <romsaf@metoffice.gov.uk>

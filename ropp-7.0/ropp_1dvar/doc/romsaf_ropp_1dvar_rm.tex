@@ -1,0 +1,126 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                                                                              %
+% ROPP 1dvar Manual                                                            %
+%                                                                              %
+% Met Office, Exeter                  <romsaf@metoffice.gov.uk>                %
+%                                                                              %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass[idxtotoc]{romsaf}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                                                                              %
+% Packages                                                                     %
+%                                                                              %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{scrfootnote}
+\usepackage[english]{babel}
+\usepackage{color}
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{colortbl}
+\usepackage{booktabs}
+\usepackage{fancyvrb}
+\usepackage[centertags]{amsmath}
+\usepackage{amssymb}
+\usepackage{mathptmx}
+\usepackage{chapterbib}
+\usepackage{natbib}
+\usepackage{cmtools}
+\usepackage{setspace}
+\usepackage{relsize}
+\usepackage{makeidx}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                                                                              %
+% Title, document characteristics                                              %
+%                                                                              %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\DocTitle{The Radio Occultation Processing Package (ROPP)\\
+          ROPP 1D-Var Reference Manual}
+\DocShortTitle{ROPP 1D-Var Reference manual}
+\DocReference{SAF/ROM/METO/RM/ROPP/004}
+\DocVersion{Version 7.0}
+\DocDate{31 July 2013}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                                                                              %
+% Signature Table and Document Change Record                                   %
+%                                                                              %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\PreparedBy{I. Culverwell}{ROM SAF Project Team}
+\ReviewedBy{D. Offiler}{ROM SAF Project Team}
+\ApprovedBy{K.--B. Lauritsen}{ROM SAF Project Manager}
+
+\DocChange{Version 0.9}{30 Aug 2006}{DO}{First Beta release}
+\DocChange{Version 1.0}{01 Mar 2007}{DO}{First Full release}
+\DocChange{Version 1.1}{01 Mar 2008}{DO}{Update to first Full release}
+\DocChange{Version 1.2}{01 Jul 2008}{HL}{Update to first Full release}
+\DocChange{Version 2.0}{01 Sep 2008}{HL}{Second Full release}
+\DocChange{Version 3.0}{01 Jun 2009}{HL}{Third Full release}
+\DocChange{Version 4.0}{01 Nov 2009}{HL}{Fourth Full release}
+\DocChange{Version 4.1}{01 Jun 2010}{HL}{Update to fourth Full release}
+\DocChange{Version 5.0}{23 Mar 2011}{IC}{Fifth Full release}
+\DocChange{Version 6.0}{31 Oct 2011}{IC}{Sixth Full release}
+\DocChange{Version 6.1}{31 Jan 2013}{IC}{Update to sixth Full release}
+\DocChange{Version 7.0}{31 Jul 2013}{IC}{Seventh Full release}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                                                                              %
+% Bibliography                                                                 %
+%                                                                              %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\renewcommand{\bibsection}{\section{\refname}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                                                                              %
+% The 'real' document begins here...                                           %
+%                                                                              %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\makeindex
+
+\begin{document}
+
+% Title
+% -----
+
+\maketitle
+
+% Table of contents
+% -----------------
+\onehalfspace
+\pagenumbering{roman}
+\tableofcontents
+
+\cleardoublepage
+
+% Include individual chapters
+% ---------------------------
+%
+% Note: \input will insert contents of the specified files as they
+%       are, while \include will also issue a \cleardoublepage after
+%       each file (to ensure that chapters start on odd page
+%       numbers).
+
+\pagenumbering{arabic}
+
+\onehalfspace
+\input{rm_intro}
+
+\chapter{Reference manual}
+\fvset{fontsize=\relsize{-1}}
+\input{rm_1dvar}
+
+\onehalfspace
+\input{rm_copyright}
+
+\printindex
+
+\end{document}

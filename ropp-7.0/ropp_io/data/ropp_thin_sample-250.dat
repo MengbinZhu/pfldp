@@ -1,0 +1,4 @@
+Title=Thinning by sampling to no more than 250 levels
+Method=Sample
+Nlevels=250
+Hlevels=0

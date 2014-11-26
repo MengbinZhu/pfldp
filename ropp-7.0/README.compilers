@@ -1,0 +1,56 @@
+                   A note on Compiler options
+                   ==========================
+
+The usual convention for Fortran compilers is to modify the name the name of
+internal objects slightly from the name in the source code; probably the most
+common form of this name mangling is that an underscore is appended to the 
+name of a Fortran object. As an example, a function or subroutine foo will get 
+the internal name 'foo_'. Plain C does not do any name mangling; a C function 
+bar will be visible as C object bar in a library. This convention ensures that
+C and Fortran name spaces can be kept more or less seperate; on the other 
+hand, mixed language programming is still feasible by following the appropriate 
+naming conventiones when calling functions in one language from a function in 
+an other language (at least as long as advanced Fortran 90 features are 
+excluded). The cfortran.h header file uses this mechanism to construct wrapper
+between C and Fortran code.
+
+However, a small number of Fortran compilers do not follow this convention,
+mostnotably, HPUX and IBM's XL compilers (e.g on AIX), which by default, do no
+name mangling on Fortran routines. This becomes a problem if there are
+duplicate names in the Fortran and C name spaces. For example, a single 
+library which provides the same function for both C and Fortran requires some 
+compiler mechanism to keep the two language versions apart. Also note that if
+one library is compiled with underscores, and another without, a program 
+calling routines from both libraries can not be linked against the two 
+libraries successfully; there will always be unresolved externals. Thus, the 
+same convention must be used for all libraries of a given project.
+
+For the HPUX and IBM XL compilers, seperate namespaces can be enforced by
+setting (when running configure)
+
+   CPPFLAGS=-Dextname
+
+for the C compiler, and
+
+   FFLAGS=+ppu FCFLAGS=+ppu
+
+and
+
+   FFLAGS=-qextname FCFLAGS=-qextname
+
+for the native HPUX and XL compilers, respectively.
+
+Some research has shown that the udunits library requires seperate C and Fortran
+name spaces, and therefore requires the extname settings on both platforms. The
+above settings are indeed enforced by the build system of udunits. Thus, all
+other libraries must be compiled with these options as well.
+
+We can (and do) enforce that for all ROPP packages. However, all external
+libraries like netCDF and BUFR also must be compiled with this convention.
+
+
+ROPP Development Team
+Met Office
+
+Version 7.0
+31 July 2013

@@ -1,0 +1,329 @@
+
+Testing netCDF Fortran 90 write interfaces...
+
+ *** Netcdf: Success ***
+ *** Netcdf: Success ***
+ *** Netcdf: Success ***
+ *** Netcdf: Success ***
+ *** Netcdf: Success ***
+ *** Netcdf: Success ***
+ *** Netcdf: Success ***
+ *** Netcdf: Success ***
+ *** Netcdf: Success ***
+ *** Netcdf: Success ***
+ *** Netcdf: Success ***
+ *** Netcdf: Success ***
+ *** Netcdf: Success ***
+ *** Netcdf: Success ***
+ *** Netcdf: Success ***
+ *** Netcdf: Success ***
+ *** Netcdf: Success ***
+ *** Netcdf: Success ***
+ *** Netcdf: Success ***
+ *** Netcdf: Success ***
+ *** Netcdf: Success ***
+ *** Netcdf: Success ***
+ *** Netcdf: Success ***
+ *** Netcdf: Success ***
+ *** Netcdf: Success ***
+ *** Netcdf: Success ***
+ *** Netcdf: Success ***
+ *** Netcdf: Success ***
+ *** Netcdf: Success ***
+ *** Netcdf: Success ***
+ *** Netcdf: Success ***
+ *** Netcdf: Success ***
+ *** Netcdf: Success ***
+ *** Netcdf: Success ***
+
+
+Testing ROPP conversion tool...
+
+
+Test 1: Range check tests - missing & invalid data --> missing data
+-----------------------------------------------------------------------
+
+ --------------------------------------------------------
+                       ROPP Test Tool
+                     12:08UT 21-Apr-2011
+ --------------------------------------------------------
+
+INFO (from test2ropp):  Profile    1 : OC_99999999999999_UNKN_U999_UNKN  (MISSING)
+INFO (from test2ropp):  Writing ropp_test_1m.nc
+
+ --------------------------------------------------------
+                      ROPP-to-ROPP Tool
+                     12:08UT 21-Apr-2011
+ --------------------------------------------------------
+
+INFO (from ropp2ropp):  Reading ropp_test_1m.nc
+INFO (from ropp2ropp):  Profile    1 : OC_99999999999999_UNKN_U999_UNKN
+INFO (from ropp2ropp):  Writing ropp_test_1m.nc
+
+ --------------------------------------------------------
+                       ROPP Test Tool
+                     12:08UT 21-Apr-2011
+ --------------------------------------------------------
+
+INFO (from test2ropp):  Profile    1 : OC_21429999999999_UNKN_U999_UNKN  (INVALID)
+INFO (from test2ropp):  Writing ropp_test_1i.nc
+
+ --------------------------------------------------------
+                      ROPP-to-ROPP Tool
+                     12:08UT 21-Apr-2011
+ --------------------------------------------------------
+
+INFO (from ropp2ropp):  Reading ropp_test_1i.nc
+INFO (from ropp2ropp):  Profile    1 : OC_99999999999999_UNKN_U999_UNKN
+INFO (from ropp2ropp):  Writing ropp_test_1i.nc
+
+To check results, compare ropp_test_1m.cdl and ropp_test_1i.cdl
+(Ignore differences in file names and processing_date)
+
+
+****************************************
+*** Test 1. Range INVALID test: PASS ***
+****************************************
+
+
+Test 2: Range check tests - valid data --> valid data
+-----------------------------------------------------------------------
+
+ --------------------------------------------------------
+                       ROPP Test Tool
+                     12:08UT 21-Apr-2011
+ --------------------------------------------------------
+
+INFO (from test2ropp):  Profile    1 : BG_20110411125002_CO05_E024_UCAR  (VALID)
+INFO (from test2ropp):  Writing ropp_test_2v.nc
+
+ --------------------------------------------------------
+                      ROPP-to-ROPP Tool
+                     12:08UT 21-Apr-2011
+ --------------------------------------------------------
+
+INFO (from ropp2ropp):  Reading ropp_test_2v.nc
+INFO (from ropp2ropp):  Profile    1 : BG_20110411125002_CO05_E024_UCAR
+INFO (from ropp2ropp):  Writing ropp_test_2o.nc
+
+To check results, compare ropp_test_2v.cdl and ropp_test_2o.cdl
+(Ignore differences in file names and processing_date)
+
+
+**************************************
+*** Test 2. Range VALID test: PASS ***
+**************************************
+
+
+Test 4: Converting ROPP (netCDF) -> ROPP (netCDF)
+-------------------------------------------------
+
+ --------------------------------------------------------
+                      ROPP-to-ROPP Tool
+                     12:08UT 21-Apr-2011
+ --------------------------------------------------------
+
+INFO (from ropp2ropp):  Reading ../data/ropp_test.nc
+INFO (from ropp2ropp):  Profile    1 : OC_20101209140409_META_G027_DMI_
+INFO (from ropp2ropp):  Writing ropp_test_4o.nc
+
+To check results, compare ropp_test_4n.cdl and ropp_test_4o.cdl
+(Ignore differences in file names & thin_method)
+
+
+*******************************************
+*** Test 4. ROPP netCDF -> netCDF: PASS ***
+*******************************************
+
+
+Test 5: Converting ROPP singlefiles (netCDF) -> ROPP multifile (netCDF)
+-----------------------------------------------------------------------
+
+ --------------------------------------------------------
+                      ROPP-to-ROPP Tool
+                     12:08UT 21-Apr-2011
+ --------------------------------------------------------
+
+INFO (from ropp2ropp):  Reading ../data/ropp_test.nc
+INFO (from ropp2ropp):  Profile    1 : OC_20101209140409_META_G027_DMI_
+INFO (from ropp2ropp):  Writing ropp_test_5o.nc
+INFO (from ropp2ropp):  Reading ../data/ropp_test.nc
+INFO (from ropp2ropp):  Profile    1 : OC_20101209140409_META_G027_DMI_
+INFO (from ropp2ropp):  Writing ropp_test_5o.nc
+INFO (from ropp2ropp):       2 profiles processed
+
+To check results, compare ropp_test_5m.cdl and ropp_test_5o.cdl
+(Ignore difference in file names & thin_method))
+
+
+**************************************************
+*** Test 5. ROPP singlefile -> multifile: PASS ***
+**************************************************
+
+
+Test 6: Converting ROPP multifile (netCDF) -> ROPP singlefiles (netCDF)
+-----------------------------------------------------------------------
+
+ --------------------------------------------------------
+                      ROPP-to-ROPP Tool
+                     12:08UT 21-Apr-2011
+ --------------------------------------------------------
+
+INFO (from ropp2ropp):  Reading ropp_test_5o.nc
+INFO (from ropp2ropp):  Profile    1 : OC_20101209140409_META_G027_DMI_
+INFO (from ropp2ropp):  Writing ropp_test_6o.nc
+INFO (from ropp2ropp):  Profile    2 : OC_20101209140409_META_G027_DMI_
+INFO (from ropp2ropp):  Writing oc_20101209140409_meta_g027_dmi_.nc
+INFO (from ropp2ropp):       2 profiles processed
+
+To check results, compare ropp_test_6m.cdl and ropp_test_6o.cdl
+(Ignore differences in file names & thin_method)
+
+
+**************************************************
+*** Test 6. ROPP multifile -> singlefile: PASS ***
+**************************************************
+
+
+Test 7: Converting ROPP 2D (netCDF) -> ROPP 2D (netCDF)
+-------------------------------------------------
+
+ --------------------------------------------------------
+                      ROPP-to-ROPP Tool
+                     12:08UT 21-Apr-2011
+ --------------------------------------------------------
+
+INFO (from ropp2ropp):  Reading ../data/ropp_test2d.nc
+INFO (from ropp2ropp):  Profile    1 : UNKNOWN
+INFO (from ropp2ropp):  Writing ropp_test_7o.nc
+
+To check results, compare ropp_test_7n.cdl and ropp_test_7o.cdl
+(Ignore differences in file names & thin_method)
+
+
+*************************************************
+*** Test 7. ROPP 2d netCDF -> 2d netCDF: PASS ***
+*************************************************
+
+
+
+
+Testing BUFR encode/decode [MetDB library]...
+
+
+1. Encoding ROPP netCDF -> BUFR
+===============================
+
+ --------------------------------------------------------
+                      ROPP BUFR Encoder
+                     12:08UT 21-Apr-2011
+ --------------------------------------------------------
+
+INFO (from ropp2bufr):  Reading  ROPP data from ../data/ropp_test.nc
+INFO (from ropp2bufr):  Encoding profile    1 : OC_20101209140409_META_G027_DMI_
+INFO (from ropp2bufr):  Total of  17968 bytes written to bufr_test.bfr
+INFO (from ropp2bufr):  Generated 1 BUFR message to bufr_test.bfr
+
+
+2. Comparing BUFR with reference file
+=====================================
+
+ OK -  found no differences in the test BUFR files
+
+3. Decoding BUFR --> ROPP netCDF
+================================
+
+
+ --------------------------------------------------------
+                      ROPP BUFR Decoder
+                     12:08UT 21-Apr-2011
+ --------------------------------------------------------
+
+INFO (from bufr2ropp):  Reading bufr_test.bfr
+INFO (from bufr2ropp):  Decoded profile    1 : OC_20101209140409_META_G027_DMI_
+INFO (from bufr2ropp):  Writing bufr_test.nc
+INFO (from bufr2ropp):       1 new profile saved
+
+4. Comparing CDL dump with reference file
+=========================================
+
+ncdump ../data/ropp_testb.nc > ropp_test.cdl
+ncdump bufr_test.nc > bufr_test.cdl
+
+To check results, compare ropp_test.cdl and bufr_test.cdl
+(Ignore the difference in file names and processing_date value)
+
+***********************
+*** BUFR test: PASS ***
+***********************
+
+
+
+Testing GFZ-to-netCDF tool...
+
+
+1. Converting GFZ file pair -> ROPP netCDF
+-----------------------------------------------------
+
+
+ --------------------------------------------------------
+                    GFZ to ROPP Converter
+                     12:08UT 21-Apr-2011
+ --------------------------------------------------------
+
+INFO (from gfz2ropp):  Reading file ../data/gfz_test.dat
+INFO (from gfz2ropp):  Reading file ../data/gfz_test.dsc
+INFO (from gfz2ropp):  Profile    1: OC_20090828011008_GRAA_G002_GFZ_
+INFO (from gfz2ropp):  Writing gfz_test.nc
+
+
+Generating CDL dumps...
+ncdump ../data/gfz_test.nc > ../data/gfz_test.cdl
+ncdump gfz_test.nc > gfz_test.cdl
+
+2. Comparing CDL dump against reference file
+-----------------------------------------------------
+
+To check results, compare ../data/gfz_test.cdl and gfz_test.cdl
+(Ignore the difference in file names and processing_date value)
+
+
+***************************
+*** gfz2ropp test: PASS ***
+***************************
+
+
+
+Testing UCAR-to-ROPP netCDF tool...
+
+
+1. Converting UCAR netCDF -> ROPP netCDF
+-----------------------------------------------------
+
+
+ --------------------------------------------------------
+                 UCAR to ROPP netCDF Converter
+                     12:08UT 21-Apr-2011
+ --------------------------------------------------------
+
+INFO (from ucar2ropp):  Reading file ../data/ucar_test.nc
+INFO (from ucar2ropp):  Profile    1 : OC_20090827202208_C006_G029_UCAR
+INFO (from ucar2ropp):  Writing ucar_testr.nc
+
+
+Generating CDL dumps...
+ncdump ../data/ucar_testr.nc > ../data/ucar_testr.cdl
+ncdump ucar_testr.nc > ucar_testr.cdl
+
+2. Comparing CDL dump against reference file
+-----------------------------------------------------
+
+To check results, compare ../data/ucar_testr.cdl and ucar_testr.cdl
+(Ignore the difference in file names and processing_date value)
+
+
+****************************
+*** ucar2ropp test: PASS ***
+****************************
+
+

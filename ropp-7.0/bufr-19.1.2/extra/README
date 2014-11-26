@@ -1,0 +1,289 @@
+$Id: README 23 2011-06-21 12:17:04Z frdo $
+                ===============================
+
+                           Met Office
+
+                  BUFR Encode/Decode Software
+
+                ===============================
+
+      Crown Copyright 2011, The Met. Office. All rights reserved.
+
+   "The contents of these files are Crown Copyright. Data and other
+    proprietary information contained therein is supplied for
+    bonafide research purposes. Commercial or business use is not
+    permitted without the written authority of the Met Office".
+
+----------------------------------------------------------------------------
+
+This directory contains routines for generic BUFR encoding and decoding, plus
+supporting files, additional to those in the basic MetDB kernel package.
+
+
+1) File list
+   ---------
+
+README          - this file
+
+CHANGELOG       - list of changes to files in this directory
+
+Makefile        - GNU make file to build the code in this directory and
+                  install/uninstall the complete package.
+
+Makefile_BUFRtest - GNU make file to build the MetDB encoder/decoder test
+                  programs. Copied to bufr/metdb and invoked there by
+                  buildbufr.
+
+decbufr.f90     - application to decode and output generic BUFR messages.
+                  Useful to check what's in an unknown BUFR message or in
+                  confirming correct encoding of new data types without having
+                  to develop a data-specific decoder.
+
+decbufr.1       - Unix/Linux 'man' page (help file) for decbufr. The user
+                  should place this file where the 'man' utility can find it;
+                  usually via the MANPATH environment variable. This file is
+                  automatically copied to directory <prefix>/man/man1 by build
+                  script buildbufr.
+
+bufrutils.f90   - provides some library-independent BUFR utility routines,
+                  plus support for porting decoding applications currently
+                  using the MetDB library to interface with the ECMWF BUFR
+                  library.
+
+gtshdrs.f90     - routines to insert WMO/GTS routing header/trailer wrapper
+                  around a 'naked' BUFR message. Used only for application
+                  encoders; not needed for decoding.
+
+sec1tables.f90  - code used by decbufr and testtables to support interpretation
+                  of data in Section 1 of a BUFR message:
+                  + Data Category and associated Sub-Categories. Reads file
+                    DATACATEGORY.
+                  + Originating/Generating Centres and their associated
+                    Sub-Centres and ICAO Location Indicator codes. Reads file
+                    ORIGCENTRE.
+                  + BUFR Master Table versions. Reads file MASTERTABLE.
+
+nag_interfaces.f90 - wrappers to provide a transparancy to system interface
+                  routines for the NAGWare compiler (only). Used by decbufr.
+                  Included automatically by buildbufr when using the NAG
+                  'f95' or 'nagfor' compilers. Not required (and should not
+                  be used) for other vendor compilers.
+
+TABLEB          - local BUFR Table B. If present and of non-zero size,
+                  replaces the one copied from bufr/metdb/ in BUFR_LIBRARY
+
+TABLED          - local BUFR Table D. If present and of non-zero size,
+                  replaces the one copied from bufr/metdb/ in BUFR_LIBRARY
+
+CODEFIG         - local BUFR code/flag tables. If present and of non-zero
+                  size, replaces the one copied from in bufr/metdb/ in
+                  BUFR_LIBRARY
+
+DATACATEGORY    - Data Categories (BUFR Table A) and associated sub-categories
+                  (Common Code Table C-13). Copied to directory BUFR_LIBRARY
+                  by build script buildbufr.
+
+ORIGCENTRE      - Originating/Generating Centres (Common Code Table C-1)
+                  with associated ICAO codes and Sub-Centres (Common Code
+                  Table C-12). Copied to directory BUFR_LIBRARY by build script
+                  buildbufr.
+
+MASTERTABLE     - Master Table 0 (standard BUFR tables for meteorology)
+                  versions (implementation dates). Copied to directory
+                  BUFR_LIBRARY by build script buildbufr.
+
+testtables.f90  - utility program to test BUFR tables and to interactively
+                  interpret code & flag tables and descriptors.
+
+testtables.dat  - example input to testtables. As supplied, specifies:
+                  + a version look-up from MASTERTABLES
+                  + a code look-up from ORIGCENTRE
+                  + a code look-up from DATACATEGORY
+                  + a sequence decriptor from TABLED
+                  + descriptors for non-unit, numeric (integer),
+                    unit-unscaled (integer) and unit-scaled (floating-
+                    point) values from TABLEB
+                  + descriptors for code and flag table values,
+                    and associated entries within those tables
+                  Directed to stdin by buildbufr.
+
+
+2. Basic testing
+   -------------
+
+Once the package kernel library has been successfully built, the
+basic encode/decode operations can be confirmed by the test programs
+supplied with the MetDB kernel routines. Their compilation and execution
+is automated in the buildbufr script file by using the -t switch.
+
+
+3. Portability
+   -----------
+
+Almost all modern Fortran compilers support the industry-standard (if non-ISO)
+system interface routines GETENV(), GETARG(), IARGC() and EXIT() employed by
+the application programs in extra/. A notable exception is the NAGWare
+(NAG 'f95' or 'nagfor') compiler which requires USE f90_unix_* modules which 
+would make application code non-portable. The package includes an interface
+(extra/nag_interfaces.f90) which is automatically compiled with the application
+programs by the build script when using a NAG compiler. Linking with this
+interface makes the USE requirement for NAG transparent to applications.
+This interface should not be used for non-NAG compilers.
+
+Most compilers require the IARGC() system interface function to be explicitly
+declared INTEGER, or don't care if it is delared or not. Some compilers (but
+none of those in our stable) may complain about this declaration; if this is
+the case, comment out the statement in decbufr.f90.
+
+Utility programs decbufr.f90 and testtables.f90 are optional and building
+them is not necessary to use the kernel BUFR package.
+
+
+4. Testing BUFR tables
+   -------------------
+
+The environment variable BUFR_LIBRARY must be set to be the path to the
+BUFR run-time tables, for instance:
+
+ > export BUFR_LIBRARY=$HOME/data/bufr/
+
+- note the required trailing '/'
+
+A main utility program testtables.f90 is provided to test the correct usage
+of the local BUFR tables and then to interpret arbitrary BUFR descriptors.
+The program is interactive and will prompt for a descriptor in FXXYYY format,
+User input can be any one of:
+
+ - fxxyyy   : a standard Table B (element, f=0), Replication (f=1),
+              Table C (operator, f=2) or Table D (sequence, f=3) descriptor.
+              If the descriptor represents a code or flag table, a
+              supplementary code/flag value will be prompted for.
+              Tests TABLEB, TABLED and CODEFIG.
+
+ - Mttt,vvv : a Master Table and version. Currently, only Master Table 0
+              is defined, with versions 0-16. Tests MASTERTABLE.
+
+ - Occc,sss : an Originating Centre code (0-255) and a subcentre code (0-255)
+              associated with it. Tests ORIGCENTRE
+
+ - Cccc,sss : a Data Category code (0-255) and a sub-category code (0-255)
+              associated with it. Tests DATACATEGORY.
+
+ - ? or -h or --help : print summary help
+
+ - -v or --version   : print program version ID
+
+ - E or Q (upper or lower case) or - : exit/quit the program
+
+The program interrogates the relevant run-time tables and writes the details to
+standard output stream (normally the terminal). E.g.:
+
+ > ifort -o testtables -I $HOME/include testtables.f90 \
+         -L$HOME/lib -lmetdbbufr
+
+then:
+
+ > ./testtables
+
+ FXY (e.g. 001001) : 001031      <-- user input
+  Name=IDENTIFICATION OF ORIGINATING/GENERATING CENTRE (SEE NOTE 10
+ Units=CODE TABLE  Format=C  Scale=0  Ref=0  Width=16
+ Range=0 to 65534
+ Code value : 74                 <-- user input
+  =EGRR UK MET
+
+ FXY (e.g. 001031) : c3,5        <-- user input
+  =Vertical soundings (satellite) (HIRS)
+
+ FXY (e.g. 001031) : q           <-- user input to quit
+                                     (also 'e[xit]' or '-' will work)
+
+The buildbufr script installs this executable to <prefix>/bin which is assumed
+in the following to be in your PATH environment variable.
+
+File testtables.dat can be directed to stdin to check out one entry from each
+of the run-time tables:
+
+ > testtables < testtables.dat
+
+Check the comments in this data file as to what decodes are expected.
+
+This program is not necessary to the building or usage of the BUFR package
+with an application, but is a helpful diagnostic tool if there appears to
+be a problem with using the BUFR tables, or to look-up the properties of a
+descriptor or meaning of a code/flag value.
+
+
+5. Generic decoding of BUFR messages
+   ----------------------------------
+
+The BUFR_LIBRARY environment variable must be defined as above.
+
+A main program decbufr.f90 is provided which will decode arbitrary BUFR
+messages (as long as they were correctly encoded and the local BUFR tables
+know about all the descriptors present or implied by the messages).
+
+This utility gives more header information and provides a more flexible user
+interface than the much simpler example decoder provided in the MetDB kernel
+package.
+
+ > ifort -o decbufr -I $HOME/include decbufr.f90 \
+         -L$HOME/lib -lmetdbbufr
+
+then:
+
+ > ./decbufr bufr-file [...options...]
+
+The buildbufr script installs this executable to <prefix>/bin which is assumed
+in the following to be in your PATH environment variable.
+
+If an input BUFR file is not specified, a summary of usage will be printed:
+
+A dump is interpreted data - ie values are qualified by their Table B
+parameter name and code/flag table description where applicable - to human-
+readable text, which is written to stdout. A header-only dump (ie supressing
+the Section 4 user data) can be obtained by using the option -dh, while -d
+dumps all data.
+
+A decode file is an uninterpreted plain text output file more suited to
+machinable re-reading. NB both dump and decode files can be large, and neither
+are intended as other than aids to diagnosing problems, and not as normal/
+operational output - it is recommende to write a data-specific decoder -
+perhaps using decbufr.f90 as a template- which can write out decoded data
+more efficiently.
+
+First or skip allows the decoder to start part-way through the input file,
+and last or number allows stopping before the end of file. E.g.:
+
+ > decbufr -d -s5 -n1 test.bufr > test.dump
+
+will decode and interpret only the 6th BUFR message in the input file
+test.bufr and capture all diagnostics to file test.dump. No decode
+file would be generated for this example.
+
+For full help on decbufr, refer to the supplied 'man' page decbufr(1).
+The build script copies the man file to <prefix>/man/man1; the MANPATH
+environment variable should be set so that the man utility can read this page
+by default, else use the man -M option or the full path and file name.
+
+ > man decbufr
+
+This program is not necessary to the building or usage of the BUFR package
+with a data-specific application. It is provides as a helpful diagnostic tool
+to confirm that the encoding of a new data type is being done correctly - by
+the user visually comparing the original input data to the encoder with the
+output from this tool - without having to write a data-specific decoder.
+
+The source code may also be used as a template to write out the decoded
+data in a form more suited to local needs.
+
+
+6. Changes for this Release
+   ------------------------
+
+See file extra/CHANGELOG
+
+
+D. Offiler
+Met Office
+21 June 2011

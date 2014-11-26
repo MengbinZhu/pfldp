@@ -1,0 +1,415 @@
+                     ROPP configuration & build support
+                     ==================================
+
+INTRODUCTION
+------------
+
+Users should refer to the overall Release Notes (ROPP_Release_Notes_*.html) for
+guidance on building the ROPP package libraries and applications, and we
+strongly advise less-experienced users to use the tools described therein.
+
+This information in this file is particularly aimed at the ROM SAF ROPP
+Development Team, but is also provided for more experienced users.
+
+The main, full-package tarfile (ropp-*.tar.gz) or module tarfile 
+(ropp_build-*.tar.gz) containing this README.build file provides additional
+example support software to assist in the building of ROPP modules and 3rd 
+party dependency packages. It also gives some information on how to compile 
+libraries for the different platforms and Fortran compilers available to the 
+ROM SAF ROPP Development Team at the Met Office.
+
+Platforms and compilers are diverse and we cannot provide fully guaranteed build
+support for every posible combination. The files in this collection should be
+viewed as examples; they work for us (at least the ones noted below) but they
+may need to be modified to meet local requirements. If a platform/compiler combo
+is not in this collection, one of the others can probably be used as a template.
+If a new working set of build support files is constructed, we would be happy to
+include them in a future release.
+
+
+COMPILERS
+---------
+
+The ROPP software uses some F95 ISO-standard features which may be lacking in
+F90-only compilers (even those claiming some F95 compatability). Hence only the
+available F95 ISO-compliant compilers are mentioned here, though it can be noted
+that most of the 3rd party packages supporting ROPP (netCDF, BUFR, etc) do
+not have this restriction themselves.
+
+F95 compilers available to the Development Team include:
+ - Desktop Linux (RHEL4) 32-bit OS
+             : Intel (v8, v9, v10, v11, v12)
+             : NAG (v5.1, v5.2)
+             : Portland Group (v6, v7)
+             : SUN (v8)
+             : G95 and GFortran (most recent)
+ - IBM Power6 (AIX) 64-bit OS
+             : IBM XL (v12)
+ - Windows XP/Cygwin 32-bit OS
+             : Intel (v8) - but see 'NB' below
+             : G95 and GFortran (most recent)
+
+Support for other F95 compilers that were available at some point (e.g. on 
+HP-UX, NEC and SUNOS) are also provided but as these platforms are no longer 
+available to the Development Team, the builds are therefore are untested for 
+recent ROPP packgage releases.
+
+The packages described here are mostly built using Unix-style tools (configure
+scripts, make files, etc); these are supported under the Cygwin Unix-emulator 
+on the PC/Windows platform. See the README.cygwin file for more details.
+
+NB: Native PC/Windows F95 compilers, such as the Intel Visual Fortran and
+Salford f95, while being perfectly good and compliant compilers, have command
+line interfaces and/or output file extention naming schemes which are
+incompatible with the Posix-style 'configure' system used by netCDF etc, so
+these cannot be supported for ROPP.
+
+The GNU G95 & GFortran compilers are both now fairly stable, though both are
+still under development (though G95 updates seems to have stalled since 
+mid-2010). As bugs come and go, these compilers are not yet recommended for
+building operational executables. Nevertheless, both are useful for testing
+code portability. Both are free (beer & speech) and don't need to be installed 
+by root. GFortran is now appearing in recent Linux distros (or in the official
+repository) and is also available in the Cygwin repository togther with the 
+GNU gcc-4 toolset (though these are not the most recent release).
+
+The ROPP and dependency packages naturally assume that the compiler is properly
+installed and working on the platform in question. Achieving this is out of the
+scope if this README, but Met Office developers should refer to
+~sa_app/README.compilers for more info on what's available on the local Linux
+Desktops.
+
+
+ROOT PATH
+---------
+
+The install scripts, etc, use the environment variable ROPP_ROOT to give the
+top-level directory path for the ROPP installs. It is recommended that the
+environment variable 'ROPP_ROOT' be set in your .profile (or other suitable
+place) to point to the ROPP root directory path. For instance, on Met Office
+systems, we have:
+
+ export ROPP_ROOT=/data/nwp1/romsaf/ropp    (Linux desktop/servers)
+or
+ export ROPP_ROOT=/data/nwp/sa/romsaf/ropp  (IBM HPC)
+or
+ export ROPP_ROOT=/cygdrive/c/ropp          (PC/Cygwin)
+
+For testing, ROPP_ROOT can be set to a local or personal target, e.g.
+ export ROPP_ROOT=$HOME/ropp_test
+
+NB: All of the sample configure scripts in the configure/ sub-directory
+use this environment variable to specify the installation root prefix.
+
+
+BUILD PATH
+----------
+
+The build support files assume all the necesssary files
+ - source code archives (tarball, zipfiles),
+ - build shell scripts
+ - configure/ sub-directory containing configuration mini-scripts
+are in the same directory. We recommend that all source archive (tarfiles,
+zipfiles etc) package files are downloaded to e.g. ROPP_ROOT/build; that
+the contents of ropp_build-*.tar.gz are uncompressed in this same directory
+and the builds initiated here also.
+
+
+INSTALL PATH
+------------
+
+The individual compilers each have a separate sub-directory tree
+under ROPP_ROOT:
+
+On Linux:
+ ifort8/    Intel v8          (ifort8)
+ ifort/     Intel v9          (ifort)  - system default version
+ ifort9/    Intel v9          (ifort9) - alias for ifort
+ ifort10/   Intel v10         (ifort10)
+ ifort11/   Intel v11         (ifort11)
+ ifort12/   Intel XE v12      (ifort12)
+ nag/       NAGWare v5.1      (f95)
+ nagfor/    NAGWare v5.2      (nagfor)
+ pgf/       Portland Group v6 (pgf90)  - alias for pgf95
+ pgf6/      Portland Group v6 (pgf6)   - alias for pgf90/pgf95
+ pgf7/      Portland Group v7 (pgf7)
+ gfortran/  GNU GFortran      (gfortran)
+ g95/       G95               (g95)
+
+On IBM:
+ xlf95/     IBM XL Fortran    (xlf95)
+
+On PC/Cygwin:
+ gfortran/  GNU GFortran      (gfortran)
+ g95/       G95               (g95)
+
+Within each compiler sub-directory there are bin/ lib/ include/ and man/
+sub-sub-directories.
+
+Other notable sub-directories are:
+
+ data/bufr/  Hosts the platform-independent run-time BUFR tables.
+             BUFR object libraries and executable tools are installed to
+             the individual compiler directories listed above.
+
+All of these directories are created as necessary by the build systems.
+
+
+BUILD SCRIPT
+------------
+
+A BASH shell script 'buildpack' is provided in the ropp_build package to
+automate the building of ROPP modules and dependency packages. For details
+of usage, refer to the ROPP Release notes (ROPP_Release_Notes_*.html) on the
+ROPP downloads page of the ROM SAF GARF website: http://www.romsaf.org.
+
+In summary:
+
+  > buildpack <package> <compiler> [[NO]CLEAN]
+
+will, for the package (netcdf, mobufr, ropp_io...) and compiler (ifort, pgf,
+nag, gfortran, xlf95...):
+  - check that ROPP_ROOT is set (or uses a local default), exists (or is 
+    created) and can be written to by the user
+  - find an existing uncompressed source directory
+  - if CLEAN is present, wipe it to start from scratch
+  - if no directory found, find and uncompress the latest source archive
+  - run appropriate configure script for the compiler
+  - run the appropriate command(s) to clean old files (unless
+    NOCLEAN is present)
+  - run the appropriate command(s) to build, test and install
+    the package's libraries and any application tools to the
+    ROPP_ROOT/<compiler> tree.
+
+This script supports current releases of the packages; it may or may not work 
+as provided with older or later releases. Nor has it been tested on other than
+Linux and PC/Cygwin platforms. It is provided only as a tool which works for
+us, and may be useful for others.
+
+In addition, where several compilers are in use, there are also some warpper
+scripts 'build_deps' and 'build_ropp' to build several packages with a 
+particular compiler, and 'build<package>_ropp to build a package with each 
+compiler in turn. Thes wrapper scripts also capture output from the build
+to a log file in the target install directory. Each build* script can be run 
+with -h for help on usage. Again, these are tools which are used by the
+Development Team and can be edited to suit local requirements.
+
+Because of inter-dependencies, we recommend that packages are built in the 
+following order:
+ {zlib (if needing HDF5)
+  hdf5 (if needing 'full' netCDF4 capability)
+  netcdf4 (if needing 'full' netCDF4 capability)}
+  OR
+ {netcdf (if using standard 'classic' netcdf4)}
+  bufr (mobufr and/or ecbufr libs)
+  grib (optional, ECMWF libs)
+  ropp_utils
+  ropp_io
+  ropp_pp
+  ropp_fm
+  ropp_1dvar
+
+The bufr packages are optional, and if neither is present ropp_io will 
+build without the BUFR support (encoder/decoder) tools.  Similarly for the 
+zlib, hdf5 and grib libraries.
+
+
+EXTERNAL PACKAGES
+-----------------
+
+In general, external (3rd party) packages, on which ROPP depends, need only be
+built, tested and installed once for each compiler. These packages (in their
+compressed, downloaded form) are available in the ROPP_ROOT/archive directory.
+Once built, the uncompressed trees are not required and can be deleted to save
+disk space. Note that ROPP modules may depend on particular versions of these
+packages - check the ROPP Release Notes. Compatible versions are available on
+the ROM SAF website in the
+  ROPP > ROPP Download > Dependency Packages
+area.
+
+The following notes are provided to document their installation, e.g. in the
+event of updated packages becoming available or if using a new compiler (or an
+update of an exiting compiler). The 'buildpack' script can be used to automate
+the build sequence.
+
+
+1. netCDF
+---------
+
+Check for the latest package versions at [latest installed version]:
+
+ netCDF  : http://www.unidata.ucar.edu/software/netcdf/       [v4.1.3]
+
+Installation is generally with
+ configure; make; make check; make install
+Using make clean is highly recommended if the package has already been
+built, and doubly so if with a different compiler (better, make distclean
+to be sure!). Note that several options to configure are recommended to
+minimise build of components unnecessary for ROPP, paricularly for v4.1.x.
+
+Configure scripts suitable for interfacing with ROPP using locally available
+compilers for these two libraries are available in the ropp_build package.
+
+The installation follows these steps:
+   > cd $ROPP_ROOT/build
+   > tar -zxvf netcdf-<version>.tar.gz
+   > cd netcdf-<version>
+   > make distclean              [if package previously built]
+   > $ROPP_ROOT/build/configure/netcdf_configure_<compiler>_<os>
+   > make clean                  [if make distclean not run]
+   > make                        [make check recommended for netCDF]
+   > make check
+   > make install
+
+Where <version> is the package release version and <os> is the local operating 
+system, as reported by the uname(1) command, but all in lowercase (.e.g. 
+'linux', 'aix', 'cygwin').
+
+However, for simplicity, we recommend using the buildpack script:
+
+  > cd $ROPP_ROOT/build
+  > buildpack netcdf <compiler>
+
+Note 1:
+-------
+We have not yet managed to find a combination of
+compiler options to build v4.1.x library and test programs on the IBM Power6. 
+v4.0.1 is OK.
+
+Note 2:
+-------
+netCDF needs to have sucessfully passed 'make check' before the ROPP 
+module build is attempted.
+
+Note 3:
+-------
+If netCDF-4 is needed, because it is desired to read "grouped" EUMETSAT-style
+RO datafiles, then its supporting library HDF5 needs to be built first. This 
+in turn depends on the compression library zlib, which can similarly 
+be installed with buildpack, thus:
+
+  > cd $ROPP_ROOT/build
+  > buildpack zlib <compiler>
+
+HDF5 can then be built using:
+
+  > cd $ROPP_ROOT/build
+  > buildpack hdf5 <compiler>
+
+Finally, the --disable-netcdf4 flag in the netcdf mini-configuration scripts 
+needs to be omitted.  This can also be done via buildpack, thus:
+
+  > cd $ROPP_ROOT/build
+  > buildpack netcdf4 <compiler>
+
+In summary, then, if you want to use netcdf4, use the following commands:
+
+  > cd $ROPP_ROOT/build
+  > buildpack zlib <compiler>
+  > buildpack hdf5 <compiler>
+  > buildpack netcdf4 <compiler>
+
+
+2. MetDB BUFR
+-------------
+
+MetDB BUFR library enhanced by D.O. The actual installation path of the BUFR
+run-time tables is controlled by the BUFR_LIBRARY environment variable, and this
+has to be set prior to installation - best to put it into your .profile.
+
+It is generally installed the following way:
+
+  > cd $ROPP_ROOT/build
+  > tar -zxvf bufr-<version>.tar.gz
+  > cd bufr-<version>
+  > export BUFR_LIBRARY=$ROPP_ROOT/data/bufr/
+  > ./buildbufr -c -t -p $ROPP_ROOT/<compiler> -f <compiler>
+
+Compiler IDs are defined in f90_compilers.dat. New compilers can be added,
+or existing details modified, in that file. Note the final '/' in the
+BUFR_LIBRARY path.
+
+Use of the buildpack script simplifies this sequence to:
+
+  > cd $ROPP_ROOT/build
+  > export BUFR_LIBRARY=$ROPP_ROOT/bufr/
+  > ./buildpack mobufr <compiler>
+
+
+3. ECMWF BUFR
+--------------
+
+ECMWF BUFR library. The actual installation path of the BUFR run-time tables 
+is controlled by the BUFR_TABLES environment variable, and this has to be set 
+prior to installation - best to put it into your .profile.
+
+It is generally installed the following way:
+
+  > cd $ROPP_ROOT/build
+  > tar -zxvf bufr_<version>.tar.gz
+  > cd bufr_<version>
+  > export BUFR_TABLES=$ROPP_ROOT/data/bufr/
+  > ./build_library [interactive inputs]
+  > ./install
+
+Select the 32-bit REALs option for compatibility with ROPP. Note the final
+'/' in the BUFR_TABLES path.
+
+Use of the buildpack script simplifies this sequence to:
+
+  > cd $ROPP_ROOT/build
+  > export BUFR_TABLES=$ROPP_ROOT/data/bufr/
+  > buildpack ecbufr <compiler>
+
+
+4. ECMWF GRIB_API
+-----------------
+
+ECMWF GRIB API. After downloading from the ECMWF website 
+(https://software.ecmwf.int/wiki/display/GRIB/Home), 
+this is generally installed the following way:
+
+  > cd $ROPP_ROOT/build
+  > tar -zxvf grib_api_<version>.tar.gz
+  > cd grib_api_<version>
+  > $ROPP_ROOT/configure/ropp_configure_<compiler>_<os>
+  > ./install
+
+Use of the buildpack script simplifies this sequence to:
+
+  > cd $ROPP_ROOT/build
+  > buildpack grib <compiler>
+
+
+ROPP MODULES
+------------
+
+Building the ROPP modules follows the general pattern of the other packages:
+
+  > cd $ROPP_ROOT/build
+  > tar -zxvf ropp_<module>-<version>.tar.gz
+  > cd ropp_<module>-<version>
+  > $ROPP_ROOT/build/configure/ropp_configure_<compiler>_<os>
+  > make clean
+  > make
+  > make install
+
+where <module> is one of 'utils', 'io', 'pp', 'fm' or '1dvar' and <version> is
+the module release version, for instance '7.0'. Each module's installation can
+then be tested with:
+
+  > cd tests
+  > make test
+
+Use of the buildpack script simplifies this whole sequence to:
+
+  > cd $ROPP_ROOT/build
+  > buildpack ropp_<module> <compiler>
+
+
+ROPP Development Team
+Met Office
+
+Version 7.0
+31 July 2013
+

@@ -1,0 +1,37 @@
+The ROPP software in this module was authored and/or tested by 
+several (past and present) members of the Met Office 
+ROPP Development Team. 
+
+Contributing authors are:
+
+  Christian Marquardt (EUMETSAT) Ex-Development Manager.
+                      Author of majority of ROPP-1 code in UTILS, 
+                      IO, FM & 1DVAR modules, and much personal, 
+                      PES code.
+
+  Dave Offiler        ROPP Project Manager, IO application code and
+                      IO extensions.
+
+  Huw Lewis           (1st) ROPP Development Manager, FM & 1DVAR extensions.
+                      ROPP_PP.
+
+  Ian Culverwell      ROPP Development Manager.  Documentation, testing, 
+                      consolidation, IO development.
+
+  Michael Rennie      (1st) ROPP Test Manager.
+
+  Chris Burrows       ROPP Test Manager. Test folder developments.
+
+  Sean Healy          (ECMWF) Original 1D-Var code, FM 2D operator code.
+
+  Carlo Buontempo     S-G thinner code.
+
+  Axel von Engeln     (EUMETSAT) Original Test Folder system author.
+
+  Michael Gorbunov    (Russian Academy of Sciences) Original PP code.
+
+  Stig Syndergaard    (DMI) Original spectral version of MSIS model - 
+                      expansion in spherical harmonics and Chebychev polynomials.
+
+Any comments on the ROPP software should in the first instance
+be raised via the ROM SAF Helpdesk at http://www.romsaf.org

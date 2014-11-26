@@ -1,0 +1,28 @@
+#!/bin/sh
+# $Id: ropp_configure_lf95_linux 3752 2013-07-09 18:55:03Z frdo $
+#
+# ROPP shell script for a local configure.
+# USERS SHOULD MODIFY THIS SCRIPT AS REQUIRED FOR LOCAL INSTALL
+#
+# Compiler: lf95 / Linux
+#
+PREFIX=${1-$ROPP_ROOT/lf95}
+echo
+echo "Platform:"
+uname -a
+echo
+echo "Fortran compiler:"
+lf95 --version
+echo
+echo "C compiler:"
+gcc --version
+echo
+echo "Installation target:"
+echo "$PREFIX"
+echo
+#
+CC=gcc \
+F77=lf95     FFLAGS="--o2 -I$PREFIX/include" \
+FC=lf95     FCFLAGS="--o2 -I$PREFIX/include" \
+            LDFLAGS="-L$PREFIX/lib -L$PREFIX/lib64" \
+  ./configure --prefix=$PREFIX

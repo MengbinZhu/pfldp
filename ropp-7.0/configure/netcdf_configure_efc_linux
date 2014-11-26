@@ -1,0 +1,34 @@
+#!/bin/sh
+# $Id: netcdf_configure_efc_linux 3739 2013-07-08 20:40:30Z frdo $
+#
+# netcdf (v4.1.x) shell script for a local configure
+# USERS SHOULD MODIFY THIS SCRIPT AS REQUIRED FOR LOCAL INSTALL
+#
+# Compiler: efc / NEC TX
+#
+PREFIX=${1-$ROPP_ROOT/efc}
+echo
+echo "Platform:"
+uname -a
+echo
+echo "Fortran compiler:"
+efc -V
+echo
+echo "C compiler:"
+ecc -V
+echo
+echo "Installation target:"
+echo "$PREFIX"
+echo
+#
+CXX="" \
+CC=ecc       CFLAGS="-O2 -cm -w"                  \
+           CPPFLAGS="-DNAGf90Fortran"             \
+FC=efc      FCFLAGS="-O2 -integer_size 64 -cm -w" \
+F77=efc      FFLAGS="-O2 -integer_size 64 -cm -w" \
+              FLIBS="" F90LIBS="" LDFLAGS="-L$PREFIX/lib -L$PREFIX/lib64" \
+  ./configure --prefix=$PREFIX   --disable-option-checking \
+              --disable-netcdf-4 --disable-cxx             \
+              --disable-v2       --disable-dap             \
+              --disable-shared   --disable-largefile       \
+              --enable-separate-fortran

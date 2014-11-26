@@ -1,0 +1,426 @@
+#-----------------------------------------------------------------------
+#
+# FILE NAME      : Makefile
+#
+# TYPE           : Makefile
+#
+# PURPOSE        : Build BUFRDLL
+#
+#
+# REVISION INFO  :
+#
+# $Source:$
+# $Date: 16/02/2012 11:39:41$
+# $Revision: 2$
+#
+# $Author: Sheila Needham$
+#
+# $Log:
+#  2    Met_DB_Project 1.1         16/02/2012 11:39:41    Sheila Needham
+#       Updated with test script target
+#  1    Met_DB_Project 1.0         18/02/2011 13:10:06    Sheila Needham  BUFR
+#       package Release 19. Edition 4 encoding and Table B version 14.
+# $
+#-----------------------------------------------------------------------
+# (C) CROWN COPYRIGHT 2012 - MET OFFICE. All Rights Reserved.
+#
+# Met Office, United Kingdom
+#
+# The use, duplication and disclosure of this code is strictly
+# prohibited without the permission of The Meteorological Database 
+# Team at the above address.
+#-----------------------------------------------------------------------
+
+#-----------------------------------------------------------------------
+#-----------------------------------------------------------------------
+# Define the compiler parameters for NAG f95 compiler
+#-----------------------------------------------------------------------
+# -DBPATH (Bufr library), -save (implicit SAVE), -g (debug flag),
+# -DMVS (for code to run under MVS)
+# -DEBCDIC (for code on GPCS)
+# -C (range checking), -maxcontin (max continuation lines),
+# -C=all (max compiler checks)
+# -gline debug traceback
+# -Wc,+z (needed to construct shared library)
+#-----------------------------------------------------------------------
+
+FF 	= ifort
+CC 	= gcc
+
+
+FFLAGS = -DBPATH
+CFLAGS = -DUNDERSCORE
+
+TARGET = libbufr
+TEST = TEST
+
+INCL_DIR  = ./mods
+
+IFLAGS 	= -I${INCL_DIR}
+
+
+BUFR_OBJS = asc2eb.o \
+            bufd203.o \
+            bufd206.o \
+            bufdass.o \
+            bufdata.o \
+            bufdchr.o \
+            bufdelt.o \
+            bufdmap.o \
+            bufdrip.o \
+            bufdrpl.o \
+            bufdspl.o \
+	    bufhead.o \
+            bufr207.o \
+            bufrpath.o \
+            bufrqel.o \
+            bufrqop.o \
+	    bufrread.o \
+            bufrseq.o \
+            code.o \
+	    datim.o \
+            debufr.o \
+            desfxy.o \
+            eb2asc.o \
+            enbufv4.o \
+            enbufr.o \
+            encode.o \
+            ides.o \
+            inquire.o \
+	    int2ch_mod.o \
+            locald.o \
+            readcf.o \
+            tabbver.o \
+            tableb.o \
+            tabled.o \
+            valout.o \
+	    value.o
+
+C_OBJS = MetDB_c_utils.o 
+
+TARGET_LIB = ./$(TARGET).a
+
+#-----------------------------------------------------------------------
+# Rule to run build and test
+#-----------------------------------------------------------------------
+all: ${TARGET_LIB} ${TEST}
+
+#-----------------------------------------------------------------------
+# Rule to run build
+#-----------------------------------------------------------------------
+$(TARGET_LIB):${BUFR_OBJS} ${C_OBJS}
+	rm -f $@
+	ar rv $@ ${BUFR_OBJS} ${C_OBJS}
+
+#-----------------------------------------------------------------------
+# Rule to run test
+#-----------------------------------------------------------------------
+${TEST}: ${TARGET_LIB}
+	./run_test.sh ${FF}
+	
+#-----------------------------------------------------------------------
+# Rules to build object code
+#-----------------------------------------------------------------------
+
+#
+# .c source code to .o
+#
+MetDB_c_utils.o: MetDB_c_utils.c
+	${CC} ${CFLAGS} -c MetDB_c_utils.c
+
+#
+# .F and .f source to .o
+#
+asc2eb.o: asc2eb.f90 ${INCL_DIR}/int2ch_mod.mod 
+	${FF} ${IFLAGS} ${FFLAGS} -c asc2eb.f90
+
+bufd203.o: bufd203.f90 ${INCL_DIR}/value_mod.mod
+	${FF} ${IFLAGS} ${FFLAGS} -c bufd203.f90
+
+bufd206.o: bufd206.f90 ${INCL_DIR}/desfxy_mod.mod ${INCL_DIR}/value_mod.mod
+	${FF} ${IFLAGS} ${FFLAGS} -c bufd206.f90
+
+bufdass.o: bufdass.f90 ${INCL_DIR}/bufdspl_mod.mod ${INCL_DIR}/value_mod.mod
+	${FF} ${IFLAGS} ${FFLAGS} -c bufdass.f90
+
+BUFDATA_MODS = ${INCL_DIR}/bufrqop_mod.mod \
+               ${INCL_DIR}/bufrqel_mod.mod \
+               ${INCL_DIR}/bufdass_mod.mod \
+               ${INCL_DIR}/bufdchr_mod.mod \
+               ${INCL_DIR}/bufd203_mod.mod \
+               ${INCL_DIR}/bufd206_mod.mod \
+               ${INCL_DIR}/bufr207_mod.mod \
+               ${INCL_DIR}/bufdmap_mod.mod \
+               ${INCL_DIR}/desfxy_mod.mod \
+               ${INCL_DIR}/bufdspl_mod.mod \
+               ${INCL_DIR}/bufdrip_mod.mod \
+               ${INCL_DIR}/bufdrpl_mod.mod \
+               ${INCL_DIR}/bufrseq_mod.mod \
+               ${INCL_DIR}/bufdelt_mod.mod \
+	       ${INCL_DIR}/int2ch_mod.mod \
+               ${INCL_DIR}/value_mod.mod \
+               ${INCL_DIR}/asc2eb_mod.mod \
+               ${INCL_DIR}/tableb_mod.mod
+bufdata.o: bufdata.F90 ${BUFDATA_MODS}
+	${FF} ${IFLAGS} ${FFLAGS} -c bufdata.F90
+
+bufdchr.o: bufdchr.F90 ${INCL_DIR}/value_mod.mod ${INCL_DIR}/asc2eb_mod.mod \
+                       ${INCL_DIR}/int2ch_mod.mod
+	${FF} ${IFLAGS} ${FFLAGS} -c bufdchr.F90
+
+bufdelt.o: bufdelt.f90 ${INCL_DIR}/desfxy_mod.mod
+	${FF} ${IFLAGS} ${FFLAGS} -c bufdelt.f90
+
+bufdmap.o: bufdmap.f90 ${INCL_DIR}/value_mod.mod
+	${FF} ${IFLAGS} ${FFLAGS} -c bufdmap.f90
+
+bufdrip.o: bufdrip.f90 ${INCL_DIR}/desfxy_mod.mod ${INCL_DIR}/tableb_mod.mod
+	${FF} ${IFLAGS} ${FFLAGS} -c bufdrip.f90
+
+BUFDRPL_MODS = ${INCL_DIR}/value_mod.mod \
+               ${INCL_DIR}/desfxy_mod.mod \
+               ${INCL_DIR}/tableb_mod.mod \
+               ${INCL_DIR}/bufdrip_mod.mod
+bufdrpl.o: bufdrpl.f90 ${BUFDRPL_MODS}
+	${FF} ${IFLAGS} ${FFLAGS} -c bufdrpl.f90
+
+bufdspl.o: bufdspl.f90 ${INCL_DIR}/code_mod.mod
+	${FF} ${IFLAGS} ${FFLAGS} -c bufdspl.f90
+
+bufhead.o: bufhead.f90 
+	${FF} ${IFLAGS} ${FFLAGS} -c bufhead.f90
+
+bufr207.o: bufr207.f90
+	${FF} ${IFLAGS} ${FFLAGS} -c bufr207.f90
+
+bufrpath.o: bufrpath.f90 MetDB_c_utils.o
+	${FF} ${IFLAGS} ${FFLAGS} -c bufrpath.f90
+
+bufrqel.o: bufrqel.f90 ${INCL_DIR}/value_mod.mod
+	${FF} ${IFLAGS} ${FFLAGS} -c bufrqel.f90
+
+bufrqop.o: bufrqop.f90 ${INCL_DIR}/desfxy_mod.mod ${INCL_DIR}/locald_mod.mod ${INCL_DIR}/tabled_mod.mod
+	${FF} ${IFLAGS} ${FFLAGS} -c bufrqop.f90
+	
+bufrread.o: bufrread.f90 
+	${FF} ${IFLAGS} ${FFLAGS} -c bufrread.f90
+
+bufrseq.o: bufrseq.f90 ${INCL_DIR}/locald_mod.mod ${INCL_DIR}/tabled_mod.mod
+	${FF} ${IFLAGS} ${FFLAGS} -c bufrseq.f90
+
+CODE_MODS = ${INCL_DIR}/readcf_mod.mod \
+            ${INCL_DIR}/value_mod.mod \
+            ${INCL_DIR}/bufrpath_mod.mod \
+	    ${INCL_DIR}/int2ch_mod.mod \
+            ${INCL_DIR}/inquire_mod.mod
+code.o: code.F90 ${CODE_MODS}
+	${FF} ${IFLAGS} ${FFLAGS} -c code.F90
+	
+datim.o: datim.f90 
+	${FF} ${IFLAGS} ${FFLAGS} -c datim.f90
+
+debufr.o: debufr.f90 ${INCL_DIR}/bufdata_mod.mod ${INCL_DIR}/desfxy_mod.mod ${INCL_DIR}/value_mod.mod
+	${FF} ${IFLAGS} ${FFLAGS} -c debufr.f90
+
+desfxy.o: desfxy.f90
+	${FF} ${IFLAGS} ${FFLAGS} -c desfxy.f90
+
+eb2asc.o: eb2asc.f90 ${INCL_DIR}/int2ch_mod.mod
+	${FF} ${IFLAGS} ${FFLAGS} -c eb2asc.f90
+
+enbufr.o: enbufr.f90 ${INCL_DIR}/value_mod.mod ${INCL_DIR}/desfxy_mod.mod ${INCL_DIR}/encode_mod.mod
+	${FF} ${IFLAGS} ${FFLAGS} -c enbufr.f90
+
+enbufv4.o: enbufv4.F90 ${INCL_DIR}/enbufr_mod.mod ${INCL_DIR}/tabbver_mod.mod ${INCL_DIR}/eb2asc_mod.mod
+	${FF} ${IFLAGS} ${FFLAGS} -c enbufv4.F90
+
+ENCODE_MODS = ${INCL_DIR}/tableb_mod.mod \
+              ${INCL_DIR}/tabled_mod.mod \
+              ${INCL_DIR}/valout_mod.mod \
+              ${INCL_DIR}/desfxy_mod.mod \
+              ${INCL_DIR}/locald_mod.mod \
+              ${INCL_DIR}/bufrqop_mod.mod \
+              ${INCL_DIR}/value_mod.mod \
+              ${INCL_DIR}/bufr207_mod.mod \
+              ${INCL_DIR}/eb2asc_mod.mod
+	      
+encode.o: encode.F90 ${ENCODE_MODS}
+	${FF} ${IFLAGS} ${FFLAGS} -c encode.F90
+
+ides.o: ides.f90
+	${FF} ${IFLAGS} ${FFLAGS} -c ides.f90
+
+inquire.o: inquire.F90
+	${FF} ${IFLAGS} ${FFLAGS} -c inquire.F90
+	
+int2ch_mod.o: ${INCL_DIR}/int2ch_mod.f90
+	${FF} ${IFLAGS} ${FFLAGS} -c ${INCL_DIR}/int2ch_mod.f90
+
+locald.o: locald.F90 ${INCL_DIR}/bufrpath_mod.mod
+	${FF} ${IFLAGS} ${FFLAGS} -c locald.F90
+
+readcf.o: readcf.f90
+	${FF} ${IFLAGS} ${FFLAGS} -c readcf.f90
+
+tabbver.o: tabbver.F90 ${INCL_DIR}/bufrpath_mod.mod ${INCL_DIR}/inquire_mod.mod
+	${FF} ${IFLAGS} ${FFLAGS} -c tabbver.F90
+
+tableb.o: tableb.F90 ${INCL_DIR}/bufrpath_mod.mod ${INCL_DIR}/inquire_mod.mod
+	${FF} ${IFLAGS} ${FFLAGS} -c tableb.F90
+
+tabled.o: tabled.F90 ${INCL_DIR}/bufrpath_mod.mod ${INCL_DIR}/inquire_mod.mod \
+                      ${INCL_DIR}/int2ch_mod.mod
+	${FF} ${IFLAGS} ${FFLAGS} -c tabled.F90
+
+valout.o: valout.F90 ${INCL_DIR}/int2ch_mod.mod
+	${FF} ${IFLAGS} ${FFLAGS} -c valout.F90
+
+value.o: value.f90
+	${FF} ${IFLAGS} ${FFLAGS} -c value.f90
+
+#
+# Modules files, interfaces, subroutines and functions
+#	
+
+${INCL_DIR}/asc2eb_mod.mod: ${INCL_DIR}/asc2eb_mod.f90
+	${FF} ${FFLAGS} -c ${INCL_DIR}/asc2eb_mod.f90
+	mv asc2eb_mod.mod ${INCL_DIR}/.
+
+${INCL_DIR}/bufd203_mod.mod: ${INCL_DIR}/bufd203_mod.f90
+	${FF} ${FFLAGS} -c ${INCL_DIR}/bufd203_mod.f90
+	mv bufd203_mod.mod ${INCL_DIR}/.
+
+${INCL_DIR}/bufd206_mod.mod: ${INCL_DIR}/bufd206_mod.f90
+	${FF} ${FFLAGS} -c ${INCL_DIR}/bufd206_mod.f90
+	mv bufd206_mod.mod ${INCL_DIR}/.
+
+${INCL_DIR}/bufdass_mod.mod: ${INCL_DIR}/bufdass_mod.f90
+	${FF} ${FFLAGS} -c ${INCL_DIR}/bufdass_mod.f90
+	mv bufdass_mod.mod ${INCL_DIR}/.
+
+${INCL_DIR}/bufdata_mod.mod: ${INCL_DIR}/bufdata_mod.f90
+	${FF} ${FFLAGS} -c ${INCL_DIR}/bufdata_mod.f90
+	mv bufdata_mod.mod ${INCL_DIR}/.
+
+${INCL_DIR}/bufdchr_mod.mod: ${INCL_DIR}/bufdchr_mod.f90
+	${FF} ${FFLAGS} -c ${INCL_DIR}/bufdchr_mod.f90
+	mv bufdchr_mod.mod ${INCL_DIR}/.
+
+${INCL_DIR}/bufdelt_mod.mod: ${INCL_DIR}/bufdelt_mod.f90
+	${FF} ${FFLAGS} -c ${INCL_DIR}/bufdelt_mod.f90
+	mv bufdelt_mod.mod ${INCL_DIR}/.
+
+${INCL_DIR}/bufdmap_mod.mod: ${INCL_DIR}/bufdmap_mod.f90
+	${FF} ${FFLAGS} -c ${INCL_DIR}/bufdmap_mod.f90
+	mv bufdmap_mod.mod ${INCL_DIR}/.
+
+${INCL_DIR}/bufdrip_mod.mod: ${INCL_DIR}/bufdrip_mod.f90
+	${FF} ${FFLAGS} -c ${INCL_DIR}/bufdrip_mod.f90
+	mv bufdrip_mod.mod ${INCL_DIR}/.
+
+${INCL_DIR}/bufdrpl_mod.mod: ${INCL_DIR}/bufdrpl_mod.f90
+	${FF} ${FFLAGS} -c ${INCL_DIR}/bufdrpl_mod.f90
+	mv bufdrpl_mod.mod ${INCL_DIR}/.
+
+${INCL_DIR}/bufdspl_mod.mod: ${INCL_DIR}/bufdspl_mod.f90
+	${FF} ${FFLAGS} -c ${INCL_DIR}/bufdspl_mod.f90
+	mv bufdspl_mod.mod ${INCL_DIR}/.
+
+${INCL_DIR}/bufr207_mod.mod: ${INCL_DIR}/bufr207_mod.f90
+	${FF} ${FFLAGS} -c ${INCL_DIR}/bufr207_mod.f90
+	mv bufr207_mod.mod ${INCL_DIR}/.
+
+${INCL_DIR}/bufrpath_mod.mod: ${INCL_DIR}/bufrpath_mod.f90
+	${FF} ${FFLAGS} -c ${INCL_DIR}/bufrpath_mod.f90
+	mv bufrpath_mod.mod ${INCL_DIR}/.
+
+${INCL_DIR}/bufrqel_mod.mod: ${INCL_DIR}/bufrqel_mod.f90
+	${FF} ${FFLAGS} -c ${INCL_DIR}/bufrqel_mod.f90
+	mv bufrqel_mod.mod ${INCL_DIR}/.
+
+${INCL_DIR}/bufrqop_mod.mod: ${INCL_DIR}/bufrqop_mod.f90
+	${FF} ${FFLAGS} -c ${INCL_DIR}/bufrqop_mod.f90
+	mv bufrqop_mod.mod ${INCL_DIR}/.
+
+${INCL_DIR}/bufrseq_mod.mod: ${INCL_DIR}/bufrseq_mod.f90
+	${FF} ${FFLAGS} -c ${INCL_DIR}/bufrseq_mod.f90
+	mv bufrseq_mod.mod ${INCL_DIR}/.
+
+${INCL_DIR}/code_mod.mod: ${INCL_DIR}/code_mod.f90
+	${FF} ${FFLAGS} -c ${INCL_DIR}/code_mod.f90
+	mv code_mod.mod ${INCL_DIR}/.
+
+${INCL_DIR}/debufr_mod.mod: ${INCL_DIR}/debufr_mod.f90
+	${FF} ${FFLAGS} -c ${INCL_DIR}/debufr_mod.f90
+	mv debufr_mod.mod ${INCL_DIR}/.
+
+${INCL_DIR}/desfxy_mod.mod: ${INCL_DIR}/desfxy_mod.f90
+	${FF} ${FFLAGS} -c ${INCL_DIR}/desfxy_mod.f90
+	mv desfxy_mod.mod ${INCL_DIR}/.
+
+${INCL_DIR}/eb2asc_mod.mod: ${INCL_DIR}/eb2asc_mod.f90
+	${FF} ${FFLAGS} -c ${INCL_DIR}/eb2asc_mod.f90
+	mv eb2asc_mod.mod ${INCL_DIR}/.
+
+${INCL_DIR}/enbufr_mod.mod: ${INCL_DIR}/enbufr_mod.f90
+	${FF} ${FFLAGS} -c ${INCL_DIR}/enbufr_mod.f90
+	mv enbufr_mod.mod ${INCL_DIR}/.
+
+${INCL_DIR}/enbufv4_mod.mod: ${INCL_DIR}/enbufv4_mod.f90
+	${FF} ${FFLAGS} -c ${INCL_DIR}/enbufv4_mod.f90
+	mv enbufv4_mod.mod ${INCL_DIR}/.
+
+${INCL_DIR}/encode_mod.mod: ${INCL_DIR}/encode_mod.f90
+	${FF} ${FFLAGS} -c ${INCL_DIR}/encode_mod.f90
+	mv encode_mod.mod ${INCL_DIR}/.
+
+${INCL_DIR}/ides_mod.mod: ${INCL_DIR}/ides_mod.f90
+	${FF} ${FFLAGS} -c ${INCL_DIR}/ides_mod.f90
+	mv ides_mod.mod ${INCL_DIR}/.
+
+${INCL_DIR}/inquire_mod.mod: ${INCL_DIR}/inquire_mod.f90
+	${FF} ${FFLAGS} -c ${INCL_DIR}/inquire_mod.f90
+	mv inquire_mod.mod ${INCL_DIR}/.
+	
+${INCL_DIR}/int2ch_mod.mod: ${INCL_DIR}/int2ch_mod.f90
+	${FF} ${FFLAGS} -c ${INCL_DIR}/int2ch_mod.f90
+	mv int2ch_mod.mod ${INCL_DIR}/.
+
+${INCL_DIR}/locald_mod.mod: ${INCL_DIR}/locald_mod.f90
+	${FF} ${FFLAGS} -c ${INCL_DIR}/locald_mod.f90
+	mv locald_mod.mod ${INCL_DIR}/.
+
+${INCL_DIR}/readcf_mod.mod: ${INCL_DIR}/readcf_mod.f90
+	${FF} ${FFLAGS} -c ${INCL_DIR}/readcf_mod.f90
+	mv readcf_mod.mod ${INCL_DIR}/.
+
+${INCL_DIR}/tabbver_mod.mod: ${INCL_DIR}/tabbver_mod.f90
+	${FF} ${FFLAGS} -c ${INCL_DIR}/tabbver_mod.f90
+	mv tabbver_mod.mod ${INCL_DIR}/.
+
+${INCL_DIR}/tableb_mod.mod: ${INCL_DIR}/tableb_mod.f90
+	${FF} ${FFLAGS} -c ${INCL_DIR}/tableb_mod.f90
+	mv tableb_mod.mod ${INCL_DIR}/.
+
+${INCL_DIR}/tabled_mod.mod: ${INCL_DIR}/tabled_mod.f90
+	${FF} ${FFLAGS} -c ${INCL_DIR}/tabled_mod.f90
+	mv tabled_mod.mod ${INCL_DIR}/.
+
+${INCL_DIR}/valout_mod.mod: ${INCL_DIR}/valout_mod.f90
+	${FF} ${FFLAGS} -c ${INCL_DIR}/valout_mod.f90
+	mv valout_mod.mod ${INCL_DIR}/.
+
+${INCL_DIR}/value_mod.mod: ${INCL_DIR}/value_mod.f90
+	${FF} ${FFLAGS} -c ${INCL_DIR}/value_mod.f90
+	mv value_mod.mod ${INCL_DIR}/.
+
+
+#-----------------------------------------------------------------------
+# Make clean
+#-----------------------------------------------------------------------
+
+clean:
+	@rm -rf *.o ${INCL_DIR}/*.mod ${TARGET_LIB} core .Static.salf Static.sadb \
+	TestMessage.bufr *.exe \
+	$(PTREPOSITORY)/*.o BLINK/* *_bld.stamp >/dev/null 2>&1
+

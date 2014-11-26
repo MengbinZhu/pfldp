@@ -1,0 +1,433 @@
+$Id: README.cygwin 68 2012-01-24 17:11:21Z frdo $ 
+
+                Building on MS Windows under Cygwin
+               -------------------------------------
+
+
+1) Introduction
+   ------------
+
+This file (README.cygwin) is intended to give some tips for using the Cygwin
+system to build the supplied package code on Microsoft Windows platforms. The
+package supports builds using the G95 and GFortran compilers, though in 
+principle any Windows- or Cygwin-compatible f95 compiler can be used if set
+up to run under Cygwin. See section 7 for known compatibility issues.
+
+Using Cygwin allows standard Unix/Linux shell (configure) scripts and build
+tools to be used, and thus simplifies installation support for the Windows
+platform. Native Windows build support (e.g. batch command or 'nmake' files)
+is not part of the supplied package unless stated in the README for that 
+package.
+
+These tips are generic to several Met Office-developed packages, which can be
+built under Cygwin; see the package README or README.unix file for details of
+how to build the package under Unix/Linux as it is identical for Cygwin. The
+detail of the build may be different for each package.
+
+This information was believed to be correct at the time of writing, but 
+systems evolve, and details of installation and usage can and do change from 
+time to time, so if the guidance here appears not to work, check with the 
+online resources.
+
+
+2) Installing Cygwin
+   -----------------
+
+Cygwin is a freeware Linux/Unix-style environment that runs under Microsoft
+Windows XP, 2000, Vista and Win7 (from v1.7, Win95, WinMe and NT are longer
+supported).
+
+The simplest interface is via a Command Line (terminal) window, although an 
+X11 GUI interface is also available. For details on downloading, installing 
+and setting up Cygwin via the setup.exe program see:
+
+ http://www.cygwin.com
+
+There are useful tips in the FAQ section and a Cygwin User Guide (in PDF) can 
+be downloaded and browsed at leisure.
+
+We recommend downloading the Cygwin setup.exe to a top-level (but NOT root)
+directory such as C:\cygwin, and run the setup program from there by
+double-clicking on its icon. Select the 'Install from Internet' radio button.
+If you have to go though a firewall, on the next dialogue panel, set the
+connection to use IE, otherwise 'direct'. Then choose a local mirror site; an
+ftp one is best for direct connections, though an http one might be needed if
+going through a firewall and/or using an IE connection.
+
+You then need to select which bits to install. The default is a relatively small
+core subset. The minimum setup for our purpose is to take the standard defaults
+in the Base group and also select:
+'gcc-4 (Core)', 'gcc-4 (GCC Relase 4 compiler)', 'gcc4-fortran', 'make', 
+'binutils' and 'bison' from the Devel group;
+'diffutils' from the Utils group.
+
+If you intend to use the very latest GFortran compiler (v4.7.x) under Cygwin 
+from the project website instead of the Cygwin-installed version (v4.5.3), 
+also select 'GMP' and 'MPFR' maths packages from the Library group. Unless you
+have a good reason to install the latest release, we recommend using the
+Cygwin version. 
+
+Some packages may have third-party dependencies which may need other tools; for 
+instance to build the 'udunits' (v1) library from Unidata needs the 'yacc' tool. 
+Unfortunately yacc is not in the Cygwin toolset; instead select 'bison' which 
+is a plug-compatible replacement. NetCDF optionally uses 'flex'. Should you
+need to re-generate configure or makefiles you will require the automake/
+autoconf (v1.9 or later) toolset.
+
+Setup.exe will then download and install the required and any dependent
+components. Setup.exe can be run again at any time to install other components
+of Cygwin should they be needed for something else. Setup.exe will also detect
+and install any updated components after the initial install, and it can also 
+be used to uninstall Cygwin components.
+
+Before the installation completes, take the option to place a Cygwin icon on
+your Desktop; double-clicking on this will open a Cygwin terminal window. This
+is just a standard Windows Command Line interface window, and it can be
+configured for colours, font, window size and command history (depending on
+which Windows version is being used) as for any other 'DOS box'. However, it is
+running the Cygwin application (bash shell) and not DOS.
+
+The terminal should start in your personal HOME directory and run the
+.bash_profile setup script if it exists. In our experience, the resource file
+.bashrc (normally the place to define aliases) is not sourced automatically at
+login, but has to be sourced from .bash_profile (in which case you might as well
+edit alias definitions directly into .bash_profile).
+
+Try the bash commands 'ls' and 'echo $HOME' to check correct installation.
+
+
+3) Setting up Cygwin
+   -----------------
+
+The Windows environment variable %HOME% is usually set to your home directory,
+such as C:\mydir. Under Cygwin, this Windows name would be mapped by default 
+to /cygdrive/c/mydir unless explicitly mounted - e.g.:
+
+ > mount /cygdrive/c /c
+
+such that $HOME will now become /c/mydir. Once created, this mount point will
+remain until explicitly unmounted, even across logins and reboots. See the
+Cygwin User Guide for further details. It is not necessary to mount the 
+logical drive in order to build the package. Cygwin maps all Unix-style paths
+to Windows equivalents on-the-fly. The 'cygpath' utility can be used to map 
+between Windows, Unix or mixed directory path syntax styles, but from v1.7 this
+is not necessary.
+
+If HOME is not pre-set, then we recommend that it is first set up for Windows.
+For instance, under WinXP, right-click on 'My Computer', select the 'Advanced'
+tab and click on 'Environment Variables'; in the upper User section click on
+'New' and enter 'HOME' in the top text entry box and a suitable path in the
+bottom. Typically this might be of the form C:\<username>. Click OK to save;
+create the target directory if needed. Any open Cygwin terminal window must be 
+closed and a new Cygwin session started for any Windows environment variable 
+change to take effect. Setting environment variables in Vista or Win7 is very 
+similar.
+
+This mechanism can be used to create or modify other common (i.e. to Windows 
+as well as to Cygwin) environment variables such as PATH. Environment settings
+only used in Cygwin can be set up in the user's personal start-up file
+$HOME/.bash_profile
+
+In general, applications compiled under Cygwin can also be run under native
+Windows in a standard 'DOS box' or a batch command file though file syntax
+differences may not always be supported.
+
+
+4) Using the Windows native Intel VF95 an MS C++ compilers
+   -------------------------------------------------------
+
+If you are using the native Windows Intel VF95 8.x/9.x/10.x/11.x compiler 
+(which implies you already have the Microsoft Visual Studio C++.NET or 
+equivalent compiler installed too), the 'ifort' and 'cl' commands are normally 
+found by running a DOS batch file to set PATH etc.
+
+Edit the Cygwin start-up batch file (e.g. C:\cygwin\cygwin.bat) and add the
+line:
+
+call "C:\Program Files\Intel\Fortran\compiler80\IA32\bin\ifortvars.bat"
+
+(or wherever the Intel compiler was installed) before the 'login' command 
+line. This will set up the Windows PATH variable so that the Intel and 
+Microsoft tools can be found within the Cygwin environment each time the 
+Cygwin terminal window is started.
+
+The use of such native Windows compilers within Cygwin have not been tested
+with this package, and is therefore for the user to determine if they work 
+or not.
+
+Some perfectly good Windows Fortran compilers - such as the Salford F95 - do
+not work with POSIX-type tools because they employ incompatible command line
+syntax, and/or use different file naming conventions.
+
+
+5) Cygwin versions of G95, GFortran and gcc
+   ----------------------------------------
+
+The G95 and GFortran compilers are both available under the GNU free software
+licence conditions (GPL) as source code or pre-built for a variety of 
+platforms including Windows (stand-alone or under Cygwin).
+
+Both compilers are now fairly stable, although development continues. GFortran
+is now included in Cygwin (and many mainstream Linux distros), though this may 
+not be the very latest release. Where available, we recommend these distro 
+releases of GFortran for building our application rather than installing the 
+very latest, but the choice is yours. Bugs have been known to appear and 
+disappear as new 'experimental' versions are released regularly (though 
+development of G95 seems to have stalled, with no new builds for any
+platform since August 2010).
+
+5.1) G95
+
+For the details and downloads, see:
+
+ http://www.g95.org/
+
+Using your favourite browser, download the binary Cygwin distribution file 
+(tarball) 'g95-x86-cygwin.tgz' to the Cygwin root directory (e.g. C:\cygwin); 
+in a Cygwin terminal window:
+
+ > cd /
+ > tar -zxvf g95-x86-cygwin.tgz
+
+this will install the executable 'i686-pc-cygwin-g95.exe' into /usr/local/bin.
+This should already be in PATH, but it's more user-friendly to set up a
+softlink. e.g.:
+
+ > ln -s /usr/local/bin/i686-pc-cygwin-g95.exe /usr/local/bin/g95
+
+then:
+
+ > g95 --version
+
+will confirm correct installation. This link does not normally need setting up 
+whenever G95 is updated from a new tarball, but the name and/or location have
+been known to change occasionally, so if the version date doesn't appear to have
+changed, check whether the softlink needs to be deleted and re-created to point
+to the new executable.
+
+Since G95 is still being developed, we recommend re-installing the latest
+version (the website may offer various older versions as well as the very
+latest development snapshot) if you experience any compile, link or run-time 
+problems. If problems still occur which are definitely not due to your code 
+(and work with another compiler), report them to the G95 development team.
+
+At the time of writing, G95 development seems to have stalled, with the last
+Cygwin build version being v0.93, May 2010. 
+
+
+5.2) GFortran
+
+We recommend installing the Cygwin default version (currently v4.5.3) via
+setup.exe, but a later version may also be available. The very latest release
+(e.g. v7) can be obtained from the project website. For the download, see:
+
+  http://gcc.gnu.org/wiki/GFortranBinaries
+
+and a guide for installation is at:
+
+  http://gcc.gnu.org/wiki/GFortranBinariesCygwin
+
+As for G95, download the tarball gfortran-4.7-Cygwin-i686.tar.bz2 to the 
+Cygwin root directory, then in a Cygwin terminal window:
+
+  > cd /
+  > tar -jxvf gfortran-4.7-Cygwin-i686.tar.bz2
+
+This will install the executable program 'gfortran-4.exe' in /bin. Optionally, 
+to save typing, create a softlink 'gfortran' (some package installers may 
+assume this name):
+
+  > ln -s <install-path>/gfortran-4.exe /usr/local/bin/gfortran
+
+then:
+
+  > gfortran --version
+
+to test the installation.
+
+It may be our setup, but using such softlink with v4.5.3 results in a
+'failed to exec f951 no such file' error message when compiling a trivial
+test program in the package root directory, though it works the user's home 
+directory. The solution is to use the direct command 'gfortran-4'. YMMV.
+
+
+5.3) GCC
+
+If you elected to have Cygwin's setup.exe install gcc4-core, then you will have a
+version (4.5.3 or later) that is stable and adequate for our package (if there
+is any C code - not all packages have any). The installed version can be
+confirmed with:
+
+ > gcc --version
+
+If you install GFortran directly from the website, this comes with a newer 
+version (4.7 or later). We recommend that this is given a separate command 
+name, e.g. via a soft link such as:
+
+ > ln -s <install-dir>gcc.exe /usr/local/bin/gcc-47
+
+This version can be confirmed with:
+
+ > gcc-47 --version
+
+(This also applies for other platforms supported by GFortran, not just for
+Cygwin.)
+
+If you are a 'must have the latest' junkie, see:
+
+ http://gcc.gnu.org/
+
+but be prepared to have to bootstrap a binary using the Cygwin- or GFortran-
+installed gcc. We recommend using the Cygwin-installed version as this
+is known to work for the package.
+
+
+6) Building the package
+   --------------------
+
+When Cygwin and suitable compilers are correctly set up, the package is simply
+built by starting a Cygwin terminal session (e.g. from the desktop icon).
+Change directory to wherever the archive package file has been downloaded
+and unpack the archive file using tar or unzip as appropriate - refer to the
+package documentation.
+
+Change directory to the package directory, and follow the same Unix/Linux build
+procedures illustrated in the package README or README.unix file - Cygwin
+provides compatible shell (bash) commands and the necessary build tools
+from the 'binutils' setup.exe module.
+
+There are two types of build script, depending on the package:
+ a) a package-specific shell script called build<package>. This script
+    provides the whole build and install functions driving static make files.
+ b) a generic configure script which sets up local make files; the 'make'
+    and 'make install' commands are then run to build and install the
+    package itself.
+See the package README or README.unix on how to specify various build options
+such as using as specific compiler or installation path.
+
+It is recommended that the build be directed to your Cygwin HOME root space -
+i.e. the  build will put Fortran .mod files in $HOME/include (%HOME%\include),
+the  package object library in $HOME/lib (%HOME%\lib) and example application
+executable programs in $HOME/bin (%HOME%\bin). See the README or README.unix
+file to check the default root path and the method to modify it.
+
+Once the application programs have been built under Cygwin, they can be run as
+for any native 'DOS' command in any Command Line window ('DOS box'), not just at
+a Cygwin 'terminal' assuming $HOME/bin (%HOME%\bin) is in your normal (DOS) PATH
+or the explicit path to the executable is given. Note that the G95 Cygwin
+installation described above by default needs the cygwin.dll run-time shared
+library; see the G95 documentation for instructions on how to build without this
+dependency.
+
+Tip: On Windows XP, environment variables are set permanently via 
+Control Panel>System>Advanced>Environment Variables - for instance set PATH 
+to %HOME%\bin;%PATH% in the User section.
+
+
+7) Supported compilers
+  -------------------
+
+The table below lists the compilers that the scripts directly support and are
+known to work for the Cygwin environment under MS Windows. Other compilers
+may work, but have not been tested with this release of the package.
+
+
+OS & version Compiler             Command     Remarks
+--------------------------------------------------------------------------
+Windows[1]   GNU G95 (0.93)       g95      Reasonably stable [2]
+ + Cygwin    GNU GFortran (4.5.3) gfortran Cygwin (gcc4-fortran) [2] [3]
+             GNU C (4.5.3)        gcc      Version with Cygwin (gcc4-core) [2]
+--------------------------------------------------------------------------
+Notes:
+[1] Cygwin V1.7 and later works on all versions of Microsoft Windows from 
+    WinXP onwards. Win95 and WinMe are no longer supported.
+[2] Recommended version.
+[3] GFortran 4.6.x and 4.7.x are later stable and development versions,
+    repectively, and Cygwin builds can be downloaded from the GFortran project 
+    website. Like v4.5.3, these also can't find 'f951' unless run in '/'
+    or $HOME. YMMV.
+
+If you have a compiler not known to the configure script, please notify us of
+its name, command line invocation, version and any compiler flags necessary 
+for a successful build so that this combination can be added to the script 
+for a future release. Builds using the generic configure/make system can 
+specify this information on the command line when running configure; packages
+using a build<package>.sh script use a file called f90_compilers.dat which is
+simply edited to suit.
+
+The following table lists additional compilers that the package build system
+is aware of, and which have been sucessfully used with Fortran code compiled
+under Cygwin, but which have not been tested with this package release as they
+are no longer available to the developers.
+
+
+OS & version    Compiler                  Remarks
+--------------------------------------------------------------------------
+Windows[1]      Intel VF95 8.x ('ifort')  Native Windows; use with 'cl'[4]
+ + Cygwin       Microsoft C++.NET ('cl')  Native Windows [5]
+--------------------------------------------------------------------------
+Notes:
+[4] Package probably works also with V9.x and later, but not tested under
+    Cygwin.
+[5] Package probably works also with other Microsoft Visual Studio C++   
+    products, but not tested. GCC may also work with ifort (not tested).
+
+
+Other compilers may optionally be supported by the package as long as they are
+correctly set up and can be run in the Cygwin environment and compatible 
+compiler flags are specified. Note however, that some code in the package may 
+use compiler directives, so a F95 compiler supporting /fpp or equivalent 
+pre-processor option is required. The obsolete, but popular Compaq (Digital)
+Visual Fortran v6 does NOT support compiler pre-processing. Some code also 
+depends on F95 features which may not be supported by older F90-only 
+compilers.
+
+Note that some Met Office-developed packages depend on third-party code (e.g.
+UNIDATA's netCDF-4 and udunits libraries). We cannot guarantee that such
+external packages support builds under Cygwin with particular compilers. 
+For instance, there are known limitations in the netCDF configure system which
+make it incompatible with using the Microsoft C++.NET and Intel VF95 or 
+Salford F95 native compilers because either their command-line option syntax
+is so different from the Unix style or because file naming is incompatible 
+with Unix's standards (see Section 8).
+
+
+8) Issues for Cygwin vs. Unix/Linux
+   --------------------------------
+
+Building under Cygwin is little different from building under Unix/Linux, 
+and Unix file naming conventions are employed, not Windows native names:
+
+    Item         Unix/Linux    Windows
+ ------------------------------------------------
+ Object file      <name>.o    <name>.obj
+ Object library   lib<name>.a <name>.lib
+ Executables      <name>      <name>.exe
+
+The supported compilers G95 and GFortran use the Unix-standard '.o' and 
+lib<name>.a convention even on Windows. Depending on the package. the
+'.exe' extension may or may not be added to executable programs. 
+
+Note that the 'configure' build system does not support the variable naming of
+object libraries, nor (in the case of many third-party packages like netCDF),
+variable object file extensions - though there are hooks present, they are not
+exploited. The EXE extension seems to be supported for the packages we use.
+
+Native Windows compilers use '/option=<opt>' syntax while configure
+expects '-option <opt>', though the Intel compilers accept both styles in most
+cases. Worse, the Salford F95 compiler by default only compiles source code
+and needs a switch to generate executable code; this is contrary to the 
+traditional use '-c' (or '/c' for VF95) to 'compile-only'.
+
+These limitations make using the Salford F95, Intel VF95 & MS C++ compilers 
+- and possibly other Windows native compilers - unsupported for our package 
+as the 'configure' scripts will fail to detect what is otherwise a perfectly 
+good working compiler.
+
+All things considered, we recommend using the Cygwin-package version of 
+GFortran. It only needs a simple installation via setup.exe, is now 
+a mature project with continuing development and support - and the package 
+has been sucessfully tested with this compiler on Cygwin (and Linux).
+
+
+Dave Offiler, Met Office  <dave.offiler@metoffice.gov.uk>

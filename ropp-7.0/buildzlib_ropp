@@ -1,0 +1,68 @@
+#!/bin/bash
+#
+# $Id: buildzlib_ropp 3406 2012-11-08 17:14:57Z idculv $
+#
+#---------------------------------------------------------------------
+# Build ZLIB package in ROPP_ROOT tree using (by default)
+# all f95 compilers available on MetO Linux desktops,
+# or a sub-set specified in a list on the command line
+# e.g.:
+#  > buildzlib_ropp ifort g95
+#
+#---------------------------------------------------------------------
+#
+# --- Help
+#
+if [[ "$1" == "-h" ]] || \
+   [[ "$1" == "--help" ]]; then
+  echo
+  echo "Purpose: build ZLIB for ROPP"
+  echo
+  echo "Usage: buildzlib_ropp [compiler ...]"
+  echo
+  echo "Options: one or more F95 compiler tags"
+  echo
+  echo "Default: build with all compilers available on Met Office"
+  echo "         Linux Desktop domain."
+  echo
+  echo "Installs to ROPP_ROOT/<compiler>; saves a a log file in"
+  echo "ROPP_ROOT/<compiler>/buildzlib.log"
+  echo
+  exit
+fi
+#
+# --- List of Fortran compilers to use
+#
+fclist=""
+while [[ -n "$1" ]]; do fclist="$fclist $1"; shift; done
+if [[ -z $fclist ]]; then
+  fclist="g95 gfortran \
+          ifort ifort11 ifort12 \
+          nagfor pgf95 pgf11 sunf95"
+fi
+#
+# --- Build package with each compiler in the list, with
+#     output to screen & a log file
+#
+for fc in $fclist; do
+  prefix=$ROPP_ROOT/$fc
+  mkdir -p $prefix
+  log=$prefix/buildzlib.log
+  rm -f $log > /dev/null 2>&1
+  echo " "                                                          | tee $log
+  echo "----------------------------------------------------------" | tee -a $log
+  echo "Building ZLIB package on $(date) host $(hostname) by $USER" | tee -a $log
+  echo "----------------------------------------------------------" | tee -a $log
+  echo ">> $fc"                                                     | tee -a $log
+  ./buildpack zlib $fc 2>&1 5>&1 6>&1                               | tee -a $log
+  if [[ $? -ne 0 ]]; then break; fi
+done
+#
+echo "-------------------------------------------------------------"
+echo "For a record of the build status, see log files:"
+for fc in $fclist; do
+  echo " $ROPP_ROOT/$fc/buildzlib.log"
+done
+#
+exit
+

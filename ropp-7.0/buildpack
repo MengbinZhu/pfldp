@@ -1,0 +1,969 @@
+#!/bin/bash
+#
+# $Id: buildpack 3551 2013-02-25 09:51:28Z idculv $
+#
+#****s* Scripts/buildpack *
+#----------------------------------------------------------------------------------
+# SYNOPSIS
+#  buildpack   -  build an ROPP module or dependency package for ROPP
+#
+# USAGE
+#   > buildpack package compiler [[NO]CLEAN]
+#   For summary help:
+#   > buildpack [?|-h|--help]
+#
+# ARGUMENTS
+#   $1 = package generic name (ropp_io, netcdf, mobufr, ecbufr, grib, zlib, hdf5, netcdf4, ...)
+#        or if blank '?', '-h' or '--help' for summary help
+#   $2 = compiler ID (ifort, g95, nag...) (required, unless help needed)
+#   $3 = CLEAN to force clean build from latest archive (tar/zip) file, or
+#        NOCLEAN to not perform a 'make clean' before 'make' (or equivalents)
+#        (default: use existing install but clean it first)
+#
+# ENVIRONMENT VARIABLES
+#   The following must be pre-set before running this script:
+#     ROPP_ROOT  - path to ROPP root installation directory
+#
+# DESCRIPTION
+#   If no package source directory (<package> or <package>-<version>) is
+#   found, an archive (tar.gz/tar.Z/tgz/bz2/zip) file is searched for and if
+#   found is decompressed and the archive files extracted to the package
+#   directory tree. If he third argument is 'CLEAN' then any existing package
+#   directory tree is first wiped, forcing a re-install from an archive.
+#   The package is then processed, which in most cases any previous build
+#   (object/library files etc) is cleaned (unless the 3rd argument is
+#   'NOCLEAN'), then the package-dependent build commands are run. This may
+#   require compiler- and OS-specific configure files from the same directory
+#   containing this script.
+#   Libraries & F90 modules are then built and installed to the ROPP compiler
+#   directory in ROPP_ROOT/<compiler> as set in the appropriate configure
+#   file.
+#   Compiler-independent files, such as BUFR run-time tables, are installed
+#   to ROPP_ROOT/data.
+#   If the script is run with no arguments or just ?, -h or --help, summary
+#   usage info is written to stdout.
+#
+# FILES
+#   The following files are assumed to be present in the same directory
+#   in which this script is placed (e.g. ROPP_SRC).
+#   1) Package archive files (compressed tarball or zipfile), usually as:
+#      <package>-<version>.<type> or <package>.<type> where type is one of
+#      tar.gz, tar.bz2, tgz or zip
+#      (e.g. netcdf-4.1.3.tar.gz or ropp_io-6.1.tar.gz)
+#   2) Directory configure/ containing package configure file usually as:
+#      <package>_configure_<compiler>_<os>
+#      (e.g. configure/netcdf_configure_ifort_linux)
+#      (Note: MetDB BUFR does not use configure files)
+#
+# INSTALLATION
+#   Packages will be installed to ROPP_ROOT (assuming the configure scripts
+#   are as provided) thus:
+#     ROPP_ROOT/<build>             : this script, source archive files,
+#                                     build/configure scripts,
+#                                     decompressed archive trees
+#     ROPP_ROOT/<compiler>/bin      : binaries (application programs)
+#     ROPP_ROOT/<compiler>/include  : include (*.h) and F90 module (*.mod) files
+#     ROPP_ROOT/<compiler>/lib      : object libraries (usually lib<package>.a)
+#     ROPP_ROOT/<compiler>/man/man1 : 'man' page files (*.1)
+#     ROPP_ROOT/data                : compiler-independent files
+#                                     (e.g. BUFR tables)
+#   Some packages may create other directories & files in ROPP_ROOT/<compiler>.
+#   If ROPP_ROOT is undefined, it defaults to the directory which contains this
+#   build script. The path defined by ROPP_ROOT is created if necessary &
+#   checked that the user has write access.
+#
+# PACKAGES
+#   This version of the script supports the following packages and their
+#   latest versions (and previous version(s)):
+#     netcdf      v4.1.3  (v4.x.x)
+#     mobufr      v19.1.2   (v19.0,v19.1,v19.1.1)
+#     ecbufr      v387    (v38x)
+#     grib        v1.9.9
+#     zlib        v1.2.5
+#     hdf5        v1.8.8
+#     netcdf4     v4.1.3  (v4.x.x)
+#     ropp_*      v6.1    (v6.0,v5.0)
+#
+#   Earlier or later package versions may have slightly different build
+#   details, such as internal source directory layout.
+#
+#   NB 1: ROPP v1.0 and v1.1 depended on BLAS, LAPACK, LAPACK95 and M1QN3,
+#         which this version of buildpack does not support.
+#   NB 2: ROPP v1.0-v3.0 also depended on UDUNITS. This version of buildpack
+#         does not support building udunits.
+#   NB 3: This script no longer supports the obsolete Intel 'ifc' (v7)
+#         compiler.
+#
+#---------------------------------------------------------------------
+#****
+#
+# ----------------------------------------------------------------
+# Function to print a summary of usage
+#
+usage()
+{
+  echo
+  echo " buildpack - build latest ROPP module or dependency package"
+  echo
+  echo "Usage:"
+  echo " > buildpack package compiler [[NO]CLEAN]"
+  echo " > buildpack [?|-h|--help]"
+  echo
+  echo " Required:"
+  echo "   package  - package name (see Supported packages)"
+  echo "   compiler - Fortran compiler (see Compilers)"
+  echo
+  echo " Supported packages:"
+  echo "   NETCDF, MOBUFR, ECBUFR, GRIB, ZLIB, HDF5, NETCDF4,"
+  echo "   ROPP_UTILS, ROPP_IO, ROPP_PP, ROPP_FM, ROPP_1DVAR"
+  echo "   It is recommended to build packages from scratch in the above order,"
+  echo "   except only (at most) one of MOBUFR or ECBUFR need be built."
+  echo "   Note that GRIB and ZLIB/HDF5/NETCDF4 are also optional."
+  echo
+  echo " Compilers:"
+  echo "   Compiler name matching one of the configuration mini-scripts in"
+  echo "   ./configure :  <package>_configure_<compiler>_<os>."
+  echo "   Examples for <compiler> are:"
+  echo "     ifort, sunf95, nagfor, pgf95, lf95, g95, gfortran, xlf95..."
+  echo
+  echo " Options"
+  echo "    CLEAN : remove source directory to re-build from latest archive file"
+  echo "  NOCLEAN : do not clean source directory before a re-build (with the"
+  echo "            same compiler)"
+  echo
+  exit 0
+}
+# ----------------------------------------------------------------
+# Function to print a message for a missing configure script
+#
+noconfile()
+{
+  echo "*** Configure script $1 not found."
+  echo
+  echo "    Please create a configure script for this combination of package,"
+  echo "    compiler and operating system with this file name and re-run the build."
+  echo "    One of the existing files in the configure directory may be suitable"
+  echo "    as a template. Please send any new working script to the ROPP Development"
+  echo "    Team for inclusion in future releases."
+  echo
+  exit 1
+}
+# ----------------------------------------------------------------
+# Function to detect the latest version of a distro archive package.
+# Usage:
+#  latestarc [<path>]<pack>
+# Not fool-proof, but works assuming a file name template of the form:
+#  <path><pack>*-<vers>.<extn> or <pack>*_<vers>.<extn>
+# where:
+#  <path> is an optional path (default: PWD);
+#  <pack> is the package name (case-sensitive) or file name template
+#         up to the varying <vers> part;
+#  <vers> is a lexically increasing version ID (usually a number like
+#         12, 00012, 1.2 or 1.2.3). The 'latest version' selection will work
+#         best if <vers> is consistent in format across all the files
+#         matching the template;
+#  <extn> is the archive extension type: one of tar.gz, tar.bz2, tgz
+#         or zip (this list can be extended by editing 'extns' variable)
+# Returns the file with the highest (lexically greatest) <vers> string
+# to stdout.
+# Example:
+#  > ls pack*
+#  pack-1.0.tgz  pack-2.2.zip  packnew-4.zip  pack_3.tar.gz
+#  > latestarc pack
+#  packnew-4.zip
+# ----------------------------------------------------------------
+#
+latestarc(){
+  unset ls
+  unalias ls > /dev/null 2>&1
+  extns=".tar.gz .tar.bz2 .tgz .zip"  # list of archive extensions
+  latestver=""
+  for e in $extns; do
+    for f in $(ls ${1}*${e} 2>/dev/null); do
+      thisarc=$f             # save this archive file name
+      f=$(basename $f $e)    # remove <path> & <extn> parts
+      f=${f#$1pack}          # remove <pack> part
+      f=${f#-}               # remove anything up to & including dash
+      f=${f#_}               # remove anything up to & including underscore
+      if [[ -n $f ]]; then
+        thisver=$f           # anything left is <vers>
+      else
+        thisver="0"  # assume files with no detectable version are 'v0'
+      fi
+      if [[ -z "$latestver" ]]; then        # initialise with first file found
+        latestarc=$thisarc
+        latestver=$thisver
+      fi
+      if [[ $thisver > $latestver ]]; then  # update if higher <vers>
+        latestarc=$thisarc
+        latestver=$thisver
+      fi
+    done
+  done
+  echo $latestarc                                      # return the answer
+  unset extns f v latestarc latestver thisarc thisver  # tidy up
+}
+# ----------------------------------------------------------------
+# Function to detect the latest version of a distro directory.
+# Usage:
+#  latestdir [<path>]<pack>
+# Not fool-proof, but works assuming a directory name template of the form:
+#  <path><pack>*-<vers> or <pack>*_<vers>
+# where:
+#  <path> is an optional path (default: PWD);
+#  <pack> is the package name (case-sensitive) or directory name template
+#         up to the varying <vers> part;
+#  <vers> is a lexically increasing version ID (usually a number like
+#         12, 00012, 1.2 or 1.2.3). The 'latest version' selection will work
+#         best if <vers> is consistent in format across all the files
+#         matching the template;
+# Returns the directory with the highest (lexically greatest) <vers> string
+# to stdout.
+# Example:
+#  > ls -d pack*
+#  pack-1.0/ pack-2.2/  packnew_4/  pack_3/
+#  > latestdir pack
+#  packnew-4
+# ----------------------------------------------------------------
+#
+latestdir(){
+  unset ls
+  unalias ls > /dev/null 2>&1
+  latestver=""
+  for d in $(ls -d ${1}*/ 2>/dev/null); do
+    thisdir=${d%%/}               # save this directory/name
+    d=$(basename $d); d=${d#$1}   # remove <path><pack> parts
+    v=$(expr index $d - 2>/dev/null)      # remove anything else before first '-'...
+    if [[ v -le 0 ]]; then
+      v=$(expr index $d _ 2>/dev/null)    # ... or '_' if no '-'
+    fi
+    if [[ v -gt 0 ]]; then
+      thisver=${d:$v}                     # what's left is <vers>
+    else
+      thisver="0"  # assume files with no detectable version are 'v0'
+    fi
+    if [[ -z "$latestver" ]]; then        # initialise with first file found
+      latestdir=$thisdir
+      latestver=$thisver
+    fi
+    if [[ $thisver > $latestver ]]; then  # update if higher <vers>
+      latestdir=$thisdir
+      latestver=$thisver
+    fi
+  done
+  echo ${latestdir%%/}                           # return the answer
+  unset d v latestdir latestver thisdir thisver  # tidy up
+}
+# ----------------------------------------------------------------
+# Function to build/test/install netCDF library
+#
+build_NETCDF()
+{
+  echo
+  echo "------------------------------------------------------------------"
+  echo ">> Building netCDF (v$version) with '$compiler' compiler on $OS   "
+  echo "------------------------------------------------------------------"
+  echo
+#
+  confile="configure/netcdf_configure_${compiler}_${os}"
+  if [[ -f $confile ]]; then
+    echo "  - using configure script $confile"
+  else
+    noconfile $confile
+  fi
+#
+  echo
+  cd $package
+#
+  if [[ -f Makefile ]]; then
+   echo "------------------------------------------------------------------"
+   echo ">> Deep cleaning..."
+   echo
+   make distclean
+   do_clean="n"
+   echo
+  else
+   do_clean="y"
+  fi
+  echo "------------------------------------------------------------------"
+  echo ">> Configuring..."
+  echo
+  cat $TOP/$confile
+  echo
+  $TOP/$confile $ROPP_ROOT/$compiler
+  echo
+  if [[ $do_clean = "y" ]]; then
+   echo "------------------------------------------------------------------"
+   echo ">> Cleaning..."
+   echo
+   make clean
+   echo
+  fi
+  echo "------------------------------------------------------------------"
+  echo ">> Building, testing & installing..."
+  echo
+  make check install
+  if [[ $? -ne 0 ]]; then
+    echo
+    echo "*** Failed to build netCDF library"
+    errstat=1
+  fi
+}
+# ----------------------------------------------------------------
+# Function to build/test/install MetDB BUFR library
+#
+build_MOBUFR()
+{
+  if [[ $version = "?" ]] && [[ -f $package/README ]]; then
+    release=$(grep "(Release" ${package}/README | awk '{print $1 " " $2}')
+    version=${release:10}; version=${version%%")"}
+  fi
+  echo
+  echo "------------------------------------------------------------------"
+  echo ">> Building MetDB BUFR (v${version}) with '$compiler' F95 compiler on $OS"
+  echo "------------------------------------------------------------------"
+#
+  export BUFR_LIBRARY=$ROPP_ROOT/data/bufr/
+#
+  echo
+  cd $package
+  if [[ ${version:0:2} -ge 19 ]]; then
+    ./buildbufr -u -p $ROPP_ROOT/$compiler
+  fi
+  ./buildbufr -c -p $ROPP_ROOT/$compiler -f $compiler -t
+  if [[ $? -ne 0 ]]; then
+    echo
+    echo "*** Failed to build MetDB BUFR library"
+    errstat=1
+  fi
+}
+# ----------------------------------------------------------------
+# Function to build/test/install MetDB BUFR library
+#
+build_ECBUFR()
+{
+  echo
+  echo "------------------------------------------------------------------"
+  echo ">> Building ECMWF BUFR (v${version}) with '$compiler' F95 compiler on $OS"
+  echo "------------------------------------------------------------------"
+#
+  export BUFR_TABLES=$ROPP_ROOT/data/bufr/
+  export INSTALL_DIR=$ROPP_ROOT/$compiler
+  INSTALL="cp -uvp"
+  if [[ $OS == "AIX" ]]; then INSTALL="cp"; fi
+#
+  confile="configure/ecbufr_configure_${compiler}_${os}"
+  if [[ -f $confile ]]; then
+    echo "  - using configure script $confile"
+    cp $confile $package/config/config.${os}_${compiler}
+  else
+    noconfile $confile
+  fi
+  echo
+  cd $package
+#
+# ECMWF package doesn't support AIX or Cygwin, so fudge some config/
+# options files based on the Linux ones
+#
+  if [[ $OS == "AIX" ]]; then
+    cp ./options/options_linux ./options/options_aix
+    cp ./pbio/sources.linux    ./pbio/sources.tmp
+    sed s/gbyte_le/gbyte/      ./pbio/sources.tmp > ./pbio/sources.aix
+    rm ./pbio/sources.tmp
+  elif [[ $OS == "CYGWIN" ]]; then
+    cp ./options/options_linux ./options/options_cygwin
+    cp ./pbio/sources.linux    ./pbio/sources.cygwin
+  fi
+  echo
+  echo ">> Building..."
+  cd ./bufrdc
+  make ARCH=$os CNAME=_$compiler LIB=bufr clean all
+  cd ../pbio
+  make ARCH=$os CNAME=_$compiler LIB=bufr clean all
+  cd ../bufrtables
+  make ARCH=$os CNAME=_$compiler LIB=bufr clean links
+  if [[ $? -eq 0 ]]; then
+    echo
+    echo ">> Installing..."
+# Systems with non-GNU 'cp' (like AIX) may not support the -d flag
+# (preserve links). If not, the resulting installed BUFR tables
+# will be real files, not softlinks
+    cp -d links.sh tmp > /dev/null 2>&1
+    if [[ $? -eq 0 ]]; then
+      keeplinks="-d"
+      rm tmp
+    else
+      keeplinks=""
+    fi
+    mkdir -p $BUFR_TABLES
+    $INSTALL $keeplinks ?000*.TXT $BUFR_TABLES
+    $INSTALL ../libbufr.a $INSTALL_DIR/lib
+    echo
+    echo ">> Testing..."
+    cd ../examples
+    if [[ ! -f ../config/fortran2c_$compiler ]]; then
+      echo "FORTRAN2C =" > ../config/fortran2c_$compiler
+    fi
+    make ARCH=$os CNAME=_$compiler LIB=bufr clean
+#
+# ECMWF code is all f77 and contains some old deprecated features
+# which NAG doesn't support and which cause errors. We also
+# need to use the NAG interfaces fudge to support getenv() and
+# similar 'system' calls.
+#
+    if [[ ${compiler:0:3} == "nag" ]]; then
+      cp -v ../../configure/nag_interfaces.f90 .
+      nagf=$compiler
+      if [[ $nagf == "nag" ]]; then nagf=f95; fi
+      echo $nagf -c -w -f77 nag_interfaces.f90
+      $nagf -c -w -f77 nag_interfaces.f90
+      mv Makefile Makefile_notnag
+      sed s/create_bufr\.o/"create_bufr.o nag_interfaces.o"/g Makefile_notnag \
+          > Makefile
+      mv create_bufr.F create_bufr.F_notnag
+      sed s/\(a\,\$\)\'/\(a\)\',advance=\'no\'/g create_bufr.F_notnag \
+            > create_bufr.F
+    fi
+    make ARCH=$os CNAME=_$compiler LIB=bufr create_bufr
+    if [[ $? -eq 0 ]]; then
+      ./create_bufr <<EOF
+1
+1
+EOF
+    fi
+    if [[ -f nag_interfaces.f90 ]]; then
+      mv Makefile_notnag Makefile
+      mv create_bufr.F_notnag create_bufr.F
+      rm nag_interfaces.*
+    fi
+  else
+    echo
+    echo "*** Failed to build ECMWF BUFR library"
+    errstat=1
+  fi
+}
+# ----------------------------------------------------------------
+# Function to build/test/install GRIB library
+#
+build_GRIB()
+{
+  echo
+  echo "------------------------------------------------------------------"
+  echo ">> Building GRIB (v$version) with '$compiler' compiler on $OS   "
+  echo "------------------------------------------------------------------"
+  echo
+#
+  confile="configure/grib_configure_${compiler}_${os}"
+  if [[ -f $confile ]]; then
+    echo "  - using configure script $confile"
+  else
+    noconfile $confile
+  fi
+#
+  echo
+  cd $package
+#
+  if [[ -f Makefile ]]; then
+   echo "------------------------------------------------------------------"
+   echo ">> Deep cleaning..."
+   echo
+   make distclean
+   do_clean="n"
+   echo
+  else
+   do_clean="y"
+  fi
+  echo "------------------------------------------------------------------"
+  echo ">> Configuring..."
+  echo
+  cat $TOP/$confile
+  echo
+  $TOP/$confile $ROPP_ROOT/$compiler
+  echo
+  if [[ $do_clean = "y" ]]; then
+   echo "------------------------------------------------------------------"
+   echo ">> Cleaning..."
+   echo
+   make clean
+   echo
+  fi
+  echo "------------------------------------------------------------------"
+  echo ">> Building, testing & installing..."
+  echo
+  make && make check && make install
+  if [[ $? -ne 0 ]]; then
+    echo
+    echo "*** Failed to build GRIB library"
+    errstat=1
+  fi
+}
+# ----------------------------------------------------------------
+# Function to build/test/install ZLIB library
+#
+build_ZLIB()
+{
+  echo
+  echo "------------------------------------------------------------------"
+  echo ">> Building ZLIB (v$version) with '$compiler' compiler on $OS     "
+  echo "------------------------------------------------------------------"
+  echo
+#
+  confile="configure/zlib_configure_${compiler}_${os}"
+  if [[ -f $confile ]]; then
+    echo "  - using configure script $confile"
+  else
+    noconfile $confile
+  fi
+#
+  echo
+  cd $package
+#
+  if [[ -f Makefile ]]; then
+   echo "------------------------------------------------------------------"
+   echo ">> Deep cleaning..."
+   echo
+   make distclean
+   do_clean="n"
+   echo
+  else
+   do_clean="y"
+  fi
+  echo "------------------------------------------------------------------"
+  echo ">> Configuring..."
+  echo
+  cat $TOP/$confile
+  echo
+  $TOP/$confile $ROPP_ROOT/$compiler
+  echo
+  if [[ $do_clean = "y" ]]; then
+   echo "------------------------------------------------------------------"
+   echo ">> Cleaning..."
+   echo
+   make clean
+   echo
+  fi
+  echo "------------------------------------------------------------------"
+  echo ">> Building, testing & installing..."
+  echo
+  make && make check && make install
+  if [[ $? -ne 0 ]]; then
+    echo
+    echo "*** Failed to build ZLIB library"
+    errstat=1
+  fi
+}
+# ----------------------------------------------------------------
+# Function to build/test/install HDF5 library
+#
+build_HDF5()
+{
+  echo
+  echo "------------------------------------------------------------------"
+  echo ">> Building HDF5 (v$version) with '$compiler' compiler on $OS     "
+  echo "------------------------------------------------------------------"
+  echo
+#
+  confile="configure/hdf5_configure_${compiler}_${os}"
+  if [[ -f $confile ]]; then
+    echo "  - using configure script $confile"
+  else
+    noconfile $confile
+  fi
+#
+  echo
+  cd $package
+#
+  if [[ -f Makefile ]]; then
+   echo "------------------------------------------------------------------"
+   echo ">> Deep cleaning..."
+   echo
+   make distclean
+   do_clean="n"
+   echo
+  else
+   do_clean="y"
+  fi
+  echo "------------------------------------------------------------------"
+  echo ">> Configuring..."
+  echo
+  cat $TOP/$confile
+  echo
+  $TOP/$confile $ROPP_ROOT/$compiler
+  echo
+  if [[ $do_clean = "y" ]]; then
+   echo "------------------------------------------------------------------"
+   echo ">> Cleaning..."
+   echo
+   make clean
+   echo
+  fi
+  echo "------------------------------------------------------------------"
+  echo ">> Building, testing & installing..."
+  echo
+  make && make check && make install
+  if [[ $? -ne 0 ]]; then
+    echo
+    echo "*** Failed to build HDF5 library"
+    errstat=1
+  fi
+}
+# ----------------------------------------------------------------
+# Function to build/test/install netCDF4 library
+#
+build_NETCDF4()
+{
+  echo
+  echo "-------------------------------------------------------------------"
+  echo ">> Building netCDF4 (v$version) with '$compiler' compiler on $OS   "
+  echo "-------------------------------------------------------------------"
+  echo
+#
+  confile="configure/netcdf4_configure_${compiler}_${os}"
+  if [[ -f $confile ]]; then
+    echo "  - using configure script $confile"
+  else
+    noconfile $confile
+  fi
+#
+  echo
+  cd $package
+#
+  if [[ -f Makefile ]]; then
+   echo "------------------------------------------------------------------"
+   echo ">> Deep cleaning..."
+   echo
+   make distclean
+   do_clean="n"
+   echo
+  else
+   do_clean="y"
+  fi
+  echo "------------------------------------------------------------------"
+  echo ">> Configuring..."
+  echo
+  cat $TOP/$confile
+  echo
+  $TOP/$confile $ROPP_ROOT/$compiler
+  echo
+  if [[ $do_clean = "y" ]]; then
+   echo "------------------------------------------------------------------"
+   echo ">> Cleaning..."
+   echo
+   make clean
+   echo
+  fi
+  echo "------------------------------------------------------------------"
+  echo ">> Building, testing & installing..."
+  echo
+  make check install
+  if [[ $? -ne 0 ]]; then
+    echo
+    echo "*** Failed to build netCDF4 library"
+    errstat=1
+  fi
+}
+# ----------------------------------------------------------------
+# --- Function to build/install one of ROPP libraries ---
+#
+build_ROPP()
+{
+  module=$(echo $package | cut -d"_" -f2 | cut -d"-" -f1 )
+  MODULE=$(echo $module | tr [:lower:] [:upper:])
+  echo
+  echo "------------------------------------------------------------------"
+  echo ">> Building ROPP_$MODULE (v${version}) with '$compiler' compiler on $OS"
+  echo "------------------------------------------------------------------"
+  echo
+#
+  confile="configure/ropp_configure_${compiler}_${os}"
+  if [[ -f $confile ]]; then
+    echo "  - using configure script $confile"
+  else
+    noconfile $confile
+  fi
+#
+# From ROPP_IO v4, expected BUFR library name is libmetdbbufr.a. If installed
+# MetDB library is earlier than v18.2, we need to copy the old file libbufr.a
+# (after checking the latter isn't the ECMWF library of the same name).
+# The module configure script will deal with the case of neither being present.
+# ROPP_IO v5 needs MetDB BUFR v19.0 or later.
+#
+  if [ $MODULE = "IO" ] && \
+     [ ! -f $ROPP_ROOT/$compiler/lib/libmetdbbufr.a ]; then
+    if [ -f $ROPP_ROOT/$compiler/lib/libbufr.a ]; then
+      ar -t $ROPP_ROOT/$compiler/lib/libbufr.a | grep enbufv2 > /dev/null 2>&1
+      if [ $? -eq 0 ]; then
+        echo
+        echo "*** BUFR v18.2+ library not installed - found an older version..."
+        cp $ROPP_ROOT/$compiler/lib/libbufr.a $ROPP_ROOT/$compiler/lib/libmetdbbufr.a
+      fi
+    fi
+  fi
+#
+  echo
+  cd $package
+  cleanerr=0
+#
+  if [[ $do_clean = "y" ]] && [[ -f Makefile ]]; then
+    echo "------------------------------------------------------------------"
+    echo ">> Deep cleaning..."
+    echo
+    make distclean
+    cleanerr=$?
+    do_clean="n"
+    echo
+  fi
+  if [[ ! -f Makefile ]] || [[ $cleanerr -ne 0 ]]; then
+    echo "------------------------------------------------------------------"
+    echo ">> Configuring..."
+    echo
+    cat $TOP/$confile
+    echo
+    $TOP/$confile $ROPP_ROOT/$compiler
+    echo
+    if [[ ! -f Makefile ]]; then
+      echo "*** Failed to generate Makefile"
+      echo
+      exit 1
+    fi
+  fi
+  if [[ $do_clean = "y" ]]; then
+   echo "------------------------------------------------------------------"
+   echo ">> Cleaning..."
+   echo
+   make clean
+   echo
+  fi
+  echo "------------------------------------------------------------------"
+  echo ">> Building & installing..."
+  echo
+  make install
+  if [[ $? -eq 0 ]]; then
+    if [[ -f tests/Makefile ]]; then
+      echo "------------------------------------------------------------------"
+      echo ">> Testing ROPP_$MODULE..."
+      echo
+      cd tests
+      make test
+      echo
+    fi
+  else
+    echo
+    echo "*** Failed to build ROPP_$MODULE library"
+    errstat=1
+  fi
+}
+#
+# ---------------------- Start of script ------------------------------
+#
+# --- Environment set-up
+#
+# the following command sets g=rwx as default for group shared builds;
+# this can be an removed if building from a single account.
+umask 002
+#
+# the following is to ensure we don't pick up any inappropriate
+# user libraries or incompatible linker options
+unset LDFLAGS
+#
+TOP=$(dirname $0)
+if [[ $TOP = "." ]]; then
+  TOP=$PWD
+fi
+export TOP
+errstat=0
+#
+# --- Installation root directory checks
+#
+if [[ -z $ROPP_ROOT ]]; then
+  echo "WARNING: Environment variable ROPP_ROOT is not set."
+  echo "         Using $TOP as default"
+  echo
+  export ROPP_ROOT=$TOP
+fi
+mkdir -p $ROPP_ROOT > /dev/null 2>&1
+if [[ $? -ne 0 ]]; then
+  echo "*** Failed to create ROPP installation directory $ROPP_ROOT"
+  echo "    Check that you have write permissions for this path"
+  exit 1
+fi
+testfile=ropptestfile_$$
+touch $ROPP_ROOT/$testfile > /dev/null 2>&1
+if [[ $? -ne 0 ]]; then
+  echo "*** You do not have write permission to $ROPP_ROOT"
+  echo "    Please set another path for ROPP_ROOT"
+  exit 1
+fi
+rm -f $ROPP_ROOT/$testfile > /dev/null 2>&1
+#
+# --- O/S name: truncate at first space; remove version ID
+#     from 'Cygwin' & make uppercase (with duplicate in lowercase)
+#
+export OS=$(uname | cut -d" " -f1 | \
+                    sed s/_NT-.*// | \
+                    tr [:lower:] [:upper:])
+export os=$(echo $OS | tr [:upper:] [:lower:])
+#
+# --- over-ride any external user settings...
+#
+export MAN=""
+export LDFLAGS=""
+#
+#--- Check command line inputs
+#
+if [[ "$1" = "-?"     ]] || \
+   [[ "$1" = "-h"     ]] || \
+   [[ "$1" = "--help" ]]; then
+  usage
+fi
+if [[ -z "$1"         ]] || \
+   [[ -z "$2"         ]]; then
+  usage
+fi
+#
+#--- Parse command line for package, compiler & cleaning option
+#
+package=$(echo $1 | tr [:upper:] [:lower:])
+PACKAGE=$(echo $package | tr [:lower:] [:upper:])
+#
+export compiler=$2
+#
+# --- Make the basic install tree if it doesn't already exist
+#    (this would be done within the package installer, but we
+#     do it here in case the package build fails)
+#
+mkdir -p $ROPP_ROOT/$compiler/bin
+mkdir -p $ROPP_ROOT/$compiler/include
+mkdir -p $ROPP_ROOT/$compiler/lib
+mkdir -p $ROPP_ROOT/$compiler/lib64
+mkdir -p $ROPP_ROOT/$compiler/man/man1
+#
+CLEAN=$3
+#
+# --- Set up for supported packages
+#
+case $PACKAGE in
+  NETCDF)  source="http://www.unidata.ucar.edu/software/netcdf/"
+   ;;
+  BUFR)    source="http://www.romsaf.org"
+           package=bufr-
+           PACKAGE=MOBUFR
+   ;;
+  MOBUFR)  source="http://www.romsaf.org"
+           package=bufr-
+   ;;
+  ECBUFR)  source="http://www.ecmwf.int/products/data/software/bufr.html"
+           package=bufr_000
+   ;;
+  GRIB)    source="https://software.ecmwf.int/wiki/display/GRIB/Home"
+           package=grib_api-
+   ;;
+  ZLIB)    source="http://www.zlib.net"
+           package=zlib-
+   ;;
+  HDF5)    source="http://www.hdfgroup.org/HDF5"
+           package=hdf5-
+   ;;
+  NETCDF4) source="http://www.unidata.ucar.edu/software/netcdf/"
+           package=netcdf
+   ;;
+  ROPP_*)  source="http://www.romsaf.org"
+           PACKAGE="ROPP"
+   ;;
+  *) echo "*** Package $PACKAGE not supported"
+     echo
+     exit 1
+   ;;
+esac
+#
+#--- Is required uncompressed package tree present?
+#
+pkgdir=$(latestdir $package)
+#
+echo
+echo ">> Checking $PACKAGE package ..."
+#
+if [[ -d $pkgdir ]] && [[ "$CLEAN" = "CLEAN" ]]; then
+  echo "  - Wiping old source directory $pkgdir..."
+  rm -Rf $pkgdir > /dev/null 2>&1
+fi
+#
+if [[ ! -d $pkgdir ]]; then
+  echo
+  echo "*** Source directory not found - looking for distro archive file..."
+#
+  pkgarc=$(latestarc $package)
+  if [[ -f $pkgarc ]]; then
+    echo "  - Found $pkgarc - unpacking..."
+    ext=${pkgarc: -3:3}
+    case $ext in
+     bz2) bzcat $pkgarc > temp.tar
+          tar -xvf temp.tar
+          rm temp.tar
+          ;;
+     zip) unzip $pkgarc
+          ;;
+       *) gunzip -c $pkgarc > temp.tar
+          tar -xvf temp.tar
+          rm temp.tar
+          ;;
+    esac
+    pkgdir=$(latestdir $package)
+    CLEAN="NOCLEAN"
+  else
+    echo
+    echo "*** Archive tar/zip file not found either."
+    if [[ -n $source ]]; then
+      echo "    Download the latest archive from:"
+      echo "    $source"
+    fi
+    echo
+    exit 1
+  fi
+fi
+#
+version=${pkgdir##*-}
+if [[ "$version" = "$pkgdir" ]]; then version=${pkgdir##*_}; fi
+if [[ "$version" = "$pkgdir" ]]; then version="?"; fi
+export package=$pkgdir
+export version=$version
+#
+if [[ "$CLEAN" = "NOCLEAN" ]]; then
+  CLEAN="n"
+else
+  CLEAN="y"
+fi
+export do_clean=$CLEAN
+export PATH=$PATH:$ROPP_ROOT/$compiler/bin
+#
+echo
+echo " - Found installed source package $package (${PACKAGE} version ${version})"
+#
+build_$PACKAGE
+#
+echo
+echo "Directory: $ROPP_ROOT/$compiler/include"
+ls -ltr $ROPP_ROOT/$compiler/include
+echo
+echo "Directory: $ROPP_ROOT/$compiler/lib"
+ls -ltr $ROPP_ROOT/$compiler/lib
+echo
+echo "Directory: $ROPP_ROOT/$compiler/lib64"
+ls -ltr $ROPP_ROOT/$compiler/lib64
+echo
+echo "Directory: $ROPP_ROOT/$compiler/bin"
+ls -ltr $ROPP_ROOT/$compiler/bin
+echo
+echo "Directory: $ROPP_ROOT/$compiler/man/man1"
+ls -ltr $ROPP_ROOT/$compiler/man/man1
+echo
+echo "------------------------------------------------------------------"
+if [[ $errstat -eq 0 ]]; then
+  echo "Done. Check messages to confirm successful build & installation"
+else
+  echo "** An error occured. Check messages to find the problem"
+fi
+echo "------------------------------------------------------------------"
+echo
+#
+exit $errstat

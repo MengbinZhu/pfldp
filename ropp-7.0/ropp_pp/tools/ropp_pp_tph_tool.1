@@ -1,0 +1,178 @@
+./" $Id: ropp_pp_tph_tool.1 3551 2013-02-25 09:51:28Z idculv $
+./"
+.TH ROPP_PP_TPH_TOOL 1 31-Jul-2013 ROPP-7 ROPP-7
+./"
+.SH NAME
+ropp_pp_tph_tool
+./"
+.SH SYNOPSIS
+Tropopause height (TPH) diagnostic tool.
+.PP
+./"
+.B ropp_pp_tph_tool
+.I input_file [input_file...]
+\-o output_file
+.br
+                 [-b] [-n] [-y] [-t]
+.br
+                 [-h] [-d] [-v]
+./"
+.SH DESCRIPTION
+.I ropp_pp_tph_tool
+Diagnose tropopause height from the kinks in one or more RO profiles, using the
+covariance transform method of Lewis (GRL 2009), or, for temperature profiles,
+tropopause heights defined according to the standard WMO lapse-rate definition
+(WMO Bull 6, 1957) and as the height of the cold point in the lower
+troposphere. 
+.B (Reference\ 2.)
+./"
+.SH FILES
+.SS Input
+One or more ROPP netCDF files containing one or more profiles of RO data.
+.B (Reference\ 1.)
+
+If level 1b data are present, the tool will, if requested and if possible,
+return the impact  parameter of a tropopause derived from the bending angle -
+impact parameter profile. This is defined as the location of the maximum of the
+covariance transform of the bending angle profile. 
+
+If level 2a data are present, the tool will, if requested and if possible,
+return the geometric altitude of a tropopause derived from the refractivity -
+height profile. This is defined as the location of the maximum of the covariance
+transform of the refractivity profile. 
+
+If level 2a data are present, the tool will, if requested and if possible,
+return the geometric altitude of a tropopause derived from the dry temperature -
+height profile. In fact, two are calculated: one based on the standard WMO 
+lapse-rate definition of tropopause height, and one defined as the height of the
+minimum temperature in the lower part of the atmosphere.
+
+If level 2b data are present, the tool will, if requested and if possible,
+return the geopotential height of a tropopause derived from the temperature -
+geoptotential height profile. In fact, two are calculated: one based on the
+standard WMO  lapse-rate definition of tropopause height, and one defined as the
+height of the minimum temperature in the lower part of the atmosphere.
+
+If the attempts to calculate tropopause height (TPH) prove impossible,  the TPH
+will be set to the ROPP missing data value.  If the TPH calculation  is possible
+but of questionable validity, a TPH will be returned and  an indicative QC flag
+will be set. 
+
+See
+.B Reference\ 2
+for more details.
+
+.SS Output
+The output ROPP netCDF file contains the various tropopause heights and their
+error flags.  These variables are held in the Lev2c component of the standard ROPP structure - see
+.B Reference\ 1
+and 
+.B Reference\ 2
+for details. 
+
+.PP
+If the input file contains more than one profile (a 'multi-file') or more
+than one input file is specified, the single output file will contain derived
+profiles for all the input profiles.
+./"
+
+.SH OPTIONS
+Option switches are case\-sensitive but may be placed before or after
+the input file argument and in any order. All arguments to switches are
+mandatory when the switch is used.
+.PP
+
+.B -b
+\- calculate bending angle-based TPH
+.IP
+If possible, calculate impact parameter of tropopause.  If not, return a
+non-zero error flag. 
+
+.PP
+.B -n
+\- calculate refractivity-based TPH
+.IP
+If possible, calculate geometric altitude of tropopause.  If not, return a
+non-zero error flag. 
+
+.PP
+.B -y
+\- calculate dry temperature-based TPH
+.IP
+If possible, calculate geometric altitude of tropopause.  If not, return a
+non-zero error flag. 
+
+.PP
+.B -t
+\- calculate temperature-based TPH
+.IP
+If possible, calculate geopotential height of tropopause.  If not, return a
+non-zero error flag. 
+
+.PP
+.B -d
+\- diagnostics
+.IP
+Output additional diagnostics to stdout, and append covariance transforms and/or 
+lapse rates to the output netCDF file.
+
+.PP
+.B -h
+\- help
+.IP
+Requests brief help on the command to stdout.
+
+.PP
+.B -v
+\- version
+.IP
+Requests the program version ID to be written to stdout.
+
+.PP
+.B -o
+\- output file (required)
+.IP
+Specifies the name of the output ROPP netCDF file.  This file will include all
+the fields in the input file, with tropopause heights (and error flags) appended
+or amended. 
+
+./"
+.SH NOTES
+.B 1.
+If none of the {-b, -n, -y, -t} options is specified, the tool will  attempt to
+calculate all four TPHs.
+./"
+
+./"
+.SH EXAMPLES
+.B 1.
+Calculate TPHs based on bending angle profiles:
+.PP
+ > ropp_pp_tph_tool bangle.nc -b -o bangle_tph.nc
+
+.B 2.
+Calculate TPHs based on lapse rate and cold point of (wet) temperature profiles:
+.PP
+ > ropp_pp_tph_tool wettemp.nc -t -o wettemp_tph.nc
+
+.B 3.
+Calculate (if possible) all four TPHs (using lapse-rate and cold-point 
+definitions for the temperature-based ones):
+.PP
+ > ropp_pp_tph_tool all.nc -o all_tph.nc
+./"
+
+.SH REFERENCES
+.PP
+.B 1.
+ROPP User Guide - Part I: Input/Output module
+.br
+SAF/ROM/METO/UG/ROPP/002
+.PP
+.B 2.
+ROPP User Guide - Part III: Pre-processor module
+.br
+SAF/ROM/METO/UG/ROPP/004
+./"
+.SH AUTHORS
+ROPP Development Team, Met Office <romsaf@metoffice.gov.uk>

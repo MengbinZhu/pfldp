@@ -1,0 +1,18 @@
+ROPP_PP data files for release Version v7.0
+-------------------------------------------
+
+This directory contains a collection of data files used by ROPP_PP.
+
+MSIS_coeff.nc is a netCDF format file containing MSIS refractivity climatology 
+coefficients. The contents of MSIS_coeff.nc is read as part of the ionospheric 
+correction of bending angle profiles (called from subroutine
+ropp_pp_model_refrac).
+
+ropp_pp_test.nc is a netCDF format file containing radio occultation data
+used by the ropp_pp test routines in directory tests/.
+
+ropp_pp_tph_test.nc is standard format ROPP file containing a single profile 
+suitable for processing with ropp_pp_tph_tool.
+
+ROPP Development Team
+31 July 2013

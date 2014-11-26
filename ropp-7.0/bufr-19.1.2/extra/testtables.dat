@@ -1,0 +1,17 @@
+M0,15               ! Master Table: Meteology (15 September 2010)
+O74,7               ! Originating (sub-)Centre: Met Office [EGRR] (West Freugh)
+C12,5               ! Data Category: Surface data (Satellite) (Quikscat)
+301011              ! Table D: Year (004001), Month (004002), Day (004003)
+001001              ! Table B: WMO Block Number [Numeric]
+004006              ! Table B: Seconds [Unscaled value]
+006002              ! Table B: Longitude (Coarse Accuracy) [Scaled value]
+001007              ! Table B: Satellite Indentifier [Code table (internal)]
+4                   !          Metop-A (Metop-2)
+001033              ! Table B: Originating/Generating Centre [Code table (0010033)]
+254                 !           EUMETSAT, ICAO: EUMS
+001034              ! Table B: Originating Sub-centre [Code table (001034)]
+214                   !        Darwin...
+002                 !          ...for centre Melbourne (AMMR)
+008001              ! Table B: Vertical Sounding Significance [Flag table]
+18                  !          2=Standard + 16=Significant Temperature
+Quit                ! terminate

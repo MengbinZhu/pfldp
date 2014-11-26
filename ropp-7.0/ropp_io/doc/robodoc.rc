@@ -1,0 +1,49 @@
+# $Id: robodoc.rc 3551 2013-02-25 09:51:28Z idculv $
+#
+# Robodoc configuration file for the ropp_io library
+# --------------------------------------------------
+#
+items:
+   NAME
+   SYNOPSIS
+   DESCRIPTION
+   ARGUMENTS
+   OPTIONS
+   INPUTS
+   OUTPUT
+   USES
+   USED BY
+   NOTES
+   EXAMPLE
+   SEE ALSO
+   CALLS
+   CALLED BY
+   REFERENCES
+   BUGS
+   TODO
+   MODIFICATION HISTORY
+   EARLIER HISTORY
+   COPYRIGHT
+   AUTHOR
+   DEFAULTS
+   ENVIRONMENT VARIABLES
+ignore items:
+   BUGS
+   TODO
+   MODIFICATION HISTORY
+   EARLIER HISTORY
+   COPYRIGHT
+   AUTHOR
+headertypes:
+   f   "Functions"      index
+   s   "Subroutines"    index
+   m   "Modules"        index
+   v   "Variables"      index
+   p   "Parameters"     index
+   d   "Structures"     index
+   t   "Topics"         index
+   x   "Programs"       index
+ignore files:
+   ncdf_getgroupid_n3.f90
+   .svn
+   CVS

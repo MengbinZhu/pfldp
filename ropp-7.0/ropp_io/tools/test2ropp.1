@@ -1,0 +1,155 @@
+./" $Id: test2ropp.1 3696 2013-06-17 08:48:37Z idculv $
+./"
+.TH test2ropp 1 31-Jul-2013 ROPP-7.0 ROPP-7.0
+./"
+.SH NAME
+test2ropp
+./"
+.SH SYNOPSIS
+Generate a ROPP netCDF file containg dummy test data
+.PP
+>
+.B test2ropp
+.I test 
+[-o opfile] [-n nsamp] [-d] [-h|?] [-v]
+./"
+.SH DESCRIPTION
+.I test2ropp
+generates dummy test data in ROPP netCDF format.
+The following keywords for 'test' are recognised (keywords are not 
+case-sensitive):
+./"
+.PP
+.B MISSING
+\- all data set 'missing'
+.IP
+Generates test data in which all parameters are given appropriate 'missing
+data' values. For most strings, this will be 'UNKN' or 'UNKNOWN',
+and most numeric variables will be set to -99999000.0.
+.PP
+.B INVALID
+\- all data invalid
+.IP
+Generates test data in which all parameters are given random out-of-range
+(invalid) values. For most strings, this will consist of non-alphanumeric
+characters. Most numeric variables will be set outside their defined valid
+range, randomly smaller than the valid minimum or larger than the valid
+maximum.
+.PP
+.B VALID
+\- all data valid
+.IP
+Generates test data in which all parameters are given random
+within-range (valid) values. For most strings, this will consist
+of an alphanumeric string randomly taken from a built-in set of sensible
+options. Numeric variables will be set to random values within their defined
+valid range. Note that profile parameters will be completely uncorreleated
+between levels and have no scientific use.
+.PP
+.B BADPROF
+\- a bad profile
+.IP
+Generates test data in which the profile coordinates (time, impact parameter,
+altitude, geopotential height) have increasing values within the norminal
+ranges of those parameters, but all the observational data (Phase+S/N,
+Bending Sngle, Refractivites, T,q,P) are set to randomly invalid values.
+Sigma and Quality parameters are set missing; header, POD and georeference
+data are randomly valid.
+./"
+.SH FILES
+.SS Output
+An output file name can be specified on the command line, or a default
+will be generated based on the occultation ident string (as built from
+the ROPP header - see
+.BR ropp2ropp (1)
+for details). The netCDF file formatting and content follow the
+ROPP standards in
+.B Reference 1
+except that range checking is suppressed to allow invalid values to be saved.
+./"
+.SH OPTIONS
+Option switches are not case\-sensitive and may be placed before or after
+the test keyword and in any order. All arguments to switches are
+mandatory when the switch is used.
+.PP
+.B -d
+\- output diagnostics
+.IP
+Allows additional diagnostics to be written to stdout.
+.PP
+.B -h
+or
+.B ?
+\- help
+.IP
+Requests brief help on the command to stdout.
+.PP
+.B -n nsamp
+\- number of samples
+.IP
+Specifies the number of samples to be generated for profile parameters.
+All profiles (level 1a, 1b, 2a, 2b, 2d) will have the same number of samples.
+The default number of levels is 247. One Level 2c record will be generated for
+any value of nsamp>0. Specifying
+.B -n 0
+will suppress all profiles (and Level 2c) and generate only the header 
+parameters.
+.PP
+.B -o ropp-file
+\- ROPP output file name
+.IP
+.I ropp-file
+specifies the file name for the output ROPP netCDF file.
+A valid file name is mandatory if this switch is present.
+If not specified, a default name based on the occultation ident is used
+(see
+.B Reference 1
+for details).
+.PP
+.B -v
+\- version
+.IP
+Requests the program version ID to be written to stdout.
+./"
+.SH EXAMPLES
+.B 1.
+Generate a file containing only missing data flag values:
+.PP
+ >
+.B test2ropp missing -o missing.nc
+
+ --------------------------------------------------------
+                       ROPP Test Tool
+                     14:43UT 18-Jan-2012
+ --------------------------------------------------------
+
+ INFO (from test2ropp):  Profile    1 : OC_99999999999999_UNKN_U999_UNKN  (MISSING)
+ INFO (from test2ropp):  Writing missing.nc
+.PP
+.B 2.
+Generate a file containing a profile of 500 samples of random, but valid, 
+values (note that different data values will be generated for each run;
+.BR ropp2ropp (1)
+could be used to create a multifile from the output of several such runs):
+.PP
+ >
+.B test2ropp valid -n 500 -o valid_run1.nc
+./"
+.SH ERRORS
+Diagnostics relating to errors in I/O are output to stdout. Additional
+diagnostics can be obtained with the
+.B -d
+option.
+./"
+.SH REFERENCES
+.PP
+.B 1.
+ROPP User Guide - Part I
+.br
+SAF/ROM/METO/UG/ROPP/002
+./"
+.SH SEE ALSO
+.BR ropp2ropp (1)
+./"
+.SH AUTHORS
+ROPP Development Team, Met Office <romsaf@metoffice.gov.uk>

@@ -1,0 +1,30 @@
+#!/bin/sh
+# $Id: hdf5_configure_g95_cygwin 3007 2011-09-05 15:45:37Z frdo $
+#
+# hdf5 (v1.8.x) shell script for a local configure
+# USERS SHOULD MODIFY THIS SCRIPT AS REQUIRED FOR LOCAL INSTALL
+#
+# Compiler: g95 / Cygwin
+#
+PREFIX=${1-$ROPP_ROOT/g95}
+echo
+echo "Platform:"
+uname -a
+echo
+echo "Fortran compiler:"
+g95 --version
+echo
+echo "C compiler:"
+gcc --version
+echo
+echo "Installation target:"
+echo "$PREFIX"
+echo
+#
+CXX="" \
+CC=gcc       CFLAGS="-O2 -w -I$PREFIX/include" \
+FC=g95      FCFLAGS="-O2 -w -I$PREFIX/include" \
+F77=g95      FFLAGS="-O2 -w -I$PREFIX/include" \
+              FLIBS="" LDFLAGS="-L$PREFIX/lib -L$PREFIX/lib64" \
+  ./configure --prefix=$PREFIX   --enable-fortran \
+              --disable-shared   --disable-cxx

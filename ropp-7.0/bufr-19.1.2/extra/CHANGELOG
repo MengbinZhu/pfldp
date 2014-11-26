@@ -1,0 +1,255 @@
+$Id: CHANGELOG 89 2012-05-21 13:43:23Z frdo $
+
+           Changes for this release (V19.1.1, 21 February 2012)
+          ----------------------------------------------------
+
+NB the version number applies to the complete BUFR package; not all version
+updates affect files in this extra/ directory. This file only documents
+changes to files in extra/. See also file CHANGELOG in the BUFR distribution
+package root directory.
+
++ Updated DATACATEGORY, MASTERTABLE and ORIGCENTRE for BUFR Table Version 17 
+  (2-Nov-2011). Files CODEFIG, TABLEB and TABLED shipped with the kernel 
+  MetDB package (v19.1) and uncompressed to metdb/ are the latest operational 
+  V17 tables, so these files in extra/ are empty ones and will not be installed
+  to BUFR_LIBRARY. (19.1.1)
+
++ Corrected bug in decbufr.f90 skip messages/stop decoding logic when using
+  any of -f, -l, -n or -s command line options. (19.1)
+  
++ Added new MODIS aerosol descriptors to TABLEB and associated code tables 
+  to CODEFIG. Added new satellites (CALIPSO, CloudSat, Megha-Tropiques), 
+  instruments (IIR, CALIOP) and radiosonde (RS92-NGP) to CODEFIG, as proposed
+  for fast-track for 2011. (19.1)
+
++ The MetDB kernel library is at v19.0. This release is a complete code
+  refresh and has been rewritten in Fortran 95. Apart from supporting the
+  encoding of BUFR Edition 4, correcting the interpretation of some less-well
+  used BUFR features, and removing size limitations inherent to the previous
+  F77 code, there is no new functionality. Version 14 (2009) BUFR tables are
+  included with this package. (19.0)
+
++ File extra/gtshdrs.f90 (module GTShdrs) contains a completly new set of
+  routines, replacing those in previous releases. The new routines allow
+  more flexible interfacing of GTS header generation whether using the MetDB
+  or ECMWF BUFR libraries. (19.0)
+
++ New file extra/bufrutils.f90 (module BUFRutils) is included to provide some
+  library-independent BUFR utility routines, plus support for porting
+  decoding applications currently using the MetDB library to interface with
+  the ECMWF BUFR library. (19.0)
+
++ decbufr.f90 modified to use BUFRutils routines in preparation for a future
+  release supporting interfacing with the ECMWF BUFR kernel library. Also
+  minor changes to the testtables.f90 utility. (19.0)
+
++ The NAG interface code in extra/nag_interfaces.f90 is no longer inserted
+  into the BUFR object library, as it may also be in other libraries which
+  then causes linker 'multply defined' errors. Instead, compile and link with
+  each application program (see extra/Makefile). (19.0)
+
++ Upadated Master Table Versions list in extra/MASTERTABLE. (19.0)
+
++ Satellite codes for TanDEM-X (043), PAZ (044), OceanSat-2 (421), C/NOFS
+  (786), COMS-1 (810) and COMS-2 (811) and instrument codes for ROSA (287)
+  and OSCAT (288) were accepted by IPET-DRC on 3 March 2011, and these new
+  codes are included in the local version of code table 001007 & 002019 in
+  file extra/CODEFIGS. (19.0)
+
++ The main shell script buildbufr has been simplified by:
+    - upgrading extra/Makefile to do more to install and (new) uninstall
+      the complete package to/from the target directories
+    - for builds on Cygwin (DLL V1.7 and later), Unix-style paths are now
+      default, so conversion to/from Windows/Unix styles using the cygpath
+      utility is no longer necessary.
+   The script can also now just uninstall previously installed files from
+   the <prefix> target tree (new -u switch); the clean (-c) switch now
+   cleans only the local package tree before rebuilding (this last step
+   can be suppressed by using the new switch -n). (19.0)
+
++ Added new satellite codes for TanDEM-X (043), PAZ (044) and C/NOFS (786) to
+  local version of code table 001007 in file extra/CODEFIG. NB these are
+  in anticipation of proposals being fast-tracked to IPET-DRC and are not
+  yet official, so could change. (18.5)
+
++ GPS Analysis Centre IRE1 (Originating Sub-centre code 36) changed to
+  IRE as alias for IRE1 (now ceased) and replacement IRE2. (v18.4)
+
++ The generic decoder decbufr now also supports decoding Section 1 information
+  headers for BUFR Edition 4. Editions before 3 are no longer supported in
+  this utility. (18.2)
+
++ The table testing/look-up utility test_tables is renamed testtables, as is
+  the Fortran source file (.f90) and sample data input file (.dat). (18.2)
+
++ File CODEFIG has been updated to include new entries from Common Code Tables
+  published for pre-operational Version 14, October 2008. (18.2)
+
++ File TABLEA is replaced by DATACATEGORY which lists not only Data Category
+  entries (from BUFR Table A) but also the associated International Sub-
+  Category entries (from Common Code Table C-13). The latter codes are new in
+  Section 1 for BUFR Edition 4. This table includes new entries for pre-
+  operational Version 14, November 2008. (18.2)
+
++ Files CT001033 and CT001034 are replaced by ORIGCENTRE which contains the
+  Originating Centres (and assocated ICAO codes) for BUFR code table 001033
+  (Common Code Table C-1) and - where defined - their assocated Sub-Centres
+  (from Common Code Table C-12). This effectively combines CT001033 and
+  CT001034 and at the same time extends the sub-centre codes to potentially
+  all originating centres instead of only one; as shipped, CT001034 was
+  applicable only to Originating Centre 074 (Met Office, Exeter). ORIGCENTRE
+  also includes codes published at Version 14. (18.2)
+
++ Code table ORIGCENTRE also updates CT001033 by including ICAO Location
+  Indicator codes for all Originating Centres - where known from the ICAO
+  Location Indicator tables - defined in the WMO BUFR Tables Version 14
+  (October 2008) Common Code Table C-1. Note that this is not a definitive
+  list, as some codes and/or centres are ambigious, and a guess at the most
+  appropriate ICAO code has been made. Generally, unless the ICAO code for a
+  country is a known meteological centre, either the code for the capital city
+  or an international airport has been selected. Decoding the ICAO code to
+  originating centre is at least guaranteed to result in the correct country!
+  For centres where an ICAO code has not been identified, it has been assigned
+  the ICAO default value 'ZZZZ'. The author would welcome updates/corrections
+  to these codes as used in practice for GTS bulletin routing headers. (18.2)
+
++ New table file MASTERTABLE contains a look-up of implementation dates for
+  each Master Table. Currently only Master Table zero (standard BUFR tables
+  for Meteorology) is defined, but in the future other disciplines such as
+  Oceanography might have their own Master Table. A new routine MasterTables()
+  in codetables.f90 loads and interprets this file.
+
++ Look-up routines in codetables.f90 have been upgraded to support the new
+  file structure of main and optional sub-entries. As the formal arguments and
+  files they process are different, the subroutine names have been changed to
+  better refect the new tables:
+    TableA() --> DataCategory()
+    CT001033() + CT001034() --> OrigCentre()
+    MasterTable() is a new routine,
+
++ Tools decbufr and testtables (and testtables.dat) include the use of these
+  new files and subroutines. (18.2)
+
++ Originating Sub-centre code 32 for Originating Centre 74 (previously used
+  for GPS Analysis Centre ROB) had been unknowingly reserved, though
+  unpublished, for a different center. ROB is now assigned a code of 37.
+  New codes 32-37 have recently been approved by IPET-DRC and will be included
+  in the next edition of the published code tables under Originating Centre 74
+  (UK Met Office), and these are included in ORIGCENTRE. (v18.2)
+
++ Note that apart from TABLEB and TABLED, all of the look-up tables are only
+  used for visual decoding (e.g. dumping BUFR message headers with the decbufr
+  utility), and are not necessary for normal BUFR binary data decoding.
+
++ Removed portability.fi mechanism originally designed to support linking of
+  non-ISO, but industry-standard system interface routines like GETENV() and
+  GETARG(). Almost all modern Fortran compilers now automatically provide
+  these routines without explicit USE statements. The notable exception is the
+  NAGWare (NAG f95) compiler which requires USE f90_unix_* modules which would
+  make application code non-portable. The package includes an interface
+  (nag_interfaces.f90) which is automatically added to the BUFR object library
+  by the build script when using the NAG compiler; this makes the USE
+  requirement for NAG transparent to applications when linked with the BUFR
+  library. This interface should not be used for non-NAG compilers. (18.2)
+
++ Makefile uses BUFR library name libmetdbbufr.a (see main CHANGELOG) (18.2)
+
++ README and decbufr.1 files updated. (18.2)
+
++ Fixed a bug in test_tables.f90 related to formatting the min/max range of
+  Real values when Scale is negative. (18.1)
+
++ CODEFIG updated to include 3 additional defined bits in Flag Table 033039
+ (Quality flags for RO data). (18.1)
+
++ CT001033 (Originating Centres) updated to BUFR Tables Version 13-19/11/2007
+  (2 new entries) (18.1)
+
++ Added GPS Analysis Centre IRE1 (as Originating Sub-centre code 36) to
+  CT001034. (v18.1)
+
++ Order of descriptor tests changed in test_tables.dat (18.1)
+
++ README file updated (18.1)
+
++ test_tables.f90 has been updated to include:
+  - a summary help option: enter ?, -h or --help at the FXY prompt
+  - display valid data max & min range values for Table B element
+    descriptors
+  - facility enter flag values as decimal, hex, octal or binary
+  The sample test file test_tables.dat has more cases to check the
+  various sub-types of element descriptor (Numeric, Real, Code table
+  and Flag table). (v18.0)
+
++ Version 18 of MetDB BUFR kernel library (18.0)
+
++----------------------------------------------------------------------
+Version 17
+
++ Increased internal capacity of decbufr.f90 to handle decoding of messages
+  up to 500,000 bytes (from 25,000) and containing up to 200,000 expanded
+  descriptors (from 20,000). (v17.4)
+
++ Added GPS Analysis Centre IGE (as Originating Sub-centre code 35) to
+  extra/CT001034. (v17.3)
+
++ TABLEB and TABLED in metdb/ are updated to Master Table Version 13
+  (7 November 2007). These now supercede those in extra/ so the latter
+  versions have been removed. CODEFIG has not yet been updated, so the verson
+  in extra/ remains the most recent. (v17.2)
+
++ Version 17 of MetDB BUFR kernel library (17.0)
+
++----------------------------------------------------------------------
+Version 16
+
++ Subroutine GTShdr() in gtshdrs.f90 can now cope with being given longitudes
+  in the range -180 to +180 or 0 to 360 degrees. Previously the algorithm
+  which generated the geographical area designator (A2) only gave the correct
+  code if the given range was 0 to 359 degrees. (v16.6)
+
++ Man page for decbufr updated to document use of BUFR_LIBRARY plus some minor
+  edits/corrections. (V16.6)
+
++ CODEFIG in extra/ includes satellite & instrument ID codes (042 in 001007
+  (C-5) & 103 in 002019 (C-8), repectively) proposed for IGOR RO instrument
+  on TerraSAR-X. (v16.6)
+
++ New, separate Code Table extra/CT001033 (Originating/Generating Centre)
+  file including new additions to Version 12 of Common Code Table C-1
+  (2 November 2005) with associated ICAO codes (where known). (V16.5)
+
++ CODEFIG, TABLED & TABLEB in extra/ updated in sync with operational tables
+  in bufr/metdb/ for Version 12 BUFR tables in formal use from 2 November
+  2005. These local tables retain ASCAT support which was not formally
+  approved in time for the V12 updates. (V16.5)
+
++ Source code files tablea.f90 (subroutine TABLEA) and ct001034.f90
+  (subroutine CT001034) consolidated into a new source file codetables.f90
+  and a new subroutine CT001033 included to support separate implementation
+  of Code Table 001033 (Originating/Generating Centre) also supporting ICAO
+  code lookup. These routines are implemented as a module interface and
+  require a 'USE codetables' statement in the calling program. (V16.5)
+
++ decbufr (-o) output was not correctly printing very large (>10^11) unscaled
+  (Scale=0) numbers, as these overflow 4-byte integer type. Scaled numbers may
+  also not have been displayed with sufficient precision. All decoded numbers
+  >10^10 (scaled or unscaled) are now printed in floating-point E-format.
+  (V16.5)
+
++ CODEFIG, TABLEB & TABLED in extra/ now support the recently 'agreed in
+  principle' (post 2 November 2005) ASCAT BUFR template. (V16.4)
+
++ Code Table extra/CT001034 includes entries for new ground stations
+  supporting direct reception of ERS-2 data. (V16.3)
+
++ MetDB Release V16.1. Routine DEBUFR supports extraction of BUFR Section 2.
+  The decbuf.f90 tool uses this new interface (but does nothing with any
+  data that might be returned). (V16.1)
+
++ BUFR tables TABLEB and CODEFIG in extra/ incorporate the changes to these
+  tables in the MetDB v16.1 release, and in addition continue to include
+  support for the recently ratified radio occultation elements & code/flag
+  table entries. (V16.1)
+
++ Version 16 of MetDB BUFR kernel library (16.0)

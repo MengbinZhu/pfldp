@@ -1,0 +1,348 @@
+./" $Id: bufr2ropp.1 3696 2013-06-17 08:48:37Z idculv $
+./"
+.TH bufr2ropp 1 31-Jul-2013 ROPP-7.0 ROPP-7.0
+./"
+.SH NAME
+bufr2ropp
+./"
+.SH SYNOPSIS
+Decode RO BUFR messages to ROPP netCDF
+.PP
+>
+.B bufr2ropp
+.I bufr-file
+[bufr-file...] [-o ropp-file] [-f first] [-n number]
+                      [-m] [-a] [-d] [-h|?] [-v]
+./"
+.SH DESCRIPTION
+.PP
+.I bufr2ropp
+decodes GPS Radio Occultation (RO) data from one or more files of BUFR
+messages to ROPP netCDF format.
+./"
+.SH FILES
+.SS Input
+.I bufr-file
+: input BUFR file(s)
+.IP
+These files may contain any number of arbitrary BUFR messages,
+but any which do not contain RO data (or have coding errors) will be
+ignored. The BUFR template for RO data is specified in
+.B Reference
+.BR 1 .
+More than one BUFR file can be decoded, either by an explicit list of files
+or by wild-carding. If no input file name is specified, the default is
+.BR ropp.bufr .
+.PP
+.I roppbufrcodes.nl
+: look up table file
+.IP
+This is a Fortran namelist file which should be installed in the directory path
+.B BUFR_TABLES
+(if using the ECMWF BUFR library), or
+.B BUFR_LIBRARY
+(if using the MetDB BUFR library).
+This file  contains look-up tables for converting between WMO numeric code
+values and ROPP text-based identifiers (or vice-versa). If this file
+cannot be read for any reason, internal default tables will be applied.
+This namelist file can be locally edited to change the conversion values
+or extend the existing tables.
+./"
+.SS Output
+.I ropp-file
+: output ROPP netCDF file
+.IP
+The output file name for a decoded BUFR message can be specified
+on the command line with
+.BR -o ,
+or a default will be used based on the occultation ident string
+(as generated from the ROPP header - see
+.BR ropp2ropp (1)
+or
+.B Reference
+.BR 2 ).
+The output will be created as one ROPP netCDF file for each input RO
+BUFR message, unless the
+.B -m
+switch is used to specify output to a multifile.
+The specification of the ROPP format for this data type is given in
+.B Reference
+.BR 2 .
+.IP
+If there is more than one RO BUFR message in the input file(s), and
+the
+.B -m
+multifile switch is used, the default file name will be generated from
+the first decoded occultation header. If the specified or default output
+file already exists, it will be overwritten unless the
+.B -a
+switch is present, in which case the new profiles will be appended
+to the existing file. If no valid RO BUFR messages can be decoded,
+then no output file will be created (or an existing file modified).
+.IP
+By default, each output ROPP file will contain data for one occultation
+decoded from each input RO BUFR message. If the
+.B -m
+(and/or
+.BR -a )
+switch is present, all decoded RO profiles will be written to a single
+netCDF file (a 'multifile').
+./"
+.SH ENVIRONMENT
+.B BUFR_TABLES
+(ECMWF BUFR library) or
+.B BUFR_LIBRARY
+(MetDB BUFR library)
+should define a path to the directory containing run-time BUFR files, including
+the
+.B roppbufrcodes.nl
+namelist file read by
+.I bufr2ropp
+for BUFR to ROPP identifier code conversions. See documentation on the appropriate
+BUFR kernel library for more details.
+./"
+.SH OPTIONS
+Option switches are not case\-sensitive and may be placed before or after
+the input file name and in any order. All arguments to switches are
+mandatory.
+.PP
+.B -a
+\- append
+.IP
+Causes data to be appended to an already existing file, e.g. as
+specified by the
+.B -o
+option. The default is to overwrite an existing file. If the
+.B -a
+switch is present, but the file does not already exist, the file will
+be created.
+.IP
+Since appending profiles implies that the output is a multifile, if not
+explicitly given, option
+.B -m
+is automatically set if
+.B -a
+is used.
+.PP
+.B -d
+\- output diagnostics
+.IP
+Allows additional diagnostics to be written to stdout.
+.I bufr2ropp
+will print out, for instance, how many profile samples have been decoded
+for each ROPP section.
+.PP
+.B -f first
+\- first message to decode
+.IP
+.I first
+specifies the first RO BUFR message in the input file at which to begin
+decoding. A positive numeric value must follow if this switch is
+used. The default is to start decoding at the first valid RO BUFR
+message read from the input file. If there are multiple input files,
+this option is applied separately to each file.
+.PP
+.B -h
+or
+.B ?
+\- help
+.IP
+Requests brief help on the command to stdout.
+.PP
+.B -m
+\- multifile output
+.IP
+Specifies that if there is more than one RO BUFR message input, all decoded
+profiles are to be written (appended) to a single netCDF 'multifile'.
+If no file name is specified with
+.B -o
+then a default will be generated from the first successfully decoded
+occultation header. If only one RO profile is decoded, this option is
+effectively redundant. The default is to create one output file for each
+successfully decoded BUFR message.
+By default, any existing file will be overwritten unless the
+.B -a
+switch is specified.
+.PP
+.B -n number
+\- maximum number to decode
+.IP
+.I number
+specifies the maximum number of RO BUFR messages in the input file to
+decode. A positive numeric value must follow if this switch is used.
+The default is to decode all valid RO BUFR messages in the input file
+(up to 999999). If there are multiple input files, this option is applied
+separately to each file.
+.PP
+.B -o ropp-file
+\- ROPP output file name
+.IP
+.I ropp-file
+specifies the file name for the output ROPP netCDF file.
+A valid file name is mandatory if this switch is present.
+.IP
+If a name is given, and there are multiple input profiles but neither
+.B -m
+nor
+.B -a
+switches is specified (i.e. the default of one profile per output file),
+only the first output file will have this name; subsequent files will
+have default names based on their occultation headers.
+.IP
+If there could be more than one RO BUFR message in the input file(s),
+and separate output files are required,
+.I it is strongly recommended that this option is not used.
+Let the program generate a unique default name for each output file,
+based on the occultation ID string.
+.PP
+.B -v
+\- version
+.IP
+Requests the
+.I bufr2ropp
+program version ID to be written to stdout.
+./"
+.SH EXAMPLES
+.B 1.
+Show summary help:
+.PP
+ >
+.B bufr2ropp -h
+
+ --------------------------------------------------------
+                    ROPP BUFR Decoder
+                   20:49UT 18-Jan-2012
+ --------------------------------------------------------
+
+ Purpose:
+   Decode RO BUFR messages to ROPP format.
+ Usage:
+ ...etc
+
+The date and time in the banner is the program run time.
+.PP
+.B 2.
+Simple decode operation:
+.PP
+ >
+.B bufr2ropp oc_20101209140409_meta_g027_dmi_.bufr
+
+ --------------------------------------------------------
+                    ROPP BUFR Decoder
+                   20:54UT 18-Jan-2012
+ --------------------------------------------------------
+
+ INFO (from bufr2ropp):  Reading oc_20101209140409_meta_g027_dmi_.bufr
+ INFO (from bufr2ropp):  Decoded profile    1 : OC_20101209140409_META_G027_DMI_
+ INFO (from bufr2ropp):  Writing oc_20101209140409_meta_g027_dmi_.nc
+ INFO (from bufr2ropp):  1 new profile saved
+.PP
+.B 3.
+Decode only the 5th RO BUFR message in a file containing multiple
+(arbitrary) BUFR messages. As we are only decoding one message we
+can safely specify an output file name:
+.PP
+ >
+.B bufr2ropp many_messages.bufr -o ropp.dat -f5 -n1
+.PP
+Any non-RO BUFR messages are always ignored and are not included in the
+.B -f
+and
+.B -n
+counting.
+.PP
+.B 4.
+Decode several single-message BUFR files and save them to a daily
+archive ROPP multifile. As we are only decoding to a single output
+file we can again safely specify a file name, which might already exist with
+previously decoded data, so we append to it:
+.PP
+ > today-file=`date -u "+ro_%Y.%j.nc"`
+ >
+.B bufr2ropp ro_*.bufr -a -o $today-file
+./"
+.SH NOTES
+.B Detecting a Radio Occultation BUFR message
+.PP
+Each BUFR message is analysed for content and for any coding errors
+which might indicate a corrupted message. A message is rejected as 'not RO'
+if
+.I any
+of the following are detected:
+
+ - Section 0:
+   + Key string 'BUFR' missing
+   + Not an Edition 3 or 4 BUFR message (RO should not be using obsolete editions)
+
+ - Section 1:
+   + Length of section > message length
+   + Data type is not 'satellite sounding' (RO uses code value 3 from BUFR Table A)
+
+ - Section 2:
+   + Length of section > message length
+   + No data is expected in Section 2 , but in principle could be present and still
+     be RO data, so something in Section 2 is not a trigger (the decoder will just
+     ignore it)
+
+ - Section 3
+   + Length of section > message length
+   + Observation count is zero or more than one (should have only one RO occultation
+     per message)
+   + RO descriptor not present (expecting a single descriptor 310026)
+     This is
+.B the
+killer test!
+
+ - Section 4:
+   + Length of section > message length
+
+ - Section 5:
+   + Key '7777' string not found at the byte position indicated by the message length
+     in Section 1 (message is likely to be corrupt)
+.PP
+In addition, if after decoding there appears to be no variable-length
+profile data (all the delayed replication counts are zero), then
+the message is also marked as 'not RO'.
+
+A message detected as 'not RO' is ignored (and does not appear in the
+message counters) and the next message (if any) is read from the input
+file. Only messages passing all of these these tests are converted
+and output to the ROPP file. The failed test for any 'not RO' rejected
+messages can be displayed with the
+.B -d
+switch.
+./"
+.SH ERRORS
+Diagnostics relating to errors in I/O are output to stdout.
+Additional diagnostics (e.g. the reason for rejecting non-RO messages)
+can be obtained with the
+.B -d
+option.
+.PP
+If there are decoding problems, or the BUFR message (or file)
+does not contain the expected data, the content can be better diagnosed
+using the
+.IR decbufr (1)
+utility which comes with the MetDB BUFR package or equivalent ECMWF
+generic decoder tool.
+./"
+.SH REFERENCES
+.PP
+.B 1.
+WMO FM-94 (BUFR) specification for ROM SAF processed Radio Occultation data.
+.br
+SAF/ROM/METO/FMT/BUFR/001
+.PP
+.B 2.
+ROPP User Guide - Part I
+.br
+SAF/ROM/METO/UG/ROPP/002
+./"
+.SH SEE ALSO
+.IR ropp2bufr (1)
+.IR ropp2ropp (1)
+.IR decbufr (1)
+./"
+.SH AUTHORS
+ROPP Development Team, Met Office, <romsaf@metoffice.gov.uk>
+

@@ -1,0 +1,296 @@
+# $Id: $
+
+#****c* Configuration Files/ecmwf_bangle_1dvar.cf *
+#
+# NAME
+#    ecmwf_bangle_1dvar.cf - Default configuration file for 1DVar 
+#                            implementations in ROPP. ECMWF background data,
+#                            bending angle observations. 
+#
+# SYNOPSIS
+#    <1DVar_program> ... -c ecmwf_bangle_1dvar.cf ...
+# 
+# DESCRIPTION
+#    This file reflects the default configuration for the 1DVar
+#    implementations within ROPP using ECMWF background data and 
+#    bending angle observations.
+#
+# NOTES
+#    Running a ROPP 1DVar with this configuration should provide the
+#    same results as running the same tool without any configuration
+#    file. It's main purpose is to document the default settings, and
+#    which configuration options are available to the user.
+#
+# EXAMPLE
+#
+#
+# SEE ALSO
+#
+#
+# REFERENCES
+#
+#
+# AUTHOR
+#   Met Office, Exeter, UK.
+#   Any comments on this software should be given via the ROM SAF
+#   Helpdesk at http://www.romsaf.org
+#
+# COPYRIGHT
+#   (c) EUMETSAT. All rights reserved.
+#   For further details please refer to the file COPYRIGHT
+#   which you should have received as part of this distribution.
+#
+#****
+
+#-------------------------------------------------------------------------------
+# 1. Input and output files
+#-------------------------------------------------------------------------------
+
+# The names of input and output files can also be specified through command line
+# arguments; names mspecified through the command line will always overwrite
+# configuration file settings. The command line arguments corresponding to 
+# configuration options are given in round brackets after the detailed comments
+# below.
+
+# 1.1 Background
+# --------------
+
+bg_input_file  = ropp_bg.nc        # Background profile                          (-b, -bg, --bg)
+bg_corr_file   = ropp_bg_corr.nc   # Background error correlations / covariances (--bg-corr)
+
+# 1.2 Observations
+# ----------------
+
+obs_input_file = ropp_obs.nc       # Observation profile                          (-y, -obs, --obs)
+obs_corr_file  = ropp_obs_corr.nc  # Observation error correlations / covariances (--obs-corr)
+
+# 1.3 Output
+# ----------
+
+output_file    = ropp_out.nc       # Retrieved profile                            (-o)
+
+
+#-------------------------------------------------------------------------------
+# 2. Error covariance models
+#-------------------------------------------------------------------------------
+
+# 2.1 Background error covariances
+# --------------------------------
+#
+# Background error covariances can be constructed using the following methods:
+#
+#   FSFC   Fixed Sigmas, Fixed correlations: Both error correlations and
+#            and error standard deviations are read from a background
+#            error correlation file. The error correlation file must 
+#            contain both the error correlation matrix as well as the
+#            standard deviations (errors) for all background state vector
+#            elements.
+#
+#   VSFC   Variable Sigmas, Fixed Correlations: Error correlations are read
+#            from an error correlation file, while per profile error 
+#            estimates as contained in the background data file are used.
+#            In this case, the error correlation / covariance data files
+#            only require to contain the error correlations.
+#
+# Note that error correlation files may contain latitudinally binned error
+# correlations and standard deviations, allowing to have latitudinally varying
+# error correlation structures and standard deviations even in the FCFS scenario.
+#
+# Specifying (and providing) a properly formatted error correlation / covariance
+# file for the background data is mandatory for the ROPP 1DVars.
+
+bg_covar_method  = VSFC   # Variable Sigmas, Fixed Correlations
+
+# 2.2 Observation error covariances
+# ---------------------------------
+#
+# Bending angle and refractivity error covariances can be constructed using the 
+# following methods: 
+#
+#    FSFC   Fixed Sigmas, Fixed correlations: Both error correlations and
+#             and error standard deviations are read from an observation
+#             error correlation file. The error correlation file must 
+#             contain both the error correlation matrix as well as the
+#             standard deviations (errors) for all observation vector
+#             elements.
+#
+#    VSDC   Variable Sigmas, Diagonal Correlations: A diagonal error correlation
+#             structure (i.e., no error correlations) is assumed, while per
+#             profile error estimates as contained in the observation data file
+#             are used. In this case, no error correlation / covariance data
+#             file is required.
+#
+#    VSFC   Variable Sigmas, Fixed Correlations: Error correlations are read
+#             from an error correlation file, while per profile error 
+#             estimates as contained in the observation data file are used.
+#             In this case, the error correlation / covariance data files
+#             only require to contain the error correlations.
+#
+# Note that error correlation files may contain latitudinally binned error
+# correlations and standard deviations, allowing to have latitudinally varying
+# error correlation structures and standard deviations in the FSFC  and VSFC
+# scenarios.
+#
+# In contrast to the background data, observations do not require an error
+# correlation / covariance file in scenario VSDC, if the input data already
+# contains error estimates.
+
+obs_covar_method = VSDC   # Variable Sigmas, Diagonal Correlations
+
+
+#-------------------------------------------------------------------------------
+# 3. Quality control
+#-------------------------------------------------------------------------------
+
+# 3.1 Valid observation height range
+# ----------------------------------
+#
+# A valid height range can be specified, outside of which observations are 
+# not used in the 1dVar analysis.
+
+min_1dvar_height = 0.0   # minimum observation height (km)
+
+max_1dvar_height = 50.0  # maximum observation height (km)
+
+# 3.2 Generic quality control
+# ---------------------------
+#
+# Generic quality control checks for the obviouos things - whether data values
+# are within reasonable bounds (specified below as minimum and maximum values),
+# and if the input data is roughly consistent.
+#
+# In addition, co-location of background and observations is checked via the
+# great-circle and temporal distance betwen the nominal locations of both. For
+# testing purposes, and in case the 1DVar is used with climatological data as
+# background which is not properly co-located or time stamped, this particular
+# check can be disabled.
+
+genqc_colocation_apply     = .true.         # Apply colocation checks?
+
+genqc_max_distance         = 300.0          # Maximum obs vs. bg great circle distance (km)
+genqc_max_time_sep         = 3600.0          # Maximum obs vs. bg temporal seperation (sec)
+
+genqc_min_temperature      = 150.0          # K
+genqc_max_temperature      = 350.0          # K
+
+genqc_min_spec_humidity    =  0.0           # g/kg
+genqc_max_spec_humidity    = 50.0           # g/kg
+
+genqc_min_impact           = 6.2e6          # m
+genqc_max_impact           = 6.6e6          # m
+
+genqc_min_bangle           = -1.0e-4        # rad
+genqc_max_bangle           =  0.1           # rad
+
+genqc_min_geop_refrac      = -1.0e3         # m 
+genqc_max_geop_refrac      = 1.e5           # m
+
+genqc_min_refractivity     = 0.0            # N-units
+genqc_max_refractivity     = 500.0          # N-units
+
+
+# 3.3 Background quality control
+# ------------------------------
+#
+# Background quality control, if applied, rejects observation data points which
+# deviate by more than <bgqc_reject_factor> * <expected error>, where the
+# <expected error> is calculated from both the assumed observation and forward
+# modelled background errors. If the number of rejected points exceeds 
+# <bgqc_reject_max_percent>, the entire profile is considered to be of poor
+# quality, and is not further processed.
+
+bgqc_apply                 = .true.         # Apply background quality control?
+
+bgqc_reject_factor         = 10.0           # Data rejected if O-B > factor * sigma
+bgqc_reject_max_percent    = 50.0           # Maximum percentage of data rejected
+
+
+# 3.4 Probability of Gross Error
+# ------------------------------
+#
+# Probability of Gross Error, as a diagnostic quantity, is always calculated
+# as part of the standard processing (from the O - B differences). It can also
+# be used for quality control, by calculating weights based on the value of
+# the gross error probability which are applied to the observations.
+
+pge_apply                  = .false.        # Apply PGE for quality control?
+
+pge_fg                     = 0.001          # First guess PGE
+pge_d                      = 10.0           # Width of gross error plateau
+
+
+#-------------------------------------------------------------------------------
+# 4. Preconditioning, convergence checks and minimiser
+#-------------------------------------------------------------------------------
+
+# 4.1 Preconditioning
+# -------------------
+#
+# Preconditioning accelerates the minimisation significantly and his highly
+# recommended; it should only be disabled for testing purposes.
+
+use_precond                = .true.
+
+
+# 4.2 Convergence checks
+# ----------------------
+#
+# Apart from the minimiser's own convergence check (which is based on the change
+# of the gradient size), two more convergence checks are implemented: The 
+# minimisation is assumed to have converged if any of the following conditions
+#
+#  - change of state vector < <conv_check_max_delta_state> * <background error>
+#  - change of cost function < <conv_check_max_delta_J>
+#
+# is achieved for at least <conv_check_apply> consecutive iterations / calls of
+# the cost function evaluation.
+#
+# Note that the convergence criteria for the state vector changes are specified
+# as a fraction of the background error.
+
+conv_check_apply           = .true.         # Apply additional convergence checks?
+
+conv_check_n_previous      = 2              # Minimum number of iterations required
+conv_check_max_delta_state = 0.1            # State vector must change less than this * bg error
+conv_check_max_delta_J     = 0.1            # Cost function must change less than this
+
+
+# 4.3 minROPP settings
+# ------------------
+
+minropp_method               = MINROPP        # minimisation method 
+                                              # MINROPP (default) or LEVMARQ
+minropp_log_file             = screen         # 'screen' for output on the screen, file name otherwise
+minropp_impres               =    0
+minropp_n_iter               = 1500
+minropp_mode                 =    0
+minropp_n_updates            =   50
+minropp_eps_grad             = 1.0e-8
+minropp_dx_min               = 1.0e-16
+
+
+#-------------------------------------------------------------------------------
+# 5. Additional output
+#-------------------------------------------------------------------------------
+#
+# If <extended_1dvar_diag> is .true., the 1DVar will add additional diagnostic
+# output to the retrieval data file. At present, the following diagnostics are
+# available:
+#
+#  - O-B differences
+#  - O-A differences
+#  - PGE
+
+extended_1dvar_diag     = .false.
+
+#-------------------------------------------------------------------------------
+# 6. Log(pressure) and Log(humidity) options
+#-------------------------------------------------------------------------------
+#
+# If <use_logp> is .true., the 1DVar will perform the minimisation using log(p)
+# rather than absolute pressure in the state vector
+# If <use_logq> is .true., the 1DVar will perform the minimisation using log(q)
+# rather than absolute pressure in the state vector
+
+use_logp = .false.
+use_logq = .false.

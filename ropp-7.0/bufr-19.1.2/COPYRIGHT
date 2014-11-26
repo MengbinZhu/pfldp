@@ -1,0 +1,58 @@
+$Id: COPYRIGHT 89 2012-05-21 13:43:23Z frdo $
+
+                  COPYRIGHT AND RIGHT-TO-USE LICENSE
+                 ------------------------------------
+
+1) The complete package and all files in it ('the Software') are
+
+  (c) Crown Copyright 2012, Met Office
+
+unless explicitly noted in optional file COPYRIGHT.extra. 
+
+Use, duplication or disclosure of this Software is subject to the restrictions 
+as set forth below.
+
+2) The Software is not in any way commercial and is supplied 'as-is' and
+without warranty, guarantee or formal support and for scientific or
+research use ONLY. In particular it MUST NOT be copied in full or part, by
+any means, and for any purpose, to any third party without the express
+written permission of the Met Office. The Met Office retains all rights to
+the Software.
+
+3) By using this Software (or any component(s) contained in it) you are
+deemed to have agreed to abide by this licence, which gives you
+non-exclusive right to use the Software for your own R&D purposes only.
+
+4) This Software (code, data files and documentation) is provided at no
+cost and 'as-is' with no formal support, nor any guarantees that it works
+as described on any other platform and/or compilers than used for the
+prototyping - though the authors would be pleased to hear of any
+portability problems (especially if they come with solutions).
+
+5) The Software must not be used for any purpose other than for scientific
+R&D and in particular, nothing in this package may be used in any way,
+directly or indirectly, for commercial gain. It may be modified to suit,
+and/or incorporated into non-operational local applications. Any local
+enhancements, etc, should be reported back to the author so that they can
+be used to improve the package for other researchers.
+
+6) The authors reserve the right to continue developing this package to
+meet their own needs. Updates may be released from time to time and
+backwards compatibility is not guaranteed. Suggestions for improvements are
+welcome, but may or may not be implemented, though any reported bugs will
+be investigated.
+
+7) If any code is required for operational processing, then written
+permission for such use must be obtained via the authors. Note that this
+does not provide any entitlement to formal support from the Met Office
+unless explicitly agreed, and the Met Office reserves the right to charge a
+licence fee for such use and for any support.
+
+
+Met Office, 
+FitzRoy Road, 
+Exeter, 
+Devon, EX1 3PB, 
+UK
+
+

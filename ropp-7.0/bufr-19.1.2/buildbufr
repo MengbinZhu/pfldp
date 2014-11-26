@@ -1,0 +1,475 @@
+#!/bin/bash
+#
+# $Id: buildbufr 99 2012-10-09 10:14:59Z frdo $
+#
+#****k* BUFR/buildbufr *
+#-----------------------------------------------------------------------
+#
+# NAME
+#   buildbufr
+#
+# SYNOPSIS
+#   Example script to build BUFR library and support programs.
+#
+#  > buildbufr [-b bufrdir] [-c] [-f compiler] [-h]
+#              [-n] [-p prefix] [-t] [-u] [-v] [-z]
+#
+# OPTIONS
+#   -b set BUFR_LIBRARY temporarily to <bufrdir>
+#      BUFR tables will be copied here as working versions.
+#      Default: existing environment variable definition,
+#      or if this is not defined, then <prefix>/data/bufr/
+#      Tip: use "-b ." to install locally within the BUFR package tree.
+#
+#   -c clean build before make (make from scratch)
+#      Recommended if trying a different compiler or building
+#      an updated package from an existing build in the same
+#      location. Default: build only things which have changed.
+#
+#   -f use F90 ID <compiler>
+#      See file f90_compilers.dat for definitive list - other
+#      compilers may be supported by adding entries to this file.
+#
+#   -h print basic usage info and exit.
+#
+#   -n without -z: don't install executables (Default: install to <prefix>/bin)
+#      with    -z: disables default distribution of tarball.
+#
+#   -p set a prefix (root directory) for build. Default: HOME
+#      <prefix>/bin      - location for binary (executable) files
+#      <prefix>/lib      - location for BUFR object library (libbufr.a)
+#      <prefix>/include  - location for f90 include & module files
+#      <prefix>/man/man1 - location for 'man page' files
+#      <prefix/data/bufr - location for run-time BUFR tables
+#      Tip: use "-p ." to install locally within the BUFR package tree.
+#
+#   -t build & run test programs. Default: skip tests.
+#      (basic encode/decode test is always run and testtables and decbufr
+#       are always built, but not run unless -t given )
+#
+#   -u uninstall any previously installed files from the <prefix> tree (only)
+#
+#   -v print package version information and exit
+#
+#   -z builds a distribution as a tarball. Except for -n all other
+#      options are ignored. This option is for local administrator use,
+#      and depends on files not in the distribution package. By default,
+#      the newly-created package is 'published' for use by other application
+#      packages; this action can be disabled by also using -n. (See
+#      scripts/bufrpack.sh for publication targets.)
+#
+# INPUTS
+#   BUFR source code and supporting files - see PACKINGLIST
+#
+# OUTPUTS
+#   Without -z: BUFR files installed to <prefix>
+#   With    -z: make disto package ../bufr-<ver>.tar.gz
+#               where <ver> is the current BUFR package release version ID
+#               taken from the README file.
+#
+# ENVIRONMENT VARIABLES
+#   BUFR_LIBRARY   - path to BUFR run-time files
+#   PACKAGES       - path to package root directory (used with -z only)
+#
+# USES
+#   f90_select
+#   cygpath           (on Cygwin builds only)
+#   bufrpack.sh       (with -z and optonally -n only)
+#
+# DESCRIPTION
+#   Assumes a directory structure:
+#
+#            bufr[-<ver>]/
+#              |
+#     +--------+---------+
+#     |                  |
+#   metdb/            extra/
+#
+#   and that:
+#   - we are curently in bufr/ or bufr-<ver>/ (where <ver> is the BUFR
+#     package release version ID)
+#   - the MetDB kernel BUFR package, including operational tables, is
+#     installed in metdb/
+#   - additional non-MetDB files are in extra/
+#   - installed files will be copied to the <prefix> tree, except run-time
+#     BUFR files which are instaled to BUFR_LIBRARY
+#    (default <prefix>/data/bufr/)
+#
+#   Configured to support a (limited) number of compilers running under
+#   AIX, HP-UX, SunOS, Linux and Cygwin (Microsoft Windows). See README,
+#   README.cygwin & f90_compilers.dat files for details.
+#
+#   Tip: to save a log of the build:
+#     > buildbufr [options...] 2>&1 | tee buildbufr.log
+#
+#   The build script will:
+#    - uninstall any previous build & stop (if -u option present)
+#    - clean any previous build (if -c option present) then stop
+#      (if -n opton present) or continue:
+#    - check that the BUFR_LIBRARY environment variable is set
+#      if not, set the default to directory <prefix>/data/bufr)
+#    - check that the selected (if using the -f option) or default F90
+#      compiler is present & working
+#    - make the kernel MetDB BUFR object library
+#    - build & run the MetDB test programs
+#    - add some extra support routines to the BUFR object library
+#    - make the BUFR application executable programs
+#    - install library, modules, executables, man pages & run-time BUFR
+#      tables to <prefix> tree
+#    - generate HTML documentation from code headers to $HOME/public_html/bufr
+#      (if ROBOdoc utility is installed)
+#    - test run the application programs (if -t option present)
+#
+#   If the -c option is not used, and a previous build has been done, only
+#   changed components will be updated.
+#
+#   If the -z option is used, a distribution package (tarball) will be built.
+#   Since this uses files not included in the distribution, this option
+#   should only be used on the package development tree. A file called
+#   bufr-<ver>.tar.gz (where <ver> is the current package release version ID,
+#   extracted from te README file) will be created (or replaced) in the
+#   PACKAGES directory (parent of bufr/).
+#
+# AUTHOR
+#   Dave Offiler
+#
+# COPYRIGHT
+#   (c) Crown copyright 2011, Met Office. All rights reserved.
+#
+#   Use, duplication or disclosure of this code is subject to the restrictions
+#   as set forth in the contract. If no contract has been raised with this
+#   copy of the code, the use, duplication or disclosure of it is strictly
+#   prohibited. Permission to do so must first be obtained in writing from
+#   the Head of Satellite Applications at the following address:
+#      Met Office, FitzRoy Road, Exeter, Devon, EX1 3PB  United Kingdom
+#
+#-------------------------------------------------------------------
+#****
+#
+usage(){
+  echo
+  echo "Usage: > buildbufr [-b bufrdir] [-c [-n]] [-f compiler] [-h]"
+  echo "                   [-n] [-p prefix] [-t] [-u] [-v] [-z]"
+  echo
+  echo "where:"
+  echo " -c : clean build before make (make from scratch)"
+  echo " -b : tempory override of path to install BUFR tables"
+  echo "      [Default: BUFR_LIBRARY or if not set, <prefix>/data/bufr]"
+  echo " -f : F90 compiler tag (ID)"
+  echo " -h : print basic usage info and exit"
+  echo " -n : no build. Use with -c to clean local package tree only"
+  echo " -p : set a prefix (root directory) for installation. [Default: HOME]"
+  echo " -t : run tests to check correct build. [Default: skip tests]"
+  echo " -u : uninstall any previously installed files from <prefix> tree"
+  echo " -x : no publish. Use in conjunction with -z to build the tarball  but"
+  echo "    : don't upload them to other projects."
+  echo " -v : print package version information and exit"
+  echo " -z : build distribution as a tarball. All other options (except -x)"
+  echo "      are ignored. For local admin use only."
+  echo
+  exit
+}
+#
+release(){
+  if [[ -f RELEASE ]]; then
+    cat RELEASE
+  elif [[ -f README ]]; then
+    echo $(grep "(Release" README | awk '{print $1 " " $2}')
+  else
+    echo "No release info available"
+  fi
+}
+finish(){
+  start=$1
+  end=$(date "+%s")
+  ((delta=end-start))
+  runtime=$(date "+%H:%M")
+  echo
+  echo ">> Finished at $runtime ($delta secs elapsed)"
+  echo
+}
+#-------------------------------------------------------------------
+#
+echo
+echo " ============ Build script for BUFR package ============"
+#
+#-------------------------------------------------------------
+# 1. Start from directory containing this script
+#-------------------------------------------------------------
+#
+cd $(dirname $0)
+TOP=$PWD
+#
+#-------------------------------------------------------------
+# 2. Parse options after setting defaults
+#-------------------------------------------------------------
+#
+build="y"
+clean="n"
+uninstall="n"
+f90opt="DEF"
+PREFIX=$HOME
+test="n"
+mkdistro="n"
+publish="-p"
+#
+while getopts b:cf:hnp:tuvxz option
+do
+  case $option in
+    b) BUFR_LIBRARY=$OPTARG
+       if [[ $BUFR_LIBRARY = "." ]] || [[ $BUFR_LIBRARY = "./" ]]; then
+         BUFR_LIBRARY=$PWD/data/bufr/
+       fi
+       ;;
+    c) clean="y"
+       ;;
+    f) f90opt=$OPTARG
+       ;;
+    h) usage
+       ;;
+    n) build="n"
+       ;;
+    p) PREFIX=$(readlink -f -n $OPTARG)
+       ;;
+    t) test="y"
+       ;;
+    u) uninstall="y"
+       ;;
+    x) publish=""
+       ;;
+    v) echo
+       release
+       echo
+       exit
+       ;;
+    z) mkdistro="y"
+       ;;
+  esac
+done
+#
+#-------------------------------------------------------------
+# 3. Build distribution package (tarball) - Admin use only
+#-------------------------------------------------------------
+#
+if [[ $mkdistro = "y" ]]; then
+  if [[ -f ./scripts/bufrpack.sh ]]; then
+    tarball=$(ls MetDB_BUFR*.tar.gz | tail -n1)
+    sed -i s/MetDB_BUFR.*gz/$tarball/ PACKINGLIST
+    ./scripts/bufrpack.sh $publish
+  else
+    echo
+    echo "*** Package builder not available in this distribution"
+    echo
+  fi
+  exit
+fi
+#
+start_time=$(date "+%s")
+#
+#-------------------------------------------------------------
+# 4. Setup for OS-specific stuff
+#-------------------------------------------------------------
+#
+MAKE="make -e -C"
+OBJ=".o"
+EXE=""
+OS=$(uname | cut -c 1-6 | tr "[:lower:]" "[:upper:]")
+case $OS in
+  AIX)
+    echo "                     (IBM AIX)"
+    INSTALL="cp -f -p"
+    MKDIR="mkdir -p"
+    MAKE="/opt/freeware/bin/make -e -C"            # require GNU-make
+    ;;
+  CYGWIN)
+    echo "                   (Windows/Cygwin)"
+    INSTALL="cp --update --verbose --preserve"
+    MKDIR="mkdir --parents --verbose"
+    EXE=".exe"
+    ;;
+  HP-UX)
+    echo "                      (HP Unix)"
+    INSTALL="cp -f -p"
+    MKDIR="mkdir -p"
+    ;;
+  *)
+    uname -a | grep nec > /dev/null
+    if [[ $? -eq 0 ]];  then
+      echo "                     (NEC Linux)"
+      INSTALL="cp --update --verbose --preserve"
+      MKDIR="mkdir -p"
+    else
+      echo "                       (Linux)"
+      INSTALL="cp --update --verbose --preserve=timestamps"
+      MKDIR="mkdir --parents --verbose"
+    fi
+    ;;
+esac
+export INSTALL MKDIR OBJ EXE
+#
+#-------------------------------------------------------------
+# 5. Set up environment for Makefiles
+#-------------------------------------------------------------
+#
+PREFIX=$(echo $PREFIX | sed s#"\/$"##)
+INCDIR=$PREFIX/include
+BINDIR=$PREFIX/bin
+LIBDIR=$PREFIX/lib
+MANDIR=$PREFIX/man
+DATDIR=$PREFIX/data
+export PREFIX INCDIR BINDIR LIBDIR MANDIR DATDIR
+#
+MDBDIR=$PWD/metdb
+export MDBDIR
+if [[ -z "$BUFR_LIBRARY" ]]; then
+  BUFR_LIBRARY=$DATDIR/bufr/
+fi
+BUFR_LIBRARY=${BUFR_LIBRARY%%/}/
+export BUFR_LIBRARY
+#
+ROBODOC=$(which robodoc 2>&1)
+if [[ $? -ne 0 ]]; then
+  echo
+  echo "** ROBODoc utilty not found; "\
+"HTML documentation will not be generated."
+  echo
+  ROBODOC=""
+fi
+export ROBODOC
+#
+#-------------------------------------------------------------
+# 6. Uninstall any previously installed package files
+#-------------------------------------------------------------
+#
+if [[ "$uninstall" = "y" ]]; then
+  echo
+  echo ">> Uninstalling BUFR..."
+  echo
+  $MAKE ./extra uninstall
+  finish $start_time
+  exit
+fi
+#
+#-------------------------------------------------------------
+# 7. Clean any old build in current tree
+#-------------------------------------------------------------
+#
+if [[ "$clean" = "y" ]]; then
+  echo
+  echo ">> Cleaning BUFR package tree..."
+  echo
+  if [[ -f $MDBDIR/Makefile_BUFRrelease ]]; then
+    $MAKE $MDBDIR -f Makefile_BUFRrelease clean
+  fi
+  $MAKE ./extra clean
+fi
+#
+if [[ $build = "n" ]]; then
+  finish $start_time
+  exit
+fi
+#
+#-------------------------------------------------------------
+# 8. Continue with build & installation
+#-------------------------------------------------------------
+#
+runtime=$(date "+%H:%M on %A, %d-%b-%Y")
+echo
+echo ">> Building $(release)"
+echo "   by $USER on $(hostname) at $runtime"
+#
+#  --- Set up favourite compiler ---
+#
+echo
+. ./f90_select f90opt=$f90opt
+echo ">> Using $f90name compiler ($FF)"
+export FF FFLAGS CC CFLAGS
+#
+#-------------------------------------------------------------
+# 9. Unpack MetDB tarball if virgin install
+#-------------------------------------------------------------
+#
+if [[ ! -f $MDBDIR/Makefile_BUFRrelease ]]; then
+  echo
+  echo ">> Unpacking BUFR kernel files..."
+  echo
+  $MKDIR $MDBDIR
+  tarball=$(ls MetDB_BUFR*.tar.gz)
+  tarfile=${tarball%%.gz}
+  gunzip -c $tarball > $tarfile
+  cd $MDBDIR
+  tar -xvf $TOP/$tarfile
+  cd $TOP
+  rm -f $tarfile > /dev/null 2>&1
+fi
+#
+#-------------------------------------------------------------
+# 10. Compiler-specifc oddities
+#-------------------------------------------------------------
+#
+# 10.1 NAG compiler needs system interfaces including in compiles
+#
+if [[ ${f90name:0:3} = "NAG" ]]; then
+  NAGIF=nag_interfaces.f90
+else
+  NAGIF=""
+fi
+export NAGIF
+#
+# 10.2 SUN compiler needs a module path for MeDB .mod files
+#
+if [[ ${f90name:0:3} = "SUN" ]]; then
+  FFLAGS="$FFLAGS -M./mods"
+fi
+#
+#-------------------------------------------------------------
+# 11. Build MetDB kernel BUFR object library
+#     (default; $MDBDIR/libbufr.a)
+#-------------------------------------------------------------
+#
+echo
+echo ">> Building BUFR kernel object library..."
+echo
+$MAKE $MDBDIR -f Makefile_BUFRrelease
+if [[ $? -eq 0 ]]; then
+#
+#-------------------------------------------------------------
+# 12. Build extra utility routines & programs
+#-------------------------------------------------------------
+#
+  export BUFRLIB=libmetdbbufr.a
+  echo
+  echo ">> Adding BUFR extra routines to $BUFRLIB"
+  echo "   and making BUFR utility programs..."
+  echo
+  $MAKE ./extra
+#
+#-------------------------------------------------------------
+# 13. Install to target <prefix> tree
+#-------------------------------------------------------------
+#
+  if [[ $? -eq 0 ]]; then
+    echo
+    echo ">> Installing..."
+    echo
+    $MAKE ./extra install
+#
+#-------------------------------------------------------------
+# 14. Optionally test sample application tools
+#-------------------------------------------------------------
+#
+    if [[ "$test" = "y" ]]; then
+      echo
+      echo ">> Testing application tools..."
+      echo
+      $MAKE ./extra test
+    fi
+  fi
+#
+else
+   echo
+   echo "*** Failed to build BUFR library - correct error(s) and re-run"
+fi
+#
+finish $start_time
+exit

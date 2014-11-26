@@ -1,0 +1,126 @@
+#!/bin/bash
+#
+#    $Id: buildbufr_local 98 2012-10-09 09:26:20Z frdo $
+#
+#****k* BUFR/buildbufr_local *
+#-----------------------------------------------------------------------
+#
+# NAME
+#  buildbufr_local
+#
+# SYNOPSIS
+#   Wrapper script to build MetDB BUFR library and application tools
+#   for a list of Fortran compilers in the local (PWD) directory tree.
+#
+#   > buildbufr_local [fc...] [CLEAN] [-p install_root] [-h]
+#
+# OPTIONS
+#   fc    : one or more compiler names separated by spaces
+#           Default: list of all Fortran compilers available
+#           on Met Office SA Scientific Deskops.
+#   CLEAN : if present, just remove the local build directories
+#           Default: build BUFR in directories <install_root>/<fc>
+#           for each compiler <fc>
+#   -p    : specify an installation root path (default: PWD)
+#   -h    : summary usage help
+#
+# USES
+#   buildbufr - main BUFR build script
+#
+# DESCRIPTION
+#   Test build BUFR package in local (PWD) tree using (by default)
+#   all f95 compilers available on MetO Linux desktops, or any
+#   arbitrary set of names specified in a list on the command line,
+#   as long as each name is defined in f90_compilers.dat (and of course
+#   the compiler is installed & working!). Compiler names are case 
+#   insensitive. E.g.:
+#    > buildbufr_local gfortran ifort11
+#   If any argument is the literal string "CLEAN" then the compiler
+#   directories are completely removed, not built, e.g.:
+#    > buildbufr_local pgf95 nagfor CLEAN
+#   or
+#    > buildbufr_local CLEAN pgf95 nagfor
+#   If the -p option is used, the install is to the root path specified,
+#   else to PWD, in both cases with <fc> appended.
+#   A log file of the build output is saved in the root of the
+#   build directory <install_root>/<fc>/buildbufr.log
+#
+# AUTHOR
+#   Dave Offiler
+#
+#-----------------------------------------------------------------------
+#****
+#
+# --- List of F90 compilers to use
+#     (from command line or default list)
+#
+usage(){
+ echo "> buildbufr_local [fc...] [CLEAN] [-p install_root] [-h]"
+ echo "where:"
+ echo " fc    : one or more compiler IDs separated by spaces"
+ echo "         Default: list of all Fortran compilers available"
+ echo "         on Met Office Scientific Deskops."
+ echo " CLEAN : if present, just remove the local build directories"
+ echo "         Default: build GWV in local directories ./<fc>"
+ echo "         for each compiler <fc>"
+ echo " -p    : specify an installation root path (default: PWD)"
+ echo " -h    : this help"
+ exit
+}
+clean="no"
+fclist=""
+INSTALL_ROOT=$PWD
+while [[ -n "$1" ]]; do
+  if [[ $1 == "CLEAN" ]]; then
+    clean="yes"
+  elif [[ $1 == "-p" ]]; then
+    shift
+    INSTALL_ROOT=$(readlink -f -n $1)
+  elif [[ $1 == "-h" ]] || [[ $1 = "--help" ]]; then
+    usage
+  else
+    fclist="$fclist $1"
+  fi
+  shift
+done
+#
+if [[ -z $fclist ]]; then
+  fclist="g95 gfortran \
+          ifort ifort11 ifort12 \
+          nagfor pgf95 pgf11 sunf95"
+fi
+#
+# --- Clean each installed compiler directory
+#
+if [[ $clean == "yes" ]]; then
+  for fc in $fclist; do
+    echo ">> Cleaning $INSTALL_ROOT/$fc..."
+    rm -Rf $INSTALL_ROOT/$fc
+   done
+   exit
+fi
+#
+# --- Build package with each compiler in the list, with
+#     output to screen & a log file
+#
+for fc in $fclist; do
+  prefix=$INSTALL_ROOT/$fc
+  export BUFR_LIBRARY=$prefix/data/bufr/
+  mkdir -p $prefix
+  log=$prefix/buildbufr.log
+  rm -f $log > /dev/null 2>&1
+  echo " " | tee $log
+  echo "-------------------------------------------------------------" | tee -a $log
+  echo "Building BUFR package on $(date) host $(hostname) by $USER"    | tee -a $log
+  echo "-------------------------------------------------------------" | tee -a $log
+  echo ">> $fc"                                                        | tee -a $log
+  ./buildbufr -c -t -p $prefix -f $fc 2>&1                             | tee -a $log
+done
+#
+echo "-------------------------------------------------------------"
+echo "For a record of the build status, see log files:"
+for fc in $fclist; do
+  echo " $INSTALL_ROOT/$fc/buildbufr.log"
+done
+exit
+

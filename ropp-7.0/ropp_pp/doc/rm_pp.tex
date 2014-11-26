@@ -1,0 +1,3040 @@
+% Document: ./rm_pp
+% Source: ./mywork/
+% Generated with ROBODoc Version 4.99.36 (Jul 28 2009)
+\section{BendingAngle/ropp\_pp\_abel\_EXP}
+\textsl{[ Subroutines ]}
+
+\label{ch:robo0}
+\label{ch:BendingAngle_ropp_pp_abel_EXP}
+\index{unsorted!ropp\_pp\_abel\_EXP}\index{Subroutines!ropp\_pp\_abel\_EXP}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    ropp_pp_abel_EXP - Calculate a one dimensional bending angle
+                       profile from refractivity / impact parameter profile at
+                       required output levels using a Fast Abel Transform
+                       Assume exponential variation of ln(n) with height 
+                       between successive impact parameter levels.
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    call ropp_pp_abel_EXP(nr, refrac, impact, bangle)
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    This routine calculates bending angles at a given set of impact parameters
+    from a vertical profile of refractivity given at the observed set of 
+    x = nr levels.
+\end{Verbatim}
+\textbf{INPUTS:}\hspace{0.08in}\begin{Verbatim}
+    real(wp), dimension(:) :: nr          ! x=nr product
+    real(wp), dimension(:) :: refrac      ! Refractivity values
+    real(wp), dimension(:) :: impact      ! Impact parameters
+\end{Verbatim}
+\textbf{OUTPUT:}\hspace{0.08in}\begin{Verbatim}
+    real(wp), dimension(:) :: bangle      ! Calculated bending angles
+\end{Verbatim}
+\textbf{NOTES:}\hspace{0.08in}\begin{Verbatim}
+    The interpolation of bending angles calculated at the input data
+    geopotential levels to the output impact parameter levels is
+    carried out assuming that bending angle varies exponentially with
+    impact parameter.
+\end{Verbatim}
+\textbf{SEE ALSO:}\hspace{0.08in}\begin{Verbatim}
+     ropp_pp_invert_EXP
+\end{Verbatim}
+\section{BendingAngle/ropp\_pp\_abel\_LIN}
+\textsl{[ Subroutines ]}
+
+\label{ch:robo1}
+\label{ch:BendingAngle_ropp_pp_abel_LIN}
+\index{unsorted!ropp\_pp\_abel\_LIN}\index{Subroutines!ropp\_pp\_abel\_LIN}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    ropp_pp_abel_LIN - Calculate a one dimensional bending angle
+                       profile from refractivity / impact parameter profile at
+                       required output levels using a Fast Abel Transform
+                       Assume linear variation of ln(n) with impact height.  
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    call ropp_pp_abel(nr, refrac, impact, bangle, dlndx, scale)
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    This routine calculates bending angles at a given set of impact parameters
+    from a vertical profile of refractivity given at the observation set of
+    impact parameters.
+\end{Verbatim}
+\textbf{INPUTS:}\hspace{0.08in}\begin{Verbatim}
+    real(wp), dimension(:) :: nr          ! x=nr product
+    real(wp), dimension(:) :: refrac      ! Refractivity values
+    real(wp), dimension(:) :: impact      ! Impact parameters
+    real(wp), dimension(:) :: dlndx       ! Refractive index gradient
+    real(wp),              :: scale       ! Scale height
+\end{Verbatim}
+\textbf{OUTPUT:}\hspace{0.08in}\begin{Verbatim}
+    real(wp), dimension(:) :: bangle       ! Calculated bending angles
+\end{Verbatim}
+\textbf{NOTES:}\hspace{0.08in}\begin{Verbatim}
+    The interpolation of bending angles calculated at the input data
+    geopotential levels to the output impact parameter levels is
+    carried out assuming that bending angle varies exponentially with
+    impact parameter.
+\end{Verbatim}
+\textbf{SEE ALSO:}\hspace{0.08in}\begin{Verbatim}
+    ropp_pp_abel_EXP
+\end{Verbatim}
+\section{BendingAngle/ropp\_pp\_invert\_EXP}
+\textsl{[ Subroutines ]}
+
+\label{ch:robo2}
+\label{ch:BendingAngle_ropp_pp_invert_EXP}
+\index{unsorted!ropp\_pp\_invert\_EXP}\index{Subroutines!ropp\_pp\_invert\_EXP}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    ropp_pp_invert_EXP - Calculate a one dimensional refractivity profile from
+                         bending angle / impact parameter profile using a 
+                         Fast Abel Transform. Assume exponential variation of 
+                         bending angle with height between successive impact 
+                         parameter levels.
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    call ropp_pp_invert_EXP(impact, bangle, nr, refrac)
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    This routine calculates refractivity at a given set of x=nr levels
+    from a vertical profile of bending angles given at a set 
+    of impact parameters.
+\end{Verbatim}
+\textbf{INPUTS:}\hspace{0.08in}\begin{Verbatim}
+    real(wp), dimension(:) :: impact      ! Input impact parameters 
+    real(wp), dimension(:) :: bangle      ! Bending angles
+    real(wp), dimension(:) :: nr          ! x = nr product
+\end{Verbatim}
+\textbf{OUTPUT:}\hspace{0.08in}\begin{Verbatim}
+    real(wp), dimension(:) :: refrac      ! Refractivity values
+\end{Verbatim}
+\textbf{NOTES:}\hspace{0.08in}\begin{Verbatim}
+    The interpolation of refractivity calculated at the input data
+    impact height levels to the output geopotential levels is
+    carried out assuming that dln(n)/dx varies exponentially with x.
+\end{Verbatim}
+\textbf{SEE ALSO:}\hspace{0.08in}\begin{Verbatim}
+    ropp_pp_invert_LIN
+\end{Verbatim}
+\section{BendingAngle/ropp\_pp\_invert\_LIN}
+\textsl{[ Subroutines ]}
+
+\label{ch:robo3}
+\label{ch:BendingAngle_ropp_pp_invert_LIN}
+\index{unsorted!ropp\_pp\_invert\_LIN}\index{Subroutines!ropp\_pp\_invert\_LIN}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    ropp_pp_invert_LIN - Calculate a one dimensional refractivity profile from
+                         bending angle / impact parameter profile
+                         using a Fast Abel Transform
+                         Assume linear variation of bending angle with height
+                         between successive impact parameter levels
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    call ropp_pp_invert_LIN(impact, bangle, nr, refrac, scale)
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    This routine calculates refractivity at a given set of x=nr levels
+    from a vertical profile of bending angles given at a set of
+    impact parameters.
+\end{Verbatim}
+\textbf{INPUTS:}\hspace{0.08in}\begin{Verbatim}
+    real(wp), dimension(:) :: impact      ! Input impact parameters 
+    real(wp), dimension(:) :: bangle      ! Bending angles
+    real(wp), dimension(:) :: nr          ! x=nr product
+    real(wp), optional     :: scale       ! Vertical scale height
+\end{Verbatim}
+\textbf{OUTPUT:}\hspace{0.08in}\begin{Verbatim}
+    real(wp), dimension(:) :: refrac      ! Refractivity values
+\end{Verbatim}
+\textbf{NOTES:}\hspace{0.08in}\begin{Verbatim}
+    The interpolation of refractivity calculated at the input data
+    impact height levels to the output geopotential levels is
+    carried out assuming that dln(n)/dx varies linearly with x.
+\end{Verbatim}
+\textbf{SEE ALSO:}\hspace{0.08in}\begin{Verbatim}
+    ropp_pp_invert_LIN
+\end{Verbatim}
+\section{common/ropp\_pp\_version}
+\textsl{[ Functions ]}
+
+\label{ch:robo4}
+\label{ch:common_ropp_pp_version}
+\index{unsorted!ropp\_pp\_version}\index{Functions!ropp\_pp\_version}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+   ropp_pp_version
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+   Return ROPP_PP version ID string
+
+   USE ropp_pp
+   version = ropp_pp_version()
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+   This function returns the (common) version string for the ROPP_PP
+   module. By default, this function should be called by all ROPP_PP
+   tools to display a version ID when the '-v' command-line switch is
+   used.
+\end{Verbatim}
+\section{Constants/Earth}
+\textsl{[ Topics ]}
+
+\label{ch:robo5}
+\label{ch:Constants_Earth}
+\index{unsorted!Earth}\index{Topics!Earth}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    Physical constants related to the Earth as used in the ROPP Forward Model
+    library. 
+\end{Verbatim}
+\textbf{SEE ALSO:}\hspace{0.08in}\begin{Verbatim}
+    g_wmo
+    c_light
+    R_dry
+    R_vap
+    C_p
+    mw_dry_air
+    mw_water
+    epsilon_water
+\end{Verbatim}
+\subsection{Earth/g\_wmo}
+\textsl{[ Earth ]}
+\textsl{[ Parameters ]}
+
+\label{ch:robo12}
+\label{ch:Earth_g_wmo}
+\index{unsorted!g\_wmo}\index{Parameters!g\_wmo}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    g_wmo - Gravitational acceleration (WMO standard value)
+\end{Verbatim}
+\textbf{SOURCE:}\hspace{0.08in}\begin{Verbatim}
+  REAL(wp), PARAMETER :: g_wmo = 9.80665_wp         !   m s^{-2}
+\end{Verbatim}
+\section{Constants/Maths}
+\textsl{[ Topics ]}
+
+\label{ch:robo6}
+\label{ch:Constants_Maths}
+\index{unsorted!Maths}\index{Topics!Maths}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    Mathematical constants as used in the ROPP Forward Model library. 
+\end{Verbatim}
+\textbf{SEE ALSO:}\hspace{0.08in}\begin{Verbatim}
+    pi
+\end{Verbatim}
+\subsection{Maths/pi}
+\textsl{[ Maths ]}
+\textsl{[ Parameters ]}
+
+\label{ch:robo32}
+\label{ch:Maths_pi}
+\index{unsorted!pi}\index{Parameters!pi}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    pi  
+\end{Verbatim}
+\textbf{SOURCE:}\hspace{0.08in}\begin{Verbatim}
+  REAL(wp), PARAMETER :: pi = 3.141592653589793238_wp   
+\end{Verbatim}
+\section{Constants/RadioOccultation}
+\textsl{[ Topics ]}
+
+\label{ch:robo7}
+\label{ch:Constants_RadioOccultation}
+\index{unsorted!RadioOccultation}\index{Topics!RadioOccultation}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    Physical constants specific for radio occultation measurement as used in
+    the ROPP Forward Model library.
+\end{Verbatim}
+\textbf{SEE ALSO:}\hspace{0.08in}\begin{Verbatim}
+    kappa1
+    kappa2
+\end{Verbatim}
+\subsection{RadioOccultation/kappa1}
+\textsl{[ RadioOccultation ]}
+\textsl{[ Parameters ]}
+
+\label{ch:robo93}
+\label{ch:RadioOccultation_kappa1}
+\index{unsorted!kappa1}\index{Parameters!kappa1}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    kappa1 - Coefficient to calculate dry refractivity contribution.
+\end{Verbatim}
+\textbf{SOURCE:}\hspace{0.08in}\begin{Verbatim}
+  REAL(wp), PARAMETER :: kappa1 = 77.60e-2_wp      !   K Pa^{-1}
+\end{Verbatim}
+\subsection{RadioOccultation/kappa2}
+\textsl{[ RadioOccultation ]}
+\textsl{[ Parameters ]}
+
+\label{ch:robo94}
+\label{ch:RadioOccultation_kappa2}
+\index{unsorted!kappa2}\index{Parameters!kappa2}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    kappa2 - Coefficient to calculate moist refractivity contribution.
+\end{Verbatim}
+\textbf{SOURCE:}\hspace{0.08in}\begin{Verbatim}
+  REAL(wp), PARAMETER :: kappa2 = 3.73e3_wp        !   K^2 Pa^{-1}
+\end{Verbatim}
+\section{Datatypes/KeyConfig}
+\textsl{[ Structures ]}
+
+\label{ch:robo9}
+\label{ch:Datatypes_KeyConfig}
+\index{unsorted!KeyConfig}\index{Structures!KeyConfig}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    KeyConfig - Key-value pairs defined in PP config files
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    use ropp_pp_types
+      ...
+    type(KeyConfig) :: key_value
+\end{Verbatim}
+\textbf{NOTES:}\hspace{0.08in}\textbf{SEE ALSO:}\hspace{0.08in}\textbf{SOURCE:}\hspace{0.08in}\begin{Verbatim}
+  TYPE KeyConfig
+
+     CHARACTER(len = 1024), DIMENSION(:), POINTER :: keys   => null()
+     CHARACTER(len = 4096), DIMENSION(:), POINTER :: values => null()
+
+  END TYPE KeyConfig
+\end{Verbatim}
+\section{Datatypes/PPConfig}
+\textsl{[ Structures ]}
+
+\label{ch:robo10}
+\label{ch:Datatypes_PPConfig}
+\index{unsorted!PPConfig}\index{Structures!PPConfig}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    PPConfig - Configuration options for excess phase to bending angle and 
+               ionospheric correction processing
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    use ropp_pp
+      ...
+    type(PPConfig) :: config
+\end{Verbatim}
+\textbf{SOURCE:}\hspace{0.08in}\begin{Verbatim}
+  TYPE ppConfig
+
+     LOGICAL  :: obs_ok   = .TRUE.      ! Observations QC flag
+     
+     LOGICAL  :: output_tdry = .TRUE.  ! Flag to output 'dry' parameters
+
+     LOGICAL  :: output_diag = .FALSE.  ! Flag to output additional diagnostics
+
+     !! Occultation (excess phase to bending angle) processing
+
+     ! Excess phase to bangle method (GO = geometric optics, WO = wave optics)
+     CHARACTER(len=10) :: occ_method = "WO"
+     ! Filter type for phase differentiation (slpoly = sliding polynomial, optest = optimal estimation filter)
+     CHARACTER(len=10) :: filter_method = "slpoly"
+     ! Filter width for smoothed GO bending angles (m)
+     REAL(wp) :: fw_go_smooth =  3000.0_wp  
+     ! Filter width for computing full resolution GO bending angles (m)
+     REAL(wp) :: fw_go_full   =  3000.0_wp  
+     ! Filter width for wave optics bending angle above 7 km (m)
+     REAL(wp) :: fw_wo        =  2000.0_wp 
+     ! Filter width for wave optics bending angle below 7 km (m)
+     REAL(wp) :: fw_low       =  -1000.0_wp 
+     ! Maximum height for wave optics processing (m)
+     REAL(wp) :: hmax_wo      = 25000.0_wp
+     ! Fractional cut-off limit for amplitude
+     REAL(wp) :: Acut     = 0.0_wp      
+     ! Cut-off limit for impact height (m)
+     REAL(wp) :: Pcut     = -2000.0_wp      
+     ! Cut-off limit for bending angle (rad)
+     REAL(wp) :: Bcut     = 0.1_wp 
+     ! Cut-off limit for straight-line tangent altitude (m)
+     REAL(wp) :: Hcut     = -250000.0_wp 
+     ! Complex filter flag
+     INTEGER  :: CFF = 3
+     ! Shadow border width (m)
+     REAL(wp) :: dsh = 200.0_wp
+     ! Degraded L2 data flag
+     LOGICAL  :: opt_DL2  = .TRUE.      
+     ! Calculate and output spectra flag
+     LOGICAL  :: opt_spectra = .FALSE.
+     ! Path to EGM96 model coefficients file
+     CHARACTER(len=80) :: egm96 = "egm96.dat"
+     ! Path to EGM96 model corrections file
+     CHARACTER(len=80) :: corr_egm96 = "corrcoef.dat"
+     ! Path to external navigation bit file
+     CHARACTER(len=80) :: navbit_file = " "
+
+     !! Inversion (bending angle to refractivity) processing
+
+     ! Ionospheric correction method (NONE = linear combination, MSIS = full,
+     !                                GMSIS = full with global MSIS search,
+     !                                BG = full with background profile)
+     CHARACTER(len=10) :: method = "GMSIS"
+     ! Statistical optimization method (so = statistical optimisation (default)
+     !                                  lcso = linear combination+stat opt)
+     CHARACTER(len=10) :: so_method = "so"
+     ! Abel integral algorithm (LIN = linear, EXP = exponential)
+     CHARACTER(len=10) :: abel = "LIN" 
+     ! Model coefficients file path
+     CHARACTER(len=80) :: mfile = "MSIS_coeff.nc"      
+     ! Background atmospheric profile file path
+     CHARACTER(len=80) :: bfile = "n/a"  
+     ! Local radius of curvature (m)
+     REAL(wp) :: r_curve               
+     ! Number of input data points
+     INTEGER  :: npoints               
+     ! Step of standard impact parameter grid (m)
+     REAL(wp) :: dpi      = 100.0_wp    
+
+     ! Minimum impact parameter (m)
+     REAL(wp) :: pmin                  
+     ! Maximum impact parameter (m)
+     REAL(wp) :: pmax                  
+     ! Polynomial degree for smoothing regression
+     INTEGER  :: np_smooth = 3         
+     ! Filter width for smoothing profile
+     REAL(wp) :: fw_smooth = 1000.0_wp 
+
+     ! Number of parameters used for model fit regression
+     REAL(wp) :: nparm_fit = 2
+     ! Lower limit for model fit regression (m)
+     REAL(wp) :: hmin_fit = 20000.0_wp 
+     ! Upper limit for model fit regression (m)
+     REAL(wp) :: hmax_fit = 70000.0_wp 
+     ! a priori standard dev of regression factor
+     REAL(wp) :: omega_fit = 0.3_wp    
+
+     ! Ionospheric correction filter width (m)
+     REAL(wp) :: f_width  = 2000.0_wp   
+     ! Step of homogeneous impact p. grid (m)
+     REAL(wp) :: delta_p  =  20.0_wp   
+     ! External ionospheric smoothing scale (m)  
+     REAL(wp) :: s_smooth = 2000.0_wp  
+     ! Lower limit of ionospheric signal (m)
+     REAL(wp) :: z_ion    = 50000.0_wp 
+     ! Upper limit of stratospheric signal (m)
+     REAL(wp) :: z_str    = 35000.0_wp 
+     ! Upper limit of tropospheric signal (m)
+     REAL(wp) :: z_ltr    = 12000.0_wp 
+     ! Number of points for smoothing (odd)
+     INTEGER  :: n_smooth = 11         
+
+     ! Height of atmosphere for inversion (m)
+     REAL(wp) :: ztop_invert = 150000.0_wp 
+     ! Step of highest part inversion grid (m)
+     REAL(wp) :: dzh_invert = 50.0_wp      
+     ! Interval for regression in inversion (m)
+     REAL(wp) :: dzr_invert = 20000.0_wp   
+
+  END TYPE ppConfig
+\end{Verbatim}
+\section{Datatypes/PPDiag}
+\textsl{[ Structures ]}
+
+\label{ch:robo11}
+\label{ch:Datatypes_PPDiag}
+\index{unsorted!PPDiag}\index{Structures!PPDiag}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    PPDiag -
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    use ropp_pp
+      ...
+    type(PPDiag) :: diag
+\end{Verbatim}
+\textbf{SOURCE:}\hspace{0.08in}\begin{Verbatim}
+  TYPE ppDiag
+     REAL(wp) :: L2_badness    ! L2 phase correction badness score
+     REAL(wp) :: sq            ! Statistical optimisation badness score
+     ! CT processing impact parameter grid (m)
+     REAL(wp), DIMENSION(:), POINTER :: CTimpact => null()
+     ! CT processing amplitude 
+     REAL(wp), DIMENSION(:), POINTER :: CTamplitude => null()
+     ! CT processing smoothed amplitude 
+     REAL(wp), DIMENSION(:), POINTER :: CTamplitude_smt => null()
+     ! CT processing impact parameter grid (m)
+     REAL(wp), DIMENSION(:), POINTER :: CTimpactL2 => null()
+     ! CT processing amplitude 
+     REAL(wp), DIMENSION(:), POINTER :: CTamplitudeL2 => null()
+     ! CT processing smoothed amplitude 
+     REAL(wp), DIMENSION(:), POINTER :: CTamplitudeL2_smt => null()
+     ! Ionospheric bending angle in L1
+     REAL(wp), DIMENSION(:), POINTER :: ba_ion => null()    
+     ! Error covariance of ionospheric bending angle (rad**2)
+     REAL(wp), DIMENSION(:), POINTER :: err_ion => null()   
+     ! Error covariance of neutral bending angle (rad**2)
+     REAL(wp), DIMENSION(:), POINTER :: err_neut => null()
+     ! Weight of data (data:data+clim) in profile
+     REAL(wp), DIMENSION(:), POINTER :: wt_data => null()
+
+  END TYPE ppDiag
+\end{Verbatim}
+\section{FFT/ropp\_pp\_FFT\_complex}
+\textsl{[ Subroutines ]}
+
+\label{ch:robo13}
+\label{ch:FFT_ropp_pp_FFT_complex}
+\index{unsorted!ropp\_pp\_FFT\_complex}\index{Subroutines!ropp\_pp\_FFT\_complex}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    ropp_pp_FFT - Compute Fast Fourier Transform of complex data
+                  using the Danielson-Lanczos Lemma
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    call ropp_pp_FFT(data, isign)
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    This subroutine computes the Fast Fourier transform (or its inverse)
+    of complex data using the Danielson-Lanczos Lemma. Based on dfour.f
+    routine provided in Numerical Recipes.
+\end{Verbatim}
+\textbf{INPUTS:}\hspace{0.08in}\begin{Verbatim}
+    complex(wp), dim(:)  :: data      Input complex data signal
+    integer           :: isign     FFT direction
+                                             > 0 - forward discrete FT
+                                             < 0 - inverse discrete FT
+\end{Verbatim}
+\textbf{OUTPUT:}\hspace{0.08in}\begin{Verbatim}
+    complex(wp), dim(:)  :: data      Transformed sequence
+\end{Verbatim}
+\textbf{REFERENCES:}\hspace{0.08in}\begin{Verbatim}
+   W.H. Press, S.A. Teukolsjy, W.T. Vetterling and B.P. Flannery,
+   Numerical Recipes in C - The Art of Scientific Computing.
+   2nd Ed., Cambridge University Press, 1992.
+\end{Verbatim}
+\section{FFT/ropp\_pp\_FFT\_real}
+\textsl{[ Subroutines ]}
+
+\label{ch:robo14}
+\label{ch:FFT_ropp_pp_FFT_real}
+\index{unsorted!ropp\_pp\_FFT\_real}\index{Subroutines!ropp\_pp\_FFT\_real}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    ropp_pp_FFT - Compute Fast Fourier Transform of complex data
+                  (real representation) using the Danielson-Lanczos Lemma
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    call ropp_pp_FFT(data, isign)
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    This subroutine computes the Fast Fourier transform (or its inverse)
+    of complex data using the Danielson-Lanczos Lemma. Based on dfour.f
+    routine provided in Numerical Recipes.
+\end{Verbatim}
+\textbf{INPUTS:}\hspace{0.08in}\begin{Verbatim}
+    real(wp), dim(:)  :: data      Input complex data signal
+    integer           :: isign     FFT direction
+                                             > 0 - forward discrete FT
+                                             < 0 - inverse discrete FT
+\end{Verbatim}
+\textbf{OUTPUT:}\hspace{0.08in}\begin{Verbatim}
+    real(wp), dim(:)  :: data      Transformed sequence
+\end{Verbatim}
+\textbf{NOTES:}\hspace{0.08in}\begin{Verbatim}
+   The signal array contains complex data stored as
+     data(1) = real part f(1)
+     data(2) = imag part f(1)
+     data(3) = real part f(2)
+     data(4) = imag part f(2)
+      ...
+     data(2*nn-1) = real part f(nn)
+     data(2*nn)   = imag part f(nn)
+   etc....
+\end{Verbatim}
+\textbf{REFERENCES:}\hspace{0.08in}\begin{Verbatim}
+   W.H. Press, S.A. Teukolsjy, W.T. Vetterling and B.P. Flannery,
+   Numerical Recipes in C - The Art of Scientific Computing.
+   2nd Ed., Cambridge University Press, 1992.
+\end{Verbatim}
+\section{FFT/ropp\_pp\_filter}
+\textsl{[ Subroutines ]}
+
+\label{ch:robo15}
+\label{ch:FFT_ropp_pp_filter}
+\index{unsorted!ropp\_pp\_filter}\index{Subroutines!ropp\_pp\_filter}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    ropp_pp_filter - Filtering and differentitation of a signal
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    call ropp_pp_filter(dt, s, w, nd, fs, ds)
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    Optimal solution of integral equation
+\end{Verbatim}
+\textbf{INPUTS:}\hspace{0.08in}\begin{Verbatim}
+    real(wp)             :: dt      Time step
+    real(wp), dim([:],:) :: s       Signal samples ([channel],time)
+    integer              :: w       Window width [npoints]
+    integer              :: nd      Number of points for differentiation 
+\end{Verbatim}
+\textbf{OUTPUT:}\hspace{0.08in}\begin{Verbatim}
+    real(wp), dim([:],:), optional  :: fs      Filtered signal
+    real(wp), dim([:],:), optional  :: ds      Signal derivative
+\end{Verbatim}
+\section{FFT/ropp\_pp\_fourier\_filter}
+\textsl{[ Subroutines ]}
+
+\label{ch:robo16}
+\label{ch:FFT_ropp_pp_fourier_filter}
+\index{unsorted!ropp\_pp\_fourier\_filter}\index{Subroutines!ropp\_pp\_fourier\_filter}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    ropp_pp_fourier_filter - Gaussian filter in spectral space
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    call ropp_pp_fourier_filter(data, window)
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    This routine filters an input complex signal by computing its spectrum,
+    filtering the signal in spectral space, and inverse transforming back
+    to the data space
+\end{Verbatim}
+\textbf{INPUTS:}\hspace{0.08in}\begin{Verbatim}
+    complex(wp), dim(:)  :: data      Input complex data signal
+    integer              :: window    Filtering window width (npoints)
+\end{Verbatim}
+\textbf{OUTPUT:}\hspace{0.08in}\begin{Verbatim}
+    complex(wp), dim(:)  :: data      Filtered sequence
+\end{Verbatim}
+\textbf{REFERENCES:}\hspace{0.08in}\begin{Verbatim}
+   W.H. Press, S.A. Teukolsjy, W.T. Vetterling and B.P. Flannery,
+   Numerical Recipes in C - The Art of Scientific Computing.
+   2nd Ed., Cambridge University Press, 1992.
+\end{Verbatim}
+\section{FFT/ropp\_pp\_sliding\_polynomial}
+\textsl{[ Subroutines ]}
+
+\label{ch:robo17}
+\label{ch:FFT_ropp_pp_sliding_polynomial}
+\index{unsorted!ropp\_pp\_sliding\_polynomial}\index{Subroutines!ropp\_pp\_sliding\_polynomial}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    ropp_pp_sliding_poly - Least-square fitting polynomial in sliding
+                           windows
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    call ropp_pp_sliding_polynomial(t, s, w, np, fs, ds)
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    Least-square fitting polynomial in sliding windows 
+\end{Verbatim}
+\textbf{INPUTS:}\hspace{0.08in}\begin{Verbatim}
+    real(wp)             :: t       Time
+    real(wp), dim([:],:) :: s       Signal samples ([channel],time)
+    integer, [dim(:)],   :: w       Window width [npoints]
+    integer              :: np      Polynomial degree
+\end{Verbatim}
+\textbf{OUTPUT:}\hspace{0.08in}\begin{Verbatim}
+    real(wp), dim([:],:), optional  :: fs      Filtered signal
+    real(wp), dim([:],:), optional  :: ds      Signal derivative
+\end{Verbatim}
+\section{GeometricOptics/ropp\_pp\_bending\_angle\_go}
+\textsl{[ Subroutines ]}
+
+\label{ch:robo18}
+\label{ch:GeometricOptics_ropp_pp_bending_angle_go}
+\index{unsorted!ropp\_pp\_bending\_angle\_go}\index{Subroutines!ropp\_pp\_bending\_angle\_go}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    ropp_pp_bending_angle_go - Calculate L1 and L2 bending angle profiles from
+                               occultation data by GEOMETRIC OPTICS
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    call ropp_pp_bending_angle_go(time, r_leo, r_gns, r_coc, phase_L1,
+                                  phase_L2, w_smooth, filter, impact, bangle)
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    This routine calculates L1 and L2 bending angles.
+      1) Detrend excess phase using spline regression
+      2) Numerical differentiation of detrended excess phase
+      3) Calculation of impact parameter and bending angle from Doppler shift
+         using Snell's Law - GEOMETRIC OPTICS method
+\end{Verbatim}
+\textbf{INPUTS:}\hspace{0.08in}\begin{Verbatim}
+    real(wp), dimension(:)   :: time      ! Relative time of samples (s)
+    real(wp), dimension(:,:) :: r_leo     ! Cartesian LEO coordinates (m)
+    real(wp), dimension(:,:) :: r_gns     ! Cartesian GPS coordinates (m)
+    real(wp), dimension(:)   :: r_coc     ! Centre curvature coordinates (m)
+    integer                  :: w_smooth  ! Smoothing window (points)
+    character(len=*)         :: filter    ! Filter type (optest/slpoly)
+    real(wp), dimension(:)   :: phase_L1  ! L1 excess phase (m)
+    real(wp), dimension(:)   :: phase_L2  ! L2 excess phase (m)
+\end{Verbatim}
+\textbf{OUTPUT:}\hspace{0.08in}\begin{Verbatim}
+    real(wp), dimension(:)   :: impact_L1 ! L1 impact parameters (m)
+    real(wp), dimension(:)   :: bangle_L1 ! L1 bending angles (rad)
+    real(wp), dimension(:)   :: impact_L2 ! L2 impact parameters (m)
+    real(wp), dimension(:)   :: bangle_L2 ! L2 bending angles (rad)
+\end{Verbatim}
+\textbf{NOTES:}\hspace{0.08in}\begin{Verbatim}
+    Method:
+        1. Detrending excess phase using spline regression.
+        2. Numerical differentiation of detrended phase using
+           optimal solution of integral equation in matrix form.
+        3. Calculation of impact parameter and bending
+           angle from Doppler shift using Snell's law.
+\end{Verbatim}
+\textbf{REFERENCES:}\hspace{0.08in}\begin{Verbatim}
+   Vorob'ev, V.V. and Krasil'nikova T.G. 1994, 
+   Estimation of the accuracy of the atmospheric refractive index recovery
+   from doppler Sshift measurements at frequencies used in the NAVSTAR system
+   Physics of the Atmosphere and Ocean (29) 602-609
+
+  Gorbunov, M.E. and Kornblueh, L. 2003,
+  Principles of variational assimilation of GNSS radio occultation data
+  Max Planck Institute Report 350 
+  http://www.mpimet.mpg.de/fileadmin/publikationen/Reports/max_scirep_350.pdf
+\end{Verbatim}
+\section{GeometricOptics/ropp\_pp\_geometric\_optics}
+\textsl{[ Subroutines ]}
+
+\label{ch:robo19}
+\label{ch:GeometricOptics_ropp_pp_geometric_optics}
+\index{unsorted!ropp\_pp\_geometric\_optics}\index{Subroutines!ropp\_pp\_geometric\_optics}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    ropp_pp_geometric_optics - Calculate bending angle and impact parameter 
+                               from relative Doppler frequency shift.
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    call ropp_pp_geometric_optics(r_leo, v_leo, r_gns, v_gns, doppler,
+                                  impact, bangle)
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    This routine calculates bending angle and impact parameter from relative
+    Doppler frequency shift.
+    Iterative solution of the system of equations:
+               (c - (v_leo, U_leo))/(c - (v_gns, U_gns)) - 1 = doppler
+               [r_leo, U_leo] - [r_gns, U_gns] = 0
+               (U_leo, U_leo) = 1
+               (U_gns, U_gns) = 1
+   where U_leo and U_gns are the ray directions at the receiver and 
+   transmitter respectively.
+\end{Verbatim}
+\textbf{INPUTS:}\hspace{0.08in}\begin{Verbatim}
+    real(wp), dimension(:) :: r_leo     ! relative LEO position (m) [ECI]
+    real(wp), dimension(:) :: v_leo     ! LEO velocity (m/s) [ECI]  
+    real(wp), dimension(:) :: r_gns     ! relative GPS position (m) [ECI]
+    real(wp), dimension(:) :: v_gns     ! GPS velocity (m/s) [ECI]  
+    real(wp)               :: doppler   ! relative Doppler frequency shift
+\end{Verbatim}
+\textbf{OUTPUT:}\hspace{0.08in}\begin{Verbatim}
+    real(wp)               :: impact    ! impact parameter (m)
+    real(wp)               :: bangle    ! bending angle (rad)
+\end{Verbatim}
+\textbf{NOTES:}\hspace{0.08in}\textbf{REFERENCES:}\hspace{0.08in}\begin{Verbatim}
+   Vorob'ev and Krasil'nikova 1994, 
+   Estimation of the accuracy of the atmospheric refractive index recovery
+   from doppler Sshift measurements at frequencies used in the NAVSTAR system
+   Physics of the Atmosphere and Ocean (29) 602-609
+
+  Gorbunov, M.E. and Kornblueh, L. 2003,
+  Principles of variational assimilation of GNSS radio occultation data
+  Max PlancK Institute Report 350 
+  http://www.mpimet.mpg.de/fileadmin/publikationen/Reports/max_scirep_350.pdf
+\end{Verbatim}
+\section{GeometricOptics/ropp\_pp\_geometric\_optics\_adj}
+\textsl{[ Subroutines ]}
+
+\label{ch:robo20}
+\label{ch:GeometricOptics_ropp_pp_geometric_optics_adj}
+\index{unsorted!ropp\_pp\_geometric\_optics\_adj}\index{Subroutines!ropp\_pp\_geometric\_optics\_adj}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    ropp_pp_geometric_optics_adj - Calculate bending angle and impact 
+                                   parameter from relative Doppler frequency 
+                                   shift. ADJOINT VERSION.
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    call ropp_pp_geometric_optics_adj(r_leo, v_leo, r_gns, v_gns, doppler,
+                                      impact, bangle, impact_dd, impact_dr, 
+                                      bangle_dd, bangle_dr)
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    This routine is the adjoint of ropp_pp_geometric_optics, which calculates 
+    bending angle and impact parameter from relative Doppler frequency shift.
+    Iterative solution of the system of equations:
+               (c - (v_leo, U_leo))/(c - (v_gns, U_gns)) - 1 = doppler
+               [r_leo, U_leo] - [r_gns, U_gns] = 0
+               (U_leo, U_leo) = 1
+               (U_gns, U_gns) = 1
+   where U_leo and U_gns are the ray directions at the receiver and 
+   transmitter respectively.
+\end{Verbatim}
+\textbf{INPUTS:}\hspace{0.08in}\begin{Verbatim}
+    real(wp), dimension(:) :: r_leo     ! relative LEO position (ECI)
+    real(wp), dimension(:) :: v_leo     ! LEO velocity (ECI)  
+    real(wp), dimension(:) :: r_gns     ! relative GPS position (ECI)
+    real(wp), dimension(:) :: v_gns     ! GPS velocity (ECI)  
+    real(wp)               :: doppler   ! relative Doppler frequency shift
+\end{Verbatim}
+\textbf{OUTPUT:}\hspace{0.08in}\begin{Verbatim}
+    real(wp)               :: impact    ! impact parameter (m)
+    real(wp)               :: bangle    ! bending angle (rad)
+    real(wp)               :: impact_dd ! d(IP)/d(d) 
+    real(wp), dimension(:) :: impact_dr ! d(IP)/d(r_leo,r_gns)
+    real(wp)               :: bangle_dd ! d(BA)/d(d) 
+    real(wp), dimension(:) :: bangle_dr ! d(BA)/d(r_leo,r_gns) 
+\end{Verbatim}
+\textbf{NOTES:}\hspace{0.08in}\textbf{REFERENCES:}\hspace{0.08in}\begin{Verbatim}
+   Vorob'ev and Krasil'nikova 1994, 
+   Estimation of the accuracy of the atmospheric refractive index recovery
+   from doppler Sshift measurements at frequencies used in the NAVSTAR system
+   Physics of the Atmosphere and Ocean (29) 602-609
+
+  Gorbunov, M.E. and Kornblueh, L. 2003,
+  Principles of variational assimilation of GNSS radio occultation data
+  Max PlancK Institute Report 350 
+  http://www.mpimet.mpg.de/fileadmin/publikationen/Reports/max_scirep_350.pdf
+\end{Verbatim}
+\section{GPSRO/L1}
+\textsl{[ Parameters ]}
+
+\label{ch:robo21}
+\label{ch:GPSRO_L1}
+\index{unsorted!L1}\index{Parameters!L1}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    f_L1 - Carrier frequency for L1 signal 
+\end{Verbatim}
+\textbf{SOURCE:}\hspace{0.08in}\begin{Verbatim}
+  REAL(wp), PARAMETER :: f_L1 = 1.57542e9_wp         !   Hz
+\end{Verbatim}
+\section{GPSRO/L1L2}
+\textsl{[ Topics ]}
+
+\label{ch:robo22}
+\label{ch:GPSRO_L1L2}
+\index{unsorted!L1L2}\index{Topics!L1L2}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    Carrier frequencies L1 and L2 as used in ROPP pre-processor library.
+\end{Verbatim}
+\section{GPSRO/L2}
+\textsl{[ Parameters ]}
+
+\label{ch:robo23}
+\label{ch:GPSRO_L2}
+\index{unsorted!L2}\index{Parameters!L2}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    f_L2 - Carrier frequency for L2 signal 
+\end{Verbatim}
+\textbf{SOURCE:}\hspace{0.08in}\begin{Verbatim}
+  REAL(wp), PARAMETER :: f_L2 = 1.22760e9_wp         !   Hz
+\end{Verbatim}
+\section{Interface/Modules}
+\textsl{[ Topics ]}
+
+\label{ch:robo24}
+\label{ch:Interface_Modules}
+\index{unsorted!Modules}\index{Topics!Modules}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    use ropp_pp
+    use ropp_pp_types
+    use ropp_pp_constants
+    use ropp_pp_utils
+    use ropp_pp_spline
+    use ropp_pp_MSIS
+\end{Verbatim}
+\subsection{Modules/ropp\_pp}
+\textsl{[ Modules ]}
+\textsl{[ Modules ]}
+
+\label{ch:robo42}
+\label{ch:Modules_ropp_pp}
+\index{unsorted!ropp\_pp}\index{Modules!ropp\_pp}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    ropp_pp - Interface module for the ROPP pre-processor
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    use ropp_pp
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    This module provides interfaces for all pre-processor routines in the
+    ROPP Preprocessor library.
+\end{Verbatim}
+\textbf{NOTES:}\hspace{0.08in}\textbf{SEE ALSO:}\hspace{0.08in}\begin{Verbatim}
+    ropp_pp_constants
+\end{Verbatim}
+\subsection{Modules/ropp\_pp\_constants}
+\textsl{[ Modules ]}
+\textsl{[ Modules ]}
+
+\label{ch:robo43}
+\label{ch:Modules_ropp_pp_constants}
+\index{unsorted!ropp\_pp\_constants}\index{Modules!ropp\_pp\_constants}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    ropp_pp_constants - Module providing meteorological and physical constants.
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    use ropp_pp_constants
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    This module provides numerical values for meteorological and other
+    physical constants which are used throughout the ROPP package.
+\end{Verbatim}
+\textbf{SEE ALSO:}\hspace{0.08in}\begin{Verbatim}
+    Thermodynamical constants:  R_dry, R_vap, C_p,
+                                mw_dry_air, mw_water, epsilon_water
+    GPSRO carrier frequencies:  f_L1, f_L2
+    Refractivity constants:     kappa1, kappa2
+    Light speed in vacuum:      c_light
+    Gravitational acceleration: g_wmo 
+    Mathematical constants:     pi
+\end{Verbatim}
+\subsection{Modules/ropp\_pp\_copy}
+\textsl{[ Modules ]}
+\textsl{[ Modules ]}
+
+\label{ch:robo44}
+\label{ch:Modules_ropp_pp_copy}
+\index{unsorted!ropp\_pp\_copy}\index{Modules!ropp\_pp\_copy}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    ropp_pp_copy - Interface module for the ROPP PP copying function to ROprof
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    use ropp_pp_copy
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    Data type/structure copying functions using ROprof structures used by the
+    ROPP preprocessing module.
+\end{Verbatim}
+\textbf{SEE ALSO:}\hspace{0.08in}\begin{Verbatim}
+    ropp_pp_diag2roprof
+\end{Verbatim}
+\subsection{Modules/ropp\_pp\_MSIS}
+\textsl{[ Modules ]}
+\textsl{[ Modules ]}
+
+\label{ch:robo45}
+\label{ch:Modules_ropp_pp_MSIS}
+\index{unsorted!ropp\_pp\_MSIS}\index{Modules!ropp\_pp\_MSIS}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    ropp_pp_MSIS - Interface module for routines to obtain MSIS bending angle
+                   profiles in the ROPP pre-processor
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    use ropp_pp_MSIS
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    This module provides interfaces for all MSIS bending angle routines in the
+    ROPP Preprocessor library.
+\end{Verbatim}
+\textbf{SEE ALSO:}\hspace{0.08in}\begin{Verbatim}
+    ropp_pp
+\end{Verbatim}
+\subsection{Modules/ropp\_pp\_preproc}
+\textsl{[ Modules ]}
+\textsl{[ Modules ]}
+
+\label{ch:robo46}
+\label{ch:Modules_ropp_pp_preproc}
+\index{unsorted!ropp\_pp\_preproc}\index{Modules!ropp\_pp\_preproc}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    ropp_pp_preproc - Interface module for the ROPP pre-processing module.
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    use ropp_pp_preproc
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    Data type/structure copying functions using ROprof structures used by the
+    ropp_pp module.
+\end{Verbatim}
+\textbf{SEE ALSO:}\hspace{0.08in}\begin{Verbatim}
+    ropp_pp_set_coordinates
+\end{Verbatim}
+\subsection{Modules/ropp\_pp\_spline}
+\textsl{[ Modules ]}
+\textsl{[ Modules ]}
+
+\label{ch:robo47}
+\label{ch:Modules_ropp_pp_spline}
+\index{unsorted!ropp\_pp\_spline}\index{Modules!ropp\_pp\_spline}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    ropp_pp_spline - Spline interpolation routines
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    use ropp_pp_spline
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    This module provides spline interpolation routines used by
+    the ROPP pre-processor package.
+\end{Verbatim}
+\subsection{Modules/ropp\_pp\_types}
+\textsl{[ Modules ]}
+\textsl{[ Modules ]}
+
+\label{ch:robo48}
+\label{ch:Modules_ropp_pp_types}
+\index{unsorted!ropp\_pp\_types}\index{Modules!ropp\_pp\_types}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    ropp_pp_types - Type declarations for ROPP PP library.
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    use ropp_pp_types
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    This module provides dervived type / structure definitions for the
+    pre-processor routines in ROPP.
+\end{Verbatim}
+\textbf{NOTES:}\hspace{0.08in}\begin{Verbatim}
+    The ropp_pp_types module is loaded automatically with the ropp_pp module.
+\end{Verbatim}
+\subsection{Modules/ropp\_pp\_utils}
+\textsl{[ Modules ]}
+\textsl{[ Modules ]}
+
+\label{ch:robo49}
+\label{ch:Modules_ropp_pp_utils}
+\index{unsorted!ropp\_pp\_utils}\index{Modules!ropp\_pp\_utils}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    ropp_pp_utils - Utility routines for ionospheric correction 
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    use ropp_pp_utils
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    This module provides signal and matrix processing routines used by
+    the ROPP pre-processor ionospheric correction package.
+\end{Verbatim}
+\section{Interpolation/ropp\_pp\_interpol}
+\textsl{[ Subroutines ]}
+
+\label{ch:robo25}
+\label{ch:Interpolation_ropp_pp_interpol}
+\index{unsorted!ropp\_pp\_interpol}\index{Subroutines!ropp\_pp\_interpol}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    ropp_pp_interpol - Interpolate linearly.
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    call ropp_pp_interpol(x, newx, array, interp)
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    This subroutine interpolates an array assuming it varies linearly in x.
+\end{Verbatim}
+\textbf{INPUTS:}\hspace{0.08in}\begin{Verbatim}
+    real(wp), dim(:) :: x       Coordinate values.
+    real(wp), dim(:) :: newx    New coordinate values.
+    real(wp), dim(:) :: array   Data to be interpolated (lives on x).
+    logical,optional :: Cext    Constant or linear (default) extrapolation
+\end{Verbatim}
+\textbf{OUTPUT:}\hspace{0.08in}\begin{Verbatim}
+    real(wp), dim(:) :: interp  Interpolated data (lives on newx).
+\end{Verbatim}
+\textbf{NOTES:}\hspace{0.08in}\begin{Verbatim}
+    The coordinate array x must be strictly monotonically increasing. If
+    elements of newx are outside the range of x, data will be extrapolated.
+
+    None of the above conditions are checked for, but wrong or unexpected
+    results will be obtained if thone of them is not met.
+\end{Verbatim}
+\section{Interpolation/ropp\_pp\_interpol\_log}
+\textsl{[ Subroutines ]}
+
+\label{ch:robo26}
+\label{ch:Interpolation_ropp_pp_interpol_log}
+\index{unsorted!ropp\_pp\_interpol\_log}\index{Subroutines!ropp\_pp\_interpol\_log}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    ropp_pp_interpol - Interpolate logarithmically.
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    call ropp_pp_interpol_log(x, newx, array, interp)
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    This subroutine interpolates an array assuming it varies exponentially
+    in x i.e. assuming its log varies linearly as a function of x.  
+\end{Verbatim}
+\textbf{INPUTS:}\hspace{0.08in}\begin{Verbatim}
+    real(wp), dim(:) :: x       Coordinate values.
+    real(wp), dim(:) :: newx    New coordinate values.
+    real(wp), dim(:) :: array   Data to be interpolated (lives on x).
+\end{Verbatim}
+\textbf{OUTPUT:}\hspace{0.08in}\begin{Verbatim}
+    real(wp), dim(:) :: interp  Interpolated data (lives on newx).
+\end{Verbatim}
+\textbf{NOTES:}\hspace{0.08in}\begin{Verbatim}
+    Array must be strictly positive.
+
+    The coordinate array x must be strictly monotonically increasing. If
+    elements of newx are outside the range of x, data will be extrapolated.
+
+    None of the above conditions are checked for, but wrong or unexpected
+    results will be obtained if thone of them is not met. 
+\end{Verbatim}
+\textbf{SEE ALSO:}\hspace{0.08in}\begin{Verbatim}
+    ropp_pp_interpol
+\end{Verbatim}
+\section{IonosphericCorrection/ropp\_pp\_invert\_refraction}
+\textsl{[ Subroutines ]}
+
+\label{ch:robo27}
+\label{ch:IonosphericCorrection_ropp_pp_invert_refraction}
+\index{unsorted!ropp\_pp\_invert\_refraction}\index{Subroutines!ropp\_pp\_invert\_refraction}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    ropp_pp_invert_refraction - Invert neutral atmosphere bending angle
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    call ropp_pp_invert_refraction(mfile, month, lat, lon, impact, bangle,
+                                   geop, refrac, config)
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    This subroutine calculates the refractivity profile for a given location
+    from a bending angle profile combined with MSIS climatology
+\end{Verbatim}
+\textbf{INPUTS:}\hspace{0.08in}\begin{Verbatim}
+    character(len=*) :: mfile          Model coefficients file
+    integer          :: month          Month of year  
+    real(wp)         :: lat            Latitude  (deg)
+    real(wp)         :: lon            Longitude (deg)
+    real(wp), dim(:) :: impact         Impact parameter (m)
+    real(wp), dim(:) :: bangle         Bending angles (rad)
+    type(ppConfig)   :: config         Configuration parameters
+\end{Verbatim}
+\textbf{OUTPUT:}\hspace{0.08in}\begin{Verbatim}
+    real(wp), dim(:) :: geop           Geopotential height (m)
+    real(wp), dim(:) :: refrac         Refractivity (N-units)
+\end{Verbatim}
+\section{IonosphericCorrection/ropp\_pp\_ionospheric\_correction}
+\textsl{[ Subroutines ]}
+
+\label{ch:robo28}
+\label{ch:IonosphericCorrection_ropp_pp_ionospheric_correction}
+\index{unsorted!ropp\_pp\_ionospheric\_correction}\index{Subroutines!ropp\_pp\_ionospheric\_correction}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    ropp_pp_ionospheric_correction - 
+                   Calculate neutral and ionospheric bending angle 
+                   profile on L1 impact heights from L1/L2 bending angles 
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    call ropp_pp_ionospheric_correction(impact_L1, ba_L1, 
+                                        impact_L2, ba_L2,
+                                        impact_LM, ba_LM,
+                                        config, impact_LC, ba_LC, diag_out)
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    This routine calculates bending angles at a given set of impact parameters
+    from vertical profiles of bending angles at the two measurement 
+    frequencies (channels) L1 and L2.
+\end{Verbatim}
+\textbf{INPUTS:}\hspace{0.08in}\begin{Verbatim}
+    real(wp), dimension(:) :: impact_L1   ! Impact parameters of channel L1 (m)
+    real(wp), dimension(:) :: ba_L1       ! Bending angles for channel L1 (rad)
+    real(wp), dimension(:) :: impact_L2   ! Impact parameters of channel L2 (m)
+    real(wp), dimension(:) :: ba_L2       ! Bending angles for channel L2 (rad)
+    real(wp), dimension(:) :: impact_LM   ! Model impact parameters (m)
+    real(wp), dimension(:) :: ba_LM       ! Model bending angles (rad)
+    type(ppConfig)         :: config      ! Configuration parameters
+\end{Verbatim}
+\textbf{OUTPUT:}\hspace{0.08in}\begin{Verbatim}
+    real(wp), dimension(:) :: impact_LC   ! Impact parameters of channel L1
+    real(wp), dimension(:) :: ba_LC       ! Corrected bending angles 
+    type(ppDiag)           :: diag_out    ! Output diagnostics
+\end{Verbatim}
+\textbf{NOTES:}\hspace{0.08in}\begin{Verbatim}
+    Method:
+        1. Calculation of strongly smoothed ionospheric signal
+           (using the external scale). Further deviations from
+           this signal are calculated.
+        2. Estimation of ionospheric signal and noise covariances
+           using the highest part (> 50 km) of the occultation.
+        3. Calculation of relative mean deviation of neutral refraction
+           from the model refraction using signal at heights 12-35 km.
+        4. Optimal linear combination for the same impact parameters using the
+           covariances.
+\end{Verbatim}
+\textbf{REFERENCES:}\hspace{0.08in}\begin{Verbatim}
+     M.E. Gorbunov
+     Ionospheric correction and statistical optimization of radio 
+     occultation data
+     Radio Science, 37(5), 1084
+\end{Verbatim}
+\section{IonosphericCorrection/ropp\_pp\_linear\_combination}
+\textsl{[ Subroutines ]}
+
+\label{ch:robo29}
+\label{ch:IonosphericCorrection_ropp_pp_linear_combination}
+\index{unsorted!ropp\_pp\_linear\_combination}\index{Subroutines!ropp\_pp\_linear\_combination}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    ropp_pp_linear_combination - 
+                   Calculate a one dimensional bending angle
+                   profile on L1 impact heights from L1/L2 bending angles 
+                   using linear combination
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    call ropp_pp_linear_combination(impact_L1, bangle_L1, 
+                                    impact_L2, bangle_L2,
+                                    impact_LC, bangle_LC)
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    This routine calculates bending angles at a given set of impact parameters
+    from vertical profiles of bending angles at the two measurement 
+    frequencies (channels) L1 and L2.
+\end{Verbatim}
+\textbf{INPUTS:}\hspace{0.08in}\begin{Verbatim}
+    real(wp), dimension(:) :: impact_L1   ! Impact parameters of channel L1
+    real(wp), dimension(:) :: bangle_L1   ! Bending angles for channel L1
+    real(wp), dimension(:) :: impact_L2   ! Impact parameters of channel L2
+    real(wp), dimension(:) :: bangle_L2   ! Bending angles for channel L2
+\end{Verbatim}
+\textbf{OUTPUT:}\hspace{0.08in}\begin{Verbatim}
+    real(wp), dimension(:) :: impact_LC   ! Impact parameters of channel L1
+    real(wp), dimension(:) :: bangle_LC   ! Corrected bending angles 
+\end{Verbatim}
+\textbf{NOTES:}\hspace{0.08in}\begin{Verbatim}
+    Uses a linear combination of bending angles at the common impact parameter
+    (impact_L1)
+                        
+                          bangle1(impactL1)*f1*f1  - bangle2(impactL1)*f2*f2
+   bangle_LC(impact_L1) = --------------------------------------------------
+                                          f1*f1  - f2*f2
+\end{Verbatim}
+\textbf{REFERENCES:}\hspace{0.08in}\begin{Verbatim}
+     M.E. Gorbunov
+     Ionospheric correction and statistical optimization of radio 
+     occultation data
+     Radio Science, 37(5), 1084
+\end{Verbatim}
+\section{IonosphericCorrection/ropp\_pp\_merge\_profile}
+\textsl{[ Subroutines ]}
+
+\label{ch:robo30}
+\label{ch:IonosphericCorrection_ropp_pp_merge_profile}
+\index{unsorted!ropp\_pp\_merge\_profile}\index{Subroutines!ropp\_pp\_merge\_profile}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    ropp_pp_merge_profile - 
+                   Merge and interpolate bending angles onto standard grid
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    call ropp_pp_merge_profile(impact_L1, bangle_L1, impact_L2, bangle_L2, 
+                               impact_I1, bangle_I1, impact_I2, bangle_I2,
+                               Pmin, Pmax)                               
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    This routine calculates L1 and L2 bending angles on a standard vertical 
+    grid by linear interpolation
+\end{Verbatim}
+\textbf{INPUTS:}\hspace{0.08in}\begin{Verbatim}
+    real(wp), dimension(:) :: impact_L1   ! Impact parameters of channel L1
+    real(wp), dimension(:) :: bangle_L1   ! Bending angles for channel L1
+    real(wp), dimension(:) :: impact_L2   ! Impact parameters of channel L2
+    real(wp), dimension(:) :: bangle_L2   ! Bending angles for channel L2
+    real(wp), optional     :: Pmin        ! Minimum impact parameter
+    real(wp), optional     :: Pmax        ! Maximum impact parameter
+\end{Verbatim}
+\textbf{OUTPUT:}\hspace{0.08in}\begin{Verbatim}
+    real(wp), dimension(:) :: impact_I1   ! Standard impact parameter grid L1
+    real(wp), dimension(:) :: bangle_I1   ! L1 bending angles on impact_I1
+    real(wp), dimension(:) :: impact_I2   ! Standard impact parameter grid L1
+    real(wp), dimension(:) :: bangle_I2   ! L2 bending angles on impact_I2
+\end{Verbatim}
+\section{IonosphericCorrection/ropp\_pp\_smooth\_profile}
+\textsl{[ Subroutines ]}
+
+\label{ch:robo31}
+\label{ch:IonosphericCorrection_ropp_pp_smooth_profile}
+\index{unsorted!ropp\_pp\_smooth\_profile}\index{Subroutines!ropp\_pp\_smooth\_profile}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    ropp_pp_smooth_profile - Filter bending angle profile 
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    call ropp_pp_smooth_profile(impact, bangle, smooth, config)
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    This routine filters a signal by least-square fitting a polynomial
+    in sliding windows
+\end{Verbatim}
+\textbf{INPUTS:}\hspace{0.08in}\begin{Verbatim}
+    real(wp), dimension(:) :: impact      ! Impact parameters 
+    real(wp), dimension(:) :: bangle      ! Bending angles
+    type(ppConfig)         :: config      ! Configuration parameters 
+\end{Verbatim}
+\textbf{OUTPUT:}\hspace{0.08in}\begin{Verbatim}
+    real(wp), dimension(:) :: smooth      ! Smoothed bending angles 
+    type(ppConfig)         :: config      ! Configuration parameters 
+\end{Verbatim}
+\section{Meteo/ropp\_pp\_tdry}
+\textsl{[ Subroutines ]}
+
+\label{ch:robo33}
+\label{ch:Meteo_ropp_pp_tdry}
+\index{unsorted!ropp\_pp\_tdry}\index{Subroutines!ropp\_pp\_tdry}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    ropp_pp_tdry - Compute temperature (and pressure profile) from 
+                   refractivity assuming zero humidity.
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    call ropp_pp_tdry(lat, alt, refrac, shum, t_dry, p_dry, Zmax)
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    Calculate P(z) from numerical integration of barometric formula
+
+            d ln(P(z))                    g(z)
+            ---------- = - -------------------------------------
+               dz           Rd T(N(z),P(z),Q(z)) (1 + eps(Q(z))
+
+    given N(z) and Q(z) and known dependence T(N, P, Q).
+    Calculate T(z) = T(N(z), P(z), Q(z)). 
+\end{Verbatim}
+\textbf{INPUTS:}\hspace{0.08in}\begin{Verbatim}
+    real(wp)                 :: lat       ! latitude
+    real(wp), dimension(:)   :: alt       ! altitude (z)
+    real(wp), dimension(:)   :: refrac    ! refraction (N(z))
+    real(wp), dimension(:)   :: shum      ! specific humidity (Q(z))
+    real(wp), optional       :: zmax      ! upper integration height 
+\end{Verbatim}
+\textbf{OUTPUT:}\hspace{0.08in}\begin{Verbatim}
+    real(wp), dimension(:)   :: t_dry     ! dry temperature (T(z))
+    real(wp), dimension(:)   :: p_dry     ! dry pressure (P(z))
+\end{Verbatim}
+\section{ModelRefraction/ropp\_pp\_bangle\_MSIS}
+\textsl{[ Subroutines ]}
+
+\label{ch:robo34}
+\label{ch:ModelRefraction_ropp_pp_bangle_MSIS}
+\index{unsorted!ropp\_pp\_bangle\_MSIS}\index{Subroutines!ropp\_pp\_bangle\_MSIS}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    ropp_pp_bangle_MSIS - Compute bending angle from MSIS spherical harmonics
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    call ropp_pp_bangle_MSIS(file, month, lat, lon, alt, bangle)
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    This subroutine calculates a climatological bending angle profile for 
+    a given month, latitude and longitude from MSIS data. Profiles are 
+    computed using Chebyshev polynomials and spherical harmonics with 
+    coefficients read from file.
+\end{Verbatim}
+\textbf{INPUTS:}\hspace{0.08in}\begin{Verbatim}
+    character(len=*) :: file     Model coefficients filename
+    integer,         :: month    Month of year
+    real(wp),        :: lat      Latitude
+    real(wp),        :: lon      Longitude
+    real(wp), dim(:) :: alt      Altitude levels on which to find N
+\end{Verbatim}
+\textbf{OUTPUT:}\hspace{0.08in}\begin{Verbatim}
+    character(len=*) :: file     Model coefficients filename
+    real(wp), dim(:) :: bangle   Bending angle field
+\end{Verbatim}
+\section{ModelRefraction/ropp\_pp\_bg\_refraction}
+\textsl{[ Subroutines ]}
+
+\label{ch:robo35}
+\label{ch:ModelRefraction_ropp_pp_bg_refraction}
+\index{unsorted!ropp\_pp\_bg\_refraction}\index{Subroutines!ropp\_pp\_bg\_refraction}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    ropp_pp_bg_refraction - Calculate bending angle profile for BG 
+                            refractivity
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    call ropp_pp_bg_refraction(bfile, month, lat, lon, impact,    &
+                               bangle_BG, config)
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    This subroutine calculates the bending angle profile for a given location
+    from the background t,p,q fields.
+
+ INPUT
+    character(len=*) :: bfile          Model coefficients file
+    integer,         :: month          Month of year
+    real(wp)         :: lat            Latitude  (deg)
+    real(wp)         :: lon            Longitude (deg)
+    real(wp), dim(:) :: impact         Impact parameter (m)
+    type(PPConfig)   :: config         Configuration parameters
+\end{Verbatim}
+\textbf{OUTPUT:}\hspace{0.08in}\begin{Verbatim}
+    real(wp), dim(:) :: bangle_BG      BG bending angles 
+                                       (on input impact parameter levels).
+\end{Verbatim}
+\section{ModelRefraction/ropp\_pp\_fit\_model\_refraction}
+\textsl{[ Subroutines ]}
+
+\label{ch:robo36}
+\label{ch:ModelRefraction_ropp_pp_fit_model_refraction}
+\index{unsorted!ropp\_pp\_fit\_model\_refraction}\index{Subroutines!ropp\_pp\_fit\_model\_refraction}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    ropp_pp_fit_model_refraction - Fit model bending angle profile with 
+                                   observed bending angles
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    call ropp_pp_fit_model_refraction(impact_LC, bangle_LC, 
+                                      impact_model, bangle_model, config)
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    This subroutine calculates a fitting factor of model bending angle profile
+    with observed bending angles by linear regression in height interval 
+    40-60 km.
+\end{Verbatim}
+\textbf{INPUTS:}\hspace{0.08in}\begin{Verbatim}
+    real(wp), dim(:) :: impact_LC     Observed impact parameters (m)   
+    real(wp), dim(:) :: bangle_LC     Observed bending angles (rad)
+    real(wp), dim(:) :: impact_model  Model impact parameter (m)
+    real(wp), dim(:) :: bangle_model  Model bending angles (rad)
+    type(ppConfig)   :: config        Configuration parameters
+\end{Verbatim}
+\textbf{OUTPUT:}\hspace{0.08in}\begin{Verbatim}
+    real(wp), dim(:) :: bangle_model  Fitted model bending angles (rad)
+\end{Verbatim}
+\section{ModelRefraction/ropp\_pp\_model\_refraction}
+\textsl{[ Subroutines ]}
+
+\label{ch:robo37}
+\label{ch:ModelRefraction_ropp_pp_model_refraction}
+\index{unsorted!ropp\_pp\_model\_refraction}\index{Subroutines!ropp\_pp\_model\_refraction}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    ropp_pp_model_refraction - Calculate bending angle profile for MSIS 
+                               refractivity
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    call ropp_pp_model_refraction(mfile, month, lat, lon, impact,    &
+                                  bangle_MSIS, config)
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    This subroutine calculates the bending angle profile for a given location
+    from the MSIS refractivity field
+
+ INPUT
+    character(len=*) :: mfile          Model coefficients file
+    integer,         :: month          Month of year
+    real(wp)         :: lat            Latitude  (deg)
+    real(wp)         :: lon            Longitude (deg)
+    real(wp), dim(:) :: impact         Impact parameter (m)
+    type(PPConfig)   :: config         Configuration parameters
+\end{Verbatim}
+\textbf{OUTPUT:}\hspace{0.08in}\begin{Verbatim}
+    real(wp), dim(:) :: bangle_MSIS    MSIS bending angles 
+                                       (on input impact parameter levels).
+\end{Verbatim}
+\section{ModelRefraction/ropp\_pp\_read\_MSIS}
+\textsl{[ Subroutines ]}
+
+\label{ch:robo38}
+\label{ch:ModelRefraction_ropp_pp_read_MSIS}
+\index{unsorted!ropp\_pp\_read\_MSIS}\index{Subroutines!ropp\_pp\_read\_MSIS}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    ropp_pp_read_MSIS - Read spherical harmonic coefficients from file
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    call ropp_pp_read_MSIS(file, month, coeff)
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    This subroutine reads a file of MSIS climatology spherical harmonic
+    coefficients for the month specified and fills the elements of a 
+    structure of derived type MSIScoeff.
+\end{Verbatim}
+\textbf{INPUTS:}\hspace{0.08in}\begin{Verbatim}
+    character(*)     :: file          Filename
+    integer,         :: month         Month of year
+\end{Verbatim}
+\textbf{OUTPUT:}\hspace{0.08in}\begin{Verbatim}
+    type(MSIScoeff)  :: coeff         Coefficients  (ref/ba)
+\end{Verbatim}
+\section{ModelRefraction/ropp\_pp\_refrac\_BG}
+\textsl{[ Subroutines ]}
+
+\label{ch:robo39}
+\label{ch:ModelRefraction_ropp_pp_refrac_BG}
+\index{unsorted!ropp\_pp\_refrac\_BG}\index{Subroutines!ropp\_pp\_refrac\_BG}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    ropp_pp_refrac_BG - Compute refractivity from BG atmospheric data
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    call ropp_pp_refrac_BG(file, month, lat, lon, alt, refrac)
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    This subroutine calculates a background refractivity profile from a
+    profile of temperature, pressure and humidity data read from a ROPP
+    format netCDF file. Processing is applied according to the ropp_fm module
+    routines.
+\end{Verbatim}
+\textbf{INPUTS:}\hspace{0.08in}\begin{Verbatim}
+    character(len=*) :: file     Background profile filename
+    integer,         :: month    Month of year
+    real(wp),        :: lat      Latitude
+    real(wp),        :: lon      Longitude
+    real(wp), dim(:) :: alt      Altitude levels on which to find N
+\end{Verbatim}
+\textbf{OUTPUT:}\hspace{0.08in}\begin{Verbatim}
+    real(wp), dim(:) :: refrac   Refractivity field
+\end{Verbatim}
+\section{ModelRefraction/ropp\_pp\_refrac\_MSIS}
+\textsl{[ Subroutines ]}
+
+\label{ch:robo40}
+\label{ch:ModelRefraction_ropp_pp_refrac_MSIS}
+\index{unsorted!ropp\_pp\_refrac\_MSIS}\index{Subroutines!ropp\_pp\_refrac\_MSIS}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    ropp_pp_refrac_MSIS - Compute refractivity from MSIS spherical harmonics
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    call ropp_pp_refrac_MSIS(file, month, lat, lon, alt, refrac, grad)
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    This subroutine calculates a climatological refractivity profile for 
+    a given month, latitude and longitude from MSIS data. Profiles are 
+    computed using Chebyshev polynomials and spherical harmonics with 
+    coefficients read from file.
+\end{Verbatim}
+\textbf{INPUTS:}\hspace{0.08in}\begin{Verbatim}
+    character(len=*) :: file     Model coefficients filename
+    integer,         :: month    Month of year
+    real(wp),        :: lat      Latitude
+    real(wp),        :: lon      Longitude
+    real(wp), dim(:) :: alt      Altitude levels on which to find N
+\end{Verbatim}
+\textbf{OUTPUT:}\hspace{0.08in}\begin{Verbatim}
+    character(len=*) :: file     Model coefficients filename
+    real(wp), dim(:) :: refrac   Refractivity field
+    real(wp), dim(:) :: grad     Refractivity field gradient (optional)
+\end{Verbatim}
+\section{ModelRefraction/ropp\_pp\_search\_model\_refraction}
+\textsl{[ Subroutines ]}
+
+\label{ch:robo41}
+\label{ch:ModelRefraction_ropp_pp_search_model_refraction}
+\index{unsorted!ropp\_pp\_search\_model\_refraction}\index{Subroutines!ropp\_pp\_search\_model\_refraction}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    ropp_pp_search_model_refraction - Calculate best-fit bending angle profile
+                                      for MSIS refractivity
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    call ropp_pp_model_refraction(mfile, in_month, in_lat, in_lon, 
+                                  in_impact, in_bangle, 
+                                  impact, bangle_MSIS, config)
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    This subroutine calculates the best-fit bending angle profile from the
+    MSIS refractivity field by regression to an input bending angle profile 
+
+ INPUT
+    character(len=*) :: mfile          Model coefficients file
+    integer,         :: in_month       Month of year
+    real(wp)         :: in_lat         Latitude  (deg)
+    real(wp)         :: in_lon         Longitude (deg)
+    real(wp), dim(:) :: in_impact      Input impact parameter (m)
+    real(wp), dim(:) :: in_bangle      Input bending angle (rad)
+    real(wp), dim(:) :: impact         Impact parameter (m)
+    type(PPConfig)   :: config         Configuration parameters
+\end{Verbatim}
+\textbf{OUTPUT:}\hspace{0.08in}\begin{Verbatim}
+    real(wp), dim(:) :: bangle_MSIS    Best-fit MSIS bending angles 
+                                       (on input impact parameter levels).
+\end{Verbatim}
+\section{Monotonous/ropp\_pp\_monotonous}
+\textsl{[ Subroutines ]}
+
+\label{ch:robo50}
+\label{ch:Monotonous_ropp_pp_monotonous}
+\index{unsorted!ropp\_pp\_monotonous}\index{Subroutines!ropp\_pp\_monotonous}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    ropp_pp_monotonous - Find monotonous sequence.
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    call ropp_pp_monotonous(x, d)
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    This subroutine finds a monotonous sequence by an iterative orthogonal
+    projections and crawling monotonoization method.
+\end{Verbatim}
+\textbf{INPUTS:}\hspace{0.08in}\begin{Verbatim}
+    real(wp), dim(:)  :: x      Coordinate values to be transformed.
+    integer, optional :: d      Sort direction flag 
+                                             > 0 - rising
+                                             < 0 - setting
+\end{Verbatim}
+\textbf{OUTPUT:}\hspace{0.08in}\begin{Verbatim}
+    real(wp), dim(:)  :: x      Transformed sequence
+\end{Verbatim}
+\section{Parameters/TPH\_QC\_flag}
+\textsl{[ Parameters ]}
+
+\label{ch:robo51}
+\label{ch:Parameters_TPH_QC_flag}
+\index{unsorted!TPH\_QC\_flag}\index{Parameters!TPH\_QC\_flag}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    TPH QC flag parameters - Parameters that define the components 
+                             of the overall TPH QC flag.
+\end{Verbatim}
+\textbf{SOURCE:}\hspace{0.08in}\begin{Verbatim}
+  INTEGER, PARAMETER :: TPH_QC_data_invalid     =  0  ! Input data validity check
+  INTEGER, PARAMETER :: TPH_QC_prof_depth       =  1  ! Input data depth check
+  INTEGER, PARAMETER :: TPH_QC_prof_height      =  2  ! Input data height check
+  INTEGER, PARAMETER :: TPH_QC_CT_smooth_above  =  3  ! Cov trans sharpness above TPH check
+  INTEGER, PARAMETER :: TPH_QC_CT_smooth_below  =  4  ! Cov trans sharpness below TPH check
+  INTEGER, PARAMETER :: TPH_QC_double_trop      =  5  ! Double tropopause detected
+  INTEGER, PARAMETER :: TPH_QC_too_low          =  6  ! TPH minimum height check
+  INTEGER, PARAMETER :: TPH_QC_too_high         =  7  ! TPH maximum height check
+  INTEGER, PARAMETER :: TPH_QC_reserved8        =  8  ! Reserved
+  INTEGER, PARAMETER :: TPH_QC_reserved9        =  9  ! Reserved
+  INTEGER, PARAMETER :: TPH_QC_reserved10       = 10  ! Reserved
+  INTEGER, PARAMETER :: TPH_QC_reserved11       = 11  ! Reserved
+  INTEGER, PARAMETER :: TPH_QC_reserved12       = 12  ! Reserved
+  INTEGER, PARAMETER :: TPH_QC_reserved13       = 13  ! Reserved
+  INTEGER, PARAMETER :: TPH_QC_reserved14       = 14  ! Reserved
+  INTEGER, PARAMETER :: TPH_QC_reserved15       = 15  ! Reserved
+\end{Verbatim}
+\section{Parameters/wp}
+\textsl{[ Parameters ]}
+
+\label{ch:robo52}
+\label{ch:Parameters_wp}
+\index{unsorted!wp}\index{Parameters!wp}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    wp - Kind parameter for double precision floating point numbers.
+\end{Verbatim}
+\textbf{SOURCE:}\hspace{0.08in}\begin{Verbatim}
+  USE typesizes, ONLY: wp => EightByteReal
+\end{Verbatim}
+\section{Physical/c\_light}
+\textsl{[ Parameters ]}
+
+\label{ch:robo53}
+\label{ch:Physical_c_light}
+\index{unsorted!c\_light}\index{Parameters!c\_light}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    c_light - Light speed in vaccuum (m/s)
+\end{Verbatim}
+\textbf{SOURCE:}\hspace{0.08in}\begin{Verbatim}
+  REAL(wp), PARAMETER :: c_light = 299792458.0_wp         !   m s^{-1}
+\end{Verbatim}
+\section{PP/ropp\_pp\_diag2roprof}
+\textsl{[ Subroutines ]}
+
+\label{ch:robo54}
+\label{ch:PP_ropp_pp_diag2roprof}
+\index{unsorted!ropp\_pp\_diag2roprof}\index{Subroutines!ropp\_pp\_diag2roprof}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    ropp_pp_diag2roprof - Add diagnostic information gathered during 
+                          processing an occultation to a ROprof data structure
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    call ropp_pp_diag2roprof(diag, ro_data)
+\end{Verbatim}
+\textbf{INPUTS:}\hspace{0.08in}\begin{Verbatim}
+    type(PPdiag) :: diag       Diagnostic information structure
+    type(ROprof) :: ro_data    RO data file structure
+\end{Verbatim}
+\textbf{OUTPUT:}\hspace{0.08in}\begin{Verbatim}
+    type(ROprof) :: ro_data    Updated RO data structure with diagnostics
+\end{Verbatim}
+\section{PPSpline/ropp\_pp\_basic\_splines}
+\textsl{[ Subroutines ]}
+
+\label{ch:robo55}
+\label{ch:PPSpline_ropp_pp_basic_splines}
+\index{unsorted!ropp\_pp\_basic\_splines}\index{Subroutines!ropp\_pp\_basic\_splines}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    ropp_pp_basic_splines - Generate a matrix of basic polynomials for
+                            polynomial regression
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    call ropp_pp_basic_splines(X, Xs, K)
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    Generation of matrix of basic polynomials for polynomial regression
+\end{Verbatim}
+\section{PPSpline/ropp\_pp\_init\_spline}
+\textsl{[ Subroutines ]}
+
+\label{ch:robo56}
+\label{ch:PPSpline_ropp_pp_init_spline}
+\index{unsorted!ropp\_pp\_init\_spline}\index{Subroutines!ropp\_pp\_init\_spline}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    ropp_pp_init_spline - Calculation of 2nd derivative of a spline
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    call ropp_pp_init_spline(x, f, d2)
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    Calculate 2nd derivative of a spline, drive-through solution
+\end{Verbatim}
+\section{PPSpline/ropp\_pp\_interpol\_spline}
+\textsl{[ Subroutines ]}
+
+\label{ch:robo57}
+\label{ch:PPSpline_ropp_pp_interpol_spline}
+\index{unsorted!ropp\_pp\_interpol\_spline}\index{Subroutines!ropp\_pp\_interpol\_spline}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    ropp_pp_interpol_spline - Spline interpolation of a gridded function with
+                              linear extrapolation outside grid extent
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    call ropp_pp_interpol_spline(x, f, d2, x_int, f_int, fd_int, fd2_int)
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    Search for grid interval containing the interpolation point and summation
+    of polynomail with given spline coefficients
+\end{Verbatim}
+\section{PPUtils/ropp\_pp\_init\_polynomial}
+\textsl{[ Subroutines ]}
+
+\label{ch:robo58}
+\label{ch:PPUtils_ropp_pp_init_polynomial}
+\index{unsorted!ropp\_pp\_init\_polynomial}\index{Subroutines!ropp\_pp\_init\_polynomial}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    ropp_pp_init_polynomial - Generate matrix of basic polynomials 
+                              for regression
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    call ropp_pp_init_polynomial(x, K)
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    Compute basic polynomials as
+        K_ij = f_j(x_i) = (x_i)^j     for j=0..UBound(K,2)
+\end{Verbatim}
+\section{PPUtils/ropp\_pp\_invert\_matrix}
+\textsl{[ Subroutines ]}
+
+\label{ch:robo59}
+\label{ch:PPUtils_ropp_pp_invert_matrix}
+\index{unsorted!ropp\_pp\_invert\_matrix}\index{Subroutines!ropp\_pp\_invert\_matrix}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    ropp_pp_invert_matrix - Invert a matrix A(dimY, dimX) 
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    call ropp_pp_invert_matrix(A, B)
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    Gauss elimination
+\end{Verbatim}
+\section{PPUtils/ropp\_pp\_isnan}
+\textsl{[ Subroutines ]}
+
+\label{ch:robo60}
+\label{ch:PPUtils_ropp_pp_isnan}
+\index{unsorted!ropp\_pp\_isnan}\index{Subroutines!ropp\_pp\_isnan}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    ropp_pp_isnan - Test if variable value is NaN
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    true_or_false = ropp_pp_isnan(x)
+\end{Verbatim}
+\section{PPUtils/ropp\_pp\_matmul}
+\textsl{[ Subroutines ]}
+
+\label{ch:robo61}
+\label{ch:PPUtils_ropp_pp_matmul}
+\index{unsorted!ropp\_pp\_matmul}\index{Subroutines!ropp\_pp\_matmul}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    ropp_pp_matmul - Matrix multiplication 
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    C = ropp_pp_matmul(A, B)
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    Replicates intrinsic 'MATMUL' function
+\end{Verbatim}
+\section{PPUtils/ropp\_pp\_nearest\_power2}
+\textsl{[ Subroutines ]}
+
+\label{ch:robo62}
+\label{ch:PPUtils_ropp_pp_nearest_power2}
+\index{unsorted!ropp\_pp\_nearest\_power2}\index{Subroutines!ropp\_pp\_nearest\_power2}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    ropp_pp_nearest_power2 - Find power of 2 nearest input integer
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    n2 = ropp_pp_nearest_power2(n)
+\end{Verbatim}
+\section{PPUtils/ropp\_pp\_polynomial}
+\textsl{[ Subroutines ]}
+
+\label{ch:robo63}
+\label{ch:PPUtils_ropp_pp_polynomial}
+\index{unsorted!ropp\_pp\_polynomial}\index{Subroutines!ropp\_pp\_polynomial}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    ropp_pp_polynomial - Calculation of a polynomial and its derivative
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    call ropp_pp_polynomial(c, x, P, DP)
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    Horner scheme
+\end{Verbatim}
+\section{PPUtils/ropp\_pp\_quasi\_invert}
+\textsl{[ Subroutines ]}
+
+\label{ch:robo64}
+\label{ch:PPUtils_ropp_pp_quasi_invert}
+\index{unsorted!ropp\_pp\_quasi\_invert}\index{Subroutines!ropp\_pp\_quasi\_invert}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    ropp_pp_quasi_invert - Quasi-inverse of a matrix K(dimY, dimX) 
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    call ropp_pp_quasi_invert(K, Q)
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    1. dimY >= dimX:
+       x = Qy - vector minimizing ||Kx - y||
+       QK = E; Q is left inverse operator.
+       Q = (K^T K)^-1 K^T
+    2. dimY <= dimX:
+       x = Qy - solution minimizing ||x||
+       KQ = E; Q is right inverse operator.
+       Q = K^T (KK^T)^-1
+\end{Verbatim}
+\section{PPUtils/ropp\_pp\_regression}
+\textsl{[ Subroutines ]}
+
+\label{ch:robo65}
+\label{ch:PPUtils_ropp_pp_regression}
+\index{unsorted!ropp\_pp\_regression}\index{Subroutines!ropp\_pp\_regression}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    ropp_pp_regression - Linear regression
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    call ropp_pp_regression(K, y, a)
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    Quasi-inversion of matrix of basic functions:
+       || Sum_j a_j f_j(x_i) - y_i || = min
+    Solution is a = Q y where Q is left inverse of K_ij = f_j(x_i) 
+\end{Verbatim}
+\section{PPUtils/ropp\_pp\_seek\_index}
+\textsl{[ Subroutines ]}
+
+\label{ch:robo66}
+\label{ch:PPUtils_ropp_pp_seek_index}
+\index{unsorted!ropp\_pp\_seek\_index}\index{Subroutines!ropp\_pp\_seek\_index}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    ropp_pp_seek_index - Find grid interval containing given point
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    ip = ropp_pp_seek_index(x, xp)
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    Search for grid interval containing the interpolation point.
+    Combination of Newton-like and dichotomic iterative search.
+     Result:
+         >0   - index of grid interval containing xp (x(ip) <= xp <= x(ip+1))
+          0   - xp is not inside grid
+         -1   - iterations do not converge
+\end{Verbatim}
+\section{Preprocessing/Cutoff}
+\textsl{[ Topics ]}
+
+\label{ch:robo69}
+\label{ch:Preprocessing_Cutoff}
+\index{unsorted!Cutoff}\index{Topics!Cutoff}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    Data cutoff based on amplitude, smoothed bending angle and impact parameter
+\end{Verbatim}
+\textbf{SEE ALSO:}\hspace{0.08in}\section{Preprocessing/Preprocess}
+\textsl{[ Topics ]}
+
+\label{ch:robo70}
+\label{ch:Preprocessing_Preprocess}
+\index{unsorted!Preprocess}\index{Topics!Preprocess}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    Routines for mission-specific pre-processing steps
+\end{Verbatim}
+\textbf{SEE ALSO:}\hspace{0.08in}\begin{Verbatim}
+    ropp_pp_preprocess
+\end{Verbatim}
+\subsection{Preprocess/ropp\_pp\_amplitude\_go}
+\textsl{[ Preprocess ]}
+\textsl{[ Subroutines ]}
+
+\label{ch:robo67}
+\label{ch:Preprocess_ropp_pp_amplitude_go}
+\index{unsorted!ropp\_pp\_amplitude\_go}\index{Subroutines!ropp\_pp\_amplitude\_go}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    ropp_pp_amplitude_go - Calculate RO signal amplitude in GO approximation.
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    call ropp_pp_amplitude_go(time, r_leo, r_gns, r_coc, roc, impact, snr, 
+                              w_smooth, snr_R)
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    This routine calculates L2 amplitude in Geometric optics approximation
+\end{Verbatim}
+\textbf{INPUTS:}\hspace{0.08in}\begin{Verbatim}
+    real(wp), dimension(:)   :: time      ! Relative time of samples (s)
+    real(wp), dimension(:,:) :: r_leo     ! LEO coordinates (ECI or ECF) (m)
+    real(wp), dimension(:,:) :: r_gns     ! GPS coordinates (ECI or ECF) (m)
+    real(wp), dimension(:)   :: r_coc     ! centre curvature coordinates (m)
+    real(wp)                 :: roc       ! Radius curvature (m)
+    real(wp), dimension(:)   :: impact    ! Impact parameters (m)
+    real(wp), dimension(:)   :: snr       ! Observed amplitude
+    integer                  :: w_smooth  ! smoothing window (points)
+\end{Verbatim}
+\textbf{OUTPUT:}\hspace{0.08in}\begin{Verbatim}
+    real(wp), dimension(:)   :: snr_R     ! Refractive amplitude
+\end{Verbatim}
+\textbf{NOTES:}\hspace{0.08in}\textbf{REFERENCES:}\hspace{0.08in}\begin{Verbatim}
+   Gorbunov M.E. and Lauritsen K.B. 2004
+   Analysis of wave fields by Fourier integral operators and their application
+   for radio occultations
+   Radio Science (39) RS4010
+
+   Gorbunov M.E., Lauritsen K.B., Rodin A., Tomassini M., Kornblueh L. 2005 
+   Analysis of the CHAMP experimental data on radio-occultation sounding of
+   the Earth's atmosphere.
+   Izvestiya Atmospheric and Oceanic Physics (41) 726-740.
+\end{Verbatim}
+\subsection{Preprocess/ropp\_pp\_correct\_L2}
+\textsl{[ Preprocess ]}
+\textsl{[ Subroutines ]}
+
+\label{ch:robo68}
+\label{ch:Preprocess_ropp_pp_correct_L2}
+\index{unsorted!ropp\_pp\_correct\_L2}\index{Subroutines!ropp\_pp\_correct\_L2}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    ropp_pp_correct_L2 - Correction of unusable L2 data.
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    call ropp_pp_correct_L2(time, r_leo, r_gns, r_coc, roc, impact_LM, 
+                             phase_LM, phase_L1, phase_L2, snr_L1, snr_L2,
+                             lcf, Hmid, L2Q)
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    This routine corrects unusable L2 data.
+       1) Computation of penalty function for L2 channel from radio optical 
+          analysis.
+       2) Lower region correction:
+             A2 is multiplied with penalty function;
+             Corrected S2 is linear combination of S1 and S2.
+       3) Upper region correction:
+             Corrected S2 is linear combination of S2 and and smoothed S2.
+       4) Click removal in L2 phase.
+\end{Verbatim}
+\textbf{INPUTS:}\hspace{0.08in}\begin{Verbatim}
+    real(wp), dimension(:)   :: time      ! Relative time of samples (s)
+    real(wp), dimension(:,:) :: r_leo     ! LEO coordinates (ECI or ECF) (m)
+    real(wp), dimension(:,:) :: r_gns     ! GPS coordinates (ECI or ECF) (m)
+    real(wp), dimension(:)   :: r_coc     ! centre curvature coordinates (m)
+    real(wp)                 :: roc       ! Radius curvature (m)
+    real(wp), dimension(:)   :: impact_LM ! Model impact parameters (m)
+    real(wp), dimension(:)   :: phase_LM  ! Model excess phase (m)
+    real(wp), dimension(:)   :: phase_L1  ! L1 excess phase (m)
+    real(wp), dimension(:)   :: phase_L2  ! L2 excess phase (m)
+    real(wp), dimension(:)   :: snr_L1    ! L1 amplitude
+    real(wp), dimension(:)   :: snr_L2    ! L2 amplitude
+    integer,  dimension(:)   :: lcf       ! Lost carrier flag  
+    real(wp)                 :: hmid      ! Border between upper/lower region 
+\end{Verbatim}
+\textbf{OUTPUT:}\hspace{0.08in}\begin{Verbatim}
+    real(wp), dimension(:)   :: phase_L1  ! L1 excess phase (m)
+    real(wp), dimension(:)   :: phase_L2  ! L2 excess phase (m)
+    real(wp), dimension(:)   :: snr_L1    ! L1 amplitude
+    real(wp), dimension(:)   :: snr_L2    ! L2 amplitude
+    real(wp)                 :: L2Q       ! L2 badness score
+\end{Verbatim}
+\textbf{NOTES:}\hspace{0.08in}\textbf{REFERENCES:}\hspace{0.08in}\begin{Verbatim}
+   Gorbunov M.E., Lauritsen K.B., Rhodin A., Tomassini M. and Kornblueh L. 
+   2006
+   Radio holographic filtering, error estimation, and quality control of 
+   radio occultation data
+   Journal of Geophysical Research (111) D10105
+
+   Gorbunov M.E., Lauritsen K.B., Rodin A., Tomassini M., Kornblueh L. 2005 
+   Analysis of the CHAMP experimental data on radio-occultation sounding of
+   the Earth's atmosphere.
+   Izvestiya Atmospheric and Oceanic Physics (41) 726-740.
+\end{Verbatim}
+\section{Preprocessing/ropp\_pp\_bangle2phase}
+\textsl{[ Subroutines ]}
+
+\label{ch:robo71}
+\label{ch:Preprocessing_ropp_pp_bangle2phase}
+\index{unsorted!ropp\_pp\_bangle2phase}\index{Subroutines!ropp\_pp\_bangle2phase}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    ropp_pp_bangle2phase - Compute excess phase as a function of time from 
+                           bending angle as function of impact parameter
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    call ropp_pp_bangle2phase(time, r_leo, r_gns, r_coc, impact, bangle, 
+                              phase, dphi, impact_LM, IL, IU)
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    This routine computes model excess phase from bending angle data
+      1. Compute t(p) for given satellite trajectories
+      2. Compute p(t) -> d(t) -> Phi(t)
+\end{Verbatim}
+\textbf{INPUTS:}\hspace{0.08in}\begin{Verbatim}
+    real(wp), dimension(:)   :: time      ! time of samples (s)
+    real(wp), dimension(:,:) :: r_leo     ! cartesian LEO coordinates (ECF)
+    real(wp), dimension(:,:) :: r_gns     ! cartesian GPS coordinates (ECF)
+    real(wp), dimension(:)   :: r_coc     ! cartesian centre curvature (ECF)
+    real(wp), dimension(:)   :: impact    ! input impact parameters (m)
+    real(wp), dimension(:)   :: bangle    ! input bending angle profile (rad)
+\end{Verbatim}
+\textbf{OUTPUT:}\hspace{0.08in}\begin{Verbatim}
+    real(wp), dimension(:)   :: bangle    ! output bending angle profile (rad)
+    real(wp), dimension(:)   :: phase     ! excess phase as function time (m)
+    real(wp), optional, dimension(:) :: dphi      ! derivative phase with time
+    real(wp), optional, dimension(:) :: impact_LM ! model impact parameter (m)
+    integer,  optional               :: IL  ! lower index valid model interval
+    integer,  optional               :: IU  ! upper index valid model interval
+\end{Verbatim}
+\textbf{NOTES:}\hspace{0.08in}\textbf{REFERENCES:}\hspace{0.08in}\section{Preprocessing/ropp\_pp\_cutoff}
+\textsl{[ Subroutines ]}
+
+\label{ch:robo72}
+\label{ch:Preprocessing_ropp_pp_cutoff}
+\index{unsorted!ropp\_pp\_cutoff}\index{Subroutines!ropp\_pp\_cutoff}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    ropp_pp_cutoff - Cut off occultation data based on amplitude, smoothed
+                     bending angle and impact parameter values
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    call ropp_pp_cutoff(ro_data, config, var1, var2, var3)
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    1) Compute smoothed bending angle profile
+    2) Cut off from amplitude (based on config%Acut parameter)
+    3) Cut off from bending angle profile (based on config%Bcut, config%Pcut)
+\end{Verbatim}
+\textbf{INPUTS:}\hspace{0.08in}\begin{Verbatim}
+    type(ROprof)                      :: ro_data ! RO data strucuture
+    type(PPConfig)                    :: config  ! Configuration options
+    real(wp), dimension(:), optional  :: var1    ! Extra variables to shrink
+    real(wp), dimension(:), optional  :: var2    ! Extra variables to shrink
+    integer,  dimension(:), optional  :: var3    ! Extra variables to shrink
+\end{Verbatim}
+\textbf{OUTPUT:}\hspace{0.08in}\begin{Verbatim}
+    type(ROprof)                      :: ro_data ! Shrunk RO data strucuture
+    type(PPConfig)                    :: config  ! Configuration options
+    real(wp), dimension(:), optional  :: var1    ! Shrunk extra variables
+    real(wp), dimension(:), optional  :: var2    ! Shrunk extra variables
+    integer,  dimension(:), optional  :: var3    ! Shrunk extra variables
+\end{Verbatim}
+\textbf{NOTES:}\hspace{0.08in}\begin{Verbatim}
+   Requires ROprof data structure type, defined in ropp_io module. This
+   routine therefore requires that the ropp_io module is pre-installed before
+   compilation.
+\end{Verbatim}
+\textbf{REFERENCES:}\hspace{0.08in}\section{Preprocessing/ropp\_pp\_cutoff\_amplitude}
+\textsl{[ Subroutines ]}
+
+\label{ch:robo73}
+\label{ch:Preprocessing_ropp_pp_cutoff_amplitude}
+\index{unsorted!ropp\_pp\_cutoff\_amplitude}\index{Subroutines!ropp\_pp\_cutoff\_amplitude}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    ropp_pp_cutoff_amplitude - Cut off occultation data based on amplitude
+                               and missing data flag
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    call ropp_pp_cutoff_amplitude(ro_data, LCF, config)
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    Cut off from amplitude (based on config%Acut parameter)
+\end{Verbatim}
+\textbf{INPUTS:}\hspace{0.08in}\begin{Verbatim}
+    type(ROprof)                      :: ro_data ! RO data strucuture
+    integer,  dimension(:)            :: LCF     ! Lost carrier flag
+    type(PPConfig)                    :: config  ! Configuration options
+\end{Verbatim}
+\textbf{OUTPUT:}\hspace{0.08in}\begin{Verbatim}
+    type(ROprof)                      :: ro_data ! Shrunk RO data strucuture
+    integer,  dimension(:)            :: LCF     ! Shrunk LCF
+    type(PPConfig)                    :: config  ! Configuration options
+\end{Verbatim}
+\textbf{NOTES:}\hspace{0.08in}\begin{Verbatim}
+   Requires ROprof data structure type, defined in ropp_io module. This
+   routine therefore requires that the ropp_io module is pre-installed before
+   compilation.
+\end{Verbatim}
+\textbf{REFERENCES:}\hspace{0.08in}\section{Preprocessing/ropp\_pp\_impact2doppler}
+\textsl{[ Subroutines ]}
+
+\label{ch:robo74}
+\label{ch:Preprocessing_ropp_pp_impact2doppler}
+\index{unsorted!ropp\_pp\_impact2doppler}\index{Subroutines!ropp\_pp\_impact2doppler}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    ropp_pp_impact2doppler - Compute relative doppler shift from geometrical
+                             data
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    call ropp_pp_impact2doppler(xleo,vleo,xgns,vgns,impact,doppler,bangle)
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\textbf{INPUTS:}\hspace{0.08in}\begin{Verbatim}
+    real(wp), dimension(:) :: xleo     ! cartesian LEO coordinates
+    real(wp), dimension(:) :: vleo     ! cartesian LEO velocity
+    real(wp), dimension(:) :: xgns     ! cartesian GPS coordinates
+    real(wp), dimension(:) :: vgns     ! cartesian GPS velocity
+    real(wp)               :: impact   ! impact parameter
+\end{Verbatim}
+\textbf{OUTPUT:}\hspace{0.08in}\begin{Verbatim}
+    real(wp)               :: doppler  ! Relative doppler frequency shift
+    real(wp)               :: bangle   ! Bending angle
+\end{Verbatim}
+\textbf{NOTES:}\hspace{0.08in}\textbf{REFERENCES:}\hspace{0.08in}\section{Preprocessing/ropp\_pp\_internal\_navbit}
+\textsl{[ Subroutines ]}
+
+\label{ch:robo75}
+\label{ch:Preprocessing_ropp_pp_internal_navbit}
+\index{unsorted!ropp\_pp\_internal\_navbit}\index{Subroutines!ropp\_pp\_internal\_navbit}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    ropp_pp_internal_navbit - get internal navigation bits
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    call ropp_pp_internal_navbit(time, ds, lcf)
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    Determine navigation bits frame position, polynomial regression of
+    phase in frames and detection of phase jumps by Pi
+\end{Verbatim}
+\section{Preprocessing/ropp\_pp\_interpolate\_trajectory}
+\textsl{[ Subroutines ]}
+
+\label{ch:robo76}
+\label{ch:Preprocessing_ropp_pp_interpolate_trajectory}
+\index{unsorted!ropp\_pp\_interpolate\_trajectory}\index{Subroutines!ropp\_pp\_interpolate\_trajectory}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    ropp_pp_interpolate_trajectory - Calculate interpolated coordinates,
+                                     velocities, satellite-satellite angle
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+     call ropp_pp_interpolate_trajectory(time, cleo, cgns, r_coc, t_init,  & 
+                                         xleo, vleo, xgns, vgns, theta)
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    This routine calculates interpolated  coordinates, velocities
+    and satellite-satellite angle at time t_init by polynomial regression
+\end{Verbatim}
+\textbf{INPUTS:}\hspace{0.08in}\begin{Verbatim}
+    real(wp), dimension(:)   :: time    ! time of sample (s)
+    real(wp), dimension(:,:) :: cleo    ! LEO regression coefficients
+    real(wp), dimension(:,:) :: cgns    ! GPS regression coefficients
+    real(wp), dimension(:,:) :: r_coc   ! cartesian centre curvature
+    real(wp)                 :: t_init  ! interpolation time
+
+ OUTPUTS
+    real(wp), dimension(:,:) :: xleo    ! LEO positions from regression
+    real(wp), dimension(:,:) :: vleo    ! LEO velocities from regression
+    real(wp), dimension(:,:) :: xgns    ! GPS positions from regression
+    real(wp), dimension(:,:) :: vgns    ! GPS velocities from regression
+    real(wp), optional       :: theta   ! Satellite-to-satellite angle
+\end{Verbatim}
+\textbf{NOTES:}\hspace{0.08in}\textbf{REFERENCES:}\hspace{0.08in}\section{Preprocessing/ropp\_pp\_modelphase}
+\textsl{[ Subroutines ]}
+
+\label{ch:robo77}
+\label{ch:Preprocessing_ropp_pp_modelphase}
+\index{unsorted!ropp\_pp\_modelphase}\index{Subroutines!ropp\_pp\_modelphase}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    ropp_pp_modelphase - Compute model excess phase from MSIS data
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    call ropp_pp_modelphase(month, lat, lon, time, r_leo, r_gns,
+                            r_coc, roc, phase_LM, impact_LM, config)
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    This routine computes model excess phase
+      1. Compute MSIS model bending angle as a function of impact parameter p
+      2. Compute t(p) for given satellite trajectories
+      3. Compute p(t) -> d(t) -> phase(t)
+\end{Verbatim}
+\textbf{INPUTS:}\hspace{0.08in}\begin{Verbatim}
+    integer                  :: month     ! month of year
+    real(wp)                 :: lat       ! occultation point latitude
+    real(wp)                 :: lon       ! occultation point longitude
+    real(wp), dimension(:)   :: time      ! time of samples (s)
+    real(wp), dimension(:,:) :: r_leo     ! cartesian LEO coordinates (ECF)
+    real(wp), dimension(:,:) :: r_gns     ! cartesian GPS coordinates (ECF)
+    real(wp), dimension(:)   :: r_coc     ! cartesian centre curvature (ECF)
+    real(wp)                 :: roc       ! radius curvature
+    type(PPConfig)           :: config    ! configuration options
+\end{Verbatim}
+\textbf{OUTPUT:}\hspace{0.08in}\begin{Verbatim}
+    real(wp), dimension(:)   :: phase_LM  ! model excess phase (m)
+    real(wp), dimension(:)   :: impact_LM ! model impact parameter (m)
+\end{Verbatim}
+\textbf{NOTES:}\hspace{0.08in}\textbf{REFERENCES:}\hspace{0.08in}\section{Preprocessing/ropp\_pp\_openloop}
+\textsl{[ Subroutines ]}
+
+\label{ch:robo78}
+\label{ch:Preprocessing_ropp_pp_openloop}
+\index{unsorted!ropp\_pp\_openloop}\index{Subroutines!ropp\_pp\_openloop}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    ropp_pp_openloop - Transform open-loop data into excess phase
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    call ropp_pp_openloop(time, phase_L1, phase_L2, phase_LM, 
+                             r_leo, r_gns, r_coc, LCF)
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    This routine transforms open-loop data into excess phase.
+      1. Frequency down-conversion by subtracting phase mode.
+      2. Navigation bits removal.
+      3. Phase accumulation.
+      4. Restoring phase variation.
+\end{Verbatim}
+\textbf{INPUTS:}\hspace{0.08in}\begin{Verbatim}
+    real(wp), dimension(:)   :: time      ! time of samples (s)
+    real(wp), dimension(:)   :: phase_L1  ! excess phase L1 (m)
+    real(wp), dimension(:)   :: phase_L2  ! excess phase L2 (m)
+    real(wp), dimension(:)   :: phase_LM  ! model excess phase (m)
+    real(wp), dimension(:,:) :: r_leo     ! cartesian LEO coordinates (ECF)
+    real(wp), dimension(:,:) :: r_gns     ! cartesian GPS coordinates (ECF)
+    real(wp), dimension(:)   :: r_coc     ! cartesian centre curvature (ECF)
+    integer,  dimension(:)   :: lcf       ! lost carrier flag
+\end{Verbatim}
+\textbf{OUTPUT:}\hspace{0.08in}\begin{Verbatim}
+    real(wp), dimension(:)   :: phase_L1  ! excess phase L1 (m)
+    real(wp), dimension(:)   :: phase_L2  ! excess phase L2 (m)
+    integer,  dimension(:)   :: lcf       ! lost carrier flag
+\end{Verbatim}
+\textbf{NOTES:}\hspace{0.08in}\textbf{REFERENCES:}\hspace{0.08in}\section{Preprocessing/ropp\_pp\_preprocess}
+\textsl{[ Subroutines ]}
+
+\label{ch:robo79}
+\label{ch:Preprocessing_ropp_pp_preprocess}
+\index{unsorted!ropp\_pp\_preprocess}\index{Subroutines!ropp\_pp\_preprocess}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    ropp_pp_preprocess - Level1a data preprocessing
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    call ropp_pp_preprocess(ro_data, config, diag)
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\textbf{INPUTS:}\hspace{0.08in}\begin{Verbatim}
+    type(ROprof)   :: ro_data      ! Radio occultation data strucuture
+    type(PPConfig) :: config       ! Configuration options
+\end{Verbatim}
+\textbf{OUTPUT:}\hspace{0.08in}\begin{Verbatim}
+    type(ROprof)   :: ro_data      ! Corrected radio occultation data
+    type(PPConfig) :: config       ! Configuration options
+    type(PPDiag)   :: diag         ! Diagnostic output
+\end{Verbatim}
+\textbf{NOTES:}\hspace{0.08in}\begin{Verbatim}
+   Requires ROprof data structure type, defined in ropp_io module. This
+   routine therefore requires that the ropp_io module is pre-installed before
+   compilation.
+\end{Verbatim}
+\textbf{REFERENCES:}\hspace{0.08in}\begin{Verbatim}
+   Gorbunov M.E., Lauritsen K.B., Rhodin A., Tomassini M. and Kornblueh L.
+   2006
+   Radio holographic filtering, error estimation, and quality control of
+   radio occultation data
+   Journal of Geophysical Research (111) D10105
+\end{Verbatim}
+\section{Preprocessing/ropp\_pp\_preprocess\_CHAMP}
+\textsl{[ Subroutines ]}
+
+\label{ch:robo80}
+\label{ch:Preprocessing_ropp_pp_preprocess_CHAMP}
+\index{unsorted!ropp\_pp\_preprocess\_CHAMP}\index{Subroutines!ropp\_pp\_preprocess\_CHAMP}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    ropp_pp_preprocess_CHAMP - Mission-specific Level1a data preprocessing
+                               for CHAMP
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    call ropp_pp_preprocess_CHAMP(ro_data, config)
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    1) Amplitude correction
+\end{Verbatim}
+\textbf{INPUTS:}\hspace{0.08in}\begin{Verbatim}
+    type(ROprof)   :: ro_data      ! Radio occultation data strucuture
+    type(PPConfig) :: config       ! Configuration options
+\end{Verbatim}
+\textbf{OUTPUT:}\hspace{0.08in}\begin{Verbatim}
+    type(ROprof)   :: ro_data      ! Corrected radio occultation data
+    type(PPConfig) :: config       ! Configuration options
+\end{Verbatim}
+\textbf{NOTES:}\hspace{0.08in}\begin{Verbatim}
+   Requires ROprof data structure type, defined in ropp_io module. This 
+   routine therefore requires that the ropp_io module is pre-installed before
+   compilation.
+\end{Verbatim}
+\textbf{REFERENCES:}\hspace{0.08in}\section{Preprocessing/ropp\_pp\_preprocess\_COSMIC}
+\textsl{[ Subroutines ]}
+
+\label{ch:robo81}
+\label{ch:Preprocessing_ropp_pp_preprocess_COSMIC}
+\index{unsorted!ropp\_pp\_preprocess\_COSMIC}\index{Subroutines!ropp\_pp\_preprocess\_COSMIC}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    ropp_pp_preprocess_COSMIC - Mission-specific Level1a data preprocessing
+                                for COSMIC 
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    call ropp_pp_preprocess_COSMIC(ro_data, config, LCF)
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    Removal of phase discontinuity - updates phase_L1 and phase_L2
+\end{Verbatim}
+\textbf{INPUTS:}\hspace{0.08in}\begin{Verbatim}
+    type(ROprof)   :: ro_data      ! Radio occultation data strucuture
+    type(PPConfig) :: config       ! Configuration options
+    integer        :: LCF          ! Lost carrier flag
+\end{Verbatim}
+\textbf{OUTPUT:}\hspace{0.08in}\begin{Verbatim}
+    type(ROprof)   :: ro_data      ! Corrected radio occultation data
+    type(PPConfig) :: config       ! Configuration options
+    integer        :: LCF          ! Lost carrier flag
+\end{Verbatim}
+\textbf{NOTES:}\hspace{0.08in}\begin{Verbatim}
+   Requires ROprof data structure type, defined in ropp_io module. This 
+   routine therefore requires that the ropp_io module is pre-installed before
+   compilation.
+\end{Verbatim}
+\textbf{REFERENCES:}\hspace{0.08in}\section{Preprocessing/ropp\_pp\_preprocess\_GRASRS}
+\textsl{[ Subroutines ]}
+
+\label{ch:robo82}
+\label{ch:Preprocessing_ropp_pp_preprocess_GRASRS}
+\index{unsorted!ropp\_pp\_preprocess\_GRASRS}\index{Subroutines!ropp\_pp\_preprocess\_GRASRS}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    ropp_pp_preprocess_GRASRS - Mission-specific Level1a data preprocessing
+                                for GRAS Raw Sampling data
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    call ropp_pp_preprocess_GRASRS(ro_data, config, LCF)
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    Merge and upsample CL and RS data
+    1. Select CL and RS records by LCF flag
+    2. Generate merged time grid anchored at highest point of RS record
+    3. Interpolate CL and RS data to merged time grid
+    4. Merge data
+    5. Generate phase model and connecting phase
+    6. Interpolate data on merged time grid within small gaps
+    7. Restore phase variation
+\end{Verbatim}
+\textbf{INPUTS:}\hspace{0.08in}\begin{Verbatim}
+    type(ROprof)   :: ro_data      ! Radio occultation data strucuture
+    type(PPConfig) :: config       ! Configuration options
+    integer        :: LCF          ! Lost carrier flag
+\end{Verbatim}
+\textbf{OUTPUT:}\hspace{0.08in}\begin{Verbatim}
+    type(ROprof)   :: ro_data      ! Corrected radio occultation data
+    type(PPConfig) :: config       ! Configuration options
+    integer        :: LCF          ! Lost carrier flag
+\end{Verbatim}
+\textbf{NOTES:}\hspace{0.08in}\begin{Verbatim}
+   Requires ROprof data structure type, defined in ropp_io module. This
+   routine therefore requires that the ropp_io module is pre-installed before
+   compilation.
+\end{Verbatim}
+\textbf{REFERENCES:}\hspace{0.08in}\section{Preprocessing/ropp\_pp\_radioholographic\_filter}
+\textsl{[ Subroutines ]}
+
+\label{ch:robo83}
+\label{ch:Preprocessing_ropp_pp_radioholographic_filter}
+\index{unsorted!ropp\_pp\_radioholographic\_filter}\index{Subroutines!ropp\_pp\_radioholographic\_filter}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    ropp_pp_radioholographic_filter - Radioholographic filtering of radio
+                                      occultation data
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    call ropp_pp_radioholographic_filter(time,r_leo,r_gns,r_coc,roc,phase_LM,
+                                         phase, snr)
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+     1) Multiplication of the radio occulutation data with a reference signal 
+     2) Fourier filter combined signal
+     3) Removal of reference signal
+\end{Verbatim}
+\textbf{INPUTS:}\hspace{0.08in}\begin{Verbatim}
+    real(wp), dimension(:)   :: time     ! relative time of samples (s)
+    real(wp), dimension(:,:) :: r_leo    ! cartesian LEO coordinates (m)
+    real(wp), dimension(:,:) :: r_gns    ! cartesian GPS coordinates (m)
+    real(wp), dimension(:)   :: r_coc    ! cartesian centre curvature (m)
+    real(wp)                 :: roc      ! radius of curvature (m)
+    real(wp), dimension(:)   :: phase_LM ! model excess phase (m)
+    real(wp), dimension(:,:) :: phase    ! L1 and L2 excess phase (m)
+    real(wp), dimension(:,:) :: snr      ! L1 and L2 amplitude
+\end{Verbatim}
+\textbf{OUTPUT:}\hspace{0.08in}\begin{Verbatim}
+    real(wp), dimension(:,:) :: phase    ! L1 and L2 excess phase (m)
+    real(wp), dimension(:,:) :: snr      ! L1 and L2 amplitude
+\end{Verbatim}
+\textbf{NOTES:}\hspace{0.08in}\textbf{REFERENCES:}\hspace{0.08in}\begin{Verbatim}
+   Gorbunov M.E., Lauritsen K.B., Rhodin A., Tomassini M. and Kornblueh L. 
+   2006
+   Radio holographic filtering, error estimation, and quality control of 
+   radio occultation data
+   Journal of Geophysical Research (111) D10105
+
+   Gorbunov M.E., Lauritsen K.B., Rodin A., Tomassini M., Kornblueh L. 2005 
+   Analysis of the CHAMP experimental data on radio-occultation sounding of
+   the Earth's atmosphere.
+   Izvestiya Atmospheric and Oceanic Physics (41) 726-740.
+\end{Verbatim}
+\section{Preprocessing/ropp\_pp\_radiooptic\_analysis}
+\textsl{[ Subroutines ]}
+
+\label{ch:robo84}
+\label{ch:Preprocessing_ropp_pp_radiooptic_analysis}
+\index{unsorted!ropp\_pp\_radiooptic\_analysis}\index{Subroutines!ropp\_pp\_radiooptic\_analysis}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    ropp_pp_radiooptic_analysis - Radiooptical analysis of radio occultation
+                                  data - calculation of local spatial spectra
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    call ropp_pp_radiooptic_analysis(time, r_leo, r_gns, r_coc, roc, 
+                                         phase_LM, phase, snr, PA, PD, OutRO, filnam)
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+     Calculation of local spatial spectra
+\end{Verbatim}
+\textbf{INPUTS:}\hspace{0.08in}\begin{Verbatim}
+    real(wp), dimension(:)     :: time     ! relative time of samples (s)
+    real(wp), dimension(:,:)   :: r_leo    ! cartesian LEO coordinates (m)
+    real(wp), dimension(:,:)   :: r_gns    ! cartesian GPS coordinates (m)
+    real(wp), dimension(:)     :: r_coc    ! cartesian centre curvature (m)
+    real(wp)                   :: roc      ! radius of curvature (m)
+    real(wp), dimension(:)     :: phase_LM ! model excess phase (m)
+    real(wp), dimension(:,:)   :: phase    ! L1 and L2 excess phase (m)
+    real(wp), dimension(:,:)   :: snr      ! L1 and L2 amplitude
+    logical, optional          :: OutRO    ! Flag to output spectra results
+    character(len=*), optional :: filnam   ! Output file name root
+\end{Verbatim}
+\textbf{OUTPUT:}\hspace{0.08in}\begin{Verbatim}
+    real(wp), dimension(:,:)   :: PA       ! Average impact parameter (m)
+    real(wp), dimension(:,:)   :: PD       ! RMS deviation of impact parameter
+\end{Verbatim}
+\textbf{REFERENCES:}\hspace{0.08in}\begin{Verbatim}
+   Gorbunov M.E., Lauritsen K.B., Rhodin A., Tomassini M. and Kornblueh L. 
+   2006
+   Radio holographic filtering, error estimation, and quality control of 
+   radio occultation data
+   Journal of Geophysical Research (111) D10105
+
+   Gorbunov M.E., Lauritsen K.B., Rodin A., Tomassini M., Kornblueh L. 2005 
+   Analysis of the CHAMP experimental data on radio-occultation sounding of
+   the Earth's atmosphere.
+   Izvestiya Atmospheric and Oceanic Physics (41) 726-740.
+\end{Verbatim}
+\section{Preprocessing/ropp\_pp\_satellite\_velocities}
+\textsl{[ Subroutines ]}
+
+\label{ch:robo85}
+\label{ch:Preprocessing_ropp_pp_satellite_velocities}
+\index{unsorted!ropp\_pp\_satellite\_velocities}\index{Subroutines!ropp\_pp\_satellite\_velocities}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    ropp_pp_satellite_velocities - Calculate satellite velocities by
+                                   polynomial regression
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    call ropp_pp_satellite_velocities(time, r_leo, r_gns, xleo, vleo,    &
+                                      xgns, vgns, abl, abg)
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    This routine calculates satellite velocities by polynomial regression
+\end{Verbatim}
+\textbf{INPUTS:}\hspace{0.08in}\begin{Verbatim}
+    real(wp), dimension(:)   :: time    ! time of sample (s)
+    real(wp), dimension(:,:) :: r_leo   ! cartesian LEO position (ECI or ECF)
+    real(wp), dimension(:,:) :: r_gns   ! cartesian GPS position (ECI or ECF)
+
+ OUTPUTS
+    real(wp), dimension(:,:) :: xleo    ! LEO positions from regression
+    real(wp), dimension(:,:) :: vleo    ! LEO velocities from regression
+    real(wp), dimension(:,:) :: xgns    ! GPS positions from regression
+    real(wp), dimension(:,:) :: vgns    ! GPS velocities from regression
+    real(wp), dimension(:,:) :: abl     ! LEO regression coefficients (opt)
+    real(wp), dimension(:,:) :: abg     ! GPS regression coefficients (opt)
+\end{Verbatim}
+\textbf{NOTES:}\hspace{0.08in}\textbf{REFERENCES:}\hspace{0.08in}\section{Preprocessing/ropp\_pp\_spectra}
+\textsl{[ Subroutines ]}
+
+\label{ch:robo86}
+\label{ch:Preprocessing_ropp_pp_spectra}
+\index{unsorted!ropp\_pp\_spectra}\index{Subroutines!ropp\_pp\_spectra}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    ropp_pp_spectra - Calculation of local spatial spectra
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    call ropp_pp_spectra(time, phase_L1, phase_L2, phase_LM, impact_LM,
+                         config, OutRO, filnam)
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\textbf{INPUTS:}\hspace{0.08in}\begin{Verbatim}
+    real(wp), dimension(:)     :: time      ! time of samples (s)
+    real(wp), dimension(:)     :: phase_L1  ! excess phase L1 (m)
+    real(wp), dimension(:)     :: phase_L2  ! excess phase L2 (m)
+    real(wp), dimension(:)     :: phase_LM  ! model excess phase (m)
+    real(wp), dimension(:)     :: impact_LM ! model impact parameter (m)
+    type(PPConfig)             :: config    ! Configuration options
+    logical, optional          :: OutRO     ! Flag to output spectra results
+    character(len=*), optional :: filnam    ! Output file name root
+\end{Verbatim}
+\textbf{OUTPUT:}\hspace{0.08in}\begin{Verbatim}
+    Spectra as functions of (doppler,time) written to output ASCII files.
+\end{Verbatim}
+\textbf{NOTES:}\hspace{0.08in}\textbf{REFERENCES:}\hspace{0.08in}\begin{Verbatim}
+   Gorbunov M.E., Lauritsen K.B., Rhodin A., Tomassini M. and Kornblueh L.
+   2006
+   Radio holographic filtering, error estimation, and quality control of
+   radio occultation data
+   Journal of Geophysical Research (111) D10105
+\end{Verbatim}
+\section{Programs/ropp\_pp\_abel\_tool}
+\textsl{[ Parameters ]}
+
+\label{ch:robo87}
+\label{ch:Programs_ropp_pp_abel_tool}
+\index{unsorted!ropp\_pp\_abel\_tool}\index{Parameters!ropp\_pp\_abel\_tool}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+   ropp_pp_abel_tool
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+   Tool to test Abel transform and inverse Abel transform routines.
+
+   > ropp_pp_abel_tool [<options>] <infile(s)>
+\end{Verbatim}
+\textbf{ARGUMENTS:}\hspace{0.08in}\begin{Verbatim}
+  <infile(s)>   One (or more) input file names.
+\end{Verbatim}
+\textbf{OPTIONS:}\hspace{0.08in}\begin{Verbatim}
+   -o <output_file>  name of ROPP netCDF output file
+   -h                help
+   -v                version information
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+   This program reads RO refractivity data from the input data files and 
+   calculates vertical profiles of bending angles using the Abel transform. 
+   The inverse Abel transform is then used to compute a new refractivity 
+   profile, which may be compared with the input data.
+\end{Verbatim}
+\textbf{NOTES:}\hspace{0.08in}\begin{Verbatim}
+   If the input file is a multifile, or more than one input files are
+   specified, the output file is a multifile.
+
+   Already existing output files will be overwritten.
+\end{Verbatim}
+\section{Programs/ropp\_pp\_grasrs2ropp}
+\textsl{[ Parameters ]}
+
+\label{ch:robo88}
+\label{ch:Programs_ropp_pp_grasrs2ropp}
+\index{unsorted!ropp\_pp\_grasrs2ropp}\index{Parameters!ropp\_pp\_grasrs2ropp}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+   ropp_pp_grasrs2ropp
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+   Program to convert EUMETSAT GRAS Raw Sampling data netcdf file to standard
+   ROPP format netCDF structure, suitable for processing with ropp_pp_occ_tool.
+
+   > ropp_pp_grasrs2ropp [<options>] <infile(s)>
+\end{Verbatim}
+\textbf{ARGUMENTS:}\hspace{0.08in}\begin{Verbatim}
+   <infile(s)>   One (or more) input file names.
+\end{Verbatim}
+\textbf{OPTIONS:}\hspace{0.08in}\begin{Verbatim}
+   -o <output_file>  name of ROPP netCDF output file
+                     (default: ropp_pp_gras.nc)
+   -d                output additional diagnostics
+   -h                help
+   -v                version information
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+   This program reads EUMETSAT format netCDF files containing closed loop and
+   raw sampling data from GRAS. Data are translated into the standard ROPP
+   data format structures and written to a ROPP formatted output file.
+\end{Verbatim}
+\textbf{NOTES:}\hspace{0.08in}\begin{Verbatim}
+   If the input file is a multifile, or more than one input files are
+   specified, the output file is a multifile.
+
+   Already existing output files will be overwritten.
+\end{Verbatim}
+\section{Programs/ropp\_pp\_invert\_tool}
+\textsl{[ Parameters ]}
+
+\label{ch:robo89}
+\label{ch:Programs_ropp_pp_invert_tool}
+\index{unsorted!ropp\_pp\_invert\_tool}\index{Parameters!ropp\_pp\_invert\_tool}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    ropp_pp_invert_tool
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+   Calculate refractivity and dry temperature profile from L1 and L2
+   channel radio occultation bending angle data using ionospheric
+   correction, statistical optimization, Abel transform, and 
+   hydrostatic equation.
+
+   > ropp_pp_invert_tool infile(s)
+                         [-c <config_file>]  [-o <output_file>[
+                         [-m <method>]  [-mfile <file>]  [-bfile <file>]
+                         [-d] [-h] [-v]
+\end{Verbatim}
+\textbf{ARGUMENTS:}\hspace{0.08in}\begin{Verbatim}
+   infile(s)   One or more input file names.
+\end{Verbatim}
+\textbf{OPTIONS:}\hspace{0.08in}\begin{Verbatim}
+   -c <config_file> name of configuration file
+   -o <output_file> name of ROPP netCDF output file
+   -m <method>      ionospheric correction method
+                    [NONE,MSIS,GMSIS,BG], (default GMSIS)
+   -mfile <file>    model refractivity coefficients file
+                    (default 'MSIS_coeff.nc')
+   -bfile <file>    background model atmospheric profile file path
+                    (if using BG ionospheric correction method)
+   -d               output additional diagnostics
+   -h               help
+   -v               version information
+
+    -o <outfile>  Name of output file (default: ropp_pp_inv.nc).
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    This program reads RO L1 and L2 bending angle data on impact parameter 
+    levels from the input data files and calculates vertical profiles of 
+    ionospheric corrected bending angle, refractivity, and dry temperature. 
+    The result is written to a ROPP formatted output file.
+\end{Verbatim}
+\textbf{NOTES:}\hspace{0.08in}\begin{Verbatim}
+   If the input file is a multifile, or more than one input files are
+   specified, the output file is a multifile.
+
+   Already existing output files will be overwritten.
+\end{Verbatim}
+\textbf{EXAMPLE:}\hspace{0.08in}\begin{Verbatim}
+   To calculate bending angle, refractivity, and dry temperature 
+   from one of the example (single-) files in the data directory:
+     > ropp_pp_invert_tool ../data/input.nc -o example_01.nc
+
+   To calculate bending angle, refractivity and dry temperature profiles
+   from all singlefiles in the data directory:
+
+     > ropp_pp_occ_tool ../data/*.nc -o example_02.nc
+
+   Note that the resulting example_02.nc file contains processed data from
+   all example profiles.
+
+   To calculate bending angle, refractivity, and dry temperature profiles from
+   all profiles contained in the multifile multi.nc:
+     > ropp_pp_invert_tool ../data/multi.nc -o example_03.nc
+
+   Since the multi_* file was generated by concatenating the other files
+   in the data directory, example_02.nc and example_03.nc should be identical
+   apart from the file names.
+\end{Verbatim}
+\section{Programs/ropp\_pp\_occ\_tool}
+\textsl{[ Parameters ]}
+
+\label{ch:robo90}
+\label{ch:Programs_ropp_pp_occ_tool}
+\index{unsorted!ropp\_pp\_occ\_tool}\index{Parameters!ropp\_pp\_occ\_tool}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+   ropp_pp_occ_tool
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+   Pre-processing tool to calculate refractivity and dry temperature 
+   profile from L1 and L2 excess phase radio occultation data using 
+   geometric optics or wave optics, ionospheric correction, statistical 
+   optimization, Abel transform and hydrostatic equation.
+
+   > ropp_pp_occ_tool [<options>] <infile(s)>
+\end{Verbatim}
+\textbf{ARGUMENTS:}\hspace{0.08in}\begin{Verbatim}
+   <infile(s)>   One (or more) input file names.
+\end{Verbatim}
+\textbf{OPTIONS:}\hspace{0.08in}\begin{Verbatim}
+   -c <config_file>  name of configuration file
+   -o <output_file>  name of ROPP netCDF output file
+   -m <method>       ionospheric correction method [NONE,MSIS,GMSIS,BG]
+                     (default GMSIS)
+   -mfile <file>     model refractivity coefficients file
+                     (default 'MSIS_coeff.nc')
+   -bfile <file>     background model atmospheric profile file path
+                     (if using BG ionospheric correction method)
+   -navfile <file>   external navigation bit *_txt file path
+                     (default internal correction)
+   -occ <method>     processing method, WO or GO (default WO)
+   -filter <method>  filtering method, slpoly or optest
+                     (default slpoly, sliding polynomial)
+   -fit              apply 2-parameter regression fit to model
+   -ellipsoid        output height with respect to WGS84 ellipsoid
+                     (default output wrt EGM96 geoid)
+   -d                output additional diagnostics
+   -h                help
+   -v                version information
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+   This program reads RO L1 and L2 excess phase data as a function of time
+   from the input data files and calculates vertical profiles L1 and L2
+   bending angles, ionospheric corrected bending angle, refractivity and
+   dry temperature.  The result is written to a ROPP output file.
+\end{Verbatim}
+\textbf{NOTES:}\hspace{0.08in}\begin{Verbatim}
+   If the input file is a multifile, or more than one input files are
+   specified, the output file is a multifile.
+
+   Already existing output files will be overwritten.
+\end{Verbatim}
+\textbf{EXAMPLE:}\hspace{0.08in}\begin{Verbatim}
+   To calculate bending angle, refractivity and dry temperature from one
+   of the example (single-) files in the data directory:
+
+     > ropp_pp_occ_tool ../data/input.nc -o example_01.nc
+
+   To calculate bending angle, refractivity and dry temperature profiles
+   from all singlefiles in the data directory:
+
+     > ropp_pp_occ_tool ../data/*.nc -o example_02.nc
+
+   Note that the resulting example_02.nc file contains processed data from
+   all example profiles.
+
+   To calculate bending angle, refractivity and dry temperature profiles 
+   from all profiles contained in the multifile multi.nc:
+
+     > ropp_pp_occ_tool ../data/multi.nc -o example_03.nc
+
+   Since the multi_* file was generated by concatenating the other files
+   in the data directory, example_02.nc and example_03.nc should be identical
+   apart from the file names.
+\end{Verbatim}
+\section{Programs/ropp\_pp\_spectra\_tool}
+\textsl{[ Parameters ]}
+
+\label{ch:robo91}
+\label{ch:Programs_ropp_pp_spectra_tool}
+\index{unsorted!ropp\_pp\_spectra\_tool}\index{Parameters!ropp\_pp\_spectra\_tool}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+   ropp_pp_spectra_tool
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+   Pre-processing tool to compute local spatial spectra of the
+   complex wave field.
+
+   >  ropp_pp_spectra_tool <infile(s)> [-o <outfile>]
+                           [-c <cnfgfile>] [-m <method>] [-mfile <mfile>]
+                           [-navfile <nfile>]
+                           [-h] [-v]
+\end{Verbatim}
+\textbf{ARGUMENTS:}\hspace{0.08in}\begin{Verbatim}
+   <infile(s)>   One (or more) input file names
+\end{Verbatim}
+\textbf{OPTIONS:}\hspace{0.08in}\begin{Verbatim}
+   -o <outfile>      name of spectra output file
+                     (default: ROanalysis_pp_<type>_<freq>.dat)
+   -c <cnfgfile>     name of configuration file
+   -m <method>       ionospheric correction method
+   -mfile <mfile>    model refractivity file
+   -navfile <nfile>  name of external navigation bit file
+   -h                help
+   -v                version information
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+   This program reads RO L1 and L2 excess phase data as a function of time
+   from the input data files and calculates local spatial spectra as a
+   function of doppler frequency shift and time or as a function of bending
+   angle and impact parameter. The results are written to four ASCII files, 
+   whose contents can be plotted by, for instance, 
+   ropp_pp/tests/it_pp_spectra_dt.pro and ropp_pp/tests/it_pp_spectra_dt.pro.
+\end{Verbatim}
+\textbf{NOTES:}\hspace{0.08in}\begin{Verbatim}
+   If the input file is a multifile, or more than one input files are
+   specified, output for all profiles are written out in separate files.
+
+   Already existing output files will be overwritten.
+\end{Verbatim}
+\textbf{EXAMPLE:}\hspace{0.08in}\begin{Verbatim}
+   To calculate spectra for one of the example files in the data directory:
+
+     > ropp_pp_spectra_tool ../data/input.nc
+\end{Verbatim}
+\textbf{SEE ALSO:}\hspace{0.08in}\begin{Verbatim}
+   For an example plotting tool to view the resulting spectra see
+   ropp_pp/tests_plot_spectra.pro
+\end{Verbatim}
+\textbf{REFERENCES:}\hspace{0.08in}\begin{Verbatim}
+  Gorbunov M.E., Lauritsen K.B., Rhodin A., Tomassini M. and
+   Kornblueh L. 2006
+   Radio holographic filtering, error estimation, and quality control of
+   radio occultation data
+   Journal of Geophysical Research (111) D10105
+\end{Verbatim}
+\section{Programs/ropp\_pp\_tph\_tool}
+\textsl{[ Parameters ]}
+
+\label{ch:robo92}
+\label{ch:Programs_ropp_pp_tph_tool}
+\index{unsorted!ropp\_pp\_tph\_tool}\index{Parameters!ropp\_pp\_tph\_tool}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+   ropp_pp_tph_tool
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+   Tropopause height (TPH) diagnostic
+
+   > ropp_pp_tph_tool [<options>] <infile(s)>
+\end{Verbatim}
+\textbf{ARGUMENTS:}\hspace{0.08in}\begin{Verbatim}
+   <infile(s)>   One (or more) input file names.
+\end{Verbatim}
+\textbf{OPTIONS:}\hspace{0.08in}\begin{Verbatim}
+   -o <output_file>  name of ROPP netCDF output file
+   -b                calculate bending angle-based TPH
+   -n                calculate refractivity-based TPH
+   -y                calculate dry-temperature-based TPH
+   -t                calculate temperature-based TPH
+   -h                help
+   -d                output additional diagnostics
+   -v                version information
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+   Diagnose tropopause height from the kinks in one or more RO profiles, 
+   using the covariance transform method of Lewis (GRL 2009).
+\end{Verbatim}
+\textbf{NOTES:}\hspace{0.08in}\begin{Verbatim}
+   If the input file is a multifile, or more than one input files are
+   specified, the output file is a multifile.
+
+   Existing output files will be overwritten.
+
+   If none of the {-b, -n, -y, -t} options is specified, the tool will 
+   attempt to calculate all four TPHs.
+\end{Verbatim}
+\section{Setup/ropp\_pp\_read\_config}
+\textsl{[ Subroutines ]}
+
+\label{ch:robo95}
+\label{ch:Setup_ropp_pp_read_config}
+\index{unsorted!ropp\_pp\_read\_config}\index{Subroutines!ropp\_pp\_read\_config}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    ropp_pp_read_config - Read a configuration file for ROPP_PP
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    call ropp_pp_read_config(file, config)
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\textbf{INPUTS:}\hspace{0.08in}\begin{Verbatim}
+      file
+\end{Verbatim}
+\textbf{OUTPUT:}\hspace{0.08in}\begin{Verbatim}
+     config
+\end{Verbatim}
+\section{Thermodynamics/C\_p}
+\textsl{[ Parameters ]}
+
+\label{ch:robo96}
+\label{ch:Thermodynamics_C_p}
+\index{unsorted!C\_p}\index{Parameters!C\_p}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    C_p - Specific heat capacity of dry air at constant pressure
+\end{Verbatim}
+\textbf{SOURCE:}\hspace{0.08in}\begin{Verbatim}
+!!  REAL(wp), PARAMETER :: C_p = 1005.7_wp       !   J K^{-1} kg^{-1}
+  REAL(wp), PARAMETER :: C_p = 1004.6_wp       !   J K^{-1} kg^{-1}
+\end{Verbatim}
+\section{Thermodynamics/epsilon\_water}
+\textsl{[ Parameters ]}
+
+\label{ch:robo97}
+\label{ch:Thermodynamics_epsilon_water}
+\index{unsorted!epsilon\_water}\index{Parameters!epsilon\_water}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    epsilon_water - Ratio of molecular weight of water to that of dry air.
+\end{Verbatim}
+\textbf{SOURCE:}\hspace{0.08in}\begin{Verbatim}
+  REAL(wp), PARAMETER :: epsilon_water = 287.05_wp / 461.51_wp  !mw_water / mw_dry_air
+\end{Verbatim}
+\section{Thermodynamics/mw\_dry\_air}
+\textsl{[ Parameters ]}
+
+\label{ch:robo98}
+\label{ch:Thermodynamics_mw_dry_air}
+\index{unsorted!mw\_dry\_air}\index{Parameters!mw\_dry\_air}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    mw_dry_air - Molecular weight of dry air
+\end{Verbatim}
+\textbf{SOURCE:}\hspace{0.08in}\begin{Verbatim}
+  REAL(wp), PARAMETER :: mw_dry_air = 28.9648e-3_wp !   kg mol^{-1}
+\end{Verbatim}
+\section{Thermodynamics/mw\_water}
+\textsl{[ Parameters ]}
+
+\label{ch:robo99}
+\label{ch:Thermodynamics_mw_water}
+\index{unsorted!mw\_water}\index{Parameters!mw\_water}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    mw_water - Molecular weight of water
+\end{Verbatim}
+\textbf{SOURCE:}\hspace{0.08in}\begin{Verbatim}
+  REAL(wp), PARAMETER :: mw_water = 18.01528e-3_wp  !   kg mol^{-1}
+\end{Verbatim}
+\section{Thermodynamics/R\_dry}
+\textsl{[ Parameters ]}
+
+\label{ch:robo100}
+\label{ch:Thermodynamics_R_dry}
+\index{unsorted!R\_dry}\index{Parameters!R\_dry}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    R_dry - Gas constant of dry air
+\end{Verbatim}
+\textbf{SOURCE:}\hspace{0.08in}\begin{Verbatim}
+!!  REAL(wp), PARAMETER :: R_dry = 287.0597_wp        !   J K^{-1} kg^{-1}
+  REAL(wp), PARAMETER :: R_dry = 287.05_wp        !   J K^{-1} kg^{-1}
+\end{Verbatim}
+\section{Thermodynamics/R\_vap}
+\textsl{[ Parameters ]}
+
+\label{ch:robo101}
+\label{ch:Thermodynamics_R_vap}
+\index{unsorted!R\_vap}\index{Parameters!R\_vap}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    R_vap - Gas constant of water vapor
+\end{Verbatim}
+\textbf{SOURCE:}\hspace{0.08in}\begin{Verbatim}
+!!  REAL(wp), PARAMETER :: R_vap = 461.5250_wp        !   J K^{-1} kg^{-1}
+  REAL(wp), PARAMETER :: R_vap = 461.51_wp        !   J K^{-1} kg^{-1}
+\end{Verbatim}
+\section{Tools/Coordinates}
+\textsl{[ Topics ]}
+
+\label{ch:robo102}
+\label{ch:Tools_Coordinates}
+\index{unsorted!Coordinates}\index{Topics!Coordinates}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    Routines for dealing with coordinate frames
+\end{Verbatim}
+\textbf{SEE ALSO:}\hspace{0.08in}\begin{Verbatim}
+    ropp_pp_set_coordinates
+\end{Verbatim}
+\subsection{Coordinates/ropp\_pp\_set\_coordinates}
+\textsl{[ Coordinates ]}
+\textsl{[ Subroutines ]}
+
+\label{ch:robo8}
+\label{ch:Coordinates_ropp_pp_set_coordinates}
+\index{unsorted!ropp\_pp\_set\_coordinates}\index{Subroutines!ropp\_pp\_set\_coordinates}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    ropp_pp_set_coordinatess - Set internally used position and velocity 
+                               reference frames used in ropp_pp processing
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    use ropp_io
+    use ropp_pp
+      ...
+    type(ROprof) :: rodata
+      ...
+    call ropp_pp_set_coordinates(rodata)
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    This subroutine sets the reference coordinate frame within an ROprof
+    data structure to the reference frame used internally in the ropp_pp 
+    package. For each variable to be defined a call to ropp_utils function
+    coordinates_eci2ecef is made to transform the data if required. 
+\end{Verbatim}
+\textbf{INPUTS:}\hspace{0.08in}\begin{Verbatim}
+    rodata  Radio occultation profile data structure
+\end{Verbatim}
+\textbf{OUTPUT:}\hspace{0.08in}\begin{Verbatim}
+    rodata  As above, but with Level1a data coordinate reference frame 
+             modified to reflect standard reference frames as used within 
+             ropp_pp.
+\end{Verbatim}
+\textbf{NOTES:}\hspace{0.08in}\begin{Verbatim}
+    Default coordinate frames assumed by ropp_pp processing are:
+         r_leo : ECF (Earth Centred Fixed)
+         r_gns : ECF (Earth Centred Fixed)
+         v_leo : ECI (Earth Centred Inertial)
+         v_gns : ECI (Earth Centred Inertial)
+\end{Verbatim}
+\section{WaveOptics/ropp\_pp\_bending\_angle\_wo}
+\textsl{[ Subroutines ]}
+
+\label{ch:robo103}
+\label{ch:WaveOptics_ropp_pp_bending_angle_wo}
+\index{unsorted!ropp\_pp\_bending\_angle\_wo}\index{Subroutines!ropp\_pp\_bending\_angle\_wo}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    ropp_pp_bending_angle_wo - Calculate L1 and L2 bending angle profiles from
+                               occultation data by WAVE OPTICS
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    call ropp_pp_bending_angle_wo(time, r_leo, r_gns, r_coc, phase_L1,
+                                  phase_L2, snr_L1, snr_L2, w_ls,
+                                  w_smooth, w_low, hmax, filter, opt_DL2,
+                                  cff, dsh, 
+                                  impact_L1, bangle_L1, ba_sigma_L1,
+                                  impact_L2, bangle_L2, ba_sigma_L2, diag)
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    This routine calculates L1 and L2 bending angles using the CT2 algorithm.
+\end{Verbatim}
+\textbf{INPUTS:}\hspace{0.08in}\begin{Verbatim}
+    real(wp), dimension(:)   :: time      ! Relative time of samples (s)
+    real(wp), dimension(:,:) :: r_leo     ! LEO coordinates (m) (ECI or ECF)
+    real(wp), dimension(:,:) :: r_gns     ! GPS coordinates (m) (ECI or ECF)
+    real(wp), dimension(:)   :: r_coc     ! Centre curvature coords (m)
+    real(wp)                 :: roc       ! Radius curvature (m)
+    integer                  :: w_ls      ! Large-scale smoothing (points)
+    integer                  :: w_smooth  ! Smoothing window above 7km (point)
+    integer                  :: w_low     ! Smoothing window below 7km (point)
+    real(wp)                 :: hmax      ! Maximum height for WO (m)
+    character(len=*)         :: filter    ! Filter method ('optest'/'slpoly')
+    logical                  :: opt_DL2   ! Degraded L2 flag
+    integer                  :: cff       ! Complex filtering flag
+    real(wp)                 :: dsh       ! Shadow border width (m)
+    real(wp), dimension(:)   :: phase_L1  ! L1 excess phase (m)
+    real(wp), dimension(:)   :: phase_L2  ! L2 excess phase (m)
+    real(wp), dimension(:)   :: snr_L1    ! L1 amplitude
+    real(wp), dimension(:)   :: snr_L2    ! L2 amplitude
+    real(wp), dimension(:)   :: impact_L1 ! L1 impact parameters (m)
+    real(wp), dimension(:)   :: bangle_L1 ! L1 bending angles (rad)
+    real(wp), dimension(:)   :: impact_L2 ! L2 impact parameters (m)
+    real(wp), dimension(:)   :: bangle_L2 ! L2 bending angles (rad)
+\end{Verbatim}
+\textbf{OUTPUT:}\hspace{0.08in}\begin{Verbatim}
+    real(wp), dimension(:)   :: impact_L1 ! L1 impact parameters (m)
+    real(wp), dimension(:)   :: bangle_L1 ! L1 bending angles (rad)
+    real(wp), dimension(:)   :: ba_sigma_L1 ! L1 bending angle error (rad)
+    real(wp), dimension(:)   :: impact_L2 ! L2 impact parameters (m)
+    real(wp), dimension(:)   :: bangle_L2 ! L2 bending angles (rad)
+    real(wp), dimension(:)   :: ba_sigma_L2 ! L2 bending angle error (rad)
+    type(PPdiag), optional   :: diag      ! Additional output diagnostic strt
+\end{Verbatim}
+\textbf{NOTES:}\hspace{0.08in}\textbf{REFERENCES:}\hspace{0.08in}\begin{Verbatim}
+   Gorbunov M.E. and Lauritsen K.B. 2004
+   Analysis of wave fields by Fourier integral operators and their application
+   for radio occultations
+   Radio Science (39) RS4010
+
+   Gorbunov M.E., Lauritsen K.B., Rodin A., Tomassini M., Kornblueh L. 2005 
+   Analysis of the CHAMP experimental data on radio-occultation sounding of
+   the Earth's atmosphere.
+   Izvestiya Atmospheric and Oceanic Physics (41) 726-740.
+\end{Verbatim}
+\section{WaveOptics/ropp\_pp\_DCT}
+\textsl{[ Subroutines ]}
+
+\label{ch:robo104}
+\label{ch:WaveOptics_ropp_pp_DCT}
+\index{unsorted!ropp\_pp\_DCT}\index{Subroutines!ropp\_pp\_DCT}
+\textbf{NAME:}\hspace{0.08in}\begin{Verbatim}
+    ropp_pp_DCT - Calculate L1 and L2 bending angle profiles using
+                  Canonical Transform (CT2).
+\end{Verbatim}
+\textbf{SYNOPSIS:}\hspace{0.08in}\begin{Verbatim}
+    call ropp_pp_DCT(time, snr, phase, r_leo, r_gns, r_coc, roc, w_ls,
+                     w_smooth, hmax, filter, opt_DL2, cff, dsh,
+                     impact, bangle, ba_cov, diag)
+\end{Verbatim}
+\textbf{DESCRIPTION:}\hspace{0.08in}\begin{Verbatim}
+    This routine calculates L1 and L2 bending angles using a CT2 algorithm.
+\end{Verbatim}
+\textbf{INPUTS:}\hspace{0.08in}\begin{Verbatim}
+    real(wp), dimension(:)   :: time     ! Relative time of samples (s)
+    real(wp), dimension(:,:) :: snr      ! L1,L2 amplitudes [channel, time]
+    real(wp), dimension(:,:) :: phase    ! L1,L2 excess phase (m) [ch, time]
+    real(wp), dimension(:,:) :: r_leo    ! LEO coordinates (m) (ECI or ECF)
+    real(wp), dimension(:,:) :: r_gns    ! GPS coordinates (m) (ECI or ECF)
+    real(wp), dimension(:)   :: r_coc    ! Centre curvature coordinates (m)
+    real(wp)                 :: roc      ! Radius of curvature (m)
+    integer                  :: w_ls     ! Large-scale smoothing window
+    integer                  :: w_smooth ! Smoothing window above 7km (points)
+    integer                  :: w_low    ! Smoothing window below 7km (points)
+    real(wp)                 :: hmax     ! Maximum height for WO processing
+    character(len=*)         :: filter   ! Filter method ('optest','slpoly')
+    logical                  :: opt_DL2  ! Degraded L2 flag
+    integer                  :: cff      ! Complex filtering flag
+    real(wp)                 :: dsh      ! Shadow border width (m)
+    real(wp), dimension(:,:) :: impact   ! L1,L2 impact parameters (m) [ch,t]
+    real(wp), dimension(:,:) :: bangle   ! L1,L2 bending angles (rad) [ch,t]
+\end{Verbatim}
+\textbf{OUTPUT:}\hspace{0.08in}\begin{Verbatim}
+    real(wp), dimension(:,:) :: impact   ! L1,L2 impact parameters (m) [ch, t]
+    real(wp), dimension(:,:) :: bangle   ! L1,L2 bending angles (rad) [ch, ip]
+    real(wp), dimension(:,:) :: ba_cov   ! Estimate of bangle covariance
+    type(PPdiag),   optional :: diag     ! Additional output diagnostics structure
+\end{Verbatim}
+\textbf{NOTES:}\hspace{0.08in}\begin{Verbatim}
+   Impact parameters are calculated with respect to local centre of curvature
+   Bending angles are calculated from Doppler shift in the approximation of
+   local spherical symmetry.
+   Variable names follow Gorbunov and Lauritsen (2004)
+                   P - impact parameter
+                   E - bending angle (epsilon)
+                   Y - new coordinate
+\end{Verbatim}
+\textbf{REFERENCES:}\hspace{0.08in}\begin{Verbatim}
+   Gorbunov M.E. and Lauritsen K.B. 2004
+   Analysis of wave fields by Fourier integral operators and their application
+   for radio occultations
+   Radio Science (39) RS4010
+
+   Gorbunov M.E., Lauritsen K.B., Rhodin A., Tomassini M. and Kornblueh L.
+   Radio holographic filtering, error estimation, and quality control of
+   radio occultation data
+   Journal of Geophysical Research (111) D10105
+
+   Gorbunov M.E., Lauritsen K.B., Rodin A., Tomassini M., Kornblueh L. 2005
+   Analysis of the CHAMP experimental data on radio-occultation sounding of
+   the Earth's atmosphere.
+   Izvestiya Atmospheric and Oceanic Physics (41) 726-740.
+\end{Verbatim}

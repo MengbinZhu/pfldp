@@ -1,0 +1,22 @@
+		   ROPP_UTILS Package Release V7.0
+		  ---------------------------------
+
+The ropp_utils module is a package of useful tools and utility routines.
+
+ropp_utils forms one module of the Radio Occultation Processing Package
+(ROPP) which is a key deliverable of the ROM SAF. The ROPP UTILS package
+is used by other ROPP modules (ropp_io, ropp_pp, ropp_fm and ropp_1dvar). 
+Please refer to the installation guides of those modules for further 
+dependencies.
+
+See the README.unix and README.cygwin files for installation instructions and
+tips. See file MANIFEST for the complete list of files in the distribution
+package and the COPYRIGHT file for copyright information. The file INSTALL
+contains generic instructions for the configure script.
+   
+Any comments on this software should be given via the ROM SAF
+Helpdesk at http://www.romsaf.org
+
+
+ROM SAF ROPP Development Team
+31 July 2013

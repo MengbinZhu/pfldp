@@ -1,0 +1,103 @@
+./" $Id: ropp_pp_abel.1 3551 2013-02-25 09:51:28Z idculv $
+./"
+.TH ROPP_PP_ABEL 1 31-Jul-2013 ROPP-7 ROPP-7
+./"
+.SH NAME
+ropp_pp_abel
+./"
+.SH SYNOPSIS
+Tool to test Abel transform and inverse Abel transform routines.
+.PP
+./"
+.B ropp_pp_abel
+.I input_file [input_file...]
+\-o output_file
+.br
+                 [-h] [-v]
+./"
+.SH DESCRIPTION
+.I ropp_pp_abel
+This program reads RO refractivity data from the input data files and calculates
+vertical profiles of bending angles using the Abel transform. The inverse Abel
+transform is then used to compute a new refractivity profile, which may be
+compared with the input data.
+.B (Reference\ 2.)
+./"
+.SH FILES
+.SS Input
+One or more ROPP netCDF files containing one or more profiles of RO data.
+.B (Reference\ 1.)
+
+.SS Output
+The output ROPP netCDF file contains the bending angles and refractivities
+derived from the refractivities in the input file.
+
+.PP
+If the input file contains more than one profile (a 'multi-file') or more
+than one input file is specified, the single output file will contain derived
+profiles for all the input profiles.
+./"
+
+.SH OPTIONS
+Option switches are case\-sensitive but may be placed before or after
+the input file argument and in any order. All arguments to switches are
+mandatory when the switch is used.
+
+.PP
+.B -h
+\- help
+.IP
+Requests brief help on the command to stdout.
+
+.PP
+.B -v
+\- version
+.IP
+Requests the program version ID to be written to stdout.
+
+.PP
+.B -o
+\- output file
+.IP
+Specifies the name of the output ROPP netCDF file.  Default: ro2ro.nc.
+
+./"
+.SH NOTES
+.B 1.
+This tool is obsolete.  Its function is now carried out by the  analagous
+program ropp_pp/tests/ropp_test_abel, which goes further than this tool by
+computing and reporting the differences between the input and output files. 
+ropp_pp_abel_tool is included in the ROPP distribution in the hope that its code
+may prove beneficial to some ROPP users. 
+./"
+
+./"
+.SH EXAMPLES
+.B 1.
+To calculate bending angles (and hence refractivities) from refractivities
+in one of the example (single-) files in the data directory:
+.PP
+ > ropp_pp_abel_tool ../data/ropp_pp_test.nc -o ropp_pp_test_out.nc
+
+The refractivities in the two files may be compared.
+
+./"
+
+.SH REFERENCES
+.PP
+.B 1.
+ROPP User Guide - Part I: Input/Output module
+.br
+SAF/ROM/METO/UG/ROPP/002
+.PP
+.B 2.
+ROPP User Guide - Part III: Pre-processor module
+.br
+SAF/ROM/METO/UG/ROPP/004
+./"
+.SH SEE ALSO
+.BR ropp_pp/tests/ropp_test_abel (1)
+./"
+
+.SH AUTHORS
+ROPP Development Team, Met Office <romsaf@metoffice.gov.uk>

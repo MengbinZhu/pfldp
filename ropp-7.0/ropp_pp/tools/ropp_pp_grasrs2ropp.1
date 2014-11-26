@@ -1,0 +1,98 @@
+./" $Id: ropp_pp_grasrs2ropp.1 3551 2013-02-25 09:51:28Z idculv $
+./"
+.TH ROPP_PP_GRASRS2ROPP 1 31-Jul-2013 ROPP-7 ROPP-7
+./"
+.SH NAME
+ropp_pp_grasrs2ropp
+./"
+.SH SYNOPSIS
+Program to convert EUMETSAT GRAS Raw Sampling data netcdf file to standard ROPP
+format netCDF structure, suitable for processing with ropp_pp_occ_tool.
+.PP
+./"
+.B ropp_pp_grasrs2ropp
+.I input_file [input_file...]
+\-o output_file
+.br
+                 [-h] [-d] [-v]
+./"
+.SH DESCRIPTION
+.I ropp_pp_grasrs2ropp
+This program reads EUMETSAT format netCDF files containing closed loop and
+raw sampling data from GRAS. Data are translated into the standard ROPP
+data format structures and written to a ROPP formatted output file.
+.B (Reference\ 2.)
+./"
+.SH FILES
+.SS Input
+One or more ROPP netCDF files containing one or more profiles of RO data.
+.B (Reference\ 1.)
+
+.SS Output
+The output ROPP netCDF file contains the merged RS+CL data from the input  file
+in a standard RPPP netCDF file. This file also contains the lost carrier
+information flag "open_loop_lcf".
+
+.PP
+If the input file contains more than one profile (a 'multi-file') or more
+than one input file is specified, the single output file will contain derived
+profiles for all the input profiles.
+./"
+
+.SH OPTIONS
+Option switches are case\-sensitive but may be placed before or after
+the input file argument and in any order. All arguments to switches are
+mandatory when the switch is used.
+
+.PP
+.B -d
+\- diagnostics
+.IP
+Output additional diagnostics to stdout.
+
+.PP
+.B -h
+\- help
+.IP
+Requests brief help on the command to stdout.
+
+.PP
+.B -v
+\- version
+.IP
+Requests the program version ID to be written to stdout.
+
+.PP
+.B -o
+\- output file (required)
+.IP
+Specifies the name of the output ROPP netCDF file.  Default: ropp_pp_gras.nc.
+
+./"
+.SH EXAMPLES
+.B 1.
+To process the example GRAS RS data in the data directory:
+.PP
+ > ropp_pp_grasrs2ropp ../data/ropp_pp_grasrs_test.nc -o ropp_pp_test_gras.nc
+
+The output from this is then ready to be passed through ropp_pp_occ_tool.
+
+./"
+
+.SH REFERENCES
+.PP
+.B 1.
+ROPP User Guide - Part I: Input/Output module
+.br
+SAF/ROM/METO/UG/ROPP/002
+.PP
+.B 2.
+ROPP User Guide - Part III: Pre-processor module
+.br
+SAF/ROM/METO/UG/ROPP/004
+./"
+.SH SEE ALSO
+.BR ropp_pp_occ_tool (1)
+./"
+.SH AUTHORS
+ROPP Development Team, Met Office <romsaf@metoffice.gov.uk>

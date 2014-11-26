@@ -1,0 +1,24 @@
+Notes on the test files in this directory:
+
+A basic check on the running of the 1D-Var stand-alone
+application (ropp_1dvar_refrac_ec in ropp_1dvar/build) 
+can be invoked by:
+
+ > make test
+ 
+This runs the test_1dvar.sh shell script, which:
+a) runs the 1D-Var application using test files
+   in the ropp_1dvar/data directory, and outputs a results
+   file to that directory,
+b) runs an IDL script to 
+   - read the input (background) and results files,
+   - calculate the mean & differences (ideally these
+     should be zero, but some rounding error can be expected),
+   - plots the mean difference profiles to a jpeg file,
+c) displays the jpeg file using XV.
+
+If all is well, the mean percentage differences should be, 
+for all practical purposes, zero.
+
+Files example_tests.log and example_tests.jpg are examples
+of successful test output.
