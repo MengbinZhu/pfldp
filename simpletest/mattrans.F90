@@ -1,4 +1,4 @@
-SUBROUTINE MATRIXTRANS(MOriginal,MTrans,ColDim,RowDim)
+SUBROUTINE MATTRANS(MOriginal,MTrans,ColDim,RowDim)
 
 IMPLICIT NONE
 

@@ -35,7 +35,7 @@ TMP(:) = SQRT((- 2.0 * log(TMP(:)))/TMP(:))
 NNum1(:) = UDX1(:)*TMP(:)
 NNum2(:) = UDX2(:)*TMP(:)
 
-NDNumb(:) = NDMean + NDVar*NNum1(:)
+NDNumb(:) = NDMean + NDVar*NNum2(:)
 
 !print *,NDNumb(:)
 
