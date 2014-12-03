@@ -13,7 +13,7 @@ REAL(KIND=8)                     :: TMP(IDIMV)
 INTEGER                          :: I
 
 TMP(:) = 1.0
-CALL RANDOM_SEED(PUT=SEED(1:IDIMV))
+!CALL RANDOM_SEED(PUT=SEED(1:IDIMV))
 
 DO I=1,IDIMV
 

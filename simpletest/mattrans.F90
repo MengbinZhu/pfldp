@@ -3,7 +3,7 @@ SUBROUTINE MATTRANS(MOriginal,MTrans,ColDim,RowDim)
 IMPLICIT NONE
 
 REAL(KIND=8),INTENT(IN)    :: ColDim, RowDim
-REAL(KIND=8),INTENT(IN)    :: MOriginal(ColDim,RowDim)
+REAL(KIND=8),INTENT(INOUT) :: MOriginal(ColDim,RowDim)
 REAL(KIND=8),INTENT(INOUT) :: MTrans(RowDim,ColDim)
 
 REAL(KIND=8)               :: I,J

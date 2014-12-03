@@ -24,12 +24,11 @@ REAL(KIND=8)                :: XVector(IDIMV,1)
 REAL(KIND=8)                :: DiT(1,NumOfObs)
 REAL(KIND=8)                :: Di(NumOfObs,1)
 REAL(KIND=8)                :: TMPNUM(1,1)
+REAL(KIND=8)                :: TMPNUM2(1,1)
 REAL(KIND=8)                :: USIGMA(IDIMEn)  ! -2log(Wi) for Every Particle
+REAL(KIND=8)                :: USIGMA2(IDIMEn) ! -2log(Wi) for Every Particle
 REAL(KIND=8)                :: TMPMat(NumOfObs,NumOfObs)
 REAL(KIND=8)                :: TMPMatInv(NumOfObs,NumOfObs)
-!Variables Defined Below have dimension problems.
-REAL(KIND=8)                :: TMPNUM2(1,1)
-REAL(KIND=8)                :: USIGMA2(IDIMEn) ! -2log(Wi) for Every Particle
 REAL(KIND=8)                :: WWeight         ! The Weights of All Particles
 REAL(KIND=8)                :: EW              ! The Weight from Last Timestep
 
@@ -41,71 +40,69 @@ WWeight    = 0.0
 XVector    = 0.0
 
 SELECT CASE(Method)
+!============================SIR Method===============================
 CASE(1) !SIR Method
 CALL MATRIXINV(RMat,RMatInv,NumOfObs)
 WWeight = 0.0
-!PRINT*,"OBSY = "
-!PRINT*,OBSY(1,:)
 DO I = 1, IDIMEn
-   XVector(:,1) = SVX(:,NTIMESTEP,I)
-   !PRINT*,"XVec ="
-   !PRINT*,XVector(:,1)
+   XVector(:,1) = SVX(:,NTIMESTEP,I) !Maybe some problems here about SVX!
    HXMat = MATMUL(HMat,XVector)
-   !PRINT*,"HXMAT =" 
-   !PRINT*,HXMat
    DO J = 1, NumOfObs
       DiT(1,J) = OBSY(NTIMESTEP,J) - HXMat(J,1)
       Di(J,1)  = DiT(1,J)
-      !PRINT*,"Di = "
-      !PRINT*,Di(J,1)
    END DO
    TMPNUM = MATMUL(DiT,MATMUL(RMatInv,Di))
    USIGMA(I) = TMPNUM(1,1)
    WWeight = WWeight +EXP(-0.5*USIGMA(I))
 END DO
 Weights(:) = EXP(-0.5*USIGMA(:))/WWeight
-PRINT*,"TEST OF SIR Weights:"
-PRINT*,USIGMA(:)
-PRINT*,"==========================="
+PRINT*,"WWeight = "
 PRINT*,WWeight
-PRINT*,"&&&&&&&&&&&&&&&&&&&&&&&&&&"
+PRINT*,"TEST OF SIR Weights:"
+PRINT*,"==========================="
 PRINT*,Weights(:)
 PRINT*,"END OF THE TEST"
 
+!========================The Optimal Proposal Density====================
 CASE(2) !The Optimal Proposal Density Method
     
-CALL MatTrans(HMat,HTMat,NumOfObs,IDIMV)
-!Start from Here 17:47 Dec 02 2014
+HTMat(:,:) = 0.0
+!CALL MATTRANS(HMat,HTMat,NumOfObs,IDIMV)
+HTMat = TRANSPOSE(HMat)
+!PRINT*,"HTMat ="
+!PRINT*,HTMat
 TMPMat = MATMUL(HMat,MATMUL(QMat,HTMat)) + RMat
-CALL MATRIXINV(TMPMat,TMPMatInv,IDIMV)
+CALL MATRIXINV(TMPMat,TMPMatInv,NumOfObs)
+
+EW = IDIMEn
+EW = 1/EW
 
 DO I = 1, IDIMEn
-
+   XVector(:,1) = SVX(:,NTIMESTEP-1,I) !Maybe some problems here about SVX!
+   !PRINT*,"SVX(:,0,I) = "
+   !PRINT*,XVector(:,1)
+   HXMat = MATMUL(HMat,XVector)
    DO J = 1, NumOfObs
-      DO K = 1, IDIMV
-        ! DiT(1,K) = OBSY(K,NTIMESTEP,J) - SVX(K,NTIMESTEP,I)
-        ! Di(K,1)  = DiT(1,K)
-      END DO
-      !TMPNUM = MATMUL(DiT,MATMUL(TMPMatInv,Di))
-      !USIGMA(I) = USIGMA(I) + TMPNUM(1,1)
-      !TMPNUM2 = MATMUL(DiT,MATMUL(RMatInv,Di))
-      !USIGMA2(I) = USIGMA2(I) + TMPNUM2(1,1)
+      DiT(1,J) = OBSY(NTIMESTEP,J) - HXMat(J,1)
+      Di(J,1)  = DiT(1,J)
    END DO
-   !WWeight = WWeight +EXP(-0.5*USIGMA2(I))
+   TMPNUM     = MATMUL(DiT,MATMUL(RMatInv,Di))
+   USIGMA(I)  = TMPNUM(1,1)
+   TMPNUM2    = MATMUL(DiT,MATMUL(TMPMatInv,Di))
+   USIGMA2(I) = TMPNUM2(1,1)
+   WWeight = WWeight +EXP(-0.5*USIGMA(I))
    !Weights(I) = (1/IDIMEn)*(EXP(-0.5*USIGMA(I))/EXP(-0.5*USIGMA2(I)))*(SQRT(RMat(1,1)/TMPMat(1,1)))
-   EW = IDIMEn
-   EW = 1/EW
-   !PRINT*,"==================================="
-   !PRINT*,EXP(-0.5*USIGMA(I))
-   !PRINT*,EXP(-0.5*USIGMA2(I))
-   !PRINT*,EW
-   !Weights(I) = EXP(-0.5*USIGMA(I))/WWeight
 END DO
+!PRINT*,"USIGMA2 = "
+!PRINT*,USIGMA2(:)
+Weights(:) = EXP(-0.5*USIGMA2(:))
+Weights(:) = Weights(:)/SUM(Weights)
 PRINT*,"TEST OF THE OPTIMAL PROPOSAL DENSITY WEIGHTS"
 PRINT*,"============================================"
-!PRINT*,Weights(:)
+PRINT*,Weights(:)
 PRINT*,"END OF THE OPTIMAL PROPOSAL DENSITY WEIGHTS"
 
+!==============================The New Scheme================================
 CASE(3)
 
 CASE DEFAULT
