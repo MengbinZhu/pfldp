@@ -19,7 +19,7 @@
 !c     Local variables.
 !c
       complex*16 A(N,N), VS(2*N,N)
-      complex*16 WORK(3*N), W(N)
+      complex*16 WORK(16*N), W(N)
 
       double precision RWORK(N)
       integer*8 SDIM,INFO
@@ -42,7 +42,7 @@
 !c
 !c     Compute the eigenvalues and Schur vectors of A.
 !c
-      call ZGEES('V','N',DUMMY_SELECT2, N, A, N, SDIM, W, VS, 2*N, WORK,3*N, RWORK, BWORK, INFO)
+      call ZGEES('V','N',DUMMY_SELECT2, N, A, N, SDIM, W, VS, 2*N, WORK,16*N, RWORK, BWORK, INFO)
 !c
 !c     Compute the square root R of T one column at a time.
 !c

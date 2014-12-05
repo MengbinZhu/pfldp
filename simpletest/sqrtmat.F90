@@ -1,39 +1,3 @@
-!
-!     Copyright (c) 2002-2010, Boyce Griffith
-!c     All rights reserved.
-!c
-!c     Redistribution and use in source and binary forms, with or without
-!c     modification, are permitted provided that the following conditions
-!c     are met:
-!c
-!c        * Redistributions of source code must retain the above
-!c          copyright notice, this list of conditions and the following
-!c          disclaimer.
-!c
-!c        * Redistributions in binary form must reproduce the above
-!c          copyright notice, this list of conditions and the following
-!c          disclaimer in the documentation and/or other materials
-!c          provided with the distribution.
-!c
-!c        * Neither the name of New York University nor the names of its
-!c          contributors may be used to endorse or promote products
-!c          derived from this software without specific prior written
-!c          permission.
-!c
-!c     THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND
-!c     CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES,
-!c     INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
-!c     MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
-!c     DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS
-!c     BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
-!c     EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED
-!c     TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
-!c     DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
-!c     ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR
-!c     TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
-!c     THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
-!c     SUCH DAMAGE.
-!c
 !ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
 !c
 !c     Compute the principal square root X of an N-by-N real matrix A,
@@ -44,7 +8,6 @@
 !c     Algebra Appl, 52-53:127--140 (1983).
 !c
 !ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
-!c
       SUBROUTINE SQRTMAT(X,A,N)
 !c
       IMPLICIT NONE
@@ -90,6 +53,8 @@
 !c
 !c     Compute the square root U of S one super-diagonal at a time.
 !c
+      U = 0
+      PRINT*,U
       do j = 1,N-1              ! set the lower triangle to zero
          do i = j+1,N
             U(i,j) = ZERO
@@ -99,24 +64,30 @@
       do i = 1,N                ! set the diagonal elements
          U(i,i) = zsqrt(S(i,i))
       enddo
+      !PRINT*,U
 
       do sdiag = 1,N-1          ! loop over the N-1 super-diagonals
          do i = 1,N-sdiag
             j = i+sdiag
             U(i,j) = S(i,j)
             do k = i+1,j-1
+               U(i,j) = S(i,j)
                U(i,j) = U(i,j) - U(i,k)*U(k,j)
+               PRINT*,U(i,j)
             enddo
             U(i,j) = U(i,j) / (U(i,i) + U(j,j))
          enddo
       enddo
+      !PRINT*,U
 !c
 !c     Compute X = Q*U*(Q**H).
 !c
       call ZGEMM('N', 'N', N, N, N, ONE, Q, N, U, N, ZERO, QU, N)
+      !PRINT*,QU
       call ZGEMM('N', 'C', N, N, N, ONE, QU, N, Q, N, ZERO, QUQH, N)
       do j = 1,N
          do i = 1,N
+            !PRINT*,QUQH(i,j)  !added by Zhu for debugging
             X(i,j) = dble(QUQH(i,j))
          enddo
       enddo

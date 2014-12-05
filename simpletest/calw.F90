@@ -96,14 +96,14 @@ END DO
 !PRINT*,"USIGMA2 = "
 !PRINT*,USIGMA2(:)
 Weights(:) = EXP(-0.5*USIGMA2(:))
-Weights(:) = Weights(:)/SUM(Weights)
+Weights(:) = Weights(:)/SUM(Weights) !Relative Weights Here
 PRINT*,"TEST OF THE OPTIMAL PROPOSAL DENSITY WEIGHTS"
 PRINT*,"============================================"
 PRINT*,Weights(:)
 PRINT*,"END OF THE OPTIMAL PROPOSAL DENSITY WEIGHTS"
 
 !==============================The New Scheme================================
-CASE(3)
+CASE(3) !The New Scheme Method
 
 CASE DEFAULT
     Weights(:) = 1/IDIMEn
