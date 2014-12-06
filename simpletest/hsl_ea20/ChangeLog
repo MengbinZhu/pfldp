@@ -1,0 +1,5 @@
+2013-07-18  Mario Arioli
+Version 1.1.0: Fix bug if residual reaches exactly zero.
+
+2011-02-01  Mario Arioli
+Version 1.0.0: Initial public release.

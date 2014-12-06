@@ -56,8 +56,8 @@ DO I = 1, IDIMEn
    WWeight = WWeight +EXP(-0.5*USIGMA(I))
 END DO
 Weights(:) = EXP(-0.5*USIGMA(:))/WWeight
-PRINT*,"WWeight = "
-PRINT*,WWeight
+!PRINT*,"WWeight = "
+!PRINT*,WWeight
 PRINT*,"TEST OF SIR Weights:"
 PRINT*,"==========================="
 PRINT*,Weights(:)

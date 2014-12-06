@@ -1,19 +1,26 @@
 PROGRAM SIMEXP
 
+USE HSL_EA20_double
+
 IMPLICIT NONE
 
+!Derived Types for HSL_EA20
+TYPE(EA20_CONTROL)          :: CNTL
+TYPE(EA20_INFO)             :: INFO
+TYPE(EA20_REVERSE)          :: REV
+
 INTEGER(KIND=4),PARAMETER   :: IDIMEn = 20    ! Number of Ensemble Size
-INTEGER(KIND=4),PARAMETER   :: IDIMV  = 10   ! Size Number of the State Variables = 10
+INTEGER(KIND=4),PARAMETER   :: IDIMV  = 10    ! Size Number of the State Variables = 10
 INTEGER(KIND=4),PARAMETER   :: ITIMESTEP  = 1 ! Number of Time Steps
-INTEGER(KIND=4),PARAMETER   :: NumOfObs = 2  ! Number of Observations
+INTEGER(KIND=4),PARAMETER   :: NumOfObs = 2   ! Number of Observations
 INTEGER(KIND=4),ALLOCATABLE :: SEEDA(:)       ! Seed of the Random Number
 REAL(KIND=8)                :: NDMean, NDVar  ! Test need Mean Value and Var Value
 REAL(KIND=8),ALLOCATABLE    :: NDNumb(:)      ! Test need Output Random Number Vector
 REAL(KIND=8),ALLOCATABLE    :: ETA(:)         ! The Model Error N(0,Q)
 REAL(KIND=8),ALLOCATABLE    :: XI(:)          ! The OPD draws XI(IDIMEn)
-REAL(KIND=8),ALLOCATABLE    :: XINEW(:)          ! The OPD draws XI(IDIMEn)
+REAL(KIND=8),ALLOCATABLE    :: XINEW(:)       ! The OPD draws XI(IDIMEn)
 REAL(KIND=8),ALLOCATABLE    :: EPSIL(:)       ! The Observation Error N(0,R) EPSIL(NumOfObs)
-REAL(KIND=8),ALLOCATABLE    :: ETATRUTH(:)         ! The Model Error N(0,Q)
+REAL(KIND=8),ALLOCATABLE    :: ETATRUTH(:)    ! The Model Error N(0,Q)
 
 INTEGER(KIND=4)             :: I,J,K
 
@@ -32,6 +39,7 @@ REAL(KIND=8),ALLOCATABLE    :: GMat2(:,:)     !Matrix For the Calculation of G(X
 REAL(KIND=8),ALLOCATABLE    :: MATMP(:,:)     !Matrix For the TMP 
 REAL(KIND=8),ALLOCATABLE    :: MATMP2(:,:)    !Matrix For the TMP 2
 REAL(KIND=8),ALLOCATABLE    :: PMat(:,:)      !Matrix For the Calculation of P
+REAL(KIND=8),ALLOCATABLE    :: PW(:,:)      !Matrix For the Calculation of P
 REAL(KIND=8),ALLOCATABLE    :: PMatHalf(:,:)  !P^{1/2}
 REAL(KIND=8),ALLOCATABLE    :: PMatInv(:,:)   !P^{-1} Inverse of P
 REAL(KIND=8),ALLOCATABLE    :: SVX(:,:,:)     !State Vector Variable X(Dim, TimeSeq, EnsembleNum)
@@ -55,6 +63,15 @@ REAL(KIND=8)                :: TMPNUM(1,1)
 REAL(KIND=8)                :: USIGMA(IDIMEn)
 REAL(KIND=8)                :: XVec(IDIMV,1)
 REAL(KIND=8)                :: XVecT(1,IDIMV)
+REAL(KIND=8)                :: UVec(IDIMV,IDIMEn)
+REAL(KIND=8)                :: UVec1(IDIMV)
+REAL(KIND=8)                :: WVec1(IDIMV,1)
+REAL(KIND=8)                :: WVec2(IDIMV,1)
+
+
+double precision, parameter :: zero = 0.0d0, one = 1.0d0, two = 2.0d0
+double precision            :: s
+integer                     :: ido
 
 !Step 1. Initialize the B, R, Q Matrices and SVX(IDIMV,0)
 ALLOCATE(BMat(IDIMV,IDIMV))
@@ -71,6 +88,7 @@ ALLOCATE(GMat2(IDIMV,NumOfObs))
 ALLOCATE(MATMP(NumOfObs,NumOfObs))
 ALLOCATE(MATMP2(IDIMV,IDIMV))
 ALLOCATE(PMat(IDIMV,IDIMV))
+!ALLOCATE(PW(IDIMV,IDIMV))
 ALLOCATE(PMatHalf(IDIMV,IDIMV))
 ALLOCATE(PMatInv(IDIMV,IDIMV))
 ALLOCATE(TMPMat(IDIMV,IDIMV))
@@ -89,6 +107,14 @@ ALLOCATE(DETSI(1:IDIMEn))
 ALLOCATE(ALPHA(1:IDIMEn))
 ALLOCATE(OWeights(1:IDIMEn))
 ALLOCATE(Weights(IDIMEn))
+
+!! SET DATA
+s = 0.5d0
+!! SET CNTL FOR HSL_EA20
+CNTL%d      = 3      !! delay
+CNTL%tol    = 1.d-2  !! convergence tolerance
+CNTL%maxit  = 10    !! max number iteration
+CNTL%diagnostics_level = 1 !! full error check
 
 !! 1.1 Init B, R, Q
 
@@ -217,17 +243,63 @@ END DO
 !GMat = MATMUL(GMat2,Di) !Calculation of G(x*)
 
 !!! 3.2.3 Draw from the Optimal Proposal Density
+!!!! 3.2.3.1 First calculate the value of P^{1/2}{\xi}
+!PW(:,:) = PMat(:,:)
 ALLOCATE(XI(IDIMEn*IDIMV))
 NDMean   = 0
 NDVar    = 1.0
 XI(:)    = 0.0
 CALL NDGen(SEEDA, NDMean, NDVar, IDIMEn*IDIMV, XI)
+!!!=================The calculation of P^{1/2}*{\xi}_i^n=====================
+!!!   HSL(2013). A collection of Fortran codes for large scale scientific !!!
+!!!   computation. http://www.hsl.rl.ac.uk                                !!!
+!!!==========================================================================
 DO I = 1, IDIMEn
-   DO J = 1, IDIMV
+  DO J = 1, IDIMV
+      UVec(J,I) = XI(J+(I-1)*IDIMV)
+  END DO
+  ido = -1
+  !PW(:,:) = PMat(:,:)
+  UVec1(:) = UVec(:,I)
+  do while (ido .ne. 0 .and. info%flag == 0)
+     call EA20(IDIMV,UVec1,s,ido,PW,CNTL,INFO,REV)
+     select case(ido)
+     case(0)
+         exit
+     case(1) !! Matrix-Vector product w_out = A w(:,1)
+         WVec1(:,1) = PW(:,1)
+         WVec2(:,1) = PW(:,2)
+         WVec2 = MATMUL(PMat,WVec1)
+         PW(:,2) = WVec2(:,1)
+     case(2) !! Matrix-Vector product w(:,2) = M w(:,1)
+         PW(:,2) = PW(:,1)
+     case(3) !! Matrix-Vector product w_out = inv(M) w(:,1)
+         PW(:,2) = PW(:,1)
+     end select
+  end do
+  UVec(:,I) = UVec1(:)
+  if(info%flag .ge. 0) then
+      !write(*,'(a,i5)') 'error code =',info%flag
+      !write(*,'(a,i5)') 'number of interations = ',info%iter
+      !write(*,'(a,1x,1pe14.2)') 'estimated final error = ',info%error
+      !write(*,'(a)') '  k    X(k)'
+      !write(*,'(i5,1x,1pe14.7)') (k, UVec1(k), k=1,IDIMV)
+  end if
+END DO
+!!!==============End of The calculation of P^{1/2}*{\xi}_i^n=================
+
+!!!! 3.2.3.2 Finish the final step!
+!ALLOCATE(XI(IDIMEn*IDIMV))
+!NDMean   = 0
+!NDVar    = 1.0
+!XI(:)    = 0.0
+!CALL NDGen(SEEDA, NDMean, NDVar, IDIMEn*IDIMV, XI)
+DO I = 1, IDIMEn
+   !DO J = 1, IDIMV
       !SVX(J,1,I) = XI((I-1)*IDIMV+J)
-      XVec(J,1) = XI(J+(I-1)*IDIMV)
-   END DO
-   SVX(:,1,I) = GMat(:,I) + SVX(:,0,I) + XVec(:,1) ! This equation is not completed. I need to compute P^{1/2}
+   !   XVec(J,1) = XI(J+(I-1)*IDIMV)
+   !END DO
+   SVX(:,1,I) = GMat(:,I) + SVX(:,0,I) + UVec(:,I) ! This equation is completed now.
 END DO
 
 !==============================================================================
@@ -237,10 +309,13 @@ END DO
 
 PHI =  MATMUL(DiT,MATMUL(MATMP,Di)) !Only the diagnal elements are the values of {\phi}_i
 CALL BSDET(PMat,IDIMV,PDet)
-PRINT*,"P Matrix = "
-PRINT*,PMat
-PRINT*,"Det(P) = "
-PRINT*,PDet
+
+!PRINT*,"P Matrix = "
+!PRINT*,PMat
+!PRINT*,"Det(P) = "
+!PRINT*,PDet
+
+PRINT*,"ALPHA = ,There always are some values that we cannot choose!"
 DO I=1,IDIMEn
    Alpha(I) = EXP(PHI(I,I)/IDIMV)
    PRINT*,Alpha(I)
@@ -252,11 +327,50 @@ NDMean   = 0
 NDVar    = 1.0
 XINEW(:)    = 0.0
 CALL NDGen(SEEDA, NDMean, NDVar, IDIMEn*IDIMV, XINEW)
+
+!!!=================The calculation of P^{1/2}*{\xi}_i^n=====================
+!!!   HSL(2013). A collection of Fortran codes for large scale scientific !!!
+!!!   computation. http://www.hsl.rl.ac.uk                                !!!
+!!!==========================================================================
+DO I = 1, IDIMEn
+  DO J = 1, IDIMV
+      UVec(J,I) = XINEW(J+(I-1)*IDIMV)
+  END DO
+  ido = -1
+  !PW(:,:) = PMat(:,:)
+  UVec1(:) = UVec(:,I)
+  do while (ido .ne. 0 .and. info%flag == 0)
+     call EA20(IDIMV,UVec1,s,ido,PW,CNTL,INFO,REV)
+     select case(ido)
+     case(0)
+         exit
+     case(1) !! Matrix-Vector product w_out = A w(:,1)
+         WVec1(:,1) = PW(:,1)
+         WVec2(:,1) = PW(:,2)
+         WVec2 = MATMUL(PMat,WVec1)
+         PW(:,2) = WVec2(:,1)
+     case(2) !! Matrix-Vector product w(:,2) = M w(:,1)
+         PW(:,2) = PW(:,1)
+     case(3) !! Matrix-Vector product w_out = inv(M) w(:,1)
+         PW(:,2) = PW(:,1)
+     end select
+  end do
+  UVec(:,I) = UVec1(:)
+  if(info%flag .ge. 0) then
+      !write(*,'(a,i5)') 'error code =',info%flag
+      !write(*,'(a,i5)') 'number of interations = ',info%iter
+      !write(*,'(a,1x,1pe14.2)') 'estimated final error = ',info%error
+      !write(*,'(a)') '  k    X(k)'
+      !write(*,'(i5,1x,1pe14.7)') (k, UVec1(k), k=1,IDIMV)
+  end if
+END DO
+!!!==============End of The calculation of P^{1/2}*{\xi}_i^n=================
+
 DO I = 1, IDIMEn
    DO J = 1, IDIMV
       XVec(J,1) = XINEW(J+(I-1)*IDIMV)
    END DO
-   SVXB(:,1,I) = GMat(:,I) + SVXB(:,0,I) + XVec(:,1) ! This equation is not completed. I need to compute P^{1/2}
+   SVXB(:,1,I) = GMat(:,I) + SVXB(:,0,I) + UVec(:,I)*ALPHA(I) ! This equation is completed now.
    XVecT = TRANSPOSE(XVec)
    TMPNUM = MATMUL(XVecT,XVec)
    OWeights(I) = TMPNUM(1,1)
