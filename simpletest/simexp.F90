@@ -9,10 +9,10 @@ TYPE(EA20_CONTROL)          :: CNTL
 TYPE(EA20_INFO)             :: INFO
 TYPE(EA20_REVERSE)          :: REV
 
-INTEGER(KIND=4),PARAMETER   :: IDIMEn = 20    ! Number of Ensemble Size
+INTEGER(KIND=4),PARAMETER   :: IDIMEn = 10    ! Number of Ensemble Size
 INTEGER(KIND=4),PARAMETER   :: IDIMV  = 10    ! Size Number of the State Variables = 10
 INTEGER(KIND=4),PARAMETER   :: ITIMESTEP  = 1 ! Number of Time Steps
-INTEGER(KIND=4),PARAMETER   :: NumOfObs = 2   ! Number of Observations
+INTEGER(KIND=4),PARAMETER   :: NumOfObs = 4   ! Number of Observations
 INTEGER(KIND=4),ALLOCATABLE :: SEEDA(:)       ! Seed of the Random Number
 REAL(KIND=8)                :: NDMean, NDVar  ! Test need Mean Value and Var Value
 REAL(KIND=8),ALLOCATABLE    :: NDNumb(:)      ! Test need Output Random Number Vector
@@ -67,6 +67,11 @@ REAL(KIND=8)                :: UVec(IDIMV,IDIMEn)
 REAL(KIND=8)                :: UVec1(IDIMV)
 REAL(KIND=8)                :: WVec1(IDIMV,1)
 REAL(KIND=8)                :: WVec2(IDIMV,1)
+
+!Statistic Variables Defination
+REAL(KIND=8)                :: EnsMean_SIR(IDIMV,ITIMESTEP)
+REAL(KIND=8)                :: EnsMean_OPD(IDIMV,ITIMESTEP)
+REAL(KIND=8)                :: EnsMean_New(IDIMV,ITIMESTEP)
 
 
 double precision, parameter :: zero = 0.0d0, one = 1.0d0, two = 2.0d0
@@ -144,7 +149,7 @@ SVXB(1:IDIMV,0,1:IDIMEn) = 0.0   !Backup of Traj 1, Traj 1'
 ALLOCATE(SEEDA(IDIMEn*IDIMV)) !ALLOCATE the SEED of Random Number
 ALLOCATE(NDNumb(IDIMEn*IDIMV))!ALLOCATE the Output
 !================THIS IS THE PLACE WE CHANGE SEED================
-SEEDA(:) = 12           !Initialize the Seed 
+SEEDA(:) = 10           !Initialize the Seed 
 
 CALL RANDOM_SEED(PUT=SEEDA(:))
 
@@ -201,9 +206,16 @@ OBSY(1,1:NumOfObs) = HXMat(1:NumOfObs,1) + EPSIL(1:NumOfObs)
 !==============================================================================
 !! 3.1 the Sequential Importance Resampling Algorithm
 
+!!! 3.1.1 the Weights Calculation
+
 CALL CALW(Weights,QMat,RMat,HMat,SVX,OBSY,IDIMV,1,1,IDIMEn,NumOfObs,1)
 
 !! Still need some statistic Variables here.
+!! 3.1.2 the Ensemble Mean
+
+CALL ENSMEAN(EnsMean_SIR(:,1),SVX(:,1,:),IDIMV,IDIMEn)
+PRINT*,"THE ENSEMBLE MEAN OF SIR IS = "
+PRINT*,EnsMean_SIR(:,1)
 
 !==============================================================================
 !! 3.2 Perform the Optimal Proposal Density Algorithm
@@ -220,7 +232,7 @@ GMat2 = MATMUL(QMat,MATMUL(HTMat,MATMP))       ! Dimension = IDIMV
 !PRINT*,GMat2
 
 !P^{-1} = Q^{-1}+HT*R^{-1}*H
-CALL MATRIXINV(QMat,QIMat,IDIMV)                   ! Calculate the Inverse of Matrix Q
+CALL MATRIXINV(QMat,QIMat,IDIMV)                      ! Calculate the Inverse of Matrix Q
 CALL MATRIXINV(RMat,RIMat,NumOfObs)                   ! Calculate the Inverse of Matrix R
 PMatInv = MATMUL(HTMat,MATMUL(RIMat,HMat)) + QIMat
 CALL MATRIXINV(PMatInv,PMat,IDIMV)
@@ -240,7 +252,7 @@ DO I = 1, IDIMEn
    DiT(I,:) = DiT2(1,:)
 END DO
 
-!GMat = MATMUL(GMat2,Di) !Calculation of G(x*)
+GMat = MATMUL(GMat2,Di) !Calculation of G(x*)
 
 !!! 3.2.3 Draw from the Optimal Proposal Density
 !!!! 3.2.3.1 First calculate the value of P^{1/2}{\xi}
@@ -301,6 +313,13 @@ DO I = 1, IDIMEn
    !END DO
    SVX(:,1,I) = GMat(:,I) + SVX(:,0,I) + UVec(:,I) ! This equation is completed now.
 END DO
+
+!!! 3.2.4 Do the Statistic Step: Ensemble Mean
+
+CALL ENSMEAN(EnsMean_OPD(:,1),SVX(:,1,:),IDIMV,IDIMEn)
+PRINT*,"THE ENSEMBLE MEAN OF OPD IS = "
+PRINT*,EnsMean_OPD(:,1)
+
 
 !==============================================================================
 !! 3.3 Perform the New Scheme
@@ -370,17 +389,24 @@ DO I = 1, IDIMEn
    DO J = 1, IDIMV
       XVec(J,1) = XINEW(J+(I-1)*IDIMV)
    END DO
-   SVXB(:,1,I) = GMat(:,I) + SVXB(:,0,I) + UVec(:,I)*ALPHA(I) ! This equation is completed now.
+   !SVXB(:,1,I) = GMat(:,I) + SVXB(:,0,I) + UVec(:,I)*ALPHA(I) ! This equation is completed now.
+   SVXB(:,1,I) = GMat(:,I) + SVXB(:,0,I) + UVec(:,I)           ! This equation is completed now.
    XVecT = TRANSPOSE(XVec)
    TMPNUM = MATMUL(XVecT,XVec)
    OWeights(I) = TMPNUM(1,1)
 END DO
 
+!!! 3.3.3 Calculate the Weights
 Weights(:) = (ALPHA(:)-1)*OWeights(:)
 Weights(:) = Weights(:)/SUM(Weights(:))
 PRINT*,"=======================The Weights Of New Scheme============================"
 PRINT*,Weights
 PRINT*,"=======================END OF THE WEIGHTS OF NEW SCHEME====================="
+
+!!! 3.3.4 Do the Ensemble Mean Calculation
+CALL ENSMEAN(EnsMean_New(:,1),SVXB(:,1,:),IDIMV,IDIMEn)
+PRINT*,"THE ENSEMBLE MEAN OF New Scheme IS = "
+PRINT*,EnsMean_New(:,1)
 
 ! Test Call for the Normal Distribution Generator
 !NDMean     = 0
@@ -392,6 +418,8 @@ PRINT*,"=======================END OF THE WEIGHTS OF NEW SCHEME=================
 ! End of the Test Call
 
 !DEALLOCATE the Variables to free the memory
+
+IF(ALLOCATED(BMat)) DEALLOCATE(BMat)
 !DO I = 1, IDIMV
 !DEALLOCATE(BMat(I,:))
 !END DO

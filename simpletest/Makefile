@@ -22,8 +22,8 @@ progtest: NDGen.F90 bsdet.F90 progtest.F90
 #random_d.o: random_d.F90
 #	$(FC) $(FCFLAGS) $(FCLIBFLAGS) random_d.F90 -o random_d.o
 
-simexp: random_d.F90 bsdet.F90 NDGen.F90 simexp.F90 calw.F90 matrixinv.F90 mattrans.F90
-	$(FC) -I $(HSLLIB) $(FCFLAGS) $(FCLIBFLAGS) random_d.F90 bsdet.F90 NDGen.F90 calw.F90 simexp.F90 matrixinv.F90 mattrans.F90 -o simexp $(LIB)lapack.a $(LIB)blas.a -llapack -lblas -L$(HSLLIB) -lhsl_ea20 -I $(HSLINC)
+simexp: random_d.F90 bsdet.F90 NDGen.F90 simexp.F90 calw.F90 matrixinv.F90 mattrans.F90 ensmean.F90
+	$(FC) -I $(HSLLIB) $(FCFLAGS) $(FCLIBFLAGS) random_d.F90 bsdet.F90 NDGen.F90 calw.F90 simexp.F90 matrixinv.F90 mattrans.F90 ensmean.F90 -o simexp $(LIB)lapack.a $(LIB)blas.a -llapack -lblas -L$(HSLLIB) -lhsl_ea20 -I $(HSLINC)
 
 .PHONY : clean
 clean:
