@@ -40,6 +40,7 @@ DO I = 1, IDIMV
 END DO
 
 DO I = 1, 3
+   RMSE_SUM(:) = 0.0
    DO K = 1, IDIMV
       DO J = 1, 10
          RMSE_SUM(K) = RMSE_SUM(K) + (RMSE_DataEns(K,J,I) - MEAN_ENS(K,I))**2
@@ -49,6 +50,7 @@ DO I = 1, 3
    END DO
 END DO
 
+RMSE_SUM(:) = 0.0
 DO K = 1, IDIMV
    DO J = 1, 10
       RMSE_SUM(K) =  RMSE_SUM(K) + (RMSE_DataTruth(K,J)-MEAN_Truth(K))**2
@@ -58,13 +60,13 @@ END DO
 
 PRINT*,"================================================="
 PRINT*,"THE RMSE OF THE TRUTH RUN IS = "
-!PRINT*,RMSE_Truth(:)
+PRINT*,RMSE_Truth(:)
 PRINT*,"THE RMSE OF ENSEMBLE MEAN OF SIR IS = "
-!PRINT*,RMSE_Ens(:,1)
+PRINT*,RMSE_Ens(:,1)
 PRINT*,"THE RMSE OF ENSEMBLE MEAN OF OPD IS = "
-!PRINT*,RMSE_Ens(:,2)
+PRINT*,RMSE_Ens(:,2)
 PRINT*,"THE RMSE OF ENSEMBLE MEAN OF New IS = "
-!PRINT*,RMSE_Ens(:,3)
+PRINT*,RMSE_Ens(:,3)
 PRINT*,"================================================="
 
 END PROGRAM
