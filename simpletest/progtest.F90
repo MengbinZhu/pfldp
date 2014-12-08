@@ -28,6 +28,10 @@ double precision, dimension(n) :: u
 double precision, allocatable  :: w(:,:)
 double precision               :: s
 
+complex*16::ax(3,3),bx(3,3),cx(3,3)
+
+data ax/10,2.5,(3,7),4,5,6,7,8,9/
+
   !! set u
   u = 0.d0    
   u(2:n-1) = one 
@@ -112,5 +116,68 @@ WRITE(*,10) DET
 !PRINT*,NDNumb2
 PRINT*,A
 PRINT*,X
+
+! 测试利用lapack中的 zgetrf 和 zgetri 来求矩阵的逆
+
+
+    print*,'ax='
+
+    write(*,'(3(F8.4,"+i",F8.4,",  "))') , ax(1,:)
+
+    write(*,'(3(F8.4,"+i",F8.4,",  "))') , ax(2,:)
+
+    write(*,'(3(F8.4,"+i",F8.4,",  "))') , ax(3,:)
+
+
+
+    bx=zInverse(3,ax)
+
+    print*,'bx='
+
+    write(*,'(3(F8.4,"+i",F8.4,",  "))') , bx(1,:)
+
+    write(*,'(3(F8.4,"+i",F8.4,",  "))') , bx(2,:)
+
+    write(*,'(3(F8.4,"+i",F8.4,",  "))') , bx(3,:)
+
+
+
+    cx=matmul(ax,bx)
+
+    print*,'cx='
+
+    write(*,'(3(F8.4,"+i",F8.4,",  "))') , cx(1,:)
+
+    write(*,'(3(F8.4,"+i",F8.4,",  "))') , cx(2,:)
+
+    write(*,'(3(F8.4,"+i",F8.4,",  "))') , cx(3,:)
+
+
+
+    contains
+
+
+
+    function zInverse(n, a)  result(ra)
+
+    integer::n,lda,ipiv(n),info,lwork
+
+    complex*16::a(n,n),ra(n,n),work(n)
+
+    ra=a
+
+    lwork=n
+
+    lda=n
+
+    call zgetrf(n, n, ra, lda, ipiv, info)
+
+    if(info/=0) write(0,*) 'Error occured in zgetrf!'
+
+    call zgetri(n, ra, lda, ipiv, work, lwork, info)
+
+    if(info/=0) write(0,*) 'Error occured in zgetri!'
+
+    endfunction
 
 END PROGRAM

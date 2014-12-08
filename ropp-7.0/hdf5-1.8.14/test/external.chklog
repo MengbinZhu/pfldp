@@ -1,0 +1,20 @@
+============================
+ external  Test Log
+============================
+Testing fixed-size data space, exact storage                           PASSED
+Testing external storage is too small                                  PASSED
+Testing extendible dataspace, exact external size                      PASSED
+Testing extendible dataspace, external storage is too small            PASSED
+Testing unlimited dataspace, unlimited external storage                PASSED
+Testing multiple external files                                        PASSED
+Testing external file following unlimited file                         PASSED
+Testing address overflow in external files                             PASSED
+Testing read external dataset                                          PASSED
+Testing write external dataset                                         PASSED
+Testing opening external link twice                                    PASSED
+All external storage tests passed.
+0.00user 0.01system 0:00.03elapsed 33%CPU (0avgtext+0avgdata 3880maxresident)k
+4776inputs+96outputs (16major+1170minor)pagefaults 0swaps
+
+Finished testing external 
+============================

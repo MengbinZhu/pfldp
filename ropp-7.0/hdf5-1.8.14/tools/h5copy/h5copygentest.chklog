@@ -1,0 +1,8 @@
+============================
+ h5copygentest  Test Log
+============================
+0.00user 0.00system 0:00.03elapsed 28%CPU (0avgtext+0avgdata 5052maxresident)k
+4720inputs+104outputs (16major+1682minor)pagefaults 0swaps
+
+Finished testing h5copygentest 
+============================

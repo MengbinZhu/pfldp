@@ -27,6 +27,7 @@ uname -v = #69-Ubuntu SMP Thu Nov 13 17:53:56 UTC 2014
 /usr/bin/oslevel       = unknown
 /bin/universe          = unknown
 
+PATH: /opt/pgi/linux86-64/9.0-1/bin
 PATH: /opt/intel/composer_xe_2011_sp1.7.256/bin/intel64
 PATH: /usr/local/sbin
 PATH: /usr/local/bin

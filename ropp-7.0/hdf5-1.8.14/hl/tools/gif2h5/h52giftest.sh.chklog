@@ -1,0 +1,11 @@
+============================
+h52giftest.sh  Test Log
+============================
+Testing ./h52gif h52giftst.h5 image1.gif -i image                      PASSED
+Testing ./gif2h5 image1.gif image1.h5                                  PASSED
+All h52gif tests passed.
+0.01user 0.01system 0:00.06elapsed 31%CPU (0avgtext+0avgdata 2844maxresident)k
+9920inputs+192outputs (40major+3735minor)pagefaults 0swaps
+
+Finished testing h52giftest.sh 
+============================

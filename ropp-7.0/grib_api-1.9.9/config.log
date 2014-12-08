@@ -27,6 +27,7 @@ uname -v = #69-Ubuntu SMP Thu Nov 13 17:53:56 UTC 2014
 /usr/bin/oslevel       = unknown
 /bin/universe          = unknown
 
+PATH: /opt/pgi/linux86-64/9.0-1/bin
 PATH: /opt/intel/composer_xe_2011_sp1.7.256/bin/intel64
 PATH: /usr/local/sbin
 PATH: /usr/local/bin
@@ -554,7 +555,7 @@ configure:8888: $? = 0
 configure:8907: result: yes
 configure:8915: checking for _doprnt
 configure:8971: gcc -o conftest -O2 -w   conftest.c -lm  >&5
-/tmp/ccvErg6c.o: In function `main':
+/tmp/cc7cUOUB.o: In function `main':
 conftest.c:(.text.startup+0x7): undefined reference to `_doprnt'
 collect2: error: ld returned 1 exit status
 configure:8978: $? = 1

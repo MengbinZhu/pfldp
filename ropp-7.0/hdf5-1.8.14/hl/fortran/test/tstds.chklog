@@ -1,0 +1,16 @@
+============================
+Fortran API:  tstds  Test Log
+============================
+Test Attaching Dimension Scale                                            PASSED 
+Test If Dimension Scale Attached                                          PASSED 
+Test Getting Number Dimension Scales                                      PASSED 
+Test Detaching Dimension Scale                                            PASSED 
+Test Setting Dimension Scale                                              PASSED 
+Test If Dimension Scale                                                   PASSED 
+Test Getting Dimension Scale By Name                                      PASSED 
+Test Setting Dimension Scale Label                                        PASSED 
+0.00user 0.00system 0:00.04elapsed 22%CPU (0avgtext+0avgdata 3104maxresident)k
+4736inputs+16outputs (18major+888minor)pagefaults 0swaps
+
+Finished testing tstds 
+============================

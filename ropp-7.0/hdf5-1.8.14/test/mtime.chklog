@@ -1,0 +1,12 @@
+============================
+ mtime  Test Log
+============================
+Testing modification time messages                                     PASSED
+Testing accessing old modification time messages                       PASSED
+Testing accessing new modification time messages                       PASSED
+All modification time tests passed.
+0.00user 0.00system 0:00.08elapsed 12%CPU (0avgtext+0avgdata 2832maxresident)k
+4760inputs+8outputs (17major+876minor)pagefaults 0swaps
+
+Finished testing mtime 
+============================

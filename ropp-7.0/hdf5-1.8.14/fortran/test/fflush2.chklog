@@ -1,0 +1,12 @@
+============================
+Fortran API:  fflush2  Test Log
+============================
+           0           1           2           3           4
+           1           2           3           4           5
+           2           3           4           5           6
+           3           4           5           6           7
+0.00user 0.00system 0:00.03elapsed 22%CPU (0avgtext+0avgdata 2836maxresident)k
+4848inputs+0outputs (17major+794minor)pagefaults 0swaps
+
+Finished testing fflush2 
+============================

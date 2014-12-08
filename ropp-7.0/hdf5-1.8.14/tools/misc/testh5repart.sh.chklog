@@ -1,0 +1,14 @@
+============================
+testh5repart.sh  Test Log
+============================
+Testing h5repart -m 20000 family_file%05d.h5 /home/mengbinzhu/pfldp/ro PASSED
+Testing h5repart -m 5k family_file%05d.h5 /home/mengbinzhu/pfldp/ropp- PASSED
+Testing h5repart -m 20000 -family_to_sec2 family_file%05d.h5 /home/men PASSED
+Testing repart_test                                                    PASSED
+
+All h5repart tests passed.
+0.00user 0.02system 0:00.07elapsed 40%CPU (0avgtext+0avgdata 2504maxresident)k
+9408inputs+136outputs (35major+8338minor)pagefaults 0swaps
+
+Finished testing testh5repart.sh 
+============================

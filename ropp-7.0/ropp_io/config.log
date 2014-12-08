@@ -27,6 +27,7 @@ uname -v = #69-Ubuntu SMP Thu Nov 13 17:53:56 UTC 2014
 /usr/bin/oslevel       = unknown
 /bin/universe          = unknown
 
+PATH: /opt/pgi/linux86-64/9.0-1/bin
 PATH: /opt/intel/composer_xe_2011_sp1.7.256/bin/intel64
 PATH: /usr/local/sbin
 PATH: /usr/local/bin
@@ -202,10 +203,8 @@ configure:4158: $? = 0
 configure:4179: result: yes
 configure:4236: checking for nf_inq_ncid of the hdf5 library
 configure:4252: gfortran -o conftest  -O2 -I/home/mengbinzhu/pfldp/ropp-7.0/gfortran/include -L/home/mengbinzhu/pfldp/ropp-7.0/gfortran/lib -L/home/mengbinzhu/pfldp/ropp-7.0/gfortran/lib64  conftest.f90 -lnetcdff -lnetcdf -lhdf5hl_fortran -lhdf5_hl -lhdf5_fortran -lhdf5 -lz -lgrib_api_f90 -lgrib_api -lmetdbbufr  >&5
-/usr/bin/ld: cannot find -lhdf5hl_fortran
-/usr/bin/ld: cannot find -lhdf5_hl
-/usr/bin/ld: cannot find -lhdf5_fortran
-/usr/bin/ld: cannot find -lhdf5
+/tmp/ccYiRAVL.o: In function `main':
+conftest.f90:(.text.startup+0x1b): undefined reference to `nf_inq_ncid_'
 collect2: error: ld returned 1 exit status
 configure:4259: $? = 1
 configure: failed program was:

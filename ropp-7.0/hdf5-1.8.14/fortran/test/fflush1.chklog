@@ -1,0 +1,8 @@
+============================
+Fortran API:  fflush1  Test Log
+============================
+0.00user 0.00system 0:00.03elapsed 21%CPU (0avgtext+0avgdata 2824maxresident)k
+4816inputs+8outputs (21major+801minor)pagefaults 0swaps
+
+Finished testing fflush1 
+============================

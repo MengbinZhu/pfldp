@@ -1,5 +1,5 @@
-*** ropp_test.cdl	2014-11-26 10:20:26.552442961 +0000
---- bufr_test.cdl	2014-11-26 10:20:26.564442961 +0000
+*** ropp_test.cdl	2014-11-28 14:34:44.791542195 +0000
+--- bufr_test.cdl	2014-11-28 14:34:44.795542195 +0000
 ***************
 *** 1,4 ****
 ! netcdf ropp_testb {
@@ -24,7 +24,7 @@
   		:Conventions = "CF-1.0" ;
   		:format_version = "ROPP I/O V1.1" ;
   		:processing_centre = "DMI  (ROM SAF)" ;
-! 		:processing_date = "2014-11-26 10:20:26.537" ;
+! 		:processing_date = "2014-11-28 14:34:44.774" ;
   		:pod_method = "UNKNOWN" ;
   		:phase_method = "UNKNOWN" ;
   		:bangle_method = "UNKNOWN" ;

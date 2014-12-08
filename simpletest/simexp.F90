@@ -1,19 +1,27 @@
-PROGRAM SIMEXP
+SUBROUTINE SIMEXP(SEEDA,IDIMEn,IDIMV,ITIMESTEP,NumOfObs,EnsembleMean,TruthRun)
 
 USE HSL_EA20_double
 
 IMPLICIT NONE
+
+INTEGER(KIND=4),INTENT(IN)  :: IDIMEn         ! Number of Ensemble Size
+INTEGER(KIND=4),INTENT(IN)  :: IDIMV          ! Size Number of the State Variables = 10
+INTEGER(KIND=4),INTENT(IN)  :: ITIMESTEP      ! Number of Time Steps
+INTEGER(KIND=4),INTENT(IN)  :: NumOfObs       ! Number of Observations
+INTEGER(KIND=4),INTENT(IN)  :: SEEDA(IDIMEn*IDIMV)       ! Seed of the Random Number
+REAL(KIND=8),INTENT(INOUT)  :: EnsembleMean(IDIMV,ITIMESTEP,3)
+REAL(KIND=8),INTENT(INOUT)  :: TruthRun(IDIMV,ITIMESTEP)
 
 !Derived Types for HSL_EA20
 TYPE(EA20_CONTROL)          :: CNTL
 TYPE(EA20_INFO)             :: INFO
 TYPE(EA20_REVERSE)          :: REV
 
-INTEGER(KIND=4),PARAMETER   :: IDIMEn = 10    ! Number of Ensemble Size
-INTEGER(KIND=4),PARAMETER   :: IDIMV  = 10    ! Size Number of the State Variables = 10
-INTEGER(KIND=4),PARAMETER   :: ITIMESTEP  = 1 ! Number of Time Steps
-INTEGER(KIND=4),PARAMETER   :: NumOfObs = 4   ! Number of Observations
-INTEGER(KIND=4),ALLOCATABLE :: SEEDA(:)       ! Seed of the Random Number
+!INTEGER(KIND=4),PARAMETER   :: IDIMEn = 10    ! Number of Ensemble Size
+!INTEGER(KIND=4),PARAMETER   :: IDIMV  = 10    ! Size Number of the State Variables = 10
+!INTEGER(KIND=4),PARAMETER   :: ITIMESTEP  = 1 ! Number of Time Steps
+!INTEGER(KIND=4),PARAMETER   :: NumOfObs = 4   ! Number of Observations
+!INTEGER(KIND=4),ALLOCATABLE :: SEEDA(:)       ! Seed of the Random Number
 REAL(KIND=8)                :: NDMean, NDVar  ! Test need Mean Value and Var Value
 REAL(KIND=8),ALLOCATABLE    :: NDNumb(:)      ! Test need Output Random Number Vector
 REAL(KIND=8),ALLOCATABLE    :: ETA(:)         ! The Model Error N(0,Q)
@@ -114,7 +122,7 @@ ALLOCATE(OWeights(1:IDIMEn))
 ALLOCATE(Weights(IDIMEn))
 
 !! SET DATA
-s = 0.5d0
+s = -0.5d0
 !! SET CNTL FOR HSL_EA20
 CNTL%d      = 3      !! delay
 CNTL%tol    = 1.d-2  !! convergence tolerance
@@ -146,10 +154,10 @@ SVXB(1:IDIMV,0,1:IDIMEn) = 0.0   !Backup of Traj 1, Traj 1'
 
 ! Step 2. Generate the Ensemble Member
 
-ALLOCATE(SEEDA(IDIMEn*IDIMV)) !ALLOCATE the SEED of Random Number
+!ALLOCATE(SEEDA(IDIMEn*IDIMV)) !ALLOCATE the SEED of Random Number
 ALLOCATE(NDNumb(IDIMEn*IDIMV))!ALLOCATE the Output
 !================THIS IS THE PLACE WE CHANGE SEED================
-SEEDA(:) = 10           !Initialize the Seed 
+!SEEDA(:) = 10           !Initialize the Seed 
 
 CALL RANDOM_SEED(PUT=SEEDA(:))
 
@@ -191,6 +199,8 @@ DO I = 1, IDIMV
    SVX0(I,1) = SVX0(I,0) + ETATRUTH(I) ! Do the Model run for the Truth, There is no uncertainty here.
 END DO
 
+TruthRun(:,1) = SVX0(:,1)
+
 !! 2.2 Generate the Y(ITIMESTEP, NumOfObs)
 ALLOCATE(EPSIL(NumOfObs))
 NDMean   = 0
@@ -214,8 +224,8 @@ CALL CALW(Weights,QMat,RMat,HMat,SVX,OBSY,IDIMV,1,1,IDIMEn,NumOfObs,1)
 !! 3.1.2 the Ensemble Mean
 
 CALL ENSMEAN(EnsMean_SIR(:,1),SVX(:,1,:),IDIMV,IDIMEn)
-PRINT*,"THE ENSEMBLE MEAN OF SIR IS = "
-PRINT*,EnsMean_SIR(:,1)
+!PRINT*,"THE ENSEMBLE MEAN OF SIR IS = "
+!PRINT*,EnsMean_SIR(:,1)
 
 !==============================================================================
 !! 3.2 Perform the Optimal Proposal Density Algorithm
@@ -224,10 +234,15 @@ PRINT*,EnsMean_SIR(:,1)
 
 CALL CALW(Weights,QMat,RMat,HMat,SVX,OBSY,IDIMV,1,1,IDIMEn,NumOfObs,2)
 
-!GMat = Q*HT*(H*Q*HT+R)^(-1)
+!GMat2 = Q*HT*(H*Q*HT+R)^(-1)
 HTMat = TRANSPOSE(HMat)
 GMat1 = MATMUL(HMat,MATMUL(QMat,HTMat)) + RMat ! Dimension = NumOfObs
-CALL MATRIXINV(GMat1,MATMP,NumOfObs)
+CALL MATRIXINV(GMat1,MATMP,NumOfObs)           ! MATMP = (H*Q*HT+R)^{-1}
+!PRINT*,"ALGORITHM 1 TO CAL MATRIX INVERSE"
+!PRINT*,MATMP
+!CALL MATINV(GMat1,MATMP,NumOfObs)           ! MATMP = (H*Q*HT+R)^{-1}
+!PRINT*,"ALGORITHM 2 TO CAL MATRIX INVERSE"
+!PRINT*,MATMP
 GMat2 = MATMUL(QMat,MATMUL(HTMat,MATMP))       ! Dimension = IDIMV
 !PRINT*,GMat2
 
@@ -235,6 +250,8 @@ GMat2 = MATMUL(QMat,MATMUL(HTMat,MATMP))       ! Dimension = IDIMV
 CALL MATRIXINV(QMat,QIMat,IDIMV)                      ! Calculate the Inverse of Matrix Q
 CALL MATRIXINV(RMat,RIMat,NumOfObs)                   ! Calculate the Inverse of Matrix R
 PMatInv = MATMUL(HTMat,MATMUL(RIMat,HMat)) + QIMat
+!PRINT*,"The inverse of P Matrix is = "
+!PRINT*,PMatInv
 CALL MATRIXINV(PMatInv,PMat,IDIMV)
 !PRINT*,PMat
 
@@ -281,7 +298,7 @@ DO I = 1, IDIMEn
      case(1) !! Matrix-Vector product w_out = A w(:,1)
          WVec1(:,1) = PW(:,1)
          WVec2(:,1) = PW(:,2)
-         WVec2 = MATMUL(PMat,WVec1)
+         WVec2 = MATMUL(PMatInv,WVec1)
          PW(:,2) = WVec2(:,1)
      case(2) !! Matrix-Vector product w(:,2) = M w(:,1)
          PW(:,2) = PW(:,1)
@@ -317,8 +334,8 @@ END DO
 !!! 3.2.4 Do the Statistic Step: Ensemble Mean
 
 CALL ENSMEAN(EnsMean_OPD(:,1),SVX(:,1,:),IDIMV,IDIMEn)
-PRINT*,"THE ENSEMBLE MEAN OF OPD IS = "
-PRINT*,EnsMean_OPD(:,1)
+!PRINT*,"THE ENSEMBLE MEAN OF OPD IS = "
+!PRINT*,EnsMean_OPD(:,1)
 
 
 !==============================================================================
@@ -333,6 +350,11 @@ CALL BSDET(PMat,IDIMV,PDet)
 !PRINT*,PMat
 !PRINT*,"Det(P) = "
 !PRINT*,PDet
+
+!PRINT*,"PHI_ii = "
+!DO I= 1, IDIMEn
+!PRINT*,PHI(I,I)
+!END DO
 
 PRINT*,"ALPHA = ,There always are some values that we cannot choose!"
 DO I=1,IDIMEn
@@ -366,7 +388,7 @@ DO I = 1, IDIMEn
      case(1) !! Matrix-Vector product w_out = A w(:,1)
          WVec1(:,1) = PW(:,1)
          WVec2(:,1) = PW(:,2)
-         WVec2 = MATMUL(PMat,WVec1)
+         WVec2 = MATMUL(PMatInv,WVec1)
          PW(:,2) = WVec2(:,1)
      case(2) !! Matrix-Vector product w(:,2) = M w(:,1)
          PW(:,2) = PW(:,1)
@@ -390,7 +412,11 @@ DO I = 1, IDIMEn
       XVec(J,1) = XINEW(J+(I-1)*IDIMV)
    END DO
    !SVXB(:,1,I) = GMat(:,I) + SVXB(:,0,I) + UVec(:,I)*ALPHA(I) ! This equation is completed now.
-   SVXB(:,1,I) = GMat(:,I) + SVXB(:,0,I) + UVec(:,I)           ! This equation is completed now.
+   IF(ALPHA(I) > 2.0) THEN
+     SVXB(:,1,I) = GMat(:,I) + SVXB(:,0,I) + UVec(:,I)           ! This equation is completed now.
+   ELSE
+     SVXB(:,1,I) = GMat(:,I) + SVXB(:,0,I) + UVec(:,I)*SQRT(ALPHA(I)) ! This equation is completed now.
+   END IF
    XVecT = TRANSPOSE(XVec)
    TMPNUM = MATMUL(XVecT,XVec)
    OWeights(I) = TMPNUM(1,1)
@@ -405,8 +431,12 @@ PRINT*,"=======================END OF THE WEIGHTS OF NEW SCHEME=================
 
 !!! 3.3.4 Do the Ensemble Mean Calculation
 CALL ENSMEAN(EnsMean_New(:,1),SVXB(:,1,:),IDIMV,IDIMEn)
-PRINT*,"THE ENSEMBLE MEAN OF New Scheme IS = "
-PRINT*,EnsMean_New(:,1)
+!PRINT*,"THE ENSEMBLE MEAN OF New Scheme IS = "
+!PRINT*,EnsMean_New(:,1)
+
+EnsembleMean(:,1,1) = EnsMean_SIR(:,1)
+EnsembleMean(:,1,2) = EnsMean_OPD(:,1)
+EnsembleMean(:,1,3) = EnsMean_New(:,1)
 
 ! Test Call for the Normal Distribution Generator
 !NDMean     = 0
@@ -420,16 +450,14 @@ PRINT*,EnsMean_New(:,1)
 !DEALLOCATE the Variables to free the memory
 
 IF(ALLOCATED(BMat)) DEALLOCATE(BMat)
-!DO I = 1, IDIMV
-!DEALLOCATE(BMat(I,:))
-!END DO
-!DEALLOCATE(RMat(:,:))
-!DEALLOCATE(QMat(:,:))
-!DEALLOCATE(HMat(:,:))
-!DEALLOCATE(GMat(:,:))
-!DEALLOCATE(MATMP(:,:))
-!DEALLOCATE(MATMP2(:,:))
-!DEALLOCATE(PMat(:,:))
+IF(ALLOCATED(RMat)) DEALLOCATE(RMat)
+IF(ALLOCATED(QMat)) DEALLOCATE(QMat)
+IF(ALLOCATED(HMat)) DEALLOCATE(HMat)
+IF(ALLOCATED(GMat)) DEALLOCATE(GMat)
+IF(ALLOCATED(MATMP)) DEALLOCATE(MATMP)
+IF(ALLOCATED(MATMP2)) DEALLOCATE(MATMP2)
+IF(ALLOCATED(PMat)) DEALLOCATE(PMat)
+IF(ALLOCATED(SVX)) DEALLOCATE(SVX)
 
 !DEALLOCATE(SVX(:,:,:))
 !DEALLOCATE(OBSY(:,:,:))
@@ -438,4 +466,4 @@ IF(ALLOCATED(BMat)) DEALLOCATE(BMat)
 !DEALLOCATE(SI(:,:))
 !DEALLOCATE(Weights(:))
 
-END PROGRAM
+END SUBROUTINE

@@ -1,0 +1,60 @@
+============================
+Fortran API:  fortranlib_test_1_8  Test Log
+============================
+                        ==========================                            
+                               FORTRAN 1.8 tests 
+                        ==========================                            
+ FORTRANLIB_TEST is linked with HDF5 Library version 1.8 release  14
+
+ Testing with new file format:
+  - Tests INT attributes on both datasets and groups                    PASSED 
+  - Testing with shared attributes:
+   - Testing INT attributes on both datasets and groups                 PASSED 
+   - Testing storing attribute with "null" dataspace                    PASSED 
+   - Testing storing lots of attributes                                 PASSED 
+   - Testing creating objects with attribute creation order             PASSED 
+   - Testing compact storage on objects with attribute creation order   PASSED 
+   - Testing querying attribute info by index                           PASSED 
+   - Testing deleting attribute by index                                PASSED 
+    - Testing Creating Attributes By Name w/o Creation Order Index
+    - Testing Creating Attributes By Name w/Creation Order Index
+   - Testing creating attributes by name                                PASSED 
+   - Testing renaming shared attributes in "compact" & "dense" storage  PASSED 
+   - Testing deleting shared attributes in "compact" & "dense" storage  PASSED 
+  - Testing without shared attributes:
+   - Testing INT attributes on both datasets and groups                 PASSED 
+   - Testing storing attribute with "null" dataspace                    PASSED 
+   - Testing storing lots of attributes                                 PASSED 
+   - Testing creating objects with attribute creation order             PASSED 
+   - Testing compact storage on objects with attribute creation order   PASSED 
+   - Testing querying attribute info by index                           PASSED 
+   - Testing deleting attribute by index                                PASSED 
+    - Testing Creating Attributes By Name w/o Creation Order Index
+    - Testing Creating Attributes By Name w/Creation Order Index
+   - Testing creating attributes by name                                PASSED 
+ Testing with old file format:
+  - Tests INT attributes on both datasets and groups                    PASSED 
+ Testing attributes                                                     PASSED 
+ Testing building a file with assorted links                            PASSED 
+ Testing links are correct and building assorted links                  PASSED 
+ Testing create group with creation order indices, test querying group  PASSED 
+ Testing disabling tracking timestamps for an object                    PASSED 
+ Testing moving and renaming links preserves their properties           PASSED 
+ Testing deleting links by index                                        PASSED 
+ Testing link creation property lists                                   PASSED 
+ Testing object copy                                                    PASSED 
+ Testing adding links to a group follow proper "lifecycle"              PASSED 
+ Testing groups                                                         PASSED 
+ Testing object interface                                               PASSED 
+ Testing data transform                                                 PASSED 
+ Testing dataspace encoding and decoding                                PASSED 
+ Testing scaleoffset filter                                             PASSED 
+
+                   ============================================  
+                    FORTRAN tests completed with    0 error(s) ! 
+                   ============================================  
+0.06user 0.02system 0:00.11elapsed 75%CPU (0avgtext+0avgdata 7452maxresident)k
+5080inputs+1016outputs (22major+2045minor)pagefaults 0swaps
+
+Finished testing fortranlib_test_1_8 
+============================

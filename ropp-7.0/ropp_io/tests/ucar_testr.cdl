@@ -240,7 +240,7 @@ variables:
 		:Conventions = "CF-1.0" ;
 		:format_version = "ROPP I/O V1.1" ;
 		:processing_centre = "UCAR_CDAAC" ;
-		:processing_date = "2014-11-26 10:20:26.687" ;
+		:processing_date = "2014-11-28 14:34:44.904" ;
 		:pod_method = "UNKNOWN" ;
 		:phase_method = "UNKNOWN" ;
 		:bangle_method = "UNKNOWN" ;

@@ -1,0 +1,11 @@
+============================
+testerror.sh  Test Log
+============================
+Testing err_compat                                                     PASSED
+Testing error_test                                                     PASSED
+All Error API tests passed.
+0.00user 0.04system 0:00.10elapsed 49%CPU (0avgtext+0avgdata 2928maxresident)k
+13896inputs+64outputs (59major+9408minor)pagefaults 0swaps
+
+Finished testing testerror.sh 
+============================

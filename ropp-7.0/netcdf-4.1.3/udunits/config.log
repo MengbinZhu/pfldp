@@ -27,6 +27,7 @@ uname -v = #69-Ubuntu SMP Thu Nov 13 17:53:56 UTC 2014
 /usr/bin/oslevel       = unknown
 /bin/universe          = unknown
 
+PATH: /opt/pgi/linux86-64/9.0-1/bin
 PATH: /opt/intel/composer_xe_2011_sp1.7.256/bin/intel64
 PATH: /usr/local/sbin
 PATH: /usr/local/bin
@@ -195,7 +196,7 @@ configure:4379: $? = 0
 configure:4396: result: none required
 configure:4406: checking for library containing log10
 configure:4437: gcc -o conftest -O2 -w -DNDEBUG  conftest.c  >&5
-/tmp/ccpBlN1v.o: In function `main':
+/tmp/ccvkIqOD.o: In function `main':
 conftest.c:(.text.startup+0x7): undefined reference to `log10'
 collect2: error: ld returned 1 exit status
 configure:4437: $? = 1
@@ -230,7 +231,7 @@ configure:4437: $? = 0
 configure:4454: result: -lm
 configure:4464: checking for library containing XML_StopParser
 configure:4495: gcc -o conftest -O2 -w -DNDEBUG  conftest.c -lm  >&5
-/tmp/ccOLK7hF.o: In function `main':
+/tmp/ccFlgqXJ.o: In function `main':
 conftest.c:(.text.startup+0x7): undefined reference to `XML_StopParser'
 collect2: error: ld returned 1 exit status
 configure:4495: $? = 1

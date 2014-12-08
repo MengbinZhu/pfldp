@@ -27,6 +27,7 @@ uname -v = #69-Ubuntu SMP Thu Nov 13 17:53:56 UTC 2014
 /usr/bin/oslevel       = unknown
 /bin/universe          = unknown
 
+PATH: /opt/pgi/linux86-64/9.0-1/bin
 PATH: /opt/intel/composer_xe_2011_sp1.7.256/bin/intel64
 PATH: /usr/local/sbin
 PATH: /usr/local/bin
@@ -536,7 +537,7 @@ configure:19028: $? = 0
 configure:19028: result: yes
 configure:19037: checking for strlcat
 configure:19037: gcc -o conftest -O2 -w   conftest.c  >&5
-/tmp/ccUSM5um.o: In function `main':
+/tmp/ccuSpnti.o: In function `main':
 conftest.c:(.text.startup+0x7): undefined reference to `strlcat'
 collect2: error: ld returned 1 exit status
 configure:19037: $? = 1
@@ -1150,7 +1151,7 @@ configure:19770: $? = 0
 configure:19784: result: 8
 configure:19795: checking for library containing floor
 configure:19826: gcc -o conftest -O2 -w   conftest.c  >&5
-/tmp/ccki9N2H.o: In function `main':
+/tmp/ccLktuRP.o: In function `main':
 conftest.c:(.text.startup+0x7): undefined reference to `floor'
 collect2: error: ld returned 1 exit status
 configure:19826: $? = 1

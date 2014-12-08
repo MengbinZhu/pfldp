@@ -1,0 +1,9 @@
+============================
+ h5repart_gentest  Test Log
+============================
+ PASSED
+0.00user 0.00system 0:00.02elapsed 21%CPU (0avgtext+0avgdata 2740maxresident)k
+4704inputs+152outputs (17major+746minor)pagefaults 0swaps
+
+Finished testing h5repart_gentest 
+============================

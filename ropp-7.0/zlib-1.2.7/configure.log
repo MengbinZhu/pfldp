@@ -1,48 +1,48 @@
 --------------------
 ./configure --static --prefix=/home/mengbinzhu/pfldp/ropp-7.0/gfortran
-Wed Nov 26 10:10:38 GMT 2014
+Fri Nov 28 13:57:15 GMT 2014
 
-=== ztest30050.c ===
+=== ztest20703.c ===
 extern int getchar();
 int hello() {return getchar();}
 ===
-gcc -c -O2 -w ztest30050.c
+gcc -c -O2 -w ztest20703.c
 ... using gcc
 
 Building static library libz.a version 1.2.7 with gcc.
 
 
-=== ztest30050.c ===
+=== ztest20703.c ===
 #include <sys/types.h>
 off64_t dummy = 0;
 ===
-gcc -c -O2 -w -D_LARGEFILE64_SOURCE=1 ztest30050.c
+gcc -c -O2 -w -D_LARGEFILE64_SOURCE=1 ztest20703.c
 Checking for off64_t... Yes.
 Checking for fseeko... Yes.
 
-=== ztest30050.c ===
+=== ztest20703.c ===
 #include <string.h>
 #include <errno.h>
 int main() { return strlen(strerror(errno)); }
 ===
-gcc -O2 -w -D_LARGEFILE64_SOURCE=1 -o ztest30050 ztest30050.c
+gcc -O2 -w -D_LARGEFILE64_SOURCE=1 -o ztest20703 ztest20703.c
 Checking for strerror... Yes.
 
-=== ztest30050.c ===
+=== ztest20703.c ===
 #include <unistd.h>
 int main() { return 0; }
 ===
-gcc -c -O2 -w -D_LARGEFILE64_SOURCE=1 ztest30050.c
+gcc -c -O2 -w -D_LARGEFILE64_SOURCE=1 ztest20703.c
 Checking for unistd.h... Yes.
 
-=== ztest30050.c ===
+=== ztest20703.c ===
 #include <stdarg.h>
 int main() { return 0; }
 ===
-gcc -c -O2 -w -D_LARGEFILE64_SOURCE=1 ztest30050.c
+gcc -c -O2 -w -D_LARGEFILE64_SOURCE=1 ztest20703.c
 Checking for stdarg.h... Yes.
 
-=== ztest30050.c ===
+=== ztest20703.c ===
 #include <stdio.h>
 #include <stdarg.h>
 #include "zconf.h"
@@ -54,10 +54,10 @@ int main()
   return 0;
 }
 ===
-gcc -c -O2 -w -D_LARGEFILE64_SOURCE=1 ztest30050.c
+gcc -c -O2 -w -D_LARGEFILE64_SOURCE=1 ztest20703.c
 Checking whether to use vs[n]printf() or s[n]printf()... using vs[n]printf().
 
-=== ztest30050.c ===
+=== ztest20703.c ===
 #include <stdio.h>
 #include <stdarg.h>
 int mytest(const char *fmt, ...)
@@ -74,10 +74,10 @@ int main()
   return (mytest("Hello%d\n", 1));
 }
 ===
-gcc -O2 -w -D_LARGEFILE64_SOURCE=1 -o ztest30050 ztest30050.c
+gcc -O2 -w -D_LARGEFILE64_SOURCE=1 -o ztest20703 ztest20703.c
 Checking for vsnprintf() in stdio.h... Yes.
 
-=== ztest30050.c ===
+=== ztest20703.c ===
 #include <stdio.h>
 #include <stdarg.h>
 int mytest(const char *fmt, ...)
@@ -95,10 +95,10 @@ int main()
   return (mytest("Hello%d\n", 1));
 }
 ===
-gcc -c -O2 -w -D_LARGEFILE64_SOURCE=1 ztest30050.c
+gcc -c -O2 -w -D_LARGEFILE64_SOURCE=1 ztest20703.c
 Checking for return value of vsnprintf()... Yes.
 
-=== ztest30050.c ===
+=== ztest20703.c ===
 #define ZLIB_INTERNAL __attribute__((visibility ("hidden")))
 int ZLIB_INTERNAL foo;
 int main()
@@ -106,10 +106,10 @@ int main()
   return 0;
 }
 ===
-gcc -c -O2 -w -D_LARGEFILE64_SOURCE=1 ztest30050.c
+gcc -c -O2 -w -D_LARGEFILE64_SOURCE=1 ztest20703.c
 Checking for attribute(visibility) support... Yes.
 
-=== ztest30050.c ===
+=== ztest20703.c ===
 #include <stdio.h>
 #define is32(n,t) for(n=1,k=0;n;n<<=1,k++);if(k==32){puts(t);return 0;}
 int main() {
@@ -123,7 +123,7 @@ int main() {
     return 1;
 }
 ===
-gcc -O2 -w -D_LARGEFILE64_SOURCE=1 -DHAVE_HIDDEN ztest30050.c -o ztest30050
+gcc -O2 -w -D_LARGEFILE64_SOURCE=1 -DHAVE_HIDDEN ztest20703.c -o ztest20703
 Looking for a four-byte integer type... Found.
 
 ALL = static all64

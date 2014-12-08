@@ -1,0 +1,11 @@
+============================
+ flush2  Test Log
+============================
+Testing H5Fflush (part2 with flush)                                    PASSED
+Testing H5Fflush (part2 without flush)                                 PASSED
+Testing H5Fflush (part2 with flush and later addition)                 PASSED
+0.00user 0.00system 0:00.02elapsed 24%CPU (0avgtext+0avgdata 2912maxresident)k
+4736inputs+0outputs (18major+912minor)pagefaults 0swaps
+
+Finished testing flush2 
+============================

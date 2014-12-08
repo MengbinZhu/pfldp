@@ -27,6 +27,7 @@ uname -v = #69-Ubuntu SMP Thu Nov 13 17:53:56 UTC 2014
 /usr/bin/oslevel       = unknown
 /bin/universe          = unknown
 
+PATH: /opt/pgi/linux86-64/9.0-1/bin
 PATH: /opt/intel/composer_xe_2011_sp1.7.256/bin/intel64
 PATH: /usr/local/sbin
 PATH: /usr/local/bin
@@ -1206,7 +1207,7 @@ configure:25772: $? = 0
 configure:25772: result: yes
 configure:25778: checking for _doprnt
 configure:25778: gcc -o conftest -O2 -w   conftest.c  >&5
-/tmp/cch4auKK.o: In function `main':
+/tmp/cc6Gbs2R.o: In function `main':
 conftest.c:(.text.startup+0x7): undefined reference to `_doprnt'
 collect2: error: ld returned 1 exit status
 configure:25778: $? = 1
@@ -1434,7 +1435,7 @@ configure: failed program was:
 configure:25867: result: yes
 configure:25889: checking for strlcat
 configure:25889: gcc -o conftest -O2 -w   conftest.c  >&5
-/tmp/ccblGReP.o: In function `main':
+/tmp/ccaNgwp6.o: In function `main':
 conftest.c:(.text.startup+0x7): undefined reference to `strlcat'
 collect2: error: ld returned 1 exit status
 configure:25889: $? = 1
@@ -1561,7 +1562,7 @@ configure:25889: $? = 0
 configure:25889: result: yes
 configure:25889: checking for mktemp
 configure:25889: gcc -o conftest -O2 -w   conftest.c  >&5
-/tmp/ccTe4CJe.o: In function `main':
+/tmp/cc5pcnQh.o: In function `main':
 conftest.c:(.text.startup+0x7): warning: the use of `mktemp' is dangerous, better use `mkstemp' or `mkdtemp'
 configure:25889: $? = 0
 configure:25889: result: yes
@@ -1607,7 +1608,7 @@ configure:25889: $? = 0
 configure:25889: result: yes
 configure:25889: checking for MPI_Comm_f2c
 configure:25889: gcc -o conftest -O2 -w   conftest.c  >&5
-/tmp/ccmC5doX.o: In function `main':
+/tmp/ccsrsMvb.o: In function `main':
 conftest.c:(.text.startup+0x7): undefined reference to `MPI_Comm_f2c'
 collect2: error: ld returned 1 exit status
 configure:25889: $? = 1
