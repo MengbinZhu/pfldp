@@ -31,6 +31,7 @@ REAL(KIND=8)                :: TMPMat(NumOfObs,NumOfObs)
 REAL(KIND=8)                :: TMPMatInv(NumOfObs,NumOfObs)
 REAL(KIND=8)                :: WWeight         ! The Weights of All Particles
 REAL(KIND=8)                :: EW              ! The Weight from Last Timestep
+REAL(KIND=8)                :: ASSISTNUM
 
 TMPNUM     = 0.0
 TMPNUM2    = 0.0
@@ -44,18 +45,28 @@ SELECT CASE(Method)
 CASE(1) !SIR Method
 CALL MATRIXINV(RMat,RMatInv,NumOfObs)
 WWeight = 0.0
+!PRINT*,"OBSY = "
+!PRINT*,OBSY
 DO I = 1, IDIMEn
    XVector(:,1) = SVX(:,NTIMESTEP,I) !Maybe some problems here about SVX!
+   !PRINT*,"XVector ="
+   !PRINT*,XVector
    HXMat = MATMUL(HMat,XVector)
+   !PRINT*,"HXMat = "
+   !PRINT*,HXMat
    DO J = 1, NumOfObs
       DiT(1,J) = OBSY(NTIMESTEP,J) - HXMat(J,1)
       Di(J,1)  = DiT(1,J)
    END DO
    TMPNUM = MATMUL(DiT,MATMUL(RMatInv,Di))
    USIGMA(I) = TMPNUM(1,1)
-   WWeight = WWeight +EXP(-0.5*USIGMA(I))
+   !WWeight = WWeight +EXP(-0.5*USIGMA(I))
 END DO
-Weights(:) = EXP(-0.5*USIGMA(:))/WWeight
+ASSISTNUM = 0.5*(SUM(USIGMA(:))/IDIMEn)
+DO I = 1,IDIMEn
+   WWeight = WWeight +EXP(-0.5*USIGMA(I)+ASSISTNUM)
+END DO
+Weights(:) = EXP(-0.5*USIGMA(:)+ASSISTNUM)/WWeight
 !PRINT*,"WWeight = "
 !PRINT*,WWeight
 PRINT*,"TEST OF SIR Weights:"
@@ -67,11 +78,10 @@ PRINT*,"END OF THE TEST"
 CASE(2) !The Optimal Proposal Density Method
     
 HTMat(:,:) = 0.0
-!CALL MATTRANS(HMat,HTMat,NumOfObs,IDIMV)
 HTMat = TRANSPOSE(HMat)
-!PRINT*,"HTMat ="
-!PRINT*,HTMat
-TMPMat = MATMUL(HMat,MATMUL(QMat,HTMat)) + RMat
+
+!TMPMat = MATMUL(HMat,MATMUL(QMat,HTMat)) + RMat
+TMPMat = QMat + RMat
 CALL MATRIXINV(TMPMat,TMPMatInv,NumOfObs)
 
 EW = IDIMEn
@@ -95,7 +105,8 @@ DO I = 1, IDIMEn
 END DO
 !PRINT*,"USIGMA2 = "
 !PRINT*,USIGMA2(:)
-Weights(:) = EXP(-0.5*USIGMA2(:))
+ASSISTNUM = 0.5*(SUM(USIGMA2(:))/IDIMEn)
+Weights(:) = EXP(-0.5*USIGMA2(:)+ASSISTNUM)
 Weights(:) = Weights(:)/SUM(Weights) !Relative Weights Here
 PRINT*,"TEST OF THE OPTIMAL PROPOSAL DENSITY WEIGHTS"
 PRINT*,"============================================"

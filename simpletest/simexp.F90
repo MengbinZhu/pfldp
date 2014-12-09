@@ -9,8 +9,8 @@ INTEGER(KIND=4),INTENT(IN)  :: IDIMV          ! Size Number of the State Variabl
 INTEGER(KIND=4),INTENT(IN)  :: ITIMESTEP      ! Number of Time Steps
 INTEGER(KIND=4),INTENT(IN)  :: NumOfObs       ! Number of Observations
 INTEGER(KIND=4),INTENT(IN)  :: SEEDA(IDIMEn*IDIMV)       ! Seed of the Random Number
-REAL(KIND=8),INTENT(INOUT)  :: EnsembleMean(IDIMV,ITIMESTEP,3)
-REAL(KIND=8),INTENT(INOUT)  :: TruthRun(IDIMV,ITIMESTEP)
+REAL(KIND=8),INTENT(INOUT)  :: EnsembleMean(ITIMESTEP,3)
+REAL(KIND=8),INTENT(INOUT)  :: TruthRun(ITIMESTEP)
 
 !Derived Types for HSL_EA20
 TYPE(EA20_CONTROL)          :: CNTL
@@ -77,9 +77,10 @@ REAL(KIND=8)                :: WVec1(IDIMV,1)
 REAL(KIND=8)                :: WVec2(IDIMV,1)
 
 !Statistic Variables Defination
-REAL(KIND=8)                :: EnsMean_SIR(IDIMV,ITIMESTEP)
-REAL(KIND=8)                :: EnsMean_OPD(IDIMV,ITIMESTEP)
-REAL(KIND=8)                :: EnsMean_New(IDIMV,ITIMESTEP)
+REAL(KIND=8)                :: EnsMean_SIR(ITIMESTEP)
+REAL(KIND=8)                :: EnsMean_OPD(ITIMESTEP)
+REAL(KIND=8)                :: EnsMean_New(ITIMESTEP)
+REAL(KIND=8)                :: Sumtmp
 
 
 double precision, parameter :: zero = 0.0d0, one = 1.0d0, two = 2.0d0
@@ -137,7 +138,7 @@ USIGMA(:) = 0.0
 BMat(:,:) = 0.0
 RMat(:,:) = 0.0
 QMat(:,:) = 0.0
-HMat(:,:) = 1.0
+HMat(:,:) = 0.0
 
 DO I = 1, IDIMV
    BMat(I,I) = 1.0
@@ -145,6 +146,7 @@ DO I = 1, IDIMV
 END DO
 DO I = 1, NumOfObs
    RMat(I,I) = 0.16
+   HMat(I,I) = 1
 END DO
 
 !! 1.2 Init the SVX(:,0)
@@ -199,7 +201,7 @@ DO I = 1, IDIMV
    SVX0(I,1) = SVX0(I,0) + ETATRUTH(I) ! Do the Model run for the Truth, There is no uncertainty here.
 END DO
 
-TruthRun(:,1) = SVX0(:,1)
+TruthRun(1) = SUM(SVX0(:,1))/IDIMV
 
 !! 2.2 Generate the Y(ITIMESTEP, NumOfObs)
 ALLOCATE(EPSIL(NumOfObs))
@@ -223,9 +225,9 @@ CALL CALW(Weights,QMat,RMat,HMat,SVX,OBSY,IDIMV,1,1,IDIMEn,NumOfObs,1)
 !! Still need some statistic Variables here.
 !! 3.1.2 the Ensemble Mean
 
-CALL ENSMEAN(EnsMean_SIR(:,1),SVX(:,1,:),IDIMV,IDIMEn)
+CALL ENSMEAN(EnsMean_SIR(1),SVX(:,1,:),IDIMV,IDIMEn)
 !PRINT*,"THE ENSEMBLE MEAN OF SIR IS = "
-!PRINT*,EnsMean_SIR(:,1)
+!PRINT*,EnsMean_SIR(1)
 
 !==============================================================================
 !! 3.2 Perform the Optimal Proposal Density Algorithm
@@ -248,11 +250,14 @@ GMat2 = MATMUL(QMat,MATMUL(HTMat,MATMP))       ! Dimension = IDIMV
 
 !P^{-1} = Q^{-1}+HT*R^{-1}*H
 CALL MATRIXINV(QMat,QIMat,IDIMV)                      ! Calculate the Inverse of Matrix Q
+!CALL MATINV(QMat,QIMat,IDIMV)                      ! Calculate the Inverse of Matrix Q
 CALL MATRIXINV(RMat,RIMat,NumOfObs)                   ! Calculate the Inverse of Matrix R
+!CALL MATINV(RMat,RIMat,NumOfObs)                   ! Calculate the Inverse of Matrix R
 PMatInv = MATMUL(HTMat,MATMUL(RIMat,HMat)) + QIMat
 !PRINT*,"The inverse of P Matrix is = "
 !PRINT*,PMatInv
 CALL MATRIXINV(PMatInv,PMat,IDIMV)
+!CALL MATINV(PMatInv,PMat,IDIMV)
 !PRINT*,PMat
 
 !!! 3.2.2 Calculate the di for the G(x*) expression
@@ -333,9 +338,9 @@ END DO
 
 !!! 3.2.4 Do the Statistic Step: Ensemble Mean
 
-CALL ENSMEAN(EnsMean_OPD(:,1),SVX(:,1,:),IDIMV,IDIMEn)
+CALL ENSMEAN(EnsMean_OPD(1),SVX(:,1,:),IDIMV,IDIMEn)
 !PRINT*,"THE ENSEMBLE MEAN OF OPD IS = "
-!PRINT*,EnsMean_OPD(:,1)
+!PRINT*,EnsMean_OPD(1)
 
 
 !==============================================================================
@@ -352,13 +357,15 @@ CALL BSDET(PMat,IDIMV,PDet)
 !PRINT*,PDet
 
 !PRINT*,"PHI_ii = "
-!DO I= 1, IDIMEn
+Sumtmp = 0.0
+DO I= 1, IDIMEn
+   Sumtmp = Sumtmp + PHI(I,I)
 !PRINT*,PHI(I,I)
-!END DO
+END DO
 
 PRINT*,"ALPHA = ,There always are some values that we cannot choose!"
 DO I=1,IDIMEn
-   Alpha(I) = EXP(PHI(I,I)/IDIMV)
+   Alpha(I) = EXP((PHI(I,I)-(Sumtmp/IDIMEn))/IDIMV)
    PRINT*,Alpha(I)
 END DO
 
@@ -412,10 +419,10 @@ DO I = 1, IDIMEn
       XVec(J,1) = XINEW(J+(I-1)*IDIMV)
    END DO
    !SVXB(:,1,I) = GMat(:,I) + SVXB(:,0,I) + UVec(:,I)*ALPHA(I) ! This equation is completed now.
-   IF(ALPHA(I) > 2.0) THEN
+   IF(ABS(ALPHA(I)) > 2.0) THEN
      SVXB(:,1,I) = GMat(:,I) + SVXB(:,0,I) + UVec(:,I)           ! This equation is completed now.
    ELSE
-     SVXB(:,1,I) = GMat(:,I) + SVXB(:,0,I) + UVec(:,I)*SQRT(ALPHA(I)) ! This equation is completed now.
+     SVXB(:,1,I) = GMat(:,I) + SVXB(:,0,I) + UVec(:,I)*SQRT(ABS(ALPHA(I))) ! This equation is completed now.
    END IF
    XVecT = TRANSPOSE(XVec)
    TMPNUM = MATMUL(XVecT,XVec)
@@ -423,20 +430,20 @@ DO I = 1, IDIMEn
 END DO
 
 !!! 3.3.3 Calculate the Weights
-Weights(:) = (ALPHA(:)-1)*OWeights(:)
+Weights(:) = (ABS(ALPHA(:)-1))*OWeights(:)
 Weights(:) = Weights(:)/SUM(Weights(:))
 PRINT*,"=======================The Weights Of New Scheme============================"
 PRINT*,Weights
 PRINT*,"=======================END OF THE WEIGHTS OF NEW SCHEME====================="
 
 !!! 3.3.4 Do the Ensemble Mean Calculation
-CALL ENSMEAN(EnsMean_New(:,1),SVXB(:,1,:),IDIMV,IDIMEn)
+CALL ENSMEAN(EnsMean_New(1),SVXB(:,1,:),IDIMV,IDIMEn)
 !PRINT*,"THE ENSEMBLE MEAN OF New Scheme IS = "
 !PRINT*,EnsMean_New(:,1)
 
-EnsembleMean(:,1,1) = EnsMean_SIR(:,1)
-EnsembleMean(:,1,2) = EnsMean_OPD(:,1)
-EnsembleMean(:,1,3) = EnsMean_New(:,1)
+EnsembleMean(1,1) = EnsMean_SIR(1)
+EnsembleMean(1,2) = EnsMean_OPD(1)
+EnsembleMean(1,3) = EnsMean_New(1)
 
 ! Test Call for the Normal Distribution Generator
 !NDMean     = 0
@@ -480,12 +487,5 @@ IF(ALLOCATED(DETSI)) DEALLOCATE(DETSI)
 IF(ALLOCATED(ALPHA)) DEALLOCATE(ALPHA)
 IF(ALLOCATED(OWeights)) DEALLOCATE(OWeights)
 IF(ALLOCATED(Weights)) DEALLOCATE(Weights)
-
-!DEALLOCATE(SVX(:,:,:))
-!DEALLOCATE(OBSY(:,:,:))
-!DEALLOCATE(dist(:,:))
-!DEALLOCATE(PHI(:,:))
-!DEALLOCATE(SI(:,:))
-!DEALLOCATE(Weights(:))
 
 END SUBROUTINE
