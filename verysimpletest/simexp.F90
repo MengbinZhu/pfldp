@@ -74,6 +74,7 @@ REAL(KIND=8)                :: EnsMean_SIR(ITIMESTEP)
 REAL(KIND=8)                :: EnsMean_OPD(ITIMESTEP)
 REAL(KIND=8)                :: EnsMean_New(ITIMESTEP)
 REAL(KIND=8)                :: Sumtmp
+REAL(KIND=8)                :: Func
 
 
 double precision, parameter :: zero = 0.0d0, one = 1.0d0, two = 2.0d0
@@ -179,8 +180,12 @@ CALL NDGen(SEEDA, NDMean, NDVar, IDIMV*IDIMEn, ETA)
 
 DO I = 1, IDIMEn
    DO J = 1, IDIMV
-      SVX(J,1,I)  = SVX(J,0,I) + ETA((I-1)*IDIMV+J) ! Do the evolution of the Model for Every Ensemble Member
-      SVXB(J,1,I) = SVXB(J,0,I) + ETA((I-1)*IDIMV+J) ! Do the evolution of the Model for Every Ensemble Member
+      CALL MODEL(Func,SVX(J,0,I),0,0)
+      SVX(J,1,I)  = Func + ETA((I-1)*IDIMV+J) ! Do the evolution of the Model for Every Ensemble Member
+      CALL MODEL(Func,SVXB(J,0,I),0,0)
+      SVXB(J,1,I) = Func + ETA((I-1)*IDIMV+J) ! Do the evolution of the Model for Every Ensemble Member
+      !SVX(J,1,I)  = SVX(J,0,I) + ETA((I-1)*IDIMV+J) ! Do the evolution of the Model for Every Ensemble Member
+      !SVXB(J,1,I) = SVXB(J,0,I) + ETA((I-1)*IDIMV+J) ! Do the evolution of the Model for Every Ensemble Member
    END DO
 END DO
  
@@ -190,7 +195,9 @@ NDVar     = SQRT(QMat)
 ETA(:)    = 0.0
 CALL NDGen(SEEDA, NDMean, NDVar, IDIMV, ETATRUTH)
 DO I = 1, IDIMV
-   SVX0(I,1) = SVX0(I,0) + ETATRUTH(I) ! Do the Model run for the Truth, There is no uncertainty here.
+   CALL MODEL(Func,SVX0(I,0),0,0)
+   SVX0(I,1) = Func + ETATRUTH(I) ! Do the Model run for the Truth, There is no uncertainty here.
+   !SVX0(I,1) = SVX0(I,0) + ETATRUTH(I) ! Do the Model run for the Truth, There is no uncertainty here.
 END DO
 
 TruthRun(1) = SUM(SVX0(:,1))/IDIMV
@@ -266,7 +273,9 @@ DO I = 1, IDIMEn
    XVec(:,1) = SVX(:,0,I)
    !HXMat = MATMUL(HMat,XVec)
    DO J = 1, NumOfObs
-      DiT2(1,J) = OBSY(1,J) - XVec(J,1) !Simplified Equation For H=1
+      CALL MODEL(Func,XVec(J,1),0,0)
+      DiT2(1,J) = OBSY(1,J) - HMat*Func !Simplified Equation For H=1 and model equation
+      !DiT2(1,J) = OBSY(1,J) - XVec(J,1) !Simplified Equation For H=1
       Di2(J,1) = DiT2(1,J)
    END DO
    Di(:,I) = Di2(:,1)
@@ -322,10 +331,14 @@ END DO
 !!!==============End of The calculation of P^{1/2}*{\xi}_i^n=================
 
 !!!! 3.2.3.2 Finish the final step!
-PRINT*,"PMat^{1/2}= "
-PRINT*,SQRT(PMat)
+!PRINT*,"PMat^{1/2}= "
+!PRINT*,SQRT(PMat)
 DO I = 1, IDIMEn
-   SVX(:,1,I) = GMat2*Di(:,I) + SVX(:,0,I) + (SQRT(PMat))*UVec(:,I) ! This equation is completed now.
+   DO J = 1, IDIMV
+   CALL MODEL(Func,SVX(J,0,I),0,0)
+   SVX(J,1,I) = GMat2*Di(J,I) + Func + (SQRT(PMat))*UVec(J,I) ! Add model equation in this equation
+   !SVX(J,1,I) = GMat2*Di(J,I) + SVX(J,0,I) + (SQRT(PMat))*UVec(J,I) ! This equation is completed now.
+   END DO
 END DO
 !PRINT*,"SVX = "
 !PRINT*,SVX(:,1,1)
@@ -411,9 +424,12 @@ DO I = 1, IDIMEn
    !  SVXB(:,1,I) = GMat(:,I) + SVXB(:,0,I) + (SQRT(PMat))*UVec(:,I)           ! This equation is completed now.
    !ELSE
    !PRINT*,SQRT(Alpha(I))
-   SVXB(:,1,I) = GMat2*Di(:,I) + SVXB(:,0,I) + (SQRT(Alpha(I)*PMat))*UVec(:,I) ! This equation is completed now.
-   !SVXB(:,1,I) = GMat2*Di(:,I) + SVXB(:,0,I) + (PMat)**(0.5)*UVec(:,I) ! This equation is completed now.
+   DO K = 1, IDIMV
+      CALL MODEL(Func,SVXB(K,0,I),0,0)
+      SVXB(K,1,I) = GMat2*Di(K,I) + Func + (SQRT(Alpha(I)*PMat))*UVec(K,I) ! Add model equation here.
+   !SVXB(:,1,I) = GMat2*Di(:,I) + SVXB(:,0,I) + (SQRT(Alpha(I)*PMat))*UVec(:,I) ! This equation is completed now.
    !END IF
+   END DO
    XVecT = TRANSPOSE(XVec)
    TMPNUM = MATMUL(XVecT,XVec)
    OWeights(I) = TMPNUM(1,1)

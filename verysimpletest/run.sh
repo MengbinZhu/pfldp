@@ -1,3 +1,3 @@
 #!/bin/sh
 #Running scripts for the main program
-./mainprogram
+./mainprogram > output 2>&1

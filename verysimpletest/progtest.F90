@@ -32,6 +32,9 @@ complex*16::ax(3,3),bx(3,3),cx(3,3)
 
 data ax/10,2.5,(3,7),4,5,6,7,8,9/
 
+PRINT*,"NDVAR = "
+PRINT*,NDVar
+
   !! set u
   u = 0.d0    
   u(2:n-1) = one 

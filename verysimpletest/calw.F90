@@ -64,9 +64,13 @@ DO I = 1, IDIMEn
    !WWeight = WWeight +EXP(-0.5*USIGMA(I))
 END DO
 ASSISTNUM = 0.5*(SUM(USIGMA(:))/IDIMEn)
+!PRINT*,"ASSISTNUM = "
+!PRINT*,ASSISTNUM-0.5*USIGMA(:)
 DO I = 1,IDIMEn
    WWeight = WWeight +EXP(-0.5*USIGMA(I)+ASSISTNUM)
 END DO
+!PRINT*,"WWeight = "
+!PRINT*,WWeight
 Weights(:) = EXP(-0.5*USIGMA(:)+ASSISTNUM)/WWeight
 !PRINT*,"WWeight = "
 !PRINT*,WWeight
