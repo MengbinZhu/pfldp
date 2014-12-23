@@ -494,5 +494,5 @@ def pfModel(T=400, ns=5, mm=20, model_pure=False, pfew=False, pfpure=False, obsv
         
 
 if __name__ == '__main__':
-    pfModel()
 
+    pfModel(ns=1,pfew=True)
