@@ -1,5 +1,7 @@
 SUBROUTINE CALW(Weights,QMat,RMat,HMat,SVX,OBSY,IDIMV,ITIMESTEP,NTIMESTEP,IDIMEn,NumOfObs,Method)
 
+USE qsort_c_module
+
 IMPLICIT NONE
 
 INTEGER(KIND=4),INTENT(IN)  :: Method   ! Method = 1 SIR; 2 Optimal Proposal Density; 3 New Schme
@@ -27,6 +29,7 @@ REAL(KIND=8)                :: TMPNUM(1,1)
 REAL(KIND=8)                :: TMPNUM2(1,1)
 REAL(KIND=8)                :: USIGMA(IDIMEn)  ! -2log(Wi) for Every Particle
 REAL(KIND=8)                :: USIGMA2(IDIMEn) ! -2log(Wi) for Every Particle
+REAL(KIND=8)                :: c_sort(IDIMEn)  ! Used for quick sort
 REAL(KIND=8)                :: TMPMat
 REAL(KIND=8)                :: TMPMatInv
 REAL(KIND=8)                :: WWeight         ! The Weights of All Particles
@@ -63,7 +66,9 @@ DO I = 1, IDIMEn
    USIGMA(I) = TMPNUM(1,1)
    !WWeight = WWeight +EXP(-0.5*USIGMA(I))
 END DO
-ASSISTNUM = 0.5*(SUM(USIGMA(:))/IDIMEn)
+c_sort(:) = USIGMA(:)
+CALL QsortC(c_sort)
+ASSISTNUM = 0.5*c_sort(1)
 !PRINT*,"ASSISTNUM = "
 !PRINT*,ASSISTNUM-0.5*USIGMA(:)
 DO I = 1,IDIMEn
@@ -95,6 +100,7 @@ EW = 1/EW
 
 DO I = 1, IDIMEn
    XVector(:,1) = SVX(:,NTIMESTEP-1,I) !Maybe some problems here about SVX!
+   !XVector(:,1) = SVX(:,NTIMESTEP,I) !Maybe some problems here about SVX!
    HXMat = HMat*XVector
    DO J = 1, NumOfObs
       DiT(1,J) = OBSY(NTIMESTEP,J) - HXMat(J,1)
@@ -109,7 +115,9 @@ DO I = 1, IDIMEn
 END DO
 !PRINT*,"USIGMA2 = "
 !PRINT*,USIGMA2(:)
-ASSISTNUM = 0.5*(SUM(USIGMA2(:))/IDIMEn)
+c_sort(:) = USIGMA2(:)
+CALL QsortC(c_sort)
+ASSISTNUM = 0.5*c_sort(1)
 Weights(:) = EXP(-0.5*USIGMA2(:)+ASSISTNUM)
 Weights(:) = Weights(:)/SUM(Weights) !Relative Weights Here
 PRINT*,"TEST OF THE OPTIMAL PROPOSAL DENSITY WEIGHTS"

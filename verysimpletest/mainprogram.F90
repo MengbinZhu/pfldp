@@ -8,14 +8,14 @@ INTEGER(KIND=4),PARAMETER   :: ITIMESTEP  = 1 ! Number of Time Steps
 INTEGER(KIND=4)             :: NumOfObs = 1000 ! Number of Observations, always the same with IDIMV
 INTEGER(KIND=4),ALLOCATABLE :: SEEDA(:)       ! Seed of the Random Number
 INTEGER(KIND=4),PARAMETER   :: RONDOM_TIMES = 10
-REAL(KIND=8)                :: EnsembleMean(ITIMESTEP,3)
+REAL(KIND=8)                :: EnsembleMean(ITIMESTEP,4)
 REAL(KIND=8)                :: TruthRun(ITIMESTEP)
-REAL(KIND=8)                :: RMSE_DataEns(RONDOM_TIMES,3)
+REAL(KIND=8)                :: RMSE_DataEns(RONDOM_TIMES,4)
 REAL(KIND=8)                :: RMSE_DataTruth(RONDOM_TIMES)
-REAL(KIND=8)                :: RMSE_Ens(3)
+REAL(KIND=8)                :: RMSE_Ens(4)
 REAL(KIND=8)                :: RMSE_Truth
 
-REAL(KIND=8)                :: MEAN_ENS(3)
+REAL(KIND=8)                :: MEAN_ENS(4)
 REAL(KIND=8)                :: MEAN_Truth
 
 REAL(KIND=8)                :: RMSE_SUM
@@ -41,12 +41,12 @@ DO I = 1, RONDOM_TIMES
    RMSE_DataTruth(I) = TruthRun(1)
 END DO
 
-DO J = 1, 3
+DO J = 1, 4
    MEAN_ENS(J) = SUM(RMSE_DataEns(:,J))/RONDOM_TIMES
 END DO
 MEAN_Truth = SUM(RMSE_DataTruth(:))/RONDOM_TIMES
 
-DO I = 1, 3
+DO I = 1, 4
    RMSE_SUM = 0.0
    DO K = 1, IDIMV
       DO J = 1, RONDOM_TIMES
@@ -71,6 +71,8 @@ PRINT*,"THE RMSE OF ENSEMBLE MEAN OF OPD IS = "
 PRINT*,RMSE_Ens(2)
 PRINT*,"THE RMSE OF ENSEMBLE MEAN OF New IS = "
 PRINT*,RMSE_Ens(3)
+PRINT*,"THE RMSE OF ENSEMBLE MEAN OF EWPF IS = "
+PRINT*,RMSE_Ens(4)
 PRINT*,"================================================="
 
 END PROGRAM

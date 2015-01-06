@@ -1,6 +1,7 @@
 SUBROUTINE SIMEXP(SEEDA,IDIMEn,IDIMV,ITIMESTEP,NumOfObs,EnsembleMean,TruthRun)
 
 USE HSL_EA20_double
+USE qsort_c_module
 
 IMPLICIT NONE
 
@@ -9,7 +10,7 @@ INTEGER(KIND=4),INTENT(IN)  :: IDIMV          ! Size Number of the State Variabl
 INTEGER(KIND=4),INTENT(IN)  :: ITIMESTEP      ! Number of Time Steps
 INTEGER(KIND=4),INTENT(IN)  :: NumOfObs       ! Number of Observations
 INTEGER(KIND=4),INTENT(IN)  :: SEEDA(IDIMEn*IDIMV)       ! Seed of the Random Number
-REAL(KIND=8),INTENT(INOUT)  :: EnsembleMean(ITIMESTEP,3)
+REAL(KIND=8),INTENT(INOUT)  :: EnsembleMean(ITIMESTEP,4)
 REAL(KIND=8),INTENT(INOUT)  :: TruthRun(ITIMESTEP)
 
 !Derived Types for HSL_EA20
@@ -48,6 +49,7 @@ REAL(KIND=8)    :: PMatInv   !P^{-1} Inverse of P
 REAL(KIND=8),ALLOCATABLE    :: SVX(:,:,:)     !State Vector Variable X(Dim, TimeSeq, EnsembleNum)
 REAL(KIND=8),ALLOCATABLE    :: SVX0(:,:)      !Truth X(Dim, TimeSeq)
 REAL(KIND=8),ALLOCATABLE    :: SVXB(:,:,:)    !Backup State Vector Variable X(Dim, TimeSeq, EnsembleNum)
+REAL(KIND=8),ALLOCATABLE    :: SVXEW(:,:,:)   !Backup State Vector Variable X(Dim, TimeSeq, EnsembleNum) for EWPF
 REAL(KIND=8),ALLOCATABLE    :: OBSY(:,:)      !Observation Vector Variable Y(TimeSeq,NumOfObs)
 REAL(KIND=8),ALLOCATABLE    :: Di(:,:)        !Distance between y^n and Hf(x_i^{n-1}) dist(Dim,EnsembleNum)
 REAL(KIND=8),ALLOCATABLE    :: DiT(:,:)       !Distance between y^n and Hf(x_i^{n-1}) dist(Dim,EnsembleNum)
@@ -69,10 +71,27 @@ REAL(KIND=8)                :: UVec1(IDIMV)
 REAL(KIND=8)                :: WVec1(IDIMV,1)
 REAL(KIND=8)                :: WVec2(IDIMV,1)
 
+!Variables for EWPF
+REAL(KIND=8)                :: a_i(IDIMEn)
+REAL(KIND=8)                :: b_i(IDIMEn)
+REAL(KIND=8)                :: alpha_i(IDIMEn)
+REAL(KIND=8)                :: c_weights(IDIMEn)
+REAL(KIND=8)                :: c_sort(IDIMEn)
+REAL(KIND=8)                :: w_rest(IDIMEn)
+REAL(KIND=8)                :: mat(IDIMEn,IDIMEn)
+REAL(KIND=8)                :: mat2(IDIMEn,IDIMEn)
+REAL(KIND=8)                :: xtest(IDIMV,IDIMEn)
+REAL(KIND=8)                :: xtest_t(IDIMEn,IDIMV)
+REAL(KIND=8)                :: cc
+REAL(KIND=8),PARAMETER      :: CCC = 0.9
+REAL(KIND=8),PARAMETER      :: factor = 1.e-5
+REAL(KIND=8),ALLOCATABLE    :: xi_ew(:)
+
 !Statistic Variables Defination
 REAL(KIND=8)                :: EnsMean_SIR(ITIMESTEP)
 REAL(KIND=8)                :: EnsMean_OPD(ITIMESTEP)
 REAL(KIND=8)                :: EnsMean_New(ITIMESTEP)
+REAL(KIND=8)                :: EnsMean_EWPF(ITIMESTEP)
 REAL(KIND=8)                :: Sumtmp
 REAL(KIND=8)                :: Func
 
@@ -82,29 +101,11 @@ double precision            :: s
 integer                     :: ido
 
 !Step 1. Initialize the B, R, Q Matrices and SVX(IDIMV,0)
-!ALLOCATE(BMat(IDIMV,IDIMV))
-!ALLOCATE(RMat(NumOfObs,NumOfObs))
-!ALLOCATE(RIMat(NumOfObs,NumOfObs))
-!ALLOCATE(QMat(IDIMV,IDIMV))
-!ALLOCATE(QIMat(IDIMV,IDIMV))
-!ALLOCATE(HMat(NumOfObs,IDIMV))
-!ALLOCATE(HTMat(IDIMV,NumOfObs))
-!ALLOCATE(HXMat(NumOfObs,1))
-!ALLOCATE(GMat(IDIMV,IDIMEn))
-!ALLOCATE(GMat1(NumOfObs,NumOfObs))
-!ALLOCATE(GMat2(IDIMV,NumOfObs))
-!ALLOCATE(MATMP(NumOfObs,NumOfObs))
-!ALLOCATE(MATMP2(IDIMV,IDIMV))
-!ALLOCATE(PMat(IDIMV,IDIMV))
-!ALLOCATE(PW(IDIMV,IDIMV))
-!ALLOCATE(PMatHalf(IDIMV,IDIMV))
-!ALLOCATE(PMatInv(IDIMV,IDIMV))
-!ALLOCATE(TMPMat(IDIMV,IDIMV))
-!ALLOCATE(TMPMatInv(IDIMV,IDIMV))
 
 ALLOCATE(SVX(1:IDIMV,0:ITIMESTEP,1:IDIMEn))
 ALLOCATE(SVX0(1:IDIMV,0:ITIMESTEP))
 ALLOCATE(SVXB(1:IDIMV,0:ITIMESTEP,1:IDIMEn))
+ALLOCATE(SVXEW(1:IDIMV,0:ITIMESTEP,1:IDIMEn))
 ALLOCATE(OBSY(1:ITIMESTEP,1:NumOfObs))
 ALLOCATE(Di(1:IDIMV,1:IDIMEn))
 ALLOCATE(DiT(1:IDIMEn,1:IDIMV))
@@ -128,31 +129,21 @@ CNTL%diagnostics_level = 1 !! full error check
 TMPNUM    = 0.0
 USIGMA(:) = 0.0
 
-!BMat(:,:) = 0.0
-!RMat(:,:) = 0.0
-!QMat(:,:) = 0.0
-!HMat(:,:) = 0.0
-
-!DO I = 1, IDIMV
 BMat = 1.0
 QMat = 0.01
-!END DO
-!DO I = 1, NumOfObs
 RMat = 0.16
 HMat = 1
-!END DO
 
 !! 1.2 Init the SVX(:,0)
 SVX(1:IDIMV,0,1:IDIMEn) = 0.0   !Traj 1
 SVX0(1:IDIMV,0) = 0.0   !Take it as the Truth
 SVXB(1:IDIMV,0,1:IDIMEn) = 0.0   !Backup of Traj 1, Traj 1'
+SVXEW(1:IDIMV,0,1:IDIMEn) = 0.0   !Backup of Traj 1, Traj 1'
 
 ! Step 2. Generate the Ensemble Member
 
-!ALLOCATE(SEEDA(IDIMEn*IDIMV)) !ALLOCATE the SEED of Random Number
 ALLOCATE(NDNumb(IDIMEn*IDIMV))!ALLOCATE the Output
 !================THIS IS THE PLACE WE CHANGE SEED================
-!SEEDA(:) = 10           !Initialize the Seed 
 
 CALL RANDOM_SEED(PUT=SEEDA(:))
 
@@ -166,6 +157,7 @@ DO J = 1, IDIMEn
    DO I = 1,IDIMV
       SVX(I,0,J)  = SVX0(I,0) + NDNumb((J-1)*IDIMV+I)  !Every dimension of X is the same.
       SVXB(I,0,J) = SVX0(I,0) + NDNumb((J-1)*IDIMV+I)  !Every dimension of X is the same.
+      SVXEW(I,0,J) = SVX0(I,0) + NDNumb((J-1)*IDIMV+I)  !Every dimension of X is the same.
    END DO
 END DO
 
@@ -184,6 +176,8 @@ DO I = 1, IDIMEn
       SVX(J,1,I)  = Func + ETA((I-1)*IDIMV+J) ! Do the evolution of the Model for Every Ensemble Member
       CALL MODEL(Func,SVXB(J,0,I),0,0)
       SVXB(J,1,I) = Func + ETA((I-1)*IDIMV+J) ! Do the evolution of the Model for Every Ensemble Member
+      CALL MODEL(Func,SVXEW(J,0,I),0,0)
+      SVXEW(J,1,I) = Func + ETA((I-1)*IDIMV+J) ! Do the evolution of the Model for Every Ensemble Member
       !SVX(J,1,I)  = SVX(J,0,I) + ETA((I-1)*IDIMV+J) ! Do the evolution of the Model for Every Ensemble Member
       !SVXB(J,1,I) = SVXB(J,0,I) + ETA((I-1)*IDIMV+J) ! Do the evolution of the Model for Every Ensemble Member
    END DO
@@ -225,7 +219,7 @@ CALL CALW(Weights,QMat,RMat,HMat,SVX,OBSY,IDIMV,1,1,IDIMEn,NumOfObs,1)
 !! Still need some statistic Variables here.
 !! 3.1.2 the Ensemble Mean
 
-CALL ENSMEAN(EnsMean_SIR(1),SVX(:,1,:),IDIMV,IDIMEn)
+CALL ENSMEAN(EnsMean_SIR(1),SVX(:,1,:),IDIMV,IDIMEn,Weights)
 !PRINT*,"THE ENSEMBLE MEAN OF SIR IS = "
 !PRINT*,EnsMean_SIR(1)
 
@@ -237,34 +231,16 @@ CALL ENSMEAN(EnsMean_SIR(1),SVX(:,1,:),IDIMV,IDIMEn)
 CALL CALW(Weights,QMat,RMat,HMat,SVX,OBSY,IDIMV,1,1,IDIMEn,NumOfObs,2)
 
 !GMat2 = Q*HT*(H*Q*HT+R)^(-1)
-!HTMat = TRANSPOSE(HMat)
 HTMat = HMat
-!GMat1 = MATMUL(HMat,MATMUL(QMat,HTMat)) + RMat ! Dimension = NumOfObs
 GMat1 = HMat*QMat*HTMat + RMat
-!CALL MATRIXINV(GMat1,MATMP,NumOfObs)           ! MATMP = (H*Q*HT+R)^{-1}
 MATMP = 1/GMat1
-!PRINT*,"ALGORITHM 1 TO CAL MATRIX INVERSE"
-!PRINT*,MATMP
-!CALL MATINV(GMat1,MATMP,NumOfObs)           ! MATMP = (H*Q*HT+R)^{-1}
-!PRINT*,"ALGORITHM 2 TO CAL MATRIX INVERSE"
-!PRINT*,MATMP
-!GMat2 = MATMUL(QMat,MATMUL(HTMat,MATMP))       ! Dimension = IDIMV
 GMat2 = QMat*HTMat*MATMP
-!PRINT*,GMat2
 
 !P^{-1} = Q^{-1}+HT*R^{-1}*H
-!CALL MATRIXINV(QMat,QIMat,IDIMV)                      ! Calculate the Inverse of Matrix Q
 QIMat = 1/QMat
-!CALL MATRIXINV(RMat,RIMat,NumOfObs)                   ! Calculate the Inverse of Matrix R
 RIMat = 1/RMat
-!PMatInv = MATMUL(HTMat,MATMUL(RIMat,HMat)) + QIMat
 PMatInv = HTMat*RIMat*HMat + QIMat
-!PRINT*,"The inverse of P Matrix is = "
-!PRINT*,PMatInv
-!CALL MATRIXINV(PMatInv,PMat,IDIMV)
 PMat = 1/PMatInv
-!CALL MATINV(PMatInv,PMat,IDIMV)
-!PRINT*,PMat
 
 !!! 3.2.2 Calculate the di for the G(x*) expression
 Di2(:,:) = 0.0
@@ -275,14 +251,11 @@ DO I = 1, IDIMEn
    DO J = 1, NumOfObs
       CALL MODEL(Func,XVec(J,1),0,0)
       DiT2(1,J) = OBSY(1,J) - HMat*Func !Simplified Equation For H=1 and model equation
-      !DiT2(1,J) = OBSY(1,J) - XVec(J,1) !Simplified Equation For H=1
       Di2(J,1) = DiT2(1,J)
    END DO
    Di(:,I) = Di2(:,1)
    DiT(I,:) = DiT2(1,:)
 END DO
-
-!GMat = MATMUL(GMat2,Di) !Calculation of G(x*)
 
 !!! 3.2.3 Draw from the Optimal Proposal Density
 !!!! 3.2.3.1 First calculate the value of P^{1/2}{\xi}
@@ -292,47 +265,16 @@ NDMean   = 0
 NDVar    = 1.0
 XI(:)    = 0.0
 CALL NDGen(SEEDA, NDMean, NDVar, IDIMEn*IDIMV, XI)
-!!!=================The calculation of P^{1/2}*{\xi}_i^n=====================
-!!!   HSL(2013). A collection of Fortran codes for large scale scientific !!!
-!!!   computation. http://www.hsl.rl.ac.uk                                !!!
+
 !!!==========================================================================
 DO I = 1, IDIMEn
   DO J = 1, IDIMV
       UVec(J,I) = XI(J+(I-1)*IDIMV)
   END DO
-!  ido = -1
-!  !PW(:,:) = PMat(:,:)
-!  UVec1(:) = UVec(:,I)
-!  do while (ido .ne. 0 .and. info%flag == 0)
-!     call EA20(IDIMV,UVec1,s,ido,PW,CNTL,INFO,REV)
-!     select case(ido)
-!     case(0)
-!         exit
-!     case(1) !! Matrix-Vector product w_out = A w(:,1)
-!         WVec1(:,1) = PW(:,1)
-!         WVec2(:,1) = PW(:,2)
-!         WVec2 = MATMUL(PMatInv,WVec1)
-!         PW(:,2) = WVec2(:,1)
-!     case(2) !! Matrix-Vector product w(:,2) = M w(:,1)
-!         PW(:,2) = PW(:,1)
-!     case(3) !! Matrix-Vector product w_out = inv(M) w(:,1)
-!         PW(:,2) = PW(:,1)
-!     end select
-!  end do
-!  UVec(:,I) = UVec1(:)
-!  if(info%flag .ge. 0) then
-!      !write(*,'(a,i5)') 'error code =',info%flag
-!      !write(*,'(a,i5)') 'number of interations = ',info%iter
-!      !write(*,'(a,1x,1pe14.2)') 'estimated final error = ',info%error
-!      !write(*,'(a)') '  k    X(k)'
-!      !write(*,'(i5,1x,1pe14.7)') (k, UVec1(k), k=1,IDIMV)
-!  end if
 END DO
 !!!==============End of The calculation of P^{1/2}*{\xi}_i^n=================
 
 !!!! 3.2.3.2 Finish the final step!
-!PRINT*,"PMat^{1/2}= "
-!PRINT*,SQRT(PMat)
 DO I = 1, IDIMEn
    DO J = 1, IDIMV
    CALL MODEL(Func,SVX(J,0,I),0,0)
@@ -340,14 +282,14 @@ DO I = 1, IDIMEn
    !SVX(J,1,I) = GMat2*Di(J,I) + SVX(J,0,I) + (SQRT(PMat))*UVec(J,I) ! This equation is completed now.
    END DO
 END DO
-!PRINT*,"SVX = "
-!PRINT*,SVX(:,1,1)
+
+CALL CALW(Weights,QMat,RMat,HMat,SVX,OBSY,IDIMV,1,1,IDIMEn,NumOfObs,2)
+
 !!! 3.2.4 Do the Statistic Step: Ensemble Mean
 
-CALL ENSMEAN(EnsMean_OPD(1),SVX(:,1,:),IDIMV,IDIMEn)
+CALL ENSMEAN(EnsMean_OPD(1),SVX(:,1,:),IDIMV,IDIMEn,Weights)
 !PRINT*,"THE ENSEMBLE MEAN OF OPD IS = "
 !PRINT*,EnsMean_OPD(1)
-
 
 !==============================================================================
 !! 3.3 Perform the New Scheme
@@ -364,7 +306,10 @@ END DO
 PRINT*,"ALPHA = ,There always are some values that we cannot choose!"
 DO I=1,IDIMEn
    Alpha(I) = EXP((PHI(I,I)-(Sumtmp/IDIMEn))/IDIMV)
-   PRINT*,Alpha(I)
+   !Alpha(I) = EXP(PHI(I,I)/IDIMV)
+   !PRINT*,"---------------"
+   !PRINT*,Alpha(I)
+   !PRINT*,(PHI(I,I) - Sumtmp/IDIMEn)/IDIMV
 END DO
 
 !!! 3.3.2 Draw from the New Scheme
@@ -374,61 +319,22 @@ NDVar    = 1.0
 XINEW(:)    = 0.0
 CALL NDGen(SEEDA, NDMean, NDVar, IDIMEn*IDIMV, XINEW)
 
-!!!=================The calculation of P^{1/2}*{\xi}_i^n=====================
-!!!   HSL(2013). A collection of Fortran codes for large scale scientific !!!
-!!!   computation. http://www.hsl.rl.ac.uk                                !!!
 !!!==========================================================================
 UVec(:,:) = 0.0
 DO I = 1, IDIMEn
   DO J = 1, IDIMV
       UVec(J,I) = XINEW(J+(I-1)*IDIMV)
   END DO
-!  ido = -1
-!  !PW(:,:) = PMat(:,:)
-!  UVec1(:) = UVec(:,I)
-!  do while (ido .ne. 0 .and. info%flag == 0)
-!     call EA20(IDIMV,UVec1,s,ido,PW,CNTL,INFO,REV)
-!     select case(ido)
-!     case(0)
-!         exit
-!     case(1) !! Matrix-Vector product w_out = A w(:,1)
-!         WVec1(:,1) = PW(:,1)
-!         WVec2(:,1) = PW(:,2)
-!         WVec2 = MATMUL(PMatInv,WVec1)
-!         PW(:,2) = WVec2(:,1)
-!     case(2) !! Matrix-Vector product w(:,2) = M w(:,1)
-!         PW(:,2) = PW(:,1)
-!     case(3) !! Matrix-Vector product w_out = inv(M) w(:,1)
-!         PW(:,2) = PW(:,1)
-!     end select
-!  end do
-!  UVec(:,I) = UVec1(:)
-!  if(info%flag .ge. 0) then
-!      !write(*,'(a,i5)') 'error code =',info%flag
-!      !write(*,'(a,i5)') 'number of interations = ',info%iter
-!      !write(*,'(a,1x,1pe14.2)') 'estimated final error = ',info%error
-!      !write(*,'(a)') '  k    X(k)'
-!      !write(*,'(i5,1x,1pe14.7)') (k, UVec1(k), k=1,IDIMV)
-!  end if
 END DO
 !!!==============End of The calculation of P^{1/2}*{\xi}_i^n=================
 
-!PRINT*,"PMat**{0.5} = "
-!PRINT*,PMat**(0.5)
 DO I = 1, IDIMEn
    DO J = 1, IDIMV
       XVec(J,1) = XINEW(J+(I-1)*IDIMV)
    END DO
-   !SVXB(:,1,I) = GMat(:,I) + SVXB(:,0,I) + UVec(:,I)*ALPHA(I) ! This equation is completed now.
-   !IF(ABS(ALPHA(I)) > 2.0) THEN
-   !  SVXB(:,1,I) = GMat(:,I) + SVXB(:,0,I) + (SQRT(PMat))*UVec(:,I)           ! This equation is completed now.
-   !ELSE
-   !PRINT*,SQRT(Alpha(I))
    DO K = 1, IDIMV
       CALL MODEL(Func,SVXB(K,0,I),0,0)
       SVXB(K,1,I) = GMat2*Di(K,I) + Func + (SQRT(Alpha(I)*PMat))*UVec(K,I) ! Add model equation here.
-   !SVXB(:,1,I) = GMat2*Di(:,I) + SVXB(:,0,I) + (SQRT(Alpha(I)*PMat))*UVec(:,I) ! This equation is completed now.
-   !END IF
    END DO
    XVecT = TRANSPOSE(XVec)
    TMPNUM = MATMUL(XVecT,XVec)
@@ -439,50 +345,113 @@ END DO
 
 !!! 3.3.3 Calculate the Weights
 Weights(:) = (ABS(ALPHA(:)-1))*OWeights(:)
+PRINT*,"=======================The -log(2*Weights) Of New Scheme============================"
+PRINT*,Weights
+PRINT*,"==================END OF THE LOGIRATHM OF WEIGHTS OF NEW SCHEME====================="
+c_sort(:) = Weights(:)
+CALL QsortC(c_sort)
+Weights(:) = exp(-0.5*Weights(:) + 0.5*c_sort(1))
 Weights(:) = Weights(:)/SUM(Weights(:))
 PRINT*,"=======================The Weights Of New Scheme============================"
 PRINT*,Weights
 PRINT*,"=======================END OF THE WEIGHTS OF NEW SCHEME====================="
 
 !!! 3.3.4 Do the Ensemble Mean Calculation
-CALL ENSMEAN(EnsMean_New(1),SVXB(:,1,:),IDIMV,IDIMEn)
+CALL ENSMEAN(EnsMean_New(1),SVXB(:,1,:),IDIMV,IDIMEn,Weights)
 !PRINT*,"THE ENSEMBLE MEAN OF New Scheme IS = "
 !PRINT*,EnsMean_New(:,1)
+
+!==============================================================================
+!! 3.3 Perform the EWPF
+! a_i = 0.5 d^T_i R^{-1} H K d_i                     ------RIMat*HMat*GMat2
+! b_i = 0.5 d^T_i R^{-1} d_i - C - log w^{rest}_i
+! K   = Q H^T (HQH^T + R)^{-1}                       ------GMat2
+! d_i = y^n - H f(x^{n-1}_i)                         ------Di(1:IDIMV,1:IDIMEn)
+! alpha_i = 1 + sqrt(1 - b_i/a_i + 0.00000001)
+! MATMP = (HQH^T + R)^{-1}
+! CCC = 0.9 keep 90% of all the particles
+
+w_rest = 0.0
+DO I = 1, IDIMEn
+   c_weights(I) = w_rest(I) + 0.5*PHI(I,I) !Only the diagnal elements are the values of {\phi}_i
+   c_sort(I) = c_weights(I)
+END DO
+
+CALL QsortC(c_sort)
+cc = c_sort(ccc*IDIMEn)
+
+mat = MATMUL(DiT,RIMat*HMat*GMat2*Di)
+DO I = 1, IDIMEn
+   a_i(I) = 0.5 * mat(I,I)
+END DO
+
+mat = MATMUL(DiT,RIMat*Di)
+DO I = 1, IDIMEn
+   b_i(I) = 0.5 * mat(I,I) - cc + w_rest(I)
+END DO
+
+DO I = 1, IDIMEn
+   IF(c_weights(I) <= cc) THEN
+     alpha_i(I) = 1 + sqrt(1 - b_i(I)/a_i(I) + 0.00000001)
+   END IF
+END DO
+
+DO I = 1, IDIMEn
+   IF(c_weights(I) <= cc) THEN
+     DO K = 1, IDIMV
+       CALL MODEL(Func,SVXEW(K,0,I),0,0)
+       SVXEW(K,1,I) = alpha_i(I)*GMat2*Di(K,I) + Func ! Add model equation here.
+     END DO
+   END IF
+END DO
+
+! Add Random Part of The Proposal and Recalculate the Weights
+ALLOCATE(xi_ew(IDIMEn*IDIMV))
+NDMean   = 0
+NDVar    = 1.0
+xi_ew(:)    = 0.0
+CALL NDGen(SEEDA, NDMean, NDVar, IDIMEn*IDIMV, xi_ew)
+
+DO I = 1, IDIMEn
+   DO J = 1, IDIMV
+     SVXEW(J,1,I) = SVXEW(J,1,I) + factor*sqrt(QMat)*xi_ew(J+IDIMV*(I-1))
+     Di2(J,1) = OBSY(1,J) - HMat*SVXEW(J,1,I)
+     DiT2(1,J) = Di2(J,1)
+     CALL MODEL(Func,SVXEW(J,0,I),0,0)
+     xtest(J,I) = SVXEW(J,1,I) - Func
+     xtest_t(I,J) = xtest(J,I)
+   END DO
+   Di(:,I)  = Di2(:,1)
+   DiT(I,:) = DiT2(1,:)
+END DO
+
+mat  = MATMUL(DiT,RIMat*Di)
+mat2 = MATMUL(xtest_t,QIMat*xtest)
+
+DO I = 1, IDIMEn
+   Weights(I) = w_rest(I) + 0.5*mat(I,I) + 0.5*mat2(I,I)
+END DO
+
+c_sort(:) = Weights(:)
+CALL QsortC(c_sort)
+
+Weights(:) = exp(-Weights(:)+c_sort(1))
+Weights(:) = Weights(:)/SUM(Weights(:))
+
+PRINT*,"======================= The Weights Of EWPF ============================"
+PRINT*,Weights
+PRINT*,"=======================END OF THE WEIGHTS OF EWPF====================="
+
+CALL ENSMEAN(EnsMean_EWPF(1),SVXEW(:,1,:),IDIMV,IDIMEn,Weights)
 
 EnsembleMean(1,1) = EnsMean_SIR(1)
 EnsembleMean(1,2) = EnsMean_OPD(1)
 EnsembleMean(1,3) = EnsMean_New(1)
-
-! Test Call for the Normal Distribution Generator
-!NDMean     = 0
-!NDVar      = 0.16
-!NDNumb(:)  = 0.0
-!CALL NDGen(SEEDA, NDMean, NDVar, IDIMEn, NDNumb)
-!PRINT *,"This is just a test print for the Normal Distribution Random Number Generator"
-!PRINT *,NDNumb
-! End of the Test Call
+EnsembleMean(1,4) = EnsMean_EWPF(1)
 
 !DEALLOCATE the Variables to free the memory
 
-!IF(ALLOCATED(BMat)) DEALLOCATE(BMat)
-!IF(ALLOCATED(RMat)) DEALLOCATE(RMat)
-!IF(ALLOCATED(QMat)) DEALLOCATE(QMat)
-!IF(ALLOCATED(HMat)) DEALLOCATE(HMat)
-!IF(ALLOCATED(HTMat)) DEALLOCATE(HTMat)
-!IF(ALLOCATED(HXMat)) DEALLOCATE(HXMat)
-!IF(ALLOCATED(GMat)) DEALLOCATE(GMat)
-!IF(ALLOCATED(GMat1)) DEALLOCATE(GMat1)
-!IF(ALLOCATED(GMat2)) DEALLOCATE(GMat2)
-!IF(ALLOCATED(MATMP)) DEALLOCATE(MATMP)
-!IF(ALLOCATED(MATMP2)) DEALLOCATE(MATMP2)
-!IF(ALLOCATED(PMat)) DEALLOCATE(PMat)
-!IF(ALLOCATED(PMatInv)) DEALLOCATE(PMatInv)
-!IF(ALLOCATED(PMatHalf)) DEALLOCATE(PMatHalf)
-!IF(ALLOCATED(TMPMat)) DEALLOCATE(TMPMat)
-!IF(ALLOCATED(TMPMatInv)) DEALLOCATE(TMPMatInv)
 IF(ALLOCATED(SVX)) DEALLOCATE(SVX)
-!IF(ALLOCATED(RIMat)) DEALLOCATE(RIMat)
-!IF(ALLOCATED(QIMat)) DEALLOCATE(QIMat)
 IF(ALLOCATED(SVX0)) DEALLOCATE(SVX0)
 IF(ALLOCATED(SVXB)) DEALLOCATE(SVXB)
 IF(ALLOCATED(OBSY)) DEALLOCATE(OBSY)
@@ -491,7 +460,6 @@ IF(ALLOCATED(DiT)) DEALLOCATE(DiT)
 IF(ALLOCATED(Di2)) DEALLOCATE(Di2)
 IF(ALLOCATED(DiT2)) DEALLOCATE(DiT2)
 IF(ALLOCATED(PHI)) DEALLOCATE(PHI)
-!IF(ALLOCATED(DETSI)) DEALLOCATE(DETSI)
 IF(ALLOCATED(ALPHA)) DEALLOCATE(ALPHA)
 IF(ALLOCATED(OWeights)) DEALLOCATE(OWeights)
 IF(ALLOCATED(Weights)) DEALLOCATE(Weights)

@@ -1,0 +1,14 @@
+error code  =     0
+number of iterations  =     6
+estimated final error =        2.14E-03
+    i       X(i)
+    1     -5.000E-01
+    2      7.469E-01
+    3      3.136E-01
+    4      2.297E-01
+    5      2.028E-01
+    6      2.028E-01
+    7      2.297E-01
+    8      3.136E-01
+    9      7.469E-01
+   10     -5.000E-01

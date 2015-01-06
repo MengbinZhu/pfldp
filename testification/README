@@ -1,0 +1,3 @@
+1. The program still need the subroutine of calculating the inverse of the matrix. Solved only for the Cube matrix.
+2. The dimension of the state vector and other vectors need to be larger, which is now only 1.
+3. If we increase the dimension of the vectors, we will get more problems than the situation of only 1 dimension.

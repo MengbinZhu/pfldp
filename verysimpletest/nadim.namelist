@@ -1,4 +1,4 @@
 &NADIM
-IDIMEn       = 20,
-IDIMV        = 10000,
-NumOfObs     = 10000 /
+IDIMEn       = 10,
+IDIMV        = 10,
+NumOfObs     = 10 /
